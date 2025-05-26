@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FlatList } from "react-native";
 import results_data from "../data/list.json";
-import FeedListItem from "./FeedListItem";
+import FeedListItem from "./feed_list_items/FeedListItem";
 
 
 

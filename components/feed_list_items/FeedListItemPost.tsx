@@ -3,60 +3,44 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '../ThemedText';
 import { ThemedView } from '../ThemedView';
 
-interface PostFeedItemProps {
-  author: {
-    name: string;
-    handle: string;
-    avatar: string;
-    verified?: boolean;
-  };
+interface FeedListItemPostProps {
   content: string;
   timestamp: string;
-  stats: {
-    comments: number;
-    reposts: number;
-    likes: number;
-  };
 }
 
-export default function PostFeedListItem({ 
-  author,
-  content,
-  timestamp,
-  stats 
-}: PostFeedItemProps) {
+export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
   return (
     <ThemedView style={styles.container}>
       <View style={styles.headerRow}>
         <Image
-          source={{ uri: author.avatar }}
+          source={{ uri: item.author.avatar }}
           style={styles.avatar}
         />
         <View style={styles.authorInfo}>
           <View style={styles.nameRow}>
-            <ThemedText type="defaultBold">{author.name}</ThemedText>
-            {author.verified && (
+            <ThemedText type="defaultBold">{item.author.name}</ThemedText>
+            {item.author.verified && (
               <Image
                 source={require('../../assets/images/verified.png')}
                 style={styles.verifiedBadge}
               />
             )}
-            <ThemedText style={styles.handle}>@{author.handle}</ThemedText>
-            <ThemedText style={styles.timestamp}>{timestamp}</ThemedText>
+            <ThemedText style={styles.handle}>@{item.author.handle}</ThemedText>
+            <ThemedText style={styles.timestamp}>{item.metadata.createdAt}</ThemedText>
           </View>
-          <ThemedText>{content}</ThemedText>
+          <ThemedText>{item.post}</ThemedText>
         </View>
       </View>
       
       <View style={styles.actions}>
         <Pressable style={styles.actionButton}>
-          <ThemedText>{stats.comments}</ThemedText>
+          <ThemedText>{item.stats.comments}</ThemedText>
         </Pressable>
         <Pressable style={styles.actionButton}>
-          <ThemedText>{stats.reposts}</ThemedText>
+          <ThemedText>{item.stats.reposts}</ThemedText>
         </Pressable>
         <Pressable style={styles.actionButton}>
-          <ThemedText>{stats.likes}</ThemedText>
+          <ThemedText>{item.stats.likes}</ThemedText>
         </Pressable>
         <Pressable style={styles.actionButton}>
           <ThemedText>Share</ThemedText>

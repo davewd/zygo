@@ -4,6 +4,12 @@ export type FeedItem = {
   title: string;
   description: string;
   image?: string;
+  stats: {
+    comments: number;
+    shares: number;
+    likes: number;
+    reposts: number;
+  };
 };
 
 export interface TimelineEvent {
