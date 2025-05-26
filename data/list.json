@@ -1,0 +1,25 @@
+{
+    "results": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "image": "https://example.com/image1.jpg",
+            "title": "Software Engineer",
+            "description": "A passionate software engineer with 5 years of experience in web development."  
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "image": "https://example.com/image2.jpg",
+            "title": "Data Scientist",
+            "description": "A data scientist with a knack for turning data into actionable insights."
+        },
+        {
+            "id": 3,
+            "name": "Alice Johnson",
+            "image": "https://example.com/image3.jpg",
+            "title": "Product Manager",
+            "description": "An experienced product manager with a focus on user-centered design."            
+        }
+    ]
+}
