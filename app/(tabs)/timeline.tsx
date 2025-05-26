@@ -1,11 +1,39 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { StyleSheet } from 'react-native';
+import { TimelineItem } from '@/components/timeline/TimelineItem';
+import timelineData from '@/data/timeline.json';
+import { TimelineEvent } from '@/types/timeline';
+import { format, parseISO } from 'date-fns';
+import { ScrollView, StyleSheet } from 'react-native';
 
-export default function PostScreen() {
+const renderTimelineEvent = (event: TimelineEvent, isLast = false) => {
+  const formattedDate = format(parseISO(event.date), 'MMM d, yyyy');
+  
+  return (
+    <TimelineItem 
+      key={event.id}
+      title={event.title}
+      description={event.description}
+      timestamp={formattedDate}
+      image={event.image}
+      isLast={isLast}
+    >
+      {event.children.map((child, index) => 
+        renderTimelineEvent(child, index === event.children.length - 1)
+      )}
+    </TimelineItem>
+  );
+};
+
+export default function TimelineScreen() {
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">Timeline</ThemedText>
+      <ThemedText type="title" style={styles.header}>Timeline</ThemedText>
+      <ScrollView style={styles.scrollView}>
+        {timelineData.results.map((event, index) => 
+          renderTimelineEvent(event, index === timelineData.results.length - 1)
+        )}
+      </ScrollView>
     </ThemedView>
   );
 }
@@ -13,7 +41,12 @@ export default function PostScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  header: {
+    padding: 16,
+  },
+  scrollView: {
+    flex: 1,
+    paddingHorizontal: 16,
   },
 });
