@@ -1,0 +1,56 @@
+{
+  "$schema": "https://turbo.build/schema.v1.json",
+  "tasks": {
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["**/*.{ts,tsx,js,jsx}"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", "node_modules/.cache/metro/**"]
+    },
+    "@zygo/types#build": {
+      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build"],
+      "outputs": ["dist/**"]
+    },
+    "@zygo/constants#build": {
+      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build"],
+      "outputs": ["dist/**"]
+    },
+    "@zygo/hooks#build": {
+      "dependsOn": ["@zygo/constants#build"],
+      "outputs": ["dist/**"]
+    },
+    "@zygo/libs#build": {
+      "dependsOn": ["@zygo/types#build"],
+      "outputs": ["dist/**"]
+    },
+    "@zygo/ui#build": {
+      "dependsOn": ["@zygo/types#build", "@zygo/libs#build"],
+      "outputs": ["dist/**"]
+    },
+    "@zygo/web#build": {
+      "dependsOn": ["@zygo/ui#build"],
+      "outputs": [".next/**"]
+    },
+    "@zygo/mobile#build": {
+      "dependsOn": ["@zygo/ui#build"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "check-types": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

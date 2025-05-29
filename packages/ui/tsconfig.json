@@ -1,0 +1,32 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true,
+    "baseUrl": ".",
+    "moduleResolution": "node16",
+    "module": "node16",
+    "jsxImportSource": "react",
+    "declaration": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@zygo/ui/*": ["./src/*"],
+      "@zygo/constants/*": ["../constants/src/*"],
+      "@zygo/hooks/*": ["../hooks/src/*"],
+      "@zygo/libs/*": ["../libs/src/*"],
+      "@zygo/types/*": ["../types/src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"],
+  "references": [
+    { "path": "../constants" },
+    { "path": "../hooks" },
+    { "path": "../libs" },
+    { "path": "../types" }
+  ]
+}

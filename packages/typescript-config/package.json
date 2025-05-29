@@ -1,0 +1,15 @@
+{
+  "name": "@zygo/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "base.json",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-library.json"
+  ],
+  "scripts": {
+    "build": "echo 'No build required for typescript-config'",
+    "clean": "rm -rf .turbo && rm -rf node_modules"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@zygo/hooks",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Zygo React hooks library",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@zygo/constants": "workspace:*",
+    "@zygo/typescript-config": "workspace:*",
+    "@zygo/eslint-config": "workspace:*",
+    "react": "latest",
+    "react-native": "latest",
+    "expo-image": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-native": "latest",
+    "jest": "latest",
+    "ts-jest": "latest",
+    "tailwindcss": "^3.4.11",
+    "typescript": "latest"
+  },
+  "files": [
+    "dist"
+  ]
+}

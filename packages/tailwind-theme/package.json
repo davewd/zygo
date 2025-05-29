@@ -1,0 +1,11 @@
+{
+  "name": "@zygo/tailwind-theme",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./tailwind.config": "./tailwind.config.ts"
+  },
+  "files": [
+    "tailwind.config.ts"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@zygo/constants",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Zygo constants and configuration",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@zygo/typescript-config": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  },
+  "files": [
+    "dist"
+  ]
+}

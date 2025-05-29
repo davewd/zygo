@@ -1,0 +1,18 @@
+{
+  "name": "@zygo/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@zygo/typescript-config": "workspace:*",
+    "@zygo/ui": "workspace:*",
+    "@zygo/tailwind-theme": "workspace:*",
+    "typescript": "latest",
+    "turbo": "latest",
+    "jest": "latest",
+    "ts-jest": "latest",
+    "babel-jest": "latest"
+  }
+}

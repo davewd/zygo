@@ -1,0 +1,36 @@
+{
+  "name": "@zygo/types",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Zygo monorepo",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@zygo/typescript-config": "workspace:*",
+    "@zygo/eslint-config": "workspace:*",
+    "react": "latest",
+    "react-native": "latest",
+    "expo-image": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "jest": "latest",
+    "ts-jest": "latest",
+    "tailwindcss": "^3.4.11",
+    "clsx": "2.1.1"
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "@zygo/eslint-config",
+  "version": "1.0.0",
+  "description": "Zygo eslint configuration for React Native",
+  "author": "davedawson.co",
+  "license": "MIT",
+  "main": "react.js",
+  "files": [
+    "react.js"
+  ],
+  "scripts": {
+    "build": "echo 'No build required for typescript-config'",
+    "clean": "rm -rf .turbo && rm -rf node_modules"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "eslint-config-universe": "^14.0.0",
+    "prettier": "^3.4.2"
+  },
+  "eslintConfig": {
+    "extends": "."
+  }
+}
