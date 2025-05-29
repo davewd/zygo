@@ -6,7 +6,8 @@
       "author": {
         "name": "John Doe",
         "title": "Software Engineer",
-        "image": "https://example.com/john_doe.jpg"
+        "handle": "@123",
+        "avatar": "https://example.com/john_doe.jpg"
       },
       "title": "My First Post",
       "metadata": {
@@ -16,7 +17,8 @@
       "stats": {
         "likes": 120,
         "shares": 45,
-        "comments": 10
+        "comments": 10,
+        "reposts": 0
       },
       "comments": [
         {
@@ -46,7 +48,8 @@
       "author": {
         "name": "Jane Doe",
         "title": "Mum of 17",
-        "image": "https://example.com/john_doe.jpg"
+        "handle": "@123",
+        "avatar": "https://example.com/john_doe.jpg"
       },
       "type": "milestone",
       "post": "And Just Like That First Steps ",
@@ -54,7 +57,8 @@
       "stats": {
         "likes": 1,
         "shares": 0,
-        "comments": 10
+        "comments": 10,
+        "reposts": 0
       },
       "comments": [
         {
@@ -88,12 +92,14 @@
       "author": {
         "name": "Jane Doe",
         "title": "Mum of 17",
-        "image": "https://example.com/john_doe.jpg"
+        "handle": "@123",
+        "avatar": "https://example.com/john_doe.jpg"
       },
       "stats": {
         "likes": 0,
         "shares": 0,
-        "comments": 0
+        "comments": 0,
+        "reposts": 0
       },
       "comments": [
         {
@@ -124,11 +130,19 @@
       "author": {
         "name": "Jane Doe",
         "title": "Mum of 17",
-        "image": "https://example.com/john_doe.jpg"
+        "handle": "@123",
+        "avatar": "https://example.com/john_doe.jpg"
       },
       "metadata": {
         "createdAt": "2023-10-01T12:00:00Z"
       },
+      "stats": {
+        "likes": 0,
+        "shares": 0,
+        "comments": 0,
+        "reposts": 0
+      },
+
       "comments": [
         {
           "id": 1,
