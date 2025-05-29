@@ -1,7 +1,7 @@
 {
   "results": [
     {
-      "id": 1,
+      "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       "post": "Here's an example of something i care about !",
       "author": {
         "name": "John Doe",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
       "title": "",
       "metadata": {
         "createdAt": "2023-10-01T12:00:00Z"
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
       "name": "Jane Smith",
       "type": "link",
       "image": "https://example.com/image2.jpg",
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
       "name": "Alice Johnson",
       "type": "link",
       "image": "https://example.com/image3.jpg",

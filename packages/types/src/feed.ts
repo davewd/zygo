@@ -3,7 +3,16 @@ export enum FeedItemType {
   TEXT = 'text',
   IMAGE = 'image',
   VIDEO = 'video'
+  MILESTONE = 'milestone',
+  POLL = 'poll',
+  REPOST = 'repost',
+  SHARE = 'share',
+  COMMENT = 'comment',
+  ANNOUNCEMENT = 'announcement',
+  EVENT = 'event',
+  QUESTION = 'question'
 }
+
 
 export interface FeedItem {
   id: string;
