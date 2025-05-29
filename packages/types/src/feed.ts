@@ -2,7 +2,7 @@ export enum FeedItemType {
   LINK = 'link',
   TEXT = 'text',
   IMAGE = 'image',
-  VIDEO = 'video'
+  VIDEO = 'video',
   MILESTONE = 'milestone',
   POLL = 'poll',
   REPOST = 'repost',
