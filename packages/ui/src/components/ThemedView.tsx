@@ -1,6 +1,6 @@
 import { View, type ViewProps } from 'react-native';
 
-import { useThemeColor } from '@zygo/hooks/useThemeColor';
+import { useThemeColor } from '@zygo/hooks';
 
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;

@@ -18,7 +18,14 @@ export interface FeedItem {
   title?: string;
   description?: string;
   imageUrl?: string;
+  post?: string;
   domain?: string;
+  metadata: {
+    createdAt: string;
+    updatedAt?: string;
+    source?: string;
+    sourceUrl?: string;
+  };
   stats: {
     comments: number;
     reposts: number;

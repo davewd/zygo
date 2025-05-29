@@ -1,11 +1,13 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
-import { useThemeColor } from '@zygo/hooks/useThemeColor';
+// Update the import path below to the correct relative path if the hook exists locally, for example:
+import { useThemeColor } from '@zygo/hooks';
+// Or, if the hook is in a different location, adjust the path accordingly.
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'body' | 'caption' | 'defaultBold';
 };
 
 export function ThemedText({

@@ -1,4 +1,4 @@
-import { FeedItem } from '@/packages/types/src/feed';
+import { FeedItem } from '@zygo/types/feed';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '../ThemedText';

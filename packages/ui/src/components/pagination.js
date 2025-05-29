@@ -9,11 +9,11 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { cn } from "@zygo/libs/utils";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import * as React from "react";
-import { cn } from "@zygo/libs/utils";
-import { buttonVariants } from "@zygo/ui/button";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { buttonVariants } from "./button";
 const Pagination = (_a) => {
     var { className } = _a, props = __rest(_a, ["className"]);
     return (_jsx("nav", Object.assign({ role: "navigation", "aria-label": "pagination", className: cn("mx-auto flex w-full justify-center", className) }, props)));

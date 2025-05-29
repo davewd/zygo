@@ -1,12 +1,12 @@
+import { FeedItem } from '@zygo/types/feed';
 import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FeedItem } from '../../packages/types/feed';
 import { FeedListItemActions } from './FeedListItemActions';
 import { FeedListItemBody } from './FeedListItemBody';
 import { FeedListItemComments } from './FeedListItemComments';
 import { FeedListItemHeader } from './FeedListItemHeader';
 import { FeedListItemPost } from './FeedListItemPost';
-import { FeedListItemStats } from './FeedListItemStats';
+import FeedListItemStats from './FeedListItemStats';
 
 interface FeedListItemProps {
   feedItem: FeedItem;

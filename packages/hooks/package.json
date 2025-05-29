@@ -3,14 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "description": "Zygo React hooks library",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -33,7 +25,14 @@
     "tailwindcss": "^3.4.11",
     "typescript": "latest"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "files": [
+    "src",
     "dist"
   ]
 }

@@ -1,9 +1,9 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useColorScheme } from '@zygo/hooks/useColorScheme';
 import { StyleSheet } from 'react-native';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset, } from 'react-native-reanimated';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { useBottomTabOverflow } from '@zygo/ui/TabBarBackground';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useBottomTabOverflow } from './TabBarBackground';
+import { ThemedView } from './ThemedView';
 const HEADER_HEIGHT = 250;
 export default function ParallaxScrollView({ children, headerImage, headerBackgroundColor, }) {
     var _a;

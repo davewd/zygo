@@ -7,9 +7,9 @@ import Animated, {
   useScrollViewOffset,
 } from 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { useBottomTabOverflow } from '@zygo/ui/TabBarBackground';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import { useColorScheme } from '@zygo/hooks';
+import { useBottomTabOverflow } from './TabBarBackground';
+import { ThemedView } from './ThemedView';
 
 const HEADER_HEIGHT = 250;
 

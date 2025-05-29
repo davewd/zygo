@@ -1,8 +1,8 @@
-import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming, } from 'react-native-reanimated';
-import { ThemedText } from '@zygo/ui/ThemedText';
+import { jsx as _jsx } from "react/jsx-runtime";
+import { ThemedText } from './ThemedText';
 export function HelloWave() {
     const rotationAnimation = useSharedValue(0);
     useEffect(() => {

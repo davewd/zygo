@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { FlatList } from "react-native";
-import results_data from "../data/list.json";
-import FeedListItem from "./feed_list_items/FeedListItem";
-
-
+import { useEffect } from 'react';
+import { FlatList, ListRenderItem } from 'react-native';
+import { FeedItem } from '@zygo/types/feed';
+import results_data from '../data/list.json';
+import FeedListItem from './feed_list_items/FeedListItem';
 
 const FeedList = () => {
   useEffect(() => {
-    console.log("Feed Data on mount:", results_data);
+    console.log('Feed Data on mount:', results_data);
   }, []);
 
-  const renderItem = ({ item }) => <FeedListItem feedItem={item} />;
+  const renderItem: ListRenderItem<FeedItem> = ({ item }) => <FeedListItem feedItem={item} />;
+
   return (
-    <FlatList
+    <FlatList<FeedItem>
       data={results_data.results}
       renderItem={renderItem}
       contentContainerStyle={{ gap: 10 }}

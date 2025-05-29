@@ -3,7 +3,7 @@ import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 import * as React from "react"
 
-import { useIsMobile } from "@zygo/hooks/use-mobile"
+import { useIsMobile } from "@zygo/hooks"
 import { cn } from "@zygo/libs/utils"
 import { Button } from "./button"
 import { Input } from "./input"

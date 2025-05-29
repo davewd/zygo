@@ -29,7 +29,7 @@
       "outputs": ["dist/**"]
     },
     "@zygo/ui#build": {
-      "dependsOn": ["@zygo/types#build", "@zygo/libs#build"],
+      "dependsOn": ["@zygo/types#build", "@zygo/libs#build", "@zygo/hooks#build"],
       "outputs": ["dist/**"]
     },
     "@zygo/web#build": {

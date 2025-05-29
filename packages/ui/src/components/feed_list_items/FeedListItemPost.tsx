@@ -1,21 +1,18 @@
+import { FeedItem } from '@zygo/types/feed';
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '../ThemedText';
 import { ThemedView } from '../ThemedView';
 
 interface FeedListItemPostProps {
-  content: string;
-  timestamp: string;
+  item: FeedItem;
 }
 
 export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
   return (
     <ThemedView style={styles.container}>
       <View style={styles.headerRow}>
-        <Image
-          source={{ uri: item.author.avatar }}
-          style={styles.avatar}
-        />
+        <Image source={{ uri: item.author.avatar }} style={styles.avatar} />
         <View style={styles.authorInfo}>
           <View style={styles.nameRow}>
             <ThemedText type="defaultBold">{item.author.name}</ThemedText>
@@ -31,7 +28,7 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
           <ThemedText>{item.post}</ThemedText>
         </View>
       </View>
-      
+
       <View style={styles.actions}>
         <Pressable style={styles.actionButton}>
           <ThemedText>{item.stats.comments}</ThemedText>
@@ -48,7 +45,7 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
       </View>
     </ThemedView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

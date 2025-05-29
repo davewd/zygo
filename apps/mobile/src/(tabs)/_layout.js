@@ -1,11 +1,11 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Tabs } from 'expo-router';
-import { Platform } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from '@zygo/hooks/useColorScheme';
 import { HapticTab } from '@zygo/ui/HapticTab';
 import { IconSymbol } from '@zygo/ui/IconSymbol';
 import TabBarBackground from '@zygo/ui/TabBarBackground';
+import { Tabs } from 'expo-router';
+import { Platform } from 'react-native';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 export default function TabLayout() {
     const colorScheme = useColorScheme();
     return (_jsxs(Tabs, { screenOptions: {

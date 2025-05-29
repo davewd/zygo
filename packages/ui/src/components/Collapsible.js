@@ -1,11 +1,11 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@zygo/hooks/useColorScheme';
+import { IconSymbol } from '@zygo/ui/IconSymbol';
 import { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { IconSymbol } from '@zygo/ui/IconSymbol';
-import { ThemedText } from '@zygo/ui/ThemedText';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { ThemedText } from './ThemedText';
+import { ThemedView } from './ThemedView';
 export function Collapsible({ children, title }) {
     var _a;
     const [isOpen, setIsOpen] = useState(false);

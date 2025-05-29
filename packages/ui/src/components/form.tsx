@@ -11,7 +11,7 @@ import {
 } from "react-hook-form"
 
 import { cn } from "@zygo/libs/utils"
-import { Label } from "@zygo/ui/label"
+import { Label } from "./label"
 
 const Form = FormProvider
 

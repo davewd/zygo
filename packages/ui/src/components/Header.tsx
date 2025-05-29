@@ -1,8 +1,8 @@
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { IconSymbol } from './IconSymbol';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
-import { IconSymbol } from './ui/IconSymbol';
 
 export function Header() {
   return (

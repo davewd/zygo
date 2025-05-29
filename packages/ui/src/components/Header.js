@@ -1,9 +1,9 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { IconSymbol } from './IconSymbol';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
-import { IconSymbol } from './ui/IconSymbol';
 export function Header() {
     return (_jsxs(ThemedView, { style: styles.header, children: [_jsx(Image, { source: { uri: "../assets/images/example_copy/sample-avatar-001.jpg" }, style: styles.avatar }), _jsx(View, { style: styles.searchContainer, children: _jsx(TextInput, { style: styles.searchInput, placeholder: "Search...", placeholderTextColor: "#536471" }) }), _jsx(View, { style: styles.notificationContainer, children: _jsxs(Pressable, { children: [_jsx(IconSymbol, { name: "bell.fill" // You'll need to add this mapping to IconSymbol.tsx
                             , size: 24, color: "#1D9BF0" }), _jsx(View, { style: styles.badge, children: _jsx(ThemedText, { style: styles.badgeText, children: "3" }) })] }) })] }));

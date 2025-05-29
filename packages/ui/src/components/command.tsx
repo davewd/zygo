@@ -4,7 +4,7 @@ import { Search } from "lucide-react"
 import * as React from "react"
 
 import { cn } from "@zygo/libs/utils"
-import { Dialog, DialogContent } from "@zygo/ui/dialog"
+import { Dialog, DialogContent } from "./dialog"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

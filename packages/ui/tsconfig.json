@@ -1,32 +1,23 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@zygo/typescript-config/base.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node", "react", "react-native"],
     "outDir": "./dist",
+    "declaration": true,
     "rootDir": "./src",
     "composite": true,
     "baseUrl": ".",
-    "moduleResolution": "node16",
-    "module": "node16",
+    "moduleResolution": "bundler",
+    "module": "ES2020",
     "jsxImportSource": "react",
-    "declaration": true,
-    "skipLibCheck": true,
-    "noImplicitAny": false,
-    "noEmit": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@zygo/ui/*": ["./src/*"],
-      "@zygo/constants/*": ["../constants/src/*"],
-      "@zygo/hooks/*": ["../hooks/src/*"],
-      "@zygo/libs/*": ["../libs/src/*"],
-      "@zygo/types/*": ["../types/src/*"]
-    }
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "noEmit": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"],
-  "references": [
-    { "path": "../constants" },
-    { "path": "../hooks" },
-    { "path": "../libs" },
-    { "path": "../types" }
-  ]
+  "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["node_modules", "dist"]
 }
