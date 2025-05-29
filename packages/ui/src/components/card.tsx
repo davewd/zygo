@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@zygo/lib/utils"
+import { cn } from "@zygo/libs/utils"
 
 const Card = React.forwardRef<
   HTMLDivElement,

@@ -1,7 +1,7 @@
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
 import * as React from "react"
 
-import { cn } from "@zygo/lib/utils"
+import { cn } from "@zygo/libs/utils"
 
 const HoverCard = HoverCardPrimitive.Root
 

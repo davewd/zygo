@@ -2,7 +2,7 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 import * as React from "react"
 
-import { cn } from "@zygo/lib/utils"
+import { cn } from "@zygo/libs/utils"
 
 const Select = SelectPrimitive.Root
 
