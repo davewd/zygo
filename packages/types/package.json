@@ -12,9 +12,7 @@
   "dependencies": {
     "@zygo/typescript-config": "workspace:*",
     "@zygo/eslint-config": "workspace:*",
-    "react": "latest",
-    "react-native": "latest",
-    "expo-image": "latest"
+    "react": "18.3.1"
   },
   "devDependencies": {
     "typescript": "latest",
