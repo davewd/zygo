@@ -5,7 +5,13 @@
     "rootDir": "src",
     "declaration": true,
     "declarationMap": true,
-    "composite": true
+    "composite": true,
+    "moduleResolution": "bundler",
+    "module": "ES2020",
+    "jsxImportSource": "react",
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "noEmit": true
   },
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]
