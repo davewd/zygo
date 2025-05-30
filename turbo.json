@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.v1.json",
-  "tasks": {
+  "pipeline": {
     "lint": {
       "outputs": []
     },
@@ -42,7 +42,8 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^build"]
     },
     "check-types": {
       "dependsOn": ["^build"],
@@ -50,7 +51,9 @@
     },
     "test:watch": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^build"]
     }
-  }
+  },
+  "globalDependencies": ["$TURBO_TEAM", "tsconfig.json"]
 }

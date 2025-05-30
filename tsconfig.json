@@ -8,20 +8,27 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      "@zygo/ui/*": ["./packages/ui/src/*"],
       "@zygo/ui": ["./packages/ui/src"],
+      "@zygo/types/*": ["./packages/types/src/*"],
       "@zygo/types": ["./packages/types/src"],
+      "@zygo/constants/*": ["./packages/constants/src/*"],
       "@zygo/constants": ["./packages/constants/src"],
+      "@zygo/libs/*": ["./packages/libs/src/*"],
       "@zygo/libs": ["./packages/libs/src"],
+      "@zygo/hooks/*": ["./packages/hooks/src/*"],
       "@zygo/hooks": ["./packages/hooks/src"],
-      "@zygo/typescript-config": ["./packages/typescript-config/src"]
+      "@zygo/utils/*": ["./packages/utils/src/*"],
+      "@zygo/utils": ["./packages/utils/src"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

@@ -9,10 +9,10 @@
     "@zygo/typescript-config": "workspace:*",
     "@zygo/ui": "workspace:*",
     "@zygo/tailwind-theme": "workspace:*",
-    "typescript": "latest",
-    "turbo": "latest",
-    "jest": "latest",
-    "ts-jest": "latest",
-    "babel-jest": "latest"
+    "typescript": "^5.8.3",
+    "turbo": "^1.12.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.4",
+    "babel-jest": "^29.7.0"
   }
 }
