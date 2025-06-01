@@ -123,13 +123,14 @@
   ],
   "name": "@zygo/ui",
   "private": true,
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "prebuild": "rm -rf dist/* || true",
     "build": "tsc --build --clean",
     "dev": "tsc --watch",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "clean": "rm -rf dist/* || true"
   },
   "tsconfig": {
     "extends": "@zygo/typescript-config/base.json"

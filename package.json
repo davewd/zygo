@@ -10,7 +10,7 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
-    "clean": "rm -rf node_modules pnpm-lock.yaml .next",
+    "clean": "turbo clean && rm -rf node_modules pnpm-lock.yaml .next",
     "dev:mobile": "turbo run dev --filter=mobile",
     "dev:web": "turbo run dev --filter=web",
     "scratch": "rm -rf node_modules pnpm-lock.yaml .next && pnpm install && pnpm dev"
