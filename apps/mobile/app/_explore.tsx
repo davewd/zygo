@@ -1,12 +1,13 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
-import { Collapsible } from '@zygo/ui/Collapsible';
-import { ExternalLink } from '@zygo/ui/ExternalLink';
-import { IconSymbol } from '@zygo/ui/IconSymbol';
-import ParallaxScrollView from '@zygo/ui/ParallaxScrollView';
-import { ThemedText } from '@zygo/ui/ThemedText';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import ParallaxScrollView, {
+  Collapsible,
+  ExternalLink,
+  IconSymbol,
+  ThemedText,
+  ThemedView,
+} from '@zygo/ui';
 
 export default function TabTwoScreen() {
   return (
@@ -19,7 +20,8 @@ export default function TabTwoScreen() {
           name="chevron.left.forwardslash.chevron.right"
           style={styles.headerImage}
         />
-      }>
+      }
+    >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
