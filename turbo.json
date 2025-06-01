@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.v1.json",
-  "pipeline": {
+  "tasks": {
     "lint": {
       "outputs": []
     },
@@ -55,5 +55,5 @@
       "dependsOn": ["^build"]
     }
   },
-  "globalDependencies": ["$TURBO_TEAM", "tsconfig.json"]
+  "globalDependencies": ["tsconfig.json"]
 }

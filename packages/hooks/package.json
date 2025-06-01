@@ -22,7 +22,7 @@
     "@types/react-native": "latest",
     "jest": "latest",
     "ts-jest": "latest",
-    "tailwindcss": "^3.4.11",
+    "tailwindcss": "^4.1.8",
     "typescript": "latest"
   },
   "exports": {

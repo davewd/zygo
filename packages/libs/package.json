@@ -9,8 +9,8 @@
     "typescript": "latest",
     "jest": "latest",
     "ts-jest": "latest",
-    "tailwindcss": "^3.4.11",
-    "tailwind-merge": "1.12.0",
+    "tailwindcss": "^4.1.8",
+    "tailwind-merge": "3.3.0",
     "clsx": "2.1.1"
   },
   "scripts": {

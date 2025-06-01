@@ -3,6 +3,12 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "app",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
