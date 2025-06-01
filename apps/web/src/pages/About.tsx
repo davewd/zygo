@@ -1,5 +1,5 @@
-import { Button } from "@zygo/ui/button";
-import { Eye, Heart, Target } from "lucide-react";
+import { Button } from '@zygo/ui';
+import { Eye, Heart, Target } from 'lucide-react';
 
 const About = () => {
   return (
@@ -11,8 +11,9 @@ const About = () => {
               About <span className="text-zygo-red">Zygo</span>
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              We believe that every family has the potential to grow, learn, and thrive together. 
-              Zygo is more than just a platform – it's a movement towards stronger, more connected families.
+              We believe that every family has the potential to grow, learn, and thrive together.
+              Zygo is more than just a platform – it's a movement towards stronger, more connected
+              families.
             </p>
           </div>
 
@@ -23,9 +24,9 @@ const About = () => {
                 Our Mission
               </h3>
               <p className="text-gray-600 leading-relaxed text-lg">
-                To create a supportive ecosystem where families can connect, learn, and grow together. 
-                We provide the tools, resources, and community needed to navigate the beautiful journey 
-                of family life with confidence and joy.
+                To create a supportive ecosystem where families can connect, learn, and grow
+                together. We provide the tools, resources, and community needed to navigate the
+                beautiful journey of family life with confidence and joy.
               </p>
             </div>
             <div className="bg-zygo-yellow/30 p-8 rounded-2xl">
@@ -49,8 +50,8 @@ const About = () => {
                 Our Vision
               </h3>
               <p className="text-gray-600 leading-relaxed text-lg">
-                A world where every family feels supported, connected, and empowered to reach their 
-                full potential. Through community, education, and shared experiences, we're building 
+                A world where every family feels supported, connected, and empowered to reach their
+                full potential. Through community, education, and shared experiences, we're building
                 bridges that strengthen the foundation of society – the family unit.
               </p>
             </div>
@@ -62,11 +63,15 @@ const About = () => {
               Why Choose Zygo?
             </h3>
             <p className="text-gray-600 leading-relaxed text-lg mb-8 max-w-3xl mx-auto">
-              We understand that every family is unique, with their own challenges, dreams, and goals. 
-              That's why we've created a flexible, inclusive platform that adapts to your family's needs 
-              while connecting you with a community that truly understands your journey.
+              We understand that every family is unique, with their own challenges, dreams, and
+              goals. That's why we've created a flexible, inclusive platform that adapts to your
+              family's needs while connecting you with a community that truly understands your
+              journey.
             </p>
-            <Button size="lg" className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+            <Button
+              size="lg"
+              className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               Start Your Journey
             </Button>
           </div>

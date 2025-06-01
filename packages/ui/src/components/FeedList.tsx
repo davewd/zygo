@@ -1,7 +1,7 @@
+import { FeedItem, FeedItemType } from '@zygo/types/feed';
 import { useEffect } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
-import { FeedItem, FeedItemType } from '@zygo/types/feed';
-import results_data from '../data/list.json';
+import results_data from './data/list.json';
 import FeedListItem from './feed_list_items/FeedListItem';
 
 const FeedList = () => {

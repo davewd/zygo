@@ -17,6 +17,6 @@
     "resolveJsonModule": true,
     "noEmit": false
   },
-  "include": ["src/**/*", "src/**/*.json"],
+  "include": ["src/**/*", "src/**/*.json", "src/**/*.{png,jpg,jpeg,gif,svg,webp}"],
   "exclude": ["node_modules", "dist"]
 }

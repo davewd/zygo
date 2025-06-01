@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster as Sonner } from '@zygo/ui/sonner';
-import { Toaster } from '@zygo/ui/toaster';
-import { TooltipProvider } from '@zygo/ui/tooltip';
+import { Toaster as Sonner, Toaster, TooltipProvider } from '@zygo/ui';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Index from './pages/Index';
 import NotFound from './pages/NotFound';

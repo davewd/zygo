@@ -1,51 +1,56 @@
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@zygo/ui/card";
-import { Award, BookOpen, Calendar, MessageCircle, Shield, Users } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
+import { Award, BookOpen, Calendar, MessageCircle, Shield, Users } from 'lucide-react';
 
 const Features = () => {
   const features = [
     {
       icon: Users,
-      title: "Family Connections",
-      description: "Connect with like-minded families in your community and beyond. Build lasting relationships that support growth and learning.",
-      bgColor: "bg-zygo-yellow/20",
-      iconColor: "text-gray-700"
+      title: 'Family Connections',
+      description:
+        'Connect with like-minded families in your community and beyond. Build lasting relationships that support growth and learning.',
+      bgColor: 'bg-zygo-yellow/20',
+      iconColor: 'text-gray-700',
     },
     {
       icon: Calendar,
-      title: "Growth Activities",
-      description: "Access curated activities, workshops, and events designed to foster family development and create meaningful experiences.",
-      bgColor: "bg-zygo-blue/20",
-      iconColor: "text-gray-700"
+      title: 'Growth Activities',
+      description:
+        'Access curated activities, workshops, and events designed to foster family development and create meaningful experiences.',
+      bgColor: 'bg-zygo-blue/20',
+      iconColor: 'text-gray-700',
     },
     {
       icon: MessageCircle,
-      title: "Support Network",
-      description: "Join discussion groups, share experiences, and receive guidance from other families on similar journeys.",
-      bgColor: "bg-zygo-mint/30",
-      iconColor: "text-gray-700"
+      title: 'Support Network',
+      description:
+        'Join discussion groups, share experiences, and receive guidance from other families on similar journeys.',
+      bgColor: 'bg-zygo-mint/30',
+      iconColor: 'text-gray-700',
     },
     {
       icon: BookOpen,
-      title: "Learning Resources",
-      description: "Access expert-curated content, guides, and tools to support your family's growth in every stage of life.",
-      bgColor: "bg-zygo-cream/40",
-      iconColor: "text-gray-700"
+      title: 'Learning Resources',
+      description:
+        "Access expert-curated content, guides, and tools to support your family's growth in every stage of life.",
+      bgColor: 'bg-zygo-cream/40',
+      iconColor: 'text-gray-700',
     },
     {
       icon: Award,
-      title: "Milestone Tracking",
-      description: "Celebrate achievements and track your family's growth journey with our milestone and progress features.",
-      bgColor: "bg-zygo-yellow/20",
-      iconColor: "text-gray-700"
+      title: 'Milestone Tracking',
+      description:
+        "Celebrate achievements and track your family's growth journey with our milestone and progress features.",
+      bgColor: 'bg-zygo-yellow/20',
+      iconColor: 'text-gray-700',
     },
     {
       icon: Shield,
-      title: "Safe Environment",
-      description: "Enjoy a secure, moderated platform where families can connect and share in a trusted, supportive environment.",
-      bgColor: "bg-zygo-blue/20",
-      iconColor: "text-gray-700"
-    }
+      title: 'Safe Environment',
+      description:
+        'Enjoy a secure, moderated platform where families can connect and share in a trusted, supportive environment.',
+      bgColor: 'bg-zygo-blue/20',
+      iconColor: 'text-gray-700',
+    },
   ];
 
   return (
@@ -56,13 +61,17 @@ const Features = () => {
             Everything Your Family Needs to <span className="text-zygo-blue">Thrive</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover the tools, connections, and resources that make family growth an exciting and supported journey.
+            Discover the tools, connections, and resources that make family growth an exciting and
+            supported journey.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className={`${feature.bgColor} border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105`}>
+            <Card
+              key={index}
+              className={`${feature.bgColor} border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105`}
+            >
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto mb-4 p-3 rounded-full bg-white/50 w-fit">
                   <feature.icon className={`${feature.iconColor}`} size={32} />

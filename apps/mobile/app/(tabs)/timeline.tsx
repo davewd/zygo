@@ -1,8 +1,8 @@
-import timelineData from '@/data/timeline.json';
 import { TimelineEvent } from '@zygo/types';
 import { ThemedText, ThemedView, TimelineItem } from '@zygo/ui';
 import { format, parseISO } from 'date-fns';
 import { ScrollView, StyleSheet } from 'react-native';
+import timelineData from './data/timeline.json';
 
 const renderTimelineEvent = (event: TimelineEvent, isLast = false) => {
   const formattedDate = format(parseISO(event.date), 'MMM d, yyyy');

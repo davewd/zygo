@@ -24,6 +24,7 @@ export * from './components/input';
 export * from './components/menubar';
 export * from './components/navigation-menu';
 export * from './components/pagination';
+export * from './components/ParallaxScrollView';
 export * from './components/radio-group';
 export * from './components/resizable';
 export * from './components/select';
@@ -36,4 +37,5 @@ export * from './components/tabs';
 export * from './components/ThemedText';
 export * from './components/ThemedView';
 export * from './components/timeline/TimelineItem';
+
 

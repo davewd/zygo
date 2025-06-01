@@ -118,13 +118,15 @@
   },
     "files": [
     "src",
-    "dist"
+    "dist",
+    "src/assets/images"
   ],
   "name": "@zygo/ui",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "build": "npm run clean && tsc --build --clean",
-    "clean": "rm -rf dist",
+    "prebuild": "rm -rf dist/* || true",
+    "build": "tsc --build --clean",
     "dev": "tsc --watch",
     "test": "jest",
     "test:watch": "jest --watch"
