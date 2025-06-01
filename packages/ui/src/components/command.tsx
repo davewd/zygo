@@ -3,7 +3,7 @@ import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
 import * as React from "react"
 
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 import { Dialog, DialogContent } from "./dialog"
 
 const Command = React.forwardRef<

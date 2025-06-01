@@ -4,7 +4,7 @@ import { PanelLeft } from "lucide-react"
 import * as React from "react"
 
 import { useIsMobile } from "@zygo/hooks"
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 import { Button } from "./button"
 import { Input } from "./input"
 import { Separator } from "./separator"

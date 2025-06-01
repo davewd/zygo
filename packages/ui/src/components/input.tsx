@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {

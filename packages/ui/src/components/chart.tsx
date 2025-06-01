@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as RechartsPrimitive from 'recharts';
 
-import { cn } from '@zygo/libs/utils';
+import { cn } from '@zygo/libs';
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const;
@@ -323,5 +323,6 @@ export {
   ChartLegendContent,
   ChartStyle,
   ChartTooltip,
-  ChartTooltipContent,
+  ChartTooltipContent
 };
+

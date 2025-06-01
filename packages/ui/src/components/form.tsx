@@ -10,7 +10,7 @@ import {
   useFormContext,
 } from "react-hook-form"
 
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 import { Label } from "./label"
 
 const Form = FormProvider

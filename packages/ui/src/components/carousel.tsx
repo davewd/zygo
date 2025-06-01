@@ -4,7 +4,7 @@ import useEmblaCarousel, {
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import * as React from "react"
 
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 import { Button } from "./button"
 
 type CarouselApi = UseEmblaCarouselType[1]

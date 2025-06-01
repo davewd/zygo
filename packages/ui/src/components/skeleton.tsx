@@ -1,4 +1,4 @@
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 
 function Skeleton({
   className,

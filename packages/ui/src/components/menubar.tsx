@@ -2,7 +2,7 @@ import * as MenubarPrimitive from '@radix-ui/react-menubar';
 import { Check, ChevronRight, Circle } from 'lucide-react';
 import * as React from 'react';
 
-import { cn } from '@zygo/libs/utils';
+import { cn } from '@zygo/libs';
 
 const MenubarMenu: typeof MenubarPrimitive.Menu = MenubarPrimitive.Menu;
 
@@ -215,5 +215,6 @@ export {
   MenubarSub,
   MenubarSubContent,
   MenubarSubTrigger,
-  MenubarTrigger,
+  MenubarTrigger
 };
+

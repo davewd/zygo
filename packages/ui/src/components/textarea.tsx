@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@zygo/libs/utils"
+import { cn } from "@zygo/libs"
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

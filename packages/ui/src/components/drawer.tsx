@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
-import { cn } from '@zygo/libs/utils';
+import { cn } from '@zygo/libs';
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -102,5 +102,6 @@ export {
   DrawerOverlay,
   DrawerPortal,
   DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 };
+
