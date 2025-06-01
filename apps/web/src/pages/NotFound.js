@@ -1,6 +1,6 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 const NotFound = () => {
     const location = useLocation();
     useEffect(() => {

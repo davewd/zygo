@@ -1,9 +1,8 @@
-
-import About from "@zygo/ui/About";
-import Contact from "@zygo/ui/Contact";
-import Features from "@zygo/ui/Features";
-import Footer from "@zygo/ui/Footer";
-import Hero from "@zygo/ui/Hero";
+import About from './About';
+import Contact from './Contact';
+import Features from './Features';
+import Footer from './Footer';
+import Hero from './Hero';
 
 const Index = () => {
   return (
