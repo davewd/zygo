@@ -1,17 +1,14 @@
 import { Platform, StyleSheet, useColorScheme } from 'react-native';
 
-import { HelloWave } from '@zygo/ui/HelloWave';
-import ParallaxScrollView from '@zygo/ui/ParallaxScrollView';
+import ParallaxScrollView, { HelloWave } from '@zygo/ui';
 
-import { ThemedText } from '@zygo/ui/ThemedText';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import { ThemedText, ThemedView } from '@zygo/ui';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme() ?? 'light';
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}>
+    <ParallaxScrollView headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />

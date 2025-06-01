@@ -10,13 +10,12 @@
     "declaration": true,
     "rootDir": "./src",
     "composite": true,
-    "baseUrl": ".",
     "moduleResolution": "bundler",
     "module": "ES2020",
     "jsxImportSource": "react",
     "jsx": "react-jsx",
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": false
   },
   "include": ["src/**/*", "src/**/*.json"],
   "exclude": ["node_modules", "dist"]

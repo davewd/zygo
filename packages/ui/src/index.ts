@@ -32,4 +32,5 @@ export * from './components/switch';
 export * from './components/tabs';
 export * from './components/ThemedText';
 export * from './components/ThemedView';
+export * from './components/timeline/TimelineItem';
 

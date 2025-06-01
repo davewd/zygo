@@ -11,7 +11,7 @@
     "jsxImportSource": "react",
     "jsx": "react-jsx",
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": false
   },
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]

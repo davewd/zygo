@@ -1,11 +1,10 @@
-import FeedList from '@zygo/ui/FeedList';
-import { ThemedView } from '@zygo/ui/ThemedView';
+import FeedList, { ThemedView } from '@zygo/ui';
 import { StyleSheet } from 'react-native';
 
 export default function PostScreen() {
   return (
     <ThemedView style={styles.container}>
-      <FeedList/>
+      <FeedList />
     </ThemedView>
   );
 }

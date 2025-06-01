@@ -2,10 +2,8 @@ import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 
 import { Colors } from '@zygo/constants';
-import { useColorScheme } from '@zygo/hooks/useColorScheme';
-import { HapticTab } from '@zygo/ui/HapticTab';
-import { IconSymbol } from '@zygo/ui/IconSymbol';
-import TabBarBackground from '@zygo/ui/TabBarBackground';
+import { useColorScheme } from '@zygo/hooks';
+import TabBarBackground, { HapticTab, IconSymbol } from '@zygo/ui';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
