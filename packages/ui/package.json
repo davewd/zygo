@@ -116,10 +116,14 @@
       "types": "./dist/index.d.ts"
     }
   },
+    "files": [
+    "src",
+    "dist"
+  ],
   "name": "@zygo/ui",
   "private": true,
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc --build --clean",
     "clean": "rm -rf dist",
     "dev": "tsc --watch",
     "test": "jest",

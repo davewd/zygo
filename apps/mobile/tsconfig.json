@@ -1,7 +1,7 @@
 {
   "extends": "@zygo/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "./dist"
   },
   "include": [
     "app",

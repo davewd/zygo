@@ -1,8 +1,5 @@
-import { Button } from "@zygo/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@zygo/ui/card";
-import { Input } from "@zygo/ui/input";
-import { Textarea } from "@zygo/ui/textarea";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Textarea } from '@zygo/ui';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -14,8 +11,8 @@ const Contact = () => {
               Get in <span className="text-zygo-red">Touch</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ready to join the Zygo family? Have questions about our platform? 
-              We'd love to hear from you and help you start your family growth journey.
+              Ready to join the Zygo family? Have questions about our platform? We'd love to hear
+              from you and help you start your family growth journey.
             </p>
           </div>
 
@@ -28,27 +25,44 @@ const Contact = () => {
                 <CardContent className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                      <Input placeholder="Enter your first name" className="border-zygo-red/30 focus:border-zygo-red" />
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        First Name
+                      </label>
+                      <Input
+                        placeholder="Enter your first name"
+                        className="border-zygo-red/30 focus:border-zygo-red"
+                      />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                      <Input placeholder="Enter your last name" className="border-zygo-red/30 focus:border-zygo-red" />
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Last Name
+                      </label>
+                      <Input
+                        placeholder="Enter your last name"
+                        className="border-zygo-red/30 focus:border-zygo-red"
+                      />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <Input type="email" placeholder="Enter your email address" className="border-zygo-red/30 focus:border-zygo-red" />
+                    <Input
+                      type="email"
+                      placeholder="Enter your email address"
+                      className="border-zygo-red/30 focus:border-zygo-red"
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-                    <Input placeholder="What's this about?" className="border-zygo-red/30 focus:border-zygo-red" />
+                    <Input
+                      placeholder="What's this about?"
+                      className="border-zygo-red/30 focus:border-zygo-red"
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                    <Textarea 
-                      placeholder="Tell us how we can help your family grow..." 
-                      className="border-zygo-red/30 focus:border-zygo-red min-h-[120px]" 
+                    <Textarea
+                      placeholder="Tell us how we can help your family grow..."
+                      className="border-zygo-red/30 focus:border-zygo-red min-h-[120px]"
                     />
                   </div>
                   <Button className="w-full bg-zygo-red hover:bg-zygo-red/90 text-white py-3 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
