@@ -1,16 +1,22 @@
 {
-  "extends": "@zygo/typescript-config/base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "composite": true,
-    "moduleResolution": "bundler",
-    "module": "ES2020",
+    "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "jsx": "react-jsx"
+    "module": "ES2020",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "rootDir": "src"
   },
-  "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+  "extends": "@zygo/typescript-config/base.json",
+  "include": [
+    "src"
+  ]
 }

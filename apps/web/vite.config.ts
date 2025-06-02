@@ -1,37 +1,36 @@
 import react from "@vitejs/plugin-react-swc";
-
 import path from "path";
 import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
+export default defineConfig({
+  esbuild: {
+    loader: 'jsx',
+    include: [
+      // Handle JSX in all JS/TS files
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.ts",
+      "**/*.tsx"
+    ],
+    exclude: [],
   },
-  plugins: [
-    react()
-  ].filter(Boolean),
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
+  },
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "react-native": "react-native-web",
     },
-    extensions: [
-      '.web.tsx',
-      '.web.ts',
-      '.web.jsx',
-      '.web.js',
-      '.tsx',
-      '.ts',
-      '.jsx',
-      '.js',
-    ],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json']
   },
-  optimizeDeps: {
-    esbuildOptions: {
-      mainFields: ['module', 'main'],
-      resolveExtensions: ['.web.js', '.js', '.ts', '.jsx', '.tsx'],
-    },
-  },
-}));
+  server: {
+    host: "::",
+    port: 8083,
+  }
+});

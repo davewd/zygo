@@ -1,43 +1,14 @@
 {
-  "name": "@zygo/hooks",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
-  "description": "Zygo React hooks library",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
-    "typecheck": "tsc --noEmit",
-    "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
-    "dev": "tsup --watch"
-  },
   "dependencies": {
     "@zygo/constants": "workspace:*",
-    "@zygo/typescript-config": "workspace:*",
     "@zygo/eslint-config": "workspace:*",
+    "@zygo/typescript-config": "workspace:*",
+    "expo-image": "latest",
     "react": "latest",
-    "react-native": "latest",
-    "expo-image": "latest"
-  },
-  "devDependencies": {
-    "@types/react": "latest",
-    "@types/react-native": "latest",
-    "jest": "latest",
-    "ts-jest": "latest",
-    "tailwindcss": "^4.1.8",
-    "typescript": "latest"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    "react-native": "latest"
   },
   "dependenciesMeta": {
-    "@zygo/ui": {
+    "@zygo/@zygo/typescript-config": {
       "injected": true
     },
     "@zygo/constants": {
@@ -46,11 +17,40 @@
     "@zygo/hooks": {
       "injected": true
     },
-    "@zygo/@zygo/typescript-config": {
+    "@zygo/ui": {
       "injected": true
+    }
+  },
+  "description": "Zygo React hooks library",
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-native": "latest",
+    "jest": "latest",
+    "tailwindcss": "^4.1.8",
+    "ts-jest": "latest",
+    "typescript": "latest"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
     "dist"
-  ]
+  ],
+  "main": "./dist/index.js",
+  "name": "@zygo/hooks",
+  "private": true,
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
+    "dev": "tsup --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "0.0.1"
 }
