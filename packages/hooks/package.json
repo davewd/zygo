@@ -2,11 +2,12 @@
   "name": "@zygo/hooks",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "description": "Zygo React hooks library",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "typecheck": "tsc --noEmit",
     "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
     "dev": "tsup --watch"
@@ -27,10 +28,26 @@
     "tailwindcss": "^4.1.8",
     "typescript": "latest"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    }
+  },
+  "dependenciesMeta": {
+    "@zygo/ui": {
+      "injected": true
+    },
+    "@zygo/constants": {
+      "injected": true
+    },
+    "@zygo/hooks": {
+      "injected": true
+    },
+    "@zygo/@zygo/typescript-config": {
+      "injected": true
     }
   },
   "files": [

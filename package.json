@@ -11,7 +11,7 @@
     "test": "turbo test",
     "build": "turbo build",
     "prebuild": "turbo prebuild",
-    "clean": "pnpm -r exec rm -rf dist build lib coverage .tsbuildinfo tsconfig.tsbuildinfo && pnpm -r exec rm -rf node_modules && rm -rf node_modules",
+    "clean": "turbo clean",
     "clean:build": "pnpm -r exec rm -rf dist build lib coverage .tsbuildinfo tsconfig.tsbuildinfo",
     "reset": "pnpm clean && pnpm install",
     "dev:mobile": "turbo run dev --filter=mobile",

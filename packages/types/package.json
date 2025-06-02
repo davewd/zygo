@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "typecheck": "tsc --noEmit",
     "dev": "tsup --watch",
     "build": "tsup && tsc --emitDeclarationOnly"

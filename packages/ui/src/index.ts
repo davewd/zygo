@@ -20,6 +20,7 @@ export * from './components/feed_list_items/FeedListItemStats';
 export * from './components/FeedList';
 export * from './components/form';
 export * from './components/HapticTab';
+export * from './components/HelloWave';
 export * from './components/IconSymbol';
 export * from './components/input';
 export * from './components/menubar';

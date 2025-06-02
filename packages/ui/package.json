@@ -127,7 +127,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "typecheck": "tsc --noEmit",
     "prebuild": "rimraf dist/* || true && cp -r src/assets dist/",
     "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",

@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, useColorScheme } from 'react-native';
 
-import ParallaxScrollView, { HelloWave } from '@zygo/ui';
+import { HelloWave, ParallaxScrollView } from '@zygo/ui';
 
 import { ThemedText, ThemedView } from '@zygo/ui';
 
@@ -8,7 +8,10 @@ export default function HomeScreen() {
   const colorScheme = useColorScheme() ?? 'light';
 
   return (
-    <ParallaxScrollView headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}>
+    <ParallaxScrollView
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerImage={<ThemedText style={styles.headerText}>🌐</ThemedText>}
+    >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
@@ -16,8 +19,8 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
+          Edit <ThemedText type="defaultSemiBold">app/(tabs)/network.tsx</ThemedText> to see
+          changes. Press{' '}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
               ios: 'cmd + d',
@@ -64,5 +67,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  headerText: {
+    fontSize: 64,
+    textAlign: 'center',
   },
 });

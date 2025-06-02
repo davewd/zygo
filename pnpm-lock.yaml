@@ -316,6 +316,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.56.2
         version: 5.79.0(react@18.3.1)
+      '@zygo/constants':
+        specifier: workspace:*
+        version: file:packages/constants
       '@zygo/tailwind-theme':
         specifier: workspace:*
         version: link:../../packages/tailwind-theme
@@ -491,7 +494,7 @@ importers:
     dependencies:
       '@zygo/constants':
         specifier: workspace:*
-        version: link:../constants
+        version: file:packages/constants
       '@zygo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -507,6 +510,15 @@ importers:
       react-native:
         specifier: latest
         version: 0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0)
+    dependenciesMeta:
+      '@zygo/@zygo/typescript-config':
+        injected: true
+      '@zygo/constants':
+        injected: true
+      '@zygo/hooks':
+        injected: true
+      '@zygo/ui':
+        injected: true
     devDependencies:
       '@types/react':
         specifier: latest
@@ -12443,7 +12455,7 @@ snapshots:
 
   '@zygo/hooks@file:packages/hooks(@babel/core@7.27.4)(@types/react@19.1.6)(expo@53.0.9(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0)))(react-native-webview@13.13.5(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0))(react@19.1.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0))(react@19.1.0))(react-native-web@0.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
     dependencies:
-      '@zygo/constants': link:packages/constants
+      '@zygo/constants': file:packages/constants
       '@zygo/eslint-config': link:packages/eslint-config
       '@zygo/typescript-config': link:packages/typescript-config
       expo-image: 2.1.7(expo@53.0.9(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0)))(react-native-webview@13.13.5(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0))(react@19.1.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0))(react@19.1.0))(react-native-web@0.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.1.6)(react@19.1.0))(react@19.1.0)
@@ -13729,7 +13741,7 @@ snapshots:
       eslint: 9.28.0(jiti@2.4.2)
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-expo: 0.1.4(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.28.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-react: 7.37.5(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.28.0(jiti@2.4.2))
       globals: 16.2.0
@@ -13749,7 +13761,7 @@ snapshots:
       '@typescript-eslint/parser': 8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)
       eslint: 9.28.0(jiti@2.4.2)
       eslint-config-prettier: 9.1.0(eslint@9.28.0(jiti@2.4.2))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.28.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-n: 17.18.0(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-node: 11.1.0(eslint@9.28.0(jiti@2.4.2))
       eslint-plugin-prettier: 5.4.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2))(prettier@3.5.3)
@@ -13784,7 +13796,7 @@ snapshots:
       tinyglobby: 0.2.14
       unrs-resolver: 1.7.8
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.28.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -13821,7 +13833,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.28.0(jiti@2.4.2)):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.0(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2)))(eslint@9.28.0(jiti@2.4.2)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
