@@ -1,27 +1,25 @@
-import { FeedItem } from '@zygo/types/feed';
+import { FeedItemTypeMap } from '@zygo/types';
 import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FeedListItemActions } from './FeedListItemActions';
-import { FeedListItemBody } from './FeedListItemBody';
-import { FeedListItemComments } from './FeedListItemComments';
-import { FeedListItemHeader } from './FeedListItemHeader';
-import { FeedListItemPost } from './FeedListItemPost';
-import FeedListItemStats from './FeedListItemStats';
 
 interface FeedListItemProps {
-  feedItem: FeedItem;
+  feedItem: FeedItemTypeMap;
 }
 
 const FeedListItem: React.FC<FeedListItemProps> = ({ feedItem }) => {
   console.log('Re-rendering: ', feedItem);
   return (
     <View style={styles.container}>
-      <FeedListItemHeader item={feedItem} />
+      {/*<FeedListItemHeader item={feedItem} />
       <FeedListItemPost item={feedItem} />
       <FeedListItemBody item={feedItem} />
-      <FeedListItemStats comments={feedItem.stats.comments} shares={feedItem.stats.shares} likes={feedItem.stats.likes} />
+      <FeedListItemStats
+        comments={feedItem.stats.comments}
+        shares={feedItem.stats.shares}
+        likes={feedItem.stats.likes}
+      />
       <FeedListItemActions item={feedItem} />
-      <FeedListItemComments item={feedItem} />
+      <FeedListItemComments item={feedItem} />*/}
     </View>
   );
 };

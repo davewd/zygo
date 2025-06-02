@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "description": "Zygo monorepo",
+  "main": "./dist/index.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "dev": "tsc --watch",
-    "build": "tsc --build --clean"
+    "build": "tsc --build"
   },
   "dependencies": {
     "@zygo/typescript-config": "workspace:*",
@@ -20,15 +23,15 @@
     "ts-jest": "latest",
     "tailwindcss": "^4.1.8",
     "clsx": "2.1.1"
-  },
-  "exports": {
-    "./*": {
-      "types": "./src/*.ts",
-      "default": "./dist/*.js"
+  },  
+    "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     }
   },
   "files": [
-    "src",
     "dist"
   ]
 }

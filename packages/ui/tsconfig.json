@@ -1,22 +1,36 @@
 {
-  "extends": "@zygo/typescript-config/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "types": ["node", "react", "react-native"],
-    "outDir": "./dist",
-    "declaration": true,
-    "rootDir": "./src",
     "composite": true,
-    "moduleResolution": "bundler",
-    "module": "ES2020",
-    "jsxImportSource": "react",
+    "declaration": true,
+    "declarationMap": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "module": "ES2020",
+    "moduleResolution": "bundler",
+    "noEmit": false,
+    "outDir": "./dist",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "resolveJsonModule": true,
-    "noEmit": false
+    "rootDir": "./src",
+    "types": [
+      "node",
+      "react",
+      "react-native"
+    ]
   },
-  "include": ["src/**/*", "src/**/*.json", "src/**/*.{png,jpg,jpeg,gif,svg,webp}"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "extends": "@zygo/typescript-config/base.json",
+  "include": [
+    "src/**/*",
+    "src/**/*.json",
+    "src/**/*.{png,jpg,jpeg,gif,svg,webp}"
+  ]
 }

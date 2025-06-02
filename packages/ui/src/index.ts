@@ -19,6 +19,7 @@ export * from './components/feed_list_items/FeedListItemPost';
 export * from './components/feed_list_items/FeedListItemStats';
 export * from './components/FeedList';
 export * from './components/form';
+export * from './components/HapticTab';
 export * from './components/IconSymbol';
 export * from './components/input';
 export * from './components/menubar';
@@ -33,9 +34,9 @@ export * from './components/sidebar';
 export * from './components/skeleton';
 export * from './components/sonner';
 export * from './components/switch';
+export * from './components/TabBarBackground';
 export * from './components/tabs';
 export * from './components/ThemedText';
 export * from './components/ThemedView';
 export * from './components/timeline/TimelineItem';
-
 

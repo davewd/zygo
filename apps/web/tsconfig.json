@@ -1,9 +1,10 @@
 {
-  "extends": "@zygo/typescript-config/tsconfig.json",
+  "extends": "@zygo/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./dist",
-       "jsx": "react-jsx"
-        },
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler"
+  },
   "include": ["src"],
   "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import { FeedItem, FeedItemType } from "@zygo/types/feed";
+import { FeedItemType, FeedItemTypeMap } from '@zygo/types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FeedListItemBody_Image } from './FeedListItemBody_Image';
@@ -7,7 +7,7 @@ import { FeedListItemBody_Text } from './FeedListItemBody_Text';
 import { FeedListItemBody_Video } from './FeedListItemBody_Video';
 
 interface FeedListItemBodyProps {
-  item: FeedItem;
+  item: FeedItemTypeMap;
 }
 
 export const FeedListItemBody: React.FC<FeedListItemBodyProps> = ({ item }) => {
@@ -26,15 +26,11 @@ export const FeedListItemBody: React.FC<FeedListItemBodyProps> = ({ item }) => {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      {renderContent()}
-    </View>
-  );
+  return <View style={styles.container}>{renderContent()}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 });

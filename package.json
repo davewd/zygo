@@ -10,10 +10,13 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
-    "clean": "turbo clean && rm -rf node_modules pnpm-lock.yaml .next",
+    "prebuild": "turbo prebuild",
+    "clean": "pnpm -r exec rm -rf dist build lib coverage .tsbuildinfo tsconfig.tsbuildinfo && pnpm -r exec rm -rf node_modules && rm -rf node_modules",
+    "clean:build": "pnpm -r exec rm -rf dist build lib coverage .tsbuildinfo tsconfig.tsbuildinfo",
+    "reset": "pnpm clean && pnpm install",
     "dev:mobile": "turbo run dev --filter=mobile",
     "dev:web": "turbo run dev --filter=web",
-    "scratch": "rm -rf node_modules pnpm-lock.yaml .next && pnpm install && pnpm dev"
+    "scratch": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8",

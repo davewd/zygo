@@ -1,4 +1,4 @@
-export enum FeedItemType {
+enum FeedItemType {
   LINK = 'link',
   TEXT = 'text',
   IMAGE = 'image',
@@ -13,8 +13,7 @@ export enum FeedItemType {
   QUESTION = 'question'
 }
 
-
-export interface FeedItem {
+interface FeedItemTypeMap {
   id: string;
   type: FeedItemType;
   url?: string;
@@ -42,3 +41,7 @@ export interface FeedItem {
     likes: number;
   }
 }
+
+export { FeedItemType };
+export type { FeedItemTypeMap };
+

@@ -1,11 +1,11 @@
-import { FeedItem } from '@zygo/types/feed';
+import { FeedItemTypeMap } from '@zygo/types';
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '../ThemedText';
 import { ThemedView } from '../ThemedView';
 
 interface FeedListItemPostProps {
-  item: FeedItem;
+  item: FeedItemTypeMap;
 }
 
 export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
