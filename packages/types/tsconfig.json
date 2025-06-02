@@ -19,7 +19,9 @@
     "rootDir": "./src",
     "types": [
       "react"
-    ]
+    ],
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "incremental": true
   },
   "exclude": [
     "node_modules",

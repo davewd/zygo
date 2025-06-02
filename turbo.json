@@ -20,6 +20,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
+      "outputLogs": "new-only",
       "outputs": ["build/**", "node_modules/.cache/metro/**"]
     },
     "@zygo/types#build": {

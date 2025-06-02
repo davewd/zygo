@@ -18,11 +18,12 @@
   "name": "@zygo/libs",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist",
-    "dev": "tsc --watch",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
+    "dev": "tsup --watch"
   },
   "type": "module",
   "types": "./dist/index.d.ts",

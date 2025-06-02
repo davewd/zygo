@@ -125,12 +125,13 @@
   "name": "@zygo/ui",
   "private": true,
   "scripts": {
-    "build": "tsc --build",
-    "clean": "rm -rf dist/* || true",
-    "dev": "tsc --watch",
-    "prebuild": "rm -rf dist/* || true && cp -r src/assets dist/",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "rimraf dist/* || true && cp -r src/assets dist/",
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
+    "dev": "tsup --watch"
   },
   "type": "module",
   "types": "./dist/index.d.ts",
