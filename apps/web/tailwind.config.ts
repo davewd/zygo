@@ -9,6 +9,9 @@ const config: Config = {
       colors: {
         border: "hsl(var(--border))",
       },
+      borderColor: {
+        border: "hsl(var(--border))",
+      },
     },
   },
 };

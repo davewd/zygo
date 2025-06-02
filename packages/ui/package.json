@@ -114,13 +114,6 @@
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-    "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    }
-  },
   "name": "@zygo/ui",
   "private": true,
   "scripts": {
