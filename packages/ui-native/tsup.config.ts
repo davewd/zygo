@@ -13,6 +13,7 @@ export default defineConfig({
     'react-dom',
     'react-native',
     '@zygo/hooks',
+    '@zygo/hooks-native',
     '@zygo/libs',
     '@zygo/types',
     "@zygo/typescript-config",

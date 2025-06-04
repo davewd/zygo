@@ -21,6 +21,7 @@
     "@react-navigation/native": "^7.1.10",
     "@zygo/constants": "workspace:*",
     "@zygo/hooks": "workspace:*",
+    "@zygo/hooks-native": "workspace:*",
     "@zygo/ui-native": "workspace:*",
     "@zygo/typescript-config": "workspace:*",
     "date-fns": "^4.1.0",

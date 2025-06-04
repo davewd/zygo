@@ -3,25 +3,14 @@
     "@zygo/constants": "workspace:*",
     "@zygo/eslint-config": "workspace:*",
     "@zygo/typescript-config": "workspace:*",
-    "react": "latest"
-  },
-  "dependenciesMeta": {
-    "@zygo/@zygo/typescript-config": {
-      "injected": true
-    },
-    "@zygo/constants": {
-      "injected": true
-    },
-    "@zygo/hooks": {
-      "injected": true
-    },
-    "@zygo/ui": {
-      "injected": true
-    }
+    "expo-image": "latest",
+    "react": "latest",
+    "react-native": "latest"
   },
   "description": "Zygo React hooks library",
   "devDependencies": {
     "@types/react": "latest",
+    "@types/react-native": "latest",
     "jest": "latest",
     "tailwindcss": "^4.1.8",
     "ts-jest": "latest",
@@ -31,7 +20,7 @@
     "dist"
   ],
   "main": "./dist/index.js",
-  "name": "@zygo/hooks",
+  "name": "@zygo/hooks-native",
   "private": true,
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",

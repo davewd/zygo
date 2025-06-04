@@ -75,6 +75,14 @@
         "dist/**"
       ]
     },
+    "@zygo/hooks-native#build": {
+      "dependsOn": [
+        "@zygo/constants#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "@zygo/ui#build": {
       "dependsOn": [
         "@zygo/typescript-config#build",
@@ -93,7 +101,8 @@
         "@zygo/eslint-config#build",
         "@zygo/libs#build",
         "@zygo/types#build",
-        "@zygo/hooks#build"
+        "@zygo/hooks#build",
+        "@zygo/hooks-native#build"
       ],
       "outputs": [
         "dist/**"
@@ -109,7 +118,8 @@
     },
     "@zygo/mobile#build": {
       "dependsOn": [
-        "@zygo/ui#build"
+        "@zygo/ui#build",
+        "@zygo/ui-native#build"
       ],
       "outputs": [
         "dist/**"

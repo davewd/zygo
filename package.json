@@ -1,21 +1,26 @@
 {
   "private": true,
   "name": "@zygo/monorepo",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Monorepo for Zygo projects",
+  "license": "MIT",
+  "author": "Zygo Team",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "test": "turbo test",
-    "build": "turbo build",
-    "prebuild": "turbo prebuild",
-    "clean": "pnpm clean:build && turbo clean",
+    "dev": "turbo dev --concurrency 1000",
+    "lint": "turbo lint --concurrency 1000",
+    "test": "turbo test --concurrency 1000",
+    "build": "turbo build --concurrency 1000",
+    "prebuild": "turbo prebuild --concurrency 1000",
+    "clean": "pnpm clean:build && turbo clean --concurrency 1000",
     "clean:build": "rimraf dist build lib coverage .turbo .tsbuildinfo tsconfig.tsbuildinfo",
-    "reset": "pnpm clean && pnpm install",
-    "dev:mobile": "turbo run dev --filter=@zygo/mobile",
-    "dev:web": "turbo run dev --filter=@zygo/web",
+    "reset": "pnpm clean && pnpm install --concurrency 1000",
+    "dev:mobile": "turbo run dev --filter=@zygo/mobile --concurrency 1000",
+    "dev:web": "turbo run dev --filter=@zygo/web --concurrency 1000",
     "scratch": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {

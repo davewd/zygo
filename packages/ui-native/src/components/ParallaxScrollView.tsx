@@ -7,7 +7,7 @@ import Animated, {
   useScrollViewOffset,
 } from 'react-native-reanimated';
 
-import { useColorScheme } from '@zygo/hooks';
+import { useColorScheme } from '@zygo/hooks-native';
 import { useBottomTabOverflow } from './TabBarBackground';
 import { ThemedView } from './ThemedView';
 
@@ -18,11 +18,7 @@ type Props = PropsWithChildren<{
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
-export function ParallaxScrollView({
-  children,
-  headerImage,
-  headerBackgroundColor,
-}: Props) {
+export function ParallaxScrollView({ children, headerImage, headerBackgroundColor }: Props) {
   const colorScheme = useColorScheme() ?? 'light';
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);

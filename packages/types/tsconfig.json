@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "composite": true,
     "declaration": true,
     "declarationMap": true,
@@ -7,16 +8,22 @@
     "jsxImportSource": "react",
     "module": "ES2020",
     "moduleResolution": "bundler",
-    "outDir": "dist",
-    "rootDir": "src",
+    "noEmit": false,
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "types": [
+      "react"
+    ]
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "build"
+    "dist"
   ],
   "extends": "@zygo/typescript-config/base.json",
   "include": [
-    "src"
+    "src/**/*",
+    "src/**/*.json",
+    "src/**/*.{png,jpg,jpeg,gif,svg,webp}"
   ]
 }

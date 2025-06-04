@@ -35,6 +35,7 @@
     "@tanstack/react-query": "^5.79.0",
     "@zygo/constants": "workspace:*",
     "@zygo/hooks": "workspace:*",
+    "@zygo/hooks-native": "workspace:*",
     "@zygo/libs": "workspace:*",
     "@zygo/types": "workspace:*",
     "@zygo/typescript-config": "workspace:*",
@@ -121,7 +122,6 @@
     "test:watch": "jest --watch",
     "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "typecheck": "tsc --noEmit",
-    "prebuild": "rimraf dist/* || true",
     "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
     "dev": "tsup --watch"
   },

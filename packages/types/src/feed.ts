@@ -44,4 +44,3 @@ interface FeedItemTypeMap {
 
 export { FeedItemType };
 export type { FeedItemTypeMap };
-
