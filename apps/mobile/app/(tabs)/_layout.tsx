@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 
 import { Colors } from '@zygo/constants';
 import { useColorScheme } from '@zygo/hooks';
-import TabBarBackground, { HapticTab, IconSymbol } from '@zygo/ui';
+import TabBarBackground, { HapticTab, IconSymbol } from '@zygo/ui-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

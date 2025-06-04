@@ -11,7 +11,6 @@ export default defineConfig({
   external: [
     'react',
     'react-dom',
-    'react-native',
     '@zygo/hooks',
     '@zygo/libs',
     '@zygo/types'

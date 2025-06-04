@@ -4,8 +4,16 @@
     "lint": {
       "outputs": []
     },
+    "clean:build": {
+      "cache": false,
+      "persistent": true,
+      "outputs": []
+    },
     "clean": {
       "cache": false,
+      "dependsOn": [
+        "clean:build"
+      ],
       "persistent": true,
       "outputs": []
     },
@@ -15,57 +23,120 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["build"],
-      "inputs": ["**/*.{ts,tsx,js,jsx}"]
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "**/*.{ts,tsx,js,jsx}"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputLogs": "new-only",
-      "outputs": ["build/**", "node_modules/.cache/metro/**"]
+      "outputs": [
+        "build/**",
+        "node_modules/.cache/metro/**"
+      ]
     },
     "@zygo/types#build": {
-      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "@zygo/typescript-config#build",
+        "@zygo/eslint-config#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "@zygo/constants#build": {
-      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "@zygo/typescript-config#build",
+        "@zygo/eslint-config#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "@zygo/libs#build": {
-      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "@zygo/typescript-config#build",
+        "@zygo/eslint-config#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
-  
     "@zygo/hooks#build": {
-      "dependsOn": ["@zygo/constants#build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "@zygo/constants#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
-  "@zygo/ui#build": {
-      "dependsOn": ["@zygo/typescript-config#build", "@zygo/eslint-config#build", "@zygo/libs#build", "@zygo/types#build", "@zygo/hooks#build"],
-      "outputs": ["dist/**"]
+    "@zygo/ui#build": {
+      "dependsOn": [
+        "@zygo/typescript-config#build",
+        "@zygo/eslint-config#build",
+        "@zygo/libs#build",
+        "@zygo/types#build",
+        "@zygo/hooks#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
-        "@zygo/web#build": {
-      "dependsOn": ["@zygo/ui#build"],
-      "outputs": [".next/**"]
+    "@zygo/ui-native#build": {
+      "dependsOn": [
+        "@zygo/typescript-config#build",
+        "@zygo/eslint-config#build",
+        "@zygo/libs#build",
+        "@zygo/types#build",
+        "@zygo/hooks#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "@zygo/web#build": {
+      "dependsOn": [
+        "@zygo/ui#build"
+      ],
+      "outputs": [
+        ".next/**"
+      ]
     },
     "@zygo/mobile#build": {
-      "dependsOn": ["@zygo/ui#build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "@zygo/ui#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "check-types": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "test:watch": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     }
   },
-  "globalDependencies": ["tsconfig.json"]
+  "globalDependencies": [
+    "tsconfig.json"
+  ]
 }

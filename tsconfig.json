@@ -17,6 +17,8 @@
     "paths": {
       "@zygo/ui/*": ["./packages/ui/src/*"],
       "@zygo/ui": ["./packages/ui/src"],
+      "@zygo/ui-native/*": ["./packages/ui-native/src/*"],
+      "@zygo/ui-native": ["./packages/ui-native/src"],
       "@zygo/types/*": ["./packages/types/src/*"],
       "@zygo/types": ["./packages/types/src"],
       "@zygo/constants/*": ["./packages/constants/src/*"],

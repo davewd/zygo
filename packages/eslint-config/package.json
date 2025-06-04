@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "echo 'No build required for typescript-config'",
-    "clean": "rm -rf .turbo && rm -rf node_modules"
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.33.0",

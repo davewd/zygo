@@ -1,5 +1,5 @@
 import { TimelineEvent } from '@zygo/types';
-import { ThemedText, ThemedView, TimelineItem } from '@zygo/ui';
+import { ThemedText, ThemedView, TimelineItem } from '@zygo/ui-native';
 import { format, parseISO } from 'date-fns';
 import { ScrollView, StyleSheet } from 'react-native';
 import timelineData from './data/timeline.json';

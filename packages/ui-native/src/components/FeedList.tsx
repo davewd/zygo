@@ -15,7 +15,9 @@ const FeedList = () => {
     console.log('Feed Data on mount:', transformedData);
   }, []);
 
-  const renderItem: ListRenderItem<FeedItemTypeMap> = ({ item }) => <FeedListItem feedItem={item} />;
+  const renderItem: ListRenderItem<FeedItemTypeMap> = ({ item }) => (
+    <FeedListItem feedItem={item} />
+  );
 
   return (
     <FlatList<FeedItemTypeMap>

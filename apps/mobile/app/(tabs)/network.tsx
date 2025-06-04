@@ -1,8 +1,6 @@
 import { Platform, StyleSheet, useColorScheme } from 'react-native';
 
-import { HelloWave, ParallaxScrollView } from '@zygo/ui';
-
-import { ThemedText, ThemedView } from '@zygo/ui';
+import { HelloWave, ParallaxScrollView, ThemedText, ThemedView } from '@zygo/ui-native';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme() ?? 'light';

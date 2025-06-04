@@ -7,7 +7,7 @@ import ParallaxScrollView, {
   IconSymbol,
   ThemedText,
   ThemedView,
-} from '@zygo/ui';
+} from '@zygo/ui-native';
 
 export default function TabTwoScreen() {
   return (

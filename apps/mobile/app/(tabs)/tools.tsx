@@ -1,4 +1,4 @@
-import { ThemedText, ThemedView } from '@zygo/ui';
+import { ThemedText, ThemedView } from '@zygo/ui-native';
 import { StyleSheet } from 'react-native';
 
 export default function PostScreen() {

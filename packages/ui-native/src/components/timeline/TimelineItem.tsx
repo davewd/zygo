@@ -11,13 +11,13 @@ interface TimelineItemProps {
   isLast?: boolean;
 }
 
-export const TimelineItem = ({ 
-  title, 
-  description, 
-  timestamp, 
-  image, 
-  children, 
-  isLast = false 
+export const TimelineItem = ({
+  title,
+  description,
+  timestamp,
+  image,
+  children,
+  isLast = false,
 }: TimelineItemProps) => {
   return (
     <View style={styles.container}>
@@ -29,13 +29,7 @@ export const TimelineItem = ({
         <ThemedText type="subtitle">{title}</ThemedText>
         <ThemedText type="body">{description}</ThemedText>
         <ThemedText type="caption">{timestamp}</ThemedText>
-        {image && (
-          <Image 
-            source={{ uri: image }} 
-            style={styles.image} 
-            resizeMode="cover"
-          />
-        )}
+        {image && <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />}
         {children && <View style={styles.childrenContainer}>{children}</View>}
       </View>
     </View>

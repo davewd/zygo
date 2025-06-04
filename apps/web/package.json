@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "check-types": "tsc --noEmit",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "build": "vite build",
-    "dev": "vite --port 8083"
+    "dev": "vite"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

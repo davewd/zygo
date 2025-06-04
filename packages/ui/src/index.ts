@@ -3,30 +3,21 @@ export * from './components/button';
 export * from './components/card';
 export * from './components/carousel';
 export * from './components/chart';
-export * from './components/Collapsible';
+
 export * from './components/command';
 export * from './components/context-menu';
 export * from './components/dialog';
 export * from './components/drawer';
 export * from './components/dropdown-menu';
-export * from './components/ExternalLink';
-export * from './components/feed_list_items/FeedListItem';
-export * from './components/feed_list_items/FeedListItemActions';
-export * from './components/feed_list_items/FeedListItemBody';
-export * from './components/feed_list_items/FeedListItemComments';
-export * from './components/feed_list_items/FeedListItemHeader';
-export * from './components/feed_list_items/FeedListItemPost';
-export * from './components/feed_list_items/FeedListItemStats';
-export * from './components/FeedList';
+
+
 export * from './components/form';
-export * from './components/HapticTab';
-export * from './components/HelloWave';
-export * from './components/IconSymbol';
+
 export * from './components/input';
 export * from './components/menubar';
 export * from './components/navigation-menu';
 export * from './components/pagination';
-export * from './components/ParallaxScrollView';
+
 export * from './components/radio-group';
 export * from './components/resizable';
 export * from './components/select';
@@ -37,8 +28,6 @@ export * from './components/sonner';
 export * from './components/switch';
 export * from './components/TabBarBackground';
 export * from './components/tabs';
-export * from './components/ThemedText';
-export * from './components/ThemedView';
-export * from './components/timeline/TimelineItem';
+export * from './components/textarea';
 export * from './components/tooltip';
 
