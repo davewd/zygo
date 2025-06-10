@@ -10,7 +10,8 @@ enum FeedItemType {
   COMMENT = 'comment',
   ANNOUNCEMENT = 'announcement',
   EVENT = 'event',
-  QUESTION = 'question'
+  QUESTION = 'question',
+  POST = 'post'
 }
 
 interface FeedItemTypeMap {
@@ -44,3 +45,4 @@ interface FeedItemTypeMap {
 
 export { FeedItemType };
 export type { FeedItemTypeMap };
+
