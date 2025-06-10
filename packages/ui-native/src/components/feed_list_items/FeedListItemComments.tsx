@@ -1,10 +1,10 @@
-import { FeedItemTypeMap } from '@zygo/types';
+import { FeedItem } from '@zygo/types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '../ThemedText';
 
 interface FeedListItemActionsProps {
-  item: FeedItemTypeMap;
+  item: FeedItem;
 }
 
 export const FeedListItemComments: React.FC<FeedListItemActionsProps> = ({ item }) => {

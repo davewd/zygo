@@ -1,9 +1,9 @@
-import { FeedItemTypeMap } from '@zygo/types';
+import { FeedItem } from '@zygo/types';
 import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface FeedListItemProps {
-  feedItem: FeedItemTypeMap;
+  feedItem: FeedItem;
 }
 
 const FeedListItem: React.FC<FeedListItemProps> = ({ feedItem }) => {

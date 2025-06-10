@@ -1,4 +1,4 @@
-import { FeedItemType, FeedItemTypeMap } from '@zygo/types';
+import { FeedItem, FeedItemType } from '@zygo/types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FeedListItemBody_Image } from './FeedListItemBody_Image';
@@ -7,7 +7,7 @@ import { FeedListItemBody_Text } from './FeedListItemBody_Text';
 import { FeedListItemBody_Video } from './FeedListItemBody_Video';
 
 interface FeedListItemBodyProps {
-  item: FeedItemTypeMap;
+  item: FeedItem;
 }
 
 export const FeedListItemBody: React.FC<FeedListItemBodyProps> = ({ item }) => {

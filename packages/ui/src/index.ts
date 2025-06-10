@@ -17,6 +17,7 @@ export * from './components/input';
 export * from './components/menubar';
 export * from './components/navigation-menu';
 export * from './components/pagination';
+export * from './navigation/NavigationBar';
 
 export * from './components/radio-group';
 export * from './components/resizable';
