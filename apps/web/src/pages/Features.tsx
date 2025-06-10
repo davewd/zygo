@@ -1,37 +1,35 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import { Award, BookOpen, Calendar, MessageCircle, Shield, Users } from 'lucide-react';
+import { Award, BookOpen, Shield, TimerIcon, Users, WrenchIcon } from 'lucide-react';
 
 const Features = () => {
   const features = [
     {
-      icon: Users,
-      title: 'Family Connections',
+      icon: BookOpen,
+      title: 'Tailored content',
       description:
-        'Connect with like-minded families in your community and beyond. Build lasting relationships that support growth and learning.',
+        'Enable experts worlwide to educate you based on the topics that matter most to your family',
       bgColor: 'bg-zygo-yellow/20',
       iconColor: 'text-gray-700',
     },
     {
-      icon: Calendar,
-      title: 'Growth Activities',
-      description:
-        'Access curated activities, workshops, and events designed to foster family development and create meaningful experiences.',
+      icon: Users,
+      title: '"Village" Connections',
+      description: 'Identify those who support you, are related to you or simply relate to you !',
       bgColor: 'bg-zygo-blue/20',
       iconColor: 'text-gray-700',
     },
     {
-      icon: MessageCircle,
-      title: 'Support Network',
+      icon: TimerIcon,
+      title: 'Time Line',
       description:
-        'Join discussion groups, share experiences, and receive guidance from other families on similar journeys.',
+        'Leverage our continuously peer reviewed timeline of family growth and adjust it as your needs evolve',
       bgColor: 'bg-zygo-mint/30',
       iconColor: 'text-gray-700',
     },
     {
-      icon: BookOpen,
-      title: 'Learning Resources',
-      description:
-        "Access expert-curated content, guides, and tools to support your family's growth in every stage of life.",
+      icon: WrenchIcon,
+      title: 'Tools',
+      description: 'Share information with your partner to enable them to help',
       bgColor: 'bg-zygo-cream/40',
       iconColor: 'text-gray-700',
     },

@@ -1,5 +1,4 @@
 import About from './About';
-import Contact from './Contact';
 import Features from './Features';
 import Footer from './Footer';
 import Hero from './Hero';
@@ -10,7 +9,6 @@ const Index = () => {
       <Hero />
       <Features />
       <About />
-      <Contact />
       <Footer />
     </div>
   );

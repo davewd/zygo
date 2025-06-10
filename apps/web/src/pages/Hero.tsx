@@ -1,6 +1,5 @@
-import { Button } from '@zygo/ui';
-import { ArrowRight, Heart } from 'lucide-react';
-
+import { Button, NavigationBar } from '@zygo/ui';
+import Typewriter from 'typewriter-effect';
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -25,28 +24,62 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="animate-fade-in">
           <div className="flex items-center justify-center mb-6">
-            <Heart className="text-zygo-red mr-3" size={48} />
-            <h1 className="text-6xl md:text-8xl font-bold text-gray-800">
-              Zy<span className="text-zygo-blue">go</span>
-            </h1>
+            <h1 className="text-6xl md:text-8xl font-bold text-gray-800">Zygo</h1>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-light text-gray-700 mb-8 leading-tight">
-            Where Families <span className="text-zygo-red font-semibold">Grow</span> Together
+          <h2 className="flex items-center justify-center flex-nowrap text-3xl md:text-5xl font-light text-gray-700 mb-8 leading-tight">
+            Where&nbsp;
+            <Typewriter
+              options={{
+                strings: [
+                  'Families',
+                  'headmistresses',
+                  'Teachers',
+                  'Educators',
+                  'Caregivers',
+                  'Grandparents',
+                  'Aunts',
+                  'Uncles',
+                  'Siblings',
+                  'Guardians',
+                  'Mentors',
+                  'Role Models',
+                  'Supporters',
+                  'Communities',
+                  'Partners',
+                  'Co-parents',
+                  'Children',
+                  'Parents',
+                  "Nona's",
+                  'Friends',
+                  'Doctors',
+                  'Nurses',
+                  'Midwives',
+                  'Physiotherapists',
+                  'Occupational Therapists',
+                  'Speech Therapists',
+                  'Dietitians',
+                  'Psychologists',
+                  'Counsellors',
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+            <span className="text-zygo-red font-semibold inline-block">Grow Together</span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Building stronger connections, fostering growth, and creating lasting memories through
-            our family-centered community network.
+            Build your village. Grow with your health, education and wellness experts. Enable your
+            family to thrive.
           </p>
-
+          <NavigationBar />
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
               className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Join Our Community
-              <ArrowRight className="ml-2" size={20} />
+              Login / Sign-up
             </Button>
             <Button
               variant="outline"
