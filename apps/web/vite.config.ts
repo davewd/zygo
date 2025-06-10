@@ -48,6 +48,7 @@ export default defineConfig({
   },
   server: {
     host: "::",
+    open: true,
     port: 8083,
   }
 });

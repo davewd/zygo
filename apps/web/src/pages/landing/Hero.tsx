@@ -1,4 +1,4 @@
-import { Button, NavigationBar } from '@zygo/ui';
+import { Button } from '@zygo/ui';
 import Typewriter from 'typewriter-effect';
 const Hero = () => {
   return (
@@ -51,7 +51,7 @@ const Hero = () => {
                   'Children',
                   'Parents',
                   "Nona's",
-                  'Friends',
+                  'Best Friends',
                   'Doctors',
                   'Nurses',
                   'Midwives',
@@ -73,7 +73,6 @@ const Hero = () => {
             Build your village. Grow with your health, education and wellness experts. Enable your
             family to thrive.
           </p>
-          <NavigationBar />
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"

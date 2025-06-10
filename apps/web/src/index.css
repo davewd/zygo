@@ -93,15 +93,15 @@
 }
 :root {
   --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2 84% 4.9%);
+  --foreground: hsl(20, 82%, 50%);
 
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(229, 89%, 49%);
 
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(173 58% 39%);
 
-  --primary: hsl(222.2 47.4% 11.2%);
+  --primary: hsl(302, 50%, 52%);
   --primary-foreground: hsl(210 40% 98%);
 
   --secondary: hsl(210 40% 96.1%);
@@ -208,7 +208,13 @@
     padding: 10px 0;
   }
 }
-
+.NavigationMenuIndicator {
+  background-color: grey;
+}
+.NavigationMenuIndicator[data-orientation='horizontal'] {
+  height: 3px;
+  transition: width, transform, 250ms ease;
+}
 .tools-container {
   transform: scaleY(0);
   transform-origin: top;

@@ -13,7 +13,7 @@
   "aliases": {
     "components": "@zygo/ui",
     "utils": "@zygo/utils",
-    "ui": "@/components/ui",
+    "ui": "@zygo/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

@@ -15,38 +15,41 @@ const NavigationBar = React.forwardRef<
   React.ElementRef<typeof NavigationMenu>,
   INavigationBarProps
 >(({ className, ...props }, ref) => {
+  console.log(className);
   return (
-    <nav>
-      <NavigationMenu className={cn('', className)} ref={ref} {...props}>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/feed" className={cn(navigationMenuTriggerStyle())}>
-              Feed
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/village" className={cn(navigationMenuTriggerStyle())}>
-              Village
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/updates" className={cn(navigationMenuTriggerStyle())}>
-              Updates
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/tools" className={cn(navigationMenuTriggerStyle())}>
-              Tools
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink href="/timeline" className={cn(navigationMenuTriggerStyle())}>
-              Timeline
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </nav>
+    <NavigationMenu
+      className={cn('bg-popover text-popover-foreground', className)}
+      ref={ref}
+      {...props}
+    >
+      <NavigationMenuList>
+        <NavigationMenuItem className="bg-popover text-popover-foreground">
+          <NavigationMenuLink href="/feed" className={cn(navigationMenuTriggerStyle())}>
+            Feed
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/village" className={cn(navigationMenuTriggerStyle())}>
+            Village
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/updates" className={cn(navigationMenuTriggerStyle())}>
+            Updates
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/tools" className={cn(navigationMenuTriggerStyle())}>
+            Tools
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/timeline" className={cn(navigationMenuTriggerStyle())}>
+            Timeline
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 });
 

@@ -1,0 +1,16 @@
+{
+  "name": "@zygo/datastore",
+  "version": "1.0.0",
+  "description": "Service to allow data to be served from supabase",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "lint": "eslint . --ext .ts"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -11,9 +11,7 @@ const About = () => {
               About <span className="text-zygo-red">Zygo</span>
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              We believe that every family has the potential to grow, learn, and thrive together.
-              Zygo is more than just a platform – it's a movement towards stronger, more connected
-              families.
+              Enable every human to grow together
             </p>
           </div>
 
