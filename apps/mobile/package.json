@@ -12,7 +12,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "dev": "expo start --port 8082"
+    "dev": "expo start --port 8082",
+    "clean": "rimraf node_modules .turbo .expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -71,20 +72,6 @@
     "ts-jest": "^29.3.4",
     "typescript": "^5.8.3",
     "react-test-renderer": "19.1.0"
-  },
-  "dependenciesMeta": {
-    "@zygo/ui": {
-      "injected": true
-    },
-    "@zygo/constants": {
-      "injected": true
-    },
-    "@zygo/hooks": {
-      "injected": true
-    },
-    "@zygo/@zygo/typescript-config": {
-      "injected": true
-    }
   },
   "private": true
 }

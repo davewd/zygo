@@ -17,7 +17,7 @@
     "build": "turbo build --concurrency 1000",
     "prebuild": "turbo prebuild --concurrency 1000",
     "clean": "pnpm clean:build && turbo clean --concurrency 1000",
-    "clean:build": "rimraf dist build lib coverage .turbo .tsbuildinfo tsconfig.tsbuildinfo",
+    "clean:build": "rimraf dist build lib coverage .turbo .expo tsbuildinfo tsconfig.tsbuildinfo",
     "reset": "pnpm clean && pnpm install --concurrency 1000",
     "dev:mobile": "turbo run dev --filter=@zygo/mobile --concurrency 1000",
     "dev:web": "turbo run dev --filter=@zygo/web --concurrency 1000",

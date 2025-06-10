@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "exports": {
-    "./tailwind.config": "./tailwind.config.ts"
+    "./zygo_theme.css": "./zygo_theme.css"
   },
   "files": [
-    "tailwind.config.ts"
+    "zygo_theme.css"
   ]
 }

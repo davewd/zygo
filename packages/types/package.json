@@ -19,7 +19,7 @@
   "name": "@zygo/types",
   "private": true,
   "scripts": {
-    "build": "tsup && tsc --emitDeclarationOnly",
+    "build": "tsup && tsc --declaration --emitDeclarationOnly --outDir dist",
     "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "dev": "tsup --watch",
     "test": "jest",
