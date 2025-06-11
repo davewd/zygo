@@ -4,7 +4,7 @@ import About from './landing/About';
 import Features from './landing/Features';
 import Hero from './landing/Hero';
 
-const Index = () => {
+const Landing = () => {
   return (
     <div className="min-h-screen">
       <NavigationBar className="bg-primary text-primary-foreground" />
@@ -16,4 +16,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Landing;
