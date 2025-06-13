@@ -59,35 +59,9 @@
       ],
       "outputs": ["dist/**"]
     },
-    "@zygo/ui-native#build": {
-      "dependsOn": [
-        "@zygo/typescript-config#build",
-        "@zygo/eslint-config#build",
-        "@zygo/constants#build",
-        "@zygo/libs#build",
-        "@zygo/types#build",
-        "@zygo/hooks#build",
-        "@zygo/hooks-native#build"
-      ],
-      "outputs": ["dist/**"]
-    },
     "@zygo/web#build": {
       "dependsOn": ["@zygo/ui#build"],
       "outputs": [".next/**"]
-    },
-    "@zygo/mobile#build": {
-      "dependsOn": [
-        "@zygo/ui#build",
-        "@zygo/ui-native#build",
-        "@zygo/typescript-config#build",
-        "@zygo/eslint-config#build",
-        "@zygo/constants#build",
-        "@zygo/libs#build",
-        "@zygo/types#build",
-        "@zygo/hooks#build",
-        "@zygo/hooks-native#build"
-      ],
-      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
