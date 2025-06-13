@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import BreastfeedingDemo from './pages/BreastfeedingDemo';
 import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/landing';
@@ -22,5 +23,6 @@ export const routes = createBrowserRouter([
   },
   { path: '/login', element: <Login />, errorElement: <Error /> },
   { path: '/signup', element: <SignUp />, errorElement: <Error /> },
+  { path: '/demo/breastfeeding', element: <BreastfeedingDemo />, errorElement: <Error /> },
   { path: '/', element: <Landing />, errorElement: <Error /> },
 ]);
