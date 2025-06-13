@@ -14,6 +14,21 @@ enum FeedItemType {
   POST = 'post'
 }
 
+enum VisibilityLevel {
+  PUBLIC = 'public',
+  GROUP = 'group',
+  PRIVATE = 'private'
+}
+
+interface PrivacySettings {
+  visibility: VisibilityLevel;
+  sharedWith: Array<{
+    type: 'group' | 'individual';
+    name: string;
+    id: string;
+  }>;
+}
+
 interface FeedItemTypeMap {
   id: string;
   type: FeedItemType;
@@ -40,9 +55,10 @@ interface FeedItemTypeMap {
     reposts: number;
     shares: number;
     likes: number;
-  }
+  };
+  privacy: PrivacySettings;
 }
 
-export { FeedItemType };
-export type { FeedItemTypeMap };
+export { FeedItemType, VisibilityLevel };
+export type { FeedItemTypeMap, PrivacySettings };
 

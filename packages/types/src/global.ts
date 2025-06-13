@@ -1,4 +1,4 @@
-import { FeedItemType } from './feed';
+import { FeedItemType, PrivacySettings } from './feed';
 
 export type FeedItem = {
    id: string;
@@ -26,7 +26,8 @@ export type FeedItem = {
       reposts: number;
       shares: number;
       likes: number;
-    }
+    };
+    privacy: PrivacySettings;
   }
 
 export interface TimelineEvent {

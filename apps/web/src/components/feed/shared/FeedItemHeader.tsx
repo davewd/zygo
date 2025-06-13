@@ -1,6 +1,7 @@
 import React from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
 import { formatDate } from './feedUtils';
+import { PrivacyIndicator } from './PrivacyIndicator';
 
 interface FeedItemHeaderProps {
   item: FeedItemTypeMap;
@@ -50,6 +51,7 @@ export const FeedItemHeader: React.FC<FeedItemHeaderProps> = ({
         <p className="text-gray-500 text-sm">{formatDate(item.metadata.createdAt)}</p>
         {children}
       </div>
+      <PrivacyIndicator privacy={item.privacy} />
     </div>
   );
 };

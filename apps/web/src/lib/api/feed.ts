@@ -15,6 +15,21 @@ export enum FeedItemType {
   POST = 'post'
 }
 
+export enum VisibilityLevel {
+  PUBLIC = 'public',
+  GROUP = 'group',
+  PRIVATE = 'private'
+}
+
+export interface PrivacySettings {
+  visibility: VisibilityLevel;
+  sharedWith: Array<{
+    type: 'group' | 'individual';
+    name: string;
+    id: string;
+  }>;
+}
+
 export interface FeedItemTypeMap {
   id: string;
   type: FeedItemType;
@@ -41,7 +56,8 @@ export interface FeedItemTypeMap {
     reposts: number;
     shares: number;
     likes: number;
-  }
+  };
+  privacy: PrivacySettings;
 }
 
 // Simulate API endpoints
@@ -78,6 +94,10 @@ const mockData = {
         likes: 120,
         shares: 45,
         comments: 10
+      },
+      privacy: {
+        visibility: "public",
+        sharedWith: []
       }
     },
     {
@@ -98,6 +118,13 @@ const mockData = {
         likes: 1,
         shares: 0,
         comments: 10
+      },
+      privacy: {
+        visibility: "group",
+        sharedWith: [
+          { type: "group", name: "Family", id: "family_1" },
+          { type: "group", name: "Close Friends", id: "friends_1" }
+        ]
       }
     },
     {
@@ -119,6 +146,15 @@ const mockData = {
         likes: 0,
         shares: 0,
         comments: 0
+      },
+      privacy: {
+        visibility: "private",
+        sharedWith: [
+          { type: "individual", name: "Sarah Johnson", id: "user_1" },
+          { type: "individual", name: "Mike Davis", id: "user_2" },
+          { type: "individual", name: "Emma Wilson", id: "user_3" },
+          { type: "individual", name: "Tom Anderson", id: "user_4" }
+        ]
       }
     },
     {
@@ -135,6 +171,12 @@ const mockData = {
       },
       metadata: {
         createdAt: "2023-10-01T12:00:00Z"
+      },
+      privacy: {
+        visibility: "group",
+        sharedWith: [
+          { type: "group", name: "Work Team", id: "work_1" }
+        ]
       }
     }
   ]
@@ -173,6 +215,10 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
       reposts: 0,
       shares: item.stats?.shares || 0,
       likes: item.stats?.likes || 0,
+    },
+    privacy: item.privacy || {
+      visibility: VisibilityLevel.PUBLIC,
+      sharedWith: [],
     },
   }));
   
