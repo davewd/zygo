@@ -1,7 +1,7 @@
 import { Button } from '@zygo/ui';
 import { Calendar, Heart, MessageCircle, Repeat2, Share, Trophy } from 'lucide-react';
 import React from 'react';
-import { FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedItemTypeMap } from '../../../lib/api/feed';
 
 interface FeedListItemMilestoneProps {
   item: FeedItemTypeMap;

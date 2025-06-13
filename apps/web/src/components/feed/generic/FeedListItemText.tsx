@@ -1,13 +1,13 @@
 import { Button } from '@zygo/ui';
 import { Heart, MessageCircle, Repeat2, Share } from 'lucide-react';
 import React from 'react';
-import { FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedItemTypeMap } from '../../../lib/api/feed';
 
-interface FeedListItemPostProps {
+interface FeedListItemTextProps {
   item: FeedItemTypeMap;
 }
 
-export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
+export const FeedListItemText: React.FC<FeedListItemTextProps> = ({ item }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -61,18 +61,14 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
       {/* Content */}
       <div className="space-y-3">
         {item.title && <h2 className="text-xl font-bold text-gray-900">{item.title}</h2>}
-        {item.post && <p className="text-gray-800 leading-relaxed">{item.post}</p>}
-        {item.description && <p className="text-gray-600">{item.description}</p>}
-        {item.imageUrl && (
-          <img
-            src={item.imageUrl}
-            alt={item.title || 'Post image'}
-            className="w-full rounded-lg object-cover max-h-96"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-        )}
+        <div className="prose prose-gray max-w-none">
+          {item.description && (
+            <p className="text-gray-800 leading-relaxed text-lg">{item.description}</p>
+          )}
+          {item.post && (
+            <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{item.post}</p>
+          )}
+        </div>
       </div>
 
       {/* Actions */}

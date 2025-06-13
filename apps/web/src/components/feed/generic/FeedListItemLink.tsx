@@ -1,7 +1,7 @@
 import { Button } from '@zygo/ui';
 import { ExternalLink, Heart, MessageCircle, Repeat2, Share } from 'lucide-react';
 import React from 'react';
-import { FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedItemTypeMap } from '../../../lib/api/feed';
 
 interface FeedListItemLinkProps {
   item: FeedItemTypeMap;

@@ -1,11 +1,11 @@
 import { Card } from '@zygo/ui';
 import React, { memo } from 'react';
 import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
-import { FeedListItemImage } from './FeedListItemImage';
-import { FeedListItemLink } from './FeedListItemLink';
-import { FeedListItemMilestone } from './FeedListItemMilestone';
-import { FeedListItemPost } from './FeedListItemPost';
-import { FeedListItemText } from './FeedListItemText';
+import { FeedListItemImage } from './generic/FeedListItemImage';
+import { FeedListItemLink } from './generic/FeedListItemLink';
+import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
+import { FeedListItemPost } from './generic/FeedListItemPost';
+import { FeedListItemText } from './generic/FeedListItemText';
 
 interface FeedListItemProps {
   item: FeedItemTypeMap;

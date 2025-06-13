@@ -1,15 +1,13 @@
 import { Button } from '@zygo/ui';
-import { Heart, MessageCircle, Repeat2, Share, ZoomIn } from 'lucide-react';
-import React, { useState } from 'react';
-import { FeedItemTypeMap } from '../../lib/api/feed';
+import { Heart, MessageCircle, Repeat2, Share } from 'lucide-react';
+import React from 'react';
+import { FeedItemTypeMap } from '../../../lib/api/feed';
 
-interface FeedListItemImageProps {
+interface FeedListItemPostProps {
   item: FeedItemTypeMap;
 }
 
-export const FeedListItemImage: React.FC<FeedListItemImageProps> = ({ item }) => {
-  const [isImageExpanded, setIsImageExpanded] = useState(false);
-
+export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -65,32 +63,17 @@ export const FeedListItemImage: React.FC<FeedListItemImageProps> = ({ item }) =>
         {item.title && <h2 className="text-xl font-bold text-gray-900">{item.title}</h2>}
         {item.post && <p className="text-gray-800 leading-relaxed">{item.post}</p>}
         {item.description && <p className="text-gray-600">{item.description}</p>}
-      </div>
-
-      {/* Image */}
-      {item.imageUrl && (
-        <div className="relative group">
+        {item.imageUrl && (
           <img
             src={item.imageUrl}
-            alt={item.title || 'Image post'}
-            className={`w-full rounded-lg object-cover cursor-pointer transition-all duration-300 ${
-              isImageExpanded ? 'max-h-none' : 'max-h-96'
-            }`}
-            onClick={() => setIsImageExpanded(!isImageExpanded)}
+            alt={item.title || 'Post image'}
+            className="w-full rounded-lg object-cover max-h-96"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-200 rounded-lg flex items-center justify-center">
-            <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-          </div>
-          {!isImageExpanded && (
-            <div className="absolute bottom-2 right-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded">
-              Click to expand
-            </div>
-          )}
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Actions */}
       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
