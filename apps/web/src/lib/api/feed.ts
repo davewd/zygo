@@ -12,7 +12,8 @@ export enum FeedItemType {
   ANNOUNCEMENT = 'announcement',
   EVENT = 'event',
   QUESTION = 'question',
-  POST = 'post'
+  POST = 'post',
+  BREASTFEEDING_TOOL = 'breastfeeding_tool'
 }
 
 export enum VisibilityLevel {
@@ -58,6 +59,20 @@ export interface FeedItemTypeMap {
     likes: number;
   };
   privacy: PrivacySettings;
+  // Breastfeeding-specific data
+  breastfeedingData?: Array<{
+    date: string;
+    feedingTime: number;
+    happiness: number;
+    soreness: number;
+    fullDate: string;
+  }>;
+  breastfeedingSummary?: {
+    avgDuration: number;
+    avgHappiness: number;
+    avgSoreness: number;
+    totalSessions: number;
+  };
 }
 
 // Simulate API endpoints
@@ -178,6 +193,98 @@ const mockData = {
           { type: "group", name: "Work Team", id: "work_1" }
         ]
       }
+    },
+    {
+      id: 5,
+      title: "Breastfeeding Journey Tracker",
+      metadata: {
+        createdAt: "2023-10-02T08:30:00Z"
+      },
+      author: {
+        name: "Sarah Martinez",
+        title: "New Mom",
+        image: "https://example.com/sarah_martinez.jpg"
+      },
+      type: FeedItemType.BREASTFEEDING_TOOL,
+      post: "Tracking my breastfeeding journey with detailed metrics. 🤱 It's been amazing to see the progress over time and understand the patterns. This data helps me stay motivated and shows how far we've come together! #BreastfeedingJourney #MomLife #DataDriven",
+      image: "https://example.com/breastfeeding_chart.jpg",
+      stats: {
+        likes: 65,
+        shares: 8,
+        comments: 23
+      },
+      privacy: {
+        visibility: "group",
+        sharedWith: [
+          { type: "group", name: "Mom Support Group", id: "moms_1" },
+          { type: "group", name: "Family", id: "family_2" },
+          { type: "group", name: "New Parents Circle", id: "parents_1" }
+        ]
+      },
+      breastfeedingData: [
+        {
+          date: '12/5',
+          feedingTime: 25,
+          happiness: 8,
+          soreness: 3,
+          fullDate: '2024-12-05',
+        },
+        {
+          date: '12/6',
+          feedingTime: 30,
+          happiness: 7,
+          soreness: 4,
+          fullDate: '2024-12-06',
+        },
+        {
+          date: '12/7',
+          feedingTime: 22,
+          happiness: 9,
+          soreness: 2,
+          fullDate: '2024-12-07',
+        },
+        {
+          date: '12/8',
+          feedingTime: 28,
+          happiness: 6,
+          soreness: 5,
+          fullDate: '2024-12-08',
+        },
+        {
+          date: '12/9',
+          feedingTime: 35,
+          happiness: 8,
+          soreness: 3,
+          fullDate: '2024-12-09',
+        },
+        {
+          date: '12/10',
+          feedingTime: 20,
+          happiness: 9,
+          soreness: 2,
+          fullDate: '2024-12-10',
+        },
+        {
+          date: '12/11',
+          feedingTime: 32,
+          happiness: 7,
+          soreness: 4,
+          fullDate: '2024-12-11',
+        },
+        {
+          date: '12/12',
+          feedingTime: 26,
+          happiness: 8,
+          soreness: 3,
+          fullDate: '2024-12-12',
+        },
+      ],
+      breastfeedingSummary: {
+        avgDuration: 27,
+        avgHappiness: 7.8,
+        avgSoreness: 3.3,
+        totalSessions: 8,
+      }
     }
   ]
 };
@@ -220,6 +327,9 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
       visibility: VisibilityLevel.PUBLIC,
       sharedWith: [],
     },
+    // Preserve breastfeeding-specific data
+    breastfeedingData: item.breastfeedingData,
+    breastfeedingSummary: item.breastfeedingSummary,
   }));
   
   // Simulate pagination

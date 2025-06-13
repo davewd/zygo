@@ -18,69 +18,18 @@ interface FeedListItemToolBreastFeedingProps {
   item: FeedItemTypeMap;
 }
 
-// Mock breastfeeding data for the chart
-const breastfeedingData = [
-  {
-    date: '12/5',
-    feedingTime: 25,
-    happiness: 8,
-    soreness: 3,
-    fullDate: '2024-12-05',
-  },
-  {
-    date: '12/6',
-    feedingTime: 30,
-    happiness: 7,
-    soreness: 4,
-    fullDate: '2024-12-06',
-  },
-  {
-    date: '12/7',
-    feedingTime: 22,
-    happiness: 9,
-    soreness: 2,
-    fullDate: '2024-12-07',
-  },
-  {
-    date: '12/8',
-    feedingTime: 28,
-    happiness: 6,
-    soreness: 5,
-    fullDate: '2024-12-08',
-  },
-  {
-    date: '12/9',
-    feedingTime: 35,
-    happiness: 8,
-    soreness: 3,
-    fullDate: '2024-12-09',
-  },
-  {
-    date: '12/10',
-    feedingTime: 20,
-    happiness: 9,
-    soreness: 2,
-    fullDate: '2024-12-10',
-  },
-  {
-    date: '12/11',
-    feedingTime: 32,
-    happiness: 7,
-    soreness: 4,
-    fullDate: '2024-12-11',
-  },
-  {
-    date: '12/12',
-    feedingTime: 26,
-    happiness: 8,
-    soreness: 3,
-    fullDate: '2024-12-12',
-  },
-];
-
 export const FeedListItemToolBreastFeeding: React.FC<FeedListItemToolBreastFeedingProps> = ({
   item,
 }) => {
+  // Use data from item or fallback to empty array
+  const breastfeedingData = item.breastfeedingData || [];
+  const summary = item.breastfeedingSummary || {
+    avgDuration: 0,
+    avgHappiness: 0,
+    avgSoreness: 0,
+    totalSessions: 0,
+  };
+
   // Custom tooltip for the chart
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -142,72 +91,82 @@ export const FeedListItemToolBreastFeeding: React.FC<FeedListItemToolBreastFeedi
         </div>
 
         <div className="h-80 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart
-              data={breastfeedingData}
-              margin={{
-                top: 20,
-                right: 30,
-                bottom: 20,
-                left: 20,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis
-                dataKey="date"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fontSize: 12, fill: '#6b7280' }}
-              />
-              <YAxis
-                yAxisId="left"
-                orientation="left"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fontSize: 12, fill: '#6b7280' }}
-                label={{ value: 'Feeding Time (min)', angle: -90, position: 'insideLeft' }}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fontSize: 12, fill: '#6b7280' }}
-                label={{ value: 'Rating (1-10)', angle: 90, position: 'insideRight' }}
-                domain={[0, 10]}
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend />
-              <Bar
-                yAxisId="left"
-                dataKey="feedingTime"
-                fill="#ec4899"
-                name="Feeding Time (min)"
-                radius={[4, 4, 0, 0]}
-                opacity={0.8}
-              />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="happiness"
-                stroke="#10b981"
-                strokeWidth={3}
-                name="Happiness Level"
-                dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#10b981', strokeWidth: 2 }}
-              />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="soreness"
-                stroke="#ef4444"
-                strokeWidth={3}
-                name="Soreness Level"
-                dot={{ fill: '#ef4444', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#ef4444', strokeWidth: 2 }}
-              />
-            </ComposedChart>
-          </ResponsiveContainer>
+          {breastfeedingData.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <ComposedChart
+                data={breastfeedingData}
+                margin={{
+                  top: 20,
+                  right: 30,
+                  bottom: 20,
+                  left: 20,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis
+                  dataKey="date"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                />
+                <YAxis
+                  yAxisId="left"
+                  orientation="left"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                  label={{ value: 'Feeding Time (min)', angle: -90, position: 'insideLeft' }}
+                />
+                <YAxis
+                  yAxisId="right"
+                  orientation="right"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                  label={{ value: 'Rating (1-10)', angle: 90, position: 'insideRight' }}
+                  domain={[0, 10]}
+                />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Bar
+                  yAxisId="left"
+                  dataKey="feedingTime"
+                  fill="#ec4899"
+                  name="Feeding Time (min)"
+                  radius={[4, 4, 0, 0]}
+                  opacity={0.8}
+                />
+                <Line
+                  yAxisId="right"
+                  type="monotone"
+                  dataKey="happiness"
+                  stroke="#10b981"
+                  strokeWidth={3}
+                  name="Happiness Level"
+                  dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }}
+                  activeDot={{ r: 6, stroke: '#10b981', strokeWidth: 2 }}
+                />
+                <Line
+                  yAxisId="right"
+                  type="monotone"
+                  dataKey="soreness"
+                  stroke="#ef4444"
+                  strokeWidth={3}
+                  name="Soreness Level"
+                  dot={{ fill: '#ef4444', strokeWidth: 2, r: 4 }}
+                  activeDot={{ r: 6, stroke: '#ef4444', strokeWidth: 2 }}
+                />
+              </ComposedChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex items-center justify-center h-full bg-gray-50 rounded-lg">
+              <div className="text-center">
+                <Baby className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-gray-500">No feeding data available yet</p>
+                <p className="text-sm text-gray-400">Start tracking to see your progress!</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Chart Legend Info */}
@@ -232,19 +191,19 @@ export const FeedListItemToolBreastFeeding: React.FC<FeedListItemToolBreastFeedi
         <h4 className="font-semibold text-gray-900 mb-3">Weekly Summary</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div className="text-center">
-            <div className="text-2xl font-bold text-pink-600">27 min</div>
+            <div className="text-2xl font-bold text-pink-600">{summary.avgDuration} min</div>
             <div className="text-gray-600">Avg. Duration</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">7.8</div>
+            <div className="text-2xl font-bold text-green-600">{summary.avgHappiness}</div>
             <div className="text-gray-600">Avg. Happiness</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">3.3</div>
+            <div className="text-2xl font-bold text-red-600">{summary.avgSoreness}</div>
             <div className="text-gray-600">Avg. Soreness</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600">8</div>
+            <div className="text-2xl font-bold text-purple-600">{summary.totalSessions}</div>
             <div className="text-gray-600">Sessions</div>
           </div>
         </div>

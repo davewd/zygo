@@ -11,7 +11,8 @@ enum FeedItemType {
   ANNOUNCEMENT = 'announcement',
   EVENT = 'event',
   QUESTION = 'question',
-  POST = 'post'
+  POST = 'post',
+  BREASTFEEDING_TOOL = 'breastfeeding_tool'
 }
 
 enum VisibilityLevel {
