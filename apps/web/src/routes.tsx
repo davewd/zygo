@@ -1,22 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
+import Login from './components/Login';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import Error from './pages/error/index';
 import Feed from './pages/feed/index';
-import Landing from './pages/landing/index';
+import Landing from './pages/landing';
 import Network from './pages/network/index';
-import NotFound from './pages/NotFound';
-import TimeLine from './pages/timeline/index';
+import SignUp from './pages/signup';
+import TimeLine from './pages/timeline';
 import Tools from './pages/tools/index';
 
-const AppRoutes = () => (
-  <Routes>
-    <Route path="/" element={<Landing />} />
-    <Route path="/feed/*" element={<Feed />} />
-    <Route path="/community/*" element={<Network />} />
-    <Route path="/tools/*" element={<Tools />} />
-    <Route path="/timeline/*" element={<TimeLine />} />
-
-    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-    <Route path="*" element={<NotFound />} />
-  </Routes>
-);
-
-export default AppRoutes;
+export const routes = createBrowserRouter([
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      { path: '/feed', element: <Feed />, errorElement: <Error /> },
+      { path: '/network', element: <Network />, errorElement: <Error /> },
+      { path: '/tools', element: <Tools />, errorElement: <Error /> },
+      { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
+    ],
+    errorElement: <Error />,
+  },
+  { path: '/login', element: <Login />, errorElement: <Error /> },
+  { path: '/signup', element: <SignUp />, errorElement: <Error /> },
+  { path: '/', element: <Landing />, errorElement: <Error /> },
+]);

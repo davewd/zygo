@@ -1,4 +1,5 @@
 import { Button } from '@zygo/ui';
+import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 const Hero = () => {
   return (
@@ -74,12 +75,14 @@ const Hero = () => {
             family to thrive.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Login / Sign-up
-            </Button>
+            <Link to={'/signup'}>
+              <Button
+                size="lg"
+                className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Sign-up
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="lg"

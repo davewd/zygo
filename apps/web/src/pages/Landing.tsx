@@ -1,4 +1,3 @@
-import { NavigationBar } from '@zygo/ui';
 import Footer from './Footer';
 import About from './landing/About';
 import Features from './landing/Features';
@@ -7,7 +6,6 @@ import Hero from './landing/Hero';
 const Landing = () => {
   return (
     <div className="min-h-screen">
-      <NavigationBar className="bg-primary text-primary-foreground" />
       <Hero />
       <Features />
       <About />

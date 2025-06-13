@@ -1,4 +1,4 @@
-import { Facebook, Heart, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import Emoji from 'react-emoji-render';
 
 const Footer = () => {
@@ -15,24 +15,6 @@ const Footer = () => {
               Building stronger families through connection, growth, and shared experiences. Join
               our community and discover the joy of growing together.
             </p>
-            <div className="flex space-x-4">
-              <Facebook
-                className="text-gray-400 hover:text-zygo-red cursor-pointer transition-colors"
-                size={24}
-              />
-              <Twitter
-                className="text-gray-400 hover:text-zygo-red cursor-pointer transition-colors"
-                size={24}
-              />
-              <Instagram
-                className="text-gray-400 hover:text-zygo-red cursor-pointer transition-colors"
-                size={24}
-              />
-              <Linkedin
-                className="text-gray-400 hover:text-zygo-red cursor-pointer transition-colors"
-                size={24}
-              />
-            </div>
           </div>
 
           <div>
@@ -95,8 +77,9 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-8 pt-12 text-center">
           <p className="text-gray-400 mb-2">
-            Made in <Emoji text=":australia:" onlyEmojiClassName="make-emojis-large" /> with{' '}
-            <Heart className="inline text-zygo-red" size={16} /> for families everywhere.
+            Made with <Heart className="inline text-zygo-red" size={16} /> in{' '}
+            <Emoji text=":australia:" onlyEmojiClassName="make-emojis-large" /> for families
+            everywhere.
           </p>
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Zygo. All rights reserved.

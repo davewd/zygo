@@ -1,20 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster as Sonner, Toaster, TooltipProvider } from '@zygo/ui';
-import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes';
-
-const queryClient = new QueryClient();
-
+import { NavigationBar, Toaster as Sonner, Toaster, TooltipProvider } from '@zygo/ui';
+import { RouterProvider } from 'react-router-dom';
+import { UserAuthContextProvider } from './context/UserAuthContext';
+import { routes } from './routes';
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <TooltipProvider>
+    <Toaster />
+    <Sonner />
+    <UserAuthContextProvider>
+      <NavigationBar className="bg-primary text-primary-foreground" />
+      <RouterProvider router={routes} />
+    </UserAuthContextProvider>
+  </TooltipProvider>
 );
 
 export default App;

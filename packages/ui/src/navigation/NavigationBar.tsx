@@ -15,7 +15,6 @@ const NavigationBar = React.forwardRef<
   React.ElementRef<typeof NavigationMenu>,
   INavigationBarProps
 >(({ className, ...props }, ref) => {
-  console.log(className);
   return (
     <NavigationMenu
       className={cn('bg-popover text-popover-foreground', className)}
@@ -29,8 +28,8 @@ const NavigationBar = React.forwardRef<
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="/village" className={cn(navigationMenuTriggerStyle())}>
-            Village
+          <NavigationMenuLink href="/network" className={cn(navigationMenuTriggerStyle())}>
+            Community
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>

@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   esbuild: {
-    loader: 'jsx',
+    loader: 'tsx',
     include: [
       // Handle JSX in all JS/TS files
       "**/*.js",
@@ -33,6 +33,8 @@ export default defineConfig({
     esbuildOptions: {
       loader: {
         '.js': 'jsx',
+        '.ts': 'tsx',
+        '.tsx': 'tsx',
       },
       jsx: 'transform',
       jsxFactory: 'React.createElement',
