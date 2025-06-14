@@ -1,5 +1,5 @@
-import { FeedListItemToolBreastFeeding } from '../components/feed/tool_specific/FeedListItemToolBreastFeeding';
-import { FeedItemType, FeedItemTypeMap } from '../lib/api/feed';
+import { FeedListItemToolBreastFeeding } from '../../components/feed/tool_specific/FeedListItemToolBreastFeeding';
+import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 
 const BreastfeedingDemo = () => {
   // Mock data for the breastfeeding component

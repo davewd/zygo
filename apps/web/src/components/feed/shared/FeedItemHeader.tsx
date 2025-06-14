@@ -29,7 +29,10 @@ export const FeedItemHeader: React.FC<FeedItemHeaderProps> = ({
         alt={item.author.name}
         className={`w-12 h-12 rounded-full object-cover ${avatarClassName}`}
         onError={(e) => {
-          e.currentTarget.src = 'https://via.placeholder.com/48';
+          const img = e.currentTarget;
+          if (img.src !== 'https://via.placeholder.com/48') {
+            img.src = 'https://via.placeholder.com/48';
+          }
         }}
       />
       <div className="flex-1">
