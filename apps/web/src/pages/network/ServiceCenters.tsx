@@ -15,9 +15,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
+import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
 
 const ServiceCenters = () => {
-  const centers = [FULL_CIRCLE_CENTER]; // Will expand with more centers
+  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
@@ -38,11 +39,26 @@ const ServiceCenters = () => {
           {centers.map((center) => (
             <Card
               key={center.id}
-              className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid lg:grid-cols-3 gap-0">
+                {/* Center Image */}
+                {center.images && center.images.length > 0 && (
+                  <div className="lg:col-span-1 h-64 lg:h-auto">
+                    <img
+                      src={center.images[0]}
+                      alt={`${center.name} environment`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+
                 {/* Main Info */}
-                <div className="md:col-span-2">
+                <div
+                  className={
+                    center.images && center.images.length > 0 ? 'lg:col-span-1' : 'lg:col-span-2'
+                  }
+                >
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
@@ -63,7 +79,9 @@ const ServiceCenters = () => {
                           </span>
                           <span className="bg-zygo-yellow/20 text-gray-700 text-xs px-3 py-1 rounded-full flex items-center">
                             <Award className="w-3 h-3 mr-1" />
-                            IBCLC Certified
+                            {center.certifications?.includes('IBCLC Certified')
+                              ? 'IBCLC Certified'
+                              : 'Certified'}
                           </span>
                         </div>
                       </div>
@@ -140,7 +158,7 @@ const ServiceCenters = () => {
                 </div>
 
                 {/* Action Panel */}
-                <div className="bg-gradient-to-br from-zygo-mint/20 to-zygo-blue/20 p-6 rounded-r-lg">
+                <div className="lg:col-span-1 bg-gradient-to-br from-zygo-mint/20 to-zygo-blue/20 p-6">
                   <div className="space-y-4">
                     <Link to={`/network/centers/${center.id}`}>
                       <Button className="w-full bg-zygo-red hover:bg-zygo-red/90 text-white">

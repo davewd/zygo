@@ -16,12 +16,14 @@ import {
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
+import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
 
 const ServiceCenterDetail = () => {
   const { id } = useParams();
 
-  // In a real app, you'd fetch the center by ID
-  const center = FULL_CIRCLE_CENTER; // For now, just show the one center we have
+  // Get the center by ID
+  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
+  const center = centers.find((c) => c.id === id) || centers[0];
 
   if (!center) {
     return (
@@ -38,6 +40,24 @@ const ServiceCenterDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+      {/* Hero Section with Center Images */}
+      {center.images && center.images.length > 0 && (
+        <div className="relative h-96 mb-8">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${center.images[0]}')`,
+            }}
+          />
+          <div className="relative container mx-auto px-6 h-full flex items-end pb-8">
+            <div className="text-white">
+              <h1 className="text-5xl font-bold mb-4">{center.name}</h1>
+              <p className="text-xl opacity-90 max-w-2xl">{center.description}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto px-6 py-8">
         {/* Navigation */}
         <div className="mb-6">
@@ -50,10 +70,17 @@ const ServiceCenterDetail = () => {
           </Link>
         </div>
 
-        {/* Header */}
+        {/* Header for centers without images */}
+        {(!center.images || center.images.length === 0) && (
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">{center.name}</h1>
+            <p className="text-xl text-gray-600 leading-relaxed mb-6">{center.overview}</p>
+          </div>
+        )}
+
+        {/* Overview Section */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">{center.name}</h1>
-          <p className="text-xl text-gray-600 leading-relaxed mb-6">{center.overview}</p>
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">{center.overview}</p>
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4">
@@ -74,6 +101,24 @@ const ServiceCenterDetail = () => {
             </a>
           </div>
         </div>
+
+        {/* Center Image Gallery */}
+        {center.images && center.images.length > 1 && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Our Environment</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {center.images.slice(1).map((image, index) => (
+                <div key={index} className="relative h-48 rounded-lg overflow-hidden shadow-lg">
+                  <img
+                    src={image}
+                    alt={`${center.name} environment ${index + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}

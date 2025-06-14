@@ -20,13 +20,22 @@ import {
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
+import {
+  ANDREA_DUNNE,
+  DR_JUSTIN_TUCKER,
+  POLLY_DELANEY,
+  PROLOGUE_CENTER,
+} from '../../data/network/prologueCenter';
 
 const ServiceProviderDetail = () => {
-  const { providerId } = useParams();
+  const { id } = useParams();
 
-  // In a real app, you'd fetch the provider by ID
-  const provider = REBECCA_CAVALLARO;
-  const center = FULL_CIRCLE_CENTER;
+  // Get provider and center by ID
+  const providers = [REBECCA_CAVALLARO, DR_JUSTIN_TUCKER, ANDREA_DUNNE, POLLY_DELANEY];
+  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
+
+  const provider = providers.find((p) => p.id === id) || providers[0];
+  const center = centers.find((c) => c.providers.some((p) => p.id === provider.id)) || centers[0];
 
   if (!provider) {
     return (
@@ -43,6 +52,49 @@ const ServiceProviderDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+      {/* Hero Header with Background Image */}
+      <div
+        className="relative h-64 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-zygo-red/20 to-zygo-mint/20" />
+        <div className="relative container mx-auto px-6 h-full flex items-end pb-8">
+          <div className="flex items-end space-x-6">
+            {/* Large Profile Image */}
+            <div className="relative">
+              {provider.profileImage ? (
+                <img
+                  src={provider.profileImage}
+                  alt={`${provider.firstName} ${provider.lastName}`}
+                  className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
+                />
+              ) : (
+                <div className="w-32 h-32 bg-gradient-to-br from-zygo-red/20 to-zygo-red/30 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                  <User className="w-16 h-16 text-zygo-red" />
+                </div>
+              )}
+            </div>
+            <div className="text-white mb-2">
+              <h1 className="text-4xl font-bold mb-2">
+                {provider.firstName} {provider.lastName}
+              </h1>
+              {provider.title && <p className="text-xl opacity-90 mb-2">{provider.title}</p>}
+              <div className="flex items-center opacity-80">
+                <Clock className="w-4 h-4 mr-2" />
+                <span>{provider.yearsExperience} years of experience</span>
+                <span className="mx-3">•</span>
+                <MapPin className="w-4 h-4 mr-2" />
+                <span>
+                  {center.location.suburb}, {center.location.state}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-6 py-8">
         {/* Navigation */}
         <div className="mb-6">
@@ -58,30 +110,10 @@ const ServiceProviderDetail = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Header */}
-            <Card className="bg-gradient-to-r from-zygo-mint/20 to-zygo-blue/20 border-0">
+            {/* Bio Card */}
+            <Card className="bg-white border-0 shadow-lg">
               <CardContent className="p-8">
-                <div className="flex items-start space-x-6">
-                  <div className="w-24 h-24 bg-gradient-to-br from-zygo-red/20 to-zygo-red/30 rounded-full flex items-center justify-center flex-shrink-0">
-                    <User className="w-12 h-12 text-zygo-red" />
-                  </div>
-                  <div className="flex-1">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                      {provider.firstName} {provider.lastName}
-                    </h1>
-                    {provider.title && (
-                      <p className="text-xl text-zygo-red font-medium mb-2">{provider.title}</p>
-                    )}
-                    <div className="flex items-center text-gray-600 mb-4">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>{provider.yearsExperience} years of experience</span>
-                      <span className="mx-3">•</span>
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span>Brisbane, Australia</span>
-                    </div>
-                    <p className="text-gray-700 leading-relaxed">{provider.bio}</p>
-                  </div>
-                </div>
+                <p className="text-gray-700 leading-relaxed text-lg">{provider.bio}</p>
               </CardContent>
             </Card>
 

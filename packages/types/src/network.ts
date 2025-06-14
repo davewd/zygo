@@ -62,6 +62,7 @@ export interface ServiceProvider {
   lastName: string;
   title?: string;
   profileImage?: string;
+  headerBackgroundImage?: string;
   bio: string;
   personalStory?: string;
   credentials: Credential[];

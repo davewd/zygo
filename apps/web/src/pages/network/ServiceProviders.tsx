@@ -16,9 +16,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
+import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
 
 const ServiceProviders = () => {
-  const providers = [REBECCA_CAVALLARO]; // Will expand with more providers
+  const providers = [REBECCA_CAVALLARO, DR_JUSTIN_TUCKER, ANDREA_DUNNE, POLLY_DELANEY];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
@@ -44,9 +45,17 @@ const ServiceProviders = () => {
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-zygo-mint/30 to-zygo-blue/30 rounded-full flex items-center justify-center mr-4">
-                      <User className="w-8 h-8 text-zygo-red" />
-                    </div>
+                    {provider.profileImage ? (
+                      <img
+                        src={provider.profileImage}
+                        alt={`${provider.firstName} ${provider.lastName}`}
+                        className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-zygo-mint/30"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 bg-gradient-to-br from-zygo-mint/30 to-zygo-blue/30 rounded-full flex items-center justify-center mr-4">
+                        <User className="w-8 h-8 text-zygo-red" />
+                      </div>
+                    )}
                     <div>
                       <CardTitle className="text-xl font-bold text-gray-800">
                         {provider.firstName} {provider.lastName}
