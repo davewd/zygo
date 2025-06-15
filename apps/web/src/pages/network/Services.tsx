@@ -1,12 +1,13 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import { Activity, Baby, Calendar, Heart, MapPin, Star, Stethoscope, Users } from 'lucide-react';
+import { Activity, Baby, Calendar, Heart, MapPin, Star, Stethoscope, Users, User, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
   const serviceTypes = [
     {
       title: 'Prenatal Care',
-      description: 'Comprehensive pregnancy support and preparation',
+      description: 'Comprehensive pregnancy support and preparation for expecting parents',
+      familyMember: 'For You & Your Partner',
       icon: Baby,
       iconColor: 'text-pink-600',
       bgColor: 'bg-pink-50',
@@ -34,6 +35,7 @@ const Services = () => {
     {
       title: 'Early Development (0-2 years)',
       description: 'Support for infants and toddlers in their first years',
+      familyMember: 'For Your Baby',
       icon: Heart,
       iconColor: 'text-zygo-red',
       bgColor: 'bg-zygo-mint/20',
@@ -61,6 +63,7 @@ const Services = () => {
     {
       title: 'Toddler Activities (2-5 years)',
       description: 'Physical and social development for growing toddlers',
+      familyMember: 'For Your Toddler',
       icon: Activity,
       iconColor: 'text-orange-600',
       bgColor: 'bg-orange-50',
@@ -88,6 +91,7 @@ const Services = () => {
     {
       title: 'School Age Activities (5-12 years)',
       description: 'Engaging activities for school-aged children',
+      familyMember: 'For Your Child',
       icon: Users,
       iconColor: 'text-blue-600',
       bgColor: 'bg-blue-50',
@@ -115,6 +119,7 @@ const Services = () => {
     {
       title: 'Fertility Support',
       description: 'Comprehensive fertility assessment and treatment',
+      familyMember: 'For You & Your Partner',
       icon: Stethoscope,
       iconColor: 'text-purple-600',
       bgColor: 'bg-purple-50',
@@ -142,6 +147,7 @@ const Services = () => {
     {
       title: 'Special Occasions',
       description: 'Memorable experiences for celebrations and holidays',
+      familyMember: 'For Your Child',
       icon: Star,
       iconColor: 'text-yellow-600',
       bgColor: 'bg-yellow-50',
@@ -174,20 +180,25 @@ const Services = () => {
         </div>
 
         {/* Service Types Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-12">
           {serviceTypes.map((category, index) => (
             <Card
               key={index}
               className={`${category.bgColor} border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
             >
-              <CardHeader className="pb-4">
+              <CardHeader className="pb-6">
                 <div className="flex items-center mb-4">
                   <category.icon className={`${category.iconColor} mr-3`} size={32} />
-                  <div>
-                    <CardTitle className="text-xl font-semibold text-gray-800">
-                      {category.title}
-                    </CardTitle>
-                    <CardDescription className="text-gray-600">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-1">
+                      <CardTitle className="text-2xl font-semibold text-gray-800">
+                        {category.title}
+                      </CardTitle>
+                      <span className="bg-zygo-red/10 text-zygo-red text-sm font-medium px-3 py-1 rounded-full">
+                        {category.familyMember}
+                      </span>
+                    </div>
+                    <CardDescription className="text-gray-600 text-lg">
                       {category.description}
                     </CardDescription>
                   </div>
@@ -195,50 +206,105 @@ const Services = () => {
               </CardHeader>
 
               <CardContent>
-                <div className="space-y-4">
-                  {category.services.map((service, serviceIndex) => (
-                    <Card
-                      key={serviceIndex}
-                      className="bg-white/80 border-0 shadow-sm hover:shadow-md transition-all duration-200"
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-3">
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-gray-800 text-sm mb-1">
-                              {service.title}
-                            </h4>
-                            <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                              {service.description}
-                            </p>
-                            <div className="flex items-center text-xs text-gray-500 mb-2">
-                              <MapPin className="w-3 h-3 mr-1" />
-                              {service.location}
+                {/* Horizontal Scrolling Container */}
+                <div className="overflow-x-auto pb-4">
+                  <div className="flex gap-4 pb-2" style={{ width: 'max-content' }}>
+                    {category.services.map((service, serviceIndex) => (
+                      <Card
+                        key={serviceIndex}
+                        className="bg-white/90 border-0 shadow-md hover:shadow-lg transition-all duration-200 w-[280px] h-[320px] flex flex-col flex-shrink-0 relative"
+                      >
+                        <CardContent className="p-0 flex flex-col h-full relative">
+                          {/* Top Half - Consumer Profile */}
+                          <div className="flex-1 bg-gradient-to-br from-zygo-mint/30 to-zygo-blue/20 relative">
+                            <div className="flex flex-col items-center justify-center h-full text-center p-4">
+                              <div className="bg-white/60 rounded-lg p-3 mb-2 backdrop-blur-sm">
+                                <h4 className="font-semibold text-gray-800 text-sm mb-1">You & Your Family</h4>
+                                <p className="text-xs text-gray-600 leading-relaxed">
+                                  Seeking quality care and support
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="text-right ml-3">
-                            <div className="text-sm font-medium text-zygo-red mb-1">
-                              {service.price}
-                            </div>
-                          </div>
-                        </div>
 
-                        <div className="flex items-center justify-between">
-                          <div className="text-xs text-gray-600">
-                            with <span className="font-medium">{service.provider}</span> at{' '}
-                            <span className="font-medium">{service.center}</span>
+                          {/* Avatar Icons positioned on center line */}
+                          <div className="absolute top-1/2 left-0 right-0 flex items-center justify-between px-8 transform -translate-y-1/2 z-20">
+                            {/* Consumer Avatar - Left */}
+                            <div className="w-16 h-16 bg-gradient-to-br from-zygo-mint to-zygo-blue rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                              <User className="w-8 h-8 text-white" />
+                            </div>
+
+                            {/* Collaboration X Icon - Center */}
+                            <div className="w-8 h-8 bg-zygo-red rounded-full flex items-center justify-center shadow-lg border-2 border-white z-10">
+                              <X className="w-4 h-4 text-white" />
+                            </div>
+
+                            {/* Provider Avatar - Right */}
+                            <div className="w-16 h-16 bg-gradient-to-br from-zygo-yellow to-zygo-cream rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                              <Stethoscope className="w-8 h-8 text-gray-700" />
+                            </div>
                           </div>
-                          <Link to={service.route}>
-                            <Button
-                              size="sm"
-                              className="bg-zygo-red hover:bg-zygo-red/90 text-white text-xs px-3 py-1"
-                            >
-                              View Provider
-                            </Button>
-                          </Link>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+
+                          {/* Bottom Half - Service Provider Profile */}
+                          <div className="flex-1 bg-gradient-to-br from-zygo-yellow/20 to-zygo-cream/30 relative">
+                            <div className="flex flex-col items-center justify-center h-full text-center p-4 pt-8">
+                              <div className="bg-white/60 rounded-lg p-3 backdrop-blur-sm w-full">
+                                <h4 className="font-semibold text-gray-800 text-sm mb-1">{service.provider}</h4>
+                                <p className="text-xs text-gray-600 mb-2">at {service.center}</p>
+                                <div className="flex items-center justify-center text-xs text-gray-500 mb-2">
+                                  <MapPin className="w-3 h-3 mr-1" />
+                                  {service.location}
+                                </div>
+                                <div className="text-sm font-medium text-zygo-red mb-2">
+                                  {service.price}
+                                </div>
+                                <Link to={service.route}>
+                                  <Button
+                                    size="sm"
+                                    className="bg-zygo-red hover:bg-zygo-red/90 text-white text-xs px-3 py-1"
+                                  >
+                                    Connect
+                                  </Button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+
+                    {/* Fill remaining slots if less than 4 services */}
+                    {Array.from({ length: Math.max(0, 4 - category.services.length) }, (_, emptyIndex) => (
+                      <Card
+                        key={`empty-${emptyIndex}`}
+                        className="bg-white/60 border-2 border-dashed border-gray-300 w-[280px] h-[320px] flex flex-col flex-shrink-0"
+                      >
+                        <CardContent className="p-0 flex flex-col h-full items-center justify-center">
+                          <div className="text-center text-gray-400">
+                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3 mx-auto">
+                              <Star className="w-6 h-6 text-gray-400" />
+                            </div>
+                            <p className="text-sm font-medium">More services</p>
+                            <p className="text-xs">coming soon</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Service Details Summary */}
+                <div className="mt-6 pt-4 border-t border-white/30">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {category.services.map((service, idx) => (
+                      <span key={idx} className="text-xs bg-white/50 px-2 py-1 rounded-full text-gray-700">
+                        {service.title.split(' at ')[0]}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600 text-center">
+                    Swipe or scroll horizontally to explore collaboration opportunities →
+                  </p>
                 </div>
               </CardContent>
             </Card>
