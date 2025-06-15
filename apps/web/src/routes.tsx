@@ -10,6 +10,7 @@ import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
 import ServiceCenters from './pages/network/ServiceCenters';
 import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
 import ServiceProviders from './pages/network/ServiceProviders';
+import Services from './pages/network/Services';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
 import Tools from './pages/tools/index';
@@ -20,6 +21,7 @@ export const routes = createBrowserRouter([
     children: [
       { path: '/feed', element: <Feed />, errorElement: <Error /> },
       { path: '/network', element: <Network />, errorElement: <Error /> },
+      { path: '/network/services', element: <Services />, errorElement: <Error /> },
       { path: '/network/centers', element: <ServiceCenters />, errorElement: <Error /> },
       { path: '/network/centers/:id', element: <ServiceCenterDetail />, errorElement: <Error /> },
       { path: '/network/providers', element: <ServiceProviders />, errorElement: <Error /> },

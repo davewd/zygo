@@ -15,14 +15,25 @@ import {
   Users,
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
+import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
+import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCenter';
 import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
+import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
 const ServiceCenterDetail = () => {
   const { id } = useParams();
 
   // Get the center by ID
-  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
+  const centers = [
+    FULL_CIRCLE_CENTER,
+    PROLOGUE_CENTER,
+    ACTIVE8_CENTER,
+    WHITE_CITY_TENNIS_CENTER,
+    ELIXR_SWIM_SCHOOL_CENTER,
+    KICKEROOS_SOCCER_CENTER,
+  ];
   const center = centers.find((c) => c.id === id) || centers[0];
 
   if (!center) {
@@ -352,7 +363,7 @@ const ServiceCenterDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {Object.entries(center.operatingHours).map(([day, hours]) => (
+                  {Object.entries(center.operatingHours).map(([day, hours]: [string, any]) => (
                     <div key={day} className="flex justify-between items-center">
                       <span className="capitalize font-medium">{day}</span>
                       <span className="text-gray-600">

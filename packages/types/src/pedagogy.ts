@@ -7,7 +7,10 @@ export enum DevelopmentCategory {
   MOTOR_SKILLS = 'motor_skills',
   SENSORY = 'sensory',
   SELF_CARE = 'self_care',
-  ACADEMIC = 'academic'
+  ACADEMIC = 'academic',
+  CREATIVE = 'creative',
+  PLAY_BASED = 'play_based',
+  RECREATIONAL = 'recreational'
 }
 
 export enum AgeRange {

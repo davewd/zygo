@@ -15,11 +15,43 @@ import {
   Video,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { EMILY_MCCONAGHY, JAKE_THOMPSON } from '../../data/network/active8KidsCenter';
+import {
+  EMMA_RODRIGUEZ,
+  MARCUS_CHEN,
+  SARAH_MITCHELL,
+} from '../../data/network/elixrSwimSchoolCenter';
 import { REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
+import {
+  JAMES_THOMPSON,
+  MICHAEL_OCONNOR,
+  SOFIA_MARTINEZ,
+} from '../../data/network/kickeroosSoccerCenter';
 import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
+import {
+  DANIELLE_HARMSEN,
+  LUCY_WOOD,
+  STEVE_LOEFFLER,
+} from '../../data/network/whiteCityTennisCenter';
 
 const ServiceProviders = () => {
-  const providers = [REBECCA_CAVALLARO, DR_JUSTIN_TUCKER, ANDREA_DUNNE, POLLY_DELANEY];
+  const providers = [
+    REBECCA_CAVALLARO,
+    DR_JUSTIN_TUCKER,
+    ANDREA_DUNNE,
+    POLLY_DELANEY,
+    EMILY_MCCONAGHY,
+    JAKE_THOMPSON,
+    STEVE_LOEFFLER,
+    LUCY_WOOD,
+    DANIELLE_HARMSEN,
+    SARAH_MITCHELL,
+    MARCUS_CHEN,
+    EMMA_RODRIGUEZ,
+    JAMES_THOMPSON,
+    SOFIA_MARTINEZ,
+    MICHAEL_OCONNOR,
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">

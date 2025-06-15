@@ -45,12 +45,12 @@ const Network = () => {
       comingSoon: false,
     },
     {
-      title: 'Services',
-      description: 'Programs and services available to support your growth',
+      title: 'Services by Type',
+      description: 'Browse services organized by family needs and life stages',
       icon: Star,
       iconColor: 'text-purple-600',
       bgColor: 'bg-purple-100',
-      items: ['Education Programs', 'Support Groups', 'Wellness Services', 'Resources'],
+      items: ['Prenatal Care', 'Early Development', "Children's Activities", 'Family Support'],
       route: '/network/services',
       comingSoon: false,
     },
@@ -92,11 +92,11 @@ const Network = () => {
             <NetworkIcon className="text-zygo-red mr-3" size={48} />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Your <span className="text-zygo-red">Network</span>
+            Your Family <span className="text-zygo-red">Services</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Build and nurture the connections that support your family's growth journey. From
-            immediate family to healthcare providers, create a comprehensive support network.
+            Discover services and providers tailored to your family's journey. From prenatal care to
+            children's activities, find expert support for every stage of development.
           </p>
         </div>
 
@@ -123,7 +123,7 @@ const Network = () => {
         {/* Network Categories */}
         <div className="mb-16">
           <h2 className="text-3xl font-semibold text-gray-800 mb-8 text-center">
-            Explore Your Network
+            Browse by Category
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {networkCategories.map((category, index) => (

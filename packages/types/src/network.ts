@@ -35,7 +35,7 @@ export interface ServiceCategory {
   id: string;
   name: string;
   description: string;
-  taxonomy: 'healthcare' | 'education' | 'support' | 'therapy' | 'wellness' | 'emergency';
+  taxonomy: 'healthcare' | 'education' | 'support' | 'therapy' | 'wellness' | 'emergency' | 'activities' | 'recreation';
 }
 
 export interface Service {
@@ -52,7 +52,7 @@ export interface Service {
       amount: number;
     };
   };
-  ageGroups?: ('prenatal' | 'newborn' | 'infant' | 'toddler' | 'child' | 'adolescent' | 'adult')[];
+  ageGroups?: ('prenatal' | 'newborn' | 'infant' | 'toddler' | 'preschool' | 'child' | 'adolescent' | 'adult')[];
   tags?: string[];
 }
 

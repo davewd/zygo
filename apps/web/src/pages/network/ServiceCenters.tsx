@@ -14,11 +14,22 @@ import {
   Users,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
+import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
+import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCenter';
 import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
+import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
 const ServiceCenters = () => {
-  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
+  const centers = [
+    FULL_CIRCLE_CENTER,
+    PROLOGUE_CENTER,
+    ACTIVE8_CENTER,
+    WHITE_CITY_TENNIS_CENTER,
+    ELIXR_SWIM_SCHOOL_CENTER,
+    KICKEROOS_SOCCER_CENTER,
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
@@ -144,14 +155,16 @@ const ServiceCenters = () => {
                         Operating Hours
                       </h4>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                        {Object.entries(center.operatingHours).map(([day, hours]) => (
-                          <div key={day} className="flex justify-between">
-                            <span className="capitalize font-medium">{day.slice(0, 3)}:</span>
-                            <span className="text-gray-600">
-                              {hours.closed ? 'Closed' : `${hours.open}-${hours.close}`}
-                            </span>
-                          </div>
-                        ))}
+                        {Object.entries(center.operatingHours).map(
+                          ([day, hours]: [string, any]) => (
+                            <div key={day} className="flex justify-between">
+                              <span className="capitalize font-medium">{day.slice(0, 3)}:</span>
+                              <span className="text-gray-600">
+                                {hours.closed ? 'Closed' : `${hours.open}-${hours.close}`}
+                              </span>
+                            </div>
+                          )
+                        )}
                       </div>
                     </div>
                   </CardContent>

@@ -19,20 +19,66 @@ import {
   Video,
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import {
+  ACTIVE8_CENTER,
+  EMILY_MCCONAGHY,
+  JAKE_THOMPSON,
+} from '../../data/network/active8KidsCenter';
+import {
+  ELIXR_SWIM_SCHOOL_CENTER,
+  EMMA_RODRIGUEZ,
+  MARCUS_CHEN,
+  SARAH_MITCHELL,
+} from '../../data/network/elixrSwimSchoolCenter';
 import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
+import {
+  JAMES_THOMPSON,
+  KICKEROOS_SOCCER_CENTER,
+  MICHAEL_OCONNOR,
+  SOFIA_MARTINEZ,
+} from '../../data/network/kickeroosSoccerCenter';
 import {
   ANDREA_DUNNE,
   DR_JUSTIN_TUCKER,
   POLLY_DELANEY,
   PROLOGUE_CENTER,
 } from '../../data/network/prologueCenter';
+import {
+  DANIELLE_HARMSEN,
+  LUCY_WOOD,
+  STEVE_LOEFFLER,
+  WHITE_CITY_TENNIS_CENTER,
+} from '../../data/network/whiteCityTennisCenter';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
 
   // Get provider and center by ID
-  const providers = [REBECCA_CAVALLARO, DR_JUSTIN_TUCKER, ANDREA_DUNNE, POLLY_DELANEY];
-  const centers = [FULL_CIRCLE_CENTER, PROLOGUE_CENTER];
+  const providers = [
+    REBECCA_CAVALLARO,
+    DR_JUSTIN_TUCKER,
+    ANDREA_DUNNE,
+    POLLY_DELANEY,
+    EMILY_MCCONAGHY,
+    JAKE_THOMPSON,
+    STEVE_LOEFFLER,
+    LUCY_WOOD,
+    DANIELLE_HARMSEN,
+    SARAH_MITCHELL,
+    MARCUS_CHEN,
+    EMMA_RODRIGUEZ,
+    JAMES_THOMPSON,
+    SOFIA_MARTINEZ,
+    MICHAEL_OCONNOR,
+  ];
+  const centers = [
+    FULL_CIRCLE_CENTER,
+    PROLOGUE_CENTER,
+    ACTIVE8_CENTER,
+    WHITE_CITY_TENNIS_CENTER,
+    ELIXR_SWIM_SCHOOL_CENTER,
+    KICKEROOS_SOCCER_CENTER,
+  ];
 
   const provider = providers.find((p) => p.id === id) || providers[0];
   const center = centers.find((c) => c.providers.some((p) => p.id === provider.id)) || centers[0];
