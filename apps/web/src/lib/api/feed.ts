@@ -13,7 +13,8 @@ export enum FeedItemType {
   EVENT = 'event',
   QUESTION = 'question',
   POST = 'post',
-  BREASTFEEDING_TOOL = 'breastfeeding_tool'
+  BREASTFEEDING_TOOL = 'breastfeeding_tool',
+  SPONSORED = 'sponsored'
 }
 
 export enum VisibilityLevel {
@@ -72,6 +73,14 @@ export interface FeedItemTypeMap {
     avgHappiness: number;
     avgSoreness: number;
     totalSessions: number;
+  };
+  // Sponsored content specific data
+  sponsoredData?: {
+    advertiserName: string;
+    advertiserLogo?: string;
+    ctaText: string;
+    ctaUrl: string;
+    sponsorshipType?: 'promoted' | 'sponsored' | 'ad';
   };
 }
 
@@ -285,6 +294,38 @@ const mockData = {
         avgSoreness: 3.3,
         totalSessions: 8,
       }
+    },
+    {
+      id: 6,
+      title: "Excellence in Education at Kambala",
+      metadata: {
+        createdAt: "2023-10-03T10:00:00Z"
+      },
+      author: {
+        name: "Kambala School",
+        title: "Independent Anglican School",
+        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&h=150&fit=crop&crop=center"
+      },
+      type: FeedItemType.SPONSORED,
+      post: "Discover where tradition meets innovation. At Kambala, we empower young women to become confident, creative, and compassionate leaders. Our holistic approach to education nurtures academic excellence, creativity, and character development in a supportive community environment.",
+      description: "Join our community of inspiring educators and remarkable students. Excellence is not just our standard – it's our passion.",
+      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop&crop=center",
+      stats: {
+        likes: 42,
+        shares: 15,
+        comments: 8
+      },
+      privacy: {
+        visibility: "public",
+        sharedWith: []
+      },
+      sponsoredData: {
+        advertiserName: "Kambala School",
+        advertiserLogo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=32&h=32&fit=crop&crop=center",
+        ctaText: "Learn More",
+        ctaUrl: "https://kambala.nsw.edu.au/",
+        sponsorshipType: "sponsored"
+      }
     }
   ]
 };
@@ -330,6 +371,8 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
     // Preserve breastfeeding-specific data
     breastfeedingData: item.breastfeedingData,
     breastfeedingSummary: item.breastfeedingSummary,
+    // Preserve sponsored-specific data
+    sponsoredData: item.sponsoredData,
   }));
   
   // Simulate pagination

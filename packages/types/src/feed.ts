@@ -12,7 +12,8 @@ enum FeedItemType {
   EVENT = 'event',
   QUESTION = 'question',
   POST = 'post',
-  BREASTFEEDING_TOOL = 'breastfeeding_tool'
+  BREASTFEEDING_TOOL = 'breastfeeding_tool',
+  SPONSORED = 'sponsored'
 }
 
 enum VisibilityLevel {
@@ -58,6 +59,14 @@ interface FeedItemTypeMap {
     likes: number;
   };
   privacy: PrivacySettings;
+  // Sponsored content specific data
+  sponsoredData?: {
+    advertiserName: string;
+    advertiserLogo?: string;
+    ctaText: string;
+    ctaUrl: string;
+    sponsorshipType?: 'promoted' | 'sponsored' | 'ad';
+  };
 }
 
 export { FeedItemType, VisibilityLevel };

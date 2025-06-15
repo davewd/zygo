@@ -4,6 +4,7 @@ import { FeedListItemImage } from './generic/FeedListItemImage';
 import { FeedListItemLink } from './generic/FeedListItemLink';
 import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
 import { FeedListItemPost } from './generic/FeedListItemPost';
+import { FeedListItemSponsored } from './generic/FeedListItemSponsored';
 import { FeedListItemText } from './generic/FeedListItemText';
 import { FeedListItemToolBreastFeeding } from './tool_specific/FeedListItemToolBreastFeeding';
 
@@ -28,6 +29,8 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ item, className }) => {
         return <FeedListItemText item={item} />;
       case FeedItemType.BREASTFEEDING_TOOL:
         return <FeedListItemToolBreastFeeding item={item} />;
+      case FeedItemType.SPONSORED:
+        return <FeedListItemSponsored item={item} />;
       case FeedItemType.VIDEO:
         return <FeedListItemPost item={item} />; // Fallback to post for now
       case FeedItemType.POLL:
