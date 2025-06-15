@@ -41,6 +41,7 @@
     "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/vite": "4.1.8",
     "@tanstack/react-query": "^5.79.0",
+    "@xyflow/react": "^12.7.0",
     "@zygo/constants": "workspace:*",
     "@zygo/tailwind-theme": "workspace:*",
     "@zygo/types": "workspace:*",

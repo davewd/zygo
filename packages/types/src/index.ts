@@ -2,4 +2,5 @@
 export * from './feed';
 export * from './global';
 export * from './network';
+export * from './pedagogy';
 
