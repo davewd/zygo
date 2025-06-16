@@ -1,5 +1,16 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import { Activity, Baby, Calendar, Heart, MapPin, Star, Stethoscope, Users, User, X } from 'lucide-react';
+import {
+  Activity,
+  Baby,
+  Calendar,
+  Heart,
+  MapPin,
+  Star,
+  Stethoscope,
+  User,
+  Users,
+  X,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
@@ -19,7 +30,7 @@ const Services = () => {
           price: 'From $350',
           provider: 'Dr. Justin Tucker',
           center: 'Prologue',
-          route: '/network/providers/dr-justin-tucker',
+          route: '/community/providers/dr-justin-tucker',
         },
         {
           title: 'Before Birth Consultation at Full Circle with Rebecca Cavallaro',
@@ -28,7 +39,7 @@ const Services = () => {
           price: 'From $230',
           provider: 'Rebecca Cavallaro',
           center: 'Full Circle Midwifery',
-          route: '/network/providers/rebecca-cavallaro',
+          route: '/community/providers/rebecca-cavallaro',
         },
       ],
     },
@@ -47,7 +58,7 @@ const Services = () => {
           price: 'From $230',
           provider: 'Rebecca Cavallaro',
           center: 'Full Circle Midwifery',
-          route: '/network/providers/rebecca-cavallaro',
+          route: '/community/providers/rebecca-cavallaro',
         },
         {
           title: 'Kindy Gym at Active8Kids with Emily McConaghy',
@@ -219,7 +230,9 @@ const Services = () => {
                           <div className="flex-1 bg-gradient-to-br from-zygo-mint/30 to-zygo-blue/20 relative">
                             <div className="flex flex-col items-center justify-center h-full text-center p-4">
                               <div className="bg-white/60 rounded-lg p-3 mb-2 backdrop-blur-sm">
-                                <h4 className="font-semibold text-gray-800 text-sm mb-1">You & Your Family</h4>
+                                <h4 className="font-semibold text-gray-800 text-sm mb-1">
+                                  You & Your Family
+                                </h4>
                                 <p className="text-xs text-gray-600 leading-relaxed">
                                   Seeking quality care and support
                                 </p>
@@ -249,7 +262,9 @@ const Services = () => {
                           <div className="flex-1 bg-gradient-to-br from-zygo-yellow/20 to-zygo-cream/30 relative">
                             <div className="flex flex-col items-center justify-center h-full text-center p-4 pt-8">
                               <div className="bg-white/60 rounded-lg p-3 backdrop-blur-sm w-full">
-                                <h4 className="font-semibold text-gray-800 text-sm mb-1">{service.provider}</h4>
+                                <h4 className="font-semibold text-gray-800 text-sm mb-1">
+                                  {service.provider}
+                                </h4>
                                 <p className="text-xs text-gray-600 mb-2">at {service.center}</p>
                                 <div className="flex items-center justify-center text-xs text-gray-500 mb-2">
                                   <MapPin className="w-3 h-3 mr-1" />
@@ -274,22 +289,25 @@ const Services = () => {
                     ))}
 
                     {/* Fill remaining slots if less than 4 services */}
-                    {Array.from({ length: Math.max(0, 4 - category.services.length) }, (_, emptyIndex) => (
-                      <Card
-                        key={`empty-${emptyIndex}`}
-                        className="bg-white/60 border-2 border-dashed border-gray-300 w-[280px] h-[320px] flex flex-col flex-shrink-0"
-                      >
-                        <CardContent className="p-0 flex flex-col h-full items-center justify-center">
-                          <div className="text-center text-gray-400">
-                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3 mx-auto">
-                              <Star className="w-6 h-6 text-gray-400" />
+                    {Array.from(
+                      { length: Math.max(0, 4 - category.services.length) },
+                      (_, emptyIndex) => (
+                        <Card
+                          key={`empty-${emptyIndex}`}
+                          className="bg-white/60 border-2 border-dashed border-gray-300 w-[280px] h-[320px] flex flex-col flex-shrink-0"
+                        >
+                          <CardContent className="p-0 flex flex-col h-full items-center justify-center">
+                            <div className="text-center text-gray-400">
+                              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3 mx-auto">
+                                <Star className="w-6 h-6 text-gray-400" />
+                              </div>
+                              <p className="text-sm font-medium">More services</p>
+                              <p className="text-xs">coming soon</p>
                             </div>
-                            <p className="text-sm font-medium">More services</p>
-                            <p className="text-xs">coming soon</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                          </CardContent>
+                        </Card>
+                      )
+                    )}
                   </div>
                 </div>
 
@@ -297,7 +315,10 @@ const Services = () => {
                 <div className="mt-6 pt-4 border-t border-white/30">
                   <div className="flex flex-wrap gap-2 mb-3">
                     {category.services.map((service, idx) => (
-                      <span key={idx} className="text-xs bg-white/50 px-2 py-1 rounded-full text-gray-700">
+                      <span
+                        key={idx}
+                        className="text-xs bg-white/50 px-2 py-1 rounded-full text-gray-700"
+                      >
                         {service.title.split(' at ')[0]}
                       </span>
                     ))}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
 import { formatDate } from './feedUtils';
 import { PrivacyIndicator } from './PrivacyIndicator';
@@ -37,7 +38,12 @@ export const FeedItemHeader: React.FC<FeedItemHeaderProps> = ({
       />
       <div className="flex-1">
         <div className="flex items-center space-x-2">
-          <h3 className="font-semibold text-gray-900">{item.author.name}</h3>
+          <Link
+            to={`/community/profiles/${item.author.handle}`}
+            className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+          >
+            {item.author.name}
+          </Link>
           {item.author.verified && (
             <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
               <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">

@@ -28,7 +28,7 @@ const NavigationBar = React.forwardRef<
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="/network" className={cn(navigationMenuTriggerStyle())}>
+          <NavigationMenuLink href="/community" className={cn(navigationMenuTriggerStyle())}>
             Community
           </NavigationMenuLink>
         </NavigationMenuItem>
