@@ -38,7 +38,10 @@ import {
   MICHAEL_OCONNOR,
   SOFIA_MARTINEZ,
 } from '../../data/network/kickeroosSoccerCenter';
-import { JESSICA_DAWSON_DIETITIAN, KIDNEY_NUTRITION_CENTER } from '../../data/network/kidneyNutritionCenter';
+import {
+  JESSICA_DAWSON_DIETITIAN,
+  KIDNEY_NUTRITION_CENTER,
+} from '../../data/network/kidneyNutritionCenter';
 import {
   CAROLINE_MATERNITY_CONSULTANT,
   MUMMYS_WHISPERS_CENTER,
@@ -92,8 +95,10 @@ const ServiceProviderDetail = () => {
     KIDNEY_NUTRITION_CENTER,
   ];
 
-  const provider = providers.find((p) => p.id === id) || providers[0];
-  const center = centers.find((c) => c.providers.some((p) => p.id === provider.id)) || centers[0];
+  const provider = providers.find((p) => p.id === id);
+  const center = provider
+    ? centers.find((c) => c.providers.some((p) => p.id === provider.id))
+    : null;
 
   if (!provider) {
     return (
@@ -142,11 +147,15 @@ const ServiceProviderDetail = () => {
               <div className="flex items-center opacity-80">
                 <Clock className="w-4 h-4 mr-2" />
                 <span>{provider.yearsExperience} years of experience</span>
-                <span className="mx-3">•</span>
-                <MapPin className="w-4 h-4 mr-2" />
-                <span>
-                  {center.location.suburb}, {center.location.state}
-                </span>
+                {center && (
+                  <>
+                    <span className="mx-3">•</span>
+                    <MapPin className="w-4 h-4 mr-2" />
+                    <span>
+                      {center.location.suburb}, {center.location.state}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -328,34 +337,36 @@ const ServiceProviderDetail = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-gray-800">Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <a href={center.contact.bookingUrl} target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full bg-zygo-red hover:bg-zygo-red/90 text-white">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Book Appointment
-                  </Button>
-                </a>
-                <a href={`tel:${center.contact.phone}`}>
-                  <Button
-                    variant="outline"
-                    className="w-full border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white"
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </Button>
-                </a>
-                <a href={`mailto:${center.contact.email}`}>
-                  <Button variant="outline" className="w-full">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Send Email
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
+            {center && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Quick Actions</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <a href={center.contact.bookingUrl} target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full bg-zygo-red hover:bg-zygo-red/90 text-white">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      Book Appointment
+                    </Button>
+                  </a>
+                  <a href={`tel:${center.contact.phone}`}>
+                    <Button
+                      variant="outline"
+                      className="w-full border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call Now
+                    </Button>
+                  </a>
+                  <a href={`mailto:${center.contact.email}`}>
+                    <Button variant="outline" className="w-full">
+                      <Mail className="w-4 h-4 mr-2" />
+                      Send Email
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Consultation Options */}
             <Card>
@@ -441,31 +452,34 @@ const ServiceProviderDetail = () => {
             )}
 
             {/* Practice Location */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-gray-800">Practice Location</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Link
-                  to={`/network/centers/${center.id}`}
-                  className="block hover:bg-gray-50 p-3 rounded-lg transition-colors"
-                >
-                  <h4 className="font-semibold text-gray-800 mb-2">{center.name}</h4>
-                  <div className="flex items-start text-gray-600 text-sm mb-2">
-                    <MapPin className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div>{center.location.address}</div>
+            {center && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Practice Location</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Link
+                    to={`/network/centers/${center.id}`}
+                    className="block hover:bg-gray-50 p-3 rounded-lg transition-colors"
+                  >
+                    <h4 className="font-semibold text-gray-800 mb-2">{center.name}</h4>
+                    <div className="flex items-start text-gray-600 text-sm mb-2">
+                      <MapPin className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" />
                       <div>
-                        {center.location.suburb}, {center.location.state} {center.location.postcode}
+                        <div>{center.location.address}</div>
+                        <div>
+                          {center.location.suburb}, {center.location.state}{' '}
+                          {center.location.postcode}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="mt-2">
-                    View Center Details
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+                    <Button variant="outline" size="sm" className="mt-2">
+                      View Center Details
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Languages */}
             {provider.languages && provider.languages.length > 0 && (

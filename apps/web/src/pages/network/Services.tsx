@@ -52,7 +52,8 @@ const Services = () => {
         },
         {
           title: 'Comprehensive Pregnancy Care at EMOG with Dr. Shelley Rowlands',
-          description: 'Complete obstetric care from early pregnancy through delivery with expert monitoring',
+          description:
+            'Complete obstetric care from early pregnancy through delivery with expert monitoring',
           location: 'East Melbourne, VIC',
           price: 'From $380',
           provider: 'Dr. Shelley Rowlands',
@@ -209,7 +210,8 @@ const Services = () => {
         },
         {
           title: 'Fertility Assessment & Counseling at EMOG with Dr. Shelley Rowlands',
-          description: 'Comprehensive fertility evaluation and counseling for couples trying to conceive',
+          description:
+            'Comprehensive fertility evaluation and counseling for couples trying to conceive',
           location: 'East Melbourne, VIC',
           price: 'From $350',
           provider: 'Dr. Shelley Rowlands',
@@ -294,7 +296,7 @@ const Services = () => {
         },
         {
           title: 'Gynaecological Consultation at EMOG with Dr. Shelley Rowlands',
-          description: 'Comprehensive women\'s health assessments and gynecological care',
+          description: "Comprehensive women's health assessments and gynecological care",
           location: 'East Melbourne, VIC',
           price: 'From $280',
           provider: 'Dr. Shelley Rowlands',

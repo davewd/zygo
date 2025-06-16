@@ -33,7 +33,7 @@ export const EMOG_SERVICES: Service[] = [
   {
     id: 'pregnancy-care',
     name: 'Comprehensive Pregnancy Care',
-    description: 'Complete obstetric care from early pregnancy through delivery, including regular monitoring, ultrasounds, and birth planning with experienced obstetricians.',
+    description: 'Specialist obstetric care providing medical management of pregnancy from conception to delivery. Includes advanced monitoring protocols, diagnostic ultrasounds, and evidence-based interventions with FRANZCOG-certified specialists.',
     category: EMOG_SERVICE_CATEGORIES.OBSTETRICS,
     duration: 45,
     price: {
@@ -50,7 +50,7 @@ export const EMOG_SERVICES: Service[] = [
   {
     id: 'high-risk-pregnancy',
     name: 'High-Risk Pregnancy Management',
-    description: 'Specialized care for complex pregnancies including multiple births, medical conditions, and pregnancy complications with expert maternal-fetal medicine.',
+    description: 'Subspecialist management of high-risk pregnancies requiring advanced medical intervention. Includes maternal-fetal medicine consultation, complex monitoring protocols, and multidisciplinary care coordination for optimal outcomes.',
     category: EMOG_SERVICE_CATEGORIES.OBSTETRICS,
     duration: 60,
     price: {
@@ -67,7 +67,7 @@ export const EMOG_SERVICES: Service[] = [
   {
     id: 'gynaecological-consultation',
     name: 'Gynaecological Consultation',
-    description: 'Comprehensive women\'s health assessments including routine examinations, contraceptive advice, and treatment of gynecological conditions.',
+    description: 'Specialist women\'s health consultations providing medical assessment and treatment of gynaecological conditions. Includes clinical examination, diagnostic procedures, and evidence-based management plans.',
     category: EMOG_SERVICE_CATEGORIES.GYNAECOLOGY,
     duration: 30,
     price: {
@@ -84,7 +84,7 @@ export const EMOG_SERVICES: Service[] = [
   {
     id: 'fertility-assessment',
     name: 'Fertility Assessment & Counseling',
-    description: 'Comprehensive fertility evaluation and counseling for couples trying to conceive, including diagnostic testing and treatment planning.',
+    description: 'Medical fertility assessment utilizing advanced reproductive endocrinology and diagnostic technologies. Includes comprehensive testing protocols, specialist consultation, and evidence-based treatment pathways for infertility.',
     category: EMOG_SERVICE_CATEGORIES.FERTILITY,
     duration: 45,
     price: {
@@ -142,8 +142,8 @@ export const DR_SHELLEY_ROWLANDS: ServiceProvider = {
   title: 'Obstetrician & Gynaecologist',
   profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
   headerBackgroundImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-  bio: 'Dr. Shelley Rowlands is an experienced obstetrician and gynaecologist providing comprehensive women\'s healthcare services in Eastern Melbourne. She specializes in pregnancy care, gynecological conditions, and reproductive health with a focus on personalized, compassionate care.',
-  personalStory: 'As a mother and practicing obstetrician, I understand the importance of feeling supported and informed throughout your healthcare journey. I believe in building strong relationships with my patients and providing care that is tailored to each woman\'s unique needs and circumstances.',
+  bio: 'Dr. Shelley Rowlands is a FRANZCOG-certified obstetrician and gynaecologist with subspecialist expertise in maternal-fetal medicine and reproductive health. Based in Eastern Melbourne, she provides advanced medical care for complex pregnancies, fertility disorders, and challenging gynaecological conditions, combining clinical excellence with cutting-edge medical technology.',
+  personalStory: 'My passion for women\'s health began during my medical training when I witnessed the profound impact that specialist care can have on women and families facing complex health challenges. As both a medical specialist and a mother, I understand the importance of providing expert clinical care while maintaining the human connection that makes all the difference in healthcare.',
   credentials: [
     {
       title: 'Fellow of the Royal Australian and New Zealand College of Obstetricians and Gynaecologists',
@@ -177,7 +177,7 @@ export const DR_SHELLEY_ROWLANDS: ServiceProvider = {
   ],
   languages: ['English'],
   yearsExperience: 15,
-  approach: 'I believe in providing comprehensive, personalized care that empowers women to make informed decisions about their health. My approach combines clinical expertise with compassionate support, ensuring that each patient feels heard, understood, and well-cared for throughout their healthcare journey.',
+  approach: 'My practice is built on evidence-based medicine and subspecialist expertise. I take a comprehensive approach to women\'s health, utilizing advanced diagnostic techniques and innovative treatment protocols. Every patient receives individualized medical care based on the latest research and clinical guidelines, ensuring optimal outcomes for even the most complex conditions.',
   availability: {
     inPerson: true,
     telehealth: false,
@@ -195,9 +195,9 @@ export const DR_SHELLEY_ROWLANDS: ServiceProvider = {
 export const EMOG_CENTER: ServiceCenter = {
   id: 'emog-eastern-melbourne',
   name: 'EMOG - Eastern Melbourne Obstetrics & Gynaecology',
-  description: 'Comprehensive obstetric and gynecological care providing expert women\'s health services throughout pregnancy, reproductive health, and beyond.',
-  overview: 'EMOG provides specialized obstetric and gynecological services with a focus on comprehensive women\'s healthcare. Our experienced team offers personalized care from pregnancy planning through menopause, ensuring continuity of care and excellence in women\'s health services.',
-  mission: 'To provide exceptional obstetric and gynecological care that supports women through all stages of their reproductive health journey with expertise, compassion, and personalized attention.',
+  description: 'Leading specialist obstetric and gynaecological practice offering advanced medical care for women. Our FRANZCOG-certified specialists provide evidence-based treatment for complex pregnancies, reproductive health conditions, and comprehensive women\'s medical services.',
+  overview: 'EMOG is a specialist medical practice focused on advanced obstetric and gynaecological care in Eastern Melbourne. Led by Dr. Shelley Rowlands, our practice delivers expert medical management for high-risk pregnancies, fertility challenges, and complex gynaecological conditions. We combine state-of-the-art medical technology with specialist expertise to provide comprehensive women\'s healthcare from adolescence through menopause.',
+  mission: 'To deliver excellence in specialist women\'s healthcare through advanced medical expertise, innovative treatment approaches, and evidence-based practice. We are committed to providing the highest standard of obstetric and gynaecological care for women facing complex health challenges.',
   location: {
     address: 'Suite 123, Medical Center',
     suburb: 'East Melbourne',
@@ -233,18 +233,18 @@ export const EMOG_CENTER: ServiceCenter = {
     sunday: { closed: true, open: '', close: '' }
   },
   features: [
-    'Comprehensive obstetric care',
-    'Expert gynecological services',
+    'FRANZCOG-certified specialist care',
+    'Advanced maternal-fetal medicine',
     'High-risk pregnancy management',
-    'Fertility assessment and counseling',
-    'Pregnancy ultrasound and imaging',
-    'Menopause management',
-    'Medicare rebates available',
-    'Experienced FRANZCOG specialists',
-    'Personalized care plans',
-    'Emergency obstetric support',
-    'Family planning services',
-    'Women\'s reproductive health focus'
+    'Subspecialist fertility assessment',
+    'State-of-the-art ultrasound technology',
+    'Evidence-based treatment protocols',
+    'Medicare specialist rebates',
+    'Complex gynaecological procedures',
+    'Multidisciplinary care coordination',
+    'Emergency obstetric intervention',
+    'Advanced reproductive medicine',
+    'Specialist referral pathways'
   ],
   certifications: [
     'FRANZCOG Certified',
@@ -266,5 +266,5 @@ export const EMOG_CENTER: ServiceCenter = {
     'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
   ],
   establishedYear: 2010,
-  culturalConsiderations: 'EMOG welcomes women from all cultural backgrounds and provides culturally sensitive care. We respect diverse beliefs and practices around pregnancy, birth, and women\'s health, and work with patients to ensure care aligns with their cultural and personal values.'
+  culturalConsiderations: 'EMOG provides culturally responsive medical care, understanding that health beliefs and practices vary across communities. Our specialist team works collaboratively with patients from diverse backgrounds to ensure medical decisions align with cultural values while maintaining the highest standards of clinical care.'
 };
