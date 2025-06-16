@@ -30,6 +30,7 @@ import {
   MARCUS_CHEN,
   SARAH_MITCHELL,
 } from '../../data/network/elixrSwimSchoolCenter';
+import { DR_SHELLEY_ROWLANDS, EMOG_CENTER } from '../../data/network/emogCenter';
 import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
 import {
   JAMES_THOMPSON,
@@ -37,6 +38,11 @@ import {
   MICHAEL_OCONNOR,
   SOFIA_MARTINEZ,
 } from '../../data/network/kickeroosSoccerCenter';
+import { JESSICA_DAWSON_DIETITIAN, KIDNEY_NUTRITION_CENTER } from '../../data/network/kidneyNutritionCenter';
+import {
+  CAROLINE_MATERNITY_CONSULTANT,
+  MUMMYS_WHISPERS_CENTER,
+} from '../../data/network/mummysWhispersCenter';
 import {
   ANDREA_DUNNE,
   DR_JUSTIN_TUCKER,
@@ -70,6 +76,9 @@ const ServiceProviderDetail = () => {
     JAMES_THOMPSON,
     SOFIA_MARTINEZ,
     MICHAEL_OCONNOR,
+    CAROLINE_MATERNITY_CONSULTANT,
+    DR_SHELLEY_ROWLANDS,
+    JESSICA_DAWSON_DIETITIAN,
   ];
   const centers = [
     FULL_CIRCLE_CENTER,
@@ -78,6 +87,9 @@ const ServiceProviderDetail = () => {
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,
     KICKEROOS_SOCCER_CENTER,
+    MUMMYS_WHISPERS_CENTER,
+    EMOG_CENTER,
+    KIDNEY_NUTRITION_CENTER,
   ];
 
   const provider = providers.find((p) => p.id === id) || providers[0];

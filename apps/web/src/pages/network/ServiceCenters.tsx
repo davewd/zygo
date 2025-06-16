@@ -16,8 +16,11 @@ import {
 import { Link } from 'react-router-dom';
 import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
+import { EMOG_CENTER } from '../../data/network/emogCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
 import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCenter';
+import { KIDNEY_NUTRITION_CENTER } from '../../data/network/kidneyNutritionCenter';
+import { MUMMYS_WHISPERS_CENTER } from '../../data/network/mummysWhispersCenter';
 import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
 import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
@@ -29,6 +32,9 @@ const ServiceCenters = () => {
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,
     KICKEROOS_SOCCER_CENTER,
+    MUMMYS_WHISPERS_CENTER,
+    EMOG_CENTER,
+    KIDNEY_NUTRITION_CENTER,
   ];
 
   return (

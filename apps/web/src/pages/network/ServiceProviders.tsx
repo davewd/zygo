@@ -21,12 +21,15 @@ import {
   MARCUS_CHEN,
   SARAH_MITCHELL,
 } from '../../data/network/elixrSwimSchoolCenter';
+import { DR_SHELLEY_ROWLANDS } from '../../data/network/emogCenter';
 import { REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
 import {
   JAMES_THOMPSON,
   MICHAEL_OCONNOR,
   SOFIA_MARTINEZ,
 } from '../../data/network/kickeroosSoccerCenter';
+import { JESSICA_DAWSON_DIETITIAN } from '../../data/network/kidneyNutritionCenter';
+import { CAROLINE_MATERNITY_CONSULTANT } from '../../data/network/mummysWhispersCenter';
 import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
 import {
   DANIELLE_HARMSEN,
@@ -51,6 +54,9 @@ const ServiceProviders = () => {
     JAMES_THOMPSON,
     SOFIA_MARTINEZ,
     MICHAEL_OCONNOR,
+    CAROLINE_MATERNITY_CONSULTANT,
+    DR_SHELLEY_ROWLANDS,
+    JESSICA_DAWSON_DIETITIAN,
   ];
 
   return (

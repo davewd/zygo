@@ -19,6 +19,7 @@ import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
 import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCenter';
+import { MUMMYS_WHISPERS_CENTER } from '../../data/network/mummysWhispersCenter';
 import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
 import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
@@ -33,6 +34,7 @@ const ServiceCenterDetail = () => {
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,
     KICKEROOS_SOCCER_CENTER,
+    MUMMYS_WHISPERS_CENTER,
   ];
   const center = centers.find((c) => c.id === id) || centers[0];
 
