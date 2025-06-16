@@ -4,6 +4,7 @@ import {
   Award,
   Calendar,
   Clock,
+  Eye,
   Globe,
   Heart,
   Mail,
@@ -13,6 +14,7 @@ import {
   Star,
   Users,
 } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
@@ -25,6 +27,19 @@ import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
 import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
 const ServiceCenters = () => {
+  // State for controlling contact information visibility for each center
+  const [visibleContact, setVisibleContact] = useState<{[key: string]: {phone: boolean, email: boolean}}>({});
+
+  const toggleContactVisibility = (centerId: string, type: 'phone' | 'email') => {
+    setVisibleContact(prev => ({
+      ...prev,
+      [centerId]: {
+        ...prev[centerId],
+        [type]: true
+      }
+    }));
+  };
+
   const centers = [
     FULL_CIRCLE_CENTER,
     PROLOGUE_CENTER,
@@ -118,11 +133,33 @@ const ServiceCenters = () => {
                         </div>
                         <div className="flex items-center text-gray-600">
                           <Phone className="w-4 h-4 mr-2 text-zygo-red" />
-                          <span className="text-sm">{center.contact.phone}</span>
+                          {visibleContact[center.id]?.phone ? (
+                            <span className="text-sm">{center.contact.phone}</span>
+                          ) : (
+                            <button
+                              onClick={() => toggleContactVisibility(center.id, 'phone')}
+                              className="flex items-center text-gray-600 hover:text-zygo-red transition-colors focus:outline-none text-sm"
+                            >
+                              <span className="mr-2">••• ••• •••</span>
+                              <Eye className="w-3 h-3" />
+                              <span className="ml-1 text-xs">Click to show</span>
+                            </button>
+                          )}
                         </div>
                         <div className="flex items-center text-gray-600">
                           <Mail className="w-4 h-4 mr-2 text-zygo-red" />
-                          <span className="text-sm">{center.contact.email}</span>
+                          {visibleContact[center.id]?.email ? (
+                            <span className="text-sm">{center.contact.email}</span>
+                          ) : (
+                            <button
+                              onClick={() => toggleContactVisibility(center.id, 'email')}
+                              className="flex items-center text-gray-600 hover:text-zygo-red transition-colors focus:outline-none text-sm"
+                            >
+                              <span className="mr-2">••••••@••••••••</span>
+                              <Eye className="w-3 h-3" />
+                              <span className="ml-1 text-xs">Click to show</span>
+                            </button>
+                          )}
                         </div>
                       </div>
 

@@ -5,6 +5,8 @@ import {
   CheckCircle,
   Clock,
   DollarSign,
+  Eye,
+  EyeOff,
   Globe,
   Heart,
   Mail,
@@ -14,6 +16,7 @@ import {
   Stethoscope,
   Users,
 } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
@@ -27,6 +30,10 @@ import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCent
 
 const ServiceCenterDetail = () => {
   const { id } = useParams();
+
+  // State for controlling contact information visibility
+  const [showPhone, setShowPhone] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
 
   // Get the center by ID
   const centers = [
@@ -327,22 +334,44 @@ const ServiceCenterDetail = () => {
 
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-3 text-zygo-red" />
-                  <a
-                    href={`tel:${center.contact.phone}`}
-                    className="hover:text-zygo-red transition-colors"
-                  >
-                    {center.contact.phone}
-                  </a>
+                  {showPhone ? (
+                    <a
+                      href={`tel:${center.contact.phone}`}
+                      className="hover:text-zygo-red transition-colors"
+                    >
+                      {center.contact.phone}
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => setShowPhone(true)}
+                      className="flex items-center text-gray-600 hover:text-zygo-red transition-colors focus:outline-none"
+                    >
+                      <span className="mr-2">••• ••• •••</span>
+                      <Eye className="w-4 h-4" />
+                      <span className="ml-1 text-sm">Click to show</span>
+                    </button>
+                  )}
                 </div>
 
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-3 text-zygo-red" />
-                  <a
-                    href={`mailto:${center.contact.email}`}
-                    className="hover:text-zygo-red transition-colors"
-                  >
-                    {center.contact.email}
-                  </a>
+                  {showEmail ? (
+                    <a
+                      href={`mailto:${center.contact.email}`}
+                      className="hover:text-zygo-red transition-colors"
+                    >
+                      {center.contact.email}
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => setShowEmail(true)}
+                      className="flex items-center text-gray-600 hover:text-zygo-red transition-colors focus:outline-none"
+                    >
+                      <span className="mr-2">••••••@••••••••</span>
+                      <Eye className="w-4 h-4" />
+                      <span className="ml-1 text-sm">Click to show</span>
+                    </button>
+                  )}
                 </div>
 
                 <div className="flex items-center">
