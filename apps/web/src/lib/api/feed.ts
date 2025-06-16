@@ -105,9 +105,9 @@ const mockData = {
       id: 1,
       post: "Here's an example of something i care about !",
       author: {
-        name: "John Doe",
-        title: "Software Engineer",
-        image: "https://example.com/john_doe.jpg"
+        name: "Mike Johnson",
+        handle: "mike_dad",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
       },
       title: "My First Post",
       metadata: {
@@ -131,13 +131,13 @@ const mockData = {
         createdAt: "2023-10-01T12:00:00Z"
       },
       author: {
-        name: "Jane Doe",
-        title: "Mum of 17",
-        image: "https://example.com/john_doe.jpg"
+        name: "Sarah Johnson",
+        handle: "sarah_mama",
+        image: "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face"
       },
       type: "milestone",
       post: "And Just Like That First Steps ",
-      image: "https://example.com/image1.jpg",
+      image: "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&h=600&fit=crop&crop=center",
       stats: {
         likes: 1,
         shares: 0,
@@ -153,18 +153,18 @@ const mockData = {
     },
     {
       id: 3,
-      name: "Jane Smith",
+      name: "Jessica Davis",
       type: "link",
-      image: "https://example.com/image2.jpg",
+      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&h=600&fit=crop&crop=center",
       title: "Data Scientist",
       metadata: {
         createdAt: "2023-10-01T12:00:00Z"
       },
       description: "A data scientist with a knack for turning data into actionable insights.",
       author: {
-        name: "Jane Doe",
-        title: "Mum of 17",
-        image: "https://example.com/john_doe.jpg"
+        name: "Jessica Davis",
+        handle: "jessica_mama2",
+        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
       },
       stats: {
         likes: 0,
@@ -183,15 +183,15 @@ const mockData = {
     },
     {
       id: 4,
-      name: "Alice Johnson",
+      name: "Mary Wilson",
       type: "link",
-      image: "https://example.com/image3.jpg",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&crop=center",
       title: "Product Manager",
       description: "An experienced product manager with a focus on user-centered design.",
       author: {
-        name: "Jane Doe",
-        title: "Mum of 17",
-        image: "https://example.com/john_doe.jpg"
+        name: "Mary Wilson",
+        handle: "mary_nana",
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
       },
       metadata: {
         createdAt: "2023-10-01T12:00:00Z"
@@ -210,13 +210,13 @@ const mockData = {
         createdAt: "2023-10-02T08:30:00Z"
       },
       author: {
-        name: "Sarah Martinez",
-        title: "New Mom",
-        image: "https://example.com/sarah_martinez.jpg"
+        name: "Alex Thompson",
+        handle: "alex_twin1",
+        image: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150&h=150&fit=crop&crop=face"
       },
       type: FeedItemType.BREASTFEEDING_TOOL,
       post: "Tracking my breastfeeding journey with detailed metrics. 🤱 It's been amazing to see the progress over time and understand the patterns. This data helps me stay motivated and shows how far we've come together! #BreastfeedingJourney #MomLife #DataDriven",
-      image: "https://example.com/breastfeeding_chart.jpg",
+      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop&crop=center",
       stats: {
         likes: 65,
         shares: 8,
@@ -350,7 +350,7 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
     url: item.url || '',
     author: {
       name: item.author?.name || 'Unknown',
-      handle: item.author?.title?.toLowerCase().replace(/\s+/g, '_') || 'unknown',
+      handle: item.author?.handle || item.author?.title?.toLowerCase().replace(/\s+/g, '_') || 'unknown',
       avatar: item.author?.image || 'https://via.placeholder.com/48',
       verified: false,
     },

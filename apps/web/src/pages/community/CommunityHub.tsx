@@ -27,7 +27,7 @@ const CommunityHub = () => {
   // Featured community members
   const featuredMembers = COMMUNITY_PROFILES.sort(
     (a, b) => b.stats.postsCount - a.stats.postsCount
-  ).slice(0, 3);
+  ).slice(0, 6);
 
   const getRoleIcon = (role: UserRole) => {
     switch (role) {
@@ -177,7 +177,7 @@ const CommunityHub = () => {
             </Link>
           </div>
 
-          {/* Community Stats */}
+          {/*           { /*Community Stats /}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
             {communityStats.map((stat, index) => {
               const IconComponent = stat.icon;
@@ -191,10 +191,10 @@ const CommunityHub = () => {
                 </Card>
               );
             })}
-          </div>
+          </div> */}
 
           {/* Featured Members */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {featuredMembers.map((profile) => {
               const { consumer, stats } = profile;
               const RoleIcon = getRoleIcon(consumer.role);
