@@ -29,6 +29,11 @@ export interface Credential {
   issuingBody: string;
   year?: number;
   verified: boolean;
+  // Enhanced fields to connect with new credential system
+  credentialDefinitionId?: string; // Reference to CredentialDefinition
+  personalCredentialId?: string; // Reference to PersonalCredential if this is from the credential system
+  expiryDate?: string;
+  verificationReference?: string;
 }
 
 export interface ServiceCategory {

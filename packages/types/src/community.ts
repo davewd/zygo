@@ -60,6 +60,9 @@ export interface PrimaryConsumer {
     restrictedFields: string[]; // Fields that require parental permission to view
   };
   
+  // Credentials (for community members who may have relevant qualifications)
+  credentials?: string[]; // Array of PersonalCredential IDs
+  
   // Additional metadata
   interests?: string[]; // General interests/topics they engage with
   preferredLanguages?: string[];

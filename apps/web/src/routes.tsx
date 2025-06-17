@@ -6,6 +6,11 @@ import CommunityHub from './pages/community/CommunityHub';
 import CommunityProfiles from './pages/community/CommunityProfiles';
 import CommunityProviders from './pages/community/CommunityProviders';
 import ProfileDetail from './pages/community/ProfileDetail';
+import CredentialsHub from './pages/credentials/CredentialsHub';
+import CredentialProviders from './pages/credentials/CredentialProviders';
+import CredentialProviderDetail from './pages/credentials/CredentialProviderDetail';
+import CredentialVerify from './pages/credentials/CredentialVerify';
+import CredentialSearch from './pages/credentials/CredentialSearch';
 import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/Landing';
@@ -34,6 +39,13 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/community/centers/:id', element: <ServiceCenterDetail />, errorElement: <Error /> },
+
+      // Credentials routes
+      { path: '/credentials', element: <CredentialsHub />, errorElement: <Error /> },
+      { path: '/credentials/providers', element: <CredentialProviders />, errorElement: <Error /> },
+      { path: '/credentials/providers/:id', element: <CredentialProviderDetail />, errorElement: <Error /> },
+      { path: '/credentials/verify', element: <CredentialVerify />, errorElement: <Error /> },
+      { path: '/credentials/search', element: <CredentialSearch />, errorElement: <Error /> },
 
       // Legacy network routes - redirect to community
       { path: '/network', element: <CommunityHub />, errorElement: <Error /> },
