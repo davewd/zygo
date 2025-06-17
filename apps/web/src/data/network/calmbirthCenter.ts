@@ -1,4 +1,4 @@
-import type { Service, ServiceCategory, ServiceCenter, ServiceProvider, ServiceNetworkProvider } from '@zygo/types';
+import type { Service, ServiceCategory, ServiceCenter, ServiceNetworkProvider, ServiceProvider } from '@zygo/types';
 
 // Service Categories
 export const CALMBIRTH_SERVICE_CATEGORIES: Record<string, ServiceCategory> = {
@@ -295,6 +295,13 @@ export const SARAH_THOMPSON_EDUCATOR: ServiceProvider = {
   }
 };
 
+// Providers array for easy import
+export const CALMBIRTH_PROVIDERS: ServiceProvider[] = [
+  PETER_JACKSON,
+  KAREN_MCCLAY,
+  SARAH_THOMPSON_EDUCATOR
+];
+
 // Calmbirth® Australia Service Center
 export const CALMBIRTH_CENTER: ServiceCenter = {
   id: 'calmbirth-australia',
@@ -390,4 +397,202 @@ export const CALMBIRTH_CENTER: ServiceCenter = {
   ],
   establishedYear: 2004,
   culturalConsiderations: 'Calmbirth® is an inclusive organisation that embraces cultural diversity and accepts all pregnant couples regardless of gender and sexuality. We acknowledge the Traditional Custodians of the land on which we live and teach our Calmbirth program, and pay our respects to their Elders past and present.'
+};
+
+// Service Network Provider
+export const CALMBIRTH_NETWORK_PROVIDER: ServiceNetworkProvider = {
+  id: 'calmbirth-network',
+  name: 'Calmbirth®',
+  description: 'Australia\'s most highly acclaimed childbirth education program',
+  overview: 'Calmbirth® is a unique, transformational childbirth education program that incorporates mind-body medicine and utilizes guided relaxation and hypnobirthing-style techniques to teach women how to work with their body during labour.',
+  mission: 'To enable couples to experience a calm, positive birth through education, empowerment, and emotional preparation that addresses the psychological aspects of childbirth.',
+  foundedYear: 2004,
+  headquarters: {
+    address: 'Suite 3, Level 2, 6 O\'Connell Street',
+    suburb: 'Sydney',
+    state: 'NSW',
+    postcode: '2000',
+    country: 'Australia',
+    coordinates: {
+      lat: -33.8688,
+      lng: 151.2093
+    }
+  },
+  contact: {
+    phone: '+61 2 9188 1725',
+    email: 'info@calmbirth.com.au',
+    website: 'https://www.calmbirth.com.au',
+    bookingUrl: 'https://www.calmbirth.com.au/find-a-course',
+    socialMedia: [
+      {
+        platform: 'Facebook',
+        url: 'https://www.facebook.com/Calmbirth'
+      },
+      {
+        platform: 'Instagram',
+        url: 'https://www.instagram.com/calmbirth'
+      },
+      {
+        platform: 'YouTube',
+        url: 'https://www.youtube.com/c/Calmbirth'
+      },
+      {
+        platform: 'Podcast',
+        url: 'https://www.calmbirth.com.au/podcast'
+      }
+    ]
+  },
+  brandColors: {
+    primary: '#8B4B8C',
+    secondary: '#E8D5E8',
+    accent: '#F5F0F5'
+  },
+  logo: 'https://www.calmbirth.com.au/wp-content/uploads/2021/03/calmbirth-logo.png',
+  website: 'https://www.calmbirth.com.au',
+  
+  // Network-level statistics
+  networkStats: {
+    totalEducators: 100,
+    totalCenters: 85,
+    totalLocations: 85,
+    countriesServed: ['Australia', 'New Zealand', 'France'],
+    familiesTrained: 50000
+  },
+  
+  // Geographic coverage across Australia and internationally
+  locations: [
+    {
+      country: 'Australia',
+      state: 'NSW',
+      region: 'New South Wales',
+      centerCount: 43,
+      educatorCount: 43
+    },
+    {
+      country: 'Australia',
+      state: 'QLD',
+      region: 'Queensland',
+      centerCount: 13,
+      educatorCount: 13
+    },
+    {
+      country: 'Australia',
+      state: 'VIC',
+      region: 'Victoria',
+      centerCount: 12,
+      educatorCount: 12
+    },
+    {
+      country: 'Australia',
+      state: 'WA',
+      region: 'Western Australia',
+      centerCount: 4,
+      educatorCount: 4
+    },
+    {
+      country: 'Australia',
+      state: 'SA',
+      region: 'South Australia',
+      centerCount: 3,
+      educatorCount: 3
+    },
+    {
+      country: 'Australia',
+      state: 'TAS',
+      region: 'Tasmania',
+      centerCount: 5,
+      educatorCount: 5
+    },
+    {
+      country: 'Australia',
+      state: 'ACT',
+      region: 'Australian Capital Territory',
+      centerCount: 1,
+      educatorCount: 1
+    },
+    {
+      country: 'New Zealand',
+      region: 'National',
+      centerCount: 2,
+      educatorCount: 2
+    },
+    {
+      country: 'France',
+      region: 'National',
+      centerCount: 2,
+      educatorCount: 2
+    }
+  ],
+  
+  // Associated centers and providers (referencing existing data)
+  centers: [CALMBIRTH_CENTER],
+  providers: [PETER_JACKSON, KAREN_MCCLAY, SARAH_THOMPSON_EDUCATOR],
+  
+  // Network-wide features and certifications
+  networkFeatures: [
+    'Internationally recognized childbirth education program',
+    'Mind-body medicine approach with scientific foundation',
+    'Fear release techniques and guided relaxation methods',
+    'Weekend intensive program format for working couples',
+    'Hospital-based programs in major cities',
+    'Private and group session options available',
+    'Refresher courses for subsequent pregnancies',
+    'Birth partner support and involvement',
+    'Comprehensive educator training and certification',
+    'Cultural diversity and LGBTQ+ inclusive approach',
+    'Evidence-based curriculum development',
+    'Continuous professional development for educators',
+    'Gift voucher programs available',
+    'Educational podcast and online resources',
+    'Advocacy for positive birth culture change'
+  ],
+  
+  certifications: [
+    'Internationally Recognized Childbirth Education Program',
+    'Australian Health Practitioner Regulation Agency Affiliated',
+    'Professional Indemnity Insurance Coverage',
+    'Continuous Professional Development Accredited',
+    'Evidence-Based Practice Standards',
+    'Cultural Safety Training Certified'
+  ],
+  
+  accreditations: [
+    'Australian College of Midwives Recognition',
+    'International Childbirth Education Association Member',
+    'Lamaze International Affiliate',
+    'HypnoBirthing Institute Partnership',
+    'Birthing From Within Alliance'
+  ],
+  
+  partnerships: [
+    'Australian College of Midwives',
+    'Royal Australian and New Zealand College of Obstetricians and Gynaecologists',
+    'Australian Breastfeeding Association',
+    'Perinatal Anxiety & Depression Australia (PANDA)',
+    'Birth Trauma Association Australia',
+    'International Association of Yoga Therapists',
+    'Major Australian Private and Public Hospitals'
+  ],
+  
+  culturalConsiderations: 'Calmbirth® is an inclusive organisation that embraces cultural diversity and accepts all pregnant couples regardless of gender and sexuality. We acknowledge the Traditional Custodians of the land on which we live and teach our Calmbirth program, and pay our respects to their Elders past and present. Our program respects diverse cultural birthing practices and beliefs.',
+  
+  socialImpact: 'Calmbirth® has transformed the birth experiences of over 50,000 families across Australia and internationally. By addressing the psychological and emotional aspects of childbirth, we reduce birth trauma, increase positive birth experiences, and support healthier family transitions. Our advocacy work promotes cultural change in maternity care, encouraging respectful, woman-centered approaches to birth.',
+  
+  awards: [
+    {
+      title: 'Australian Business Award for Excellence in Training',
+      year: 2018,
+      issuingBody: 'Australian Business Awards'
+    },
+    {
+      title: 'NSW Premier\'s Award for Women in Business',
+      year: 2016,
+      issuingBody: 'Government of New South Wales'
+    },
+    {
+      title: 'International Childbirth Education Excellence Award',
+      year: 2015,
+      issuingBody: 'International Childbirth Education Association'
+    }
+  ]
 };

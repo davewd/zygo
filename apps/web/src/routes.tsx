@@ -10,6 +10,8 @@ import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/Landing';
 import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
+import ServiceNetworkProviderDetail from './pages/network/ServiceNetworkProviderDetail';
+import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
 import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
@@ -42,6 +44,16 @@ export const routes = createBrowserRouter([
       {
         path: '/network/providers/:id',
         element: <ServiceProviderDetail />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/network/network-providers',
+        element: <ServiceNetworkProviders />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/network/network-providers/:id',
+        element: <ServiceNetworkProviderDetail />,
         errorElement: <Error />,
       },
 

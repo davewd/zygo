@@ -125,6 +125,29 @@ export interface FeedParams {
 const mockData = {
   results: [
     {
+      id: 9,
+      title: "Feeding Reminder",
+      metadata: {
+        createdAt: "2024-12-15T15:45:00Z"
+      },
+      author: {
+        name: "Zygo",
+        handle: "zygo_service_provider",
+        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      },
+      type: FeedItemType.BREASTFEEDING_REMINDER,
+      post: "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
+      stats: {
+        likes: 12,
+        shares: 1,
+        comments: 3
+      },
+      privacy: {
+        visibility: "private",
+        sharedWith: []
+      }
+    },
+    {
       id: 1,
       post: "Here's an example of something i care about !",
       author: {
@@ -423,29 +446,6 @@ const mockData = {
         ],
         totalWeeklyFeeds: 59,
         avgDailyFeeds: 8.4
-      }
-    },
-    {
-      id: 9,
-      title: "Feeding Reminder",
-      metadata: {
-        createdAt: "2024-12-15T15:45:00Z"
-      },
-      author: {
-        name: "Zygo App",
-        handle: "zygo_system",
-        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.BREASTFEEDING_REMINDER,
-      post: "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
-      stats: {
-        likes: 12,
-        shares: 1,
-        comments: 3
-      },
-      privacy: {
-        visibility: "private",
-        sharedWith: []
       }
     }
   ]

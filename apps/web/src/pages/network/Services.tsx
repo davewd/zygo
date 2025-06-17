@@ -69,6 +69,35 @@ const Services = () => {
           center: 'EMOG',
           route: '/network/providers/dr-shelley-rowlands',
         },
+        {
+          title: 'Calmbirth® Childbirth Education Course with Peter Jackson',
+          description:
+            "Australia's most acclaimed 12-hour childbirth education program focusing on psychological and emotional birth preparation",
+          location: 'Blue Mountains, NSW',
+          price: 'From $395',
+          provider: 'Peter Jackson',
+          center: 'Calmbirth® Australia',
+          route: '/network/providers/peter-jackson-calmbirth',
+        },
+        {
+          title: 'Calmbirth® Fear Release & Relaxation with Karen McClay',
+          description:
+            'Specialized fear release techniques and guided relaxation for confident birth preparation',
+          location: 'Brisbane, QLD',
+          price: 'From $195',
+          provider: 'Karen McClay',
+          center: 'Calmbirth® Australia',
+          route: '/network/providers/karen-mcclay-calmbirth',
+        },
+        {
+          title: 'Calmbirth® Private Session with Sarah Thompson',
+          description: 'One-on-one personalized childbirth education in a private setting',
+          location: 'Sydney Northern Beaches, NSW',
+          price: 'From $450',
+          provider: 'Sarah Thompson',
+          center: 'Calmbirth® Australia',
+          route: '/network/providers/sarah-thompson-calmbirth',
+        },
       ],
     },
     {
