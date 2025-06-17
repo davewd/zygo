@@ -17,6 +17,7 @@ import {
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
+import { CALMBIRTH_CENTER } from '../../data/network/calmbirthCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
 import { EMOG_CENTER } from '../../data/network/emogCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
@@ -28,21 +29,24 @@ import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCent
 
 const ServiceCenters = () => {
   // State for controlling contact information visibility for each center
-  const [visibleContact, setVisibleContact] = useState<{[key: string]: {phone: boolean, email: boolean}}>({});
+  const [visibleContact, setVisibleContact] = useState<{
+    [key: string]: { phone: boolean; email: boolean };
+  }>({});
 
   const toggleContactVisibility = (centerId: string, type: 'phone' | 'email') => {
-    setVisibleContact(prev => ({
+    setVisibleContact((prev) => ({
       ...prev,
       [centerId]: {
         ...prev[centerId],
-        [type]: true
-      }
+        [type]: true,
+      },
     }));
   };
 
   const centers = [
     FULL_CIRCLE_CENTER,
     PROLOGUE_CENTER,
+    CALMBIRTH_CENTER,
     ACTIVE8_CENTER,
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,

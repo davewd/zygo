@@ -17,6 +17,11 @@ import {
 import { Link } from 'react-router-dom';
 import { EMILY_MCCONAGHY, JAKE_THOMPSON } from '../../data/network/active8KidsCenter';
 import {
+  KAREN_MCCLAY,
+  PETER_JACKSON,
+  SARAH_THOMPSON_EDUCATOR,
+} from '../../data/network/calmbirthCenter';
+import {
   EMMA_RODRIGUEZ,
   MARCUS_CHEN,
   SARAH_MITCHELL,
@@ -43,6 +48,9 @@ const ServiceProviders = () => {
     DR_JUSTIN_TUCKER,
     ANDREA_DUNNE,
     POLLY_DELANEY,
+    PETER_JACKSON,
+    KAREN_MCCLAY,
+    SARAH_THOMPSON_EDUCATOR,
     EMILY_MCCONAGHY,
     JAKE_THOMPSON,
     STEVE_LOEFFLER,

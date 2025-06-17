@@ -6,7 +6,6 @@ import {
   Clock,
   DollarSign,
   Eye,
-  EyeOff,
   Globe,
   Heart,
   Mail,
@@ -19,6 +18,7 @@ import {
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
+import { CALMBIRTH_CENTER } from '../../data/network/calmbirthCenter';
 import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
 import { EMOG_CENTER } from '../../data/network/emogCenter';
 import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
@@ -39,6 +39,7 @@ const ServiceCenterDetail = () => {
   const centers = [
     FULL_CIRCLE_CENTER,
     PROLOGUE_CENTER,
+    CALMBIRTH_CENTER,
     ACTIVE8_CENTER,
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,

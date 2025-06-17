@@ -110,8 +110,63 @@ export interface ServiceCenter {
   culturalConsiderations?: string;
 }
 
+export interface ServiceNetworkProvider {
+  id: string;
+  name: string;
+  description: string;
+  overview: string;
+  mission?: string;
+  foundedYear?: number;
+  headquarters: Location;
+  contact: ContactInfo;
+  brandColors?: {
+    primary: string;
+    secondary?: string;
+    accent?: string;
+  };
+  logo?: string;
+  website?: string;
+  
+  // Network-level information
+  networkStats: {
+    totalEducators?: number;
+    totalCenters?: number;
+    totalLocations?: number;
+    countriesServed?: string[];
+    familiesTrained?: number;
+  };
+  
+  // Geographic coverage
+  locations: {
+    country: string;
+    state?: string;
+    region?: string;
+    centerCount: number;
+    educatorCount: number;
+  }[];
+  
+  // Associated centers and providers
+  centers: ServiceCenter[];
+  providers: ServiceProvider[];
+  
+  // Network-wide features and certifications
+  networkFeatures: string[];
+  certifications?: string[];
+  accreditations?: string[];
+  partnerships?: string[];
+  
+  // Cultural and social information
+  culturalConsiderations?: string;
+  socialImpact?: string;
+  awards?: {
+    title: string;
+    year: number;
+    issuingBody: string;
+  }[];
+}
+
 export interface NetworkConnection {
-  type: 'provider' | 'center' | 'service';
+  type: 'provider' | 'center' | 'service' | 'network';
   id: string;
   relationshipType: 'primary' | 'secondary' | 'referral' | 'emergency';
   dateConnected: Date;
