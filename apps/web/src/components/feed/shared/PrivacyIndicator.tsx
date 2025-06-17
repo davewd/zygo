@@ -41,7 +41,9 @@ export const PrivacyIndicator: React.FC<PrivacyIndicatorProps> = ({ privacy, cla
       case VisibilityLevel.GROUP:
         return 'Groups';
       case VisibilityLevel.PRIVATE:
-        return `${privacy.sharedWith.length} people`;
+        return privacy.sharedWith.length === 0
+          ? 'Only to you'
+          : `${privacy.sharedWith.length} people`;
       default:
         return '';
     }
@@ -60,7 +62,8 @@ export const PrivacyIndicator: React.FC<PrivacyIndicatorProps> = ({ privacy, cla
     if (privacy.sharedWith.length === 0) {
       return (
         <div className="text-sm text-gray-600">
-          <p className="font-medium">No specific sharing</p>
+          <p className="font-medium">Only to you</p>
+          <p>Only you can see this post</p>
         </div>
       );
     }

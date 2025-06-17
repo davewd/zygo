@@ -41,10 +41,7 @@ import {
   LUCY_WOOD,
   STEVE_LOEFFLER,
 } from '../../data/network/whiteCityTennisCenter';
-import {
-  DR_ALEXANDRA_THOMPSON,
-  SARAH_DIGITAL_SPECIALIST,
-} from '../../data/network/zygoAppCenter';
+import { DR_ALEXANDRA_THOMPSON, SARAH_DIGITAL_SPECIALIST } from '../../data/network/zygoAppCenter';
 
 const ServiceProviders = () => {
   const providers = [
