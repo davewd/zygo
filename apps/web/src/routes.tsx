@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
-import BreastfeedingTest from './pages/BreastfeedingTest';
 import CommunityHub from './pages/community/CommunityHub';
 import CommunityProfiles from './pages/community/CommunityProfiles';
 import CommunityProviders from './pages/community/CommunityProviders';
@@ -75,13 +74,16 @@ export const routes = createBrowserRouter([
       },
 
       { path: '/tools', element: <Tools />, errorElement: <Error /> },
-      { path: '/tools/postnatal/breastfeeding-timer', element: <BreastfeedingTimer />, errorElement: <Error /> },
+      {
+        path: '/tools/postnatal/breastfeeding-timer',
+        element: <BreastfeedingTimer />,
+        errorElement: <Error />,
+      },
       { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
     ],
     errorElement: <Error />,
   },
   { path: '/login', element: <Login />, errorElement: <Error /> },
   { path: '/signup', element: <SignUp />, errorElement: <Error /> },
-  { path: '/test/breastfeeding', element: <BreastfeedingTest />, errorElement: <Error /> },
   { path: '/', element: <Landing />, errorElement: <Error /> },
 ]);
