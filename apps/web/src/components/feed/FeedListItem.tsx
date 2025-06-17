@@ -6,6 +6,9 @@ import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
 import { FeedListItemPost } from './generic/FeedListItemPost';
 import { FeedListItemSponsored } from './generic/FeedListItemSponsored';
 import { FeedListItemText } from './generic/FeedListItemText';
+import { FeedListItemBreastfeedingDaily } from './tool_specific/FeedListItemBreastfeedingDaily';
+import { FeedListItemBreastfeedingReminder } from './tool_specific/FeedListItemBreastfeedingReminder';
+import { FeedListItemBreastfeedingWeekly } from './tool_specific/FeedListItemBreastfeedingWeekly';
 import { FeedListItemToolBreastFeeding } from './tool_specific/FeedListItemToolBreastFeeding';
 
 interface FeedListItemProps {
@@ -29,6 +32,12 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ item, className }) => {
         return <FeedListItemText item={item} />;
       case FeedItemType.BREASTFEEDING_TOOL:
         return <FeedListItemToolBreastFeeding item={item} />;
+      case FeedItemType.BREASTFEEDING_DAILY_SUMMARY:
+        return <FeedListItemBreastfeedingDaily item={item} />;
+      case FeedItemType.BREASTFEEDING_WEEKLY_SUMMARY:
+        return <FeedListItemBreastfeedingWeekly item={item} />;
+      case FeedItemType.BREASTFEEDING_REMINDER:
+        return <FeedListItemBreastfeedingReminder item={item} />;
       case FeedItemType.SPONSORED:
         return <FeedListItemSponsored item={item} />;
       case FeedItemType.VIDEO:
