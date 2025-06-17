@@ -58,6 +58,11 @@ import {
   STEVE_LOEFFLER,
   WHITE_CITY_TENNIS_CENTER,
 } from '../../data/network/whiteCityTennisCenter';
+import {
+  DR_ALEXANDRA_THOMPSON,
+  SARAH_DIGITAL_SPECIALIST,
+  ZYGO_APP_CENTER,
+} from '../../data/network/zygoAppCenter';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -82,6 +87,8 @@ const ServiceProviderDetail = () => {
     CAROLINE_MATERNITY_CONSULTANT,
     DR_SHELLEY_ROWLANDS,
     JESSICA_DAWSON_DIETITIAN,
+    SARAH_DIGITAL_SPECIALIST,
+    DR_ALEXANDRA_THOMPSON,
   ];
   const centers = [
     FULL_CIRCLE_CENTER,
@@ -93,6 +100,7 @@ const ServiceProviderDetail = () => {
     MUMMYS_WHISPERS_CENTER,
     EMOG_CENTER,
     KIDNEY_NUTRITION_CENTER,
+    ZYGO_APP_CENTER,
   ];
 
   const provider = providers.find((p) => p.id === id);
