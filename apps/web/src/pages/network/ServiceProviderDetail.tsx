@@ -18,12 +18,15 @@ import {
   User,
   Video,
 } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { BlogPostCard } from '../../components/blog/BlogPostCard';
 import {
   ACTIVE8_CENTER,
   EMILY_MCCONAGHY,
   JAKE_THOMPSON,
 } from '../../data/network/active8KidsCenter';
+import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
 import {
   ELIXR_SWIM_SCHOOL_CENTER,
   EMMA_RODRIGUEZ,
@@ -66,6 +69,35 @@ import {
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Get tab from URL params, default to 'activity'
+  const tabFromUrl = searchParams.get('tab') || 'activity';
+  const [activeTab, setActiveTab] = useState(tabFromUrl);
+
+  const tabs = [
+    { id: 'activity', label: 'Activity', icon: Star },
+    { id: 'values', label: 'Values', icon: Heart },
+    { id: 'services', label: 'Services', icon: Stethoscope },
+    { id: 'credentials', label: 'Credentials', icon: Award },
+  ];
+
+  // Update URL when tab changes
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId);
+    setSearchParams({ tab: tabId });
+  };
+
+  // Update activeTab when URL changes (e.g., browser back/forward)
+  useEffect(() => {
+    const urlTab = searchParams.get('tab');
+    if (urlTab && tabs.some((tab) => tab.id === urlTab)) {
+      setActiveTab(urlTab);
+    } else if (!urlTab) {
+      setActiveTab('activity');
+    }
+  }, [searchParams]);
 
   // Get provider and center by ID
   const providers = [
@@ -185,161 +217,255 @@ const ServiceProviderDetail = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Bio Card */}
+            {/* Tab Navigation */}
             <Card className="bg-white border-0 shadow-lg">
-              <CardContent className="p-8">
-                <p className="text-gray-700 leading-relaxed text-lg">{provider.bio}</p>
-              </CardContent>
-            </Card>
-
-            {/* Personal Story */}
-            {provider.personalStory && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-gray-800">
-                    <Heart className="w-5 h-5 mr-2 text-zygo-red" />
-                    Personal Journey
-                  </CardTitle>
-                  <CardDescription>Understanding through experience</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed italic">"{provider.personalStory}"</p>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Professional Credentials */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-gray-800">
-                  <Award className="w-5 h-5 mr-2 text-zygo-red" />
-                  Professional Credentials
-                </CardTitle>
-                <CardDescription>Verified qualifications and certifications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
-                  {provider.credentials.map((credential, index) => (
-                    <div key={index} className="flex items-start p-4 border rounded-lg">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-800">{credential.title}</h4>
-                        {credential.abbreviation && (
-                          <p className="text-zygo-red font-medium">{credential.abbreviation}</p>
-                        )}
-                        <p className="text-gray-600 text-sm">{credential.issuingBody}</p>
-                        {credential.verified && (
-                          <span className="inline-block mt-2 bg-green-50 text-green-700 text-xs px-2 py-1 rounded">
-                            ✓ Verified
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+              <CardContent className="p-0">
+                <div className="flex border-b">
+                  {tabs.map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => handleTabChange(tab.id)}
+                        className={`flex-1 flex items-center justify-center px-6 py-4 text-sm font-medium transition-colors ${
+                          activeTab === tab.id
+                            ? 'border-b-2 border-zygo-red text-zygo-red bg-zygo-red/5'
+                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4 mr-2" />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Approach & Philosophy */}
-            {provider.approach && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center text-gray-800">
-                    <BookOpen className="w-5 h-5 mr-2 text-zygo-red" />
-                    Care Approach
-                  </CardTitle>
-                  <CardDescription>Philosophy and methodology</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">{provider.approach}</p>
-                </CardContent>
-              </Card>
-            )}
+            {/* Tab Content */}
+            <div className="space-y-6">
+              {/* Values Tab */}
+              {activeTab === 'values' && (
+                <div className="space-y-6">
+                  {/* Bio Card */}
+                  <Card className="bg-white border-0 shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-gray-800">
+                        <Heart className="w-5 h-5 mr-2 text-zygo-red" />
+                        About {provider.firstName}
+                      </CardTitle>
+                      <CardDescription>Professional background and experience</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 leading-relaxed text-lg">{provider.bio}</p>
+                    </CardContent>
+                  </Card>
 
-            {/* Services Offered */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-gray-800">
-                  <Stethoscope className="w-5 h-5 mr-2 text-zygo-red" />
-                  Services Offered
-                </CardTitle>
-                <CardDescription>Comprehensive care tailored to your needs</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
-                  {provider.services.map((service) => (
-                    <div
-                      key={service.id}
-                      className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-800 mb-1">{service.name}</h4>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {service.description}
-                          </p>
-                        </div>
-                        {service.price && (
-                          <div className="text-right ml-4 flex-shrink-0">
-                            <div className="font-semibold text-zygo-red">
-                              ${service.price.amount} {service.price.currency}
-                            </div>
-                            {service.price.rebate && (
-                              <div className="text-xs text-green-600">
-                                {service.price.rebate.provider} rebate: $
-                                {service.price.rebate.amount}
-                              </div>
-                            )}
+                  {/* Personal Story */}
+                  {provider.personalStory && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-gray-800">
+                          <Heart className="w-5 h-5 mr-2 text-zygo-red" />
+                          Personal Journey
+                        </CardTitle>
+                        <CardDescription>Understanding through experience</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-700 leading-relaxed italic">
+                          "{provider.personalStory}"
+                        </p>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Approach & Philosophy for Rebecca */}
+                  {provider.id === 'rebecca-cavallaro' && provider.approach && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-gray-800">
+                          <BookOpen className="w-5 h-5 mr-2 text-zygo-red" />
+                          Care Approach
+                        </CardTitle>
+                        <CardDescription>Philosophy and methodology</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-700 leading-relaxed">{provider.approach}</p>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
+              )}
+
+              {/* Activity Tab */}
+              {activeTab === 'activity' && (
+                <div className="space-y-6">
+                  {/* Blog Feed */}
+                  {provider.id === 'rebecca-cavallaro' && (
+                    <div className="space-y-6">
+                      <div className="text-center mb-6">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                          Recent Articles & Insights
+                        </h3>
+                        <p className="text-gray-600">
+                          Evidence-based guidance and personal insights from Rebecca's clinical
+                          practice
+                        </p>
+                      </div>
+
+                      {REBECCA_CAVALLARO_BLOG_POSTS.map((post) => (
+                        <BlogPostCard key={post.id} post={post} />
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Approach & Philosophy for other providers */}
+                  {provider.id !== 'rebecca-cavallaro' && provider.approach && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-gray-800">
+                          <BookOpen className="w-5 h-5 mr-2 text-zygo-red" />
+                          Care Approach
+                        </CardTitle>
+                        <CardDescription>Philosophy and methodology</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-700 leading-relaxed">{provider.approach}</p>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Specializations */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-gray-800">
+                        <Star className="w-5 h-5 mr-2 text-zygo-red" />
+                        Areas of Specialization
+                      </CardTitle>
+                      <CardDescription>Focused expertise and special interests</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {provider.specializations.map((spec, index) => (
+                          <div key={index} className="bg-zygo-mint/20 p-3 rounded-lg text-center">
+                            <span className="text-gray-700 font-medium text-sm">{spec}</span>
                           </div>
-                        )}
+                        ))}
                       </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-1">
-                          <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
-                            {service.category.name}
-                          </span>
-                          {service.ageGroups?.map((age) => (
-                            <span
-                              key={age}
-                              className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
-                            >
-                              {age}
-                            </span>
-                          ))}
-                        </div>
-                        {service.duration && (
-                          <span className="text-xs text-gray-500 flex items-center">
-                            <Clock className="w-3 h-3 mr-1" />
-                            {service.duration} min
-                          </span>
-                        )}
+              {/* Services Tab */}
+              {activeTab === 'services' && (
+                <div className="space-y-6">
+                  {/* Services Offered */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-gray-800">
+                        <Stethoscope className="w-5 h-5 mr-2 text-zygo-red" />
+                        Services Offered
+                      </CardTitle>
+                      <CardDescription>Comprehensive care tailored to your needs</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid gap-4">
+                        {provider.services.map((service) => (
+                          <div
+                            key={service.id}
+                            className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex justify-between items-start mb-3">
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-gray-800 mb-1">{service.name}</h4>
+                                <p className="text-gray-600 text-sm leading-relaxed">
+                                  {service.description}
+                                </p>
+                              </div>
+                              {service.price && (
+                                <div className="text-right ml-4 flex-shrink-0">
+                                  <div className="font-semibold text-zygo-red">
+                                    ${service.price.amount} {service.price.currency}
+                                  </div>
+                                  {service.price.rebate && (
+                                    <div className="text-xs text-green-600">
+                                      {service.price.rebate.provider} rebate: $
+                                      {service.price.rebate.amount}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="flex items-center justify-between">
+                              <div className="flex flex-wrap gap-1">
+                                <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
+                                  {service.category.name}
+                                </span>
+                                {service.ageGroups?.map((age) => (
+                                  <span
+                                    key={age}
+                                    className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                                  >
+                                    {age}
+                                  </span>
+                                ))}
+                              </div>
+                              {service.duration && (
+                                <span className="text-xs text-gray-500 flex items-center">
+                                  <Clock className="w-3 h-3 mr-1" />
+                                  {service.duration} min
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
+              )}
 
-            {/* Specializations */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-gray-800">
-                  <Star className="w-5 h-5 mr-2 text-zygo-red" />
-                  Areas of Specialization
-                </CardTitle>
-                <CardDescription>Focused expertise and special interests</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {provider.specializations.map((spec, index) => (
-                    <div key={index} className="bg-zygo-mint/20 p-3 rounded-lg text-center">
-                      <span className="text-gray-700 font-medium text-sm">{spec}</span>
-                    </div>
-                  ))}
+              {/* Credentials Tab */}
+              {activeTab === 'credentials' && (
+                <div className="space-y-6">
+                  {/* Professional Credentials */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-gray-800">
+                        <Award className="w-5 h-5 mr-2 text-zygo-red" />
+                        Professional Credentials
+                      </CardTitle>
+                      <CardDescription>Verified qualifications and certifications</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid gap-4">
+                        {provider.credentials.map((credential, index) => (
+                          <div key={index} className="flex items-start p-4 border rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-gray-800">{credential.title}</h4>
+                              {credential.abbreviation && (
+                                <p className="text-zygo-red font-medium">
+                                  {credential.abbreviation}
+                                </p>
+                              )}
+                              <p className="text-gray-600 text-sm">{credential.issuingBody}</p>
+                              {credential.verified && (
+                                <span className="inline-block mt-2 bg-green-50 text-green-700 text-xs px-2 py-1 rounded">
+                                  ✓ Verified
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
+              )}
+            </div>
           </div>
 
           {/* Sidebar */}
