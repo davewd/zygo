@@ -132,7 +132,7 @@ const mockData = {
       },
       author: {
         name: "Zygo",
-        handle: "zygo_service_provider",
+        handle: "zygo_app",
         image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
       },
       type: FeedItemType.BREASTFEEDING_REMINDER,
