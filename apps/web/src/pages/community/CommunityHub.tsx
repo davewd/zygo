@@ -166,8 +166,9 @@ const CommunityHub = () => {
         <section className="mb-16">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Community Members</h2>
-              <p className="text-gray-600">Connect with families at every stage</p>
+              <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                Community Members you may know
+              </h2>
             </div>
             <Link to="/community/profiles">
               <Button variant="outline" className="flex items-center space-x-2">
