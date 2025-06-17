@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { Search, Filter, SlidersHorizontal, Award, Globe, Calendar } from 'lucide-react';
+import { Calendar, Globe, Search, SlidersHorizontal } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
 
@@ -13,23 +13,30 @@ const CredentialSearch = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const filteredAndSortedProviders = useMemo(() => {
-    let filtered = CREDENTIAL_PROVIDERS.filter(provider => {
+    let filtered = CREDENTIAL_PROVIDERS.filter((provider) => {
       if (!provider.isActive) return false;
 
-      const matchesSearch = 
+      const matchesSearch =
         provider.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         provider.abbreviation?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         provider.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        provider.credentialsIssued?.some(cred => 
+        provider.credentialsIssued?.some((cred) =>
           cred.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
       const matchesType = selectedType === 'all' || provider.type === selectedType;
       const matchesCountry = selectedCountry === 'all' || provider.country === selectedCountry;
-      const matchesOnlineVerification = !onlineVerificationOnly || provider.verificationMethods?.online;
+      const matchesOnlineVerification =
+        !onlineVerificationOnly || provider.verificationMethods?.online;
       const matchesApiAccess = !apiAccessOnly || provider.verificationMethods?.api;
 
-      return matchesSearch && matchesType && matchesCountry && matchesOnlineVerification && matchesApiAccess;
+      return (
+        matchesSearch &&
+        matchesType &&
+        matchesCountry &&
+        matchesOnlineVerification &&
+        matchesApiAccess
+      );
     });
 
     // Sort results
@@ -49,8 +56,8 @@ const CredentialSearch = () => {
     return filtered;
   }, [searchTerm, selectedType, selectedCountry, onlineVerificationOnly, apiAccessOnly, sortBy]);
 
-  const uniqueTypes = [...new Set(CREDENTIAL_PROVIDERS.map(p => p.type))];
-  const uniqueCountries = [...new Set(CREDENTIAL_PROVIDERS.map(p => p.country))].sort();
+  const uniqueTypes = [...new Set(CREDENTIAL_PROVIDERS.map((p) => p.type))];
+  const uniqueCountries = [...new Set(CREDENTIAL_PROVIDERS.map((p) => p.country))].sort();
 
   const clearFilters = () => {
     setSearchTerm('');
@@ -63,10 +70,14 @@ const CredentialSearch = () => {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'government': return '🏛️';
-      case 'certification-body': return '🏅';
-      case 'professional-association': return '🏢';
-      default: return '🌐';
+      case 'government':
+        return '🏛️';
+      case 'certification-body':
+        return '🏅';
+      case 'professional-association':
+        return '🏢';
+      default:
+        return '🌐';
     }
   };
 
@@ -75,7 +86,8 @@ const CredentialSearch = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Advanced Credential Search</h1>
         <p className="text-gray-600">
-          Use advanced filters and search options to find specific credential providers and certifications.
+          Use advanced filters and search options to find specific credential providers and
+          certifications.
         </p>
       </div>
 
@@ -98,7 +110,10 @@ const CredentialSearch = () => {
           >
             <SlidersHorizontal className="w-5 h-5 mr-2" />
             Filters
-            {(selectedType !== 'all' || selectedCountry !== 'all' || onlineVerificationOnly || apiAccessOnly) && (
+            {(selectedType !== 'all' ||
+              selectedCountry !== 'all' ||
+              onlineVerificationOnly ||
+              apiAccessOnly) && (
               <span className="ml-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                 Active
               </span>
@@ -111,16 +126,18 @@ const CredentialSearch = () => {
           <div className="mt-6 pt-6 border-t">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Provider Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Provider Type
+                </label>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
                 >
                   <option value="all">All Types</option>
-                  {uniqueTypes.map(type => (
+                  {uniqueTypes.map((type) => (
                     <option key={type} value={type}>
-                      {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                      {type.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
                     </option>
                   ))}
                 </select>
@@ -134,8 +151,10 @@ const CredentialSearch = () => {
                   onChange={(e) => setSelectedCountry(e.target.value)}
                 >
                   <option value="all">All Countries</option>
-                  {uniqueCountries.map(country => (
-                    <option key={country} value={country}>{country}</option>
+                  {uniqueCountries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -191,7 +210,8 @@ const CredentialSearch = () => {
       {/* Results Summary */}
       <div className="mb-6">
         <p className="text-gray-600">
-          Found {filteredAndSortedProviders.length} provider{filteredAndSortedProviders.length !== 1 ? 's' : ''}
+          Found {filteredAndSortedProviders.length} provider
+          {filteredAndSortedProviders.length !== 1 ? 's' : ''}
           {searchTerm && ` matching "${searchTerm}"`}
         </p>
       </div>
@@ -219,9 +239,7 @@ const CredentialSearch = () => {
               </div>
             </div>
 
-            <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-              {provider.description}
-            </p>
+            <p className="text-gray-600 text-sm mb-4 line-clamp-2">{provider.description}</p>
 
             <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
               <div className="flex items-center text-gray-600">
@@ -244,7 +262,7 @@ const CredentialSearch = () => {
                       key={index}
                       className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded"
                     >
-                      {credential.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                      {credential.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
                     </span>
                   ))}
                   {provider.credentialsIssued.length > 3 && (
@@ -269,7 +287,7 @@ const CredentialSearch = () => {
                   </span>
                 )}
               </div>
-              
+
               <Link
                 to={`/credentials/providers/${provider.id}`}
                 className="text-blue-600 hover:text-blue-800 text-sm font-medium"

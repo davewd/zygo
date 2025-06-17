@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { Award, Building, Filter, Globe, Search, Shield } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, Globe, Shield, Award, Building } from 'lucide-react';
 import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
 
 const CredentialProviders = () => {
@@ -9,36 +9,45 @@ const CredentialProviders = () => {
   const [filterCountry, setFilterCountry] = useState<string>('all');
 
   const filteredProviders = useMemo(() => {
-    return CREDENTIAL_PROVIDERS.filter(provider => {
-      const matchesSearch = provider.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          provider.abbreviation?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          provider.description.toLowerCase().includes(searchTerm.toLowerCase());
-      
+    return CREDENTIAL_PROVIDERS.filter((provider) => {
+      const matchesSearch =
+        provider.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        provider.abbreviation?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        provider.description.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesType = filterType === 'all' || provider.type === filterType;
       const matchesCountry = filterCountry === 'all' || provider.country === filterCountry;
-      
+
       return matchesSearch && matchesType && matchesCountry && provider.isActive;
     });
   }, [searchTerm, filterType, filterCountry]);
 
-  const uniqueTypes = [...new Set(CREDENTIAL_PROVIDERS.map(p => p.type))];
-  const uniqueCountries = [...new Set(CREDENTIAL_PROVIDERS.map(p => p.country))];
+  const uniqueTypes = [...new Set(CREDENTIAL_PROVIDERS.map((p) => p.type))];
+  const uniqueCountries = [...new Set(CREDENTIAL_PROVIDERS.map((p) => p.country))];
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'government': return <Shield className="w-5 h-5" />;
-      case 'certification-body': return <Award className="w-5 h-5" />;
-      case 'professional-association': return <Building className="w-5 h-5" />;
-      default: return <Globe className="w-5 h-5" />;
+      case 'government':
+        return <Shield className="w-5 h-5" />;
+      case 'certification-body':
+        return <Award className="w-5 h-5" />;
+      case 'professional-association':
+        return <Building className="w-5 h-5" />;
+      default:
+        return <Globe className="w-5 h-5" />;
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'government': return 'bg-blue-100 text-blue-800';
-      case 'certification-body': return 'bg-green-100 text-green-800';
-      case 'professional-association': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'government':
+        return 'bg-blue-100 text-blue-800';
+      case 'certification-body':
+        return 'bg-green-100 text-green-800';
+      case 'professional-association':
+        return 'bg-purple-100 text-purple-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -47,7 +56,8 @@ const CredentialProviders = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Credential Providers</h1>
         <p className="text-gray-600">
-          Browse and search through our comprehensive database of credential providers and certification bodies.
+          Browse and search through our comprehensive database of credential providers and
+          certification bodies.
         </p>
       </div>
 
@@ -64,7 +74,7 @@ const CredentialProviders = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
+
           <div className="relative">
             <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <select
@@ -73,9 +83,9 @@ const CredentialProviders = () => {
               onChange={(e) => setFilterType(e.target.value)}
             >
               <option value="all">All Types</option>
-              {uniqueTypes.map(type => (
+              {uniqueTypes.map((type) => (
                 <option key={type} value={type}>
-                  {type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                  {type.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
                 </option>
               ))}
             </select>
@@ -89,8 +99,10 @@ const CredentialProviders = () => {
               onChange={(e) => setFilterCountry(e.target.value)}
             >
               <option value="all">All Countries</option>
-              {uniqueCountries.map(country => (
-                <option key={country} value={country}>{country}</option>
+              {uniqueCountries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
               ))}
             </select>
           </div>
@@ -100,7 +112,8 @@ const CredentialProviders = () => {
       {/* Results Summary */}
       <div className="mb-6">
         <p className="text-gray-600">
-          Showing {filteredProviders.length} of {CREDENTIAL_PROVIDERS.filter(p => p.isActive).length} active providers
+          Showing {filteredProviders.length} of{' '}
+          {CREDENTIAL_PROVIDERS.filter((p) => p.isActive).length} active providers
         </p>
       </div>
 
@@ -129,18 +142,14 @@ const CredentialProviders = () => {
               </span>
             </div>
 
-            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-              {provider.description}
-            </p>
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3">{provider.description}</p>
 
             <div className="flex items-center justify-between text-sm text-gray-500">
               <span className="flex items-center">
                 <Globe className="w-4 h-4 mr-1" />
                 {provider.country}
               </span>
-              <span>
-                {provider.credentialsIssued?.length || 0} credentials
-              </span>
+              <span>{provider.credentialsIssued?.length || 0} credentials</span>
             </div>
 
             {provider.verificationMethods && (

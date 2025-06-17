@@ -1,25 +1,27 @@
+import { Award, Filter, Globe, Search, TrendingUp, Users } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, Award, Users, Globe, TrendingUp } from 'lucide-react';
 import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
 
 const CredentialsHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const activeProviders = CREDENTIAL_PROVIDERS.filter(p => p.isActive);
-  const governmentBodies = activeProviders.filter(p => p.type === 'government');
-  const certificationBodies = activeProviders.filter(p => p.type === 'certification-body');
-  const professionalAssociations = activeProviders.filter(p => p.type === 'professional-association');
+  const activeProviders = CREDENTIAL_PROVIDERS.filter((p) => p.isActive);
+  const governmentBodies = activeProviders.filter((p) => p.type === 'government');
+  const certificationBodies = activeProviders.filter((p) => p.type === 'certification-body');
+  const professionalAssociations = activeProviders.filter(
+    (p) => p.type === 'professional-association'
+  );
 
   const recentProviders = activeProviders
     .sort((a, b) => (b.establishedYear || 0) - (a.establishedYear || 0))
     .slice(0, 6);
 
   const featuredProviders = [
-    activeProviders.find(p => p.id === 'ahpra'),
-    activeProviders.find(p => p.id === 'iblce'),
-    activeProviders.find(p => p.id === 'tennis-australia'),
-    activeProviders.find(p => p.id === 'swimming-australia')
+    activeProviders.find((p) => p.id === 'ahpra'),
+    activeProviders.find((p) => p.id === 'iblce'),
+    activeProviders.find((p) => p.id === 'tennis-australia'),
+    activeProviders.find((p) => p.id === 'swimming-australia'),
   ].filter(Boolean);
 
   return (
@@ -28,7 +30,7 @@ const CredentialsHub = () => {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Credentials Hub</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Explore, verify, and manage professional credentials from trusted providers worldwide. 
+          Explore, verify, and manage professional credentials from trusted providers worldwide.
           Your gateway to professional verification and credentialing.
         </p>
       </div>
@@ -49,7 +51,9 @@ const CredentialsHub = () => {
           </div>
           <div className="mt-4 flex justify-center">
             <Link
-              to={`/credentials/providers${searchTerm ? `?search=${encodeURIComponent(searchTerm)}` : ''}`}
+              to={`/credentials/providers${
+                searchTerm ? `?search=${encodeURIComponent(searchTerm)}` : ''
+              }`}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
               Browse All Providers
@@ -131,9 +135,7 @@ const CredentialsHub = () => {
                 <h3 className="font-semibold text-gray-900 text-lg mb-2">
                   {provider?.abbreviation || provider?.name}
                 </h3>
-                <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {provider?.description}
-                </p>
+                <p className="text-sm text-gray-600 mb-3 line-clamp-2">{provider?.description}</p>
                 <span className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
                   {provider?.country}
                 </span>
@@ -212,9 +214,7 @@ const CredentialsHub = () => {
               <h3 className="font-semibold text-gray-900 text-lg mb-2">
                 {provider.abbreviation || provider.name}
               </h3>
-              <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                {provider.description}
-              </p>
+              <p className="text-sm text-gray-600 mb-3 line-clamp-2">{provider.description}</p>
               <div className="flex items-center justify-between text-sm text-gray-500">
                 <span>{provider.country}</span>
                 <span>Est. {provider.establishedYear}</span>

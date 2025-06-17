@@ -1,5 +1,5 @@
+import { AlertCircle, CheckCircle, ExternalLink, Search, XCircle } from 'lucide-react';
 import { useState } from 'react';
-import { Search, CheckCircle, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
 
 const CredentialVerify = () => {
@@ -13,24 +13,24 @@ const CredentialVerify = () => {
   const [isVerifying, setIsVerifying] = useState(false);
 
   const providersWithVerification = CREDENTIAL_PROVIDERS.filter(
-    p => p.isActive && p.verificationMethods?.online
+    (p) => p.isActive && p.verificationMethods?.online
   );
 
   const handleVerification = async () => {
     if (!credentialId.trim() || !providerId) {
       setVerificationResult({
         status: 'error',
-        message: 'Please enter both a credential ID and select a provider.'
+        message: 'Please enter both a credential ID and select a provider.',
       });
       return;
     }
 
     setIsVerifying(true);
-    
+
     // Simulate verification process
     setTimeout(() => {
-      const provider = CREDENTIAL_PROVIDERS.find(p => p.id === providerId);
-      
+      const provider = CREDENTIAL_PROVIDERS.find((p) => p.id === providerId);
+
       // Mock verification logic - in reality this would call actual APIs
       const mockResults = [
         {
@@ -41,8 +41,8 @@ const CredentialVerify = () => {
             credentialType: 'Registered Nurse',
             issueDate: '2022-03-15',
             expiryDate: '2025-03-15',
-            status: 'Active'
-          }
+            status: 'Active',
+          },
         },
         {
           status: 'warning' as const,
@@ -52,13 +52,13 @@ const CredentialVerify = () => {
             credentialType: 'IBCLC Certification',
             issueDate: '2020-06-01',
             expiryDate: '2024-06-01',
-            status: 'Expires Soon'
-          }
+            status: 'Expires Soon',
+          },
         },
         {
           status: 'error' as const,
-          message: 'Credential not found or has been revoked'
-        }
+          message: 'Credential not found or has been revoked',
+        },
       ];
 
       const result = mockResults[Math.floor(Math.random() * mockResults.length)];
@@ -98,15 +98,15 @@ const CredentialVerify = () => {
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Credential Verification</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Verify professional credentials and certifications from trusted providers. 
-          Enter the credential details below to check authenticity and status.
+          Verify professional credentials and certifications from trusted providers. Enter the
+          credential details below to check authenticity and status.
         </p>
       </div>
 
       {/* Verification Form */}
       <div className="bg-white rounded-lg shadow-sm border p-8 mb-8">
         <h2 className="text-xl font-semibold text-gray-900 mb-6">Verification Details</h2>
-        
+
         <div className="space-y-6">
           <div>
             <label htmlFor="credentialId" className="block text-sm font-medium text-gray-700 mb-2">
@@ -167,39 +167,47 @@ const CredentialVerify = () => {
           <div className="flex items-start">
             {getStatusIcon(verificationResult.status)}
             <div className="ml-3 flex-1">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Verification Result
-              </h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Verification Result</h3>
               <p className="text-gray-700 mb-4">{verificationResult.message}</p>
-              
+
               {verificationResult.details && (
                 <div className="bg-white rounded-md p-4 border">
                   <h4 className="font-medium text-gray-900 mb-3">Credential Details</h4>
                   <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <dt className="text-sm font-medium text-gray-500">Holder Name</dt>
-                      <dd className="text-sm text-gray-900">{verificationResult.details.holderName}</dd>
+                      <dd className="text-sm text-gray-900">
+                        {verificationResult.details.holderName}
+                      </dd>
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-gray-500">Credential Type</dt>
-                      <dd className="text-sm text-gray-900">{verificationResult.details.credentialType}</dd>
+                      <dd className="text-sm text-gray-900">
+                        {verificationResult.details.credentialType}
+                      </dd>
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-gray-500">Issue Date</dt>
-                      <dd className="text-sm text-gray-900">{verificationResult.details.issueDate}</dd>
+                      <dd className="text-sm text-gray-900">
+                        {verificationResult.details.issueDate}
+                      </dd>
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-gray-500">Expiry Date</dt>
-                      <dd className="text-sm text-gray-900">{verificationResult.details.expiryDate}</dd>
+                      <dd className="text-sm text-gray-900">
+                        {verificationResult.details.expiryDate}
+                      </dd>
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-gray-500">Status</dt>
                       <dd className="text-sm text-gray-900">
-                        <span className={`inline-flex px-2 py-1 text-xs rounded-full ${
-                          verificationResult.details.status === 'Active' 
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}>
+                        <span
+                          className={`inline-flex px-2 py-1 text-xs rounded-full ${
+                            verificationResult.details.status === 'Active'
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-yellow-100 text-yellow-800'
+                          }`}
+                        >
                           {verificationResult.details.status}
                         </span>
                       </dd>
@@ -214,11 +222,13 @@ const CredentialVerify = () => {
 
       {/* Available Providers */}
       <div className="bg-white rounded-lg shadow-sm border p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Available for Online Verification</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          Available for Online Verification
+        </h2>
         <p className="text-gray-600 mb-6">
           The following providers support online credential verification:
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {providersWithVerification.map((provider) => (
             <div key={provider.id} className="border rounded-lg p-4">
@@ -251,7 +261,9 @@ const CredentialVerify = () => {
         <h3 className="text-lg font-medium text-blue-900 mb-2">Need Help?</h3>
         <div className="text-blue-800 space-y-2">
           <p>• Credential IDs are usually found on official certificates or registration cards</p>
-          <p>• Some providers may have different verification portals for different credential types</p>
+          <p>
+            • Some providers may have different verification portals for different credential types
+          </p>
           <p>• If you can't find your provider, they may not support online verification yet</p>
           <p>• Contact the credential provider directly if you need manual verification</p>
         </div>

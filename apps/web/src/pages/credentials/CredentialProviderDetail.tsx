@@ -1,10 +1,20 @@
-import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Globe, Mail, Phone, ExternalLink, Shield, Calendar, CheckCircle, XCircle } from 'lucide-react';
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle,
+  ExternalLink,
+  Globe,
+  Mail,
+  Phone,
+  Shield,
+  XCircle,
+} from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
 
 const CredentialProviderDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const provider = CREDENTIAL_PROVIDERS.find(p => p.id === id);
+  const provider = CREDENTIAL_PROVIDERS.find((p) => p.id === id);
 
   if (!provider) {
     return (
@@ -28,19 +38,27 @@ const CredentialProviderDetail = () => {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'government': return <Shield className="w-6 h-6" />;
-      case 'certification-body': return <CheckCircle className="w-6 h-6" />;
-      case 'professional-association': return <Globe className="w-6 h-6" />;
-      default: return <Globe className="w-6 h-6" />;
+      case 'government':
+        return <Shield className="w-6 h-6" />;
+      case 'certification-body':
+        return <CheckCircle className="w-6 h-6" />;
+      case 'professional-association':
+        return <Globe className="w-6 h-6" />;
+      default:
+        return <Globe className="w-6 h-6" />;
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'government': return 'bg-blue-100 text-blue-800';
-      case 'certification-body': return 'bg-green-100 text-green-800';
-      case 'professional-association': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'government':
+        return 'bg-blue-100 text-blue-800';
+      case 'certification-body':
+        return 'bg-green-100 text-green-800';
+      case 'professional-association':
+        return 'bg-purple-100 text-purple-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -61,13 +79,9 @@ const CredentialProviderDetail = () => {
       <div className="bg-white rounded-lg shadow-sm border p-8 mb-6">
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-center space-x-4">
-            <div className="p-3 bg-gray-50 rounded-full">
-              {getTypeIcon(provider.type)}
-            </div>
+            <div className="p-3 bg-gray-50 rounded-full">{getTypeIcon(provider.type)}</div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                {provider.name}
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900">{provider.name}</h1>
               {provider.abbreviation && (
                 <p className="text-lg text-gray-600 mt-1">{provider.abbreviation}</p>
               )}
@@ -75,7 +89,7 @@ const CredentialProviderDetail = () => {
           </div>
           <div className="flex flex-col items-end space-y-2">
             <span className={`px-3 py-1 text-sm rounded-full ${getTypeColor(provider.type)}`}>
-              {provider.type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              {provider.type.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
             </span>
             <div className="flex items-center">
               {provider.isActive ? (
@@ -93,9 +107,7 @@ const CredentialProviderDetail = () => {
           </div>
         </div>
 
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
-          {provider.description}
-        </p>
+        <p className="text-gray-700 text-lg leading-relaxed mb-6">{provider.description}</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
@@ -168,20 +180,38 @@ const CredentialProviderDetail = () => {
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Verification Methods</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="flex items-center">
-              <div className={`w-3 h-3 rounded-full mr-3 ${provider.verificationMethods.online ? 'bg-green-500' : 'bg-gray-300'}`} />
-              <span className={provider.verificationMethods.online ? 'text-gray-900' : 'text-gray-500'}>
+              <div
+                className={`w-3 h-3 rounded-full mr-3 ${
+                  provider.verificationMethods.online ? 'bg-green-500' : 'bg-gray-300'
+                }`}
+              />
+              <span
+                className={provider.verificationMethods.online ? 'text-gray-900' : 'text-gray-500'}
+              >
                 Online Verification
               </span>
             </div>
             <div className="flex items-center">
-              <div className={`w-3 h-3 rounded-full mr-3 ${provider.verificationMethods.manual ? 'bg-green-500' : 'bg-gray-300'}`} />
-              <span className={provider.verificationMethods.manual ? 'text-gray-900' : 'text-gray-500'}>
+              <div
+                className={`w-3 h-3 rounded-full mr-3 ${
+                  provider.verificationMethods.manual ? 'bg-green-500' : 'bg-gray-300'
+                }`}
+              />
+              <span
+                className={provider.verificationMethods.manual ? 'text-gray-900' : 'text-gray-500'}
+              >
                 Manual Verification
               </span>
             </div>
             <div className="flex items-center">
-              <div className={`w-3 h-3 rounded-full mr-3 ${provider.verificationMethods.api ? 'bg-green-500' : 'bg-gray-300'}`} />
-              <span className={provider.verificationMethods.api ? 'text-gray-900' : 'text-gray-500'}>
+              <div
+                className={`w-3 h-3 rounded-full mr-3 ${
+                  provider.verificationMethods.api ? 'bg-green-500' : 'bg-gray-300'
+                }`}
+              />
+              <span
+                className={provider.verificationMethods.api ? 'text-gray-900' : 'text-gray-500'}
+              >
                 API Access
               </span>
             </div>
@@ -212,7 +242,7 @@ const CredentialProviderDetail = () => {
                 key={index}
                 className="bg-gray-50 rounded-lg p-3 text-sm font-medium text-gray-700"
               >
-                {credential.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                {credential.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
               </div>
             ))}
           </div>
