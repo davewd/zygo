@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@zygo/ui';
-import { Baby, Edit, Pause, Play, Plus, Trash2, X } from 'lucide-react';
+import { Baby, Edit, Play, Plus, Trash2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +37,8 @@ interface FeedingSession {
   totalDuration: number; // in seconds
   entries: FeedingEntry[];
   notes?: string;
+  happinessScore?: number; // 1-10 scale
+  sorenessScore?: number; // 1-10 scale
 }
 
 interface Timer {
@@ -83,6 +85,10 @@ export default function BreastfeedingTimer() {
   const [bottleAmount, setBottleAmount] = useState<string>('');
   const [editingSession, setEditingSession] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'current' | 'previous'>('current');
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [sessionHappiness, setSessionHappiness] = useState<number>(5);
+  const [sessionSoreness, setSessionSoreness] = useState<number>(5);
+  const [sessionComment, setSessionComment] = useState<string>('');
 
   // Timer effect
   useEffect(() => {
@@ -110,20 +116,105 @@ export default function BreastfeedingTimer() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Emoji scales for rating
+  const HappinessScale = ({
+    value,
+    onChange,
+  }: {
+    value: number;
+    onChange: (value: number) => void;
+  }) => {
+    const emojis = ['😭', '😢', '😟', '😕', '😐', '🙂', '😊', '😄', '😁', '🤩'];
+    const labels = [
+      'Extremely Unhappy',
+      'Very Unhappy',
+      'Quite Unhappy',
+      'Somewhat Unhappy',
+      'Neutral',
+      'Slightly Happy',
+      'Happy',
+      'Very Happy',
+      'Extremely Happy',
+      'Ecstatic',
+    ];
+
+    return (
+      <div className="space-y-3">
+        <div className="grid grid-cols-5 gap-2 md:flex md:justify-between md:items-center">
+          {emojis.map((emoji, index) => (
+            <button
+              key={index}
+              onClick={() => onChange(index + 1)}
+              className={`text-2xl md:text-3xl p-1 md:p-2 rounded-full transition-all hover:scale-110 ${
+                value === index + 1
+                  ? 'bg-blue-100 ring-2 ring-blue-500 shadow-lg transform scale-110'
+                  : 'hover:bg-gray-100'
+              }`}
+              title={labels[index]}
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
+        <div className="text-center text-sm text-gray-600">
+          {labels[value - 1]} ({value}/10)
+        </div>
+      </div>
+    );
+  };
+
+  const SorenessScale = ({
+    value,
+    onChange,
+  }: {
+    value: number;
+    onChange: (value: number) => void;
+  }) => {
+    const emojis = ['🤮', '😖', '😣', '😔', '😕', '😐', '😌', '😊', '🤗', '🥰'];
+    const labels = [
+      'Extremely Sore',
+      'Very Sore',
+      'Quite Sore',
+      'Moderately Sore',
+      'Somewhat Sore',
+      'Neutral',
+      'Slightly Comfortable',
+      'Comfortable',
+      'Very Comfortable',
+      'Extremely Comfortable',
+    ];
+
+    return (
+      <div className="space-y-3">
+        <div className="grid grid-cols-5 gap-2 md:flex md:justify-between md:items-center">
+          {emojis.map((emoji, index) => (
+            <button
+              key={index}
+              onClick={() => onChange(index + 1)}
+              className={`text-2xl md:text-3xl p-1 md:p-2 rounded-full transition-all hover:scale-110 ${
+                value === index + 1
+                  ? 'bg-pink-100 ring-2 ring-pink-500 shadow-lg transform scale-110'
+                  : 'hover:bg-gray-100'
+              }`}
+              title={labels[index]}
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
+        <div className="text-center text-sm text-gray-600">
+          {labels[value - 1]} ({value}/10)
+        </div>
+      </div>
+    );
+  };
+
   const startTimer = (side: 'left' | 'right') => {
     const now = new Date();
     if (side === 'left') {
       setLeftTimer({ startTime: now, elapsed: 0, isRunning: true });
     } else {
       setRightTimer({ startTime: now, elapsed: 0, isRunning: true });
-    }
-  };
-
-  const pauseTimer = (side: 'left' | 'right') => {
-    if (side === 'left') {
-      setLeftTimer((prev) => ({ ...prev, isRunning: false }));
-    } else {
-      setRightTimer((prev) => ({ ...prev, isRunning: false }));
     }
   };
 
@@ -342,8 +433,24 @@ export default function BreastfeedingTimer() {
 
   const finishCurrentSession = () => {
     if (currentSession) {
-      setPreviousSessions((prev) => [currentSession, ...prev]);
+      setShowRatingModal(true);
+    }
+  };
+
+  const completeSessionWithRatings = () => {
+    if (currentSession) {
+      const updatedSession = {
+        ...currentSession,
+        happinessScore: sessionHappiness,
+        sorenessScore: sessionSoreness,
+        notes: sessionComment.trim() || undefined, // Only save if not empty
+      };
+      setPreviousSessions((prev) => [updatedSession, ...prev]);
       setCurrentSession(null);
+      setShowRatingModal(false);
+      setSessionHappiness(5);
+      setSessionSoreness(5);
+      setSessionComment('');
     }
   };
 
@@ -489,23 +596,13 @@ export default function BreastfeedingTimer() {
                       </Button>
                     ) : (
                       <Button
-                        onClick={() => pauseTimer('left')}
-                        className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white h-9 rounded-xl text-sm"
+                        onClick={() => stopTimer('left')}
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white h-9 rounded-xl text-sm"
                       >
-                        <Pause className="w-3 h-3 mr-1" />
-                        Pause
+                        <X className="w-3 h-3 mr-1" />
+                        Stop
                       </Button>
                     )}
-
-                    <Button
-                      onClick={() => stopTimer('left')}
-                      disabled={!leftTimer.startTime}
-                      variant="outline"
-                      className="flex-1 border-red-300 text-red-600 hover:bg-red-50 h-9 rounded-xl text-sm"
-                    >
-                      <X className="w-3 h-3 mr-1" />
-                      Stop
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -553,23 +650,13 @@ export default function BreastfeedingTimer() {
                       </Button>
                     ) : (
                       <Button
-                        onClick={() => pauseTimer('right')}
-                        className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white h-9 rounded-xl text-sm"
+                        onClick={() => stopTimer('right')}
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white h-9 rounded-xl text-sm"
                       >
-                        <Pause className="w-3 h-3 mr-1" />
-                        Pause
+                        <X className="w-3 h-3 mr-1" />
+                        Stop
                       </Button>
                     )}
-
-                    <Button
-                      onClick={() => stopTimer('right')}
-                      disabled={!rightTimer.startTime}
-                      variant="outline"
-                      className="flex-1 border-red-300 text-red-600 hover:bg-red-50 h-9 rounded-xl text-sm"
-                    >
-                      <X className="w-3 h-3 mr-1" />
-                      Stop
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -732,6 +819,48 @@ export default function BreastfeedingTimer() {
                             • Total: {formatTime(currentSession.totalDuration)} • Feeds:{' '}
                             {currentSession.entries.length}
                           </p>
+                          {/* Current Session Ratings (if any) */}
+                          {(currentSession.happinessScore || currentSession.sorenessScore) && (
+                            <div className="flex items-center space-x-4 mt-1">
+                              {currentSession.happinessScore && (
+                                <div className="flex items-center space-x-1">
+                                  <span className="text-xs text-blue-500">Mood:</span>
+                                  <span className="text-sm">
+                                    {
+                                      ['😭', '😢', '😟', '😕', '😐', '🙂', '😊', '😄', '😁', '🤩'][
+                                        currentSession.happinessScore - 1
+                                      ]
+                                    }
+                                  </span>
+                                  <span className="text-xs text-blue-500">
+                                    ({currentSession.happinessScore}/10)
+                                  </span>
+                                </div>
+                              )}
+                              {currentSession.sorenessScore && (
+                                <div className="flex items-center space-x-1">
+                                  <span className="text-xs text-blue-500">Comfort:</span>
+                                  <span className="text-sm">
+                                    {
+                                      ['🤮', '😖', '😣', '😔', '😕', '😐', '😌', '😊', '🤗', '🥰'][
+                                        currentSession.sorenessScore - 1
+                                      ]
+                                    }
+                                  </span>
+                                  <span className="text-xs text-blue-500">
+                                    ({currentSession.sorenessScore}/10)
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          {/* Current Session Notes */}
+                          {currentSession.notes && (
+                            <div className="mt-2 p-2 bg-blue-50 rounded text-sm">
+                              <span className="text-blue-600 font-medium text-xs">Notes: </span>
+                              <span className="text-blue-700 italic text-xs">"{currentSession.notes}"</span>
+                            </div>
+                          )}
                         </div>
                         <Button
                           onClick={deleteCurrentSession}
@@ -851,6 +980,48 @@ export default function BreastfeedingTimer() {
                           • Total: {formatTime(session.totalDuration)} • Feeds:{' '}
                           {session.entries.length}
                         </p>
+                        {/* Session Ratings */}
+                        {(session.happinessScore || session.sorenessScore) && (
+                          <div className="flex items-center space-x-4 mt-2">
+                            {session.happinessScore && (
+                              <div className="flex items-center space-x-1">
+                                <span className="text-sm text-gray-500">Mood:</span>
+                                <span className="text-lg">
+                                  {
+                                    ['😭', '😢', '😟', '😕', '😐', '🙂', '😊', '😄', '😁', '🤩'][
+                                      session.happinessScore - 1
+                                    ]
+                                  }
+                                </span>
+                                <span className="text-xs text-gray-500">
+                                  ({session.happinessScore}/10)
+                                </span>
+                              </div>
+                            )}
+                            {session.sorenessScore && (
+                              <div className="flex items-center space-x-1">
+                                <span className="text-sm text-gray-500">Comfort:</span>
+                                <span className="text-lg">
+                                  {
+                                    ['🤮', '😖', '😣', '😔', '😕', '😐', '😌', '😊', '🤗', '🥰'][
+                                      session.sorenessScore - 1
+                                    ]
+                                  }
+                                </span>
+                                <span className="text-xs text-gray-500">
+                                  ({session.sorenessScore}/10)
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        {/* Session Notes */}
+                        {session.notes && (
+                          <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
+                            <span className="text-gray-500 font-medium">Notes: </span>
+                            <span className="text-gray-700 italic">"{session.notes}"</span>
+                          </div>
+                        )}
                       </div>
                       <div className="flex items-center space-x-2">
                         <Button
@@ -909,6 +1080,72 @@ export default function BreastfeedingTimer() {
             )}
           </CardContent>
         </Card>
+
+        {/* Rating Modal */}
+        {showRatingModal && (
+          <div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowRatingModal(false);
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setShowRatingModal(false);
+              }
+            }}
+            tabIndex={-1}
+          >
+            <Card className="bg-white max-w-lg w-full">
+              <CardHeader className="text-center">
+                <CardTitle className="text-xl font-bold text-gray-800">Rate Your Session</CardTitle>
+                <p className="text-gray-600">How was this feeding session for you?</p>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-3">How happy do you feel?</h4>
+                  <HappinessScale value={sessionHappiness} onChange={setSessionHappiness} />
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-3">How sore do you feel?</h4>
+                  <SorenessScale value={sessionSoreness} onChange={setSessionSoreness} />
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-3">Additional notes (optional)</h4>
+                  <textarea
+                    value={sessionComment}
+                    onChange={(e) => setSessionComment(e.target.value)}
+                    placeholder="E.g. one side hurt more than the other? Latching good?"
+                    className="w-full h-20 px-3 py-2 border border-gray-300 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    maxLength={200}
+                  />
+                  <div className="text-xs text-gray-500 mt-1 text-right">
+                    {sessionComment.length}/200
+                  </div>
+                </div>
+
+                <div className="flex space-x-3 pt-4">
+                  <Button
+                    onClick={() => setShowRatingModal(false)}
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={completeSessionWithRatings}
+                    className="flex-1 bg-pink-600 hover:bg-pink-700 text-white"
+                  >
+                    Complete Session
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
