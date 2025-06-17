@@ -2,7 +2,7 @@ import { Baby, Clock, ExternalLink } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
-import { FeedItemActions, FeedItemHeader } from '../shared';
+import { DismissReminderButton, FeedItemHeader } from '../shared';
 
 interface FeedListItemBreastfeedingReminderProps {
   item: FeedItemTypeMap;
@@ -13,20 +13,14 @@ export const FeedListItemBreastfeedingReminder: React.FC<
 > = ({ item }) => {
   const breastfeedingHeader = (
     <div>
-      <FeedItemHeader item={item} />
-
-      {/* Reminder Header with Icon */}
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-3 mt-2">
+      <FeedItemHeader item={item}>
         <div className="flex items-center space-x-2 mb-2">
           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
             <Clock className="w-3 h-3 text-white" />
           </div>
-          <span className="text-amber-700 font-semibold text-xs">FEEDING REMINDER</span>
+          <span className="text-amber-700 font-semibold text-xs">REMINDER</span>
         </div>
-
-        {item.title && <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>}
-        {item.post && <p className="text-gray-700 text-sm leading-relaxed">{item.post}</p>}
-      </div>
+      </FeedItemHeader>
     </div>
   );
 
@@ -48,7 +42,7 @@ export const FeedListItemBreastfeedingReminder: React.FC<
           <div className="flex-1">
             <h4 className="text-lg font-semibold text-gray-900 mb-2">Time for a feed?</h4>
             <p className="text-gray-600 text-sm mb-3">
-              Use the breastfeeding app now if you want to track your next session.
+              {item.post && <p className="text-gray-700 text-sm leading-relaxed">{item.post}</p>}
             </p>
 
             <Link to="/tools/postnatal/breastfeeding-timer">
@@ -64,14 +58,12 @@ export const FeedListItemBreastfeedingReminder: React.FC<
         {/* Quick Stats or Tips */}
         <div className="mt-4 pt-3 border-t border-gray-100">
           <div className="flex justify-between items-center text-xs text-gray-500">
-            <span>💡 Tip: Track for better insights</span>
-            <span>🤱 Keep up the great work!</span>
+            <span>💡 Tip: Regular tracking can help prevent Mastitus</span>
           </div>
         </div>
       </div>
-
-      {/* Actions - Compact */}
-      <FeedItemActions item={item} />
+      {/* Dismiss Reminder Button */}
+      <DismissReminderButton item={item} className="mt-2" />
     </div>
   );
 };

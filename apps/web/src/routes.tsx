@@ -21,6 +21,7 @@ import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
 import Tools from './pages/tools/index';
+import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
 
 export const routes = createBrowserRouter([
   {
@@ -74,6 +75,7 @@ export const routes = createBrowserRouter([
       },
 
       { path: '/tools', element: <Tools />, errorElement: <Error /> },
+      { path: '/tools/postnatal/breastfeeding-timer', element: <BreastfeedingTimer />, errorElement: <Error /> },
       { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
     ],
     errorElement: <Error />,
