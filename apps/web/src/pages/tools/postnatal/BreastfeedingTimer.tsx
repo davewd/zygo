@@ -858,7 +858,9 @@ export default function BreastfeedingTimer() {
                           {currentSession.notes && (
                             <div className="mt-2 p-2 bg-blue-50 rounded text-sm">
                               <span className="text-blue-600 font-medium text-xs">Notes: </span>
-                              <span className="text-blue-700 italic text-xs">"{currentSession.notes}"</span>
+                              <span className="text-blue-700 italic text-xs">
+                                "{currentSession.notes}"
+                              </span>
                             </div>
                           )}
                         </div>
