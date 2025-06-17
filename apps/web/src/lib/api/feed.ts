@@ -105,6 +105,15 @@ export interface FeedItemTypeMap {
     ctaUrl: string;
     sponsorshipType?: 'promoted' | 'sponsored' | 'ad';
   };
+  // Event specific data
+  eventData?: {
+    date: string;
+    time: string;
+    location: string;
+    attendees: number;
+    schoolLogo?: string;
+    schoolName?: string;
+  };
 }
 
 // Simulate API endpoints
@@ -124,6 +133,38 @@ export interface FeedParams {
 // Mock data - in a real app, this would come from your backend
 const mockData = {
   results: [
+    {
+      id: 10,
+      title: "Child's Assembly Award Ceremony",
+      metadata: {
+        createdAt: "2024-12-15T09:00:00Z"
+      },
+      author: {
+        name: "Family Calendar",
+        handle: "family_events",
+        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      },
+      type: FeedItemType.EVENT,
+      post: "Attend Child's assembly to watch @Lily get an award",
+      stats: {
+        likes: 0,
+        shares: 0,
+        comments: 0,
+        reposts: 0
+      },
+      privacy: {
+        visibility: VisibilityLevel.PRIVATE,
+        sharedWith: []
+      },
+      eventData: {
+        date: "2024-12-20",
+        time: "10:00 AM",
+        location: "Main Assembly Hall",
+        attendees: 1,
+        schoolLogo: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=64&h=64&fit=crop&crop=center",
+        schoolName: "Bronte Public School"
+      }
+    },
     {
       id: 9,
       title: "Feeding Reminder",
@@ -496,6 +537,8 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
     breastfeedingWeeklySummary: item.breastfeedingWeeklySummary,
     // Preserve sponsored-specific data
     sponsoredData: item.sponsoredData,
+    // Preserve event-specific data
+    eventData: item.eventData,
   }));
   
   // Simulate pagination

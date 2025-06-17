@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedListItemEvent } from './generic/FeedListItemEvent';
 import { FeedListItemImage } from './generic/FeedListItemImage';
 import { FeedListItemLink } from './generic/FeedListItemLink';
 import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
@@ -40,6 +41,8 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ item, className }) => {
         return <FeedListItemBreastfeedingReminder item={item} />;
       case FeedItemType.SPONSORED:
         return <FeedListItemSponsored item={item} />;
+      case FeedItemType.EVENT:
+        return <FeedListItemEvent item={item} />;
       case FeedItemType.VIDEO:
         return <FeedListItemPost item={item} />; // Fallback to post for now
       case FeedItemType.POLL:
