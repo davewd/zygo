@@ -2,12 +2,14 @@ import {
   Background,
   ConnectionMode,
   Controls,
+  MarkerType,
   MiniMap,
   Panel,
   ReactFlow,
   ReactFlowProvider,
   useEdgesState,
   useNodesState,
+  useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { Button } from '@zygo/ui';
@@ -20,12 +22,22 @@ import {
   Circle,
   Clock,
   Filter,
+  Focus,
   Trophy,
   Users,
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  generateAgeRanges,
+  loadMilestonesFromCSV,
+  type AgeRange,
+  type MilestoneData,
+} from '../../lib/api/milestones';
+
+// Temporary wrapper to fix TypeScript issues
+const SafeButton = Button as any;
 
 // For now, define types locally until the @zygo/types package is properly exported
 interface PedagogyProfile {
@@ -67,6 +79,10 @@ interface TimelineEdge {
   type?: string;
   style?: Record<string, any>;
   label?: string;
+  markerEnd?: {
+    type: any;
+    color?: string;
+  };
 }
 
 interface TimelineZoomLevel {
@@ -285,28 +301,320 @@ interface TimelinePedagogyProps {
 }
 
 const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNodeClick }) => {
-  // Zoom levels configuration
+  // State for CSV-based milestones
+  const [csvMilestones, setCsvMilestones] = useState<MilestoneData[]>([]);
+  const [ageRanges, setAgeRanges] = useState<AgeRange[]>([]);
+  const [milestonesLoading, setMilestonesLoading] = useState(true);
+  const [milestonesError, setMilestonesError] = useState<string | null>(null);
+
+  // Load milestone data from CSV on component mount
+  useEffect(() => {
+    const loadMilestoneData = async () => {
+      try {
+        setMilestonesLoading(true);
+        setMilestonesError(null);
+
+        // Load milestones from CSV and age ranges
+        const [milestones, ranges] = await Promise.all([
+          loadMilestonesFromCSV(),
+          Promise.resolve(generateAgeRanges()),
+        ]);
+
+        setCsvMilestones(milestones);
+        setAgeRanges(ranges);
+      } catch (error) {
+        console.error('Error loading milestone data:', error);
+        setMilestonesError(
+          error instanceof Error ? error.message : 'Failed to load milestone data'
+        );
+
+        // Use fallback age ranges if CSV fails
+        setAgeRanges(generateAgeRanges());
+      } finally {
+        setMilestonesLoading(false);
+      }
+    };
+
+    loadMilestoneData();
+  }, []);
+
+  // Comprehensive milestone generation for every 6-month period
+  const generateComprehensiveMilestones = () => {
+    const milestones = [];
+    const ageRanges = generateAgeRanges();
+
+    // Milestone templates by category and age range
+    const milestoneTemplates = {
+      // Prenatal milestones
+      prenatal: {
+        physical: [
+          'Neural tube formation',
+          'Heart development begins',
+          'Limb bud formation',
+          'Organ system development',
+          'Fetal movement begins',
+          'Rapid brain growth',
+        ],
+        cognitive: [
+          'Basic neural connections',
+          'Sensory system development',
+          'Early brain wave activity',
+          'Memory pathway formation',
+          'Sleep-wake cycles develop',
+          'Response to external stimuli',
+        ],
+        social_emotional: [
+          'Maternal bonding begins',
+          'Stress response system',
+          'Emotional regulation foundation',
+          'Attachment preparation',
+          'Recognition of maternal voice',
+          'Emotional circuitry development',
+        ],
+        language: [
+          'Auditory system formation',
+          'Sound processing development',
+          'Vocal cord formation',
+          'Language area brain development',
+          'Maternal voice recognition',
+          'Sound discrimination ability',
+        ],
+      },
+      // Infancy milestones (0-24 months)
+      infancy: {
+        physical: [
+          'Head control',
+          'Rolling over',
+          'Sitting without support',
+          'Crawling/creeping',
+          'Standing with support',
+          'Walking independently',
+          'Running and jumping',
+          'Climbing up stairs',
+        ],
+        cognitive: [
+          'Tracking objects with eyes',
+          'Object permanence',
+          'Cause and effect understanding',
+          'Simple problem solving',
+          'Imitation of actions',
+          'Symbolic thinking begins',
+          'Memory development',
+          'Attention span increases',
+        ],
+        social_emotional: [
+          'Social smiling',
+          'Stranger anxiety',
+          'Separation anxiety',
+          'Attachment formation',
+          'Emotional expression',
+          'Empathy development',
+          'Self-awareness begins',
+          'Peer interest',
+        ],
+        language: [
+          'Cooing and babbling',
+          'First words',
+          'Vocabulary growth',
+          'Two-word combinations',
+          'Understanding simple commands',
+          'Gesture communication',
+          'Story comprehension',
+          'Question asking begins',
+        ],
+      },
+      // Early childhood milestones (2-5 years)
+      earlyChildhood: {
+        physical: [
+          'Pedaling tricycle',
+          'Throwing and catching',
+          'Balance beam walking',
+          'Fine motor precision',
+          'Drawing shapes',
+          'Cutting with scissors',
+          'Dressing independently',
+          'Coordinated movements',
+        ],
+        cognitive: [
+          'Pretend play',
+          'Classification skills',
+          'Number recognition',
+          'Letter recognition',
+          'Problem-solving strategies',
+          'Memory games',
+          'Logical thinking',
+          'Abstract concepts',
+        ],
+        social_emotional: [
+          'Parallel play',
+          'Cooperative play',
+          'Emotional regulation',
+          'Friendship formation',
+          'Rule following',
+          'Conflict resolution',
+          'Self-control',
+          'Emotional intelligence',
+        ],
+        language: [
+          'Complex sentences',
+          'Story telling',
+          'Conversation skills',
+          'Reading readiness',
+          'Phonemic awareness',
+          'Vocabulary expansion',
+          'Grammar mastery',
+          'Narrative skills',
+        ],
+      },
+      // School age milestones (5-12 years)
+      schoolAge: {
+        physical: [
+          'Sports participation',
+          'Complex motor skills',
+          'Physical endurance',
+          'Coordination mastery',
+          'Team sports',
+          'Fine motor precision',
+          'Physical fitness',
+          'Body awareness',
+        ],
+        cognitive: [
+          'Academic skills',
+          'Critical thinking',
+          'Study strategies',
+          'Mathematical reasoning',
+          'Scientific thinking',
+          'Research skills',
+          'Complex problem solving',
+          'Abstract reasoning',
+        ],
+        social_emotional: [
+          'Peer relationships',
+          'Group dynamics',
+          'Leadership skills',
+          'Moral reasoning',
+          'Self-concept',
+          'Achievement motivation',
+          'Social skills',
+          'Emotional maturity',
+        ],
+        language: [
+          'Advanced vocabulary',
+          'Writing skills',
+          'Reading fluency',
+          'Communication skills',
+          'Language arts',
+          'Multiple languages',
+          'Public speaking',
+          'Literary appreciation',
+        ],
+      },
+      // Adolescence milestones (12-18 years)
+      adolescence: {
+        physical: [
+          'Puberty completion',
+          'Adult body proportions',
+          'Physical maturity',
+          'Athletic peak',
+          'Body image acceptance',
+          'Health awareness',
+          'Physical independence',
+          'Adult coordination',
+        ],
+        cognitive: [
+          'Abstract thinking',
+          'Future planning',
+          'Identity formation',
+          'Career exploration',
+          'Independent learning',
+          'Complex reasoning',
+          'Decision making',
+          'Life skills mastery',
+        ],
+        social_emotional: [
+          'Identity development',
+          'Intimate relationships',
+          'Value system',
+          'Independence',
+          'Social responsibility',
+          'Emotional maturity',
+          'Peer influence balance',
+          'Adult relationships',
+        ],
+        language: [
+          'Advanced communication',
+          'Professional language',
+          'Academic writing',
+          'Debate skills',
+          'Multiple registers',
+          'Cultural communication',
+          'Technology communication',
+          'Lifelong learning',
+        ],
+      },
+    };
+
+    // Generate milestones for each age range and category
+    ageRanges.forEach((ageRange, rangeIndex) => {
+      const { months, key } = ageRange;
+      const [startMonth, endMonth] = months;
+
+      // Determine age period
+      let period = 'infancy';
+      if (startMonth < 0) period = 'prenatal';
+      else if (startMonth >= 24 && startMonth < 60) period = 'earlyChildhood';
+      else if (startMonth >= 60 && startMonth < 144) period = 'schoolAge';
+      else if (startMonth >= 144) period = 'adolescence';
+
+      // Generate milestones for each category
+      DEVELOPMENT_CATEGORIES.forEach((category) => {
+        const templates = milestoneTemplates[period]?.[category] || [];
+        const milestoneIndex = rangeIndex % templates.length;
+
+        if (templates[milestoneIndex]) {
+          milestones.push({
+            id: `milestone-${key}-${category}-${milestoneIndex}`,
+            title: templates[milestoneIndex],
+            description: `${templates[milestoneIndex]} development milestone for ${ageRange.range}`,
+            category: category,
+            ageRange: ageRange.range,
+            ageRangeKey: key,
+            months: months,
+            period: period,
+            isTypical: true,
+            importance: 'high',
+            createdDate: new Date().toISOString(),
+            modifiedDate: new Date().toISOString(),
+          });
+        }
+      });
+    });
+
+    return milestones;
+  };
+
+  // Enhanced zoom levels with comprehensive coverage
   const zoomLevels: TimelineZoomLevel[] = [
     {
       level: 0,
       name: 'Overview',
-      description: 'Age groups and major developmental periods (Vertical Flow)',
-      nodeTypes: ['ageGroup'],
-      timeSpan: { minAgeMonths: 0, maxAgeMonths: 216 }, // 0-18 years
+      description: 'Complete timeline overview from prenatal to 18 years',
+      nodeTypes: ['ageGroup', 'category'],
+      timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // -12 months to 18 years
     },
     {
       level: 1,
-      name: 'Categories',
-      description: 'Development categories within age groups (1:2 relationships)',
-      nodeTypes: ['ageGroup', 'category'],
-      timeSpan: { minAgeMonths: 0, maxAgeMonths: 60 }, // 0-5 years focus
+      name: 'Age Group Focus',
+      description: 'Focused view on specific age group and its categories',
+      nodeTypes: ['ageGroup', 'category', 'milestone'],
+      timeSpan: { minAgeMonths: -12, maxAgeMonths: 60 }, // Prenatal to 5 years focus
     },
     {
       level: 2,
-      name: 'Milestones',
-      description: 'Individual milestones and detailed tracking (1:1 relationships)',
+      name: 'Milestone Deep Dive',
+      description: 'Detailed view of individual milestones and progress',
       nodeTypes: ['category', 'milestone'],
-      timeSpan: { minAgeMonths: 0, maxAgeMonths: 36 }, // 0-3 years focus
+      timeSpan: { minAgeMonths: -12, maxAgeMonths: 36 }, // Prenatal to 3 years focus
     },
   ];
 
@@ -314,49 +622,334 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
   const [selectedCategories, setSelectedCategories] = useState<DevelopmentCategory[]>([]);
   const [selectedFamilyMembers, setSelectedFamilyMembers] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [focusNodeId, setFocusNodeId] = useState<string | null>(null);
+  const [focusArea, setFocusArea] = useState<string | null>(null);
+  const [allAgeRanges] = useState(() => generateAgeRanges());
+  const [comprehensiveMilestones] = useState(() => generateComprehensiveMilestones());
 
-  // Generate nodes and edges with vertical layout and proper parent-child relationships
+  // Enhanced layout algorithm with collision detection and proper spacing
+  const calculateNodePositions = useCallback(
+    (nodeData: any[], edgeData: any[], zoomLevel: number, focusArea?: string) => {
+      const positions = new Map<string, { x: number; y: number }>();
+      const nodeWidths = new Map<string, number>();
+      const nodeHeights = new Map<string, number>();
+
+      // Define node dimensions based on type and zoom level
+      const getNodeDimensions = (nodeType: string) => {
+        const baseScale = zoomLevel === 0 ? 1.2 : zoomLevel === 1 ? 1.0 : 0.8;
+        switch (nodeType) {
+          case 'ageGroup':
+            return { width: 400 * baseScale, height: 200 * baseScale };
+          case 'category':
+            return { width: 340 * baseScale, height: 180 * baseScale };
+          case 'milestone':
+            return { width: 300 * baseScale, height: 160 * baseScale };
+          default:
+            return { width: 200 * baseScale, height: 120 * baseScale };
+        }
+      };
+
+      // Store dimensions
+      nodeData.forEach((node) => {
+        const dims = getNodeDimensions(node.type);
+        nodeWidths.set(node.id, dims.width);
+        nodeHeights.set(node.id, dims.height);
+      });
+
+      // Dynamic spacing based on zoom level and focus area
+      const getLayoutParams = () => {
+        if (zoomLevel === 0) {
+          return {
+            centerX: 600,
+            verticalSpacing: 350,
+            horizontalSpacing: 500,
+            padding: 100,
+          };
+        } else if (zoomLevel === 1) {
+          return {
+            centerX: 500,
+            verticalSpacing: 280,
+            horizontalSpacing: 400,
+            padding: 80,
+          };
+        } else {
+          return {
+            centerX: 400,
+            verticalSpacing: 220,
+            horizontalSpacing: 320,
+            padding: 60,
+          };
+        }
+      };
+
+      const { centerX, verticalSpacing, horizontalSpacing, padding } = getLayoutParams();
+
+      // Group nodes by type and hierarchy
+      const nodesByType = nodeData.reduce((acc, node) => {
+        if (!acc[node.type]) acc[node.type] = [];
+        acc[node.type].push(node);
+        return acc;
+      }, {} as Record<string, any[]>);
+
+      // Collision detection helper
+      const checkCollision = (
+        pos1: { x: number; y: number },
+        size1: { width: number; height: number },
+        pos2: { x: number; y: number },
+        size2: { width: number; height: number }
+      ) => {
+        return !(
+          pos1.x + size1.width / 2 < pos2.x - size2.width / 2 ||
+          pos2.x + size2.width / 2 < pos1.x - size1.width / 2 ||
+          pos1.y + size1.height / 2 < pos2.y - size2.height / 2 ||
+          pos2.y + size2.height / 2 < pos1.y - size1.height / 2
+        );
+      };
+
+      const findNonCollidingPosition = (
+        startPos: { x: number; y: number },
+        nodeId: string,
+        attempts = 0
+      ) => {
+        if (attempts > 50) return startPos; // Prevent infinite loops
+
+        const nodeSize = {
+          width: nodeWidths.get(nodeId) || 200,
+          height: nodeHeights.get(nodeId) || 120,
+        };
+
+        // Check for collisions with existing positioned nodes
+        for (const [existingId, existingPos] of positions.entries()) {
+          if (existingId === nodeId) continue;
+
+          const existingSize = {
+            width: nodeWidths.get(existingId) || 200,
+            height: nodeHeights.get(existingId) || 120,
+          };
+
+          if (checkCollision(startPos, nodeSize, existingPos, existingSize)) {
+            // Enhanced collision resolution for social_emotional and other important categories
+            const isSocialEmotional = nodeId.includes('social_emotional');
+            const adjustmentMultiplier = isSocialEmotional ? 1.5 : 1.0; // Give social_emotional more space
+
+            const newPos = {
+              x: startPos.x + (Math.random() - 0.5) * 120 * adjustmentMultiplier,
+              y: startPos.y + (50 + attempts * 25) * adjustmentMultiplier,
+            };
+            return findNonCollidingPosition(newPos, nodeId, attempts + 1);
+          }
+        }
+
+        return startPos;
+      };
+
+      // Position age groups vertically down the center
+      if (nodesByType.ageGroup) {
+        nodesByType.ageGroup.forEach((node, index) => {
+          const initialPos = {
+            x: centerX,
+            y: padding + index * (verticalSpacing + 100),
+          };
+          positions.set(node.id, findNonCollidingPosition(initialPos, node.id));
+        });
+      }
+
+      // Position categories around age groups with improved category-specific branching
+      if (nodesByType.category) {
+        const ageGroups = nodesByType.ageGroup || [];
+
+        // Group categories by age group for better positioning
+        const categoriesByAgeGroup = new Map<string, any[]>();
+
+        nodesByType.category.forEach((node) => {
+          // Extract age group from node ID (format: category-{ageGroup}-{category})
+          const ageGroupMatch = node.id.match(/category-([^-]+)-/);
+          const ageGroup = ageGroupMatch ? ageGroupMatch[1] : 'unknown';
+
+          if (!categoriesByAgeGroup.has(ageGroup)) {
+            categoriesByAgeGroup.set(ageGroup, []);
+          }
+          categoriesByAgeGroup.get(ageGroup)?.push(node);
+        });
+
+        // Position categories with category-specific logic
+        categoriesByAgeGroup.forEach((categories, ageGroupKey) => {
+          const ageGroup = ageGroups.find((ag) => ag.id === `ageGroup-${ageGroupKey}`);
+          if (!ageGroup) return;
+
+          const ageGroupPos = positions.get(ageGroup.id);
+          if (!ageGroupPos) return;
+
+          // Sort categories to ensure consistent positioning
+          const sortedCategories = categories.sort((a, b) => {
+            // Extract category type from node data
+            const categoryA = a.data?.category || '';
+            const categoryB = b.data?.category || '';
+
+            // Priority order for consistent positioning
+            const priorityOrder = {
+              physical: 0,
+              cognitive: 1,
+              social_emotional: 2,
+              language: 3,
+              motor_skills: 4,
+              sensory: 5,
+              self_care: 6,
+              academic: 7,
+            };
+
+            return (priorityOrder[categoryA] || 99) - (priorityOrder[categoryB] || 99);
+          });
+
+          sortedCategories.forEach((node, index) => {
+            const categoryType = node.data?.category || '';
+            let offsetX, offsetY;
+
+            // Category-specific positioning with improved social_emotional placement
+            switch (categoryType) {
+              case 'physical':
+                offsetX = -horizontalSpacing * 1.1;
+                offsetY = -80;
+                break;
+              case 'cognitive':
+                offsetX = horizontalSpacing * 1.1;
+                offsetY = -80;
+                break;
+              case 'social_emotional':
+                // Fix: Position social_emotional prominently to the left-center
+                offsetX = -horizontalSpacing * 0.6;
+                offsetY = 120;
+                break;
+              case 'language':
+                offsetX = horizontalSpacing * 0.6;
+                offsetY = 120;
+                break;
+              case 'motor_skills':
+                offsetX = -horizontalSpacing * 1.3;
+                offsetY = 40;
+                break;
+              case 'sensory':
+                offsetX = horizontalSpacing * 1.3;
+                offsetY = 40;
+                break;
+              case 'self_care':
+                offsetX = 0;
+                offsetY = 200;
+                break;
+              case 'academic':
+                offsetX = 0;
+                offsetY = -150;
+                break;
+              default:
+                // Fallback pattern for any additional categories
+                const fallbackIndex = index % 4;
+                const angle = (fallbackIndex / 4) * Math.PI * 2;
+                offsetX = Math.cos(angle) * horizontalSpacing;
+                offsetY = Math.sin(angle) * verticalSpacing * 0.3;
+            }
+
+            const initialPos = {
+              x: ageGroupPos.x + offsetX,
+              y: ageGroupPos.y + offsetY,
+            };
+            positions.set(node.id, findNonCollidingPosition(initialPos, node.id));
+          });
+        });
+      }
+
+      // Position milestones around categories with hierarchical layout
+      if (nodesByType.milestone) {
+        const categories = nodesByType.category || [];
+
+        categories.forEach((category, catIndex) => {
+          const categoryPos = positions.get(category.id);
+          if (!categoryPos) return;
+
+          // Get milestones for this category
+          const categoryMilestones = nodesByType.milestone.filter((m) =>
+            edgeData.some((edge) => edge.source === category.id && edge.target === m.id)
+          );
+
+          categoryMilestones.forEach((milestone, mIndex) => {
+            // Create a circular/fan pattern around the category
+            const angle = (mIndex / categoryMilestones.length) * Math.PI * 2;
+            const radius = 250;
+            const offsetX = Math.cos(angle) * radius;
+            const offsetY = Math.sin(angle) * radius;
+
+            const initialPos = {
+              x: categoryPos.x + offsetX,
+              y: categoryPos.y + offsetY + 200, // Offset down from category
+            };
+            positions.set(milestone.id, findNonCollidingPosition(initialPos, milestone.id));
+          });
+        });
+      }
+
+      return { positions, nodeWidths, nodeHeights };
+    },
+    []
+  );
+
+  // Enhanced nodes and edges generation with better layout and directional flow
   const { nodes, edges } = useMemo(() => {
     if (!pedagogyData) {
-      // Default demo nodes in vertical layout
+      // Enhanced demo nodes with better positioning
+      const demoNodesData = [
+        { id: 'demo-overview', type: 'ageGroup' },
+        { id: 'demo-physical', type: 'category' },
+        { id: 'demo-cognitive', type: 'category' },
+      ];
+      const demoEdgesData = [
+        { id: 'demo-edge-1', source: 'demo-overview', target: 'demo-physical' },
+        { id: 'demo-edge-2', source: 'demo-overview', target: 'demo-cognitive' },
+      ];
+
+      const { positions } = calculateNodePositions(
+        demoNodesData,
+        demoEdgesData,
+        currentZoomLevel,
+        focusArea
+      );
+
       const demoNodes: TimelineNode[] = [
         {
           id: 'demo-overview',
           type: 'ageGroup',
           data: {
             title: 'Early Childhood (0-2 years)',
-            description: 'Critical foundational period',
+            description: 'Critical foundational period for development',
             totalMilestones: 25,
             completedMilestones: 8,
             inProgressMilestones: 5,
           },
-          position: { x: 300, y: 100 },
+          position: positions.get('demo-overview') || { x: 600, y: 100 },
         },
         {
           id: 'demo-physical',
           type: 'category',
           data: {
             title: 'Physical Development',
-            description: 'Gross and fine motor skills',
+            description: 'Gross and fine motor skills development',
             category: 'physical' as DevelopmentCategory,
             completionPercentage: 65,
             milestoneCount: 8,
             isExpanded: false,
           },
-          position: { x: 100, y: 400 },
+          position: positions.get('demo-physical') || { x: 200, y: 400 },
         },
         {
           id: 'demo-cognitive',
           type: 'category',
           data: {
             title: 'Cognitive Development',
-            description: 'Learning and problem-solving',
+            description: 'Learning, memory, and problem-solving skills',
             category: 'cognitive' as DevelopmentCategory,
             completionPercentage: 40,
             milestoneCount: 10,
             isExpanded: false,
           },
-          position: { x: 500, y: 400 },
+          position: positions.get('demo-cognitive') || { x: 1000, y: 400 },
         },
       ];
 
@@ -367,14 +960,17 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
           target: 'demo-physical',
           type: 'smoothstep',
           style: { stroke: '#10b981', strokeWidth: 3 },
-          label: '1:2 Split',
+          label: 'Develops into',
+          markerEnd: { type: MarkerType.ArrowClosed, color: '#10b981' },
         },
         {
           id: 'demo-edge-2',
           source: 'demo-overview',
           target: 'demo-cognitive',
           type: 'smoothstep',
-          style: { stroke: '#10b981', strokeWidth: 3 },
+          style: { stroke: '#3b82f6', strokeWidth: 3 },
+          label: 'Grows into',
+          markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' },
         },
       ];
 
@@ -385,182 +981,255 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     const generatedNodes: TimelineNode[] = [];
     const generatedEdges: TimelineEdge[] = [];
 
-    // Vertical timeline configuration
-    const baseX = 300; // Center column for main timeline
-    const ySpacing = 400; // Vertical spacing between main nodes
-    const lateralOffset = 250; // Horizontal offset for child nodes
-    const childSpacing = 200; // Spacing between child nodes
+    // Filter nodes based on zoom level and focus area
+    const shouldIncludeNode = (nodeType: string, nodeData?: any) => {
+      if (!currentLevel.nodeTypes.includes(nodeType as any)) return false;
+      if (focusArea && nodeData && !nodeData.id?.includes(focusArea)) return false;
+      return true;
+    };
 
-    if (currentLevel.nodeTypes.includes('ageGroup')) {
-      // Generate age group nodes vertically down the center
-      const ageGroups = ['0-6 months', '6-12 months', '12-24 months', '2-3 years', '3-5 years'];
+    // Generate age groups with enhanced data using comprehensive ranges
+    if (shouldIncludeNode('ageGroup')) {
+      // Use comprehensive age ranges instead of hardcoded ranges
+      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length)); // Show first 12 ranges for better visualization
+
       ageGroups.forEach((ageGroup, index) => {
-        const ageGroupId = `ageGroup-${index}`;
+        const ageGroupId = `ageGroup-${ageGroup.key}`;
+        const milestoneCountForRange = comprehensiveMilestones.filter(
+          (m) => m.ageRangeKey === ageGroup.key
+        ).length;
+
         generatedNodes.push({
           id: ageGroupId,
           type: 'ageGroup',
           data: {
-            title: ageGroup,
-            description: `Key developmental milestones for ${ageGroup}`,
-            ageRange: ageGroup as any,
-            totalMilestones: 15 + Math.floor(Math.random() * 20),
-            completedMilestones: Math.floor(Math.random() * 10),
-            inProgressMilestones: Math.floor(Math.random() * 5),
+            title: ageGroup.range,
+            description: ageGroup.description,
+            ageRange: ageGroup.range,
+            totalMilestones: milestoneCountForRange,
+            completedMilestones: Math.floor(milestoneCountForRange * 0.3),
+            inProgressMilestones: Math.floor(milestoneCountForRange * 0.2),
+            months: ageGroup.months,
+            key: ageGroup.key,
           },
-          position: { x: baseX, y: 100 + index * ySpacing },
+          position: { x: 0, y: 0 }, // Will be calculated
         });
 
-        // Connect to previous age group to show timeline flow
+        // Connect age groups with timeline flow
         if (index > 0) {
           generatedEdges.push({
-            id: `edge-timeline-${index - 1}-${index}`,
-            source: `ageGroup-${index - 1}`,
+            id: `timeline-flow-${index}`,
+            source: `ageGroup-${ageGroups[index - 1].key}`,
             target: ageGroupId,
-            type: 'straight',
-            style: { stroke: '#6b7280', strokeWidth: 4, strokeDasharray: '10,5' },
-            label: 'Timeline Flow',
+            type: 'smoothstep',
+            style: {
+              stroke: '#6b7280',
+              strokeWidth: 4,
+              strokeDasharray: '15,10',
+            },
+            label: 'Timeline Progression',
+            markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
           });
         }
       });
     }
 
-    if (currentLevel.nodeTypes.includes('category')) {
-      // For each age group, create category nodes with 1:2 relationships
-      const ageGroups = ['0-6 months', '6-12 months', '12-24 months', '2-3 years', '3-5 years'];
+    // Generate categories with better relationships using comprehensive ranges
+    if (shouldIncludeNode('category')) {
+      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length)); // Match age group generation
+      const categoryColors = {
+        physical: '#ef4444',
+        cognitive: '#3b82f6',
+        social_emotional: '#10b981',
+        language: '#8b5cf6',
+        motor_skills: '#f97316',
+        sensory: '#eab308',
+        self_care: '#ec4899',
+        academic: '#6366f1',
+      };
 
       ageGroups.forEach((ageGroup, ageIndex) => {
-        const ageGroupId = `ageGroup-${ageIndex}`;
-        const ageGroupY = 100 + ageIndex * ySpacing;
+        const ageGroupId = `ageGroup-${ageGroup.key}`;
 
-        // Filter categories that have milestones for this age group
+        // Filter categories based on selections and relevance to age range
         const relevantCategories = DEVELOPMENT_CATEGORIES.filter((category) => {
           if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
             return false;
           }
-          return true; // Simplified - would filter by actual milestone data
-        }).slice(0, 2); // Limit to 2 categories per age group for 1:2 relationship
+          // Filter categories by age appropriateness
+          const [startMonth] = ageGroup.months;
+          if (
+            startMonth < 0 &&
+            !['physical', 'cognitive', 'social_emotional', 'language'].includes(category)
+          ) {
+            return false; // Prenatal only has basic categories
+          }
+          return true;
+        });
 
         relevantCategories.forEach((category, catIndex) => {
-          const categoryId = `category-${ageIndex}-${category}`;
-          const isLeft = catIndex === 0;
+          const categoryId = `category-${ageGroup.key}-${category}`;
+          const categoryMilestones = comprehensiveMilestones.filter(
+            (m) => m.ageRangeKey === ageGroup.key && m.category === category
+          );
 
           generatedNodes.push({
             id: categoryId,
             type: 'category',
             data: {
               title: category.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
-              description: `${category} development for ${ageGroup}`,
+              description: `${category.replace('_', ' ')} development during ${ageGroup.range}`,
               category: category,
-              completionPercentage: Math.random() * 100,
-              milestoneCount: 5 + Math.floor(Math.random() * 10),
+              completionPercentage: Math.floor(Math.random() * 100),
+              milestoneCount: categoryMilestones.length,
               isExpanded: false,
+              ageGroup: ageGroup.key,
+              ageRange: ageGroup.range,
+              months: ageGroup.months,
             },
-            position: {
-              x: baseX + (isLeft ? -lateralOffset : lateralOffset),
-              y: ageGroupY + 50 + catIndex * 100,
-            },
+            position: { x: 0, y: 0 }, // Will be calculated
           });
 
-          // Create 1:2 parent-child relationship
+          // Create enhanced directional edges from age group to categories
           generatedEdges.push({
-            id: `edge-age-cat-${ageIndex}-${category}`,
+            id: `age-to-cat-${ageGroup.key}-${category}`,
             source: ageGroupId,
             target: categoryId,
             type: 'smoothstep',
-            style: { stroke: '#10b981', strokeWidth: 2 },
-            label: catIndex === 0 ? '1:2 Split' : undefined,
+            style: {
+              stroke: categoryColors[category] || '#6b7280',
+              strokeWidth: 3,
+              opacity: 0.8,
+            },
+            label: catIndex === 0 ? 'Develops into' : undefined,
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              color: categoryColors[category] || '#6b7280',
+            },
           });
         });
       });
     }
 
-    if (currentLevel.nodeTypes.includes('milestone')) {
-      // For each category, create milestone nodes with 1:1 or 1:2 relationships
-      let globalMilestoneIndex = 0;
+    // Generate milestones with hierarchical relationships using comprehensive milestone data
+    if (shouldIncludeNode('milestone')) {
+      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length)); // Match other generations
+      const categoryColors = {
+        physical: '#ef4444',
+        cognitive: '#3b82f6',
+        social_emotional: '#10b981',
+        language: '#8b5cf6',
+        motor_skills: '#f97316',
+        sensory: '#eab308',
+        self_care: '#ec4899',
+        academic: '#6366f1',
+      };
 
-      DEVELOPMENT_CATEGORIES.forEach((category, catIndex) => {
-        if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
-          return;
-        }
-
-        const categoryMilestones = pedagogyData.milestones
-          .filter((m: any) => m.category === category)
-          .slice(0, 3); // Limit milestones for cleaner layout
-
-        if (categoryMilestones.length === 0) return;
-
-        const categoryId = `category-${Math.floor(catIndex / 2)}-${category}`;
-        const categoryY = 100 + Math.floor(catIndex / 2) * ySpacing + 50 + (catIndex % 2) * 100;
-
-        categoryMilestones.forEach((milestone: any, milestoneIndex) => {
-          const milestoneId = `milestone-${milestone.id}`;
-          const relevantProgress = pedagogyData.milestoneProgress.filter(
-            (p: any) =>
-              p.milestoneId === milestone.id &&
-              (selectedFamilyMembers.length === 0 ||
-                selectedFamilyMembers.includes(p.familyMemberId))
-          );
-
-          const relevantFamilyMembers = pedagogyData.familyMembers.filter(
-            (fm: any) => selectedFamilyMembers.length === 0 || selectedFamilyMembers.includes(fm.id)
-          );
-
-          generatedNodes.push({
-            id: milestoneId,
-            type: 'milestone',
-            data: {
-              title: milestone.title,
-              description: milestone.description,
-              milestone: milestone,
-              progress: relevantProgress,
-              familyMembers: relevantFamilyMembers,
-              completionPercentage:
-                relevantProgress.length > 0
-                  ? (relevantProgress.filter((p: any) => p.status === 'completed').length /
-                      relevantProgress.length) *
-                    100
-                  : 0,
-            },
-            position: {
-              x:
-                baseX +
-                (catIndex % 2 === 0 ? -lateralOffset : lateralOffset) +
-                (milestoneIndex % 2 === 0 ? -150 : 150),
-              y: categoryY + 200 + milestoneIndex * 120,
-            },
-          });
-
-          // Create 1:1 parent-child relationship from category to milestone
-          generatedEdges.push({
-            id: `edge-cat-milestone-${category}-${milestone.id}`,
-            source: categoryId,
-            target: milestoneId,
-            type: 'smoothstep',
-            style: { stroke: '#3b82f6', strokeWidth: 2 },
-            label: milestoneIndex === 0 ? '1:1 Child' : undefined,
-          });
-
-          // Add prerequisite relationships between milestones
-          if (milestone.prerequisites) {
-            milestone.prerequisites.forEach((prereqId: string) => {
-              generatedEdges.push({
-                id: `edge-prereq-${prereqId}-${milestone.id}`,
-                source: `milestone-${prereqId}`,
-                target: milestoneId,
-                type: 'bezier',
-                style: { stroke: '#f59e0b', strokeWidth: 2, strokeDasharray: '5,5' },
-                label: 'Prerequisite',
-              });
-            });
+      ageGroups.forEach((ageGroup) => {
+        DEVELOPMENT_CATEGORIES.forEach((category) => {
+          if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
+            return;
           }
 
-          globalMilestoneIndex++;
+          const categoryId = `category-${ageGroup.key}-${category}`;
+          const categoryMilestones = comprehensiveMilestones.filter(
+            (m) => m.ageRangeKey === ageGroup.key && m.category === category
+          );
+
+          if (categoryMilestones.length === 0) return;
+
+          categoryMilestones.forEach((milestone, milestoneIndex) => {
+            const milestoneId = `milestone-${milestone.id}`;
+
+            // Create mock progress data based on pedagogy data if available
+            const relevantProgress =
+              pedagogyData?.milestoneProgress?.filter(
+                (p: any) =>
+                  p.milestoneId === milestone.id &&
+                  (selectedFamilyMembers.length === 0 ||
+                    selectedFamilyMembers.includes(p.familyMemberId))
+              ) || [];
+
+            const relevantFamilyMembers =
+              pedagogyData?.familyMembers?.filter(
+                (fm: any) =>
+                  selectedFamilyMembers.length === 0 || selectedFamilyMembers.includes(fm.id)
+              ) || [];
+
+            // Calculate completion percentage
+            const completionPercentage =
+              relevantProgress.length > 0
+                ? (relevantProgress.filter((p: any) => p.status === 'completed').length /
+                    relevantProgress.length) *
+                  100
+                : Math.floor(Math.random() * 100); // Random for demo purposes
+
+            generatedNodes.push({
+              id: milestoneId,
+              type: 'milestone',
+              data: {
+                title: milestone.title,
+                description: milestone.description,
+                milestone: milestone,
+                progress: relevantProgress,
+                familyMembers: relevantFamilyMembers,
+                completionPercentage: completionPercentage,
+                category: category,
+                ageRange: milestone.ageRange,
+                period: milestone.period,
+                importance: milestone.importance,
+                months: milestone.months,
+              },
+              position: { x: 0, y: 0 }, // Will be calculated
+            });
+
+            // Enhanced directional edges from category to milestones
+            generatedEdges.push({
+              id: `cat-to-milestone-${milestone.id}`,
+              source: categoryId,
+              target: milestoneId,
+              type: 'smoothstep',
+              style: {
+                stroke: categoryColors[category] || '#6b7280',
+                strokeWidth: 2,
+                opacity: 0.7,
+              },
+              label: milestoneIndex === 0 ? 'Includes' : undefined,
+              markerEnd: {
+                type: MarkerType.ArrowClosed,
+                color: categoryColors[category] || '#6b7280',
+              },
+            });
+          });
         });
       });
     }
 
+    // Calculate positions with enhanced algorithm
+    const { positions } = calculateNodePositions(
+      generatedNodes,
+      generatedEdges,
+      currentZoomLevel,
+      focusArea
+    );
+
+    // Apply calculated positions
+    generatedNodes.forEach((node) => {
+      const pos = positions.get(node.id);
+      if (pos) {
+        node.position = pos;
+      }
+    });
+
     return { nodes: generatedNodes, edges: generatedEdges };
-  }, [currentZoomLevel, selectedCategories, selectedFamilyMembers, pedagogyData]);
+  }, [
+    currentZoomLevel,
+    selectedCategories,
+    selectedFamilyMembers,
+    pedagogyData,
+    calculateNodePositions,
+    focusArea,
+  ]);
 
   const [reactFlowNodes, setNodes, onNodesChange] = useNodesState(nodes);
   const [reactFlowEdges, setEdges, onEdgesChange] = useEdgesState(edges);
@@ -577,12 +1246,22 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
         onNodeClick(node.id, node.data);
       }
 
-      // Auto-zoom logic: drill down when clicking on parent nodes
-      if (node.type === 'ageGroup' && currentZoomLevel === 0) {
-        setCurrentZoomLevel(1);
-      } else if (node.type === 'category' && currentZoomLevel === 1) {
-        setCurrentZoomLevel(2);
+      // Enhanced zoom logic: focus on specific areas and zoom into them
+      setFocusNodeId(node.id);
+
+      // Set focus area based on node type and data
+      if (node.type === 'ageGroup') {
+        setFocusArea(node.data.ageRange);
+        if (currentZoomLevel === 0) {
+          setCurrentZoomLevel(1); // Zoom into age group categories
+        }
+      } else if (node.type === 'category') {
+        setFocusArea(node.data.ageGroup);
+        if (currentZoomLevel === 1) {
+          setCurrentZoomLevel(2); // Zoom into category milestones
+        }
       }
+      // For milestones, just focus without changing zoom level
     },
     [onNodeClick, currentZoomLevel]
   );
@@ -599,6 +1278,11 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     }
   }, [currentZoomLevel]);
 
+  // Focus on a specific node
+  const handleFocusNode = useCallback((nodeId: string) => {
+    setFocusNodeId(nodeId);
+  }, []);
+
   const toggleCategoryFilter = (category: DevelopmentCategory) => {
     setSelectedCategories((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
@@ -608,175 +1292,288 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
   return (
     <div className="h-screen w-full bg-gray-50">
       <ReactFlowProvider>
-        <ReactFlow
+        <ReactFlowInnerComponent
           nodes={reactFlowNodes}
           edges={reactFlowEdges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onNodeClick={handleNodeClick}
-          nodeTypes={nodeTypes}
-          connectionMode={ConnectionMode.Loose}
-          fitView
-          attributionPosition="bottom-left"
-          defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
-        >
-          <Background color="#f1f5f9" gap={20} />
-          <Controls />
-          <MiniMap
-            nodeColor={(node) => {
-              switch (node.type) {
-                case 'milestone':
-                  return '#3b82f6';
-                case 'category':
-                  return '#10b981';
-                case 'ageGroup':
-                  return '#f59e0b';
-                default:
-                  return '#6b7280';
-              }
-            }}
-          />
-
-          {/* Custom Control Panel */}
-          <Panel position="top-left" className="bg-white rounded-lg shadow-lg p-4 m-4">
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-2">Vertical Timeline</h3>
-                <div className="text-sm text-gray-600 mb-3">
-                  {zoomLevels[currentZoomLevel].description}
-                </div>
-                <div className="flex flex-col space-y-2">
-                  <div className="flex space-x-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={handleZoomOut}
-                      disabled={currentZoomLevel === 0}
-                    >
-                      <ZoomOut className="w-4 h-4 mr-1" />
-                      Zoom Out
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={handleZoomIn}
-                      disabled={currentZoomLevel === zoomLevels.length - 1}
-                    >
-                      <ZoomIn className="w-4 h-4 mr-1" />
-                      Zoom In
-                    </Button>
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    Click age groups or categories to drill down
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Button size="sm" variant="outline" onClick={() => setShowFilters(!showFilters)}>
-                  <Filter className="w-4 h-4 mr-1" />
-                  Filters
-                </Button>
-              </div>
-
-              {showFilters && (
-                <div className="space-y-3 border-t pt-3">
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">Categories</h4>
-                    <div className="space-y-1 max-h-32 overflow-y-auto">
-                      {DEVELOPMENT_CATEGORIES.map((category) => (
-                        <label key={category} className="flex items-center text-sm">
-                          <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(category)}
-                            onChange={() => toggleCategoryFilter(category)}
-                            className="mr-2"
-                          />
-                          {category
-                            .replace('_', ' ')
-                            .replace(/\b\w/g, (l: string) => l.toUpperCase())}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {pedagogyData && (
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-2">Family Members</h4>
-                      <div className="space-y-1 max-h-24 overflow-y-auto">
-                        {pedagogyData.familyMembers.map((member: any) => (
-                          <label key={member.id} className="flex items-center text-sm">
-                            <input
-                              type="checkbox"
-                              checked={selectedFamilyMembers.includes(member.id)}
-                              onChange={() => {
-                                setSelectedFamilyMembers((prev) =>
-                                  prev.includes(member.id)
-                                    ? prev.filter((id) => id !== member.id)
-                                    : [...prev, member.id]
-                                );
-                              }}
-                              className="mr-2"
-                            />
-                            {member.name} ({member.relationship})
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </Panel>
-
-          {/* Relationship Legend */}
-          <Panel position="bottom-right" className="bg-white rounded-lg shadow-lg p-4 m-4">
-            <h4 className="font-semibold text-gray-800 mb-2">Relationships</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-0.5 bg-gray-500" style={{ borderStyle: 'dashed' }}></div>
-                <span>Timeline Flow</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-0.5 bg-green-500"></div>
-                <span>1:2 Parent-Child</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-0.5 bg-blue-500"></div>
-                <span>1:1 Parent-Child</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-0.5 bg-orange-500" style={{ borderStyle: 'dashed' }}></div>
-                <span>Prerequisite</span>
-              </div>
-            </div>
-          </Panel>
-
-          {/* Status Legend */}
-          <Panel position="bottom-left" className="bg-white rounded-lg shadow-lg p-4 m-4">
-            <h4 className="font-semibold text-gray-800 mb-2">Status Legend</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Completed</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="w-4 h-4 text-blue-600" />
-                <span>In Progress</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Circle className="w-4 h-4 text-gray-400" />
-                <span>Not Started</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-yellow-600" />
-                <span>Deferred</span>
-              </div>
-            </div>
-          </Panel>
-        </ReactFlow>
+          currentZoomLevel={currentZoomLevel}
+          zoomLevels={zoomLevels}
+          handleZoomIn={handleZoomIn}
+          handleZoomOut={handleZoomOut}
+          handleFocusNode={handleFocusNode}
+          focusNodeId={focusNodeId}
+          focusArea={focusArea}
+          showFilters={showFilters}
+          setShowFilters={setShowFilters}
+          selectedCategories={selectedCategories}
+          toggleCategoryFilter={toggleCategoryFilter}
+          selectedFamilyMembers={selectedFamilyMembers}
+          setSelectedFamilyMembers={setSelectedFamilyMembers}
+          pedagogyData={pedagogyData}
+        />
       </ReactFlowProvider>
     </div>
+  );
+};
+
+// Enhanced inner component to access ReactFlow context with area focusing
+interface ReactFlowInnerComponentProps {
+  nodes: any[];
+  edges: any[];
+  onNodesChange: any;
+  onEdgesChange: any;
+  onNodeClick: any;
+  currentZoomLevel: number;
+  zoomLevels: TimelineZoomLevel[];
+  handleZoomIn: () => void;
+  handleZoomOut: () => void;
+  handleFocusNode: (nodeId: string) => void;
+  focusNodeId: string | null;
+  focusArea: string | null;
+  showFilters: boolean;
+  setShowFilters: (show: boolean) => void;
+  selectedCategories: DevelopmentCategory[];
+  toggleCategoryFilter: (category: DevelopmentCategory) => void;
+  selectedFamilyMembers: string[];
+  setSelectedFamilyMembers: React.Dispatch<React.SetStateAction<string[]>>;
+  pedagogyData?: PedagogyProfile;
+}
+
+const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
+  nodes,
+  edges,
+  onNodesChange,
+  onEdgesChange,
+  onNodeClick,
+  currentZoomLevel,
+  zoomLevels,
+  handleZoomIn,
+  handleZoomOut,
+  handleFocusNode,
+  focusNodeId,
+  focusArea,
+  showFilters,
+  setShowFilters,
+  selectedCategories,
+  toggleCategoryFilter,
+  selectedFamilyMembers,
+  setSelectedFamilyMembers,
+  pedagogyData,
+}) => {
+  const reactFlowInstance = useReactFlow();
+
+  // Enhanced focus behavior: zoom into areas rather than just individual nodes
+  React.useEffect(() => {
+    if (focusNodeId && reactFlowInstance && nodes.length > 0) {
+      const node = nodes.find((n) => n.id === focusNodeId);
+      if (node) {
+        // If we have a focus area, focus on all nodes in that area
+        if (focusArea) {
+          const areaNodes = nodes.filter(
+            (n) =>
+              n.data.ageRange === focusArea ||
+              n.data.ageGroup === focusArea ||
+              n.id.includes(focusArea)
+          );
+
+          if (areaNodes.length > 0) {
+            reactFlowInstance.fitView({
+              nodes: areaNodes,
+              duration: 1000,
+              padding: 0.2,
+              minZoom: 0.8,
+              maxZoom: 1.5,
+            });
+            return;
+          }
+        }
+
+        // Fallback to individual node focus
+        reactFlowInstance.fitView({
+          nodes: [node],
+          duration: 800,
+          padding: 0.3,
+          minZoom: 0.5,
+          maxZoom: 2.0,
+        });
+      }
+    }
+  }, [focusNodeId, focusArea, nodes, reactFlowInstance]);
+
+  // Handle visual zoom controls with improved behavior
+  const handleVisualZoomIn = useCallback(() => {
+    reactFlowInstance.zoomIn({ duration: 300 });
+  }, [reactFlowInstance]);
+
+  const handleVisualZoomOut = useCallback(() => {
+    reactFlowInstance.zoomOut({ duration: 300 });
+  }, [reactFlowInstance]);
+
+  const handleFitView = useCallback(() => {
+    reactFlowInstance.fitView({
+      duration: 800,
+      padding: 0.1,
+      minZoom: 0.1,
+      maxZoom: 1.5,
+    });
+  }, [reactFlowInstance]);
+
+  return (
+    <ReactFlow
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      onNodeClick={onNodeClick}
+      nodeTypes={nodeTypes}
+      connectionMode={ConnectionMode.Loose}
+      fitView
+      minZoom={0.1}
+      maxZoom={2}
+      defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+      nodesDraggable={true}
+      nodesConnectable={false}
+      elementsSelectable={true}
+    >
+      <Background />
+      <Controls />
+      <MiniMap
+        nodeColor={(node) => {
+          switch (node.type) {
+            case 'ageGroup':
+              return '#6b7280';
+            case 'category':
+              return '#10b981';
+            case 'milestone':
+              return '#3b82f6';
+            default:
+              return '#9ca3af';
+          }
+        }}
+        maskColor="rgba(255, 255, 255, 0.8)"
+        position="bottom-right"
+      />
+
+      {/* Enhanced Control Panel */}
+      <Panel position="top-left" className="bg-white p-4 rounded-lg shadow-lg border">
+        <div className="space-y-3">
+          {/* Zoom Level Info */}
+          <div className="text-sm">
+            <div className="font-semibold text-gray-800">{zoomLevels[currentZoomLevel].name}</div>
+            <div className="text-gray-600 text-xs">{zoomLevels[currentZoomLevel].description}</div>
+            {focusArea && (
+              <div className="text-blue-600 text-xs mt-1">📍 Focused on: {focusArea}</div>
+            )}
+          </div>
+
+          {/* Zoom Controls */}
+          <div className="flex items-center space-x-2">
+            <SafeButton
+              size="sm"
+              variant="outline"
+              onClick={handleZoomOut}
+              disabled={currentZoomLevel === 0}
+              className="flex items-center space-x-1"
+            >
+              <ZoomOut className="w-3 h-3" />
+              <span>Out</span>
+            </SafeButton>
+            <SafeButton
+              size="sm"
+              variant="outline"
+              onClick={handleZoomIn}
+              disabled={currentZoomLevel === zoomLevels.length - 1}
+              className="flex items-center space-x-1"
+            >
+              <ZoomIn className="w-3 h-3" />
+              <span>In</span>
+            </SafeButton>
+            <SafeButton
+              size="sm"
+              variant="outline"
+              onClick={handleFitView}
+              className="flex items-center space-x-1"
+            >
+              <Focus className="w-3 h-3" />
+              <span>Fit</span>
+            </SafeButton>
+          </div>
+
+          {/* Visual Zoom Controls */}
+          <div className="flex items-center space-x-2 pt-2 border-t">
+            <span className="text-xs text-gray-600">View:</span>
+            <SafeButton size="sm" variant="ghost" onClick={handleVisualZoomIn} className="p-1">
+              <ZoomIn className="w-3 h-3" />
+            </SafeButton>
+            <SafeButton size="sm" variant="ghost" onClick={handleVisualZoomOut} className="p-1">
+              <ZoomOut className="w-3 h-3" />
+            </SafeButton>
+          </div>
+
+          {/* Filter Toggle */}
+          <SafeButton
+            size="sm"
+            variant="outline"
+            onClick={() => setShowFilters(!showFilters)}
+            className="flex items-center space-x-1 w-full"
+          >
+            <Filter className="w-3 h-3" />
+            <span>Filters</span>
+          </SafeButton>
+        </div>
+      </Panel>
+
+      {/* Enhanced Filter Panel */}
+      {showFilters && (
+        <Panel position="top-right" className="bg-white p-4 rounded-lg shadow-lg border max-w-xs">
+          <div className="space-y-4">
+            <div className="font-semibold text-gray-800">Development Categories</div>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {DEVELOPMENT_CATEGORIES.map((category) => (
+                <label key={category} className="flex items-center space-x-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => toggleCategoryFilter(category)}
+                    className="rounded border-gray-300"
+                  />
+                  <span className="capitalize">{category.replace('_', ' ')}</span>
+                </label>
+              ))}
+            </div>
+
+            {pedagogyData &&
+              pedagogyData.familyMembers &&
+              pedagogyData.familyMembers.length > 0 && (
+                <>
+                  <div className="font-semibold text-gray-800 pt-2 border-t">Family Members</div>
+                  <div className="space-y-2 max-h-32 overflow-y-auto">
+                    {pedagogyData.familyMembers.map((member: any) => (
+                      <label key={member.id} className="flex items-center space-x-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={selectedFamilyMembers.includes(member.id)}
+                          onChange={() => {
+                            setSelectedFamilyMembers((prev) =>
+                              prev.includes(member.id)
+                                ? prev.filter((id) => id !== member.id)
+                                : [...prev, member.id]
+                            );
+                          }}
+                          className="rounded border-gray-300"
+                        />
+                        <span>{member.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                </>
+              )}
+          </div>
+        </Panel>
+      )}
+    </ReactFlow>
   );
 };
 
