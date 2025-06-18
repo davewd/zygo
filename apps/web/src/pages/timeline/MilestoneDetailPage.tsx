@@ -9,21 +9,21 @@ import {
   Clock,
   Edit,
   FileText,
-  Heart,
   MessageSquare,
   MoreHorizontal,
   Play,
   Plus,
   Share2,
   Target,
-  TrendingUp,
   Trophy,
   Users,
   Video,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import FeedListItem from '../../components/feed/FeedListItem';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
+import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 import { loadMilestonesFromCSV } from '../../lib/api/milestones';
 
 interface MilestoneDetailData {
@@ -45,19 +45,6 @@ interface MilestoneDetailData {
   resources?: string;
   createdDate: string;
   modifiedDate: string;
-}
-
-interface ActivityPost {
-  id: string;
-  authorId: string;
-  authorName: string;
-  authorAvatar?: string;
-  content: string;
-  timestamp: string;
-  likes: number;
-  comments: number;
-  isLiked?: boolean;
-  type: 'achievement' | 'question' | 'tip' | 'milestone_update' | 'celebration';
 }
 
 // Simple Badge component
@@ -85,7 +72,7 @@ const MilestoneDetailPage: React.FC = () => {
   const [currentProgress, setCurrentProgress] = useState<MilestoneProgress | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [relatedActivities, setRelatedActivities] = useState<ActivityPost[]>([]);
+  const [relatedActivities, setRelatedActivities] = useState<FeedItemTypeMap[]>([]);
 
   // Load milestone data
   useEffect(() => {
@@ -116,43 +103,83 @@ const MilestoneDetailPage: React.FC = () => {
           setSelectedFamilyMember(pedagogyData.familyMembers[0].id);
         }
 
-        // Generate mock activity posts
-        const mockActivities: ActivityPost[] = [
+        // Generate mock activity posts as feed items
+        const mockActivities: FeedItemTypeMap[] = [
           {
             id: '1',
-            authorId: 'user1',
-            authorName: 'Sarah Johnson',
-            authorAvatar: '/avatars/sarah.jpg',
-            content: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
-            timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-            likes: 12,
-            comments: 3,
-            isLiked: false,
-            type: 'achievement',
+            type: FeedItemType.POST,
+            author: {
+              name: 'Sarah Johnson',
+              handle: 'sarah_mama',
+              avatar:
+                'https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face',
+            },
+            title: `Achievement: ${foundMilestone.title}`,
+            post: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
+            metadata: {
+              createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+            },
+            stats: {
+              likes: 12,
+              comments: 3,
+              reposts: 0,
+              shares: 1,
+            },
+            privacy: {
+              visibility: 'group' as any,
+              sharedWith: [{ type: 'group', name: 'Family', id: 'family_1' }],
+            },
           },
           {
             id: '2',
-            authorId: 'user2',
-            authorName: 'Dr. Emily Chen',
-            authorAvatar: '/avatars/emily.jpg',
-            content: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
-            timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-            likes: 8,
-            comments: 1,
-            isLiked: true,
-            type: 'tip',
+            type: FeedItemType.POST,
+            author: {
+              name: 'Dr. Emily Chen',
+              handle: 'dr_emily_chen',
+              avatar:
+                'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+              verified: true,
+            },
+            title: `Tip for ${foundMilestone.title}`,
+            post: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
+            metadata: {
+              createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+            },
+            stats: {
+              likes: 8,
+              comments: 1,
+              reposts: 2,
+              shares: 0,
+            },
+            privacy: {
+              visibility: 'public' as any,
+              sharedWith: [],
+            },
           },
           {
             id: '3',
-            authorId: 'user3',
-            authorName: 'Mike Peterson',
-            authorAvatar: '/avatars/mike.jpg',
-            content: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,
-            timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            likes: 5,
-            comments: 6,
-            isLiked: false,
-            type: 'question',
+            type: FeedItemType.POST,
+            author: {
+              name: 'Mike Peterson',
+              handle: 'mike_dad',
+              avatar:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+            },
+            title: `Question about ${foundMilestone.title}`,
+            post: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,
+            metadata: {
+              createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+            },
+            stats: {
+              likes: 5,
+              comments: 6,
+              reposts: 0,
+              shares: 1,
+            },
+            privacy: {
+              visibility: 'group' as any,
+              sharedWith: [{ type: 'group', name: 'Parents Support', id: 'parents_1' }],
+            },
           },
         ];
         setRelatedActivities(mockActivities);
@@ -217,23 +244,6 @@ const MilestoneDetailPage: React.FC = () => {
       return `${Math.floor(Math.abs(difference))}m to go`;
     } else {
       return 'Right on track';
-    }
-  };
-
-  const formatActivityType = (type: string) => {
-    switch (type) {
-      case 'achievement':
-        return { icon: Trophy, color: 'text-yellow-600', label: 'Achievement' };
-      case 'question':
-        return { icon: MessageSquare, color: 'text-blue-600', label: 'Question' };
-      case 'tip':
-        return { icon: TrendingUp, color: 'text-green-600', label: 'Tip' };
-      case 'milestone_update':
-        return { icon: Calendar, color: 'text-purple-600', label: 'Update' };
-      case 'celebration':
-        return { icon: Heart, color: 'text-pink-600', label: 'Celebration' };
-      default:
-        return { icon: MessageSquare, color: 'text-gray-600', label: 'Post' };
     }
   };
 
@@ -470,56 +480,9 @@ const MilestoneDetailPage: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {relatedActivities.map((activity) => {
-                    const activityType = formatActivityType(activity.type);
-                    const ActivityIcon = activityType.icon;
-
-                    return (
-                      <div
-                        key={activity.id}
-                        className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
-                      >
-                        <div className="flex items-start space-x-3">
-                          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium">
-                            {activity.authorName.charAt(0)}
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-1">
-                              <span className="font-medium text-gray-800">
-                                {activity.authorName}
-                              </span>
-                              <ActivityIcon className={`w-4 h-4 ${activityType.color}`} />
-                              <span
-                                className={`text-xs px-2 py-1 rounded ${activityType.color} bg-current bg-opacity-10`}
-                              >
-                                {activityType.label}
-                              </span>
-                              <span className="text-xs text-gray-500">
-                                {new Date(activity.timestamp).toLocaleDateString()}
-                              </span>
-                            </div>
-                            <p className="text-gray-700 text-sm mb-2">{activity.content}</p>
-                            <div className="flex items-center space-x-4 text-xs text-gray-500">
-                              <button
-                                className={`flex items-center space-x-1 hover:text-red-600 ${
-                                  activity.isLiked ? 'text-red-600' : ''
-                                }`}
-                              >
-                                <Heart
-                                  className={`w-4 h-4 ${activity.isLiked ? 'fill-current' : ''}`}
-                                />
-                                <span>{activity.likes}</span>
-                              </button>
-                              <button className="flex items-center space-x-1 hover:text-blue-600">
-                                <MessageSquare className="w-4 h-4" />
-                                <span>{activity.comments}</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {relatedActivities.map((activity) => (
+                    <FeedListItem key={activity.id} item={activity} />
+                  ))}
                 </div>
               </CardContent>
             </Card>
