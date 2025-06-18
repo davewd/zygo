@@ -349,7 +349,7 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     const milestones = [];
     const ageRanges = generateAgeRanges();
 
-    // Milestone templates by category and age range
+    // Milestone templates by category and age range (fallback only)
     const milestoneTemplates = {
       // Prenatal milestones
       prenatal: {
@@ -772,19 +772,21 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
             const isImportantMilestone = nodeId.includes('critical') || nodeId.includes('high');
             const adjustmentMultiplier = isImportantMilestone ? 1.2 : 1.0;
 
-            // Try multiple positioning strategies
+            // Try multiple positioning strategies with deterministic offsets
             const strategies = [
               // Strategy 1: Offset vertically
               {
                 x: startPos.x,
                 y: startPos.y + (60 + attempts * 30) * adjustmentMultiplier,
               },
-              // Strategy 2: Offset horizontally (but keep within bounds)
+              // Strategy 2: Offset horizontally (but keep within bounds) - deterministic based on attempts
               {
-                x: startPos.x + (Math.random() - 0.5) * 150 * adjustmentMultiplier,
+                x:
+                  startPos.x +
+                  (attempts % 2 === 0 ? 1 : -1) * (50 + attempts * 25) * adjustmentMultiplier,
                 y: startPos.y + (30 + attempts * 15) * adjustmentMultiplier,
               },
-              // Strategy 3: Spiral outward
+              // Strategy 3: Spiral outward - deterministic spiral pattern
               {
                 x: startPos.x + Math.cos(attempts * 0.5) * (100 + attempts * 20),
                 y: startPos.y + Math.sin(attempts * 0.5) * (100 + attempts * 20),
@@ -1017,7 +1019,7 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
                 ? (relevantProgress.filter((p: any) => p.status === 'completed').length /
                     relevantProgress.length) *
                   100
-                : Math.floor(Math.random() * 100); // Random for demo purposes
+                : Math.floor((milestoneIndex * 13 + category.length * 7) % 100); // Deterministic demo value based on milestone index and category
 
             generatedNodes.push({
               id: milestoneId,
@@ -1174,6 +1176,11 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     );
   };
 
+  const clearAllFilters = useCallback(() => {
+    setSelectedCategories([]);
+    setSelectedFamilyMembers([]);
+  }, []);
+
   return (
     <div className="h-screen w-full bg-gray-50">
       <ReactFlowProvider>
@@ -1192,6 +1199,7 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
           focusArea={focusArea}
           selectedCategories={selectedCategories}
           toggleCategoryFilter={toggleCategoryFilter}
+          clearAllFilters={clearAllFilters}
           selectedFamilyMembers={selectedFamilyMembers}
           setSelectedFamilyMembers={setSelectedFamilyMembers}
           pedagogyData={pedagogyData}
@@ -1218,6 +1226,7 @@ interface ReactFlowInnerComponentProps {
   focusArea: string | null;
   selectedCategories: DevelopmentCategory[];
   toggleCategoryFilter: (category: DevelopmentCategory) => void;
+  clearAllFilters: () => void;
   selectedFamilyMembers: string[];
   setSelectedFamilyMembers: React.Dispatch<React.SetStateAction<string[]>>;
   pedagogyData?: PedagogyProfile;
@@ -1239,6 +1248,7 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
   focusArea,
   selectedCategories,
   toggleCategoryFilter,
+  clearAllFilters,
   selectedFamilyMembers,
   setSelectedFamilyMembers,
   pedagogyData,
@@ -1509,7 +1519,18 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
       {/* Always Visible Filter Panel */}
       <Panel position="top-right" className="bg-white p-4 rounded-lg shadow-lg border max-w-xs">
         <div className="space-y-4">
-          <div className="font-semibold text-gray-800">Development Categories</div>
+          <div className="flex items-center justify-between">
+            <div className="font-semibold text-gray-800">Development Categories</div>
+            <SafeButton
+              size="sm"
+              variant="outline"
+              onClick={clearAllFilters}
+              className="text-xs px-2 py-1 h-auto"
+              disabled={selectedCategories.length === 0 && selectedFamilyMembers.length === 0}
+            >
+              Clear All
+            </SafeButton>
+          </div>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {DEVELOPMENT_CATEGORIES.map((category) => (
               <label key={category} className="flex items-center space-x-2 text-sm">
