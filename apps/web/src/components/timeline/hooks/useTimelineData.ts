@@ -1,5 +1,6 @@
 import { MarkerType } from '@xyflow/react';
 import { useEffect, useMemo, useState } from 'react';
+import { generateAgeRanges, loadMilestonesFromCSV } from '../../../lib/api/milestones';
 import { CATEGORY_COLORS, DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
   AgeRange,
@@ -10,7 +11,6 @@ import {
   TimelineNode
 } from '../types';
 import { calculateNodePositions } from '../utils/layoutCalculation';
-import { generateAgeRanges, generateComprehensiveMilestones } from '../utils/milestoneGeneration';
 
 interface UseTimelineDataProps {
   pedagogyData?: PedagogyProfile;
@@ -35,23 +35,28 @@ export const useTimelineData = ({
   const [milestonesLoading, setMilestonesLoading] = useState(true);
   const [milestonesError, setMilestonesError] = useState<string | null>(null);
 
-  // Generate comprehensive data
+  // Generate age ranges (this is still needed for the timeline structure)
   const [allAgeRanges] = useState(() => generateAgeRanges());
-  const [comprehensiveMilestones] = useState(() => generateComprehensiveMilestones());
 
   // Load milestone data from CSV on component mount
   useEffect(() => {
     const loadMilestoneData = async () => {
       try {
-        // TODO: Implement CSV loading logic here
-        // For now, use generated data
-        setCsvMilestones(comprehensiveMilestones);
+        setMilestonesLoading(true);
+        setMilestonesError(null);
+        
+        // Load milestones from CSV using the API
+        const milestones = await loadMilestonesFromCSV();
+        setCsvMilestones(milestones);
         setAgeRanges(allAgeRanges);
+        
+        console.log(`✅ Loaded ${milestones.length} milestones from CSV`);
       } catch (error) {
         console.error('Error loading milestone data:', error);
-        setMilestonesError(
-          error instanceof Error ? error.message : 'Failed to load milestone data'
-        );
+        setMilestonesError(error instanceof Error ? error.message : 'Failed to load milestone data');
+        
+        // Fallback to empty data or could use fallback generation
+        setCsvMilestones([]);
         setAgeRanges(allAgeRanges);
       } finally {
         setMilestonesLoading(false);
@@ -59,7 +64,7 @@ export const useTimelineData = ({
     };
 
     loadMilestoneData();
-  }, [comprehensiveMilestones, allAgeRanges]);
+  }, []); // Load once on mount
 
   // Generate nodes and edges based on current state
   const { nodes, edges } = useMemo(() => {
@@ -112,7 +117,7 @@ export const useTimelineData = ({
 
       ageGroups.forEach((ageGroup, index) => {
         const ageGroupId = `ageGroup-${ageGroup.key}`;
-        const milestoneCountForRange = comprehensiveMilestones.filter(
+        const milestoneCountForRange = csvMilestones.filter(
           (m) => m.ageRangeKey === ageGroup.key
         ).length;
 
@@ -164,7 +169,7 @@ export const useTimelineData = ({
             return;
           }
 
-          const categoryMilestones = comprehensiveMilestones.filter(
+          const categoryMilestones = csvMilestones.filter(
             (m) => m.ageRangeKey === ageGroup.key && m.category === category
           );
 
@@ -263,7 +268,7 @@ export const useTimelineData = ({
     focusArea,
     canvasWidth,
     allAgeRanges,
-    comprehensiveMilestones,
+    csvMilestones,
   ]);
 
   return {
@@ -274,6 +279,6 @@ export const useTimelineData = ({
     milestonesLoading,
     milestonesError,
     allAgeRanges,
-    comprehensiveMilestones,
+    milestones: csvMilestones, // Provide milestones as an alias for backward compatibility
   };
 };

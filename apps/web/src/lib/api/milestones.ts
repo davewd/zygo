@@ -150,13 +150,22 @@ export async function loadMilestonesFromCSV(): Promise<MilestoneData[]> {
       return cachedMilestones;
     }
 
-    // Load CSV file from public directory
-    const response = await fetch('/data/milestones.csv');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    // Try loading from comprehensive CSV first, then fallback to original
+    let response: Response;
+    let csvText: string;
     
-    const csvText = await response.text();
+    try {
+      response = await fetch('/data/comprehensive-milestones.csv');
+      if (!response.ok) throw new Error('Comprehensive CSV not found');
+      csvText = await response.text();
+    } catch {
+      // Fallback to original CSV
+      response = await fetch('/data/milestones.csv');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      csvText = await response.text();
+    }
     
     return new Promise((resolve, reject) => {
       Papa.parse(csvText, {

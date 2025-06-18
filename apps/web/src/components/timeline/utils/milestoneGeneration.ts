@@ -1,3 +1,14 @@
+/**
+ * @deprecated This file is deprecated. Milestone data has been moved to CSV format.
+ * Use the API functions from '../../../lib/api/milestones' instead:
+ * - loadMilestonesFromCSV() to load milestone data
+ * - generateAgeRanges() is available in the API
+ * 
+ * The CSV data is located at:
+ * - /public/data/comprehensive-milestones.csv (new comprehensive data)
+ * - /public/data/milestones.csv (original data)
+ */
+
 import { DEVELOPMENT_CATEGORIES } from '../constants';
 import { AgeRange, MilestoneData } from '../types';
 
