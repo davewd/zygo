@@ -26,6 +26,7 @@ import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCente
 import { KIDNEY_NUTRITION_CENTER } from '../../data/network/kidneyNutritionCenter';
 import { MUMMYS_WHISPERS_CENTER } from '../../data/network/mummysWhispersCenter';
 import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
+import { ST_MARYS_CHILDCARE_CENTER } from '../../data/network/stMarysChildcareCenter';
 import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
 
 const ServiceCenterDetail = () => {
@@ -44,6 +45,7 @@ const ServiceCenterDetail = () => {
     WHITE_CITY_TENNIS_CENTER,
     ELIXR_SWIM_SCHOOL_CENTER,
     KICKEROOS_SOCCER_CENTER,
+    ST_MARYS_CHILDCARE_CENTER,
     MUMMYS_WHISPERS_CENTER,
     EMOG_CENTER,
     KIDNEY_NUTRITION_CENTER,

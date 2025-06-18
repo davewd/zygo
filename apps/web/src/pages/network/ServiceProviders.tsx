@@ -37,6 +37,11 @@ import { JESSICA_DAWSON_DIETITIAN } from '../../data/network/kidneyNutritionCent
 import { CAROLINE_MATERNITY_CONSULTANT } from '../../data/network/mummysWhispersCenter';
 import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
 import {
+  MICHAEL_CHEN_MUSIC,
+  REBECCA_THOMPSON_OUTDOOR,
+  SARAH_MITCHELL_DIRECTOR,
+} from '../../data/network/stMarysChildcareCenter';
+import {
   DANIELLE_HARMSEN,
   LUCY_WOOD,
   STEVE_LOEFFLER,
@@ -63,6 +68,9 @@ const ServiceProviders = () => {
     JAMES_THOMPSON,
     SOFIA_MARTINEZ,
     MICHAEL_OCONNOR,
+    SARAH_MITCHELL_DIRECTOR,
+    REBECCA_THOMPSON_OUTDOOR,
+    MICHAEL_CHEN_MUSIC,
     CAROLINE_MATERNITY_CONSULTANT,
     DR_SHELLEY_ROWLANDS,
     JESSICA_DAWSON_DIETITIAN,
