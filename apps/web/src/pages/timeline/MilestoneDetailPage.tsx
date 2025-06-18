@@ -1,0 +1,635 @@
+import type { MilestoneProgress } from '@zygo/types';
+import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
+import {
+  AlertCircle,
+  ArrowLeft,
+  Calendar,
+  Camera,
+  CheckCircle,
+  Clock,
+  Edit,
+  FileText,
+  Heart,
+  MessageSquare,
+  MoreHorizontal,
+  Play,
+  Plus,
+  Share2,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Video,
+} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { usePedagogyData } from '../../hooks/usePedagogyData';
+import { loadMilestonesFromCSV } from '../../lib/api/milestones';
+
+interface MilestoneDetailData {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  ageRange: string;
+  startMonths: number;
+  endMonths: number;
+  period: string;
+  importance: 'low' | 'medium' | 'high' | 'critical';
+  isTypical: boolean;
+  prerequisites?: string[];
+  skills?: string[];
+  observationTips?: string;
+  supportStrategies?: string;
+  redFlags?: string;
+  resources?: string;
+  createdDate: string;
+  modifiedDate: string;
+}
+
+interface ActivityPost {
+  id: string;
+  authorId: string;
+  authorName: string;
+  authorAvatar?: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+  comments: number;
+  isLiked?: boolean;
+  type: 'achievement' | 'question' | 'tip' | 'milestone_update' | 'celebration';
+}
+
+// Simple Badge component
+const Badge: React.FC<{ className: string; children: React.ReactNode }> = ({
+  className,
+  children,
+}) => (
+  <span
+    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${className}`}
+  >
+    {children}
+  </span>
+);
+
+const MilestoneDetailPage: React.FC = () => {
+  const { milestoneId, familyMemberId } = useParams<{
+    milestoneId: string;
+    familyMemberId?: string;
+  }>();
+  const navigate = useNavigate();
+  const { pedagogyData, loading: pedagogyLoading } = usePedagogyData();
+
+  const [milestone, setMilestone] = useState<MilestoneDetailData | null>(null);
+  const [selectedFamilyMember, setSelectedFamilyMember] = useState<string>('');
+  const [currentProgress, setCurrentProgress] = useState<MilestoneProgress | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [relatedActivities, setRelatedActivities] = useState<ActivityPost[]>([]);
+
+  // Load milestone data
+  useEffect(() => {
+    const loadMilestoneData = async () => {
+      if (!milestoneId) {
+        setError('Milestone ID is required');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const milestones = await loadMilestonesFromCSV();
+        const foundMilestone = milestones.find((m) => m.id === milestoneId);
+
+        if (!foundMilestone) {
+          setError('Milestone not found');
+          setLoading(false);
+          return;
+        }
+
+        setMilestone(foundMilestone);
+
+        // Set selected family member
+        if (familyMemberId) {
+          setSelectedFamilyMember(familyMemberId);
+        } else if (pedagogyData?.familyMembers?.[0]) {
+          setSelectedFamilyMember(pedagogyData.familyMembers[0].id);
+        }
+
+        // Generate mock activity posts
+        const mockActivities: ActivityPost[] = [
+          {
+            id: '1',
+            authorId: 'user1',
+            authorName: 'Sarah Johnson',
+            authorAvatar: '/avatars/sarah.jpg',
+            content: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
+            timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+            likes: 12,
+            comments: 3,
+            isLiked: false,
+            type: 'achievement',
+          },
+          {
+            id: '2',
+            authorId: 'user2',
+            authorName: 'Dr. Emily Chen',
+            authorAvatar: '/avatars/emily.jpg',
+            content: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
+            timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+            likes: 8,
+            comments: 1,
+            isLiked: true,
+            type: 'tip',
+          },
+          {
+            id: '3',
+            authorId: 'user3',
+            authorName: 'Mike Peterson',
+            authorAvatar: '/avatars/mike.jpg',
+            content: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,
+            timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+            likes: 5,
+            comments: 6,
+            isLiked: false,
+            type: 'question',
+          },
+        ];
+        setRelatedActivities(mockActivities);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load milestone data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMilestoneData();
+  }, [milestoneId, familyMemberId, pedagogyData]);
+
+  // Update current progress when family member or pedagogy data changes
+  useEffect(() => {
+    if (pedagogyData && selectedFamilyMember && milestoneId) {
+      const progress = pedagogyData.milestoneProgress?.find(
+        (p) => p.familyMemberId === selectedFamilyMember && p.milestoneId === milestoneId
+      );
+      setCurrentProgress(progress || null);
+    }
+  }, [pedagogyData, selectedFamilyMember, milestoneId]);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'bg-green-100 text-green-800 border-green-200';
+      case 'in_progress':
+        return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'not_started':
+        return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'deferred':
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
+  const getImportanceColor = (importance: string) => {
+    switch (importance) {
+      case 'critical':
+        return 'bg-red-100 text-red-800 border-red-200';
+      case 'high':
+        return 'bg-orange-100 text-orange-800 border-orange-200';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'low':
+        return 'bg-green-100 text-green-800 border-green-200';
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
+  const calculateRelativeAge = (startMonths: number, endMonths: number, currentAge?: number) => {
+    if (!currentAge) currentAge = 24; // Default to 24 months for demo
+    const targetAge = (startMonths + endMonths) / 2;
+    const difference = currentAge - targetAge;
+
+    if (difference > 0) {
+      return `+${Math.floor(difference)}m ahead`;
+    } else if (difference < 0) {
+      return `${Math.floor(Math.abs(difference))}m to go`;
+    } else {
+      return 'Right on track';
+    }
+  };
+
+  const formatActivityType = (type: string) => {
+    switch (type) {
+      case 'achievement':
+        return { icon: Trophy, color: 'text-yellow-600', label: 'Achievement' };
+      case 'question':
+        return { icon: MessageSquare, color: 'text-blue-600', label: 'Question' };
+      case 'tip':
+        return { icon: TrendingUp, color: 'text-green-600', label: 'Tip' };
+      case 'milestone_update':
+        return { icon: Calendar, color: 'text-purple-600', label: 'Update' };
+      case 'celebration':
+        return { icon: Heart, color: 'text-pink-600', label: 'Celebration' };
+      default:
+        return { icon: MessageSquare, color: 'text-gray-600', label: 'Post' };
+    }
+  };
+
+  if (loading || pedagogyLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading milestone details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !milestone) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
+          <h1 className="text-xl font-semibold text-gray-800 mb-2">Milestone Not Found</h1>
+          <p className="text-gray-600 mb-4">
+            {error || 'The requested milestone could not be found.'}
+          </p>
+          <Button onClick={() => navigate('/timeline')}>
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Timeline
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const selectedMember = pedagogyData?.familyMembers?.find((m) => m.id === selectedFamilyMember);
+  const familyMembersActive = pedagogyData?.familyMembers?.filter((m) => m.isActive) || [];
+  const familyMembersHistorical = pedagogyData?.familyMembers?.filter((m) => !m.isActive) || [];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/timeline')}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Timeline
+              </Button>
+              <div className="h-6 w-px bg-gray-300" />
+              <div>
+                <h1 className="text-xl font-semibold text-gray-800">{milestone.title}</h1>
+                <p className="text-sm text-gray-600">
+                  {milestone.category.replace('_', ' ').replace(/\b\w/g, (l) => l.toUpperCase())} •{' '}
+                  {milestone.ageRange}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm">
+                <Share2 className="w-4 h-4 mr-2" />
+                Share
+              </Button>
+              <Button variant="outline" size="sm">
+                <MoreHorizontal className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Milestone Overview Card */}
+            <Card>
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Trophy className="w-6 h-6 text-yellow-600" />
+                    <div>
+                      <CardTitle className="text-xl">{milestone.title}</CardTitle>
+                      <p className="text-gray-600 mt-1">{milestone.description}</p>
+                    </div>
+                  </div>
+                  <Badge className={getImportanceColor(milestone.importance)}>
+                    {milestone.importance.toUpperCase()}
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <Calendar className="w-5 h-5 mx-auto mb-2 text-gray-600" />
+                    <div className="text-sm font-medium text-gray-800">Age Range</div>
+                    <div className="text-xs text-gray-600">{milestone.ageRange}</div>
+                  </div>
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <Target className="w-5 h-5 mx-auto mb-2 text-gray-600" />
+                    <div className="text-sm font-medium text-gray-800">Timeline</div>
+                    <div className="text-xs text-gray-600">
+                      {calculateRelativeAge(milestone.startMonths, milestone.endMonths)}
+                    </div>
+                  </div>
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <Clock className="w-5 h-5 mx-auto mb-2 text-gray-600" />
+                    <div className="text-sm font-medium text-gray-800">Period</div>
+                    <div className="text-xs text-gray-600">
+                      {milestone.period.replace('_', ' ')}
+                    </div>
+                  </div>
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <Trophy className="w-5 h-5 mx-auto mb-2 text-gray-600" />
+                    <div className="text-sm font-medium text-gray-800">Type</div>
+                    <div className="text-xs text-gray-600">
+                      {milestone.isTypical ? 'Typical' : 'Adaptive'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Family Member Selection */}
+                {familyMembersActive.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-sm font-medium text-gray-800 mb-3">Track Progress For:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {familyMembersActive.map((member) => (
+                        <Button
+                          key={member.id}
+                          variant={selectedFamilyMember === member.id ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setSelectedFamilyMember(member.id)}
+                          className="flex items-center space-x-2"
+                        >
+                          <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs">
+                            {member.name.charAt(0)}
+                          </div>
+                          <span>{member.name}</span>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Current Progress */}
+                {selectedMember && (
+                  <div className="p-4 bg-blue-50 rounded-lg">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-medium text-gray-800">
+                        Current Progress for {selectedMember.name}
+                      </h4>
+                      {currentProgress && (
+                        <Badge className={getStatusColor(currentProgress.status)}>
+                          {currentProgress.status.replace('_', ' ')}
+                        </Badge>
+                      )}
+                    </div>
+
+                    {currentProgress ? (
+                      <div className="space-y-3">
+                        {currentProgress.dateStarted && (
+                          <div className="flex items-center text-sm text-gray-600">
+                            <Play className="w-4 h-4 mr-2" />
+                            Started: {new Date(currentProgress.dateStarted).toLocaleDateString()}
+                          </div>
+                        )}
+                        {currentProgress.dateCompleted && (
+                          <div className="flex items-center text-sm text-gray-600">
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Completed:{' '}
+                            {new Date(currentProgress.dateCompleted).toLocaleDateString()}
+                          </div>
+                        )}
+                        {currentProgress.notes && (
+                          <div className="text-sm text-gray-700 bg-white p-3 rounded">
+                            <strong>Notes:</strong> {currentProgress.notes}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-center py-4">
+                        <div className="text-gray-500 mb-2">No progress recorded yet</div>
+                        <Button size="sm" variant="outline">
+                          <Plus className="w-4 h-4 mr-2" />
+                          Start Tracking
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Milestone Details */}
+                <div className="mt-6 space-y-4">
+                  {milestone.observationTips && (
+                    <div>
+                      <h5 className="font-medium text-gray-800 mb-2">Observation Tips</h5>
+                      <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+                        {milestone.observationTips}
+                      </p>
+                    </div>
+                  )}
+
+                  {milestone.supportStrategies && (
+                    <div>
+                      <h5 className="font-medium text-gray-800 mb-2">Support Strategies</h5>
+                      <p className="text-sm text-gray-600 bg-blue-50 p-3 rounded">
+                        {milestone.supportStrategies}
+                      </p>
+                    </div>
+                  )}
+
+                  {milestone.redFlags && (
+                    <div>
+                      <h5 className="font-medium text-gray-800 mb-2">Red Flags</h5>
+                      <p className="text-sm text-red-700 bg-red-50 p-3 rounded border border-red-200">
+                        {milestone.redFlags}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Related Activity Posts */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <MessageSquare className="w-5 h-5 mr-2" />
+                  Related Community Activity
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {relatedActivities.map((activity) => {
+                    const activityType = formatActivityType(activity.type);
+                    const ActivityIcon = activityType.icon;
+
+                    return (
+                      <div
+                        key={activity.id}
+                        className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0"
+                      >
+                        <div className="flex items-start space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium">
+                            {activity.authorName.charAt(0)}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <span className="font-medium text-gray-800">
+                                {activity.authorName}
+                              </span>
+                              <ActivityIcon className={`w-4 h-4 ${activityType.color}`} />
+                              <span
+                                className={`text-xs px-2 py-1 rounded ${activityType.color} bg-current bg-opacity-10`}
+                              >
+                                {activityType.label}
+                              </span>
+                              <span className="text-xs text-gray-500">
+                                {new Date(activity.timestamp).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <p className="text-gray-700 text-sm mb-2">{activity.content}</p>
+                            <div className="flex items-center space-x-4 text-xs text-gray-500">
+                              <button
+                                className={`flex items-center space-x-1 hover:text-red-600 ${
+                                  activity.isLiked ? 'text-red-600' : ''
+                                }`}
+                              >
+                                <Heart
+                                  className={`w-4 h-4 ${activity.isLiked ? 'fill-current' : ''}`}
+                                />
+                                <span>{activity.likes}</span>
+                              </button>
+                              <button className="flex items-center space-x-1 hover:text-blue-600">
+                                <MessageSquare className="w-4 h-4" />
+                                <span>{activity.comments}</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Family Members Active */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center text-base">
+                  <Users className="w-5 h-5 mr-2" />
+                  Active Family Members
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {familyMembersActive.map((member) => (
+                    <div
+                      key={member.id}
+                      className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-800">
+                        {member.name.charAt(0)}
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-sm text-gray-800">{member.name}</div>
+                        <div className="text-xs text-gray-500">{member.relationship}</div>
+                      </div>
+                      {member.id === selectedFamilyMember && (
+                        <CheckCircle className="w-4 h-4 text-green-600" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Family Members Historical */}
+            {familyMembersHistorical.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-base">
+                    <Clock className="w-5 h-5 mr-2" />
+                    Previously Involved
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {familyMembersHistorical.map((member) => (
+                      <div key={member.id} className="flex items-center space-x-3 p-2 rounded-lg">
+                        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-medium text-gray-600">
+                          {member.name.charAt(0)}
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-sm text-gray-600">{member.name}</div>
+                          <div className="text-xs text-gray-400">{member.relationship}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <Button variant="outline" size="sm" className="w-full justify-start">
+                    <Camera className="w-4 h-4 mr-2" />
+                    Add Photo Evidence
+                  </Button>
+                  <Button variant="outline" size="sm" className="w-full justify-start">
+                    <Video className="w-4 h-4 mr-2" />
+                    Record Video
+                  </Button>
+                  <Button variant="outline" size="sm" className="w-full justify-start">
+                    <FileText className="w-4 h-4 mr-2" />
+                    Add Note
+                  </Button>
+                  <Button variant="outline" size="sm" className="w-full justify-start">
+                    <Edit className="w-4 h-4 mr-2" />
+                    Update Progress
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Resources */}
+            {milestone.resources && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Resources</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+                    {milestone.resources}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MilestoneDetailPage;

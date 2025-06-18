@@ -19,6 +19,7 @@ import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
 import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
+import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
 import Tools from './pages/tools/index';
 import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
 
@@ -80,6 +81,11 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
+      {
+        path: '/timeline/milestone/:milestoneId/:familyMemberId?',
+        element: <MilestoneDetailPage />,
+        errorElement: <Error />,
+      },
     ],
     errorElement: <Error />,
   },

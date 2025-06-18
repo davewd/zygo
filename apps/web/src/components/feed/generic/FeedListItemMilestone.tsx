@@ -12,7 +12,13 @@ export const FeedListItemMilestone: React.FC<FeedListItemMilestoneProps> = ({ it
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/timeline');
+    // If we have a specific milestone ID, navigate to the milestone detail page
+    if (item.milestoneId) {
+      navigate(`/timeline/milestone/${item.milestoneId}`);
+    } else {
+      // Fallback to the timeline page if no specific milestone ID is available
+      navigate('/timeline');
+    }
   };
 
   return (

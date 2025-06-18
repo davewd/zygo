@@ -1,18 +1,16 @@
 import { AlertCircle, Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import MilestoneDetail from '../../components/timeline/MilestoneDetail';
+import { useNavigate } from 'react-router-dom';
 import VerticalTimeLine from '../../components/timeline/PedagogyTimelineVertical';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
 
 export default function TimeLine() {
   const { pedagogyData, loading, error } = usePedagogyData();
-  const [selectedMilestone, setSelectedMilestone] = useState<any>(null);
-  const [showMilestoneDetail, setShowMilestoneDetail] = useState(false);
+  const navigate = useNavigate();
 
   const handleNodeClick = (nodeId: string, nodeData: any) => {
     if (nodeData.milestone) {
-      setSelectedMilestone(nodeData.milestone);
-      setShowMilestoneDetail(true);
+      // Navigate to the detailed milestone page
+      navigate(`/timeline/milestone/${nodeData.milestone.id}`);
     }
   };
 
@@ -43,20 +41,6 @@ export default function TimeLine() {
   return (
     <div className="h-screen">
       <VerticalTimeLine pedagogyData={pedagogyData || undefined} onNodeClick={handleNodeClick} />
-
-      {selectedMilestone && (
-        <MilestoneDetail
-          milestone={selectedMilestone}
-          familyMembers={pedagogyData?.familyMembers || []}
-          milestoneProgress={pedagogyData?.milestoneProgress || []}
-          isOpen={showMilestoneDetail}
-          onClose={() => setShowMilestoneDetail(false)}
-          onUpdateProgress={(milestoneId, familyMemberId, newProgress) => {
-            // Handle progress updates here
-            console.log('Update progress:', { milestoneId, familyMemberId, newProgress });
-          }}
-        />
-      )}
     </div>
   );
 }

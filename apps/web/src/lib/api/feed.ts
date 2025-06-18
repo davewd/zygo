@@ -114,6 +114,8 @@ export interface FeedItemTypeMap {
     schoolLogo?: string;
     schoolName?: string;
   };
+  // Milestone specific data
+  milestoneId?: string; // ID of the related milestone from the milestones CSV
 }
 
 // Simulate API endpoints
@@ -236,7 +238,8 @@ const mockData = {
           { type: "group", name: "Family", id: "family_1" },
           { type: "group", name: "Close Friends", id: "friends_1" }
         ]
-      }
+      },
+      milestoneId: "early_childhood_24_30_physical_1" // Link to "First steps" milestone
     },
     {
       id: 3,
@@ -447,6 +450,8 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
     sponsoredData: item.sponsoredData,
     // Preserve event-specific data
     eventData: item.eventData,
+    // Preserve milestone-specific data
+    milestoneId: item.milestoneId,
   }));
   
   // Simulate pagination
