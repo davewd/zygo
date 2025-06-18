@@ -21,7 +21,6 @@ import {
   ChevronRight,
   Circle,
   Clock,
-  Filter,
   Focus,
   Trophy,
   Users,
@@ -70,6 +69,7 @@ interface TimelineNode {
   data: any;
   position: { x: number; y: number };
   style?: Record<string, any>;
+  draggable?: boolean;
 }
 
 interface TimelineEdge {
@@ -263,7 +263,13 @@ const CategoryNode = ({ data }: { data: any }) => {
 
 const AgeGroupNode = ({ data }: { data: any }) => {
   return (
-    <div className="p-6 rounded-xl border-2 border-gray-300 bg-gray-50 shadow-lg min-w-96">
+    <div
+      className="p-6 rounded-xl border-2 border-gray-300 bg-gray-50 shadow-lg min-w-96 max-w-96 transform-gpu pointer-events-auto"
+      style={{
+        zIndex: 10, // Keep age groups above other elements
+        cursor: 'default', // Indicate non-draggable
+      }}
+    >
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl font-bold text-gray-800">{data.title}</h2>
         <Calendar className="w-6 h-6 text-gray-600" />
@@ -621,31 +627,42 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
   const [currentZoomLevel, setCurrentZoomLevel] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<DevelopmentCategory[]>([]);
   const [selectedFamilyMembers, setSelectedFamilyMembers] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
   const [focusNodeId, setFocusNodeId] = useState<string | null>(null);
   const [focusArea, setFocusArea] = useState<string | null>(null);
   const [allAgeRanges] = useState(() => generateAgeRanges());
   const [comprehensiveMilestones] = useState(() => generateComprehensiveMilestones());
+  const [canvasWidth, setCanvasWidth] = useState<number | undefined>(undefined);
+
+  // Canvas width change handler
+  const handleCanvasWidthChange = useCallback((width: number) => {
+    setCanvasWidth(width);
+  }, []);
 
   // Enhanced layout algorithm with collision detection and proper spacing
   const calculateNodePositions = useCallback(
-    (nodeData: any[], edgeData: any[], zoomLevel: number, focusArea?: string) => {
+    (
+      nodeData: any[],
+      edgeData: any[],
+      zoomLevel: number,
+      focusArea?: string,
+      canvasWidth?: number
+    ) => {
       const positions = new Map<string, { x: number; y: number }>();
       const nodeWidths = new Map<string, number>();
       const nodeHeights = new Map<string, number>();
 
-      // Define node dimensions based on type and zoom level
+      // Define node dimensions based on type - consistent sizes regardless of zoom level
       const getNodeDimensions = (nodeType: string) => {
-        const baseScale = zoomLevel === 0 ? 1.2 : zoomLevel === 1 ? 1.0 : 0.8;
+        // Remove zoom-based scaling to keep cards same size during zoom
         switch (nodeType) {
           case 'ageGroup':
-            return { width: 400 * baseScale, height: 200 * baseScale };
+            return { width: 400, height: 200 };
           case 'category':
-            return { width: 340 * baseScale, height: 180 * baseScale };
+            return { width: 340, height: 180 };
           case 'milestone':
-            return { width: 300 * baseScale, height: 160 * baseScale };
+            return { width: 300, height: 160 };
           default:
-            return { width: 200 * baseScale, height: 120 * baseScale };
+            return { width: 200, height: 120 };
         }
       };
 
@@ -656,25 +673,29 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
         nodeHeights.set(node.id, dims.height);
       });
 
-      // Dynamic spacing based on zoom level and focus area
+      // Dynamic spacing based on zoom level and focus area - FIXED CENTER
       const getLayoutParams = () => {
+        // Use half of ReactFlow canvas width to properly center nodes on the viewport
+        const FIXED_CENTER_X = canvasWidth ? canvasWidth * 2 : 800; // Default to 800 if canvas width is not available
+        console.log('Canvas width:', canvasWidth, 'Center X:', FIXED_CENTER_X);
+
         if (zoomLevel === 0) {
           return {
-            centerX: 600,
+            centerX: FIXED_CENTER_X,
             verticalSpacing: 350,
             horizontalSpacing: 500,
             padding: 100,
           };
         } else if (zoomLevel === 1) {
           return {
-            centerX: 500,
+            centerX: FIXED_CENTER_X,
             verticalSpacing: 280,
             horizontalSpacing: 400,
             padding: 80,
           };
         } else {
           return {
-            centerX: 400,
+            centerX: FIXED_CENTER_X,
             verticalSpacing: 220,
             horizontalSpacing: 320,
             padding: 60,
@@ -691,18 +712,28 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
         return acc;
       }, {} as Record<string, any[]>);
 
-      // Collision detection helper
+      // Enhanced collision detection helper with margin buffer
       const checkCollision = (
         pos1: { x: number; y: number },
         size1: { width: number; height: number },
         pos2: { x: number; y: number },
-        size2: { width: number; height: number }
+        size2: { width: number; height: number },
+        buffer: number = 20 // Add margin between cards
       ) => {
+        const expandedSize1 = {
+          width: size1.width + buffer * 2,
+          height: size1.height + buffer * 2,
+        };
+        const expandedSize2 = {
+          width: size2.width + buffer * 2,
+          height: size2.height + buffer * 2,
+        };
+
         return !(
-          pos1.x + size1.width / 2 < pos2.x - size2.width / 2 ||
-          pos2.x + size2.width / 2 < pos1.x - size1.width / 2 ||
-          pos1.y + size1.height / 2 < pos2.y - size2.height / 2 ||
-          pos2.y + size2.height / 2 < pos1.y - size1.height / 2
+          pos1.x + expandedSize1.width / 2 < pos2.x - expandedSize2.width / 2 ||
+          pos2.x + expandedSize2.width / 2 < pos1.x - expandedSize1.width / 2 ||
+          pos1.y + expandedSize1.height / 2 < pos2.y - expandedSize2.height / 2 ||
+          pos2.y + expandedSize2.height / 2 < pos1.y - expandedSize1.height / 2
         );
       };
 
@@ -711,46 +742,73 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
         nodeId: string,
         attempts = 0
       ) => {
-        if (attempts > 50) return startPos; // Prevent infinite loops
+        if (attempts > 100) return startPos; // Increased max attempts for better positioning
+
+        // Age groups are locked in center and should not be moved by collision detection
+        if (nodeId.includes('ageGroup')) {
+          return startPos;
+        }
 
         const nodeSize = {
           width: nodeWidths.get(nodeId) || 200,
           height: nodeHeights.get(nodeId) || 120,
         };
 
-        // Check for collisions with existing positioned nodes
+        // Check for collisions with existing positioned nodes using enhanced collision detection
         for (const [existingId, existingPos] of positions.entries()) {
           if (existingId === nodeId) continue;
+
+          // Skip collision with age groups since they are locked in center
+          if (existingId.includes('ageGroup')) continue;
 
           const existingSize = {
             width: nodeWidths.get(existingId) || 200,
             height: nodeHeights.get(existingId) || 120,
           };
 
-          if (checkCollision(startPos, nodeSize, existingPos, existingSize)) {
-            // Enhanced collision resolution for social_emotional and other important categories
-            const isSocialEmotional = nodeId.includes('social_emotional');
-            const adjustmentMultiplier = isSocialEmotional ? 1.5 : 1.0; // Give social_emotional more space
+          if (checkCollision(startPos, nodeSize, existingPos, existingSize, 30)) {
+            // Increased buffer for better spacing
+            // Enhanced collision resolution with smarter positioning
+            const isImportantMilestone = nodeId.includes('critical') || nodeId.includes('high');
+            const adjustmentMultiplier = isImportantMilestone ? 1.2 : 1.0;
 
-            const newPos = {
-              x: startPos.x + (Math.random() - 0.5) * 120 * adjustmentMultiplier,
-              y: startPos.y + (50 + attempts * 25) * adjustmentMultiplier,
-            };
-            return findNonCollidingPosition(newPos, nodeId, attempts + 1);
+            // Try multiple positioning strategies
+            const strategies = [
+              // Strategy 1: Offset vertically
+              {
+                x: startPos.x,
+                y: startPos.y + (60 + attempts * 30) * adjustmentMultiplier,
+              },
+              // Strategy 2: Offset horizontally (but keep within bounds)
+              {
+                x: startPos.x + (Math.random() - 0.5) * 150 * adjustmentMultiplier,
+                y: startPos.y + (30 + attempts * 15) * adjustmentMultiplier,
+              },
+              // Strategy 3: Spiral outward
+              {
+                x: startPos.x + Math.cos(attempts * 0.5) * (100 + attempts * 20),
+                y: startPos.y + Math.sin(attempts * 0.5) * (100 + attempts * 20),
+              },
+            ];
+
+            const strategyIndex = attempts % strategies.length;
+            return findNonCollidingPosition(strategies[strategyIndex], nodeId, attempts + 1);
           }
         }
 
         return startPos;
       };
 
-      // Position age groups vertically down the center
+      // Position age groups vertically down the center - LOCKED to prevent horizontal movement
       if (nodesByType.ageGroup) {
         nodesByType.ageGroup.forEach((node, index) => {
-          const initialPos = {
-            x: centerX,
+          const nodeWidth = nodeWidths.get(node.id) || 400; // Get the actual node width
+          const fixedCenterPos = {
+            x: centerX - nodeWidth / 2, // Offset by half width to center the node properly
             y: padding + index * (verticalSpacing + 100),
           };
-          positions.set(node.id, findNonCollidingPosition(initialPos, node.id));
+          // Set position directly without collision detection to lock them in center
+          positions.set(node.id, fixedCenterPos);
         });
       }
 
@@ -782,7 +840,21 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
               x: ageGroupPos.x + offsetX,
               y: ageGroupPos.y + offsetY,
             };
-            positions.set(milestone.id, findNonCollidingPosition(initialPos, milestone.id));
+
+            // Apply positioning with constraints to keep milestones within reasonable bounds
+            const finalPos = findNonCollidingPosition(initialPos, milestone.id);
+
+            // Constrain milestone positions to stay within reasonable horizontal bounds
+            const maxHorizontalDistance = canvasWidth * 2; // Maximum distance from center
+            const constrainedX = Math.max(
+              -maxHorizontalDistance,
+              Math.min(maxHorizontalDistance, finalPos.x)
+            );
+
+            positions.set(milestone.id, {
+              x: constrainedX,
+              y: finalPos.y,
+            });
           });
         });
       }
@@ -805,7 +877,8 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
         demoNodesData,
         demoEdgesData,
         currentZoomLevel,
-        focusArea
+        focusArea,
+        canvasWidth
       );
 
       const demoNodes: TimelineNode[] = [
@@ -819,7 +892,8 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
             completedMilestones: 8,
             inProgressMilestones: 5,
           },
-          position: positions.get('demo-overview') || { x: 600, y: 100 },
+          position: positions.get('demo-overview') || { x: 0, y: 100 }, // Fixed center position
+          draggable: false, // Lock demo age group in center position
         },
       ];
 
@@ -866,6 +940,7 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
             key: ageGroup.key,
           },
           position: { x: 0, y: 0 }, // Will be calculated
+          draggable: false, // Lock age groups in center position
         });
 
         // Connect age groups with timeline flow
@@ -990,7 +1065,8 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
       generatedNodes,
       generatedEdges,
       currentZoomLevel,
-      focusArea
+      focusArea,
+      canvasWidth
     );
 
     // Apply calculated positions
@@ -1009,10 +1085,44 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     pedagogyData,
     calculateNodePositions,
     focusArea,
+    canvasWidth,
   ]);
 
-  const [reactFlowNodes, setNodes, onNodesChange] = useNodesState(nodes);
+  const [reactFlowNodes, setNodes, onNodesChangeInternal] = useNodesState(nodes);
   const [reactFlowEdges, setEdges, onEdgesChange] = useEdgesState(edges);
+
+  // Custom nodes change handler to prevent horizontal movement and maintain collision-free positioning
+  const onNodesChange = useCallback(
+    (changes: any[]) => {
+      // Filter out changes that would move nodes horizontally or cause collisions
+      const filteredChanges = changes.filter((change) => {
+        // Always block position changes for age groups
+        if (change.type === 'position' && change.id?.includes('ageGroup')) {
+          return false;
+        }
+
+        // For milestone nodes, prevent excessive horizontal movement
+        if (change.type === 'position' && change.position) {
+          const node = reactFlowNodes.find((n) => n.id === change.id);
+          if (node && change.position.x !== undefined) {
+            const maxHorizontalDistance = 600;
+            const constrainedX = Math.max(
+              -maxHorizontalDistance,
+              Math.min(maxHorizontalDistance, change.position.x)
+            );
+
+            // Update position to constrained value
+            change.position.x = constrainedX;
+          }
+        }
+
+        return true;
+      });
+
+      onNodesChangeInternal(filteredChanges);
+    },
+    [onNodesChangeInternal, reactFlowNodes]
+  );
 
   // Update nodes when generated nodes change
   React.useEffect(() => {
@@ -1080,13 +1190,12 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
           handleFocusNode={handleFocusNode}
           focusNodeId={focusNodeId}
           focusArea={focusArea}
-          showFilters={showFilters}
-          setShowFilters={setShowFilters}
           selectedCategories={selectedCategories}
           toggleCategoryFilter={toggleCategoryFilter}
           selectedFamilyMembers={selectedFamilyMembers}
           setSelectedFamilyMembers={setSelectedFamilyMembers}
           pedagogyData={pedagogyData}
+          onCanvasWidthChange={handleCanvasWidthChange}
         />
       </ReactFlowProvider>
     </div>
@@ -1107,13 +1216,12 @@ interface ReactFlowInnerComponentProps {
   handleFocusNode: (nodeId: string) => void;
   focusNodeId: string | null;
   focusArea: string | null;
-  showFilters: boolean;
-  setShowFilters: (show: boolean) => void;
   selectedCategories: DevelopmentCategory[];
   toggleCategoryFilter: (category: DevelopmentCategory) => void;
   selectedFamilyMembers: string[];
   setSelectedFamilyMembers: React.Dispatch<React.SetStateAction<string[]>>;
   pedagogyData?: PedagogyProfile;
+  onCanvasWidthChange: (width: number) => void;
 }
 
 const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
@@ -1129,15 +1237,43 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
   handleFocusNode,
   focusNodeId,
   focusArea,
-  showFilters,
-  setShowFilters,
   selectedCategories,
   toggleCategoryFilter,
   selectedFamilyMembers,
   setSelectedFamilyMembers,
   pedagogyData,
+  onCanvasWidthChange,
 }) => {
   const reactFlowInstance = useReactFlow();
+
+  // Keep track of previous nodes length to avoid excessive centering
+  const prevNodesLength = React.useRef(0);
+
+  // Track canvas dimensions
+  const [canvasDimensions, setCanvasDimensions] = React.useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+
+  // Get canvas dimensions from ReactFlow container
+  React.useEffect(() => {
+    if (reactFlowInstance) {
+      const updateDimensions = () => {
+        const container = document.querySelector('.react-flow__renderer');
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          setCanvasDimensions({ width: rect.width, height: rect.height });
+          onCanvasWidthChange(rect.width); // Notify parent component
+        }
+      };
+
+      // Update dimensions initially and on resize
+      updateDimensions();
+      window.addEventListener('resize', updateDimensions);
+
+      return () => window.removeEventListener('resize', updateDimensions);
+    }
+  }, [reactFlowInstance, onCanvasWidthChange]);
 
   // Enhanced focus behavior: zoom into areas rather than just individual nodes
   React.useEffect(() => {
@@ -1161,6 +1297,16 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
               minZoom: 0.8,
               maxZoom: 1.5,
             });
+            // Force center after area focus
+            setTimeout(() => {
+              const viewport = reactFlowInstance.getViewport();
+              const canvasCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+              reactFlowInstance.setViewport({
+                x: canvasCenterX,
+                y: viewport.y,
+                zoom: viewport.zoom,
+              });
+            }, 100);
             return;
           }
         }
@@ -1173,9 +1319,35 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
           minZoom: 0.5,
           maxZoom: 2.0,
         });
+        // Force center after individual focus
+        setTimeout(() => {
+          const viewport = reactFlowInstance.getViewport();
+          const canvasCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+          reactFlowInstance.setViewport({ x: canvasCenterX, y: viewport.y, zoom: viewport.zoom });
+        }, 100);
       }
     }
   }, [focusNodeId, focusArea, nodes, reactFlowInstance]);
+
+  // Initial centering when component mounts
+  React.useEffect(() => {
+    if (reactFlowInstance && nodes.length > 0) {
+      setTimeout(() => {
+        reactFlowInstance.fitView({
+          padding: 0.1,
+          minZoom: 0.5,
+          maxZoom: 1.2,
+          duration: 500,
+        });
+        // Force center after initial fit
+        setTimeout(() => {
+          const viewport = reactFlowInstance.getViewport();
+          const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+          reactFlowInstance.setViewport({ x: screenCenterX, y: viewport.y, zoom: viewport.zoom });
+        }, 600);
+      }, 200);
+    }
+  }, [reactFlowInstance, nodes.length, canvasDimensions]);
 
   // Handle visual zoom controls with improved behavior
   const handleVisualZoomIn = useCallback(() => {
@@ -1187,13 +1359,55 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
   }, [reactFlowInstance]);
 
   const handleFitView = useCallback(() => {
-    reactFlowInstance.fitView({
-      duration: 800,
-      padding: 0.1,
-      minZoom: 0.1,
-      maxZoom: 1.5,
-    });
-  }, [reactFlowInstance]);
+    if (nodes.length > 0) {
+      reactFlowInstance.fitView({
+        duration: 800,
+        padding: 0.1,
+        minZoom: 0.5,
+        maxZoom: 1.5,
+      });
+      // Force center after fit view
+      setTimeout(() => {
+        const viewport = reactFlowInstance.getViewport();
+        const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+        reactFlowInstance.setViewport({ x: screenCenterX, y: viewport.y, zoom: viewport.zoom });
+      }, 100);
+    }
+  }, [reactFlowInstance, nodes, canvasDimensions]);
+
+  // Only restrict horizontal viewport movement, allow vertical panning
+  const onMoveEnd = useCallback(
+    (event: any, viewport: any) => {
+      // Calculate the center position based on canvas width
+      const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+
+      // Only reset horizontal position to center if it has moved too far, keep vertical position
+      if (Math.abs(viewport.x - screenCenterX) > 50) {
+        // Allow small horizontal movements for better UX
+        reactFlowInstance.setViewport({ x: screenCenterX, y: viewport.y, zoom: viewport.zoom });
+      }
+    },
+    [reactFlowInstance, canvasDimensions]
+  );
+
+  // Allow normal panning behavior for vertical scrolling
+  const panOnDrag = true; // Enable normal panning for vertical movement
+
+  // Auto-center horizontally when nodes change, but don't interfere with manual vertical navigation
+  React.useEffect(() => {
+    if (nodes.length > 0) {
+      // Only center initially or when zoom level changes, not on every node change
+      const hasNodesChanged = nodes.length !== prevNodesLength.current;
+      if (hasNodesChanged) {
+        setTimeout(() => {
+          const viewport = reactFlowInstance.getViewport();
+          const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
+          reactFlowInstance.setViewport({ x: screenCenterX, y: viewport.y, zoom: viewport.zoom });
+        }, 100);
+      }
+      prevNodesLength.current = nodes.length;
+    }
+  }, [nodes.length, reactFlowInstance, canvasDimensions]); // Only depend on nodes.length, not full nodes array
 
   return (
     <ReactFlow
@@ -1204,13 +1418,18 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
       onNodeClick={onNodeClick}
       nodeTypes={nodeTypes}
       connectionMode={ConnectionMode.Loose}
-      fitView
-      minZoom={0.1}
+      fitView={false} // Disable automatic fitView to control it manually
+      minZoom={0.3}
       maxZoom={2}
       defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
       nodesDraggable={true}
       nodesConnectable={false}
       elementsSelectable={true}
+      panOnDrag={panOnDrag}
+      onMoveEnd={onMoveEnd}
+      // Remove restrictive extents that might cause off-center positioning
+      preventScrolling={false}
+      zoomOnDoubleClick={false}
     >
       <Background />
       <Controls />
@@ -1284,68 +1503,53 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
               <ZoomOut className="w-3 h-3" />
             </SafeButton>
           </div>
-
-          {/* Filter Toggle */}
-          <SafeButton
-            size="sm"
-            variant="outline"
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-1 w-full"
-          >
-            <Filter className="w-3 h-3" />
-            <span>Filters</span>
-          </SafeButton>
         </div>
       </Panel>
 
-      {/* Enhanced Filter Panel */}
-      {showFilters && (
-        <Panel position="top-right" className="bg-white p-4 rounded-lg shadow-lg border max-w-xs">
-          <div className="space-y-4">
-            <div className="font-semibold text-gray-800">Development Categories</div>
-            <div className="space-y-2 max-h-64 overflow-y-auto">
-              {DEVELOPMENT_CATEGORIES.map((category) => (
-                <label key={category} className="flex items-center space-x-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={selectedCategories.includes(category)}
-                    onChange={() => toggleCategoryFilter(category)}
-                    className="rounded border-gray-300"
-                  />
-                  <span className="capitalize">{category.replace('_', ' ')}</span>
-                </label>
-              ))}
-            </div>
-
-            {pedagogyData &&
-              pedagogyData.familyMembers &&
-              pedagogyData.familyMembers.length > 0 && (
-                <>
-                  <div className="font-semibold text-gray-800 pt-2 border-t">Family Members</div>
-                  <div className="space-y-2 max-h-32 overflow-y-auto">
-                    {pedagogyData.familyMembers.map((member: any) => (
-                      <label key={member.id} className="flex items-center space-x-2 text-sm">
-                        <input
-                          type="checkbox"
-                          checked={selectedFamilyMembers.includes(member.id)}
-                          onChange={() => {
-                            setSelectedFamilyMembers((prev) =>
-                              prev.includes(member.id)
-                                ? prev.filter((id) => id !== member.id)
-                                : [...prev, member.id]
-                            );
-                          }}
-                          className="rounded border-gray-300"
-                        />
-                        <span>{member.name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </>
-              )}
+      {/* Always Visible Filter Panel */}
+      <Panel position="top-right" className="bg-white p-4 rounded-lg shadow-lg border max-w-xs">
+        <div className="space-y-4">
+          <div className="font-semibold text-gray-800">Development Categories</div>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {DEVELOPMENT_CATEGORIES.map((category) => (
+              <label key={category} className="flex items-center space-x-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => toggleCategoryFilter(category)}
+                  className="rounded border-gray-300"
+                />
+                <span className="capitalize">{category.replace('_', ' ')}</span>
+              </label>
+            ))}
           </div>
-        </Panel>
-      )}
+
+          {pedagogyData && pedagogyData.familyMembers && pedagogyData.familyMembers.length > 0 && (
+            <>
+              <div className="font-semibold text-gray-800 pt-2 border-t">Family Members</div>
+              <div className="space-y-2 max-h-32 overflow-y-auto">
+                {pedagogyData.familyMembers.map((member: any) => (
+                  <label key={member.id} className="flex items-center space-x-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={selectedFamilyMembers.includes(member.id)}
+                      onChange={() => {
+                        setSelectedFamilyMembers((prev) =>
+                          prev.includes(member.id)
+                            ? prev.filter((id) => id !== member.id)
+                            : [...prev, member.id]
+                        );
+                      }}
+                      className="rounded border-gray-300"
+                    />
+                    <span>{member.name}</span>
+                  </label>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </Panel>
     </ReactFlow>
   );
 };
