@@ -140,19 +140,25 @@ export const useTimelineData = ({
 
         // Connect age groups with timeline flow
         if (index > 0) {
-          generatedEdges.push({
-            id: `timeline-flow-${index}`,
-            source: `ageGroup-${ageGroups[index - 1].key}`,
-            target: ageGroupId,
-            type: 'smoothstep',
-            style: {
-              stroke: '#6b7280',
-              strokeWidth: 4,
-              strokeDasharray: '15,10',
-            },
-            label: 'Timeline Progression',
-            markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
-          });
+          const previousAgeGroup = ageGroups[index - 1];
+          const sourceKey = previousAgeGroup?.key;
+          
+          // Only create edge if both source and target keys exist
+          if (sourceKey && ageGroup.key) {
+            generatedEdges.push({
+              id: `timeline-flow-${index}`,
+              source: `ageGroup-${sourceKey}`,
+              target: ageGroupId,
+              type: 'smoothstep',
+              style: {
+                stroke: '#6b7280',
+                strokeWidth: 4,
+                strokeDasharray: '15,10',
+              },
+              label: 'Timeline Progression',
+              markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
+            });
+          }
         }
       });
     }
@@ -221,22 +227,24 @@ export const useTimelineData = ({
             });
 
             // Enhanced directional edges from age group to milestones
-            generatedEdges.push({
-              id: `age-to-milestone-${milestone.id}`,
-              source: ageGroupId,
-              target: milestoneId,
-              type: 'smoothstep',
-              style: {
-                stroke: CATEGORY_COLORS[category]?.stroke || '#6b7280',
-                strokeWidth: 2,
-                opacity: 0.7,
-              },
-              label: milestoneIndex === 0 ? 'Contains' : undefined,
-              markerEnd: {
-                type: MarkerType.ArrowClosed,
-                color: CATEGORY_COLORS[category]?.stroke || '#6b7280',
-              },
-            });
+            if (ageGroupId && milestoneId && milestone.id) {
+              generatedEdges.push({
+                id: `age-to-milestone-${milestone.id}`,
+                source: ageGroupId,
+                target: milestoneId,
+                type: 'smoothstep',
+                style: {
+                  stroke: CATEGORY_COLORS[category]?.stroke || '#6b7280',
+                  strokeWidth: 2,
+                  opacity: 0.7,
+                },
+                label: milestoneIndex === 0 ? 'Contains' : undefined,
+                markerEnd: {
+                  type: MarkerType.ArrowClosed,
+                  color: CATEGORY_COLORS[category]?.stroke || '#6b7280',
+                },
+              });
+            }
           });
         });
       });
