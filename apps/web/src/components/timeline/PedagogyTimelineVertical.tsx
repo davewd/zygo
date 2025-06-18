@@ -593,27 +593,27 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     return milestones;
   };
 
-  // Enhanced zoom levels with comprehensive coverage
+  // Enhanced zoom levels with comprehensive coverage (categories removed)
   const zoomLevels: TimelineZoomLevel[] = [
     {
       level: 0,
       name: 'Overview',
       description: 'Complete timeline overview from prenatal to 18 years',
-      nodeTypes: ['ageGroup', 'category'],
+      nodeTypes: ['ageGroup'],
       timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // -12 months to 18 years
     },
     {
       level: 1,
       name: 'Age Group Focus',
-      description: 'Focused view on specific age group and its categories',
-      nodeTypes: ['ageGroup', 'category', 'milestone'],
+      description: 'Focused view on specific age groups and milestones',
+      nodeTypes: ['ageGroup', 'milestone'],
       timeSpan: { minAgeMonths: -12, maxAgeMonths: 60 }, // Prenatal to 5 years focus
     },
     {
       level: 2,
       name: 'Milestone Deep Dive',
       description: 'Detailed view of individual milestones and progress',
-      nodeTypes: ['category', 'milestone'],
+      nodeTypes: ['milestone'],
       timeSpan: { minAgeMonths: -12, maxAgeMonths: 36 }, // Prenatal to 3 years focus
     },
   ];
@@ -755,131 +755,32 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
       }
 
       // Position categories around age groups with improved category-specific branching
-      if (nodesByType.category) {
+      // REMOVED: Category positioning logic since categories have been removed
+
+      // Position milestones directly around age groups in a radial pattern
+      if (nodesByType.milestone) {
         const ageGroups = nodesByType.ageGroup || [];
 
-        // Group categories by age group for better positioning
-        const categoriesByAgeGroup = new Map<string, any[]>();
-
-        nodesByType.category.forEach((node) => {
-          // Extract age group from node ID (format: category-{ageGroup}-{category})
-          const ageGroupMatch = node.id.match(/category-([^-]+)-/);
-          const ageGroup = ageGroupMatch ? ageGroupMatch[1] : 'unknown';
-
-          if (!categoriesByAgeGroup.has(ageGroup)) {
-            categoriesByAgeGroup.set(ageGroup, []);
-          }
-          categoriesByAgeGroup.get(ageGroup)?.push(node);
-        });
-
-        // Position categories with category-specific logic
-        categoriesByAgeGroup.forEach((categories, ageGroupKey) => {
-          const ageGroup = ageGroups.find((ag) => ag.id === `ageGroup-${ageGroupKey}`);
-          if (!ageGroup) return;
-
+        ageGroups.forEach((ageGroup, ageIndex) => {
           const ageGroupPos = positions.get(ageGroup.id);
           if (!ageGroupPos) return;
 
-          // Sort categories to ensure consistent positioning
-          const sortedCategories = categories.sort((a, b) => {
-            // Extract category type from node data
-            const categoryA = a.data?.category || '';
-            const categoryB = b.data?.category || '';
-
-            // Priority order for consistent positioning
-            const priorityOrder = {
-              physical: 0,
-              cognitive: 1,
-              social_emotional: 2,
-              language: 3,
-              motor_skills: 4,
-              sensory: 5,
-              self_care: 6,
-              academic: 7,
-            };
-
-            return (priorityOrder[categoryA] || 99) - (priorityOrder[categoryB] || 99);
-          });
-
-          sortedCategories.forEach((node, index) => {
-            const categoryType = node.data?.category || '';
-            let offsetX, offsetY;
-
-            // Category-specific positioning with improved social_emotional placement
-            switch (categoryType) {
-              case 'physical':
-                offsetX = -horizontalSpacing * 1.1;
-                offsetY = -80;
-                break;
-              case 'cognitive':
-                offsetX = horizontalSpacing * 1.1;
-                offsetY = -80;
-                break;
-              case 'social_emotional':
-                // Fix: Position social_emotional prominently to the left-center
-                offsetX = -horizontalSpacing * 0.6;
-                offsetY = 120;
-                break;
-              case 'language':
-                offsetX = horizontalSpacing * 0.6;
-                offsetY = 120;
-                break;
-              case 'motor_skills':
-                offsetX = -horizontalSpacing * 1.3;
-                offsetY = 40;
-                break;
-              case 'sensory':
-                offsetX = horizontalSpacing * 1.3;
-                offsetY = 40;
-                break;
-              case 'self_care':
-                offsetX = 0;
-                offsetY = 200;
-                break;
-              case 'academic':
-                offsetX = 0;
-                offsetY = -150;
-                break;
-              default:
-                // Fallback pattern for any additional categories
-                const fallbackIndex = index % 4;
-                const angle = (fallbackIndex / 4) * Math.PI * 2;
-                offsetX = Math.cos(angle) * horizontalSpacing;
-                offsetY = Math.sin(angle) * verticalSpacing * 0.3;
-            }
-
-            const initialPos = {
-              x: ageGroupPos.x + offsetX,
-              y: ageGroupPos.y + offsetY,
-            };
-            positions.set(node.id, findNonCollidingPosition(initialPos, node.id));
-          });
-        });
-      }
-
-      // Position milestones around categories with hierarchical layout
-      if (nodesByType.milestone) {
-        const categories = nodesByType.category || [];
-
-        categories.forEach((category, catIndex) => {
-          const categoryPos = positions.get(category.id);
-          if (!categoryPos) return;
-
-          // Get milestones for this category
-          const categoryMilestones = nodesByType.milestone.filter((m) =>
-            edgeData.some((edge) => edge.source === category.id && edge.target === m.id)
+          // Get milestones for this age group
+          const ageGroupMilestones = nodesByType.milestone.filter((m) =>
+            edgeData.some((edge) => edge.source === ageGroup.id && edge.target === m.id)
           );
 
-          categoryMilestones.forEach((milestone, mIndex) => {
-            // Create a circular/fan pattern around the category
-            const angle = (mIndex / categoryMilestones.length) * Math.PI * 2;
-            const radius = 250;
+          ageGroupMilestones.forEach((milestone, mIndex) => {
+            // Create a radial pattern around the age group
+            const totalMilestones = ageGroupMilestones.length;
+            const angle = (mIndex / totalMilestones) * Math.PI * 2;
+            const radius = 300 + (mIndex % 3) * 100; // Stagger milestones at different distances
             const offsetX = Math.cos(angle) * radius;
             const offsetY = Math.sin(angle) * radius;
 
             const initialPos = {
-              x: categoryPos.x + offsetX,
-              y: categoryPos.y + offsetY + 200, // Offset down from category
+              x: ageGroupPos.x + offsetX,
+              y: ageGroupPos.y + offsetY,
             };
             positions.set(milestone.id, findNonCollidingPosition(initialPos, milestone.id));
           });
@@ -894,15 +795,10 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
   // Enhanced nodes and edges generation with better layout and directional flow
   const { nodes, edges } = useMemo(() => {
     if (!pedagogyData) {
-      // Enhanced demo nodes with better positioning
-      const demoNodesData = [
-        { id: 'demo-overview', type: 'ageGroup' },
-        { id: 'demo-physical', type: 'category' },
-        { id: 'demo-cognitive', type: 'category' },
-      ];
-      const demoEdgesData = [
-        { id: 'demo-edge-1', source: 'demo-overview', target: 'demo-physical' },
-        { id: 'demo-edge-2', source: 'demo-overview', target: 'demo-cognitive' },
+      // Enhanced demo nodes with better positioning (categories removed)
+      const demoNodesData = [{ id: 'demo-overview', type: 'ageGroup' }];
+      const demoEdgesData: any[] = [
+        // No category edges since categories are removed
       ];
 
       const { positions } = calculateNodePositions(
@@ -925,53 +821,10 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
           },
           position: positions.get('demo-overview') || { x: 600, y: 100 },
         },
-        {
-          id: 'demo-physical',
-          type: 'category',
-          data: {
-            title: 'Physical Development',
-            description: 'Gross and fine motor skills development',
-            category: 'physical' as DevelopmentCategory,
-            completionPercentage: 65,
-            milestoneCount: 8,
-            isExpanded: false,
-          },
-          position: positions.get('demo-physical') || { x: 200, y: 400 },
-        },
-        {
-          id: 'demo-cognitive',
-          type: 'category',
-          data: {
-            title: 'Cognitive Development',
-            description: 'Learning, memory, and problem-solving skills',
-            category: 'cognitive' as DevelopmentCategory,
-            completionPercentage: 40,
-            milestoneCount: 10,
-            isExpanded: false,
-          },
-          position: positions.get('demo-cognitive') || { x: 1000, y: 400 },
-        },
       ];
 
       const demoEdges: TimelineEdge[] = [
-        {
-          id: 'demo-edge-1',
-          source: 'demo-overview',
-          target: 'demo-physical',
-          type: 'smoothstep',
-          style: { stroke: '#10b981', strokeWidth: 3 },
-          label: 'Develops into',
-          markerEnd: { type: MarkerType.ArrowClosed, color: '#10b981' },
-        },
-        {
-          id: 'demo-edge-2',
-          source: 'demo-overview',
-          target: 'demo-cognitive',
-          type: 'smoothstep',
-          style: { stroke: '#3b82f6', strokeWidth: 3 },
-          label: 'Grows into',
-          markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' },
-        },
+        // No edges in demo since categories have been removed
       ];
 
       return { nodes: demoNodes, edges: demoEdges };
@@ -1035,83 +888,9 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
     }
 
     // Generate categories with better relationships using comprehensive ranges
-    if (shouldIncludeNode('category')) {
-      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length)); // Match age group generation
-      const categoryColors = {
-        physical: '#ef4444',
-        cognitive: '#3b82f6',
-        social_emotional: '#10b981',
-        language: '#8b5cf6',
-        motor_skills: '#f97316',
-        sensory: '#eab308',
-        self_care: '#ec4899',
-        academic: '#6366f1',
-      };
+    // REMOVED: Category generation has been disabled to simplify the timeline view
 
-      ageGroups.forEach((ageGroup, ageIndex) => {
-        const ageGroupId = `ageGroup-${ageGroup.key}`;
-
-        // Filter categories based on selections and relevance to age range
-        const relevantCategories = DEVELOPMENT_CATEGORIES.filter((category) => {
-          if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
-            return false;
-          }
-          // Filter categories by age appropriateness
-          const [startMonth] = ageGroup.months;
-          if (
-            startMonth < 0 &&
-            !['physical', 'cognitive', 'social_emotional', 'language'].includes(category)
-          ) {
-            return false; // Prenatal only has basic categories
-          }
-          return true;
-        });
-
-        relevantCategories.forEach((category, catIndex) => {
-          const categoryId = `category-${ageGroup.key}-${category}`;
-          const categoryMilestones = comprehensiveMilestones.filter(
-            (m) => m.ageRangeKey === ageGroup.key && m.category === category
-          );
-
-          generatedNodes.push({
-            id: categoryId,
-            type: 'category',
-            data: {
-              title: category.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
-              description: `${category.replace('_', ' ')} development during ${ageGroup.range}`,
-              category: category,
-              completionPercentage: Math.floor(Math.random() * 100),
-              milestoneCount: categoryMilestones.length,
-              isExpanded: false,
-              ageGroup: ageGroup.key,
-              ageRange: ageGroup.range,
-              months: ageGroup.months,
-            },
-            position: { x: 0, y: 0 }, // Will be calculated
-          });
-
-          // Create enhanced directional edges from age group to categories
-          generatedEdges.push({
-            id: `age-to-cat-${ageGroup.key}-${category}`,
-            source: ageGroupId,
-            target: categoryId,
-            type: 'smoothstep',
-            style: {
-              stroke: categoryColors[category] || '#6b7280',
-              strokeWidth: 3,
-              opacity: 0.8,
-            },
-            label: catIndex === 0 ? 'Develops into' : undefined,
-            markerEnd: {
-              type: MarkerType.ArrowClosed,
-              color: categoryColors[category] || '#6b7280',
-            },
-          });
-        });
-      });
-    }
-
-    // Generate milestones with hierarchical relationships using comprehensive milestone data
+    // Generate milestones with direct connections to age groups (categories removed)
     if (shouldIncludeNode('milestone')) {
       const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length)); // Match other generations
       const categoryColors = {
@@ -1126,12 +905,13 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
       };
 
       ageGroups.forEach((ageGroup) => {
+        const ageGroupId = `ageGroup-${ageGroup.key}`;
+
         DEVELOPMENT_CATEGORIES.forEach((category) => {
           if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
             return;
           }
 
-          const categoryId = `category-${ageGroup.key}-${category}`;
           const categoryMilestones = comprehensiveMilestones.filter(
             (m) => m.ageRangeKey === ageGroup.key && m.category === category
           );
@@ -1183,10 +963,10 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
               position: { x: 0, y: 0 }, // Will be calculated
             });
 
-            // Enhanced directional edges from category to milestones
+            // Enhanced directional edges from age group directly to milestones (bypassing categories)
             generatedEdges.push({
-              id: `cat-to-milestone-${milestone.id}`,
-              source: categoryId,
+              id: `age-to-milestone-${milestone.id}`,
+              source: ageGroupId,
               target: milestoneId,
               type: 'smoothstep',
               style: {
@@ -1194,7 +974,7 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
                 strokeWidth: 2,
                 opacity: 0.7,
               },
-              label: milestoneIndex === 0 ? 'Includes' : undefined,
+              label: milestoneIndex === 0 ? 'Contains' : undefined,
               markerEnd: {
                 type: MarkerType.ArrowClosed,
                 color: categoryColors[category] || '#6b7280',
@@ -1249,16 +1029,11 @@ const VerticalTimeLine: React.FC<TimelinePedagogyProps> = ({ pedagogyData, onNod
       // Enhanced zoom logic: focus on specific areas and zoom into them
       setFocusNodeId(node.id);
 
-      // Set focus area based on node type and data
+      // Set focus area based on node type and data (category logic removed)
       if (node.type === 'ageGroup') {
         setFocusArea(node.data.ageRange);
         if (currentZoomLevel === 0) {
-          setCurrentZoomLevel(1); // Zoom into age group categories
-        }
-      } else if (node.type === 'category') {
-        setFocusArea(node.data.ageGroup);
-        if (currentZoomLevel === 1) {
-          setCurrentZoomLevel(2); // Zoom into category milestones
+          setCurrentZoomLevel(1); // Zoom into age group milestones
         }
       }
       // For milestones, just focus without changing zoom level
@@ -1444,8 +1219,6 @@ const ReactFlowInnerComponent: React.FC<ReactFlowInnerComponentProps> = ({
           switch (node.type) {
             case 'ageGroup':
               return '#6b7280';
-            case 'category':
-              return '#10b981';
             case 'milestone':
               return '#3b82f6';
             default:
