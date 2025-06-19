@@ -1,5 +1,5 @@
-import { Search } from 'lucide-react';
-import React, { useState } from 'react';
+import { Search, User } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from '../components/input';
 import {
   NavigationMenu,
@@ -11,26 +11,131 @@ import {
 
 import { cn } from '@zygo/libs';
 
+interface ProviderSuggestion {
+  id: string;
+  firstName: string;
+  lastName: string;
+  title: string;
+  centerName: string;
+  profileImage?: string;
+}
+
 interface INavigationBarProps {
   className?: string;
   onSearch?: (query: string) => void;
   searchPlaceholder?: string;
 }
 
+// Provider suggestions data
+const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
+  {
+    id: 'rebecca-cavallaro',
+    firstName: 'Rebecca',
+    lastName: 'Cavallaro',
+    title: 'IBCLC, Midwife, RN',
+    centerName: 'Full Circle Midwifery',
+    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    id: 'jessica-dawson-dietitian',
+    firstName: 'Jessica',
+    lastName: 'Dawson',
+    title: 'PhD, Accredited Practicing Dietitian',
+    centerName: 'Kidney Nutrition',
+    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    id: 'peta-carige',
+    firstName: 'Peta',
+    lastName: 'Carige',
+    title: 'Advanced Sports Dietitian, APD',
+    centerName: 'Start Training',
+    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
+  },
+];
+
 const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
   ({ className, onSearch, searchPlaceholder = 'Search...', ...props }, ref) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const searchRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    
+    // Filter suggestions based on search query
+    const filteredSuggestions = PROVIDER_SUGGESTIONS.filter(provider => {
+      if (!searchQuery.trim()) return false;
+      const fullName = `${provider.firstName} ${provider.lastName}`.toLowerCase();
+      return fullName.includes(searchQuery.toLowerCase());
+    });
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setSearchQuery(value);
+      setShowDropdown(value.trim().length > 0);
+      setSelectedIndex(-1);
       onSearch?.(value);
     };
 
     const handleSearchSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      onSearch?.(searchQuery);
+      if (selectedIndex >= 0 && filteredSuggestions[selectedIndex]) {
+        handleProviderSelect(filteredSuggestions[selectedIndex]);
+      } else {
+        onSearch?.(searchQuery);
+      }
     };
+
+    const handleProviderSelect = (provider: ProviderSuggestion) => {
+      setSearchQuery(`${provider.firstName} ${provider.lastName}`);
+      setShowDropdown(false);
+      setSelectedIndex(-1);
+      // Navigate to provider page
+      window.location.href = `/network/providers/${provider.id}`;
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (!showDropdown || filteredSuggestions.length === 0) return;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedIndex(prev => 
+            prev < filteredSuggestions.length - 1 ? prev + 1 : prev
+          );
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
+          break;
+        case 'Escape':
+          setShowDropdown(false);
+          setSelectedIndex(-1);
+          inputRef.current?.blur();
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0) {
+            handleProviderSelect(filteredSuggestions[selectedIndex]);
+          }
+          break;
+      }
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+          setShowDropdown(false);
+          setSelectedIndex(-1);
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, []);
 
     return (
       <div
@@ -70,19 +175,70 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Search Bar */}
-        <form onSubmit={handleSearchSubmit} className="relative max-w-md">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-            <Input
-              type="text"
-              placeholder={searchPlaceholder}
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="pl-10 pr-4 h-9 w-64 bg-background border-input focus:ring-2 focus:ring-ring focus:border-transparent"
-            />
-          </div>
-        </form>
+        {/* Search Bar with Dropdown */}
+        <div ref={searchRef} className="relative max-w-md">
+          <form onSubmit={handleSearchSubmit} className="relative">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Input
+                ref={inputRef}
+                type="text"
+                placeholder={searchPlaceholder}
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onKeyDown={handleKeyDown}
+                onFocus={() => {
+                  if (searchQuery.trim() && filteredSuggestions.length > 0) {
+                    setShowDropdown(true);
+                  }
+                }}
+                className="pl-10 pr-4 h-9 w-64 bg-background border-input focus:ring-2 focus:ring-ring focus:border-transparent"
+                autoComplete="off"
+              />
+            </div>
+          </form>
+
+          {/* Dropdown */}
+          {showDropdown && filteredSuggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-sm border border-input rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
+              {filteredSuggestions.map((provider, index) => (
+                <div
+                  key={provider.id}
+                  className={cn(
+                    'flex items-center gap-3 p-3 cursor-pointer transition-colors',
+                    'hover:bg-gray-100/80 hover:text-gray-900',
+                    selectedIndex === index && 'bg-gray-100/80 text-gray-900'
+                  )}
+                  onClick={() => handleProviderSelect(provider)}
+                  onMouseEnter={() => setSelectedIndex(index)}
+                >
+                  {provider.profileImage ? (
+                    <img
+                      src={provider.profileImage}
+                      alt={`${provider.firstName} ${provider.lastName}`}
+                      className="w-10 h-10 rounded-full object-cover border border-border"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                      <User className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-sm truncate text-gray-900">
+                      {provider.firstName} {provider.lastName}
+                    </div>
+                    <div className="text-xs text-gray-600 truncate">
+                      {provider.title}
+                    </div>
+                    <div className="text-xs text-gray-500 truncate">
+                      {provider.centerName}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
