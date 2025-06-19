@@ -73,6 +73,8 @@ import {
   SARAH_DIGITAL_SPECIALIST,
   ZYGO_APP_CENTER,
 } from '../../data/network/zygoAppCenter';
+import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
+import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -455,23 +457,10 @@ const ServiceProviderDetail = () => {
                     <CardContent>
                       <div className="grid gap-4">
                         {provider.credentials.map((credential, index) => (
-                          <div key={index} className="flex items-start p-4 border rounded-lg">
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-gray-800">{credential.title}</h4>
-                              {credential.abbreviation && (
-                                <p className="text-zygo-red font-medium">
-                                  {credential.abbreviation}
-                                </p>
-                              )}
-                              <p className="text-gray-600 text-sm">{credential.issuingBody}</p>
-                              {credential.verified && (
-                                <span className="inline-block mt-2 bg-green-50 text-green-700 text-xs px-2 py-1 rounded">
-                                  ✓ Verified
-                                </span>
-                              )}
-                            </div>
-                          </div>
+                          <ClickableCredentialCard
+                            key={index}
+                            credential={credential}
+                          />
                         ))}
                       </div>
                     </CardContent>

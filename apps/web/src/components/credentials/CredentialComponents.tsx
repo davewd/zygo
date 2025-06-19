@@ -1,6 +1,8 @@
 import type { PersonalCredential } from '@zygo/types';
 import { Badge } from '@zygo/ui';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { getCredentialDefinition } from '../../data/credentials/credentialProviders_new';
 import { CredentialService } from '../../services/credentialService';
 
 interface CredentialBadgeProps {
@@ -70,6 +72,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
   onDelete,
 }) => {
   const displayInfo = CredentialService.getCredentialDisplayInfo(credential);
+  const definition = getCredentialDefinition(credential.credentialDefinitionId);
 
   const getStatusColor = () => {
     if (displayInfo.isExpired) return 'text-red-600 bg-red-50';
@@ -89,7 +92,16 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
           {displayInfo.abbreviation && (
             <p className="text-sm text-gray-600">{displayInfo.abbreviation}</p>
           )}
-          <p className="text-sm text-gray-600">{displayInfo.issuingProvider}</p>
+          {definition?.issuingProviderId ? (
+            <Link
+              to={`/credentials/providers/${definition.issuingProviderId}`}
+              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              {displayInfo.issuingProvider}
+            </Link>
+          ) : (
+            <p className="text-sm text-gray-600">{displayInfo.issuingProvider}</p>
+          )}
         </div>
 
         <div className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor()}`}>
