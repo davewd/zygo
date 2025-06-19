@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { BlogPostCard } from '../../components/blog/BlogPostCard';
+import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import {
   ACTIVE8_CENTER,
   EMILY_MCCONAGHY,
@@ -73,8 +74,6 @@ import {
   SARAH_DIGITAL_SPECIALIST,
   ZYGO_APP_CENTER,
 } from '../../data/network/zygoAppCenter';
-import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
-import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -457,10 +456,7 @@ const ServiceProviderDetail = () => {
                     <CardContent>
                       <div className="grid gap-4">
                         {provider.credentials.map((credential, index) => (
-                          <ClickableCredentialCard
-                            key={index}
-                            credential={credential}
-                          />
+                          <ClickableCredentialCard key={index} credential={credential} />
                         ))}
                       </div>
                     </CardContent>
