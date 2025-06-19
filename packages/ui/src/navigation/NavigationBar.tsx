@@ -1,5 +1,5 @@
 import { Search, User } from 'lucide-react';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Input } from '../components/input';
 import {
   NavigationMenu,
@@ -34,7 +34,8 @@ const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
     lastName: 'Cavallaro',
     title: 'IBCLC, Midwife, RN',
     centerName: 'Full Circle Midwifery',
-    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+    profileImage:
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
   },
   {
     id: 'jessica-dawson-dietitian',
@@ -42,7 +43,8 @@ const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
     lastName: 'Dawson',
     title: 'PhD, Accredited Practicing Dietitian',
     centerName: 'Kidney Nutrition',
-    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+    profileImage:
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
   },
   {
     id: 'peta-carige',
@@ -50,7 +52,8 @@ const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
     lastName: 'Carige',
     title: 'Advanced Sports Dietitian, APD',
     centerName: 'Start Training',
-    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
+    profileImage:
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
   },
 ];
 
@@ -61,9 +64,9 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const searchRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    
+
     // Filter suggestions based on search query
-    const filteredSuggestions = PROVIDER_SUGGESTIONS.filter(provider => {
+    const filteredSuggestions = PROVIDER_SUGGESTIONS.filter((provider) => {
       if (!searchQuery.trim()) return false;
       const fullName = `${provider.firstName} ${provider.lastName}`.toLowerCase();
       return fullName.includes(searchQuery.toLowerCase());
@@ -100,13 +103,11 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       switch (e.key) {
         case 'ArrowDown':
           e.preventDefault();
-          setSelectedIndex(prev => 
-            prev < filteredSuggestions.length - 1 ? prev + 1 : prev
-          );
+          setSelectedIndex((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : prev));
           break;
         case 'ArrowUp':
           e.preventDefault();
-          setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
           break;
         case 'Escape':
           setShowDropdown(false);
@@ -227,12 +228,8 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                     <div className="font-medium text-sm truncate text-gray-900">
                       {provider.firstName} {provider.lastName}
                     </div>
-                    <div className="text-xs text-gray-600 truncate">
-                      {provider.title}
-                    </div>
-                    <div className="text-xs text-gray-500 truncate">
-                      {provider.centerName}
-                    </div>
+                    <div className="text-xs text-gray-600 truncate">{provider.title}</div>
+                    <div className="text-xs text-gray-500 truncate">{provider.centerName}</div>
                   </div>
                 </div>
               ))}
