@@ -55,6 +55,7 @@ import {
   POLLY_DELANEY,
   PROLOGUE_CENTER,
 } from '../../data/network/prologueCenter';
+import { PETA_CARIGE, START_TRAINING_CENTER } from '../../data/network/startTrainingCenter';
 import {
   MICHAEL_CHEN_MUSIC,
   REBECCA_THOMPSON_OUTDOOR,
@@ -128,6 +129,7 @@ const ServiceProviderDetail = () => {
     CAROLINE_MATERNITY_CONSULTANT,
     DR_SHELLEY_ROWLANDS,
     JESSICA_DAWSON_DIETITIAN,
+    PETA_CARIGE,
     SARAH_DIGITAL_SPECIALIST,
     DR_ALEXANDRA_THOMPSON,
   ];
@@ -142,6 +144,7 @@ const ServiceProviderDetail = () => {
     MUMMYS_WHISPERS_CENTER,
     EMOG_CENTER,
     KIDNEY_NUTRITION_CENTER,
+    START_TRAINING_CENTER,
     ZYGO_APP_CENTER,
   ];
 

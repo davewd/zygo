@@ -36,6 +36,7 @@ import {
 import { JESSICA_DAWSON_DIETITIAN } from '../../data/network/kidneyNutritionCenter';
 import { CAROLINE_MATERNITY_CONSULTANT } from '../../data/network/mummysWhispersCenter';
 import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
+import { PETA_CARIGE } from '../../data/network/startTrainingCenter';
 import {
   MICHAEL_CHEN_MUSIC,
   REBECCA_THOMPSON_OUTDOOR,
@@ -74,6 +75,7 @@ const ServiceProviders = () => {
     CAROLINE_MATERNITY_CONSULTANT,
     DR_SHELLEY_ROWLANDS,
     JESSICA_DAWSON_DIETITIAN,
+    PETA_CARIGE,
     SARAH_DIGITAL_SPECIALIST,
     DR_ALEXANDRA_THOMPSON,
   ];
