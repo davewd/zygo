@@ -1,4 +1,4 @@
-name: Deploy to Supabase
+name: Deploy Web Assets to Supabase Storage
 
 on:
   workflow_run:
@@ -66,26 +66,41 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build web application
+        run: pnpm build --filter=@zygo/web
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        
       - name: Setup Supabase CLI
         uses: supabase/setup-cli@v1
         
-      - name: Initialize Supabase
-        run: supabase init
-        
-      - name: Start Supabase locally
-        run: supabase db start
-        
-      - name: Verify generated types match Postgres schema
+      - name: Deploy to Supabase Storage
         run: |
-          supabase gen types typescript --local > schema.gen.ts
-          if ! git diff --ignore-space-at-eol --exit-code --quiet schema.gen.ts; then
-            echo "Detected uncommitted changes after build. See status below:"
-            git diff
-            exit 1
-          fiß
+          # Create storage bucket if it doesn't exist
+          supabase storage create web-assets --public || true
           
-      - name: Deploy to Supabase
-        run: supabase db push
+          # Upload built assets to storage
+          find apps/web/dist -type f -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.svg" -o -name "*.ico" -o -name "*.woff" -o -name "*.woff2" -o -name "*.ttf" | while read file; do
+            # Get relative path from dist directory
+            relative_path=${file#apps/web/dist/}
+            echo "Uploading $file to $relative_path"
+            supabase storage upload web-assets "$relative_path" "$file" --upsert
+          done
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
