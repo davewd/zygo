@@ -50,7 +50,7 @@ jobs:
           
           # Create storage bucket if it doesn't exist (using REST API)
           echo "Creating storage bucket..."
-          curl -X POST "${SUPABASE_URL}/storage/bucket" \
+          curl -X POST "${SUPABASE_URL}/storage/v1/bucket" \
             -H "Authorization: Bearer ${ACCESS_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{\"id\":\"${BUCKET_NAME}\",\"name\":\"${BUCKET_NAME}\",\"public\":true}" \
@@ -65,7 +65,7 @@ jobs:
             
             # Upload file using Storage API
             curl -X POST "${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${relative_path}" \
-              -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+              -H "authorization: Bearer ${ACCESS_TOKEN}" \
               -F "file=@${file}" \
               || echo "Failed to upload $file, but continuing..."
           done
