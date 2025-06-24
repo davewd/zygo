@@ -46,6 +46,7 @@ jobs:
           # Set up variables
           SUPABASE_URL="https://${{ secrets.SUPABASE_PROJECT_REF }}.supabase.co"
           ACCESS_TOKEN="${{ secrets.SUPABASE_ACCESS_TOKEN }}"
+          PROJECT_TOKEN="${{ secrets.SUPABASE_PROJECT_KEY }}"
           BUCKET_NAME="web-assets"
           
           get_content_type() {
@@ -85,7 +86,7 @@ jobs:
             
             # Upload file using Storage API
             curl -X PUT "${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${relative_path}" \
-              -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+              -H "Authorization: Bearer ${PROJECT_TOKEN}" \
               -H "Content-Type: multipart/form-data" \
               -F "file=@${file};type=${content_type}" \
               || echo "Failed to upload $file, but continuing..."
