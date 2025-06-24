@@ -82,7 +82,7 @@ jobs:
             echo "Detected uncommitted changes after build. See status below:"
             git diff
             exit 1
-          fi
+          fiß
           
       - name: Deploy to Supabase
         run: supabase db push
