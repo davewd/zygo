@@ -444,7 +444,7 @@ export const PRIMARY_CONSUMERS: PrimaryConsumer[] = [
     },
     familyRelationships: [],
     followedProviders: [],
-    privacyLevel: 'group',
+    privacyLevel: 'public',
     interests: ['large families', 'parenting tips', 'organization', 'cooking', 'homeschooling'],
     preferredLanguages: ['English']
   },
@@ -470,14 +470,53 @@ export const PRIMARY_CONSUMERS: PrimaryConsumer[] = [
       {
         providerId: 'rebecca-cavallaro',
         providerName: 'Rebecca Cavallaro',
-        serviceType: 'lactation-consultation',
+        providerTitle: 'IBCLC, Midwife, RN',
+        centerName: 'Full Circle Midwifery',
         dateFollowed: '2023-12-01',
-        relationship: 'current-client'
+        tags: ['lactation-support', 'new-parent-support'],
+        status: 'active'
       }
     ],
-    privacyLevel: 'group',
+    privacyLevel: 'public',
     interests: ['breastfeeding', 'baby development', 'new parent support', 'sleep training'],
     preferredLanguages: ['English', 'Spanish']
+  },
+  {
+    id: 'consumer_011',
+    handle: 'jessica_stevenson',
+    firstName: 'Jessica',
+    lastName: 'Stevenson',
+    displayName: 'Jessica Stevenson',
+    profileImage: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+    dateOfBirth: '1987-06-14',
+    role: 'parent',
+    ageGroup: 'adult',
+    tagline: 'Dietitian passionate about kidney health and nutrition 🥗💚',
+    bio: 'Accredited Practicing Dietitian specializing in kidney health and chronic disease prevention. Mother of two, sharing evidence-based nutrition advice to help families eat for optimal health.',
+    location: {
+      suburb: 'Melbourne',
+      state: 'VIC',
+      country: 'Australia'
+    },
+    familyRelationships: [],
+    followedProviders: [
+      {
+        providerId: 'jessica-dawson-dietitian',
+        providerName: 'Jessica Dawson',
+        providerTitle: 'PhD, Accredited Practicing Dietitian - Renal Specialist',
+        centerName: 'Kidney Nutrition',
+        dateFollowed: '2024-01-15',
+        tags: ['kidney-health', 'nutrition', 'dietitian-collaboration'],
+        status: 'active'
+      }
+    ],
+    isActive: true,
+    joinedDate: '2023-09-20',
+    lastActiveDate: '2024-12-19',
+    privacyLevel: 'public',
+    hasLimitedProfile: false,
+    interests: ['kidney-health', 'nutrition', 'healthy-eating', 'chronic-disease-prevention', 'family-wellness'],
+    preferredLanguages: ['English']
   }
 ];
 

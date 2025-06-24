@@ -1,17 +1,8 @@
 import type { UserRole } from '@zygo/types';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import {
-  Activity,
-  ArrowRight,
-  Baby,
-  Heart,
-  MapPin,
-  Star,
-  TrendingUp,
-  User,
-  Users,
-} from 'lucide-react';
+import { Button, Card, CardContent, CardHeader } from '@zygo/ui';
+import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ServiceCategories } from '../../components/community';
 import { COMMUNITY_PROFILES } from '../../data/community/primaryConsumers';
 
 const CommunityHub = () => {
@@ -254,80 +245,7 @@ const CommunityHub = () => {
           </div>
 
           {/* Service Categories */}
-          <div className="space-y-8">
-            {serviceTypes.map((category, categoryIndex) => {
-              const IconComponent = category.icon;
-
-              return (
-                <Card key={categoryIndex} className="overflow-hidden">
-                  <CardHeader className={`${category.bgColor} border-b`}>
-                    <div className="flex items-center space-x-3">
-                      <div className={`p-3 rounded-full bg-white/70`}>
-                        <IconComponent className={`w-6 h-6 ${category.iconColor}`} />
-                      </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-xl text-gray-800">{category.title}</CardTitle>
-                        <CardDescription className="text-gray-700">
-                          {category.description}
-                        </CardDescription>
-                        <div className="text-sm font-medium text-gray-600 mt-1">
-                          {category.familyMember}
-                        </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {category.services.map((service, serviceIndex) => (
-                        <Link key={serviceIndex} to={service.route}>
-                          <Card className="hover:shadow-md transition-shadow border-l-4 border-l-blue-500">
-                            <CardContent className="p-4">
-                              <h4 className="font-semibold text-gray-800 mb-2">{service.title}</h4>
-                              <p className="text-gray-600 text-sm mb-3">{service.description}</p>
-                              <div className="flex justify-between items-center text-sm">
-                                <div className="flex items-center space-x-4 text-gray-500">
-                                  <div className="flex items-center space-x-1">
-                                    <MapPin className="w-3 h-3" />
-                                    <span>{service.location}</span>
-                                  </div>
-                                  <span className="font-medium text-gray-700">{service.price}</span>
-                                </div>
-                                <ArrowRight className="w-4 h-4 text-gray-400" />
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </Link>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Quick Actions */}
-        <section className="bg-gradient-to-r from-zygo-blue/10 to-zygo-mint/20 rounded-xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Connect?</h3>
-          <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto mb-6">
-            Join our growing community of families and discover the support and services you need
-            for every stage of your parenting journey.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/feed">
-              <Button className="bg-zygo-red hover:bg-zygo-red/90 text-white">
-                View Community Feed
-              </Button>
-            </Link>
-            <Link to="/community/profiles">
-              <Button
-                variant="outline"
-                className="border-zygo-blue text-zygo-blue hover:bg-zygo-blue/10"
-              >
-                Browse Member Profiles
-              </Button>
-            </Link>
-          </div>
+          <ServiceCategories serviceTypes={serviceTypes} />
         </section>
       </div>
     </div>

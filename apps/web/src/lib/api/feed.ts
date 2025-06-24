@@ -136,6 +136,54 @@ export interface FeedParams {
 const mockData = {
   results: [
     {
+      id: 11,
+      title: "Eating for Healthy Kidneys",
+      metadata: {
+        createdAt: "2024-12-19T14:30:00Z",
+        source: "web",
+        sourceUrl: "https://kidneynutrition.com.au/f/eating-for-healthy-kidneys"
+      },
+      author: {
+        name: "Jessica Stevenson",
+        handle: "jessica_stevenson",
+        avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+        verified: true
+      },
+      type: FeedItemType.POST,
+      post: `<div>
+        <p>🥗 <strong>Eating for Healthy Kidneys</strong> 🥗</p>
+        
+        <p>Your kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is <em>really important</em> to keep your kidneys healthy!</p>
+        
+        <h3>Key principles for kidney-healthy eating:</h3>
+        <ul>
+          <li>🧂 <strong>Watch your sodium</strong> - aim for less than 2,300mg per day</li>
+          <li>🥤 <strong>Stay hydrated</strong> - drink plenty of water throughout the day</li>
+          <li>🫘 <strong>Choose quality protein</strong> - lean meats, fish, eggs, and plant proteins</li>
+          <li>🍎 <strong>Eat plenty of fruits and vegetables</strong> - they're rich in antioxidants</li>
+          <li>🌾 <strong>Opt for whole grains</strong> - better for blood sugar control</li>
+          <li>❤️ <strong>Heart-healthy = kidney-healthy</strong> - what's good for your heart helps your kidneys too!</li>
+        </ul>
+        
+        <p>Remember: <strong>prevention is always better than treatment</strong>. Small dietary changes today can make a huge difference for your kidney health in the long run.</p>
+        
+        <p>💡 <em>If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.</em></p>
+        
+        <p>#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare</p>
+      </div>`,
+      imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      stats: {
+        likes: 24,
+        shares: 8,
+        comments: 12,
+        reposts: 3
+      },
+      privacy: {
+        visibility: VisibilityLevel.PUBLIC,
+        sharedWith: []
+      }
+    },
+    {
       id: 10,
       title: "Child's Assembly Award Ceremony",
       metadata: {
