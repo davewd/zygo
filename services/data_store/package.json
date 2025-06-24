@@ -4,7 +4,7 @@
   "description": "Service to allow data to be served from supabase",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "clean": "rimraf dist",
     "lint": "eslint . --ext .ts"
   },

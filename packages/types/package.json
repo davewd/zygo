@@ -22,7 +22,7 @@
     "build": "tsup && tsc --declaration --emitDeclarationOnly --outDir dist",
     "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
     "dev": "tsup --watch",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit"
   },
