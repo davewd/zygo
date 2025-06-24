@@ -44,7 +44,7 @@ jobs:
       - name: Deploy to Supabase Storage
         run: |
           # Set up variables
-          SUPABASE_URL="https://${{ secrets.SUPABASE_PROJECT_REF }}.supabase.co/"
+          SUPABASE_URL="https://${{ secrets.SUPABASE_PROJECT_REF }}.supabase.co"
           ACCESS_TOKEN="${{ secrets.SUPABASE_ACCESS_TOKEN }}"
           BUCKET_NAME="web-assets"
           
