@@ -1,12 +1,91 @@
-steps:
-  - uses: supabase/setup-cli@v1
-  - run: supabase init
-  - run: supabase db start
-  - name: Verify generated types match Postgres schema
-    run: |
-      supabase gen types typescript --local > schema.gen.ts
-      if ! git diff --ignore-space-at-eol --exit-code --quiet schema.gen.ts; then
-        echo "Detected uncommitted changes after build. See status below:"
-        git diff
-        exit 1
-      fi
+name: Deploy to Supabase
+
+on:
+  workflow_run:
+    workflows: ["Run Jest Tests", "Run pnpm scratch"]
+    branches: [main, develop]
+    types:
+      - completed
+
+jobs:
+  check-workflow-success:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    outputs:
+      test-success: ${{ steps.check-test.outputs.success }}
+      scratch-success: ${{ steps.check-scratch.outputs.success }}
+    steps:
+      - name: Check test workflow status
+        id: check-test
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: workflows } = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: context.ref.replace('refs/heads/', ''),
+              status: 'completed',
+              per_page: 50
+            });
+            
+            const testWorkflow = workflows.workflow_runs.find(run => 
+              run.name === 'Run Jest Tests' && 
+              run.head_sha === context.sha &&
+              run.conclusion === 'success'
+            );
+            
+            core.setOutput('success', testWorkflow ? 'true' : 'false');
+            
+      - name: Check scratch workflow status  
+        id: check-scratch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: workflows } = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: context.ref.replace('refs/heads/', ''),
+              status: 'completed',
+              per_page: 50
+            });
+            
+            const scratchWorkflow = workflows.workflow_runs.find(run => 
+              run.name === 'Run pnpm scratch' && 
+              run.head_sha === context.sha &&
+              run.conclusion === 'success'
+            );
+            
+            core.setOutput('success', scratchWorkflow ? 'true' : 'false');
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: check-workflow-success
+    if: needs.check-workflow-success.outputs.test-success == 'true' && needs.check-workflow-success.outputs.scratch-success == 'true'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        
+      - name: Initialize Supabase
+        run: supabase init
+        
+      - name: Start Supabase locally
+        run: supabase db start
+        
+      - name: Verify generated types match Postgres schema
+        run: |
+          supabase gen types typescript --local > schema.gen.ts
+          if ! git diff --ignore-space-at-eol --exit-code --quiet schema.gen.ts; then
+            echo "Detected uncommitted changes after build. See status below:"
+            git diff
+            exit 1
+          fi
+          
+      - name: Deploy to Supabase
+        run: supabase db push
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
