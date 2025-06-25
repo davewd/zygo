@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Simple workflow for deploying static content to Firebase Hosting
+name: Deploy to Firebase Hosting
 
 on:
   # Runs on pushes targeting the default branch
@@ -9,16 +9,14 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Sets permissions of the GITHUB_TOKEN
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: "firebase-deploy"
   cancel-in-progress: false
 
 jobs:
@@ -61,15 +59,32 @@ jobs:
       - name: Run pnpm scratch:build
         run: pnpm scratch:build
         timeout-minutes: 30
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: List files
-        run: ls -Rla -I node_modules .
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+
+      # Upload build artifacts for deploy job
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          # Upload entire repository
+          name: build-files
           path: './apps/web/dist/'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+
+  # Deploy job - depends on build
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+          path: './apps/web/dist/'
+      
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.FIREBASE_KEY }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: '${{ secrets.FIREBASE_PROJECT_ID }}'
+          channelId: live
