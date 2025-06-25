@@ -26,8 +26,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-    ],
+    include: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
     exclude: [
     ],
     esbuildOptions: {
