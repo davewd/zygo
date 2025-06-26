@@ -13,26 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       # Install pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10.11.0
-          
+
       # Build with sitemap generation
       - name: Build with sitemap
         run: pnpm scratch:build
         env:
           SITE_URL: https://www.zygo.app
-          
+
       # Verify sitemap was generated
       - name: Verify sitemap generation
         run: |
           echo "Checking for generated SEO files..."
           ls -la ./apps/web/dist/sitemap.xml || echo "⚠️ sitemap.xml not found"
           ls -la ./apps/web/dist/robots.txt || echo "⚠️ robots.txt not found"
-          
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

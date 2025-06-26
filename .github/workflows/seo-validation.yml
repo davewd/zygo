@@ -10,7 +10,7 @@ on:
 jobs:
   validate-seo:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,18 +42,18 @@ jobs:
           # Check if files exist
           test -f dist/sitemap.xml || (echo "❌ sitemap.xml not generated" && exit 1)
           test -f dist/robots.txt || (echo "❌ robots.txt not generated" && exit 1)
-          
+
           # Check sitemap structure
           grep -q '<?xml version="1.0" encoding="UTF-8"?>' dist/sitemap.xml || (echo "❌ Invalid XML header" && exit 1)
           grep -q '<urlset' dist/sitemap.xml || (echo "❌ Missing urlset element" && exit 1)
           grep -q 'https://preview.zygo.app/' dist/sitemap.xml || (echo "❌ Missing site URL" && exit 1)
-          
+
           # Check robots.txt structure
           grep -q 'User-agent: \*' dist/robots.txt || (echo "❌ Missing User-agent in robots.txt" && exit 1)
           grep -q 'Sitemap: https://preview.zygo.app/sitemap.xml' dist/robots.txt || (echo "❌ Missing sitemap reference in robots.txt" && exit 1)
-          
+
           echo "✅ All SEO files validated successfully"
-          
+
       - name: SEO Report
         working-directory: ./apps/web
         run: |
@@ -61,7 +61,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| File | Status | Size |" >> $GITHUB_STEP_SUMMARY
           echo "|------|--------|------|" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -f dist/sitemap.xml ]; then
             SIZE=$(stat -f%z dist/sitemap.xml 2>/dev/null || stat -c%s dist/sitemap.xml)
             URLS=$(grep -c '<url>' dist/sitemap.xml)
@@ -69,14 +69,14 @@ jobs:
           else
             echo "| sitemap.xml | ❌ Missing | - |" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           if [ -f dist/robots.txt ]; then
             SIZE=$(stat -f%z dist/robots.txt 2>/dev/null || stat -c%s dist/robots.txt)
             echo "| robots.txt | ✅ Generated | ${SIZE} bytes |" >> $GITHUB_STEP_SUMMARY
           else
             echo "| robots.txt | ❌ Missing | - |" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Sample URLs:" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
