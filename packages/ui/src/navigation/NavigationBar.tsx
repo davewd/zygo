@@ -1,5 +1,14 @@
-import { Search, User } from 'lucide-react';
+import { Search, User, Users } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
+import { Button } from '../components/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../components/dropdown-menu';
 import { Input } from '../components/input';
 import {
   NavigationMenu,
@@ -10,6 +19,14 @@ import {
 } from '../components/navigation-menu';
 
 import { cn } from '@zygo/libs';
+
+interface CurrentUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar?: string;
+}
 
 interface ProviderSuggestion {
   id: string;
@@ -24,6 +41,9 @@ interface INavigationBarProps {
   className?: string;
   onSearch?: (query: string) => void;
   searchPlaceholder?: string;
+  currentUser?: CurrentUser;
+  onUserSwitch?: () => void;
+  otherUsers?: CurrentUser[];
 }
 
 // Provider suggestions data
@@ -58,7 +78,18 @@ const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
 ];
 
 const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
-  ({ className, onSearch, searchPlaceholder = 'Search...', ...props }, ref) => {
+  (
+    {
+      className,
+      onSearch,
+      searchPlaceholder = 'Search...',
+      currentUser,
+      onUserSwitch,
+      otherUsers = [],
+      ...props
+    },
+    ref
+  ) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -176,7 +207,7 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Search Bar with Dropdown */}
+        {/* Center - Search Bar with Dropdown */}
         <div ref={searchRef} className="relative max-w-md">
           <form onSubmit={handleSearchSubmit} className="relative">
             <div className="relative">
@@ -236,6 +267,72 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
             </div>
           )}
         </div>
+
+        {/* Right - Current User and User Switch */}
+        <div className="flex items-center gap-3">
+          {/* Current User Display */}
+          {currentUser && (
+            <div className="flex items-center gap-2">
+              <Avatar className="h-8 w-8">
+                <AvatarImage
+                  src={currentUser.avatar}
+                  alt={`${currentUser.firstName} ${currentUser.lastName}`}
+                />
+                <AvatarFallback className="text-xs">
+                  {currentUser.firstName.charAt(0)}
+                  {currentUser.lastName.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="hidden sm:block">
+                <div className="text-sm font-medium">
+                  {currentUser.firstName} {currentUser.lastName}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* User Switch Dropdown */}
+          {(otherUsers.length > 0 || onUserSwitch) && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 rounded-full"
+                  title="Switch user"
+                >
+                  <Users className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {otherUsers.map((user) => (
+                  <DropdownMenuItem key={user.id} className="gap-2">
+                    <Avatar className="h-6 w-6">
+                      <AvatarImage src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
+                      <AvatarFallback className="text-xs">
+                        {user.firstName.charAt(0)}
+                        {user.lastName.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">
+                        {user.firstName} {user.lastName}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{user.email}</span>
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+                {otherUsers.length > 0 && <DropdownMenuSeparator />}
+                {onUserSwitch && (
+                  <DropdownMenuItem onClick={onUserSwitch} className="gap-2">
+                    <Users className="h-4 w-4" />
+                    <span>Switch Account</span>
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
       </div>
     );
   }
@@ -244,4 +341,4 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
 NavigationBar.displayName = 'NavigationBar';
 
 export { NavigationBar };
-export type { INavigationBarProps };
+export type { CurrentUser, INavigationBarProps };
