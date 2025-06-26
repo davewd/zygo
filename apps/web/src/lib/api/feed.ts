@@ -17,6 +17,7 @@ export enum FeedItemType {
   BREASTFEEDING_DAILY_SUMMARY = 'breastfeeding_daily_summary',
   BREASTFEEDING_WEEKLY_SUMMARY = 'breastfeeding_weekly_summary',
   BREASTFEEDING_REMINDER = 'breastfeeding_reminder',
+  LIBRARY_BOOK_REMINDER = 'library_book_reminder',
   SPONSORED = 'sponsored'
 }
 
@@ -232,6 +233,29 @@ const mockData = {
         likes: 12,
         shares: 1,
         comments: 3
+      },
+      privacy: {
+        visibility: "private",
+        sharedWith: []
+      }
+    },
+    {
+      id: 12,
+      title: "Library Books Due Soon",
+      metadata: {
+        createdAt: "2024-12-16T09:30:00Z"
+      },
+      author: {
+        name: "Zygo",
+        handle: "zygo_app",
+        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      },
+      type: FeedItemType.LIBRARY_BOOK_REMINDER,
+      post: "You have 2 library books due in 3 days: 'The Very Hungry Caterpillar' and 'Where the Wild Things Are'. Remember to return them on time!",
+      stats: {
+        likes: 0,
+        shares: 0,
+        comments: 0
       },
       privacy: {
         visibility: "private",

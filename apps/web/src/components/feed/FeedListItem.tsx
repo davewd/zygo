@@ -10,6 +10,7 @@ import { FeedListItemText } from './generic/FeedListItemText';
 import { FeedListItemBreastfeedingDaily } from './tool_specific/FeedListItemBreastfeedingDaily';
 import { FeedListItemBreastfeedingReminder } from './tool_specific/FeedListItemBreastfeedingReminder';
 import { FeedListItemBreastfeedingWeekly } from './tool_specific/FeedListItemBreastfeedingWeekly';
+import { FeedListItemLibraryBookReminder } from './tool_specific/FeedListItemLibraryBookReminder';
 
 interface FeedListItemProps {
   item: FeedItemTypeMap;
@@ -36,6 +37,8 @@ const FeedListItem: React.FC<FeedListItemProps> = ({ item, className }) => {
         return <FeedListItemBreastfeedingWeekly item={item} />;
       case FeedItemType.BREASTFEEDING_REMINDER:
         return <FeedListItemBreastfeedingReminder item={item} />;
+      case FeedItemType.LIBRARY_BOOK_REMINDER:
+        return <FeedListItemLibraryBookReminder item={item} />;
       case FeedItemType.SPONSORED:
         return <FeedListItemSponsored item={item} />;
       case FeedItemType.EVENT:
