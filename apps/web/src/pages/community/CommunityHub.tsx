@@ -1,10 +1,13 @@
-import type { UserRole } from '@zygo/types';
-import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
+// import type { UserRole } from '@zygo/types';
+// import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
 import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users, CalendarDays, Sun, Palmtree } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ServiceCategories } from '../../components/community';
 import { COMMUNITY_PROFILES } from '../../data/community/primaryConsumers';
 import { FriendNetworkAvailability } from '../../components/community/FriendNetworkAvailability';
+
+// Define UserRole locally to avoid type issues
+type UserRole = 'grandparent' | 'parent' | 'child' | 'guardian' | 'caregiver';
 
 const CommunityHub = () => {
   // Community stats
@@ -303,10 +306,10 @@ const CommunityHub = () => {
               </h2>
             </div>
             <Link to="/community/profiles">
-              <Button variant="outline" className="flex items-center space-x-2">
+              <button className="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors">
                 <span>View All Profiles</span>
                 <ArrowRight className="w-4 h-4" />
-              </Button>
+              </button>
             </Link>
           </div>
 
@@ -335,8 +338,8 @@ const CommunityHub = () => {
 
               return (
                 <Link key={consumer.id} to={`/community/profiles/${consumer.handle}`}>
-                  <Card className="hover:shadow-lg transition-shadow">
-                    <CardHeader className="pb-4">
+                  <div className="rounded-lg border bg-white shadow-sm hover:shadow-lg transition-shadow">
+                    <div className="flex flex-col space-y-1.5 p-6 pb-4">
                       <div className="flex items-center space-x-3">
                         <img
                           src={consumer.profileImage}
@@ -353,15 +356,15 @@ const CommunityHub = () => {
                           </div>
                         </div>
                       </div>
-                    </CardHeader>
-                    <CardContent>
+                    </div>
+                    <div className="p-6 pt-0">
                       <p className="text-gray-600 text-sm mb-3">{consumer.tagline}</p>
                       <div className="flex justify-between text-xs text-gray-500">
                         <span>{stats.postsCount} posts</span>
                         <span>{stats.connectionsCount} connections</span>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </Link>
               );
             })}
@@ -378,10 +381,10 @@ const CommunityHub = () => {
               </p>
             </div>
             <Link to="/community/providers">
-              <Button variant="outline" className="flex items-center space-x-2">
+              <button className="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors">
                 <span>Browse All Providers</span>
                 <ArrowRight className="w-4 h-4" />
-              </Button>
+              </button>
             </Link>
           </div>
 
