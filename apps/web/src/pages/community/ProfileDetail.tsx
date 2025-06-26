@@ -177,6 +177,17 @@ const ProfileDetail = () => {
                 )}
               </div>
               <p className="text-xl opacity-90 mb-2">@{consumer.handle}</p>
+              <div className="flex items-center opacity-80 space-x-4 mb-2">
+                <div className="flex items-center">
+                  <Users className="w-4 h-4 mr-2" />
+                  <span>{stats.connectionsCount} connections</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  <span>{stats.postsCount} posts</span>
+                </div>
+              </div>
               <div className="flex items-center opacity-80 space-x-4">
                 <span className="capitalize bg-white/20 px-3 py-1 rounded-full text-sm">
                   {consumer.role} • {getAgeFromBirthDate(consumer.dateOfBirth)}
