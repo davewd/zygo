@@ -1,0 +1,80 @@
+name: Generate Sitemap
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+  
+  # Run weekly to update sitemap with any dynamic content changes
+  schedule:
+    - cron: '0 2 * * 1'  # Every Monday at 2 AM UTC
+    
+  # Run when routes or content changes
+  push:
+    paths:
+      - 'apps/web/src/routes.tsx'
+      - 'apps/web/src/data/**'
+      - 'data/**'
+      - 'apps/web/scripts/build/generate-sitemap-advanced.mjs'
+      - 'apps/web/scripts/build/sitemap.config.mjs'
+
+jobs:
+  generate-sitemap:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate sitemap and robots.txt
+        working-directory: ./apps/web
+        run: |
+          npm run generate-seo
+        env:
+          SITE_URL: https://www.zygo.app
+
+      - name: Verify generated files
+        working-directory: ./apps/web
+        run: |
+          echo "Generated files:"
+          ls -la dist/sitemap.xml
+          ls -la dist/robots.txt
+          echo ""
+          echo "Sitemap contains $(grep -c '<url>' dist/sitemap.xml) URLs"
+          echo ""
+          echo "First few URLs in sitemap:"
+          grep -o '<loc>[^<]*</loc>' dist/sitemap.xml | head -5
+
+      - name: Upload sitemap artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-files
+          path: |
+            ./apps/web/dist/sitemap.xml
+            ./apps/web/dist/robots.txt
+          retention-days: 30

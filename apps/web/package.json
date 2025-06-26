@@ -6,8 +6,11 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
-    "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "generate-sitemap": "node -e \"import('./scripts/build/generate-sitemap-advanced.mjs').then(m => m.generateSitemap())\"",
+    "generate-robots": "node -e \"import('./scripts/build/generate-robots.mjs').then(m => m.generateRobotsTxt())\"",
+    "generate-seo": "npm run generate-sitemap && npm run generate-robots",
+    "build": "vite build && npm run generate-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

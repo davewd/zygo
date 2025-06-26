@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
+import { sitemapPlugin } from "./scripts/build/sitemap-plugin.mjs";
 
 export default defineConfig({
   esbuild: {
@@ -40,7 +41,14 @@ export default defineConfig({
       jsxFragment: 'React.Fragment',
     },
   },
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(), 
+    tailwindcss(), 
+    sitemapPlugin({
+      generateOnBuild: true,
+      generateOnDev: false
+    })
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

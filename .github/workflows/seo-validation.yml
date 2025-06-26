@@ -1,0 +1,84 @@
+name: SEO Validation
+
+on:
+  pull_request:
+    paths:
+      - 'apps/web/src/routes.tsx'
+      - 'apps/web/scripts/build/**'
+      - 'apps/web/src/**'
+
+jobs:
+  validate-seo:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test sitemap generation
+        working-directory: ./apps/web
+        run: |
+          echo "Testing sitemap generation..."
+          npm run generate-seo
+        env:
+          SITE_URL: https://preview.zygo.app
+
+      - name: Validate sitemap
+        working-directory: ./apps/web
+        run: |
+          # Check if files exist
+          test -f dist/sitemap.xml || (echo "❌ sitemap.xml not generated" && exit 1)
+          test -f dist/robots.txt || (echo "❌ robots.txt not generated" && exit 1)
+          
+          # Check sitemap structure
+          grep -q '<?xml version="1.0" encoding="UTF-8"?>' dist/sitemap.xml || (echo "❌ Invalid XML header" && exit 1)
+          grep -q '<urlset' dist/sitemap.xml || (echo "❌ Missing urlset element" && exit 1)
+          grep -q 'https://preview.zygo.app/' dist/sitemap.xml || (echo "❌ Missing site URL" && exit 1)
+          
+          # Check robots.txt structure
+          grep -q 'User-agent: \*' dist/robots.txt || (echo "❌ Missing User-agent in robots.txt" && exit 1)
+          grep -q 'Sitemap: https://preview.zygo.app/sitemap.xml' dist/robots.txt || (echo "❌ Missing sitemap reference in robots.txt" && exit 1)
+          
+          echo "✅ All SEO files validated successfully"
+          
+      - name: SEO Report
+        working-directory: ./apps/web
+        run: |
+          echo "## SEO Generation Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Status | Size |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|------|" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f dist/sitemap.xml ]; then
+            SIZE=$(stat -f%z dist/sitemap.xml 2>/dev/null || stat -c%s dist/sitemap.xml)
+            URLS=$(grep -c '<url>' dist/sitemap.xml)
+            echo "| sitemap.xml | ✅ Generated | ${SIZE} bytes (${URLS} URLs) |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| sitemap.xml | ❌ Missing | - |" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -f dist/robots.txt ]; then
+            SIZE=$(stat -f%z dist/robots.txt 2>/dev/null || stat -c%s dist/robots.txt)
+            echo "| robots.txt | ✅ Generated | ${SIZE} bytes |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| robots.txt | ❌ Missing | - |" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sample URLs:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -o '<loc>[^<]*</loc>' dist/sitemap.xml | head -5 | sed 's/<loc>//g; s/<\/loc>//g' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
