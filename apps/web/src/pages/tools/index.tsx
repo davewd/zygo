@@ -1,9 +1,25 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import { Baby, Clock, Heart, Timer } from 'lucide-react';
+import { Baby, Clock, Heart, Timer, Calendar, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Tools() {
   const toolCategories = [
+    {
+      title: 'Planning & Organization',
+      description: 'Tools to help you plan and organize family activities',
+      tools: [
+        {
+          id: 'holiday-planner',
+          name: 'Holiday Planner',
+          description: 'Plan activities and playdates for your children during holiday weeks',
+          icon: Calendar,
+          iconColor: 'text-purple-600',
+          bgColor: 'bg-purple-50',
+          route: '/tools/holiday-planner',
+          comingSoon: false,
+        },
+      ],
+    },
     {
       title: 'Postnatal & Early Development',
       description: "Tools to support the early stages of your baby's life",

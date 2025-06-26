@@ -1,4 +1,5 @@
 // Export all types from global
+export * from './calendar';
 export * from './community';
 export * from './credentials';
 export * from './feed';

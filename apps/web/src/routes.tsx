@@ -22,6 +22,7 @@ import TimeLine from './pages/timeline';
 import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
 import Tools from './pages/tools/index';
 import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
+import HolidayPlanner from './pages/tools/HolidayPlanner';
 
 export const routes = createBrowserRouter([
   {
@@ -80,6 +81,12 @@ export const routes = createBrowserRouter([
         element: <BreastfeedingTimer />,
         errorElement: <Error />,
       },
+      {
+        path: '/tools/holiday-planner',
+        element: <HolidayPlanner />,
+        errorElement: <Error />,
+      },
+      
       { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
       {
         path: '/timeline/milestone/:milestoneId/:familyMemberId?',
