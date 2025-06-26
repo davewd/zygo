@@ -20,9 +20,9 @@ import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
 import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
+import HolidayPlanner from './pages/tools/HolidayPlanner';
 import Tools from './pages/tools/index';
 import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
-import HolidayPlanner from './pages/tools/HolidayPlanner';
 
 export const routes = createBrowserRouter([
   {
@@ -86,7 +86,7 @@ export const routes = createBrowserRouter([
         element: <HolidayPlanner />,
         errorElement: <Error />,
       },
-      
+
       { path: '/timeline', element: <TimeLine />, errorElement: <Error /> },
       {
         path: '/timeline/milestone/:milestoneId/:familyMemberId?',

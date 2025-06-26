@@ -1,3 +1,8 @@
+import type {
+  CalendarAppointment,
+  HolidayWeek,
+  ServiceFilter as ServiceFilterType,
+} from '@zygo/types';
 import {
   Button,
   Card,
@@ -5,32 +10,17 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@zygo/ui';
-import {
-  CalendarDays,
-  Clock,
-  Filter,
-  MapPin,
-  Plus,
-  Search,
-  Users,
-} from 'lucide-react';
+import { CalendarDays, Clock, MapPin, Plus, Search, Users } from 'lucide-react';
 import { useState } from 'react';
-import { CalendarGrid } from '../../components/calendar/CalendarGrid';
 import { AppointmentDialog } from '../../components/calendar/AppointmentDialog';
-import { ServiceFilter } from '../../components/calendar/ServiceFilter';
+import { CalendarGrid } from '../../components/calendar/CalendarGrid';
 import { ConnectionsAvailability } from '../../components/calendar/ConnectionsAvailability';
-import type { CalendarAppointment, HolidayWeek, ServiceFilter as ServiceFilterType } from '@zygo/types';
+import { ServiceFilter } from '../../components/calendar/ServiceFilter';
 
 const HolidayPlanner = () => {
   const [selectedWeek, setSelectedWeek] = useState<HolidayWeek | null>(null);
@@ -67,16 +57,16 @@ const HolidayPlanner = () => {
 
   const handleSaveAppointment = (appointment: CalendarAppointment) => {
     if (selectedAppointment) {
-      setAppointments(prev => prev.map(apt => apt.id === appointment.id ? appointment : apt));
+      setAppointments((prev) => prev.map((apt) => (apt.id === appointment.id ? appointment : apt)));
     } else {
-      setAppointments(prev => [...prev, { ...appointment, id: Date.now().toString() }]);
+      setAppointments((prev) => [...prev, { ...appointment, id: Date.now().toString() }]);
     }
     setShowAppointmentDialog(false);
     setSelectedAppointment(null);
   };
 
   const handleDeleteAppointment = (appointmentId: string) => {
-    setAppointments(prev => prev.filter(apt => apt.id !== appointmentId));
+    setAppointments((prev) => prev.filter((apt) => apt.id !== appointmentId));
   };
 
   return (
@@ -122,7 +112,8 @@ const HolidayPlanner = () => {
                     {currentWeek.name}
                   </CardTitle>
                   <CardDescription>
-                    {currentWeek.startDate.toLocaleDateString()} - {currentWeek.endDate.toLocaleDateString()}
+                    {currentWeek.startDate.toLocaleDateString()} -{' '}
+                    {currentWeek.endDate.toLocaleDateString()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -138,10 +129,7 @@ const HolidayPlanner = () => {
             </div>
 
             <div className="space-y-4">
-              <ServiceFilter
-                filter={serviceFilter}
-                onFilterChange={setServiceFilter}
-              />
+              <ServiceFilter filter={serviceFilter} onFilterChange={setServiceFilter} />
             </div>
           </div>
         </TabsContent>

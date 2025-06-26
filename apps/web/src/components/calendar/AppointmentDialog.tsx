@@ -1,5 +1,7 @@
+import type { CalendarAppointment, Friend, HolidayWeek } from '@zygo/types';
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogContent,
   DialogHeader,
@@ -12,17 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
   Textarea,
-  Checkbox,
 } from '@zygo/ui';
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Users,
-  X,
-} from 'lucide-react';
-import { useState, useEffect } from 'react';
-import type { CalendarAppointment, HolidayWeek, Child, Friend } from '@zygo/types';
+import { Calendar, Clock, MapPin, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface AppointmentDialogProps {
   isOpen: boolean;
@@ -50,35 +44,35 @@ export const AppointmentDialog = ({
     status: 'confirmed' as CalendarAppointment['status'],
     notes: '',
   });
-  
+
   const [selectedChildren, setSelectedChildren] = useState<string[]>([]);
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
 
   // Mock friends data - in a real app this would come from connections
   const availableFriends: Friend[] = [
-    { 
-      id: 'friend1', 
-      name: 'Sophie', 
-      age: 7, 
+    {
+      id: 'friend1',
+      name: 'Sophie',
+      age: 7,
       parentId: 'parent2',
       parentName: 'Sarah Johnson',
-      relationship: 'friend'
+      relationship: 'friend',
     },
-    { 
-      id: 'friend2', 
-      name: 'Oliver', 
-      age: 8, 
+    {
+      id: 'friend2',
+      name: 'Oliver',
+      age: 8,
       parentId: 'parent3',
       parentName: 'Mike Chen',
-      relationship: 'neighbor'
+      relationship: 'neighbor',
     },
-    { 
-      id: 'friend3', 
-      name: 'Lily', 
-      age: 6, 
+    {
+      id: 'friend3',
+      name: 'Lily',
+      age: 6,
       parentId: 'parent4',
       parentName: 'Emma Davis',
-      relationship: 'classmate'
+      relationship: 'classmate',
     },
   ];
 
@@ -86,7 +80,7 @@ export const AppointmentDialog = ({
     if (appointment) {
       const startDate = new Date(appointment.startTime);
       const endDate = new Date(appointment.endTime);
-      
+
       setFormData({
         title: appointment.title,
         location: appointment.location,
@@ -98,15 +92,18 @@ export const AppointmentDialog = ({
         status: appointment.status,
         notes: appointment.notes || '',
       });
-      
-      setSelectedChildren(appointment.children.map(c => c.id));
-      setSelectedFriends(appointment.friends.map(f => f.id));
+
+      setSelectedChildren(appointment.children.map((c) => c.id));
+      setSelectedFriends(appointment.friends.map((f) => f.id));
     } else {
       // Reset form for new appointment
       const now = new Date();
       const defaultDate = now.toISOString().split('T')[0];
-      const defaultTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-      
+      const defaultTime = `${now.getHours().toString().padStart(2, '0')}:${now
+        .getMinutes()
+        .toString()
+        .padStart(2, '0')}`;
+
       setFormData({
         title: '',
         location: '',
@@ -118,7 +115,7 @@ export const AppointmentDialog = ({
         status: 'confirmed',
         notes: '',
       });
-      
+
       setSelectedChildren([]);
       setSelectedFriends([]);
     }
@@ -126,14 +123,16 @@ export const AppointmentDialog = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const startDateTime = formData.type === 'full-day' 
-      ? new Date(formData.startDate)
-      : new Date(`${formData.startDate}T${formData.startTime}`);
-    
-    const endDateTime = formData.type === 'full-day'
-      ? new Date(formData.endDate || formData.startDate)
-      : new Date(`${formData.endDate || formData.startDate}T${formData.endTime}`);
+
+    const startDateTime =
+      formData.type === 'full-day'
+        ? new Date(formData.startDate)
+        : new Date(`${formData.startDate}T${formData.startTime}`);
+
+    const endDateTime =
+      formData.type === 'full-day'
+        ? new Date(formData.endDate || formData.startDate)
+        : new Date(`${formData.endDate || formData.startDate}T${formData.endTime}`);
 
     // If full-day, set to start and end of day
     if (formData.type === 'full-day') {
@@ -141,8 +140,8 @@ export const AppointmentDialog = ({
       endDateTime.setHours(23, 59, 59, 999);
     }
 
-    const selectedChildrenData = week.children.filter(c => selectedChildren.includes(c.id));
-    const selectedFriendsData = availableFriends.filter(f => selectedFriends.includes(f.id));
+    const selectedChildrenData = week.children.filter((c) => selectedChildren.includes(c.id));
+    const selectedFriendsData = availableFriends.filter((f) => selectedFriends.includes(f.id));
 
     const appointmentData: CalendarAppointment = {
       id: appointment?.id || '',
@@ -161,18 +160,14 @@ export const AppointmentDialog = ({
   };
 
   const handleChildToggle = (childId: string) => {
-    setSelectedChildren(prev => 
-      prev.includes(childId) 
-        ? prev.filter(id => id !== childId)
-        : [...prev, childId]
+    setSelectedChildren((prev) =>
+      prev.includes(childId) ? prev.filter((id) => id !== childId) : [...prev, childId]
     );
   };
 
   const handleFriendToggle = (friendId: string) => {
-    setSelectedFriends(prev => 
-      prev.includes(friendId) 
-        ? prev.filter(id => id !== friendId)
-        : [...prev, friendId]
+    setSelectedFriends((prev) =>
+      prev.includes(friendId) ? prev.filter((id) => id !== friendId) : [...prev, friendId]
     );
   };
 
@@ -180,9 +175,7 @@ export const AppointmentDialog = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>
-            {appointment ? 'Edit Activity' : 'Create New Activity'}
-          </DialogTitle>
+          <DialogTitle>{appointment ? 'Edit Activity' : 'Create New Activity'}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -193,7 +186,7 @@ export const AppointmentDialog = ({
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                 placeholder="e.g., Swimming lessons, Playground meetup"
                 required
               />
@@ -206,7 +199,7 @@ export const AppointmentDialog = ({
                 <Input
                   id="location"
                   value={formData.location}
-                  onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
                   placeholder="e.g., Community Pool, Central Park"
                   className="pl-10"
                   required
@@ -218,8 +211,8 @@ export const AppointmentDialog = ({
               <Label htmlFor="type">Activity Type</Label>
               <Select
                 value={formData.type}
-                onValueChange={(value: CalendarAppointment['type']) => 
-                  setFormData(prev => ({ ...prev, type: value }))
+                onValueChange={(value: CalendarAppointment['type']) =>
+                  setFormData((prev) => ({ ...prev, type: value }))
                 }
               >
                 <SelectTrigger>
@@ -245,7 +238,9 @@ export const AppointmentDialog = ({
                     id="startDate"
                     type="date"
                     value={formData.startDate}
-                    onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, startDate: e.target.value }))
+                    }
                     className="pl-10"
                     required
                   />
@@ -261,7 +256,9 @@ export const AppointmentDialog = ({
                       id="startTime"
                       type="time"
                       value={formData.startTime}
-                      onChange={(e) => setFormData(prev => ({ ...prev, startTime: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, startTime: e.target.value }))
+                      }
                       className="pl-10"
                       required
                     />
@@ -278,7 +275,7 @@ export const AppointmentDialog = ({
                     id="endDate"
                     type="date"
                     value={formData.endDate || formData.startDate}
-                    onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))}
                   />
                 </div>
 
@@ -288,7 +285,7 @@ export const AppointmentDialog = ({
                     id="endTime"
                     type="time"
                     value={formData.endTime}
-                    onChange={(e) => setFormData(prev => ({ ...prev, endTime: e.target.value }))}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))}
                     required
                   />
                 </div>
@@ -346,8 +343,8 @@ export const AppointmentDialog = ({
             <Label htmlFor="status">Status</Label>
             <Select
               value={formData.status}
-              onValueChange={(value: CalendarAppointment['status']) => 
-                setFormData(prev => ({ ...prev, status: value }))
+              onValueChange={(value: CalendarAppointment['status']) =>
+                setFormData((prev) => ({ ...prev, status: value }))
               }
             >
               <SelectTrigger>
@@ -367,7 +364,7 @@ export const AppointmentDialog = ({
             <Textarea
               id="notes"
               value={formData.notes}
-              onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
               placeholder="Any additional details about the activity..."
               rows={3}
             />
@@ -378,9 +375,7 @@ export const AppointmentDialog = ({
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              {appointment ? 'Update Activity' : 'Create Activity'}
-            </Button>
+            <Button type="submit">{appointment ? 'Update Activity' : 'Create Activity'}</Button>
           </div>
         </form>
       </DialogContent>

@@ -1,29 +1,17 @@
+import type { CalendarService, ServiceFilter as ServiceFilterType } from '@zygo/types';
 import {
+  Badge,
   Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Badge,
   Checkbox,
+  Input,
 } from '@zygo/ui';
-import {
-  Clock,
-  MapPin,
-  Search,
-  Filter,
-  X,
-  Star,
-} from 'lucide-react';
+import { Clock, Filter, MapPin, Search, X } from 'lucide-react';
 import { useState } from 'react';
-import type { CalendarService, ServiceFilter as ServiceFilterType } from '@zygo/types';
 
 interface ServiceFilterProps {
   filter: ServiceFilterType;
@@ -31,11 +19,7 @@ interface ServiceFilterProps {
   expanded?: boolean;
 }
 
-export const ServiceFilter = ({
-  filter,
-  onFilterChange,
-  expanded = false,
-}: ServiceFilterProps) => {
+export const ServiceFilter = ({ filter, onFilterChange, expanded = false }: ServiceFilterProps) => {
   const [localSearchText, setLocalSearchText] = useState(filter.searchText || '');
 
   // Mock services data - in a real app this would come from your data store
@@ -108,9 +92,9 @@ export const ServiceFilter = ({
 
   const handleCategoryToggle = (category: string) => {
     const newCategories = filter.categories.includes(category)
-      ? filter.categories.filter(c => c !== category)
+      ? filter.categories.filter((c) => c !== category)
       : [...filter.categories, category];
-    
+
     onFilterChange({ ...filter, categories: newCategories });
   };
 
@@ -126,12 +110,12 @@ export const ServiceFilter = ({
     });
   };
 
-  const filteredServices = availableServices.filter(service => {
+  const filteredServices = availableServices.filter((service) => {
     // Category filter
     if (filter.categories.length > 0 && !filter.categories.includes(service.category)) {
       return false;
     }
-    
+
     // Text search
     if (filter.searchText) {
       const searchLower = filter.searchText.toLowerCase();
@@ -139,10 +123,10 @@ export const ServiceFilter = ({
         service.name.toLowerCase().includes(searchLower) ||
         service.description?.toLowerCase().includes(searchLower) ||
         service.provider?.toLowerCase().includes(searchLower) ||
-        service.tags?.some(tag => tag.toLowerCase().includes(searchLower))
+        service.tags?.some((tag) => tag.toLowerCase().includes(searchLower))
       );
     }
-    
+
     return true;
   });
 
@@ -164,15 +148,15 @@ export const ServiceFilter = ({
       </CardHeader>
       <CardContent className="pt-0">
         <p className="text-sm text-gray-600 mb-3">{service.description}</p>
-        
+
         <div className="flex flex-wrap gap-2 mb-3">
-          {service.tags?.slice(0, 3).map(tag => (
+          {service.tags?.slice(0, 3).map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>
           ))}
         </div>
-        
+
         <div className="flex justify-between items-center text-sm text-gray-500">
           <div className="flex items-center">
             <Clock className="h-3 w-3 mr-1" />
@@ -184,11 +168,9 @@ export const ServiceFilter = ({
             </div>
           )}
         </div>
-        
+
         {service.provider && (
-          <div className="text-xs text-gray-400 mt-2">
-            by {service.provider}
-          </div>
+          <div className="text-xs text-gray-400 mt-2">by {service.provider}</div>
         )}
       </CardContent>
     </Card>
@@ -203,9 +185,7 @@ export const ServiceFilter = ({
             <Filter className="h-4 w-4 mr-2" />
             Service Finder
           </CardTitle>
-          <CardDescription>
-            Find activities that fit your schedule
-          </CardDescription>
+          <CardDescription>Find activities that fit your schedule</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative">
@@ -218,11 +198,11 @@ export const ServiceFilter = ({
               className="pl-10"
             />
           </div>
-          
+
           <div className="space-y-2">
             <h4 className="text-sm font-medium">Categories</h4>
             <div className="space-y-1">
-              {categories.slice(0, 4).map(category => (
+              {categories.slice(0, 4).map((category) => (
                 <div key={category.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`category-${category.id}`}
@@ -248,9 +228,7 @@ export const ServiceFilter = ({
           </div>
 
           {filteredServices.length > 0 && (
-            <div className="text-sm text-gray-600">
-              {filteredServices.length} services found
-            </div>
+            <div className="text-sm text-gray-600">{filteredServices.length} services found</div>
           )}
         </CardContent>
       </Card>
@@ -284,7 +262,7 @@ export const ServiceFilter = ({
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-            {categories.map(category => (
+            {categories.map((category) => (
               <div
                 key={category.id}
                 onClick={() => handleCategoryToggle(category.id)}
@@ -315,20 +293,16 @@ export const ServiceFilter = ({
       {/* Results */}
       <Card>
         <CardHeader>
-          <CardTitle>
-            Available Services ({filteredServices.length})
-          </CardTitle>
-          <CardDescription>
-            Click on any service to see available time slots
-          </CardDescription>
+          <CardTitle>Available Services ({filteredServices.length})</CardTitle>
+          <CardDescription>Click on any service to see available time slots</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredServices.map(service => (
+            {filteredServices.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
-          
+
           {filteredServices.length === 0 && (
             <div className="text-center py-8 text-gray-500">
               <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />

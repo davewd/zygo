@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-import { Baby, Clock, Heart, Timer, Calendar, Users } from 'lucide-react';
+import { Baby, Calendar, Clock, Heart, Timer } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Tools() {

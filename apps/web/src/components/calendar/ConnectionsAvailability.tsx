@@ -1,24 +1,16 @@
+import type { ConnectionAvailability, HolidayWeek } from '@zygo/types';
 import {
+  Avatar,
+  Badge,
   Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  Badge,
-  Avatar,
 } from '@zygo/ui';
-import {
-  Calendar,
-  Clock,
-  Plus,
-  Users,
-  MessageCircle,
-  Check,
-  X,
-} from 'lucide-react';
+import { Calendar, Check, MessageCircle, Plus, Users } from 'lucide-react';
 import { useState } from 'react';
-import type { HolidayWeek, ConnectionAvailability, Child } from '@zygo/types';
 
 interface ConnectionsAvailabilityProps {
   currentWeek: HolidayWeek;
@@ -62,18 +54,14 @@ export const ConnectionsAvailability = ({
         {
           startTime: new Date('2024-07-23T10:00:00'),
           endTime: new Date('2024-07-23T12:00:00'),
-          overlappingChildren: [
-            { id: 'friend1', name: 'Sophie', age: 7, parentId: 'parent2' },
-          ],
+          overlappingChildren: [{ id: 'friend1', name: 'Sophie', age: 7, parentId: 'parent2' }],
         },
       ],
     },
     {
       connectionId: '2',
       connectionName: 'Mike Chen',
-      children: [
-        { id: 'friend3', name: 'Oliver', age: 8, parentId: 'parent3' },
-      ],
+      children: [{ id: 'friend3', name: 'Oliver', age: 8, parentId: 'parent3' }],
       availableSlots: [
         {
           id: '3',
@@ -96,9 +84,7 @@ export const ConnectionsAvailability = ({
         {
           startTime: new Date('2024-07-25T10:00:00'),
           endTime: new Date('2024-07-25T15:00:00'),
-          overlappingChildren: [
-            { id: 'friend3', name: 'Oliver', age: 8, parentId: 'parent3' },
-          ],
+          overlappingChildren: [{ id: 'friend3', name: 'Oliver', age: 8, parentId: 'parent3' }],
         },
       ],
     },
@@ -135,30 +121,41 @@ export const ConnectionsAvailability = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'available': return 'bg-green-100 text-green-800 border-green-300';
-      case 'maybe': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
-      case 'busy': return 'bg-red-100 text-red-800 border-red-300';
-      default: return 'bg-gray-100 text-gray-800 border-gray-300';
+      case 'available':
+        return 'bg-green-100 text-green-800 border-green-300';
+      case 'maybe':
+        return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+      case 'busy':
+        return 'bg-red-100 text-red-800 border-red-300';
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-300';
     }
   };
 
   const ConnectionCard = ({ connection }: { connection: ConnectionAvailability }) => (
-    <Card className={`cursor-pointer transition-all ${
-      selectedConnection === connection.connectionId 
-        ? 'ring-2 ring-blue-500 shadow-lg' 
-        : 'hover:shadow-md'
-    }`}>
-      <CardHeader 
+    <Card
+      className={`cursor-pointer transition-all ${
+        selectedConnection === connection.connectionId
+          ? 'ring-2 ring-blue-500 shadow-lg'
+          : 'hover:shadow-md'
+      }`}
+    >
+      <CardHeader
         className="pb-3"
-        onClick={() => setSelectedConnection(
-          selectedConnection === connection.connectionId ? null : connection.connectionId
-        )}
+        onClick={() =>
+          setSelectedConnection(
+            selectedConnection === connection.connectionId ? null : connection.connectionId
+          )
+        }
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Avatar className="h-10 w-10">
               <div className="h-full w-full bg-blue-500 text-white flex items-center justify-center text-sm font-medium">
-                {connection.connectionName.split(' ').map(n => n[0]).join('')}
+                {connection.connectionName
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')}
               </div>
             </Avatar>
             <div>
@@ -188,7 +185,7 @@ export const ConnectionsAvailability = ({
               Children
             </h4>
             <div className="flex flex-wrap gap-2">
-              {connection.children.map(child => (
+              {connection.children.map((child) => (
                 <Badge key={child.id} variant="outline">
                   {child.name} ({child.age})
                 </Badge>
@@ -205,25 +202,29 @@ export const ConnectionsAvailability = ({
               </h4>
               <div className="space-y-2">
                 {connection.mutualFreeTime.map((slot, index) => (
-                  <div 
-                    key={index}
-                    className="p-3 bg-green-50 border border-green-200 rounded-lg"
-                  >
+                  <div key={index} className="p-3 bg-green-50 border border-green-200 rounded-lg">
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium text-sm">
-                          {formatDateTime(slot.startTime)} - {slot.endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+                          {formatDateTime(slot.startTime)} -{' '}
+                          {slot.endTime.toLocaleTimeString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                          })}
                         </div>
                         <div className="text-xs text-gray-600">
-                          Available children: {slot.overlappingChildren.map(c => c.name).join(', ')}
+                          Available children:{' '}
+                          {slot.overlappingChildren.map((c) => c.name).join(', ')}
                         </div>
                       </div>
-                      <Button 
-                        size="sm" 
-                        onClick={() => onCreatePlaydate({ 
-                          date: slot.startTime, 
-                          hour: slot.startTime.getHours() 
-                        })}
+                      <Button
+                        size="sm"
+                        onClick={() =>
+                          onCreatePlaydate({
+                            date: slot.startTime,
+                            hour: slot.startTime.getHours(),
+                          })
+                        }
                       >
                         <Plus className="h-3 w-3 mr-1" />
                         Plan
@@ -242,47 +243,47 @@ export const ConnectionsAvailability = ({
               All Available Times
             </h4>
             <div className="space-y-2">
-              {connection.availableSlots.map(slot => (
-                <div 
-                  key={slot.id}
-                  className="p-3 border rounded-lg hover:bg-gray-50"
-                >
+              {connection.availableSlots.map((slot) => (
+                <div key={slot.id} className="p-3 border rounded-lg hover:bg-gray-50">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <div className="font-medium text-sm">
-                          {formatDateTime(slot.startTime)} - {slot.endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+                          {formatDateTime(slot.startTime)} -{' '}
+                          {slot.endTime.toLocaleTimeString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                          })}
                         </div>
-                        <Badge 
-                          variant="outline" 
-                          className={getStatusColor(slot.status)}
-                        >
+                        <Badge variant="outline" className={getStatusColor(slot.status)}>
                           {slot.status}
                         </Badge>
                       </div>
                       <div className="text-xs text-gray-600 mt-1">
-                        {connection.children.find(c => c.id === slot.childId)?.name}
+                        {connection.children.find((c) => c.id === slot.childId)?.name}
                       </div>
                       {slot.description && (
-                        <div className="text-xs text-gray-500 mt-1">
-                          {slot.description}
-                        </div>
+                        <div className="text-xs text-gray-500 mt-1">{slot.description}</div>
                       )}
                     </div>
                     <div className="flex space-x-2">
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => {/* Message functionality */}}
+                        onClick={() => {
+                          /* Message functionality */
+                        }}
                       >
                         <MessageCircle className="h-3 w-3" />
                       </Button>
-                      <Button 
+                      <Button
                         size="sm"
-                        onClick={() => onCreatePlaydate({ 
-                          date: slot.startTime, 
-                          hour: slot.startTime.getHours() 
-                        })}
+                        onClick={() =>
+                          onCreatePlaydate({
+                            date: slot.startTime,
+                            hour: slot.startTime.getHours(),
+                          })
+                        }
                       >
                         <Plus className="h-3 w-3 mr-1" />
                         Plan
@@ -311,8 +312,14 @@ export const ConnectionsAvailability = ({
   );
 
   // Summary stats
-  const totalMutualSlots = connections.reduce((sum, conn) => sum + (conn.mutualFreeTime?.length || 0), 0);
-  const totalAvailableSlots = connections.reduce((sum, conn) => sum + conn.availableSlots.length, 0);
+  const totalMutualSlots = connections.reduce(
+    (sum, conn) => sum + (conn.mutualFreeTime?.length || 0),
+    0
+  );
+  const totalAvailableSlots = connections.reduce(
+    (sum, conn) => sum + conn.availableSlots.length,
+    0
+  );
 
   return (
     <div className="space-y-6">
@@ -347,10 +354,10 @@ export const ConnectionsAvailability = ({
 
       {/* Connections List */}
       <div className="space-y-4">
-        {connections.map(connection => (
+        {connections.map((connection) => (
           <ConnectionCard key={connection.connectionId} connection={connection} />
         ))}
-        
+
         {connections.length === 0 && (
           <Card>
             <CardContent className="text-center py-8">

@@ -1,17 +1,6 @@
-import {
-  Button,
-  Card,
-  CardContent,
-} from '@zygo/ui';
-import {
-  Clock,
-  MapPin,
-  MoreVertical,
-  Plus,
-  Users,
-} from 'lucide-react';
-import { useState } from 'react';
 import type { CalendarAppointment, HolidayWeek } from '@zygo/types';
+import { Clock, MapPin, Plus, Users } from 'lucide-react';
+import { useState } from 'react';
 
 interface CalendarGridProps {
   week: HolidayWeek;
@@ -28,7 +17,9 @@ export const CalendarGrid = ({
   onEditAppointment,
   onDeleteAppointment,
 }: CalendarGridProps) => {
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<{ date: Date; hour?: number } | null>(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<{ date: Date; hour?: number } | null>(
+    null
+  );
 
   // Generate days of the week
   const days = [];
@@ -44,51 +35,61 @@ export const CalendarGrid = ({
 
   // Get appointments for a specific date and hour
   const getAppointmentsForSlot = (date: Date, hour?: number) => {
-    return appointments.filter(apt => {
+    return appointments.filter((apt) => {
       const aptDate = new Date(apt.startTime);
       const isSameDay = aptDate.toDateString() === date.toDateString();
-      
+
       if (apt.type === 'full-day') {
         return isSameDay;
       }
-      
+
       if (hour === undefined) return false;
-      
+
       const aptHour = aptDate.getHours();
       const aptEndHour = new Date(apt.endTime).getHours();
-      
+
       return isSameDay && hour >= aptHour && hour < aptEndHour;
     });
   };
 
   // Check if appointments overlap and need to be displayed side by side
-  const getAppointmentPosition = (appointment: CalendarAppointment, slot: CalendarAppointment[]) => {
-    const index = slot.findIndex(apt => apt.id === appointment.id);
+  const getAppointmentPosition = (
+    appointment: CalendarAppointment,
+    slot: CalendarAppointment[]
+  ) => {
+    const index = slot.findIndex((apt) => apt.id === appointment.id);
     const total = slot.length;
     return { index, total };
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
+    return date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
       minute: '2-digit',
-      hour12: true 
+      hour12: true,
     });
   };
 
   const getAppointmentColor = (appointment: CalendarAppointment) => {
     if (appointment.color) return appointment.color;
-    
+
     switch (appointment.status) {
-      case 'confirmed': return 'bg-blue-100 border-blue-300 text-blue-800';
-      case 'tentative': return 'bg-yellow-100 border-yellow-300 text-yellow-800';
-      case 'cancelled': return 'bg-gray-100 border-gray-300 text-gray-600';
-      default: return 'bg-green-100 border-green-300 text-green-800';
+      case 'confirmed':
+        return 'bg-blue-100 border-blue-300 text-blue-800';
+      case 'tentative':
+        return 'bg-yellow-100 border-yellow-300 text-yellow-800';
+      case 'cancelled':
+        return 'bg-gray-100 border-gray-300 text-gray-600';
+      default:
+        return 'bg-green-100 border-green-300 text-green-800';
     }
   };
 
-  const AppointmentCard = ({ appointment, position }: { 
-    appointment: CalendarAppointment; 
+  const AppointmentCard = ({
+    appointment,
+    position,
+  }: {
+    appointment: CalendarAppointment;
     position: { index: number; total: number };
   }) => {
     const width = position.total > 1 ? `${Math.floor(100 / position.total)}%` : '100%';
@@ -96,8 +97,10 @@ export const CalendarGrid = ({
 
     return (
       <div
-        className={`absolute inset-x-0 p-1 cursor-pointer hover:shadow-md transition-shadow ${getAppointmentColor(appointment)}`}
-        style={{ 
+        className={`absolute inset-x-0 p-1 cursor-pointer hover:shadow-md transition-shadow ${getAppointmentColor(
+          appointment
+        )}`}
+        style={{
           width,
           left,
           top: '2px',
@@ -107,9 +110,7 @@ export const CalendarGrid = ({
         }}
         onClick={() => onEditAppointment(appointment)}
       >
-        <div className="text-xs font-medium truncate">
-          {appointment.title}
-        </div>
+        <div className="text-xs font-medium truncate">{appointment.title}</div>
         <div className="text-xs opacity-75 flex items-center">
           <Clock className="h-3 w-3 mr-1" />
           {appointment.type === 'full-day' ? 'All day' : formatTime(appointment.startTime)}
@@ -147,23 +148,23 @@ export const CalendarGrid = ({
         ))}
 
         {/* All-day row */}
-        <div className="bg-white p-2 text-xs font-medium text-gray-600 border-b">
-          All Day
-        </div>
+        <div className="bg-white p-2 text-xs font-medium text-gray-600 border-b">All Day</div>
         {days.map((day, dayIndex) => {
-          const allDayAppointments = getAppointmentsForSlot(day).filter(apt => apt.type === 'full-day');
+          const allDayAppointments = getAppointmentsForSlot(day).filter(
+            (apt) => apt.type === 'full-day'
+          );
           return (
-            <div 
-              key={`allday-${dayIndex}`} 
+            <div
+              key={`allday-${dayIndex}`}
               className="bg-white p-1 min-h-[40px] relative border-b cursor-pointer hover:bg-gray-50"
               onClick={() => onCreateAppointment({ date: day })}
             >
               {allDayAppointments.map((appointment, aptIndex) => {
                 const position = getAppointmentPosition(appointment, allDayAppointments);
                 return (
-                  <AppointmentCard 
-                    key={appointment.id} 
-                    appointment={appointment} 
+                  <AppointmentCard
+                    key={appointment.id}
+                    appointment={appointment}
                     position={position}
                   />
                 );
@@ -186,7 +187,7 @@ export const CalendarGrid = ({
             {days.map((day, dayIndex) => {
               const slotAppointments = getAppointmentsForSlot(day, hour);
               return (
-                <div 
+                <div
                   key={`slot-${hour}-${dayIndex}`}
                   className="bg-white p-1 h-16 relative border-b cursor-pointer hover:bg-gray-50"
                   onClick={() => onCreateAppointment({ date: day, hour })}
@@ -194,9 +195,9 @@ export const CalendarGrid = ({
                   {slotAppointments.map((appointment) => {
                     const position = getAppointmentPosition(appointment, slotAppointments);
                     return (
-                      <AppointmentCard 
-                        key={appointment.id} 
-                        appointment={appointment} 
+                      <AppointmentCard
+                        key={appointment.id}
+                        appointment={appointment}
                         position={position}
                       />
                     );
