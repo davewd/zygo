@@ -1,10 +1,22 @@
 // import type { UserRole } from '@zygo/types';
 // import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
-import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users, CalendarDays, Sun, Palmtree } from 'lucide-react';
+import {
+  Activity,
+  ArrowRight,
+  Baby,
+  CalendarDays,
+  Heart,
+  Palmtree,
+  Star,
+  Sun,
+  TrendingUp,
+  User,
+  Users,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ServiceCategories } from '../../components/community';
-import { COMMUNITY_PROFILES } from '../../data/community/primaryConsumers';
 import { FriendNetworkAvailability } from '../../components/community/FriendNetworkAvailability';
+import { COMMUNITY_PROFILES } from '../../data/community/primaryConsumers';
 
 // Define UserRole locally to avoid type issues
 type UserRole = 'grandparent' | 'parent' | 'child' | 'guardian' | 'caregiver';
@@ -248,7 +260,9 @@ const CommunityHub = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-1">Friend Network Availability</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-1">
+                  Friend Network Availability
+                </h3>
                 <p className="text-gray-600">
                   See when your friends are available for summer holiday playdates
                 </p>
@@ -261,7 +275,7 @@ const CommunityHub = () => {
               </Link>
             </div>
 
-            <FriendNetworkAvailability 
+            <FriendNetworkAvailability
               compact={true}
               onCreatePlaydate={(timeSlot) => {
                 // Navigate to holiday planner with pre-selected time
@@ -277,7 +291,7 @@ const CommunityHub = () => {
               Ready for Summer Fun?
             </h3>
             <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto mb-6">
-              Make this summer unforgettable with activities tailored to your family's interests. 
+              Make this summer unforgettable with activities tailored to your family's interests.
               Connect with friends, discover new experiences, and create lasting memories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

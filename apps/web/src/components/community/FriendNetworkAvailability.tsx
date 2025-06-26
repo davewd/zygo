@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Friend {
   id: string;
   name: string;
@@ -18,7 +16,6 @@ export const FriendNetworkAvailability = ({
   compact = false,
   onCreatePlaydate,
 }: FriendNetworkAvailabilityProps) => {
-  
   // Mock friends data for summer holidays
   const friends: Friend[] = [
     {
@@ -27,7 +24,7 @@ export const FriendNetworkAvailability = ({
       age: 7,
       parentName: 'Sarah Johnson',
       availability: 'Available 3 days this week',
-      nextActivity: 'Beach trip planned'
+      nextActivity: 'Beach trip planned',
     },
     {
       id: '2',
@@ -35,7 +32,7 @@ export const FriendNetworkAvailability = ({
       age: 8,
       parentName: 'Mike Chen',
       availability: 'Available 4 days this week',
-      nextActivity: 'Zoo visit planned'
+      nextActivity: 'Zoo visit planned',
     },
     {
       id: '3',
@@ -43,7 +40,7 @@ export const FriendNetworkAvailability = ({
       age: 6,
       parentName: 'Emma Davis',
       availability: 'Available 2 days this week',
-      nextActivity: 'Arts and crafts morning'
+      nextActivity: 'Arts and crafts morning',
     },
     {
       id: '4',
@@ -51,7 +48,7 @@ export const FriendNetworkAvailability = ({
       age: 7,
       parentName: 'James Wilson',
       availability: 'Available 3 days this week',
-      nextActivity: 'Playground adventure'
+      nextActivity: 'Playground adventure',
     },
     {
       id: '5',
@@ -59,7 +56,7 @@ export const FriendNetworkAvailability = ({
       age: 5,
       parentName: 'Lisa Rodriguez',
       availability: 'Available 2 days this week',
-      nextActivity: 'Museum visit'
+      nextActivity: 'Museum visit',
     },
     {
       id: '6',
@@ -67,7 +64,7 @@ export const FriendNetworkAvailability = ({
       age: 8,
       parentName: 'David Thompson',
       availability: 'Available 5 days this week',
-      nextActivity: 'Sports day activities'
+      nextActivity: 'Sports day activities',
     },
   ];
 
@@ -75,7 +72,10 @@ export const FriendNetworkAvailability = ({
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {friends.map((friend) => (
-          <div key={friend.id} className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+          <div
+            key={friend.id}
+            className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+          >
             <div className="flex items-center space-x-3 mb-3">
               <div className="w-8 h-8 bg-zygo-blue text-white rounded-full flex items-center justify-center text-xs font-medium">
                 {friend.name.charAt(0)}
@@ -97,7 +97,7 @@ export const FriendNetworkAvailability = ({
               <button className="flex-1 text-xs px-2 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-50">
                 Message
               </button>
-              <button 
+              <button
                 className="flex-1 text-xs px-2 py-1 bg-zygo-red text-white rounded hover:bg-zygo-red/90"
                 onClick={() => onCreatePlaydate?.({ date: new Date(), hour: 10 })}
               >
@@ -117,7 +117,7 @@ export const FriendNetworkAvailability = ({
         <p className="text-gray-600 mb-6">
           See when your friends' children are available for summer holiday activities
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="text-center p-4 bg-blue-50 rounded-lg">
             <div className="text-2xl font-bold text-blue-600">{friends.length}</div>
@@ -135,14 +135,19 @@ export const FriendNetworkAvailability = ({
 
         <div className="space-y-4">
           {friends.map((friend) => (
-            <div key={friend.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div
+              key={friend.id}
+              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-zygo-blue text-white rounded-full flex items-center justify-center text-sm font-medium">
                     {friend.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-medium">{friend.name} ({friend.age} years)</div>
+                    <div className="font-medium">
+                      {friend.name} ({friend.age} years)
+                    </div>
                     <div className="text-sm text-gray-600">{friend.parentName}</div>
                   </div>
                 </div>
@@ -157,7 +162,7 @@ export const FriendNetworkAvailability = ({
                 <button className="flex-1 px-3 py-2 border border-gray-300 rounded text-gray-600 hover:bg-gray-50 text-sm">
                   Send Message
                 </button>
-                <button 
+                <button
                   className="flex-1 px-3 py-2 bg-zygo-red text-white rounded hover:bg-zygo-red/90 text-sm"
                   onClick={() => onCreatePlaydate?.({ date: new Date(), hour: 10 })}
                 >
