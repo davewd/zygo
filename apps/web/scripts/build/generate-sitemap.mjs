@@ -6,8 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
-const SITE_URL = 'https://www.zygo.app'; // Replace with your actual domain
-const OUTPUT_PATH = path.join(__dirname, './dist/');
+const SITE_URL = 'https://www.zygo.app'; 
+const OUTPUT_PATH = path.join(__dirname, '../../dist'); 
 
 // Static routes extracted from your routes.tsx
 const staticRoutes = [

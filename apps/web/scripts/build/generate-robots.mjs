@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { sitemapConfig } from '../sitemap.config.mjs';
+import { sitemapConfig } from './sitemap.config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
 const SITE_URL = sitemapConfig.siteUrl;
-const OUTPUT_PATH = path.join(__dirname, '../dist', sitemapConfig.robotsPath);
+const OUTPUT_PATH = path.join(__dirname, '../../dist', sitemapConfig.robotsPath);
 
 function generateRobotsTxt() {
   const robotsTxt = `User-agent: *

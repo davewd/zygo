@@ -1,7 +1,7 @@
 // Sitemap configuration
 export const sitemapConfig = {
   // Your website's base URL - IMPORTANT: Change this to your actual domain
-  siteUrl: process.env.SITE_URL || 'https://your-domain.com',
+  siteUrl: process.env.SITE_URL || 'https://www.zygo.app',
   
   // Output paths (relative to dist folder)
   sitemapPath: 'sitemap.xml',
