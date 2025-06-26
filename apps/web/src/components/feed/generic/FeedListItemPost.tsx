@@ -1,5 +1,5 @@
-import React from 'react';
 import DOMPurify from 'dompurify';
+import React from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
 import { FeedItemActions, FeedItemHeader } from '../shared';
 
@@ -22,15 +22,15 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
       <div className="space-y-3">
         {item.title && <h2 className="text-xl font-bold text-gray-900">{item.title}</h2>}
         {item.post && (
-          <div 
-            className="text-gray-800 leading-relaxed prose max-w-none" 
-            dangerouslySetInnerHTML={createSafeMarkup(item.post)} 
+          <div
+            className="text-gray-800 leading-relaxed prose max-w-none"
+            dangerouslySetInnerHTML={createSafeMarkup(item.post)}
           />
         )}
         {item.description && (
-          <div 
-            className="text-gray-600 prose max-w-none" 
-            dangerouslySetInnerHTML={createSafeMarkup(item.description)} 
+          <div
+            className="text-gray-600 prose max-w-none"
+            dangerouslySetInnerHTML={createSafeMarkup(item.description)}
           />
         )}
         {item.imageUrl && (
