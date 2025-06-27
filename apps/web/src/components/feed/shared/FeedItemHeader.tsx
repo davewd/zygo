@@ -57,6 +57,9 @@ export const FeedItemHeader: React.FC<FeedItemHeaderProps> = ({
           )}
           <span className="text-gray-500 text-sm">@{item.author.handle}</span>
           {item.sponsoredData && <span className="text-gray-400 text-sm">• Sponsored</span>}
+          {(item as any).hasReferences && (
+            <span className="text-amber-600 text-sm">• Referenced</span>
+          )}
         </div>
         <p className="text-gray-500 text-sm">{formatDate(item.metadata.createdAt)}</p>
         {children}

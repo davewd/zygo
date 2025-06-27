@@ -15,6 +15,7 @@ interface FeedListItemPostProps {
       dateLiked: string;
     }>;
   };
+  onHashtagClick?: (hashtag: string) => void;
 }
 
 // Helper function to safely render HTML content
@@ -48,7 +49,11 @@ const truncateHtmlContent = (html: string, maxLength: number = 200): string => {
   return `<p>${truncatedText}...</p>`;
 };
 
-export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item, peerLikes }) => {
+export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({
+  item,
+  peerLikes,
+  onHashtagClick,
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   // Determine if content needs truncation (use post content for length check)
@@ -95,7 +100,7 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item, peerLi
       </div>
 
       {/* Actions */}
-      <FeedItemActions item={item} peerLikes={peerLikes} />
+      <FeedItemActions item={item} peerLikes={peerLikes} onHashtagClick={onHashtagClick} />
     </div>
   );
 };

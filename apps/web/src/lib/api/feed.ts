@@ -21,6 +21,9 @@ export enum FeedItemType {
   SPONSORED = 'sponsored'
 }
 
+// Import blog posts data
+import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
+
 export enum VisibilityLevel {
   PUBLIC = 'public',
   GROUP = 'group',
@@ -122,20 +125,65 @@ export interface FeedItemTypeMap {
 // Simulate API endpoints
 const API_BASE_URL = 'http://localhost:3000/api';
 
+// Feed filtering and query interface
+export interface FeedQuery {
+  limit?: number;
+  cursor?: string;
+  filters?: {
+    authorId?: string;
+    type?: FeedItemType[];
+    source?: string[];
+    tags?: string[];
+    visibility?: VisibilityLevel[];
+  };
+}
+
 export interface FeedResponse {
   items: FeedItemTypeMap[];
   hasMore: boolean;
   nextCursor?: string;
 }
 
-export interface FeedParams {
-  limit?: number;
-  cursor?: string;
-}
+// Helper function to convert blog post to feed item
+const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS[0]): any => {
+  return {
+    id: `blog-${blogPost.id}`,
+    title: blogPost.title,
+    metadata: {
+      createdAt: blogPost.publishDate,
+      source: 'zygo-blog',
+      sourceUrl: `/blog/${blogPost.id}`,
+    },
+    author: {
+      name: 'Rebecca Cavallaro',
+      handle: 'rebecca_cavallaro',
+      avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+      verified: true,
+    },
+    type: FeedItemType.POST,
+    post: blogPost.content,
+    imageUrl: blogPost.imageUrl,
+    stats: {
+      likes: blogPost.peerLikes.count,
+      shares: Math.floor(blogPost.peerLikes.count * 0.3),
+      comments: Math.floor(blogPost.peerLikes.count * 0.5),
+      reposts: Math.floor(blogPost.peerLikes.count * 0.2),
+    },
+    privacy: {
+      visibility: VisibilityLevel.PUBLIC,
+      sharedWith: []
+    },
+    // For posts with references
+    hasReferences: blogPost.hasReferences,
+    peerLikes: blogPost.peerLikes,
+  };
+};
 
 // Mock data - in a real app, this would come from your backend
 const mockData = {
   results: [
+    // Add Rebecca's blog post
+    convertBlogPostToFeedItem(REBECCA_CAVALLARO_BLOG_POSTS[0]),
     {
       id: 11,
       title: "Eating for Healthy Kidneys",
@@ -475,58 +523,115 @@ const mockData = {
   ]
 };
 
+// Legacy interface for backward compatibility  
+export interface FeedParams {
+  limit?: number;
+  cursor?: string;
+}
+
+// Main feed items (backward compatible)
 export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedResponse> => {
-  const { limit = 10, cursor } = params;
-  
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Convert cursor to numeric offset for pagination simulation
+  return fetchCommunityFeedItems(params);
+};
+
+export const fetchMoreFeedItems = async (cursor: string, limit = 10): Promise<FeedResponse> => {
+  return fetchFeedItems({ cursor, limit });
+};
+
+// Generic feed fetching with filtering capabilities
+export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<FeedResponse> => {
+  const { limit = 10, cursor, filters } = query;
   const offset = cursor ? parseInt(cursor, 10) : 0;
+
+  // Start with all mock data
+  let allItems = [...mockData.results];
   
-  // Transform mock data to match FeedItemTypeMap interface
-  const transformedItems: FeedItemTypeMap[] = mockData.results.map((item: any) => ({
-    id: item.id.toString(),
+  // Add blog posts if not filtered out
+  if (!filters?.source || filters.source.includes('zygo-blog')) {
+    const blogFeedItems = REBECCA_CAVALLARO_BLOG_POSTS
+      .filter(post => !filters?.authorId || filters.authorId === post.authorId)
+      .map(convertBlogPostToFeedItem);
+    allItems = [...blogFeedItems, ...allItems];
+  }
+
+  // Apply filters
+  let filteredItems = allItems;
+
+  if (filters) {
+    filteredItems = allItems.filter(item => {
+      // Filter by author
+      if (filters.authorId && item.author.handle !== filters.authorId) {
+        return false;
+      }
+
+      // Filter by type
+      if (filters.type && !filters.type.includes(item.type)) {
+        return false;
+      }
+
+      // Filter by source
+      if (filters.source && item.metadata?.source && !filters.source.includes(item.metadata.source)) {
+        return false;
+      }
+
+      // Filter by visibility
+      if (filters.visibility && !filters.visibility.includes(item.privacy.visibility)) {
+        return false;
+      }
+
+      // Filter by tags (for blog posts)
+      if (filters.tags && (item as any).tags) {
+        const itemTags = (item as any).tags || [];
+        if (!filters.tags.some(tag => itemTags.includes(tag))) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }
+
+  // Sort by creation date (newest first)
+  filteredItems.sort((a, b) => 
+    new Date(b.metadata.createdAt).getTime() - new Date(a.metadata.createdAt).getTime()
+  );
+
+  // Transform items with consistent structure
+  const transformedItems = filteredItems.map((item: any) => ({
+    id: item.id,
     type: item.type,
-    title: item.title || item.name || '',
-    description: item.description || '',
-    post: item.post || '',
-    imageUrl: item.image || '',
-    url: item.url || '',
+    title: item.title || item.name,
+    description: item.description,
+    post: item.post,
+    imageUrl: item.imageUrl || item.image,
+    url: item.url,
+    domain: item.domain,
     author: {
-      name: item.author?.name || 'Unknown',
-      handle: item.author?.handle || item.author?.title?.toLowerCase().replace(/\s+/g, '_') || 'unknown',
-      avatar: item.author?.image || 'https://via.placeholder.com/48',
-      verified: false,
+      name: item.author?.name || item.author?.title || 'Unknown',
+      handle: item.author?.handle || 'unknown',
+      avatar: item.author?.avatar || item.author?.image || 'https://via.placeholder.com/48',
+      verified: item.author?.verified || false,
     },
     metadata: {
       createdAt: item.metadata?.createdAt || new Date().toISOString(),
-      source: 'api',
+      source: item.metadata?.source || 'unknown',
+      sourceUrl: item.metadata?.sourceUrl,
     },
-    stats: {
-      comments: item.stats?.comments || 0,
-      reposts: 0,
-      shares: item.stats?.shares || 0,
-      likes: item.stats?.likes || 0,
-    },
-    privacy: item.privacy || {
-      visibility: VisibilityLevel.PUBLIC,
-      sharedWith: [],
-    },
-    // Preserve breastfeeding-specific data
+    stats: item.stats || { likes: 0, shares: 0, comments: 0, reposts: 0 },
+    privacy: item.privacy || { visibility: VisibilityLevel.PUBLIC, sharedWith: [] },
+    // Preserve specific data
     breastfeedingData: item.breastfeedingData,
     breastfeedingDailyData: item.breastfeedingDailyData,
     breastfeedingSummary: item.breastfeedingSummary,
     breastfeedingWeeklySummary: item.breastfeedingWeeklySummary,
-    // Preserve sponsored-specific data
     sponsoredData: item.sponsoredData,
-    // Preserve event-specific data
     eventData: item.eventData,
-    // Preserve milestone-specific data
     milestoneId: item.milestoneId,
+    hasReferences: item.hasReferences,
+    peerLikes: item.peerLikes,
   }));
-  
-  // Simulate pagination
+
+  // Implement pagination
   const totalItems = transformedItems.length;
   const startIndex = offset;
   const endIndex = Math.min(startIndex + limit, totalItems);
@@ -542,6 +647,32 @@ export const fetchFeedItems = async (params: FeedParams = {}): Promise<FeedRespo
   };
 };
 
-export const fetchMoreFeedItems = async (cursor: string, limit = 10): Promise<FeedResponse> => {
-  return fetchFeedItems({ cursor, limit });
+// Provider-specific feed for service provider profiles
+export const fetchProviderFeedItems = async (providerId: string, query: Omit<FeedQuery, 'filters'> = {}): Promise<FeedResponse> => {
+  return fetchFilteredFeedItems({
+    ...query,
+    filters: {
+      authorId: providerId,
+    },
+  });
+};
+
+// Community feed - all public posts
+export const fetchCommunityFeedItems = async (query: Omit<FeedQuery, 'filters'> = {}): Promise<FeedResponse> => {
+  return fetchFilteredFeedItems({
+    ...query,
+    filters: {
+      visibility: [VisibilityLevel.PUBLIC],
+    },
+  });
+};
+
+// Blog posts only
+export const fetchBlogFeedItems = async (query: Omit<FeedQuery, 'filters'> = {}): Promise<FeedResponse> => {
+  return fetchFilteredFeedItems({
+    ...query,
+    filters: {
+      source: ['zygo-blog'],
+    },
+  });
 };

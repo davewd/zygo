@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FeedItemTypeMap, FeedParams, FeedResponse, fetchFeedItems, fetchMoreFeedItems } from '../lib/api/feed';
 
 export interface UseFeedState {
@@ -17,12 +17,18 @@ export const useFeed = (initialParams: FeedParams = {}): UseFeedState => {
   const [hasMore, setHasMore] = useState(true);
   const [nextCursor, setNextCursor] = useState<string | undefined>(undefined);
 
+  // Stabilize initialParams to prevent infinite re-renders
+  const stableParams = useMemo(() => initialParams, [
+    initialParams.limit, 
+    initialParams.cursor
+  ]);
+
   const loadInitialData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       
-      const response: FeedResponse = await fetchFeedItems(initialParams);
+      const response: FeedResponse = await fetchFeedItems(stableParams);
       setItems(response.items);
       setHasMore(response.hasMore);
       setNextCursor(response.nextCursor);
@@ -31,7 +37,7 @@ export const useFeed = (initialParams: FeedParams = {}): UseFeedState => {
     } finally {
       setLoading(false);
     }
-  }, [initialParams]);
+  }, [stableParams]);
 
   const loadMore = useCallback(async () => {
     if (!hasMore || loading || !nextCursor) return;
@@ -40,7 +46,7 @@ export const useFeed = (initialParams: FeedParams = {}): UseFeedState => {
       setLoading(true);
       setError(null);
       
-      const response: FeedResponse = await fetchMoreFeedItems(nextCursor, initialParams.limit);
+      const response: FeedResponse = await fetchMoreFeedItems(nextCursor, stableParams.limit);
       setItems(prev => [...prev, ...response.items]);
       setHasMore(response.hasMore);
       setNextCursor(response.nextCursor);
@@ -49,7 +55,7 @@ export const useFeed = (initialParams: FeedParams = {}): UseFeedState => {
     } finally {
       setLoading(false);
     }
-  }, [hasMore, loading, nextCursor, initialParams.limit]);
+  }, [hasMore, loading, nextCursor, stableParams.limit]);
 
   const refresh = useCallback(() => {
     setItems([]);

@@ -8,8 +8,7 @@ export interface BlogPost {
   authorId: string;
   publishDate: string;
   tags: string[];
-  isReferenced: boolean;
-  referenceBadge?: string;
+  hasReferences: boolean; // Post contains references to external sources
   peerLikes: {
     count: number;
     likedBy: PeerLike[];
@@ -67,8 +66,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-11-15',
     tags: ['jaundice', 'breastfeeding', 'newborn-care', 'lactation-support'],
-    isReferenced: true,
-    referenceBadge: 'Referenced in La Leche League International Guidelines',
+    hasReferences: true,
     peerLikes: {
       count: 12,
       likedBy: [
@@ -129,8 +127,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-10-28',
     tags: ['mastitis', 'breastfeeding', 'research', 'mental-health'],
-    isReferenced: true,
-    referenceBadge: 'Cited in Australian Breastfeeding Association Guidelines',
+    hasReferences: true,
     peerLikes: {
       count: 18,
       likedBy: [
@@ -178,7 +175,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-11-28',
     tags: ['tummy-time', 'breastfeeding', 'development', 'infant-care'],
-    isReferenced: false,
+    hasReferences: false,
     peerLikes: {
       count: 8,
       likedBy: [
@@ -233,8 +230,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-09-15',
     tags: ['oversupply', 'breastfeeding', 'lactation-management', 'ibclc-support'],
-    isReferenced: true,
-    referenceBadge: 'Featured in International Lactation Consultant Association Resources',
+    hasReferences: true,
     peerLikes: {
       count: 15,
       likedBy: [
@@ -268,7 +264,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-08-20',
     tags: ['let-down-reflex', 'oxytocin', 'mindfulness', 'breastfeeding-support'],
-    isReferenced: false,
+    hasReferences: false,
     peerLikes: {
       count: 11,
       likedBy: [
@@ -314,8 +310,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-11-20',
     tags: ['medicare-rebates', 'midwife', 'ibclc', 'healthcare-funding'],
-    isReferenced: true,
-    referenceBadge: 'Referenced in Australian Health Insurance Guidelines',
+    hasReferences: true,
     peerLikes: {
       count: 9,
       likedBy: [
@@ -384,8 +379,7 @@ export const REBECCA_CAVALLARO_BLOG_POSTS: BlogPost[] = [
     authorId: 'rebecca-cavallaro',
     publishDate: '2024-10-10',
     tags: ['returning-to-work', 'breastfeeding', 'workplace-rights', 'pumping'],
-    isReferenced: true,
-    referenceBadge: 'Cited in Australian Breastfeeding Association Guidelines',
+    hasReferences: true,
     peerLikes: {
       count: 16,
       likedBy: [

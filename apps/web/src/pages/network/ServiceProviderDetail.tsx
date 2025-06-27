@@ -335,36 +335,38 @@ const ServiceProviderDetail = () => {
                         const feedItem = convertBlogPostToFeedItem(post);
                         return (
                           <div key={feedItem.id} className="space-y-4">
-                            <FeedListItem item={feedItem} peerLikes={post.peerLikes} />
+                            <FeedListItem
+                              item={feedItem}
+                              peerLikes={post.peerLikes}
+                              onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
+                            />
                           </div>
                         );
                       })}
 
-                    {/* Generate activity feed for all other providers */}
+                    {/* Generate activity feed for providers with specific content */}
                     {provider?.id !== 'rebecca-cavallaro' &&
+                      (provider?.id?.includes('dietitian') ||
+                        provider?.id?.includes('nutrition') ||
+                        provider?.id?.includes('doctor') ||
+                        provider?.id?.includes('dr-') ||
+                        provider?.id?.includes('swim') ||
+                        provider?.id?.includes('aquatic')) &&
                       generateProviderFeedItems(provider?.id || '').map((feedItem) => (
                         <div key={feedItem.id} className="space-y-4">
-                          <FeedListItem item={feedItem} />
+                          <FeedListItem
+                            item={feedItem}
+                            onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
+                          />
                         </div>
                       ))}
                   </div>
+                </div>
+              )}
 
-                  {/* Care Approach (moved to activity for better context) */}
-                  {provider?.approach && (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-gray-800">
-                          <BookOpen className="w-5 h-5 mr-2 text-zygo-red" />
-                          Care Approach
-                        </CardTitle>
-                        <CardDescription>Philosophy and methodology</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-700 leading-relaxed">{provider.approach}</p>
-                      </CardContent>
-                    </Card>
-                  )}
-
+              {/* Services Tab */}
+              {activeTab === 'services' && (
+                <div className="space-y-6">
                   {/* Specializations */}
                   <Card>
                     <CardHeader>
@@ -384,12 +386,6 @@ const ServiceProviderDetail = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </div>
-              )}
-
-              {/* Services Tab */}
-              {activeTab === 'services' && (
-                <div className="space-y-6">
                   {/* Services Offered */}
                   <Card>
                     <CardHeader>

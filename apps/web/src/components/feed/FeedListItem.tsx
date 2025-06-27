@@ -5,6 +5,7 @@ import { FeedListItemImage } from './generic/FeedListItemImage';
 import { FeedListItemLink } from './generic/FeedListItemLink';
 import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
 import { FeedListItemPost } from './generic/FeedListItemPost';
+import { FeedListItemReferencedPost } from './generic/FeedListItemReferencedPost';
 import { FeedListItemSponsored } from './generic/FeedListItemSponsored';
 import { FeedListItemText } from './generic/FeedListItemText';
 import { FeedListItemBreastfeedingDaily } from './tool_specific/FeedListItemBreastfeedingDaily';
@@ -15,6 +16,7 @@ import { FeedListItemLibraryBookReminder } from './tool_specific/FeedListItemLib
 interface FeedListItemProps {
   item: FeedItemTypeMap;
   className?: string;
+  onHashtagClick?: (hashtag: string) => void;
   peerLikes?: {
     count: number;
     likedBy: Array<{
@@ -28,11 +30,22 @@ interface FeedListItemProps {
 }
 
 // Base polymorphic FeedListItem component that renders different types
-const FeedListItem: React.FC<FeedListItemProps> = ({ item, className, peerLikes }) => {
+const FeedListItem: React.FC<FeedListItemProps> = ({
+  item,
+  className,
+  peerLikes,
+  onHashtagClick,
+}) => {
   const renderContent = () => {
     switch (item.type) {
       case FeedItemType.POST:
-        return <FeedListItemPost item={item} peerLikes={peerLikes} />;
+        // Check if this post has references
+        if ((item as any).hasReferences) {
+          return <FeedListItemReferencedPost item={item as any} onHashtagClick={onHashtagClick} />;
+        }
+        return (
+          <FeedListItemPost item={item} peerLikes={peerLikes} onHashtagClick={onHashtagClick} />
+        );
       case FeedItemType.LINK:
         return <FeedListItemLink item={item} />;
       case FeedItemType.IMAGE:

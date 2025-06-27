@@ -2,7 +2,6 @@ import { Button } from '@zygo/ui';
 import { AlertCircle, Loader2, RefreshCw } from 'lucide-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FeedListItem from '../../components/feed/FeedListItem';
-import { FeedItemFeedbackExample } from '../../components/feed/shared/FeedItemFeedbackExample';
 import { useFeed } from '../../hooks/useFeed';
 
 const Feed = () => {
@@ -130,11 +129,6 @@ const Feed = () => {
           </div>
         )}
 
-        {/* Example Component Demo - Remove this in production */}
-        <div className="mb-8">
-          <FeedItemFeedbackExample />
-        </div>
-
         {/* Infinite Scroll Feed */}
         <InfiniteScroll
           dataLength={items.length}
@@ -151,7 +145,12 @@ const Feed = () => {
           className="space-y-4"
         >
           {items.map((item, index) => (
-            <FeedListItem key={`${item.id}-${index}`} item={item} className="fade-in" />
+            <FeedListItem
+              key={`${item.id}-${index}`}
+              item={item}
+              className="fade-in"
+              onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
+            />
           ))}
         </InfiniteScroll>
       </div>
