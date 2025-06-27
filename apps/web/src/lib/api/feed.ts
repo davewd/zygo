@@ -203,6 +203,42 @@ const mockData = {
     // Add Rebecca's blog post
     convertBlogPostToFeedItem(REBECCA_CAVALLARO_BLOG_POSTS[0]),
     {
+      id: 7,
+      title: "Today's Feeding Sessions",
+      metadata: {
+        createdAt: "2024-12-14T14:30:00Z"
+      },
+      author: {
+        name: "Emma Wilson",
+        handle: "emma_mom2",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      },
+      type: FeedItemType.BREASTFEEDING_DAILY_SUMMARY,
+      post: "Tracking my feeding sessions today from 7am to 7am. Some longer sessions this morning but overall feeling good about our routine! 🤱",
+      stats: {
+        likes: 28,
+        shares: 3,
+        comments: 12
+      },
+      privacy: {
+        visibility: "group",
+        sharedWith: [
+          { type: "group", name: "New Moms Support", id: "newmoms_1" }
+        ]
+      },
+      breastfeedingDailyData: [
+        { time: "7:30 AM", duration: 25, happiness: 8, soreness: 3, notes: "Good morning feed" },
+        { time: "10:15 AM", duration: 30, happiness: 7, soreness: 4, notes: "Cluster feeding started" },
+        { time: "12:45 PM", duration: 20, happiness: 9, soreness: 2, notes: "Quick lunch feed" },
+        { time: "3:20 PM", duration: 28, happiness: 8, soreness: 3, notes: "Afternoon session" },
+        { time: "6:00 PM", duration: 35, happiness: 6, soreness: 5, notes: "Tired but going well" },
+        { time: "8:30 PM", duration: 22, happiness: 9, soreness: 2, notes: "Bedtime routine" },
+        { time: "11:45 PM", duration: 18, happiness: 7, soreness: 3, notes: "Late night feed" },
+        { time: "2:30 AM", duration: 15, happiness: 8, soreness: 2, notes: "Night feeding" },
+        { time: "5:15 AM", duration: 26, happiness: 8, soreness: 3, notes: "Early morning" }
+      ]
+    },
+    {
       id: 11,
       title: "Eating for Healthy Kidneys",
       metadata: {
@@ -348,6 +384,45 @@ const mockData = {
             isPrimary: false
           }
         ]
+      }
+    },
+    {
+      id: 8,
+      title: "This Week's Feeding Patterns",
+      metadata: {
+        createdAt: "2024-12-15T09:00:00Z"
+      },
+      author: {
+        name: "Sarah Mitchell",
+        handle: "sarah_mom3",
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
+      },
+      type: FeedItemType.BREASTFEEDING_WEEKLY_SUMMARY,
+      post: "Week 3 summary! Really interesting to see the patterns emerging. Tuesday was definitely our challenging day but we're finding our rhythm. 📊",
+      stats: {
+        likes: 45,
+        shares: 7,
+        comments: 18
+      },
+      privacy: {
+        visibility: "group",
+        sharedWith: [
+          { type: "group", name: "Breastfeeding Support", id: "bf_support_1" },
+          { type: "group", name: "Family", id: "family_3" }
+        ]
+      },
+      breastfeedingWeeklySummary: {
+        weeklyData: [
+          { day: "Mon", avgDuration: 24, feedCount: 8, avgHappiness: 8.2, avgSoreness: 2.8 },
+          { day: "Tue", avgDuration: 31, feedCount: 6, avgHappiness: 6.5, avgSoreness: 4.2 },
+          { day: "Wed", avgDuration: 26, feedCount: 9, avgHappiness: 7.8, avgSoreness: 3.1 },
+          { day: "Thu", avgDuration: 28, feedCount: 7, avgHappiness: 8.5, avgSoreness: 2.5 },
+          { day: "Fri", avgDuration: 25, feedCount: 8, avgHappiness: 8.0, avgSoreness: 3.0 },
+          { day: "Sat", avgDuration: 29, feedCount: 8, avgHappiness: 7.9, avgSoreness: 3.2 },
+          { day: "Sun", avgDuration: 27, feedCount: 9, avgHappiness: 8.3, avgSoreness: 2.9 }
+        ],
+        totalWeeklyFeeds: 55,
+        avgDailyFeeds: 7.9
       }
     },
     {

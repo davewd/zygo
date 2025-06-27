@@ -1,18 +1,6 @@
 // import type { UserRole } from '@zygo/types';
 // import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
-import {
-  Activity,
-  ArrowRight,
-  Baby,
-  CalendarDays,
-  Heart,
-  Palmtree,
-  Star,
-  Sun,
-  TrendingUp,
-  User,
-  Users,
-} from 'lucide-react';
+import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ServiceCategories } from '../../components/community';
 import { FriendNetworkAvailability } from '../../components/community/FriendNetworkAvailability';
@@ -171,100 +159,13 @@ const CommunityHub = () => {
 
         {/* Summer Holidays Activity Planning Section */}
         <section className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 flex items-center">
-                <Sun className="w-8 h-8 mr-3 text-yellow-500" />
-                Summer Holidays Activity Plans
-              </h2>
-              <p className="text-gray-600">
-                Discover and plan exciting activities for your family based on your preferences
-              </p>
-            </div>
-            <Link to="/tools/holiday-planner">
-              <button className="bg-zygo-red hover:bg-zygo-red/90 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                <CalendarDays className="w-4 h-4" />
-                <span>Open Holiday Planner</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
-
-          {/* Activity Recommendations Based on Preferences */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-lg">
-              <div className="p-6">
-                <h3 className="flex items-center text-orange-800 font-semibold text-lg mb-3">
-                  <Palmtree className="w-5 h-5 mr-2" />
-                  Beach & Water Activities
-                </h3>
-                <p className="text-orange-700 text-sm mb-4">
-                  Based on your family's love for outdoor activities and swimming
-                </p>
-                <ul className="space-y-2 text-sm text-orange-600 mb-4">
-                  <li>• Beach picnics and sandcastle building</li>
-                  <li>• Pool parties with friends</li>
-                  <li>• Water parks and splash zones</li>
-                  <li>• Surfing lessons at Bondi Beach</li>
-                </ul>
-                <button className="w-full px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm rounded">
-                  Plan Beach Day
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg">
-              <div className="p-6">
-                <h3 className="flex items-center text-green-800 font-semibold text-lg mb-3">
-                  <Activity className="w-5 h-5 mr-2" />
-                  Adventure & Sports
-                </h3>
-                <p className="text-green-700 text-sm mb-4">
-                  Perfect for your active family with sports-loving children
-                </p>
-                <ul className="space-y-2 text-sm text-green-600 mb-4">
-                  <li>• Rock climbing and ninja courses</li>
-                  <li>• Soccer camps and tournaments</li>
-                  <li>• Hiking and nature exploration</li>
-                  <li>• Cycling adventures in the park</li>
-                </ul>
-                <button className="w-full px-3 py-2 bg-green-500 hover:bg-green-600 text-white text-sm rounded">
-                  Book Adventure
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-lg">
-              <div className="p-6">
-                <h3 className="flex items-center text-purple-800 font-semibold text-lg mb-3">
-                  <Heart className="w-5 h-5 mr-2" />
-                  Creative & Cultural
-                </h3>
-                <p className="text-purple-700 text-sm mb-4">
-                  Nurture creativity and learn about different cultures
-                </p>
-                <ul className="space-y-2 text-sm text-purple-600 mb-4">
-                  <li>• Art workshops and craft sessions</li>
-                  <li>• Museum visits and exhibitions</li>
-                  <li>• Theatre shows and performances</li>
-                  <li>• Cooking classes from around the world</li>
-                </ul>
-                <button className="w-full px-3 py-2 bg-purple-500 hover:bg-purple-600 text-white text-sm rounded">
-                  Explore Culture
-                </button>
-              </div>
-            </div>
-          </div>
-
           {/* Friend Network Availability */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                  Friend Network Availability
-                </h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-1">Activities with Friends</h3>
                 <p className="text-gray-600">
-                  See when your friends are available for summer holiday playdates
+                  See when your friends are available for a playdate or activity.
                 </p>
               </div>
               <Link to="/tools/holiday-planner">
@@ -300,22 +201,6 @@ const CommunityHub = () => {
               </button>
             </Link>
           </div>
-
-          {/*           { /*Community Stats /}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-            {communityStats.map((stat, index) => {
-              const IconComponent = stat.icon;
-              return (
-                <Card key={index} className="text-center">
-                  <CardContent className="p-4">
-                    <IconComponent className={`w-6 h-6 mx-auto mb-2 ${stat.color}`} />
-                    <div className="text-2xl font-bold text-gray-800">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div> */}
 
           {/* Featured Members */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
