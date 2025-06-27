@@ -59,6 +59,7 @@ export interface FeedItemTypeMap {
     updatedAt?: string;
     source?: string;
     sourceUrl?: string;
+    authorId?: string;
   };
   stats: {
     comments: number;
@@ -153,10 +154,11 @@ const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS
       createdAt: blogPost.publishDate,
       source: 'zygo-blog',
       sourceUrl: `/blog/${blogPost.id}`,
+      authorId: blogPost.authorId, // This is crucial for provider feed filtering
     },
     author: {
       name: 'Rebecca Cavallaro',
-      handle: 'rebecca_cavallaro',
+      handle: blogPost.authorId, // Use the authorId as handle to match service provider ID
       avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
       verified: true,
     },
@@ -546,10 +548,9 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
   // Start with all mock data
   let allItems = [...mockData.results];
   
-  // Add blog posts if not filtered out
+  // Add blog posts if not filtered out by source
   if (!filters?.source || filters.source.includes('zygo-blog')) {
     const blogFeedItems = REBECCA_CAVALLARO_BLOG_POSTS
-      .filter(post => !filters?.authorId || filters.authorId === post.authorId)
       .map(convertBlogPostToFeedItem);
     allItems = [...blogFeedItems, ...allItems];
   }
@@ -559,8 +560,10 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
 
   if (filters) {
     filteredItems = allItems.filter(item => {
-      // Filter by author
-      if (filters.authorId && item.author.handle !== filters.authorId) {
+      // Filter by author - check both handle and metadata.authorId for consistency
+      if (filters.authorId && 
+          item.author.handle !== filters.authorId && 
+          item.metadata?.authorId !== filters.authorId) {
         return false;
       }
 

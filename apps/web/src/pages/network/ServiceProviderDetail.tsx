@@ -27,7 +27,6 @@ import {
   EMILY_MCCONAGHY,
   JAKE_THOMPSON,
 } from '../../data/network/active8KidsCenter';
-import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
 import {
   ELIXR_SWIM_SCHOOL_CENTER,
   EMMA_RODRIGUEZ,
@@ -74,15 +73,14 @@ import {
   SARAH_DIGITAL_SPECIALIST,
   ZYGO_APP_CENTER,
 } from '../../data/network/zygoAppCenter';
-import {
-  convertBlogPostToFeedItem,
-  generateProviderFeedItems,
-} from '../../data/utils/feedConversion';
+import { fetchProviderFeedItems } from '../../lib/api/feed';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [providerFeedItems, setProviderFeedItems] = useState<any[]>([]);
+  const [feedLoading, setFeedLoading] = useState(false);
 
   // Get tab from URL params, default to 'activity'
   const tabFromUrl = searchParams.get('tab') || 'activity';
@@ -110,6 +108,26 @@ const ServiceProviderDetail = () => {
       setActiveTab('activity');
     }
   }, [searchParams]);
+
+  // Load provider feed data using the unified API
+  useEffect(() => {
+    const loadProviderFeed = async () => {
+      if (!id) return;
+
+      setFeedLoading(true);
+      try {
+        const response = await fetchProviderFeedItems(id, { limit: 10 });
+        setProviderFeedItems(response.items);
+      } catch (error) {
+        console.error('Failed to load provider feed:', error);
+        setProviderFeedItems([]);
+      } finally {
+        setFeedLoading(false);
+      }
+    };
+
+    loadProviderFeed();
+  }, [id]);
 
   // Get provider and center by ID
   const providers = [
@@ -329,37 +347,32 @@ const ServiceProviderDetail = () => {
                       </p>
                     </div>
 
-                    {/* Convert Rebecca's blog posts to feed items for consistency */}
-                    {provider?.id === 'rebecca-cavallaro' &&
-                      REBECCA_CAVALLARO_BLOG_POSTS.map((post) => {
-                        const feedItem = convertBlogPostToFeedItem(post);
-                        return (
-                          <div key={feedItem.id} className="space-y-4">
-                            <FeedListItem
-                              item={feedItem}
-                              peerLikes={post.peerLikes}
-                              onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
-                            />
-                          </div>
-                        );
-                      })}
+                    {/* Provider Activity Feed - Using unified API for all providers */}
+                    {feedLoading && (
+                      <div className="space-y-4">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="animate-pulse bg-gray-100 rounded-lg p-4 h-32" />
+                        ))}
+                      </div>
+                    )}
 
-                    {/* Generate activity feed for providers with specific content */}
-                    {provider?.id !== 'rebecca-cavallaro' &&
-                      (provider?.id?.includes('dietitian') ||
-                        provider?.id?.includes('nutrition') ||
-                        provider?.id?.includes('doctor') ||
-                        provider?.id?.includes('dr-') ||
-                        provider?.id?.includes('swim') ||
-                        provider?.id?.includes('aquatic')) &&
-                      generateProviderFeedItems(provider?.id || '').map((feedItem) => (
+                    {!feedLoading &&
+                      providerFeedItems.length > 0 &&
+                      providerFeedItems.map((feedItem) => (
                         <div key={feedItem.id} className="space-y-4">
                           <FeedListItem
                             item={feedItem}
+                            peerLikes={feedItem.peerLikes}
                             onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
                           />
                         </div>
                       ))}
+
+                    {!feedLoading && providerFeedItems.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        <p>No recent activity from this provider.</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

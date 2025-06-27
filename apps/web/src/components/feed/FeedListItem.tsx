@@ -5,7 +5,6 @@ import { FeedListItemImage } from './generic/FeedListItemImage';
 import { FeedListItemLink } from './generic/FeedListItemLink';
 import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
 import { FeedListItemPost } from './generic/FeedListItemPost';
-import { FeedListItemReferencedPost } from './generic/FeedListItemReferencedPost';
 import { FeedListItemSponsored } from './generic/FeedListItemSponsored';
 import { FeedListItemText } from './generic/FeedListItemText';
 import { FeedListItemBreastfeedingDaily } from './tool_specific/FeedListItemBreastfeedingDaily';
@@ -39,12 +38,13 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   const renderContent = () => {
     switch (item.type) {
       case FeedItemType.POST:
-        // Check if this post has references
-        if ((item as any).hasReferences) {
-          return <FeedListItemReferencedPost item={item as any} onHashtagClick={onHashtagClick} />;
-        }
+        // All posts now use the same component, which handles references internally
         return (
-          <FeedListItemPost item={item} peerLikes={peerLikes} onHashtagClick={onHashtagClick} />
+          <FeedListItemPost
+            item={item as any}
+            peerLikes={peerLikes}
+            onHashtagClick={onHashtagClick}
+          />
         );
       case FeedItemType.LINK:
         return <FeedListItemLink item={item} />;
