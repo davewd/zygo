@@ -1,6 +1,6 @@
 import { NavigationBar, Toaster as Sonner, Toaster, TooltipProvider } from '@zygo/ui';
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
-import { RouterProvider, useNavigate } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import { routes } from './routes';
 

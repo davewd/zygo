@@ -209,7 +209,10 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink href="/notifications" className={cn(navigationMenuTriggerStyle())}>
+              <NavigationMenuLink
+                href="/notifications"
+                className={cn(navigationMenuTriggerStyle())}
+              >
                 Notifications
               </NavigationMenuLink>
             </NavigationMenuItem>

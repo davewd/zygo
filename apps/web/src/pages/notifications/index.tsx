@@ -1,10 +1,9 @@
-import { Bell, Check, Clock, X } from 'lucide-react';
-import React, { useState } from 'react';
+import { Badge } from '@zygo/ui/src/components/badge';
 import { Button } from '@zygo/ui/src/components/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@zygo/ui/src/components/card';
-import { Badge } from '@zygo/ui/src/components/badge';
 import { ScrollArea } from '@zygo/ui/src/components/scroll-area';
-import { Separator } from '@zygo/ui/src/components/separator';
+import { Bell, Check, Clock, X } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface Notification {
   id: string;
@@ -27,14 +26,14 @@ const sampleNotifications: Notification[] = [
     id: 'reminder-1',
     type: 'reminder',
     title: 'Breastfeeding Reminder',
-    message: 'Time for Emma\'s next feeding session',
+    message: "Time for Emma's next feeding session",
     timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
     isRead: false,
     reminderData: {
       reminderType: 'breastfeeding',
       dueDate: new Date(),
-      babyName: 'Emma'
-    }
+      babyName: 'Emma',
+    },
   },
   {
     id: 'reminder-2',
@@ -45,8 +44,8 @@ const sampleNotifications: Notification[] = [
     isRead: false,
     reminderData: {
       reminderType: 'library_book',
-      dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000)
-    }
+      dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    },
   },
   {
     id: 'update-1',
@@ -55,7 +54,7 @@ const sampleNotifications: Notification[] = [
     message: 'Your baby might be ready for the "First Smile" milestone',
     timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3 hours ago
     isRead: true,
-    actionUrl: '/timeline'
+    actionUrl: '/timeline',
   },
   {
     id: 'message-1',
@@ -63,16 +62,16 @@ const sampleNotifications: Notification[] = [
     title: 'Message from Dr. Sarah',
     message: 'Great progress on your breastfeeding journey! Keep it up.',
     timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
-    isRead: true
+    isRead: true,
   },
   {
     id: 'system-1',
     type: 'system',
     title: 'Account Security',
-    message: 'We\'ve updated our privacy policy. Please review the changes.',
+    message: "We've updated our privacy policy. Please review the changes.",
     timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-    isRead: false
-  }
+    isRead: false,
+  },
 ];
 
 const getNotificationIcon = (type: string) => {
@@ -108,7 +107,7 @@ const getNotificationBadgeColor = (type: string) => {
 const formatTimestamp = (timestamp: Date) => {
   const now = new Date();
   const diffInMinutes = Math.floor((now.getTime() - timestamp.getTime()) / (1000 * 60));
-  
+
   if (diffInMinutes < 1) return 'Just now';
   if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
   if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
@@ -120,33 +119,29 @@ const Notifications: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'unread' | 'reminders'>('all');
 
   const markAsRead = (id: string) => {
-    setNotifications(prev =>
-      prev.map(notification =>
-        notification.id === id
-          ? { ...notification, isRead: true }
-          : notification
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === id ? { ...notification, isRead: true } : notification
       )
     );
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev =>
-      prev.map(notification => ({ ...notification, isRead: true }))
-    );
+    setNotifications((prev) => prev.map((notification) => ({ ...notification, isRead: true })));
   };
 
   const dismissNotification = (id: string) => {
-    setNotifications(prev => prev.filter(notification => notification.id !== id));
+    setNotifications((prev) => prev.filter((notification) => notification.id !== id));
   };
 
-  const filteredNotifications = notifications.filter(notification => {
+  const filteredNotifications = notifications.filter((notification) => {
     if (filter === 'unread') return !notification.isRead;
     if (filter === 'reminders') return notification.type === 'reminder';
     return true;
   });
 
-  const unreadCount = notifications.filter(n => !n.isRead).length;
-  const reminderCount = notifications.filter(n => n.type === 'reminder').length;
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const reminderCount = notifications.filter((n) => n.type === 'reminder').length;
 
   return (
     <div className="container mx-auto p-6 max-w-4xl">
@@ -220,19 +215,23 @@ const Notifications: React.FC = () => {
                       <div className="flex-shrink-0 mt-1">
                         {getNotificationIcon(notification.type)}
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className={`text-sm font-medium ${
-                                !notification.isRead ? 'text-gray-900' : 'text-gray-700'
-                              }`}>
+                              <h3
+                                className={`text-sm font-medium ${
+                                  !notification.isRead ? 'text-gray-900' : 'text-gray-700'
+                                }`}
+                              >
                                 {notification.title}
                               </h3>
                               <Badge
                                 variant="secondary"
-                                className={`text-xs ${getNotificationBadgeColor(notification.type)}`}
+                                className={`text-xs ${getNotificationBadgeColor(
+                                  notification.type
+                                )}`}
                               >
                                 {notification.type}
                               </Badge>
@@ -240,17 +239,16 @@ const Notifications: React.FC = () => {
                                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                               )}
                             </div>
-                            <p className="text-sm text-gray-600 mb-2">
-                              {notification.message}
-                            </p>
-                            
+                            <p className="text-sm text-gray-600 mb-2">{notification.message}</p>
+
                             {/* Reminder-specific content */}
                             {notification.reminderData && (
                               <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-2">
                                 <div className="flex items-center justify-between">
                                   <div>
                                     <p className="text-xs font-medium text-blue-800 uppercase tracking-wide">
-                                      {notification.reminderData.reminderType.replace('_', ' ')} reminder
+                                      {notification.reminderData.reminderType.replace('_', ' ')}{' '}
+                                      reminder
                                     </p>
                                     {notification.reminderData.babyName && (
                                       <p className="text-sm text-blue-700 mt-1">
@@ -269,12 +267,12 @@ const Notifications: React.FC = () => {
                                 </div>
                               </div>
                             )}
-                            
+
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-gray-500">
                                 {formatTimestamp(notification.timestamp)}
                               </span>
-                              
+
                               <div className="flex items-center gap-2">
                                 {notification.actionUrl && (
                                   <Button size="sm" variant="outline" asChild>
