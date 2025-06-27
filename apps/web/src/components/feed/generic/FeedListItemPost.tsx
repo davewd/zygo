@@ -98,7 +98,6 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({
   onHashtagClick,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const [showReferences, setShowReferences] = useState(false);
 
   // Extract references if they exist
   const references = item.hasReferences ? extractReferences(item.post || '') : null;
@@ -109,6 +108,8 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({
   // Determine if content needs truncation (use main content for length check, excluding references)
   const textContent = mainContent.replace(/<[^>]*>/g, '');
   const needsTruncation = textContent.length > 200;
+  const hasReferencesToShow = references && references.length > 0;
+  const showExpandButton = needsTruncation || hasReferencesToShow;
   const displayContent = expanded ? mainContent : truncateHtmlContent(mainContent, 200);
 
   return (
@@ -122,57 +123,57 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({
         {displayContent && (
           <div
             className="text-gray-800 leading-relaxed prose max-w-none"
-            dangerouslySetInnerHTML={createSafeMarkup(displayContent)}
+            dangerouslySetInnerHTML={createSafeMarkup(
+              expanded || !needsTruncation ? mainContent : displayContent
+            )}
           />
         )}
 
-        {/* Show More/Less Button for main content */}
-        {needsTruncation && (
+        {/* Show More Button - only when not expanded */}
+        {showExpandButton && !expanded && (
           <button
             onClick={() => setExpanded(!expanded)}
             className="text-gray-600 underline hover:text-gray-800 text-sm transition-colors"
           >
-            {expanded ? 'Show less' : 'Show more'}
+            Show more
           </button>
         )}
 
-        {/* References Section - Only show when content is expanded or if content doesn't need truncation */}
-        {references && references.length > 0 && (expanded || !needsTruncation) && (
-          <div className="mt-4">
-            <button
-              onClick={() => setShowReferences(!showReferences)}
-              className="flex items-center space-x-2 text-gray-600 underline hover:text-gray-800 text-sm transition-colors"
-            >
-              <BookOpen className="w-4 h-4" />
-              <span>{showReferences ? 'Hide references' : 'Show references'}</span>
-            </button>
-
-            {showReferences && (
-              <div className="mt-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-4">
-                <div className="flex items-center space-x-2 mb-3">
-                  <BookOpen className="w-4 h-4 text-amber-600" />
-                  <h4 className="text-sm font-semibold text-amber-800">
-                    References & Further Resources
-                  </h4>
-                </div>
-                <ol className="space-y-2 text-sm text-amber-900">
-                  {references.map((reference, index) => (
-                    <li key={index} className="flex">
-                      <span className="text-amber-600 font-medium mr-2 flex-shrink-0">
-                        {index + 1}.
-                      </span>
-                      <div
-                        className="flex-1"
-                        dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(processReferenceLinks(reference)),
-                        }}
-                      />
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
+        {/* References Section - Only show when content is expanded */}
+        {hasReferencesToShow && expanded && (
+          <div className="mt-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-4">
+            <div className="flex items-center space-x-2 mb-3">
+              <BookOpen className="w-4 h-4 text-amber-600" />
+              <h4 className="text-sm font-semibold text-amber-800">
+                References & Further Resources
+              </h4>
+            </div>
+            <ol className="space-y-2 text-sm text-amber-900">
+              {references.map((reference, index) => (
+                <li key={index} className="flex">
+                  <span className="text-amber-600 font-medium mr-2 flex-shrink-0">
+                    {index + 1}.
+                  </span>
+                  <div
+                    className="flex-1"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(processReferenceLinks(reference)),
+                    }}
+                  />
+                </li>
+              ))}
+            </ol>
           </div>
+        )}
+
+        {/* Show Less Button - only when expanded */}
+        {showExpandButton && expanded && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-gray-600 underline hover:text-gray-800 text-sm transition-colors"
+          >
+            Show less
+          </button>
         )}
 
         {item.imageUrl && (
