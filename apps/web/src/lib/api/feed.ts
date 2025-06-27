@@ -797,12 +797,12 @@ export const fetchProviderFeedItems = async (providerId: string, query: Omit<Fee
   });
 };
 
-// Community feed - all public posts
+// Community feed - all public and group posts
 export const fetchCommunityFeedItems = async (query: Omit<FeedQuery, 'filters'> = {}): Promise<FeedResponse> => {
   return fetchFilteredFeedItems({
     ...query,
     filters: {
-      visibility: [VisibilityLevel.PUBLIC],
+      visibility: [VisibilityLevel.PUBLIC, VisibilityLevel.GROUP],
     },
   });
 };
