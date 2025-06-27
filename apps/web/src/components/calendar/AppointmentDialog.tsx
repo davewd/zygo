@@ -173,93 +173,120 @@ export const AppointmentDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle>{appointment ? 'Edit Activity' : 'Create New Activity'}</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Basic Information */}
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="title">Activity Title</Label>
-              <Input
-                id="title"
-                value={formData.title}
-                onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
-                placeholder="e.g., Swimming lessons, Playground meetup"
-                required
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="location">Location</Label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="flex-1 overflow-y-auto">
+          <form onSubmit={handleSubmit} className="space-y-6 p-1">
+            {/* Basic Information */}
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="title">Activity Title</Label>
                 <Input
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
-                  placeholder="e.g., Community Pool, Central Park"
-                  className="pl-10"
+                  id="title"
+                  value={formData.title}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
+                  placeholder="e.g., Swimming lessons, Playground meetup"
                   required
                 />
               </div>
-            </div>
 
-            <div>
-              <Label htmlFor="type">Activity Type</Label>
-              <Select
-                value={formData.type}
-                onValueChange={(value: CalendarAppointment['type']) =>
-                  setFormData((prev) => ({ ...prev, type: value }))
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="timed">Specific Time</SelectItem>
-                  <SelectItem value="half-day">Half Day</SelectItem>
-                  <SelectItem value="full-day">Full Day</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Date and Time */}
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="startDate">Start Date</Label>
+                <Label htmlFor="location">Location</Label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
-                    id="startDate"
-                    type="date"
-                    value={formData.startDate}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, startDate: e.target.value }))
-                    }
+                    id="location"
+                    value={formData.location}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
+                    placeholder="e.g., Community Pool, Central Park"
                     className="pl-10"
                     required
                   />
                 </div>
               </div>
 
-              {formData.type !== 'full-day' && (
+              <div>
+                <Label htmlFor="type">Activity Type</Label>
+                <Select
+                  value={formData.type}
+                  onValueChange={(value: CalendarAppointment['type']) =>
+                    setFormData((prev) => ({ ...prev, type: value }))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="timed">Specific Time</SelectItem>
+                    <SelectItem value="half-day">Half Day</SelectItem>
+                    <SelectItem value="full-day">Full Day</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Date and Time */}
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="startTime">Start Time</Label>
+                  <Label htmlFor="startDate">Start Date</Label>
                   <div className="relative">
-                    <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
-                      id="startTime"
-                      type="time"
-                      value={formData.startTime}
+                      id="startDate"
+                      type="date"
+                      value={formData.startDate}
                       onChange={(e) =>
-                        setFormData((prev) => ({ ...prev, startTime: e.target.value }))
+                        setFormData((prev) => ({ ...prev, startDate: e.target.value }))
                       }
                       className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {formData.type !== 'full-day' && (
+                  <div>
+                    <Label htmlFor="startTime">Start Time</Label>
+                    <div className="relative">
+                      <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="startTime"
+                        type="time"
+                        value={formData.startTime}
+                        onChange={(e) =>
+                          setFormData((prev) => ({ ...prev, startTime: e.target.value }))
+                        }
+                        className="pl-10"
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {formData.type !== 'full-day' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="endDate">End Date</Label>
+                    <Input
+                      id="endDate"
+                      type="date"
+                      value={formData.endDate || formData.startDate}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="endTime">End Time</Label>
+                    <Input
+                      id="endTime"
+                      type="time"
+                      value={formData.endTime}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))}
                       required
                     />
                   </div>
@@ -267,117 +294,96 @@ export const AppointmentDialog = ({
               )}
             </div>
 
-            {formData.type !== 'full-day' && (
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="endDate">End Date</Label>
-                  <Input
-                    id="endDate"
-                    type="date"
-                    value={formData.endDate || formData.startDate}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))}
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="endTime">End Time</Label>
-                  <Input
-                    id="endTime"
-                    type="time"
-                    value={formData.endTime}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))}
-                    required
-                  />
+            {/* Participants */}
+            <div className="space-y-4">
+              <div>
+                <Label className="flex items-center mb-3">
+                  <Users className="h-4 w-4 mr-2" />
+                  Your Children
+                </Label>
+                <div className="space-y-2 max-h-32 overflow-y-auto">
+                  {week.children.map((child) => (
+                    <div key={child.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`child-${child.id}`}
+                        checked={selectedChildren.includes(child.id)}
+                        onCheckedChange={() => handleChildToggle(child.id)}
+                      />
+                      <Label htmlFor={`child-${child.id}`} className="flex-1">
+                        {child.name} ({child.age} years old)
+                      </Label>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
 
-          {/* Participants */}
-          <div className="space-y-4">
-            <div>
-              <Label className="flex items-center mb-3">
-                <Users className="h-4 w-4 mr-2" />
-                Your Children
-              </Label>
-              <div className="space-y-2">
-                {week.children.map((child) => (
-                  <div key={child.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`child-${child.id}`}
-                      checked={selectedChildren.includes(child.id)}
-                      onCheckedChange={() => handleChildToggle(child.id)}
-                    />
-                    <Label htmlFor={`child-${child.id}`} className="flex-1">
-                      {child.name} ({child.age} years old)
-                    </Label>
-                  </div>
-                ))}
+              <div>
+                <Label className="flex items-center mb-3">
+                  <Users className="h-4 w-4 mr-2" />
+                  Friends
+                </Label>
+                <div className="space-y-2 max-h-32 overflow-y-auto">
+                  {availableFriends.map((friend) => (
+                    <div key={friend.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`friend-${friend.id}`}
+                        checked={selectedFriends.includes(friend.id)}
+                        onCheckedChange={() => handleFriendToggle(friend.id)}
+                      />
+                      <Label htmlFor={`friend-${friend.id}`} className="flex-1 text-sm">
+                        {friend.name} ({friend.age}) - {friend.parentName}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div>
-              <Label className="flex items-center mb-3">
-                <Users className="h-4 w-4 mr-2" />
-                Friends
-              </Label>
-              <div className="space-y-2">
-                {availableFriends.map((friend) => (
-                  <div key={friend.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`friend-${friend.id}`}
-                      checked={selectedFriends.includes(friend.id)}
-                      onCheckedChange={() => handleFriendToggle(friend.id)}
-                    />
-                    <Label htmlFor={`friend-${friend.id}`} className="flex-1">
-                      {friend.name} ({friend.age} years old) - {friend.parentName}
-                    </Label>
-                  </div>
-                ))}
+            {/* Status and Notes in a more compact layout */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="status">Status</Label>
+                <Select
+                  value={formData.status}
+                  onValueChange={(value: CalendarAppointment['status']) =>
+                    setFormData((prev) => ({ ...prev, status: value }))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="confirmed">Confirmed</SelectItem>
+                    <SelectItem value="tentative">Tentative</SelectItem>
+                    <SelectItem value="cancelled">Cancelled</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="sm:col-span-1">
+                <Label htmlFor="notes">Notes (Optional)</Label>
+                <Textarea
+                  id="notes"
+                  value={formData.notes}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
+                  placeholder="Any additional details..."
+                  rows={2}
+                  className="resize-none"
+                />
               </div>
             </div>
-          </div>
 
-          {/* Status */}
-          <div>
-            <Label htmlFor="status">Status</Label>
-            <Select
-              value={formData.status}
-              onValueChange={(value: CalendarAppointment['status']) =>
-                setFormData((prev) => ({ ...prev, status: value }))
-              }
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="tentative">Tentative</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Notes */}
-          <div>
-            <Label htmlFor="notes">Notes (Optional)</Label>
-            <Textarea
-              id="notes"
-              value={formData.notes}
-              onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
-              placeholder="Any additional details about the activity..."
-              rows={3}
-            />
-          </div>
-
-          {/* Actions */}
-          <div className="flex justify-end space-x-2 pt-4 border-t">
-            <Button type="button" variant="outline" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit">{appointment ? 'Update Activity' : 'Create Activity'}</Button>
-          </div>
-        </form>
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4 border-t flex-shrink-0">
+              <Button type="button" variant="outline" onClick={onClose} className="w-full sm:w-auto">
+                Cancel
+              </Button>
+              <Button type="submit" className="w-full sm:w-auto">
+                {appointment ? 'Update Activity' : 'Create Activity'}
+              </Button>
+            </div>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   );
