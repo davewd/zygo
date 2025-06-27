@@ -1,6 +1,6 @@
 import { NavigationBar, Toaster as Sonner, Toaster, TooltipProvider } from '@zygo/ui';
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, useNavigate } from 'react-router-dom';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import { routes } from './routes';
 
@@ -13,6 +13,12 @@ const App = () => {
   const handleUserSwitch = () => {
     console.log('User switch requested');
     // Here you would typically open a modal or navigate to switch user
+  };
+
+  const handleNotificationClick = () => {
+    console.log('Notifications clicked');
+    // Navigate to notifications page
+    window.location.href = '/notifications';
   };
 
   // Sample current user data
@@ -56,6 +62,8 @@ const App = () => {
           currentUser={currentUser}
           otherUsers={otherUsers}
           onUserSwitch={handleUserSwitch}
+          notificationCount={3}
+          onNotificationClick={handleNotificationClick}
         />
         <RouterProvider router={routes} />
       </UserAuthContextProvider>

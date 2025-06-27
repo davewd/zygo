@@ -17,6 +17,7 @@ import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
 import ServiceNetworkProviderDetail from './pages/network/ServiceNetworkProviderDetail';
 import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
 import ServiceProviderDetail from './pages/network/ServiceProviderDetail';
+import Notifications from './pages/notifications/index';
 import SignUp from './pages/signup';
 import TimeLine from './pages/timeline';
 import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
@@ -93,6 +94,7 @@ export const routes = createBrowserRouter([
         element: <MilestoneDetailPage />,
         errorElement: <Error />,
       },
+      { path: '/notifications', element: <Notifications />, errorElement: <Error /> },
     ],
     errorElement: <Error />,
   },
