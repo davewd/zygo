@@ -18,6 +18,7 @@ export enum FeedItemType {
   BREASTFEEDING_WEEKLY_SUMMARY = 'breastfeeding_weekly_summary',
   BREASTFEEDING_REMINDER = 'breastfeeding_reminder',
   LIBRARY_BOOK_REMINDER = 'library_book_reminder',
+  TOOL_CTA_TEMPORAL = 'tool_cta_temporal',
   SPONSORED = 'sponsored'
 }
 
@@ -118,6 +119,21 @@ export interface FeedItemTypeMap {
     attendees: number;
     schoolLogo?: string;
     schoolName?: string;
+  };
+  // Tool CTA Temporal specific data
+  toolCTATemporalData?: {
+    backgroundGradient: string;
+    borderColor: string;
+    icon: string; // Icon name as string since we can't store LucideIcon directly in JSON
+    iconColor: string;
+    headerText: string;
+    description: string;
+    actions: Array<{
+      label: string;
+      url: string;
+      icon: string; // Icon name as string
+      isPrimary?: boolean;
+    }>;
   };
   // Milestone specific data
   milestoneId?: string; // ID of the related milestone from the milestones CSV
@@ -287,6 +303,51 @@ const mockData = {
       privacy: {
         visibility: "private",
         sharedWith: []
+      }
+    },
+    {
+      id: 13,
+      title: "Summer Activities",
+      metadata: {
+        createdAt: "2024-12-17T10:00:00Z"
+      },
+      author: {
+        name: "Zygo",
+        handle: "zygo_app",
+        avatar: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      },
+      type: FeedItemType.TOOL_CTA_TEMPORAL,
+      post: "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
+      stats: {
+        likes: 0,
+        shares: 0,
+        comments: 0
+      },
+      privacy: {
+        visibility: "public",
+        sharedWith: []
+      },
+      toolCTATemporalData: {
+        backgroundGradient: "bg-gradient-to-r from-zygo-mint/30 to-zygo-blue/20",
+        borderColor: "border-0",
+        icon: "Sun",
+        iconColor: "text-yellow-500",
+        headerText: "Ready for Summer Fun?",
+        description: "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
+        actions: [
+          {
+            label: "Plan Your Summer",
+            url: "/tools/holiday-planner",
+            icon: "CalendarDays",
+            isPrimary: true
+          },
+          {
+            label: "Browse Activities",
+            url: "/network/services",
+            icon: "Activity",
+            isPrimary: false
+          }
+        ]
       }
     },
     {
@@ -629,6 +690,7 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
     breastfeedingWeeklySummary: item.breastfeedingWeeklySummary,
     sponsoredData: item.sponsoredData,
     eventData: item.eventData,
+    toolCTATemporalData: item.toolCTATemporalData,
     milestoneId: item.milestoneId,
     hasReferences: item.hasReferences,
     peerLikes: item.peerLikes,

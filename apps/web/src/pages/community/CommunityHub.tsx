@@ -283,32 +283,6 @@ const CommunityHub = () => {
               }}
             />
           </div>
-
-          {/* Quick Summer Activities CTA */}
-          <div className="bg-gradient-to-r from-zygo-mint/30 to-zygo-blue/20 border-0 rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center justify-center">
-              <Sun className="w-6 h-6 mr-2 text-yellow-500" />
-              Ready for Summer Fun?
-            </h3>
-            <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto mb-6">
-              Make this summer unforgettable with activities tailored to your family's interests.
-              Connect with friends, discover new experiences, and create lasting memories.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/tools/holiday-planner">
-                <button className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg flex items-center">
-                  <CalendarDays className="w-4 h-4 mr-2" />
-                  Plan Your Summer
-                </button>
-              </Link>
-              <Link to="/network/services">
-                <button className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-6 py-3 rounded-lg flex items-center">
-                  <Activity className="w-4 h-4 mr-2" />
-                  Browse Activities
-                </button>
-              </Link>
-            </div>
-          </div>
         </section>
 
         {/* Community Members Section */}

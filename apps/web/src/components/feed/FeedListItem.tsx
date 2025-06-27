@@ -11,6 +11,7 @@ import { FeedListItemBreastfeedingDaily } from './tool_specific/FeedListItemBrea
 import { FeedListItemBreastfeedingReminder } from './tool_specific/FeedListItemBreastfeedingReminder';
 import { FeedListItemBreastfeedingWeekly } from './tool_specific/FeedListItemBreastfeedingWeekly';
 import { FeedListItemLibraryBookReminder } from './tool_specific/FeedListItemLibraryBookReminder';
+import { FeedListItemToolCTATemporal } from './tool_specific/FeedListItemToolCTATemporal';
 
 interface FeedListItemProps {
   item: FeedItemTypeMap;
@@ -36,6 +37,9 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   onHashtagClick,
 }) => {
   const renderContent = () => {
+    // Debug logging to see what type we're getting
+    console.log('FeedListItem - item.type:', item.type, 'item.id:', item.id);
+
     switch (item.type) {
       case FeedItemType.POST:
         // All posts now use the same component, which handles references internally
@@ -62,6 +66,9 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
         return <FeedListItemBreastfeedingReminder item={item} />;
       case FeedItemType.LIBRARY_BOOK_REMINDER:
         return <FeedListItemLibraryBookReminder item={item} />;
+      case FeedItemType.TOOL_CTA_TEMPORAL:
+        console.log('Rendering TOOL_CTA_TEMPORAL component');
+        return <FeedListItemToolCTATemporal item={item} />;
       case FeedItemType.SPONSORED:
         return <FeedListItemSponsored item={item} />;
       case FeedItemType.EVENT:
@@ -71,6 +78,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
       case FeedItemType.POLL:
         return <FeedListItemPost item={item} />; // Fallback to post for now
       default:
+        console.log('Falling back to post for type:', item.type);
         return <FeedListItemPost item={item} />; // Default fallback
     }
   };
