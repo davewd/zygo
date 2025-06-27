@@ -276,7 +276,9 @@ export const AppointmentDialog = ({
                       id="endDate"
                       type="date"
                       value={formData.endDate || formData.startDate}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, endDate: e.target.value }))
+                      }
                     />
                   </div>
 
@@ -286,7 +288,9 @@ export const AppointmentDialog = ({
                       id="endTime"
                       type="time"
                       value={formData.endTime}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, endTime: e.target.value }))
+                      }
                       required
                     />
                   </div>
@@ -375,7 +379,12 @@ export const AppointmentDialog = ({
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 pt-4 border-t flex-shrink-0">
-              <Button type="button" variant="outline" onClick={onClose} className="w-full sm:w-auto">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                className="w-full sm:w-auto"
+              >
                 Cancel
               </Button>
               <Button type="submit" className="w-full sm:w-auto">

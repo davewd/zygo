@@ -17,6 +17,23 @@ export interface ServiceProvider {
 // Provider data will be injected from the consuming application
 let providerDataSource: () => ServiceProvider[] = () => [];
 
+/**
+ * Set the provider data source for the library
+ * This allows consuming applications to inject their own provider data
+ * 
+ * @example
+ * ```typescript
+ * import { setProviderDataSource } from '@zygo/libs';
+ * import { getAllServiceProviders } from './data/providers';
+ * 
+ * // Initialize the library with your provider data
+ * setProviderDataSource(getAllServiceProviders);
+ * ```
+ */
+export function setProviderDataSource(dataSource: () => ServiceProvider[]): void {
+  providerDataSource = dataSource;
+}
+
 export interface ProviderFilters {
   searchQuery?: string;
   specialty?: string;
@@ -31,31 +48,10 @@ export interface ProviderRating {
 
 /**
  * Get all service providers
+ * Returns an empty array by default until a data source is set via setProviderDataSource()
  */
 export function getAllProviders(): ServiceProvider[] {
-  return [
-    REBECCA_CAVALLARO,
-    DR_JUSTIN_TUCKER,
-    ANDREA_DUNNE,
-    POLLY_DELANEY,
-    EMILY_MCCONAGHY,
-    JAKE_THOMPSON,
-    STEVE_LOEFFLER,
-    LUCY_WOOD,
-    DANIELLE_HARMSEN,
-    SARAH_MITCHELL,
-    MARCUS_CHEN,
-    EMMA_RODRIGUEZ,
-    JAMES_THOMPSON,
-    SOFIA_MARTINEZ,
-    MICHAEL_OCONNOR,
-    CAROLINE_MATERNITY_CONSULTANT,
-    DR_SHELLEY_ROWLANDS,
-    JESSICA_DAWSON_DIETITIAN,
-    PETA_CARIGE,
-    SARAH_DIGITAL_SPECIALIST,
-    DR_ALEXANDRA_THOMPSON,
-  ];
+  return providerDataSource();
 }
 
 /**
