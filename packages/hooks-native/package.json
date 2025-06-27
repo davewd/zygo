@@ -24,7 +24,7 @@
   "private": true,
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationMap",
-    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules",
     "dev": "tsup --watch",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",

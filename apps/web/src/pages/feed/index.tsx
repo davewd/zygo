@@ -2,6 +2,7 @@ import { Button } from '@zygo/ui';
 import { AlertCircle, Loader2, RefreshCw } from 'lucide-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FeedListItem from '../../components/feed/FeedListItem';
+import { FeedItemFeedbackExample } from '../../components/feed/shared/FeedItemFeedbackExample';
 import { useFeed } from '../../hooks/useFeed';
 
 const Feed = () => {
@@ -128,6 +129,11 @@ const Feed = () => {
             </div>
           </div>
         )}
+
+        {/* Example Component Demo - Remove this in production */}
+        <div className="mb-8">
+          <FeedItemFeedbackExample />
+        </div>
 
         {/* Infinite Scroll Feed */}
         <InfiniteScroll

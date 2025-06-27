@@ -20,8 +20,9 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { BlogPostCard } from '../../components/blog/BlogPostCard';
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
+import FeedListItem from '../../components/feed/FeedListItem';
+import { FeedItemFeedback } from '../../components/feed/shared/FeedItemFeedback';
 import {
   ACTIVE8_CENTER,
   EMILY_MCCONAGHY,
@@ -74,6 +75,10 @@ import {
   SARAH_DIGITAL_SPECIALIST,
   ZYGO_APP_CENTER,
 } from '../../data/network/zygoAppCenter';
+import {
+  convertBlogPostToFeedItem,
+  generateProviderFeedItems,
+} from '../../data/utils/feedConversion';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -293,8 +298,8 @@ const ServiceProviderDetail = () => {
                     </Card>
                   )}
 
-                  {/* Approach & Philosophy for Rebecca */}
-                  {provider.id === 'rebecca-cavallaro' && provider.approach && (
+                  {/* Approach & Philosophy (standardized for all providers) */}
+                  {provider?.approach && (
                     <Card>
                       <CardHeader>
                         <CardTitle className="flex items-center text-gray-800">
@@ -314,27 +319,54 @@ const ServiceProviderDetail = () => {
               {/* Activity Tab */}
               {activeTab === 'activity' && (
                 <div className="space-y-6">
-                  {/* Blog Feed */}
-                  {provider.id === 'rebecca-cavallaro' && (
-                    <div className="space-y-6">
-                      <div className="text-center mb-6">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                          Recent Articles & Insights
-                        </h3>
-                        <p className="text-gray-600">
-                          Evidence-based guidance and personal insights from Rebecca's clinical
-                          practice
-                        </p>
-                      </div>
-
-                      {REBECCA_CAVALLARO_BLOG_POSTS.map((post) => (
-                        <BlogPostCard key={post.id} post={post} />
-                      ))}
+                  {/* Provider Activity Feed - Polymorphic for all providers */}
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                        Recent Activity & Insights
+                      </h3>
+                      <p className="text-gray-600">
+                        Professional content and updates from {provider?.name}
+                      </p>
                     </div>
-                  )}
 
-                  {/* Approach & Philosophy for other providers */}
-                  {provider.id !== 'rebecca-cavallaro' && provider.approach && (
+                    {/* Convert Rebecca's blog posts to feed items for consistency */}
+                    {provider?.id === 'rebecca-cavallaro' &&
+                      REBECCA_CAVALLARO_BLOG_POSTS.map((post) => {
+                        const feedItem = convertBlogPostToFeedItem(post);
+                        return (
+                          <div key={feedItem.id} className="space-y-4">
+                            <FeedListItem item={feedItem} />
+                            <FeedItemFeedback
+                              item={feedItem}
+                              peerLikes={post.peerLikes}
+                              onLike={() => console.log('Like clicked')}
+                              onComment={() => console.log('Comment clicked')}
+                              onShare={() => console.log('Share clicked')}
+                              onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
+                            />
+                          </div>
+                        );
+                      })}
+
+                    {/* Generate activity feed for all other providers */}
+                    {provider?.id !== 'rebecca-cavallaro' &&
+                      generateProviderFeedItems(provider?.id || '').map((feedItem) => (
+                        <div key={feedItem.id} className="space-y-4">
+                          <FeedListItem item={feedItem} />
+                          <FeedItemFeedback
+                            item={feedItem}
+                            onLike={() => console.log('Like clicked')}
+                            onComment={() => console.log('Comment clicked')}
+                            onShare={() => console.log('Share clicked')}
+                            onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
+                          />
+                        </div>
+                      ))}
+                  </div>
+
+                  {/* Care Approach (moved to activity for better context) */}
+                  {provider?.approach && (
                     <Card>
                       <CardHeader>
                         <CardTitle className="flex items-center text-gray-800">
