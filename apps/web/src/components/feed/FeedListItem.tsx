@@ -15,14 +15,24 @@ import { FeedListItemLibraryBookReminder } from './tool_specific/FeedListItemLib
 interface FeedListItemProps {
   item: FeedItemTypeMap;
   className?: string;
+  peerLikes?: {
+    count: number;
+    likedBy: Array<{
+      providerId: string;
+      providerName: string;
+      credentials: string[];
+      specializations: string[];
+      dateLiked: string;
+    }>;
+  };
 }
 
 // Base polymorphic FeedListItem component that renders different types
-const FeedListItem: React.FC<FeedListItemProps> = ({ item, className }) => {
+const FeedListItem: React.FC<FeedListItemProps> = ({ item, className, peerLikes }) => {
   const renderContent = () => {
     switch (item.type) {
       case FeedItemType.POST:
-        return <FeedListItemPost item={item} />;
+        return <FeedListItemPost item={item} peerLikes={peerLikes} />;
       case FeedItemType.LINK:
         return <FeedListItemLink item={item} />;
       case FeedItemType.IMAGE:

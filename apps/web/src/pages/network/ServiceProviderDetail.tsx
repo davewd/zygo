@@ -22,7 +22,6 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import FeedListItem from '../../components/feed/FeedListItem';
-import { FeedItemFeedback } from '../../components/feed/shared/FeedItemFeedback';
 import {
   ACTIVE8_CENTER,
   EMILY_MCCONAGHY,
@@ -336,15 +335,7 @@ const ServiceProviderDetail = () => {
                         const feedItem = convertBlogPostToFeedItem(post);
                         return (
                           <div key={feedItem.id} className="space-y-4">
-                            <FeedListItem item={feedItem} />
-                            <FeedItemFeedback
-                              item={feedItem}
-                              peerLikes={post.peerLikes}
-                              onLike={() => console.log('Like clicked')}
-                              onComment={() => console.log('Comment clicked')}
-                              onShare={() => console.log('Share clicked')}
-                              onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
-                            />
+                            <FeedListItem item={feedItem} peerLikes={post.peerLikes} />
                           </div>
                         );
                       })}
@@ -354,13 +345,6 @@ const ServiceProviderDetail = () => {
                       generateProviderFeedItems(provider?.id || '').map((feedItem) => (
                         <div key={feedItem.id} className="space-y-4">
                           <FeedListItem item={feedItem} />
-                          <FeedItemFeedback
-                            item={feedItem}
-                            onLike={() => console.log('Like clicked')}
-                            onComment={() => console.log('Comment clicked')}
-                            onShare={() => console.log('Share clicked')}
-                            onHashtagClick={(hashtag) => console.log('Hashtag clicked:', hashtag)}
-                          />
                         </div>
                       ))}
                   </div>

@@ -1,10 +1,20 @@
 import DOMPurify from 'dompurify';
-import React from 'react';
+import React, { useState } from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
 import { FeedItemActions, FeedItemHeader } from '../shared';
 
 interface FeedListItemPostProps {
   item: FeedItemTypeMap;
+  peerLikes?: {
+    count: number;
+    likedBy: Array<{
+      providerId: string;
+      providerName: string;
+      credentials: string[];
+      specializations: string[];
+      dateLiked: string;
+    }>;
+  };
 }
 
 // Helper function to safely render HTML content
@@ -12,7 +22,41 @@ const createSafeMarkup = (html: string) => {
   return { __html: DOMPurify.sanitize(html) };
 };
 
-export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
+// Helper function to truncate HTML content to approximately 200 characters
+const truncateHtmlContent = (html: string, maxLength: number = 200): string => {
+  // First, strip HTML tags to count actual text length
+  const textContent = html.replace(/<[^>]*>/g, '');
+
+  if (textContent.length <= maxLength) {
+    return html;
+  }
+
+  // If we need to truncate, find a good breaking point
+  let truncatedText = textContent.substring(0, maxLength);
+  const lastSpaceIndex = truncatedText.lastIndexOf(' ');
+
+  if (lastSpaceIndex > maxLength * 0.8) {
+    truncatedText = truncatedText.substring(0, lastSpaceIndex);
+  }
+
+  // Try to preserve some basic HTML structure for the truncated content
+  const paragraphMatch = html.match(/<p[^>]*>.*?<\/p>/i);
+  if (paragraphMatch && paragraphMatch[0].replace(/<[^>]*>/g, '').length <= maxLength) {
+    return paragraphMatch[0];
+  }
+
+  return `<p>${truncatedText}...</p>`;
+};
+
+export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item, peerLikes }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  // Determine if content needs truncation (use post content for length check)
+  const fullContent = item.post || item.description || '';
+  const textContent = fullContent.replace(/<[^>]*>/g, '');
+  const needsTruncation = textContent.length > 200;
+  const displayContent = expanded ? fullContent : truncateHtmlContent(fullContent, 200);
+
   return (
     <div className="space-y-4">
       {/* Header */}
@@ -21,18 +65,23 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
       {/* Content */}
       <div className="space-y-3">
         {item.title && <h2 className="text-xl font-bold text-gray-900">{item.title}</h2>}
-        {item.post && (
+        {(item.post || item.description) && (
           <div
             className="text-gray-800 leading-relaxed prose max-w-none"
-            dangerouslySetInnerHTML={createSafeMarkup(item.post)}
+            dangerouslySetInnerHTML={createSafeMarkup(displayContent)}
           />
         )}
-        {item.description && (
-          <div
-            className="text-gray-600 prose max-w-none"
-            dangerouslySetInnerHTML={createSafeMarkup(item.description)}
-          />
+
+        {/* Show More/Less Button */}
+        {needsTruncation && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-3 px-4 py-2 text-sm border border-gray-300 rounded-md bg-white hover:bg-gray-50 text-gray-700 transition-colors"
+          >
+            {expanded ? 'Show Less' : 'Show More'}
+          </button>
         )}
+
         {item.imageUrl && (
           <img
             src={item.imageUrl}
@@ -46,7 +95,7 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({ item }) => {
       </div>
 
       {/* Actions */}
-      <FeedItemActions item={item} />
+      <FeedItemActions item={item} peerLikes={peerLikes} />
     </div>
   );
 };
