@@ -1,10 +1,10 @@
 import { Panel } from '@xyflow/react';
-import { Button } from '@zygo/ui';
+import { Button as UIButton } from '@zygo/ui';
 import { Focus, ZoomIn, ZoomOut } from 'lucide-react';
 import { TimelineZoomLevel } from '../types';
 
-// Temporary wrapper to fix TypeScript issues
-const SafeButton = Button as any;
+// Properly typed Button component
+const Button = UIButton as React.ComponentType<any>;
 
 interface TimelineControlPanelProps {
   currentZoomLevel: number;
@@ -41,7 +41,7 @@ export const TimelineControlPanel = ({
 
         {/* Zoom Controls */}
         <div className="flex items-center space-x-2">
-          <SafeButton
+          <Button
             size="sm"
             variant="outline"
             onClick={onZoomOut}
@@ -50,8 +50,8 @@ export const TimelineControlPanel = ({
           >
             <ZoomOut className="w-3 h-3" />
             <span>Out</span>
-          </SafeButton>
-          <SafeButton
+          </Button>
+          <Button
             size="sm"
             variant="outline"
             onClick={onZoomIn}
@@ -60,8 +60,8 @@ export const TimelineControlPanel = ({
           >
             <ZoomIn className="w-3 h-3" />
             <span>In</span>
-          </SafeButton>
-          <SafeButton
+          </Button>
+          <Button
             size="sm"
             variant="outline"
             onClick={onFitView}
@@ -69,18 +69,18 @@ export const TimelineControlPanel = ({
           >
             <Focus className="w-3 h-3" />
             <span>Fit</span>
-          </SafeButton>
+          </Button>
         </div>
 
         {/* Visual Zoom Controls */}
         <div className="flex items-center space-x-2 pt-2 border-t">
           <span className="text-xs text-gray-600">View:</span>
-          <SafeButton size="sm" variant="ghost" onClick={onVisualZoomIn} className="p-1">
+          <Button size="sm" variant="ghost" onClick={onVisualZoomIn} className="p-1">
             <ZoomIn className="w-3 h-3" />
-          </SafeButton>
-          <SafeButton size="sm" variant="ghost" onClick={onVisualZoomOut} className="p-1">
+          </Button>
+          <Button size="sm" variant="ghost" onClick={onVisualZoomOut} className="p-1">
             <ZoomOut className="w-3 h-3" />
-          </SafeButton>
+          </Button>
         </div>
       </div>
     </Panel>

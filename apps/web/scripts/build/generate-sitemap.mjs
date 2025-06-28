@@ -61,9 +61,32 @@ function generateSitemap() {
   </url>`;
   });
 
-  // TODO: Add dynamic routes here if you have data to populate them
-  // For example, if you have a list of profiles, providers, etc.
-  // You would fetch that data and generate URLs for each item
+  // Add dynamic routes for community profiles, providers, and centers
+  // Note: In a real application, you would fetch this data from your API/database
+  // For now, we'll add placeholders that follow the established routing patterns
+  const dynamicRoutePatterns = [
+    // Community profile examples
+    { route: '/community/profiles/sarah-mama', priority: '0.6' },
+    { route: '/community/profiles/mike-dad', priority: '0.6' },
+    
+    // Provider examples based on existing data structure
+    { route: '/community/providers/dr-justin-tucker', priority: '0.7' },
+    { route: '/community/providers/andrea-dunne', priority: '0.7' },
+    
+    // Center examples
+    { route: '/network/centers/prologue-fertility-obstetrics', priority: '0.7' },
+    { route: '/network/centers/st-marys-childcare-centre', priority: '0.7' },
+  ];
+  
+  dynamicRoutePatterns.forEach(({ route, priority }) => {
+    sitemap += `
+  <url>
+    <loc>${SITE_URL}${route}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+  });
 
   sitemap += `
 </urlset>`;

@@ -1,10 +1,10 @@
 import { Panel } from '@xyflow/react';
-import { Button } from '@zygo/ui';
+import { Button as UIButton } from '@zygo/ui';
 import { DEVELOPMENT_CATEGORIES } from '../constants';
 import { DevelopmentCategory, PedagogyProfile } from '../types';
 
-// Temporary wrapper to fix TypeScript issues
-const SafeButton = Button as any;
+// Properly typed Button component
+const Button = UIButton as React.ComponentType<any>;
 
 interface TimelineFilterPanelProps {
   selectedCategories: DevelopmentCategory[];
@@ -28,7 +28,7 @@ export const TimelineFilterPanel = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="font-semibold text-gray-800">Development Categories</div>
-          <SafeButton
+          <Button
             size="sm"
             variant="outline"
             onClick={onClearAllFilters}
@@ -36,7 +36,7 @@ export const TimelineFilterPanel = ({
             disabled={selectedCategories.length === 0 && selectedFamilyMembers.length === 0}
           >
             Clear All
-          </SafeButton>
+          </Button>
         </div>
         <div className="space-y-2 max-h-64 overflow-y-auto">
           {DEVELOPMENT_CATEGORIES.map((category) => (
