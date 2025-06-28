@@ -66,6 +66,7 @@ export default {
 					yellow: '#FFFFA4',
 					cream: '#FFFFE3',
 					blue: '#B7D6E9',
+					'dark-blue': '#7FB3D3',
 					mint: '#F3FFE3',
 					red: '#E74C3C'
 				}

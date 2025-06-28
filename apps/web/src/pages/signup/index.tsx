@@ -11,6 +11,10 @@ const SignUp = (props: Props) => {
 
   const { session, signUpNewUser } = UserAuth();
   const navigate = useNavigate();
+
+  // Check if form is complete
+  const isFormComplete = email.trim() !== '' && password.trim() !== '';
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -81,7 +85,11 @@ const SignUp = (props: Props) => {
                 </a>{' '}
               </p>
               <button
-                className="mt-6 px-6 py-3 bg-zygo-blue text-white font-semibold rounded-lg hover:bg-zygo-dark-blue transition-colors"
+                className={`mt-6 px-6 py-3 text-white font-semibold rounded-lg transition-colors ${
+                  isFormComplete
+                    ? 'bg-zygo-dark-blue hover:bg-zygo-dark-blue/80'
+                    : 'bg-zygo-blue hover:bg-zygo-dark-blue'
+                }`}
                 disabled={loading}
                 type="submit"
               >
