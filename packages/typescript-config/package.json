@@ -10,6 +10,6 @@
   ],
   "scripts": {
     "build": "echo 'No build required for typescript-config'",
-    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules"
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules"
   }
 }

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "check-types": "tsc --noEmit",
-    "clean": "rimraf dist tsconfig.tsbuildinfo .turbo node_modules",
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules",
     "dev": "vite",
     "generate-sitemap": "node -e \"import('./scripts/build/generate-sitemap-advanced.mjs').then(m => m.generateSitemap())\"",
     "generate-robots": "node -e \"import('./scripts/build/generate-robots.mjs').then(m => m.generateRobotsTxt())\"",

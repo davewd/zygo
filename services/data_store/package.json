@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],

@@ -2,6 +2,9 @@
   "name": "@zygo/tailwind-theme",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules"
+  },
   "exports": {
     "./zygo_theme.css": "./zygo_theme.css"
   },
