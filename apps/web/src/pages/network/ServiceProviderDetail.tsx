@@ -1,4 +1,5 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
+// TODO: Fix UI component type issues - may need to rebuild @zygo/ui package
 import {
   ArrowLeft,
   Award,
@@ -22,58 +23,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import FeedListItem from '../../components/feed/FeedListItem';
-import {
-  ACTIVE8_CENTER,
-  EMILY_MCCONAGHY,
-  JAKE_THOMPSON,
-} from '../../data/network/active8KidsCenter';
-import {
-  ELIXR_SWIM_SCHOOL_CENTER,
-  EMMA_RODRIGUEZ,
-  MARCUS_CHEN,
-  SARAH_MITCHELL,
-} from '../../data/network/elixrSwimSchoolCenter';
-import { DR_SHELLEY_ROWLANDS, EMOG_CENTER } from '../../data/network/emogCenter';
-import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
-import {
-  JAMES_THOMPSON,
-  KICKEROOS_SOCCER_CENTER,
-  MICHAEL_OCONNOR,
-  SOFIA_MARTINEZ,
-} from '../../data/network/kickeroosSoccerCenter';
-import {
-  JESSICA_DAWSON_DIETITIAN,
-  KIDNEY_NUTRITION_CENTER,
-} from '../../data/network/kidneyNutritionCenter';
-import {
-  CAROLINE_MATERNITY_CONSULTANT,
-  MUMMYS_WHISPERS_CENTER,
-} from '../../data/network/mummysWhispersCenter';
-import {
-  ANDREA_DUNNE,
-  DR_JUSTIN_TUCKER,
-  POLLY_DELANEY,
-  PROLOGUE_CENTER,
-} from '../../data/network/prologueCenter';
-import { PETA_CARIGE, START_TRAINING_CENTER } from '../../data/network/startTrainingCenter';
-import {
-  MICHAEL_CHEN_MUSIC,
-  REBECCA_THOMPSON_OUTDOOR,
-  SARAH_MITCHELL_DIRECTOR,
-  ST_MARYS_CHILDCARE_CENTER,
-} from '../../data/network/stMarysChildcareCenter';
-import {
-  DANIELLE_HARMSEN,
-  LUCY_WOOD,
-  STEVE_LOEFFLER,
-  WHITE_CITY_TENNIS_CENTER,
-} from '../../data/network/whiteCityTennisCenter';
-import {
-  DR_ALEXANDRA_THOMPSON,
-  SARAH_DIGITAL_SPECIALIST,
-  ZYGO_APP_CENTER,
-} from '../../data/network/zygoAppCenter';
 import { fetchProviderFeedItems } from '../../lib/api/feed';
+import { getCenterForProvider, getServiceProviderById } from '../../lib/api/serviceProviders';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -129,52 +80,9 @@ const ServiceProviderDetail = () => {
     loadProviderFeed();
   }, [id]);
 
-  // Get provider and center by ID
-  const providers = [
-    REBECCA_CAVALLARO,
-    DR_JUSTIN_TUCKER,
-    ANDREA_DUNNE,
-    POLLY_DELANEY,
-    EMILY_MCCONAGHY,
-    JAKE_THOMPSON,
-    STEVE_LOEFFLER,
-    LUCY_WOOD,
-    DANIELLE_HARMSEN,
-    SARAH_MITCHELL,
-    MARCUS_CHEN,
-    EMMA_RODRIGUEZ,
-    JAMES_THOMPSON,
-    SOFIA_MARTINEZ,
-    MICHAEL_OCONNOR,
-    SARAH_MITCHELL_DIRECTOR,
-    REBECCA_THOMPSON_OUTDOOR,
-    MICHAEL_CHEN_MUSIC,
-    CAROLINE_MATERNITY_CONSULTANT,
-    DR_SHELLEY_ROWLANDS,
-    JESSICA_DAWSON_DIETITIAN,
-    PETA_CARIGE,
-    SARAH_DIGITAL_SPECIALIST,
-    DR_ALEXANDRA_THOMPSON,
-  ];
-  const centers = [
-    FULL_CIRCLE_CENTER,
-    PROLOGUE_CENTER,
-    ACTIVE8_CENTER,
-    WHITE_CITY_TENNIS_CENTER,
-    ELIXR_SWIM_SCHOOL_CENTER,
-    KICKEROOS_SOCCER_CENTER,
-    ST_MARYS_CHILDCARE_CENTER,
-    MUMMYS_WHISPERS_CENTER,
-    EMOG_CENTER,
-    KIDNEY_NUTRITION_CENTER,
-    START_TRAINING_CENTER,
-    ZYGO_APP_CENTER,
-  ];
-
-  const provider = providers.find((p) => p.id === id);
-  const center = provider
-    ? centers.find((c) => c.providers.some((p) => p.id === provider.id))
-    : null;
+  // Get provider and center by ID using API
+  const provider = getServiceProviderById(id || '');
+  const center = provider ? getCenterForProvider(provider.id) : null;
 
   if (!provider) {
     return (
