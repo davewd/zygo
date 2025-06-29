@@ -222,11 +222,14 @@
       "handle": "catherine_ryan_headmistress",
       "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face",
       "verified": true,
-      "role": "service_provider",
+      "actorType": "service_provider",
+      "title": "Headmistress",
+      "centerName": "Bronte Public School",
+      "centerId": "bronte-public-school",
       "providerId": "catherine-ryan"
     },
     "type": "award_presentation",
-    "post": "🏆 Congratulations to Lily Dawson on receiving the Principals Award! 🌟\n\nIt is my absolute pleasure to present this award to Lily for her outstanding academic achievement, excellent behaviour, and positive attitude towards learning. Lily has consistently demonstrated the values we cherish at Bronte Public School - kindness, respect, and dedication to her studies.\n\nLily's teachers have noted her helpfulness to classmates and her enthusiasm in all subject areas. She is a wonderful role model for her peers and a credit to her family.\n\nWell done, Lily! We are so proud of you! 👏\n\n#PrincipalsAward #BrontePublicSchool #ProudMoment #StudentExcellence",
+    "post": "🏆 Congratulations to Lily Dawson on receiving the Principals Award! 🌟\n\nIt is my absolute pleasure to present this award to Lily for her outstanding academic achievement, excellent behaviour, and positive attitude towards learning. Lily has consistently demonstrated the values we cherish at Bronte Public School - kindness, respect, and dedication to her studies.\n\nLily's teachers have noted her helpfulness to classmates and her enthusiasm in all subject areas. She is a wonderful role model for her peers and a credit to her family.\n\nWell done, Lily! We are so proud of you! 👏",
     "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "stats": {
       "likes": 42,
@@ -235,8 +238,8 @@
       "reposts": 8
     },
     "privacy": {
-      "visibility": "public",
-      "sharedWith": []
+      "visibility": "group",
+      "sharedWith": ["All Bronte Public School"]
     },
     "awardData": {
       "awardType": "Principals Award",
@@ -265,13 +268,8 @@
         "logo": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=64&h=64&fit=crop&crop=center"
       },
       "presentationDate": "2025-06-29",
-      "achievements": [
-        "Outstanding Academic Achievement",
-        "Excellent Behaviour",
-        "Positive Learning Attitude",
-        "Helpful to Classmates",
-        "Enthusiasm in All Subjects"
-      ]
+      "presentationTime": "2:30 PM",
+      "achievements": ["Outstanding Academic Achievement"]
     },
     "mentions": [
       {

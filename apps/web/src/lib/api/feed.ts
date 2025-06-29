@@ -196,6 +196,7 @@ export interface FeedItemTypeMap {
       logo?: string;
     };
     presentationDate?: string;
+    presentationTime?: string;
     achievements?: string[];
   };
   // Mentions for social features
