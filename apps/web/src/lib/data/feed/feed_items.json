@@ -163,61 +163,6 @@
     }
   },
   {
-    "id": "feed-4",
-    "title": "Summer Activities",
-    "metadata": {
-      "createdAt": "2024-12-17T10:00:00Z"
-    },
-    "author": {
-      "name": "Zygo",
-      "handle": "zygo_app",
-      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
-      "actorType": "service_center",
-      "organizationType": "wellness",
-      "features": [
-        "family planning",
-        "activity coordination",
-        "community connection",
-        "digital tools"
-      ],
-      "certifications": ["Privacy Certified", "Child Safety Approved"]
-    },
-    "type": "tool_cta_temporal",
-    "post": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
-    "stats": {
-      "likes": 0,
-      "shares": 0,
-      "comments": 0,
-      "reposts": 0
-    },
-    "privacy": {
-      "visibility": "public",
-      "sharedWith": []
-    },
-    "toolCTATemporalData": {
-      "backgroundGradient": "bg-gradient-to-r from-zygo-mint/30 to-zygo-blue/20",
-      "borderColor": "border-0",
-      "icon": "Sun",
-      "iconColor": "text-yellow-500",
-      "headerText": "Ready for Summer Fun?",
-      "description": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
-      "actions": [
-        {
-          "label": "Plan Your Summer",
-          "url": "/tools/holiday-planner",
-          "icon": "CalendarDays",
-          "isPrimary": true
-        },
-        {
-          "label": "Browse Activities",
-          "url": "/network/services",
-          "icon": "Activity",
-          "isPrimary": false
-        }
-      ]
-    }
-  },
-  {
     "id": "feed-5",
     "title": "Feeding Reminder",
     "metadata": {
@@ -264,62 +209,6 @@
       "visibility": "private",
       "sharedWith": []
     }
-  },
-  {
-    "id": "feed-7",
-    "title": "My First Post",
-    "metadata": {
-      "createdAt": "2023-10-01T12:00:00Z"
-    },
-    "author": {
-      "name": "Mike Johnson",
-      "handle": "mike_dad",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-    },
-    "type": "post",
-    "post": "Here's an example of something i care about !",
-    "stats": {
-      "likes": 120,
-      "shares": 45,
-      "comments": 10,
-      "reposts": 0
-    },
-    "privacy": {
-      "visibility": "public",
-      "sharedWith": []
-    }
-  },
-  {
-    "id": "feed-8",
-    "title": "First Steps Milestone",
-    "metadata": {
-      "createdAt": "2023-10-01T12:00:00Z"
-    },
-    "author": {
-      "name": "Sarah Johnson",
-      "handle": "sarah_mama",
-      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face",
-      "actorType": "community_member",
-      "role": "parent",
-      "location": {
-        "suburb": "Paddington",
-        "state": "NSW",
-        "country": "Australia"
-      }
-    },
-    "type": "milestone",
-    "post": "And Just Like That First Steps ✨",
-    "stats": {
-      "likes": 89,
-      "shares": 12,
-      "comments": 25,
-      "reposts": 5
-    },
-    "privacy": {
-      "visibility": "group",
-      "sharedWith": [{ "type": "group", "name": "Family", "id": "family_1" }]
-    },
-    "milestoneId": "first_steps"
   },
   {
     "id": "feed-9",
