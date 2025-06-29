@@ -32,6 +32,7 @@ export enum ActorType {
 
 // Import blog posts data
 import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
+import { GAVIN_MCCORMACK_BLOG_POSTS } from '../../data/network/gavinMccormackBlogPosts';
 
 // Import feed items data from JSON
 import feedItemsData from '../data/feed/feed_items.json';
@@ -230,7 +231,30 @@ export interface FeedResponse {
 }
 
 // Helper function to convert blog post to feed item
-const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS[0]): any => {
+const convertBlogPostToFeedItem = (blogPost: any): any => {
+  // Get author info based on authorId
+  const getAuthorInfo = (authorId: string) => {
+    switch (authorId) {
+      case 'rebecca-cavallaro':
+        return {
+          name: 'Rebecca Cavallaro',
+          avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'
+        };
+      case 'gavin-mccormack':
+        return {
+          name: 'Gavin McCormack',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+        };
+      default:
+        return {
+          name: 'Unknown Author',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+        };
+    }
+  };
+
+  const authorInfo = getAuthorInfo(blogPost.authorId);
+
   return {
     id: `blog-${blogPost.id}`,
     title: blogPost.title,
@@ -241,11 +265,11 @@ const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS
       authorId: blogPost.authorId, // This is crucial for provider feed filtering
     },
     author: {
-      name: 'Rebecca Cavallaro',
+      name: authorInfo.name,
       handle: blogPost.authorId, // Use the authorId as handle to match service provider ID
-      avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+      avatar: authorInfo.avatar,
       verified: true,
-      actorType: ActorType.COMMUNITY_MEMBER, // Default to community member for blog authors
+      actorType: ActorType.SERVICE_PROVIDER, // Changed to service provider for proper filtering
     },
     type: FeedItemType.POST,
     post: blogPost.content,
@@ -296,9 +320,13 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
   
   // Add blog posts if not filtered out by source
   if (!filters?.source || filters.source.includes('zygo-blog')) {
-    const blogFeedItems = REBECCA_CAVALLARO_BLOG_POSTS
+    const rebeccaBlogFeedItems = REBECCA_CAVALLARO_BLOG_POSTS
       .map(convertBlogPostToFeedItem);
-    allItems = [...blogFeedItems, ...allItems];
+    
+    const gavinBlogFeedItems = GAVIN_MCCORMACK_BLOG_POSTS
+      .map(convertBlogPostToFeedItem);
+    
+    allItems = [...rebeccaBlogFeedItems, ...gavinBlogFeedItems, ...allItems];
   }
 
   // Apply filters

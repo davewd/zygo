@@ -28,6 +28,7 @@ import {
 } from '../../data/network/elixrSwimSchoolCenter';
 import { DR_SHELLEY_ROWLANDS } from '../../data/network/emogCenter';
 import { REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
+import { GAVIN_MCCORMACK } from '../../data/network/gavinMccormackCenter';
 import {
   JAMES_THOMPSON,
   MICHAEL_OCONNOR,
@@ -78,6 +79,7 @@ const ServiceProviders = () => {
     PETA_CARIGE,
     SARAH_DIGITAL_SPECIALIST,
     DR_ALEXANDRA_THOMPSON,
+    GAVIN_MCCORMACK,
   ];
 
   return (

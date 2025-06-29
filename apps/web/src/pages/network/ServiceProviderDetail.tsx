@@ -8,8 +8,12 @@ import {
   CheckCircle,
   Clock,
   DollarSign,
+  Download,
+  ExternalLink,
+  FileText,
   Heart,
   Home,
+  Library,
   Mail,
   MapPin,
   Phone,
@@ -362,6 +366,147 @@ const ServiceProviderDetail = () => {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* Library/Resources Section */}
+                  {(provider.id === 'peta-carige' || provider.id === 'gavin-mccormack') && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-gray-800">
+                          <Library className="w-5 h-5 mr-2 text-zygo-red" />
+                          Resources & Library
+                        </CardTitle>
+                        <CardDescription>
+                          Educational resources, guides, and tools for your journey
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid gap-4">
+                          {provider.id === 'peta-carige' && (
+                            <>
+                              <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div className="flex justify-between items-start mb-3">
+                                  <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-800 mb-1 flex items-center">
+                                      <FileText className="w-4 h-4 mr-2 text-zygo-red" />
+                                      Footy Meal Plans
+                                    </h4>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                      Comprehensive nutrition plans designed specifically for young
+                                      athletes during football season.
+                                    </p>
+                                  </div>
+                                  <div className="text-right ml-4 flex-shrink-0">
+                                    <div className="font-semibold text-zygo-red">$49.99 AUD</div>
+                                    <div className="text-xs text-gray-500">Digital Download</div>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex flex-wrap gap-1">
+                                    <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
+                                      Nutrition Plans
+                                    </span>
+                                    <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                                      Sports Nutrition
+                                    </span>
+                                  </div>
+                                  <a
+                                    href="https://petacarige.com/footy-meal-plans/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs text-zygo-red hover:text-zygo-red/80 flex items-center"
+                                  >
+                                    <ExternalLink className="w-3 h-3 mr-1" />
+                                    View Details
+                                  </a>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                          {provider.id === 'gavin-mccormack' && (
+                            <>
+                              <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div className="flex justify-between items-start mb-3">
+                                  <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-800 mb-1 flex items-center">
+                                      <BookOpen className="w-4 h-4 mr-2 text-zygo-red" />
+                                      Books & Publications
+                                    </h4>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                      Evidence-based books on nutrition, health, and wellness
+                                      available through Regarded Publications.
+                                    </p>
+                                  </div>
+                                  <div className="text-right ml-4 flex-shrink-0">
+                                    <div className="font-semibold text-zygo-red">
+                                      Various Prices
+                                    </div>
+                                    <div className="text-xs text-gray-500">Physical & Digital</div>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex flex-wrap gap-1">
+                                    <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
+                                      Publications
+                                    </span>
+                                    <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                                      Educational
+                                    </span>
+                                  </div>
+                                  <a
+                                    href="https://regarded.com.au/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs text-zygo-red hover:text-zygo-red/80 flex items-center"
+                                  >
+                                    <ExternalLink className="w-3 h-3 mr-1" />
+                                    Browse Books
+                                  </a>
+                                </div>
+                              </div>
+
+                              <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div className="flex justify-between items-start mb-3">
+                                  <div className="flex-1">
+                                    <h4 className="font-semibold text-gray-800 mb-1 flex items-center">
+                                      <Download className="w-4 h-4 mr-2 text-zygo-red" />
+                                      Free Resources
+                                    </h4>
+                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                      Download free PDF guides, meal plans, and educational
+                                      materials to support your health journey.
+                                    </p>
+                                  </div>
+                                  <div className="text-right ml-4 flex-shrink-0">
+                                    <div className="font-semibold text-green-600">Free</div>
+                                    <div className="text-xs text-gray-500">PDF Downloads</div>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex flex-wrap gap-1">
+                                    <span className="bg-green-100 text-gray-700 text-xs px-2 py-1 rounded">
+                                      Free Resources
+                                    </span>
+                                    <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                                      PDF Guides
+                                    </span>
+                                  </div>
+                                  <a
+                                    href="https://gavinmccormack.com.au/resources-pdf/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs text-zygo-red hover:text-zygo-red/80 flex items-center"
+                                  >
+                                    <ExternalLink className="w-3 h-3 mr-1" />
+                                    Download Resources
+                                  </a>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
                 </div>
               )}
 

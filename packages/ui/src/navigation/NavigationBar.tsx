@@ -77,6 +77,15 @@ const PROVIDER_SUGGESTIONS: ProviderSuggestion[] = [
     profileImage:
       'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
   },
+  {
+    id: 'gavin-mccormack',
+    firstName: 'Gavin',
+    lastName: 'McCormack',
+    title: 'Nutritionist, Health Coach',
+    centerName: 'Gavin McCormack Nutrition',
+    profileImage:
+      'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face',
+  },
 ];
 
 const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(

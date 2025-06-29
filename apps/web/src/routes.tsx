@@ -13,6 +13,7 @@ import CredentialVerify from './pages/credentials/CredentialVerify';
 import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/Landing';
+import Library from './pages/library/Library';
 import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
 import ServiceNetworkProviderDetail from './pages/network/ServiceNetworkProviderDetail';
 import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
@@ -75,6 +76,8 @@ export const routes = createBrowserRouter([
         element: <ServiceNetworkProviderDetail />,
         errorElement: <Error />,
       },
+
+      { path: '/library', element: <Library />, errorElement: <Error /> },
 
       { path: '/tools', element: <Tools />, errorElement: <Error /> },
       {

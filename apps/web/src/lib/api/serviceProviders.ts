@@ -100,55 +100,59 @@ interface ServiceCenter {
 
 // Import all the hardcoded data from data/network files
 import {
-    ACTIVE8_CENTER,
-    EMILY_MCCONAGHY,
-    JAKE_THOMPSON,
+  ACTIVE8_CENTER,
+  EMILY_MCCONAGHY,
+  JAKE_THOMPSON,
 } from '../../data/network/active8KidsCenter';
 import {
-    ELIXR_SWIM_SCHOOL_CENTER,
-    EMMA_RODRIGUEZ,
-    MARCUS_CHEN,
-    SARAH_MITCHELL,
+  ELIXR_SWIM_SCHOOL_CENTER,
+  EMMA_RODRIGUEZ,
+  MARCUS_CHEN,
+  SARAH_MITCHELL,
 } from '../../data/network/elixrSwimSchoolCenter';
 import { DR_SHELLEY_ROWLANDS, EMOG_CENTER } from '../../data/network/emogCenter';
 import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
 import {
-    JAMES_THOMPSON,
-    KICKEROOS_SOCCER_CENTER,
-    MICHAEL_OCONNOR,
-    SOFIA_MARTINEZ,
+  GAVIN_MCCORMACK,
+  GAVIN_MCCORMACK_CENTER
+} from '../../data/network/gavinMccormackCenter';
+import {
+  JAMES_THOMPSON,
+  KICKEROOS_SOCCER_CENTER,
+  MICHAEL_OCONNOR,
+  SOFIA_MARTINEZ,
 } from '../../data/network/kickeroosSoccerCenter';
 import {
-    JESSICA_DAWSON_DIETITIAN,
-    KIDNEY_NUTRITION_CENTER,
+  JESSICA_DAWSON_DIETITIAN,
+  KIDNEY_NUTRITION_CENTER,
 } from '../../data/network/kidneyNutritionCenter';
 import {
-    CAROLINE_MATERNITY_CONSULTANT,
-    MUMMYS_WHISPERS_CENTER,
+  CAROLINE_MATERNITY_CONSULTANT,
+  MUMMYS_WHISPERS_CENTER,
 } from '../../data/network/mummysWhispersCenter';
 import {
-    ANDREA_DUNNE,
-    DR_JUSTIN_TUCKER,
-    POLLY_DELANEY,
-    PROLOGUE_CENTER,
+  ANDREA_DUNNE,
+  DR_JUSTIN_TUCKER,
+  POLLY_DELANEY,
+  PROLOGUE_CENTER,
 } from '../../data/network/prologueCenter';
 import { PETA_CARIGE, START_TRAINING_CENTER } from '../../data/network/startTrainingCenter';
 import {
-    MICHAEL_CHEN_MUSIC,
-    REBECCA_THOMPSON_OUTDOOR,
-    SARAH_MITCHELL_DIRECTOR,
-    ST_MARYS_CHILDCARE_CENTER,
+  MICHAEL_CHEN_MUSIC,
+  REBECCA_THOMPSON_OUTDOOR,
+  SARAH_MITCHELL_DIRECTOR,
+  ST_MARYS_CHILDCARE_CENTER,
 } from '../../data/network/stMarysChildcareCenter';
 import {
-    DANIELLE_HARMSEN,
-    LUCY_WOOD,
-    STEVE_LOEFFLER,
-    WHITE_CITY_TENNIS_CENTER,
+  DANIELLE_HARMSEN,
+  LUCY_WOOD,
+  STEVE_LOEFFLER,
+  WHITE_CITY_TENNIS_CENTER,
 } from '../../data/network/whiteCityTennisCenter';
 import {
-    DR_ALEXANDRA_THOMPSON,
-    SARAH_DIGITAL_SPECIALIST,
-    ZYGO_APP_CENTER,
+  DR_ALEXANDRA_THOMPSON,
+  SARAH_DIGITAL_SPECIALIST,
+  ZYGO_APP_CENTER,
 } from '../../data/network/zygoAppCenter';
 
 // Consolidated arrays of all providers and centers
@@ -177,6 +181,7 @@ const ALL_PROVIDERS: ServiceProvider[] = [
   PETA_CARIGE,
   SARAH_DIGITAL_SPECIALIST,
   DR_ALEXANDRA_THOMPSON,
+  GAVIN_MCCORMACK,
 ];
 
 const ALL_CENTERS: ServiceCenter[] = [
@@ -192,6 +197,7 @@ const ALL_CENTERS: ServiceCenter[] = [
   KIDNEY_NUTRITION_CENTER,
   START_TRAINING_CENTER,
   ZYGO_APP_CENTER,
+  GAVIN_MCCORMACK_CENTER,
 ];
 
 /**
