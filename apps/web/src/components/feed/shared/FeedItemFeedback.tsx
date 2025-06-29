@@ -1,22 +1,22 @@
 import {
+  Activity,
+  Award,
+  Baby,
+  Building,
   ChevronDown,
   ChevronUp,
+  GraduationCap,
   Hash,
   Heart,
+  MapPin,
   MessageCircle,
   Share,
+  Stethoscope,
   ThumbsUp,
   Users,
-  Award,
-  MapPin,
-  Building,
-  GraduationCap,
-  Stethoscope,
-  Baby,
-  Activity,
 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
-import { FeedItemTypeMap, ActorType } from '../../../lib/api/feed';
+import { ActorType, FeedItemTypeMap } from '../../../lib/api/feed';
 import { formatStats } from './feedUtils';
 
 interface PeerLike {
@@ -76,41 +76,56 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
     switch (item.author.actorType) {
       case ActorType.COMMUNITY_MEMBER:
         return {
-          icon: item.author.role === 'parent' ? Baby : 
-                item.author.role === 'grandparent' ? Heart : 
-                item.author.role === 'child' ? Activity : Users,
+          icon:
+            item.author.role === 'parent'
+              ? Baby
+              : item.author.role === 'grandparent'
+              ? Heart
+              : item.author.role === 'child'
+              ? Activity
+              : Users,
           text: item.author.role || 'Community Member',
           bgColor: 'bg-blue-100',
           textColor: 'text-blue-700',
-          description: item.author.location ? `${item.author.location.suburb}, ${item.author.location.state}` : undefined
+          description: item.author.location
+            ? `${item.author.location.suburb}, ${item.author.location.state}`
+            : undefined,
         };
       case ActorType.SERVICE_PROVIDER:
         return {
-          icon: item.author.title?.includes('Dr') ? Stethoscope : 
-                item.author.specializations?.some(s => s.toLowerCase().includes('education')) ? GraduationCap : 
-                Award,
+          icon: item.author.title?.includes('Dr')
+            ? Stethoscope
+            : item.author.specializations?.some((s) => s.toLowerCase().includes('education'))
+            ? GraduationCap
+            : Award,
           text: item.author.title || 'Service Provider',
           bgColor: 'bg-green-100',
           textColor: 'text-green-700',
-          description: item.author.centerName ? `at ${item.author.centerName}` : 
-                      item.author.yearsExperience ? `${item.author.yearsExperience} years experience` : undefined
+          description: item.author.centerName
+            ? `at ${item.author.centerName}`
+            : item.author.yearsExperience
+            ? `${item.author.yearsExperience} years experience`
+            : undefined,
         };
       case ActorType.SERVICE_CENTER:
         return {
           icon: Building,
-          text: item.author.organizationType ? 
-                `${item.author.organizationType.charAt(0).toUpperCase() + item.author.organizationType.slice(1)} Center` : 
-                'Service Center',
+          text: item.author.organizationType
+            ? `${
+                item.author.organizationType.charAt(0).toUpperCase() +
+                item.author.organizationType.slice(1)
+              } Center`
+            : 'Service Center',
           bgColor: 'bg-purple-100',
           textColor: 'text-purple-700',
-          description: item.author.features ? `${item.author.features.length} services` : undefined
+          description: item.author.features ? `${item.author.features.length} services` : undefined,
         };
       default:
         return {
           icon: Users,
           text: 'Community',
           bgColor: 'bg-gray-100',
-          textColor: 'text-gray-700'
+          textColor: 'text-gray-700',
         };
     }
   };
@@ -157,18 +172,16 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
       <div className="flex items-center justify-between py-2">
         <div className="flex items-center space-x-3">
           {/* Actor Badge */}
-          <div className={`flex items-center space-x-2 px-3 py-1 rounded-full ${actorBadge.bgColor}`}>
+          <div
+            className={`flex items-center space-x-2 px-3 py-1 rounded-full ${actorBadge.bgColor}`}
+          >
             <actorBadge.icon className={`w-4 h-4 ${actorBadge.textColor}`} />
-            <span className={`text-sm font-medium ${actorBadge.textColor}`}>
-              {actorBadge.text}
-            </span>
+            <span className={`text-sm font-medium ${actorBadge.textColor}`}>{actorBadge.text}</span>
           </div>
-          
+
           {/* Additional Info */}
           {actorBadge.description && (
-            <span className="text-sm text-gray-500">
-              {actorBadge.description}
-            </span>
+            <span className="text-sm text-gray-500">{actorBadge.description}</span>
           )}
         </div>
 
@@ -179,8 +192,8 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
               <span
                 key={index}
                 className={`text-xs px-2 py-1 rounded ${
-                  credential.verified 
-                    ? 'bg-zygo-red/10 text-zygo-red border border-zygo-red/20' 
+                  credential.verified
+                    ? 'bg-zygo-red/10 text-zygo-red border border-zygo-red/20'
                     : 'bg-gray-100 text-gray-600'
                 }`}
               >
@@ -200,7 +213,9 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
         {item.author.actorType === ActorType.COMMUNITY_MEMBER && item.author.location && (
           <div className="flex items-center text-sm text-gray-500">
             <MapPin className="w-3 h-3 mr-1" />
-            <span>{item.author.location.suburb}, {item.author.location.state}</span>
+            <span>
+              {item.author.location.suburb}, {item.author.location.state}
+            </span>
           </div>
         )}
 

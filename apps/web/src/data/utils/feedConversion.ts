@@ -1,4 +1,4 @@
-import { FeedItemType, FeedItemTypeMap, ActorType } from '../../lib/api/feed';
+import { ActorType, FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 import { BlogPost } from '../network/blogPosts';
 
 /**

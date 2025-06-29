@@ -174,7 +174,12 @@
       "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
       "actorType": "service_center",
       "organizationType": "wellness",
-      "features": ["family planning", "activity coordination", "community connection", "digital tools"],
+      "features": [
+        "family planning",
+        "activity coordination",
+        "community connection",
+        "digital tools"
+      ],
       "certifications": ["Privacy Certified", "Child Safety Approved"]
     },
     "type": "tool_cta_temporal",

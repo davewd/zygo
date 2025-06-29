@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FeedItemTypeMap, ActorType } from '../../../lib/api/feed';
+import { ActorType, FeedItemTypeMap } from '../../../lib/api/feed';
 import { FeedItemFeedback } from './FeedItemFeedback';
 
 // Example usage component demonstrating the enhanced FeedItemFeedback
@@ -22,12 +22,12 @@ export const FeedItemFeedbackExample: React.FC = () => {
           title: 'Registered Dietitian',
           abbreviation: 'RD',
           issuingBody: 'Dietitians Association',
-          verified: true
-        }
+          verified: true,
+        },
       ],
       yearsExperience: 10,
       specializations: ['kidney health', 'nutrition'],
-      centerName: 'Kidney Health Centre'
+      centerName: 'Kidney Health Centre',
     },
     title: 'Kidney Health Tips',
     description: 'Essential nutrition tips for maintaining healthy kidneys',

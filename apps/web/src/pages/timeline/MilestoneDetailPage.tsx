@@ -23,7 +23,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
-import { FeedItemType, FeedItemTypeMap, ActorType } from '../../lib/api/feed';
+import { ActorType, FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 import { loadMilestonesFromCSV } from '../../lib/api/milestones';
 
 interface MilestoneDetailData {
@@ -118,8 +118,8 @@ const MilestoneDetailPage: React.FC = () => {
               location: {
                 suburb: 'Paddington',
                 state: 'NSW',
-                country: 'Australia'
-              }
+                country: 'Australia',
+              },
             },
             title: `Achievement: ${foundMilestone.title}`,
             post: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
@@ -153,12 +153,12 @@ const MilestoneDetailPage: React.FC = () => {
                   title: 'Doctor of Medicine',
                   abbreviation: 'MD',
                   issuingBody: 'Medical Board',
-                  verified: true
-                }
+                  verified: true,
+                },
               ],
               yearsExperience: 12,
               specializations: ['child development', 'pediatrics'],
-              centerName: 'Children\'s Development Centre'
+              centerName: "Children's Development Centre",
             },
             title: `Tip for ${foundMilestone.title}`,
             post: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
@@ -189,8 +189,8 @@ const MilestoneDetailPage: React.FC = () => {
               location: {
                 suburb: 'Bondi',
                 state: 'NSW',
-                country: 'Australia'
-              }
+                country: 'Australia',
+              },
             },
             title: `Question about ${foundMilestone.title}`,
             post: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,
