@@ -1,0 +1,346 @@
+{
+  "id": "standard_early_childhood_pedagogy",
+  "familyId": "sample_family_001",
+  "name": "Early Childhood Development Pedagogy",
+  "description": "Comprehensive development tracking for children from birth to 5 years, covering all major developmental domains with adaptive milestones.",
+  "basedOnTemplate": "WHO_CDC_developmental_standards",
+  "familyMembers": [
+    {
+      "id": "parent_001",
+      "name": "Sarah Johnson",
+      "relationship": "mother",
+      "dateOfBirth": "1990-05-15",
+      "profileImage": "https://example.com/sarah.jpg",
+      "isActive": true,
+      "joinedDate": "2023-01-01"
+    },
+    {
+      "id": "parent_002",
+      "name": "Mike Johnson",
+      "relationship": "father",
+      "dateOfBirth": "1988-08-22",
+      "profileImage": "https://example.com/mike.jpg",
+      "isActive": true,
+      "joinedDate": "2023-01-01"
+    },
+    {
+      "id": "child_001",
+      "name": "Emma Johnson",
+      "relationship": "child",
+      "dateOfBirth": "2023-03-10",
+      "profileImage": "https://example.com/emma.jpg",
+      "isActive": true,
+      "joinedDate": "2023-03-10"
+    },
+    {
+      "id": "grandparent_001",
+      "name": "Mary Wilson",
+      "relationship": "grandmother",
+      "dateOfBirth": "1955-12-03",
+      "profileImage": "https://example.com/mary.jpg",
+      "isActive": true,
+      "joinedDate": "2023-03-15"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "basic_math_skills",
+      "type": "composite",
+      "title": "Basic Mathematical Understanding",
+      "description": "Foundational mathematical concepts including number recognition, counting, and basic operations",
+      "category": "cognitive",
+      "ageRange": "3-5years",
+      "minAgeMonths": 36,
+      "maxAgeMonths": 60,
+      "priority": "high",
+      "subMilestones": [
+        "number_recognition_1_10",
+        "counting_objects",
+        "basic_addition",
+        "basic_subtraction"
+      ],
+      "completionCriteria": "majority",
+      "prerequisites": ["verbal_communication_basic"],
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Counting Games Collection",
+          "url": "https://example.com/counting-games",
+          "description": "Interactive games to help children learn counting and number recognition"
+        },
+        {
+          "type": "book",
+          "title": "Numbers All Around Us",
+          "description": "Picture book introducing numbers in everyday contexts"
+        }
+      ],
+      "tags": ["mathematics", "early-learning", "cognitive-development"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-15T10:30:00Z",
+      "version": 1
+    },
+    {
+      "id": "number_recognition_1_10",
+      "type": "simple",
+      "title": "Recognize Numbers 1-10",
+      "description": "Child can visually identify and name written numbers from 1 to 10",
+      "category": "cognitive",
+      "ageRange": "3-5years",
+      "minAgeMonths": 36,
+      "maxAgeMonths": 48,
+      "priority": "medium",
+      "criteria": "Correctly identifies 8 out of 10 numbers when shown randomly",
+      "measurable": {
+        "metric": "correct_identifications",
+        "target": 8,
+        "unit": "out_of_10"
+      },
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Number Flashcards",
+          "description": "Visual number recognition practice"
+        }
+      ],
+      "tags": ["numbers", "recognition", "visual-learning"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "counting_objects",
+      "type": "simple",
+      "title": "Count Objects 1-5",
+      "description": "Child can accurately count physical objects up to 5 using one-to-one correspondence",
+      "category": "cognitive",
+      "ageRange": "3-5years",
+      "minAgeMonths": 30,
+      "maxAgeMonths": 42,
+      "priority": "high",
+      "criteria": "Correctly counts groups of 1-5 objects without skipping or double counting",
+      "measurable": {
+        "metric": "successful_counting_attempts",
+        "target": 4,
+        "unit": "out_of_5"
+      },
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Counting Bears Activity",
+          "description": "Hands-on counting with manipulatives"
+        }
+      ],
+      "tags": ["counting", "one-to-one-correspondence", "manipulatives"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "basic_addition",
+      "type": "simple",
+      "title": "Simple Addition (1+1 to 3+2)",
+      "description": "Child can solve basic addition problems using concrete objects or fingers",
+      "category": "cognitive",
+      "ageRange": "3-5years",
+      "minAgeMonths": 42,
+      "maxAgeMonths": 60,
+      "priority": "medium",
+      "criteria": "Solves addition problems up to 5 using manipulatives or fingers",
+      "prerequisites": ["counting_objects", "number_recognition_1_10"],
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Addition with Objects",
+          "description": "Using toys and snacks to understand addition concepts"
+        }
+      ],
+      "tags": ["addition", "mathematics", "problem-solving"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "basic_subtraction",
+      "type": "simple",
+      "title": "Simple Subtraction (5-1 to 3-2)",
+      "description": "Child can solve basic subtraction problems by taking away objects",
+      "category": "cognitive",
+      "ageRange": "3-5years",
+      "minAgeMonths": 48,
+      "maxAgeMonths": 60,
+      "priority": "medium",
+      "criteria": "Solves subtraction problems up to 5 by physically removing objects",
+      "prerequisites": ["basic_addition", "counting_objects"],
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Take Away Games",
+          "description": "Fun subtraction activities with toys and treats"
+        }
+      ],
+      "tags": ["subtraction", "mathematics", "problem-solving"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "walking_independently",
+      "type": "simple",
+      "title": "Walk Independently",
+      "description": "Child can walk without support for at least 10 steps",
+      "category": "physical",
+      "ageRange": "infant",
+      "minAgeMonths": 9,
+      "maxAgeMonths": 18,
+      "priority": "critical",
+      "criteria": "Walks 10+ steps without holding onto anything or anyone",
+      "measurable": {
+        "metric": "independent_steps",
+        "target": 10,
+        "unit": "steps"
+      },
+      "prerequisites": ["standing_with_support"],
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Walking Practice Activities",
+          "description": "Safe ways to encourage first steps"
+        }
+      ],
+      "tags": ["gross-motor", "independence", "mobility"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "verbal_communication_basic",
+      "type": "composite",
+      "title": "Basic Verbal Communication",
+      "description": "Fundamental speaking and listening skills for early communication",
+      "category": "language",
+      "ageRange": "1-3years",
+      "minAgeMonths": 12,
+      "maxAgeMonths": 36,
+      "priority": "critical",
+      "subMilestones": [
+        "first_words",
+        "two_word_phrases",
+        "follows_simple_instructions",
+        "asks_for_help"
+      ],
+      "completionCriteria": "majority",
+      "resources": [
+        {
+          "type": "article",
+          "title": "Supporting Early Language Development",
+          "url": "https://example.com/language-development",
+          "description": "Expert tips for encouraging speech and communication"
+        }
+      ],
+      "tags": ["communication", "language", "social-interaction"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-01T00:00:00Z",
+      "version": 1
+    },
+    {
+      "id": "social_play_skills",
+      "type": "adaptive",
+      "title": "Social Play Skills",
+      "description": "Ability to engage in play with other children and share toys appropriately",
+      "category": "social_emotional",
+      "ageRange": "toddler",
+      "minAgeMonths": 18,
+      "maxAgeMonths": 36,
+      "priority": "high",
+      "baseTemplate": "typical_social_play",
+      "adaptations": [
+        {
+          "condition": "autism_spectrum",
+          "modifications": {
+            "description": "Adapted social play skills with focus on parallel play and structured interactions",
+            "criteria": "Engages in parallel play for 5+ minutes and accepts turn-taking with visual supports",
+            "ageAdjustment": 6,
+            "additionalResources": [
+              {
+                "type": "tool",
+                "title": "Visual Turn-Taking Cards",
+                "description": "Visual supports for understanding social play rules"
+              }
+            ]
+          }
+        }
+      ],
+      "resources": [
+        {
+          "type": "activity",
+          "title": "Cooperative Play Activities",
+          "description": "Age-appropriate games that encourage sharing and cooperation"
+        }
+      ],
+      "tags": ["social-skills", "play", "sharing", "cooperation"],
+      "createdDate": "2024-01-01T00:00:00Z",
+      "modifiedDate": "2024-01-05T14:20:00Z",
+      "version": 2
+    }
+  ],
+  "milestoneProgress": [
+    {
+      "familyMemberId": "child_001",
+      "status": "completed",
+      "dateStarted": "2023-12-01",
+      "dateCompleted": "2024-01-15",
+      "notes": "Emma took her first steps on Christmas morning! She was so excited to walk to her presents.",
+      "evidence": [
+        {
+          "id": "evidence_001",
+          "type": "video",
+          "url": "https://example.com/emma-first-steps.mp4",
+          "description": "Emma's first independent steps",
+          "dateRecorded": "2023-12-25T09:30:00Z",
+          "recordedBy": "parent_001"
+        },
+        {
+          "id": "evidence_002",
+          "type": "photo",
+          "url": "https://example.com/emma-walking.jpg",
+          "description": "Emma walking in the park",
+          "dateRecorded": "2024-01-10T14:00:00Z",
+          "recordedBy": "parent_002"
+        }
+      ]
+    },
+    {
+      "familyMemberId": "child_001",
+      "status": "in_progress",
+      "dateStarted": "2024-01-20",
+      "notes": "Emma is starting to recognize numbers 1, 2, and 3. We practice with her favorite counting book every day.",
+      "evidence": [
+        {
+          "id": "evidence_003",
+          "type": "text",
+          "description": "Emma correctly identified the number 2 on her block and said 'two!'",
+          "dateRecorded": "2024-01-25T16:30:00Z",
+          "recordedBy": "grandparent_001"
+        }
+      ]
+    }
+  ],
+  "customizations": {
+    "categoryWeights": {
+      "language": 1.2,
+      "cognitive": 1.1,
+      "physical": 1.0,
+      "social_emotional": 0.9
+    },
+    "priorityAdjustments": [
+      {
+        "milestoneId": "social_play_skills",
+        "newPriority": "critical"
+      }
+    ],
+    "hiddenCategories": [],
+    "additionalMilestones": []
+  },
+  "createdDate": "2024-01-01T00:00:00Z",
+  "modifiedDate": "2024-01-25T18:45:00Z"
+}

@@ -1,0 +1,313 @@
+[
+  {
+    "id": "consumer_001",
+    "handle": "sarah_mama",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "displayName": "Sarah",
+    "profileImage": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face",
+    "dateOfBirth": "1990-05-15",
+    "role": "parent",
+    "ageGroup": "adult",
+    "tagline": "First-time mum navigating the beautiful chaos of parenthood 💕",
+    "bio": "Marketing professional turned full-time mum. Passionate about gentle parenting, baby-led weaning, and connecting with other families on this incredible journey.",
+    "location": {
+      "suburb": "Paddington",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "familyRelationships": [
+      {
+        "id": "rel_001",
+        "relatedUserId": "consumer_002",
+        "relationshipType": "spouse",
+        "description": "husband",
+        "isPrimary": true,
+        "dateEstablished": "2020-01-01"
+      },
+      {
+        "id": "rel_002",
+        "relatedUserId": "consumer_003",
+        "relationshipType": "child",
+        "description": "daughter",
+        "isPrimary": true,
+        "dateEstablished": "2023-03-10"
+      },
+      {
+        "id": "rel_003",
+        "relatedUserId": "consumer_004",
+        "relationshipType": "parent",
+        "description": "mother",
+        "isPrimary": false,
+        "dateEstablished": "2020-01-01"
+      }
+    ],
+    "followedProviders": [
+      {
+        "providerId": "rebecca-cavallaro",
+        "providerName": "Rebecca Cavallaro",
+        "providerTitle": "IBCLC, Midwife, RN",
+        "centerName": "Full Circle Midwifery",
+        "dateFollowed": "2023-01-15",
+        "tags": ["lactation-support", "midwifery", "antenatal-care"],
+        "status": "active"
+      },
+      {
+        "providerId": "dr-justin-tucker",
+        "providerName": "Dr. Justin Tucker",
+        "providerTitle": "Obstetrician & Fertility Specialist",
+        "centerName": "Prologue",
+        "dateFollowed": "2022-08-20",
+        "tags": ["fertility", "pregnancy-care"],
+        "status": "past"
+      }
+    ],
+    "isActive": true,
+    "joinedDate": "2022-08-01",
+    "lastActiveDate": "2024-12-14",
+    "privacyLevel": "public",
+    "hasLimitedProfile": false,
+    "interests": [
+      "gentle-parenting",
+      "baby-led-weaning",
+      "attachment-parenting",
+      "child-development"
+    ],
+    "preferredLanguages": ["English"],
+    "accessibility": {
+      "largeText": false,
+      "highContrast": false,
+      "screenReader": false
+    }
+  },
+  {
+    "id": "consumer_002",
+    "handle": "mike_dad",
+    "firstName": "Mike",
+    "lastName": "Johnson",
+    "displayName": "Mike",
+    "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    "dateOfBirth": "1988-08-22",
+    "role": "parent",
+    "ageGroup": "adult",
+    "tagline": "Dad blogger sharing the real ups and downs of fatherhood",
+    "bio": "Software engineer and proud dad. Love documenting our family adventures and connecting with other dads who are figuring it out as they go.",
+    "location": {
+      "suburb": "Paddington",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "familyRelationships": [
+      {
+        "id": "rel_004",
+        "relatedUserId": "consumer_001",
+        "relationshipType": "spouse",
+        "description": "wife",
+        "isPrimary": true,
+        "dateEstablished": "2020-01-01"
+      },
+      {
+        "id": "rel_005",
+        "relatedUserId": "consumer_003",
+        "relationshipType": "child",
+        "description": "daughter",
+        "isPrimary": true,
+        "dateEstablished": "2023-03-10"
+      }
+    ],
+    "followedProviders": [
+      {
+        "providerId": "emily-mcconaghy",
+        "providerName": "Emily McConaghy",
+        "providerTitle": "Lead Gymnastics Coach",
+        "centerName": "Active8Kids",
+        "dateFollowed": "2024-05-10",
+        "tags": ["toddler-activities", "physical-development"],
+        "status": "interested"
+      }
+    ],
+    "isActive": true,
+    "joinedDate": "2022-08-01",
+    "lastActiveDate": "2024-12-13",
+    "privacyLevel": "public",
+    "hasLimitedProfile": false,
+    "interests": ["dad-life", "tech", "outdoor-activities", "photography"],
+    "preferredLanguages": ["English"]
+  },
+  {
+    "id": "consumer_003",
+    "handle": "emma_little",
+    "firstName": "Emma",
+    "displayName": "Emma",
+    "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+    "dateOfBirth": "2023-03-10",
+    "role": "child",
+    "ageGroup": "toddler",
+    "tagline": "Learning and growing every day! 🌱",
+    "location": {
+      "suburb": "Paddington",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "familyRelationships": [
+      {
+        "id": "rel_006",
+        "relatedUserId": "consumer_001",
+        "relationshipType": "parent",
+        "description": "mummy",
+        "isPrimary": true,
+        "dateEstablished": "2023-03-10"
+      },
+      {
+        "id": "rel_007",
+        "relatedUserId": "consumer_002",
+        "relationshipType": "parent",
+        "description": "daddy",
+        "isPrimary": true,
+        "dateEstablished": "2023-03-10"
+      },
+      {
+        "id": "rel_008",
+        "relatedUserId": "consumer_004",
+        "relationshipType": "grandparent",
+        "description": "nana",
+        "isPrimary": false,
+        "dateEstablished": "2023-03-10"
+      }
+    ],
+    "followedProviders": [],
+    "isActive": true,
+    "joinedDate": "2023-03-10",
+    "lastActiveDate": "2024-12-14",
+    "privacyLevel": "family",
+    "hasLimitedProfile": true,
+    "parentalControls": {
+      "parentId": "consumer_001",
+      "restrictedFields": ["bio", "interests", "location.suburb"]
+    },
+    "interests": ["books", "music", "playground", "animals"],
+    "preferredLanguages": ["English"]
+  },
+  {
+    "id": "consumer_004",
+    "handle": "mary_nana",
+    "firstName": "Mary",
+    "lastName": "Wilson",
+    "displayName": "Mary (Nana)",
+    "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+    "dateOfBirth": "1955-12-03",
+    "role": "grandparent",
+    "ageGroup": "senior",
+    "tagline": "Proud grandmother sharing wisdom and making memories",
+    "bio": "Retired teacher and devoted grandmother. I love spending time with my granddaughter and sharing what I've learned about child development over the years.",
+    "location": {
+      "suburb": "Bondi",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "familyRelationships": [
+      {
+        "id": "rel_009",
+        "relatedUserId": "consumer_001",
+        "relationshipType": "child",
+        "description": "daughter",
+        "isPrimary": true,
+        "dateEstablished": "2020-01-01"
+      },
+      {
+        "id": "rel_010",
+        "relatedUserId": "consumer_003",
+        "relationshipType": "grandparent",
+        "description": "granddaughter",
+        "isPrimary": true,
+        "dateEstablished": "2023-03-10"
+      }
+    ],
+    "followedProviders": [
+      {
+        "providerId": "emily-mcconaghy",
+        "providerName": "Emily McConaghy",
+        "providerTitle": "Lead Gymnastics Coach",
+        "centerName": "Active8Kids",
+        "dateFollowed": "2024-06-15",
+        "tags": ["toddler-activities", "child-development"],
+        "status": "active"
+      }
+    ],
+    "isActive": true,
+    "joinedDate": "2023-04-15",
+    "lastActiveDate": "2024-12-12",
+    "privacyLevel": "public",
+    "hasLimitedProfile": false,
+    "interests": ["grandparenting", "child-development", "reading", "gardening", "cooking"],
+    "preferredLanguages": ["English"]
+  },
+  {
+    "id": "consumer_005",
+    "handle": "jessica_mama2",
+    "firstName": "Jessica",
+    "lastName": "Chen",
+    "displayName": "Jess",
+    "profileImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+    "dateOfBirth": "1985-11-28",
+    "role": "parent",
+    "ageGroup": "adult",
+    "tagline": "Mum of twins, advocate for inclusive parenting 👶👶",
+    "bio": "Speech pathologist and mum to beautiful twin boys. Passionate about supporting other parents and creating inclusive communities for all families.",
+    "location": {
+      "suburb": "Surry Hills",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "familyRelationships": [
+      {
+        "id": "rel_011",
+        "relatedUserId": "consumer_006",
+        "relationshipType": "child",
+        "description": "son",
+        "isPrimary": true,
+        "dateEstablished": "2022-09-15"
+      },
+      {
+        "id": "rel_012",
+        "relatedUserId": "consumer_007",
+        "relationshipType": "child",
+        "description": "son",
+        "isPrimary": true,
+        "dateEstablished": "2022-09-15"
+      }
+    ],
+    "followedProviders": [
+      {
+        "providerId": "rebecca-cavallaro",
+        "providerName": "Rebecca Cavallaro",
+        "providerTitle": "IBCLC, Midwife, RN",
+        "centerName": "Full Circle Midwifery",
+        "dateFollowed": "2022-06-01",
+        "tags": ["lactation-support", "twins-support"],
+        "status": "past"
+      },
+      {
+        "providerId": "sarah-mitchell",
+        "providerName": "Sarah Mitchell",
+        "providerTitle": "Head Swim Instructor",
+        "centerName": "Elixr Swim School",
+        "dateFollowed": "2024-03-20",
+        "tags": ["swimming-lessons", "toddler-swimming"],
+        "status": "active"
+      }
+    ],
+    "isActive": true,
+    "joinedDate": "2022-09-15",
+    "lastActiveDate": "2024-12-13",
+    "privacyLevel": "public",
+    "hasLimitedProfile": false,
+    "interests": [
+      "twins-parenting",
+      "speech-pathology",
+      "inclusive-parenting",
+      "child-development"
+    ],
+    "preferredLanguages": ["English", "Mandarin"]
+  }
+]

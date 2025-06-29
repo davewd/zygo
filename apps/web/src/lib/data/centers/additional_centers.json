@@ -1,0 +1,146 @@
+{
+  "additional_centers": [
+    {
+      "center_id": "mummys-whispers",
+      "name": "Mummy's Whispers Maternity Care",
+      "type": "maternity_care",
+      "services": [
+        {
+          "id": "in-home-consultation",
+          "name": "In-Home Consultation",
+          "description": "Comprehensive in-home assessment and consultation covering all aspects of newborn care, sleep routines, feeding support, and family transition guidance.",
+          "duration": 120,
+          "price": {
+            "amount": 325,
+            "currency": "AUD"
+          },
+          "ageGroups": ["newborn", "infant"],
+          "tags": ["newborn-care", "family-transition", "personalized-care", "home-visit"]
+        },
+        {
+          "id": "14-day-sleep-program-online",
+          "name": "14 Days of Sleep Training Program (Online)",
+          "description": "Comprehensive online sleep training program using gentle methods, tailored specifically to your child's needs.",
+          "duration": 2016,
+          "price": {
+            "amount": 1495,
+            "currency": "AUD"
+          },
+          "ageGroups": ["newborn", "infant", "toddler"],
+          "tags": ["sleep-training", "gentle-methods", "online-support", "personalized-program"]
+        },
+        {
+          "id": "maternity-nurse-service",
+          "name": "Maternity Nurse Service",
+          "description": "Professional maternity nurse care including 24-hour support, newborn care, feeding assistance, and family support.",
+          "duration": 1440,
+          "price": {
+            "amount": 280,
+            "currency": "AUD"
+          },
+          "ageGroups": ["newborn", "infant"],
+          "tags": ["24-hour-care", "professional-nurse", "feeding-support", "newborn-care"]
+        }
+      ]
+    },
+    {
+      "center_id": "st-marys-childcare",
+      "name": "St Mary's Child Care Centre",
+      "type": "childcare_education",
+      "services": [
+        {
+          "id": "joey-room-program",
+          "name": "Joey Room (2-3 years)",
+          "description": "Nurturing care and early learning program for toddlers aged 2-3 years. Focus on developing independence, social skills, and language through play-based learning.",
+          "duration": 600,
+          "price": {
+            "amount": 180,
+            "currency": "AUD"
+          },
+          "ageGroups": ["toddler"],
+          "tags": ["toddler-care", "play-based-learning", "social-skills", "early-education"]
+        },
+        {
+          "id": "wombat-room-program",
+          "name": "Wombat Room (3-4 years)",
+          "description": "Pre-kindergarten program focusing on school readiness, language development, and social-emotional learning through structured activities.",
+          "duration": 600,
+          "price": {
+            "amount": 175,
+            "currency": "AUD"
+          },
+          "ageGroups": ["preschool"],
+          "tags": [
+            "pre-kindergarten",
+            "school-readiness",
+            "language-development",
+            "structured-learning"
+          ]
+        },
+        {
+          "id": "music-education-program",
+          "name": "Music Education Program",
+          "description": "Specialized music and creative arts program led by qualified music educator, developing musical skills and creativity.",
+          "duration": 45,
+          "price": {
+            "amount": 35,
+            "currency": "AUD"
+          },
+          "ageGroups": ["toddler", "preschool"],
+          "tags": ["music-education", "creative-arts", "qualified-educator", "skill-development"]
+        }
+      ]
+    },
+    {
+      "center_id": "kambala-school",
+      "name": "Kambala School",
+      "type": "education",
+      "services": [
+        {
+          "id": "prep-program",
+          "name": "Preparatory Program",
+          "description": "Foundation learning program for the youngest students, focusing on literacy, numeracy, and social development in a nurturing environment.",
+          "duration": 360,
+          "price": {
+            "amount": 0,
+            "currency": "AUD",
+            "note": "School fees handled separately"
+          },
+          "ageGroups": ["preschool"],
+          "tags": ["foundation-learning", "literacy", "numeracy", "social-development"]
+        },
+        {
+          "id": "primary-education",
+          "name": "Primary Education (Years 1-6)",
+          "description": "Comprehensive primary education combining academic excellence with character development, creative arts, and physical education.",
+          "duration": 360,
+          "price": {
+            "amount": 0,
+            "currency": "AUD",
+            "note": "School fees handled separately"
+          },
+          "ageGroups": ["child"],
+          "tags": [
+            "primary-education",
+            "academic-excellence",
+            "character-development",
+            "holistic-learning"
+          ]
+        },
+        {
+          "id": "boarding-program",
+          "name": "Boarding Program",
+          "description": "Comprehensive boarding program providing a home away from home with pastoral care, academic support, and life skills development.",
+          "duration": 1440,
+          "price": {
+            "amount": 0,
+            "currency": "AUD",
+            "note": "Boarding fees handled separately"
+          },
+          "ageGroups": ["child", "adolescent"],
+          "tags": ["boarding", "pastoral-care", "academic-support", "life-skills"]
+        }
+      ]
+    }
+  ]
+}

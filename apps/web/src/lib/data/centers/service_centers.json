@@ -1,0 +1,298 @@
+[
+  {
+    "id": "full-circle-midwifery-lactation",
+    "name": "Full Circle Midwifery & Lactation Support",
+    "description": "Brisbane-based midwifery and lactation treatment and support service for mothers, babies, and families before and after birth. As experienced lactation consultants and private practice midwives, our services are personalised, using a holistic approach to identify solutions that work for you and your baby.",
+    "overview": "Full Circle is a team of International Board Certified Lactation Consultants (IBCLC) and private practice midwives in Brisbane. We're passionate about continuity of care in the postpartum period and filling the gap of support that's missing for many mothers and babies.",
+    "mission": "To provide holistic, evidence-based lactation and midwifery care that empowers families to trust their intuition while receiving the knowledge and support needed to build confidence in responsive parenting.",
+    "location": {
+      "address": "123 Health Street",
+      "suburb": "Windsor",
+      "state": "QLD",
+      "postcode": "4030",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -27.4338,
+        "lng": 153.0268
+      }
+    },
+    "contact": {
+      "phone": "+61 7 3345 6789",
+      "email": "hello@fullcirclemidwifery.com.au",
+      "website": "https://fullcirclemidwifery.com.au",
+      "bookingUrl": "https://fullcirclemidwifery.com.au/book"
+    },
+    "operatingHours": {
+      "monday": { "open": "09:00", "close": "17:00" },
+      "tuesday": { "open": "09:00", "close": "17:00" },
+      "wednesday": { "open": "09:00", "close": "17:00" },
+      "thursday": { "open": "09:00", "close": "17:00" },
+      "friday": { "open": "09:00", "close": "17:00" },
+      "saturday": { "open": "09:00", "close": "15:00" },
+      "sunday": { "closed": true, "open": "", "close": "" }
+    },
+    "features": [
+      "Family-friendly clinic environment",
+      "Medicare rebates available (in first 6 weeks post birth)",
+      "Private health insurance rebates",
+      "Multiple consultation formats (in-person, online, home visits, phone)",
+      "Urgent care available Monday-Saturday",
+      "Bulk billed phone support included with consultations",
+      "Cultural acknowledgment and respect",
+      "No agenda approach - supportive of all feeding choices"
+    ],
+    "certifications": [
+      "IBCLC Certified",
+      "Medicare Provider",
+      "Australian Health Practitioner Regulation Agency Registered"
+    ],
+    "insurance": ["Medicare", "Private Health Insurance"],
+    "accessibility": [
+      "Ground floor access",
+      "Parking available",
+      "Public transport accessible",
+      "Baby changing facilities",
+      "Wheelchair accessible"
+    ],
+    "establishedYear": 2015
+  },
+  {
+    "id": "prologue-fertility-obstetrics",
+    "name": "Prologue",
+    "description": "A collaboration of talented professionals who together have curated a modern and unique approach to fertility and obstetric care. We pay attention to every detail, especially YOUR detail, offering a level of understanding, options, opportunities and an experience that is like no other.",
+    "overview": "When you engage Prologue, you are stepping into a world of exceptional creation. Located in the historic BMA House on Macquarie Street, our sanctuary offers a complete departure from the cold and clinical feel of traditional medical practices.",
+    "mission": "To provide a 'complete experience' that goes far beyond exceptional medical care. We are here FOR YOU, offering service akin to staying at a high-end hotel.",
+    "location": {
+      "address": "Suite G01 & Suite G02, 135 Macquarie Street",
+      "suburb": "Sydney",
+      "state": "NSW",
+      "postcode": "2000",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
+    },
+    "contact": {
+      "phone": "(02) 9519 4114",
+      "email": "hello@prologue.com.au",
+      "website": "https://www.prologue.com.au",
+      "bookingUrl": "https://www.prologue.com.au/contact"
+    },
+    "operatingHours": {
+      "monday": { "open": "08:00", "close": "17:00" },
+      "tuesday": { "open": "08:00", "close": "17:00" },
+      "wednesday": { "open": "08:00", "close": "17:00" },
+      "thursday": { "open": "08:00", "close": "17:00" },
+      "friday": { "open": "08:00", "close": "16:00" },
+      "saturday": { "closed": true, "open": "", "close": "" },
+      "sunday": { "closed": true, "open": "", "close": "" }
+    },
+    "features": [
+      "Historic BMA House location with rich heritage",
+      "Completely curated interiors designed for calming and nurturing",
+      "Custom seasonal playlists and curated scents",
+      "Sanctuary-like environment for staff and clients",
+      "High-end hotel level service experience",
+      "Multiple location options (CBD, Bondi Junction, North Sydney)",
+      "Monash IVF clinic partnership"
+    ],
+    "certifications": [
+      "FRANZCOG Certified",
+      "Medicare Provider",
+      "Australian Health Practitioner Regulation Agency Registered",
+      "Monash IVF Affiliated"
+    ],
+    "insurance": [
+      "Medicare",
+      "Private Health Insurance (most major providers)",
+      "Medibank",
+      "Bupa",
+      "HCF",
+      "NIB"
+    ],
+    "accessibility": [
+      "Heritage building with modern accessibility features",
+      "Central Sydney CBD location",
+      "Public transport accessible",
+      "Parking available nearby",
+      "Multiple clinic locations",
+      "Elevator access"
+    ],
+    "establishedYear": 2018
+  },
+  {
+    "id": "calmbirth-australia",
+    "name": "Calmbirth® Australia",
+    "description": "Australia's most highly acclaimed and trusted childbirth education program. Calmbirth® protects emotional and mental wellbeing before, during, and after birth through evidence-based education and fear release techniques.",
+    "overview": "Calmbirth® is a revolutionary 12-hour childbirth education program that focuses on psychological and emotional preparation for birth. With close to 100 registered educators throughout Australia, New Zealand, and France, we have successfully changed the birth culture for thousands of families.",
+    "mission": "To change our current birth culture to one that is talked about and experienced far more positively, now and for future generations.",
+    "location": {
+      "address": "National Head Office",
+      "suburb": "Blue Mountains",
+      "state": "NSW",
+      "postcode": "2780",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -33.7774,
+        "lng": 150.3109
+      }
+    },
+    "contact": {
+      "phone": "(02) 4871 1806",
+      "email": "info@calmbirth.com.au",
+      "website": "https://calmbirth.com.au",
+      "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/"
+    },
+    "operatingHours": {
+      "monday": { "open": "09:00", "close": "17:00" },
+      "tuesday": { "open": "09:00", "close": "17:00" },
+      "wednesday": { "open": "09:00", "close": "17:00" },
+      "thursday": { "open": "09:00", "close": "17:00" },
+      "friday": { "open": "09:00", "close": "17:00" },
+      "saturday": { "open": "09:00", "close": "15:00" },
+      "sunday": { "closed": true, "open": "", "close": "" }
+    },
+    "features": [
+      "Australia's most acclaimed childbirth education program",
+      "Close to 100 registered educators across Australia, New Zealand & France",
+      "Evidence-based 12-hour face-to-face program",
+      "Multiple locations: ACT (1), NSW (43), QLD (13), SA (3), TAS (5), VIC (12), WA (4)",
+      "Hospital partnerships with private and public maternity hospitals",
+      "Founded by internationally recognized midwife Peter Jackson"
+    ],
+    "certifications": [
+      "Internationally Recognized Childbirth Education Program",
+      "Australian Health Practitioner Regulation Agency Affiliated",
+      "Professional Indemnity Insurance",
+      "Continuous Professional Development Accredited"
+    ],
+    "insurance": [
+      "Some Private Health Insurance providers offer rebates",
+      "Check with your provider for maternity and allied health coverage"
+    ],
+    "accessibility": [
+      "Multiple locations across Australia for accessibility",
+      "Weekend programs to accommodate working couples",
+      "Private sessions available for specific needs",
+      "Online resources and podcast available"
+    ],
+    "establishedYear": 2004
+  },
+  {
+    "id": "kidney-nutrition-center",
+    "name": "Kidney Nutrition",
+    "description": "Specialized renal nutrition services providing expert dietary guidance for kidney health, kidney disease management, and prevention through evidence-based nutrition therapy.",
+    "overview": "Kidney Nutrition specializes in renal dietetics, offering comprehensive nutrition services for people with kidney disease, those at risk of kidney disease, and kidney transplant recipients.",
+    "mission": "To improve kidney health and quality of life through expert nutrition guidance, helping people prevent kidney disease and effectively manage existing kidney conditions with evidence-based dietary strategies.",
+    "location": {
+      "address": "Via Forum Specialists",
+      "suburb": "Sydney",
+      "state": "NSW",
+      "postcode": "2000",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
+    },
+    "contact": {
+      "phone": "02 9188 2325",
+      "email": "info@kidneynutrition.com.au",
+      "website": "https://kidneynutrition.com.au",
+      "bookingUrl": "https://kidneynutrition.com.au/contact"
+    },
+    "operatingHours": {
+      "monday": { "open": "09:00", "close": "17:00" },
+      "tuesday": { "open": "09:00", "close": "17:00" },
+      "wednesday": { "open": "09:00", "close": "17:00" },
+      "thursday": { "open": "09:00", "close": "17:00" },
+      "friday": { "open": "09:00", "close": "16:00" },
+      "saturday": { "closed": true, "open": "", "close": "" },
+      "sunday": { "closed": true, "open": "", "close": "" }
+    },
+    "features": [
+      "Specialized renal nutrition expertise",
+      "PhD-qualified dietitian",
+      "Over 10 years renal nutrition experience",
+      "Kidney disease prevention programs",
+      "Dialysis nutrition support",
+      "Kidney transplant nutrition care"
+    ],
+    "certifications": [
+      "Accredited Practicing Dietitian (APD)",
+      "Renal Nutrition Specialist",
+      "Medicare Provider",
+      "Dietitians Australia Member"
+    ],
+    "insurance": ["Medicare", "Private Health Insurance (varies by provider)"],
+    "accessibility": [
+      "Telehealth consultations available",
+      "Flexible appointment scheduling",
+      "Phone consultations",
+      "Email support available"
+    ],
+    "establishedYear": 2012
+  },
+  {
+    "id": "start-training-stafford",
+    "name": "Start Training Stafford",
+    "description": "A premium allied health clinic offering high-quality sports nutrition, exercise physiology, physiotherapy, and sports therapy services. Home to advanced sports dietitian Peta Carige and a team of experienced practitioners.",
+    "overview": "Start Training Stafford believes everyone should have access to the same high quality of allied health service delivery irrespective of level of competition or ability.",
+    "mission": "To provide exceptional allied health services that support athletes and community members in achieving their health, performance, and lifestyle goals through evidence-based practice and personalized care.",
+    "location": {
+      "address": "Hickey Park, 35 Babarra Street",
+      "suburb": "Stafford",
+      "state": "QLD",
+      "postcode": "4053",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -27.4038,
+        "lng": 153.0175
+      }
+    },
+    "contact": {
+      "phone": "0428 080 028",
+      "email": "info@starttrainingstafford.com.au",
+      "website": "https://starttrainingstafford.com.au",
+      "bookingUrl": "https://starttrainingstafford.com.au/book-online-now"
+    },
+    "operatingHours": {
+      "monday": { "open": "06:00", "close": "19:00" },
+      "tuesday": { "open": "06:00", "close": "19:00" },
+      "wednesday": { "open": "06:00", "close": "19:00" },
+      "thursday": { "open": "06:00", "close": "19:00" },
+      "friday": { "open": "06:00", "close": "19:00" },
+      "saturday": { "open": "07:00", "close": "16:00" },
+      "sunday": { "open": "08:00", "close": "15:00" }
+    },
+    "features": [
+      "Premium allied health clinic environment",
+      "Sports nutrition specialization",
+      "Exercise physiology services",
+      "High-performance athlete support",
+      "Community wellness programs",
+      "Evidence-based practice approach"
+    ],
+    "certifications": [
+      "Sports Dietitians Australia Member",
+      "Dietitians Australia Member",
+      "Allied Health Professions Australia Member",
+      "Australian Health Practitioner Regulation Agency Registered"
+    ],
+    "insurance": [
+      "Private Health Insurance (varies by provider)",
+      "WorkCover Queensland",
+      "DVA (Department of Veterans Affairs)",
+      "Medicare (for eligible services)"
+    ],
+    "accessibility": [
+      "Ground floor clinic access",
+      "Accessible parking available",
+      "Wide entrance and doorways",
+      "Accessible bathroom facilities",
+      "Online consultations for remote access"
+    ],
+    "establishedYear": 2018
+  }
+]
