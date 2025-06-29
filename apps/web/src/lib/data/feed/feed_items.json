@@ -11,7 +11,27 @@
       "name": "Jessica Stevenson",
       "handle": "jessica_stevenson",
       "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-      "verified": true
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Advanced Sports Dietitian, APD",
+      "credentials": [
+        {
+          "title": "Advanced Sports Dietitian",
+          "abbreviation": "APD",
+          "issuingBody": "Sports Dietitians Australia",
+          "verified": true
+        },
+        {
+          "title": "Registered Nutritionist",
+          "abbreviation": "RN",
+          "issuingBody": "Nutrition Society",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 8,
+      "specializations": ["sports nutrition", "kidney health", "performance nutrition"],
+      "centerName": "Kidney Nutrition Centre",
+      "centerId": "kidney-nutrition-center"
     },
     "type": "post",
     "post": "🥗 Eating for Healthy Kidneys 🥗\n\nYour kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is really important to keep your kidneys healthy!\n\nKey principles for kidney-healthy eating:\n• 🧂 Watch your sodium - aim for less than 2,300mg per day\n• 🥤 Stay hydrated - drink plenty of water throughout the day\n• 🫘 Choose quality protein - lean meats, fish, eggs, and plant proteins\n• 🍎 Eat plenty of fruits and vegetables - they're rich in antioxidants\n• 🌾 Opt for whole grains - better for blood sugar control\n• ❤️ Heart-healthy = kidney-healthy - what's good for your heart helps your kidneys too!\n\nRemember: prevention is always better than treatment. Small dietary changes today can make a huge difference for your kidney health in the long run.\n\n💡 If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.\n\n#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare",
@@ -68,7 +88,14 @@
     "author": {
       "name": "Sarah Mitchell",
       "handle": "sarah_mom3",
-      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member",
+      "role": "parent",
+      "location": {
+        "suburb": "Paddington",
+        "state": "NSW",
+        "country": "Australia"
+      }
     },
     "type": "breastfeeding_weekly_summary",
     "post": "Week 3 summary! Really interesting to see the patterns emerging. Tuesday was definitely our challenging day but we're finding our rhythm. 📊",
@@ -144,7 +171,11 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "service_center",
+      "organizationType": "wellness",
+      "features": ["family planning", "activity coordination", "community connection", "digital tools"],
+      "certifications": ["Privacy Certified", "Child Safety Approved"]
     },
     "type": "tool_cta_temporal",
     "post": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
@@ -262,7 +293,14 @@
     "author": {
       "name": "Sarah Johnson",
       "handle": "sarah_mama",
-      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member",
+      "role": "parent",
+      "location": {
+        "suburb": "Paddington",
+        "state": "NSW",
+        "country": "Australia"
+      }
     },
     "type": "milestone",
     "post": "And Just Like That First Steps ✨",
@@ -277,5 +315,432 @@
       "sharedWith": [{ "type": "group", "name": "Family", "id": "family_1" }]
     },
     "milestoneId": "first_steps"
+  },
+  {
+    "id": "feed-9",
+    "title": "Lily's Principals Award Presentation",
+    "metadata": {
+      "createdAt": "2025-06-29T10:00:00Z",
+      "source": "school"
+    },
+    "author": {
+      "name": "Catherine Ryan",
+      "handle": "catherine_ryan_headmistress",
+      "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "role": "service_provider",
+      "providerId": "catherine-ryan"
+    },
+    "type": "award_presentation",
+    "post": "🏆 Congratulations to Lily Dawson on receiving the Principals Award! 🌟\n\nIt is my absolute pleasure to present this award to Lily for her outstanding academic achievement, excellent behaviour, and positive attitude towards learning. Lily has consistently demonstrated the values we cherish at Bronte Public School - kindness, respect, and dedication to her studies.\n\nLily's teachers have noted her helpfulness to classmates and her enthusiasm in all subject areas. She is a wonderful role model for her peers and a credit to her family.\n\nWell done, Lily! We are so proud of you! 👏\n\n#PrincipalsAward #BrontePublicSchool #ProudMoment #StudentExcellence",
+    "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "stats": {
+      "likes": 42,
+      "shares": 15,
+      "comments": 18,
+      "reposts": 8
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "awardData": {
+      "awardType": "Principals Award",
+      "recipient": {
+        "name": "Lily Dawson",
+        "studentId": "lily-dawson-student",
+        "grade": "Year 5",
+        "parents": [
+          {
+            "name": "Jessica Dawson",
+            "relationship": "mother"
+          },
+          {
+            "name": "David Dawson",
+            "relationship": "father"
+          }
+        ]
+      },
+      "presenter": {
+        "name": "Catherine Ryan",
+        "title": "Headmistress",
+        "providerId": "catherine-ryan"
+      },
+      "school": {
+        "name": "Bronte Public School",
+        "logo": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=64&h=64&fit=crop&crop=center"
+      },
+      "presentationDate": "2025-06-29",
+      "achievements": [
+        "Outstanding Academic Achievement",
+        "Excellent Behaviour",
+        "Positive Learning Attitude",
+        "Helpful to Classmates",
+        "Enthusiasm in All Subjects"
+      ]
+    },
+    "mentions": [
+      {
+        "type": "student",
+        "name": "Lily Dawson",
+        "handle": "@lily_dawson"
+      },
+      {
+        "type": "parent",
+        "name": "Jessica Dawson",
+        "handle": "@jessica_dawson"
+      },
+      {
+        "type": "parent",
+        "name": "David Dawson",
+        "handle": "@david_dawson"
+      }
+    ]
+  },
+  {
+    "id": "feed-10",
+    "title": "Eating for Healthy Kidneys",
+    "metadata": {
+      "createdAt": "2024-12-19T14:30:00Z",
+      "source": "web",
+      "sourceUrl": "https://kidneynutrition.com.au/f/eating-for-healthy-kidneys"
+    },
+    "author": {
+      "name": "Jessica Stevenson",
+      "handle": "jessica_stevenson",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "verified": true
+    },
+    "type": "post",
+    "post": "<div><p>🥗 <strong>Eating for Healthy Kidneys</strong> 🥗</p><p>Your kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is <em>really important</em> to keep your kidneys healthy!</p><h3>Key principles for kidney-healthy eating:</h3><ul><li>🧂 <strong>Watch your sodium</strong> - aim for less than 2,300mg per day</li><li>🥤 <strong>Stay hydrated</strong> - drink plenty of water throughout the day</li><li>🫘 <strong>Choose quality protein</strong> - lean meats, fish, eggs, and plant proteins</li><li>🍎 <strong>Eat plenty of fruits and vegetables</strong> - they're rich in antioxidants</li><li>🌾 <strong>Opt for whole grains</strong> - better for blood sugar control</li><li>❤️ <strong>Heart-healthy = kidney-healthy</strong> - what's good for your heart helps your kidneys too!</li></ul><p>Remember: <strong>prevention is always better than treatment</strong>. Small dietary changes today can make a huge difference for your kidney health in the long run.</p><p>💡 <em>If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.</em></p><p>#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare</p></div>",
+    "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "stats": {
+      "likes": 24,
+      "shares": 8,
+      "comments": 12,
+      "reposts": 3
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "feed-11",
+    "title": "Summer Activities Tool",
+    "metadata": {
+      "createdAt": "2024-12-17T10:00:00Z"
+    },
+    "author": {
+      "name": "Zygo",
+      "handle": "zygo_app",
+      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+    },
+    "type": "tool_cta_temporal",
+    "post": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
+    "stats": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "reposts": 0
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "toolCTATemporalData": {
+      "backgroundGradient": "bg-gradient-to-r from-zygo-mint/30 to-zygo-blue/20",
+      "borderColor": "border-0",
+      "icon": "Sun",
+      "iconColor": "text-yellow-500",
+      "headerText": "Ready for Summer Fun?",
+      "description": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
+      "actions": [
+        {
+          "label": "Plan Your Summer",
+          "url": "/tools/holiday-planner",
+          "icon": "CalendarDays",
+          "isPrimary": true
+        },
+        {
+          "label": "Browse Activities",
+          "url": "/network/services",
+          "icon": "Activity",
+          "isPrimary": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "feed-12",
+    "title": "Enhanced Feeding Reminder",
+    "metadata": {
+      "createdAt": "2024-12-15T15:45:00Z"
+    },
+    "author": {
+      "name": "Zygo",
+      "handle": "zygo_app",
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+    },
+    "type": "breastfeeding_reminder",
+    "post": "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
+    "stats": {
+      "likes": 12,
+      "shares": 1,
+      "comments": 3,
+      "reposts": 0
+    },
+    "privacy": {
+      "visibility": "private",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "feed-13",
+    "title": "Enhanced Library Books Due Soon",
+    "metadata": {
+      "createdAt": "2024-12-16T09:30:00Z"
+    },
+    "author": {
+      "name": "Zygo",
+      "handle": "zygo_app",
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+    },
+    "type": "library_book_reminder",
+    "post": "You have 2 library books due in 3 days: 'The Very Hungry Caterpillar' and 'Where the Wild Things Are'. Remember to return them on time!",
+    "stats": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "reposts": 0
+    },
+    "privacy": {
+      "visibility": "private",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "feed-14",
+    "title": "Mike's First Post",
+    "metadata": {
+      "createdAt": "2023-10-01T12:00:00Z"
+    },
+    "author": {
+      "name": "Mike Johnson",
+      "handle": "mike_dad",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    "type": "post",
+    "post": "Here's an example of something i care about !",
+    "stats": {
+      "likes": 120,
+      "shares": 45,
+      "comments": 10,
+      "reposts": 0
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "feed-15",
+    "title": "Enhanced First Steps Milestone",
+    "metadata": {
+      "createdAt": "2023-10-01T12:00:00Z"
+    },
+    "author": {
+      "name": "Sarah Johnson",
+      "handle": "sarah_mama",
+      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face"
+    },
+    "type": "milestone",
+    "post": "And Just Like That First Steps ✨",
+    "imageUrl": "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&h=600&fit=crop&crop=center",
+    "stats": {
+      "likes": 89,
+      "shares": 12,
+      "comments": 25,
+      "reposts": 5
+    },
+    "privacy": {
+      "visibility": "group",
+      "sharedWith": [
+        { "type": "group", "name": "Family", "id": "family_1" },
+        { "type": "group", "name": "Close Friends", "id": "friends_1" }
+      ]
+    },
+    "milestoneId": "early_childhood_24_30_physical_1"
+  },
+  {
+    "id": "feed-16",
+    "title": "Jessica's Data Science Profile",
+    "metadata": {
+      "createdAt": "2023-10-01T12:00:00Z"
+    },
+    "author": {
+      "name": "Jessica Davis",
+      "handle": "jessica_mama2",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    "type": "link",
+    "description": "A data scientist with a knack for turning data into actionable insights.",
+    "imageUrl": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&h=600&fit=crop&crop=center",
+    "stats": {
+      "likes": 45,
+      "shares": 12,
+      "comments": 8,
+      "reposts": 2
+    },
+    "privacy": {
+      "visibility": "private",
+      "sharedWith": [
+        { "type": "individual", "name": "Sarah Johnson", "id": "user_1" },
+        { "type": "individual", "name": "Mike Davis", "id": "user_2" },
+        { "type": "individual", "name": "Emma Wilson", "id": "user_3" },
+        { "type": "individual", "name": "Tom Anderson", "id": "user_4" }
+      ]
+    }
+  },
+  {
+    "id": "feed-17",
+    "title": "Mary's Product Management Profile",
+    "metadata": {
+      "createdAt": "2023-10-01T12:00:00Z"
+    },
+    "author": {
+      "name": "Mary Wilson",
+      "handle": "mary_nana",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
+    },
+    "type": "link",
+    "description": "An experienced product manager with a focus on user-centered design.",
+    "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&crop=center",
+    "stats": {
+      "likes": 38,
+      "shares": 9,
+      "comments": 6,
+      "reposts": 1
+    },
+    "privacy": {
+      "visibility": "group",
+      "sharedWith": [{ "type": "group", "name": "Work Team", "id": "work_1" }]
+    }
+  },
+  {
+    "id": "feed-18",
+    "title": "Excellence in Education at Kambala",
+    "metadata": {
+      "createdAt": "2023-10-03T10:00:00Z"
+    },
+    "author": {
+      "name": "Kambala School",
+      "handle": "kambala_school",
+      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&h=150&fit=crop&crop=center"
+    },
+    "type": "sponsored",
+    "post": "Discover where tradition meets innovation. At Kambala, we empower young women to become confident, creative, and compassionate leaders. Our holistic approach to education nurtures academic excellence, creativity, and character development in a supportive community environment.",
+    "description": "Join our community of inspiring educators and remarkable students. Excellence is not just our standard – it's our passion.",
+    "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop&crop=center",
+    "stats": {
+      "likes": 42,
+      "shares": 15,
+      "comments": 8,
+      "reposts": 3
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "sponsoredData": {
+      "advertiserName": "Kambala School",
+      "advertiserLogo": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=32&h=32&fit=crop&crop=center",
+      "ctaText": "Learn More",
+      "ctaUrl": "https://kambala.nsw.edu.au/",
+      "sponsorshipType": "sponsored"
+    }
+  },
+  {
+    "id": "feed-19",
+    "title": "Today's Feeding Sessions",
+    "metadata": {
+      "createdAt": "2024-11-01T14:30:00Z"
+    },
+    "author": {
+      "name": "Emma Wilson",
+      "handle": "emma_mom2",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    "type": "breastfeeding_daily_summary",
+    "post": "Tracking my feeding sessions today from 7am to 7am. Some longer sessions this morning but overall feeling good about our routine! 🤱",
+    "stats": {
+      "likes": 28,
+      "shares": 3,
+      "comments": 12,
+      "reposts": 1
+    },
+    "privacy": {
+      "visibility": "group",
+      "sharedWith": [{ "type": "group", "name": "New Moms Support", "id": "newmoms_1" }]
+    },
+    "breastfeedingDailyData": [
+      {
+        "time": "7:30 AM",
+        "duration": 25,
+        "happiness": 8,
+        "soreness": 3,
+        "notes": "Good morning feed"
+      },
+      {
+        "time": "10:15 AM",
+        "duration": 30,
+        "happiness": 7,
+        "soreness": 4,
+        "notes": "Cluster feeding started"
+      },
+      {
+        "time": "12:45 PM",
+        "duration": 20,
+        "happiness": 9,
+        "soreness": 2,
+        "notes": "Quick lunch feed"
+      },
+      {
+        "time": "3:20 PM",
+        "duration": 28,
+        "happiness": 8,
+        "soreness": 3,
+        "notes": "Afternoon session"
+      },
+      {
+        "time": "6:00 PM",
+        "duration": 35,
+        "happiness": 6,
+        "soreness": 5,
+        "notes": "Tired but going well"
+      },
+      {
+        "time": "8:30 PM",
+        "duration": 22,
+        "happiness": 9,
+        "soreness": 2,
+        "notes": "Bedtime routine"
+      },
+      {
+        "time": "11:45 PM",
+        "duration": 18,
+        "happiness": 7,
+        "soreness": 3,
+        "notes": "Late night feed"
+      },
+      {
+        "time": "2:30 AM",
+        "duration": 15,
+        "happiness": 8,
+        "soreness": 2,
+        "notes": "Night feeding"
+      },
+      { "time": "5:15 AM", "duration": 26, "happiness": 8, "soreness": 3, "notes": "Early morning" }
+    ]
   }
 ]

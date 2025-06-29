@@ -1,4 +1,4 @@
-import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedItemType, FeedItemTypeMap, ActorType } from '../../lib/api/feed';
 import { BlogPost } from '../network/blogPosts';
 
 /**
@@ -13,6 +13,12 @@ export const convertBlogPostToFeedItem = (blogPost: BlogPost): FeedItemTypeMap =
       handle: `@${blogPost.authorId}`,
       avatar: getProviderAvatar(blogPost.authorId),
       verified: true,
+      actorType: ActorType.SERVICE_PROVIDER,
+      title: getProviderTitle(blogPost.authorId),
+      credentials: getProviderCredentials(blogPost.authorId),
+      yearsExperience: getProviderExperience(blogPost.authorId),
+      specializations: getProviderSpecializations(blogPost.authorId),
+      centerName: getProviderCenterName(blogPost.authorId)
     },
     title: blogPost.title,
     description: blogPost.excerpt,
@@ -65,6 +71,12 @@ const generateSampleProviderPosts = (providerId: string): FeedItemTypeMap[] => {
         handle: `@${providerId}`,
         avatar: providerAvatar,
         verified: true,
+        actorType: ActorType.SERVICE_PROVIDER,
+        title: getProviderTitle(providerId),
+        credentials: getProviderCredentials(providerId),
+        yearsExperience: getProviderExperience(providerId),
+        specializations: getProviderSpecializations(providerId),
+        centerName: getProviderCenterName(providerId)
       },
       privacy: {
         visibility: 'public' as any,
@@ -217,4 +229,80 @@ const getProviderName = (providerId: string): string => {
 const getProviderAvatar = (providerId: string): string => {
   // Default avatar - in real app would come from provider profile
   return `https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`;
+};
+
+/**
+ * Get title for provider
+ */
+const getProviderTitle = (providerId: string): string => {
+  const titleMap: Record<string, string> = {
+    'rebecca-cavallaro': 'IBCLC, Midwife, RN',
+    'jessica-dawson': 'Registered Dietitian',
+    'dr-shelley-rowlands': 'Obstetrician & Gynaecologist',
+    'emma-rodriguez': 'Early Childhood Educator',
+    'marcus-chen': 'Paediatric Speech Pathologist',
+    'sarah-mitchell': 'Child Development Specialist'
+  };
+  return titleMap[providerId] || 'Healthcare Provider';
+};
+
+/**
+ * Get credentials for provider
+ */
+const getProviderCredentials = (providerId: string): Array<{title: string; abbreviation?: string; issuingBody: string; verified: boolean}> => {
+  const credentialsMap: Record<string, Array<{title: string; abbreviation?: string; issuingBody: string; verified: boolean}>> = {
+    'rebecca-cavallaro': [
+      { title: 'International Board Certified Lactation Consultant', abbreviation: 'IBCLC', issuingBody: 'IBLCE', verified: true },
+      { title: 'Registered Midwife', abbreviation: 'RM', issuingBody: 'Nursing and Midwifery Board', verified: true }
+    ],
+    'jessica-dawson': [
+      { title: 'Registered Dietitian', abbreviation: 'RD', issuingBody: 'Dietitians Association', verified: true }
+    ]
+  };
+  return credentialsMap[providerId] || [];
+};
+
+/**
+ * Get years of experience for provider
+ */
+const getProviderExperience = (providerId: string): number => {
+  const experienceMap: Record<string, number> = {
+    'rebecca-cavallaro': 12,
+    'jessica-dawson': 8,
+    'dr-shelley-rowlands': 15,
+    'emma-rodriguez': 6,
+    'marcus-chen': 10,
+    'sarah-mitchell': 7
+  };
+  return experienceMap[providerId] || 5;
+};
+
+/**
+ * Get specializations for provider
+ */
+const getProviderSpecializations = (providerId: string): string[] => {
+  const specializationsMap: Record<string, string[]> = {
+    'rebecca-cavallaro': ['lactation support', 'postnatal care', 'breastfeeding'],
+    'jessica-dawson': ['kidney health', 'sports nutrition', 'pediatric nutrition'],
+    'dr-shelley-rowlands': ['high-risk pregnancies', 'fertility', 'obstetrics'],
+    'emma-rodriguez': ['early childhood development', 'play-based learning'],
+    'marcus-chen': ['speech development', 'language disorders', 'pediatric therapy'],
+    'sarah-mitchell': ['child development', 'behavioral support']
+  };
+  return specializationsMap[providerId] || ['healthcare'];
+};
+
+/**
+ * Get center name for provider
+ */
+const getProviderCenterName = (providerId: string): string => {
+  const centerMap: Record<string, string> = {
+    'rebecca-cavallaro': 'Full Circle Midwifery',
+    'jessica-dawson': 'Kidney Nutrition Centre',
+    'dr-shelley-rowlands': 'EMOG Centre',
+    'emma-rodriguez': 'St Marys Childcare Centre',
+    'marcus-chen': 'Speech Development Centre',
+    'sarah-mitchell': 'Child Development Centre'
+  };
+  return centerMap[providerId] || 'Healthcare Centre';
 };

@@ -19,11 +19,22 @@ export enum FeedItemType {
   BREASTFEEDING_REMINDER = 'breastfeeding_reminder',
   LIBRARY_BOOK_REMINDER = 'library_book_reminder',
   TOOL_CTA_TEMPORAL = 'tool_cta_temporal',
-  SPONSORED = 'sponsored'
+  SPONSORED = 'sponsored',
+  AWARD_PRESENTATION = 'award_presentation'
+}
+
+// Actor types for feed authors
+export enum ActorType {
+  COMMUNITY_MEMBER = 'community_member',
+  SERVICE_PROVIDER = 'service_provider',
+  SERVICE_CENTER = 'service_center'
 }
 
 // Import blog posts data
 import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
+
+// Import feed items data from JSON
+import feedItemsData from '../data/feed/feed_items.json';
 
 export enum VisibilityLevel {
   PUBLIC = 'public',
@@ -40,16 +51,42 @@ export interface PrivacySettings {
   }>;
 }
 
+export interface FeedAuthor {
+  name: string;
+  handle: string;
+  avatar: string;
+  verified?: boolean;
+  actorType: ActorType;
+  // Community member specific fields
+  role?: 'parent' | 'grandparent' | 'child' | 'guardian' | 'caregiver';
+  location?: {
+    suburb?: string;
+    state?: string;
+    country?: string;
+  };
+  // Service provider specific fields
+  title?: string;
+  credentials?: Array<{
+    title: string;
+    abbreviation?: string;
+    issuingBody: string;
+    verified: boolean;
+  }>;
+  yearsExperience?: number;
+  specializations?: string[];
+  centerName?: string;
+  centerId?: string;
+  // Service center specific fields
+  organizationType?: 'healthcare' | 'education' | 'childcare' | 'sports' | 'wellness';
+  features?: string[];
+  certifications?: string[];
+}
+
 export interface FeedItemTypeMap {
   id: string;
   type: FeedItemType;
   url?: string;
-  author: {
-    name: string;
-    handle: string;
-    avatar: string;
-    verified?: boolean;
-  };
+  author: FeedAuthor;
   title?: string;
   description?: string;
   imageUrl?: string;
@@ -137,6 +174,36 @@ export interface FeedItemTypeMap {
   };
   // Milestone specific data
   milestoneId?: string; // ID of the related milestone from the milestones CSV
+  // Award presentation specific data
+  awardData?: {
+    awardType: string;
+    recipient: {
+      name: string;
+      studentId?: string;
+      grade?: string;
+      parents?: Array<{
+        name: string;
+        relationship: string;
+      }>;
+    };
+    presenter: {
+      name: string;
+      title: string;
+      providerId?: string;
+    };
+    school?: {
+      name: string;
+      logo?: string;
+    };
+    presentationDate?: string;
+    achievements?: string[];
+  };
+  // Mentions for social features
+  mentions?: Array<{
+    type: string;
+    name: string;
+    handle: string;
+  }>;
 }
 
 // Simulate API endpoints
@@ -177,6 +244,7 @@ const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS
       handle: blogPost.authorId, // Use the authorId as handle to match service provider ID
       avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
       verified: true,
+      actorType: ActorType.COMMUNITY_MEMBER, // Default to community member for blog authors
     },
     type: FeedItemType.POST,
     post: blogPost.content,
@@ -197,393 +265,9 @@ const convertBlogPostToFeedItem = (blogPost: typeof REBECCA_CAVALLARO_BLOG_POSTS
   };
 };
 
-// Mock data - in a real app, this would come from your backend
+// Mock data - now sourced from JSON file
 const mockData = {
-  results: [
-    // Add Rebecca's blog post
-    convertBlogPostToFeedItem(REBECCA_CAVALLARO_BLOG_POSTS[0]),
-    {
-      id: 11,
-      title: "Eating for Healthy Kidneys",
-      metadata: {
-        createdAt: "2024-12-19T14:30:00Z",
-        source: "web",
-        sourceUrl: "https://kidneynutrition.com.au/f/eating-for-healthy-kidneys"
-      },
-      author: {
-        name: "Jessica Stevenson",
-        handle: "jessica_stevenson",
-        avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-        verified: true
-      },
-      type: FeedItemType.POST,
-      post: `<div>
-        <p>🥗 <strong>Eating for Healthy Kidneys</strong> 🥗</p>
-        
-        <p>Your kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is <em>really important</em> to keep your kidneys healthy!</p>
-        
-        <h3>Key principles for kidney-healthy eating:</h3>
-        <ul>
-          <li>🧂 <strong>Watch your sodium</strong> - aim for less than 2,300mg per day</li>
-          <li>🥤 <strong>Stay hydrated</strong> - drink plenty of water throughout the day</li>
-          <li>🫘 <strong>Choose quality protein</strong> - lean meats, fish, eggs, and plant proteins</li>
-          <li>🍎 <strong>Eat plenty of fruits and vegetables</strong> - they're rich in antioxidants</li>
-          <li>🌾 <strong>Opt for whole grains</strong> - better for blood sugar control</li>
-          <li>❤️ <strong>Heart-healthy = kidney-healthy</strong> - what's good for your heart helps your kidneys too!</li>
-        </ul>
-        
-        <p>Remember: <strong>prevention is always better than treatment</strong>. Small dietary changes today can make a huge difference for your kidney health in the long run.</p>
-        
-        <p>💡 <em>If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.</em></p>
-        
-        <p>#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare</p>
-      </div>`,
-      imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      stats: {
-        likes: 24,
-        shares: 8,
-        comments: 12,
-        reposts: 3
-      },
-      privacy: {
-        visibility: VisibilityLevel.PUBLIC,
-        sharedWith: []
-      }
-    },
-    {
-      id: 10,
-      title: "Child's Assembly Award Ceremony",
-      metadata: {
-        createdAt: "2024-12-15T09:00:00Z"
-      },
-      author: {
-        name: "Family Calendar",
-        handle: "family_events",
-        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.EVENT,
-      post: "Attend Child's assembly to watch @Lily get an award",
-      stats: {
-        likes: 0,
-        shares: 0,
-        comments: 0,
-        reposts: 0
-      },
-      privacy: {
-        visibility: VisibilityLevel.PRIVATE,
-        sharedWith: []
-      },
-      eventData: {
-        date: "2024-12-20",
-        time: "10:00 AM",
-        location: "Main Assembly Hall",
-        attendees: 1,
-        schoolLogo: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=64&h=64&fit=crop&crop=center",
-        schoolName: "Bronte Public School"
-      }
-    },
-    {
-      id: 9,
-      title: "Feeding Reminder",
-      metadata: {
-        createdAt: "2024-12-15T15:45:00Z"
-      },
-      author: {
-        name: "Zygo",
-        handle: "zygo_app",
-        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.BREASTFEEDING_REMINDER,
-      post: "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
-      stats: {
-        likes: 12,
-        shares: 1,
-        comments: 3
-      },
-      privacy: {
-        visibility: "private",
-        sharedWith: []
-      }
-    },
-    {
-      id: 13,
-      title: "Summer Activities",
-      metadata: {
-        createdAt: "2024-12-17T10:00:00Z"
-      },
-      author: {
-        name: "Zygo",
-        handle: "zygo_app",
-        avatar: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.TOOL_CTA_TEMPORAL,
-      post: "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
-      stats: {
-        likes: 0,
-        shares: 0,
-        comments: 0
-      },
-      privacy: {
-        visibility: "public",
-        sharedWith: []
-      },
-      toolCTATemporalData: {
-        backgroundGradient: "bg-gradient-to-r from-zygo-mint/30 to-zygo-blue/20",
-        borderColor: "border-0",
-        icon: "Sun",
-        iconColor: "text-yellow-500",
-        headerText: "Ready for Summer Fun?",
-        description: "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
-        actions: [
-          {
-            label: "Plan Your Summer",
-            url: "/tools/holiday-planner",
-            icon: "CalendarDays",
-            isPrimary: true
-          },
-          {
-            label: "Browse Activities",
-            url: "/network/services",
-            icon: "Activity",
-            isPrimary: false
-          }
-        ]
-      }
-    },
-    {
-      id: 8,
-      title: "This Week's Feeding Patterns",
-      metadata: {
-        createdAt: "2024-12-15T09:00:00Z"
-      },
-      author: {
-        name: "Sarah Mitchell",
-        handle: "sarah_mom3",
-        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
-      },
-      type: FeedItemType.BREASTFEEDING_WEEKLY_SUMMARY,
-      post: "Week 3 summary! Really interesting to see the patterns emerging. Tuesday was definitely our challenging day but we're finding our rhythm. 📊",
-      stats: {
-        likes: 45,
-        shares: 7,
-        comments: 18
-      },
-      privacy: {
-        visibility: "group",
-        sharedWith: [
-          { type: "group", name: "Breastfeeding Support", id: "bf_support_1" },
-          { type: "group", name: "Family", id: "family_3" }
-        ]
-      },
-      breastfeedingWeeklySummary: {
-        weeklyData: [
-          { day: "Mon", avgDuration: 24, feedCount: 8, avgHappiness: 8.2, avgSoreness: 2.8 },
-          { day: "Tue", avgDuration: 31, feedCount: 6, avgHappiness: 6.5, avgSoreness: 4.2 },
-          { day: "Wed", avgDuration: 26, feedCount: 9, avgHappiness: 7.8, avgSoreness: 3.1 },
-          { day: "Thu", avgDuration: 28, feedCount: 7, avgHappiness: 8.5, avgSoreness: 2.5 },
-          { day: "Fri", avgDuration: 25, feedCount: 8, avgHappiness: 8.0, avgSoreness: 3.0 },
-          { day: "Sat", avgDuration: 29, feedCount: 8, avgHappiness: 7.9, avgSoreness: 3.2 },
-          { day: "Sun", avgDuration: 27, feedCount: 9, avgHappiness: 8.3, avgSoreness: 2.9 }
-        ],
-        totalWeeklyFeeds: 55,
-        avgDailyFeeds: 7.9
-      }
-    },
-    {
-      id: 12,
-      title: "Library Books Due Soon",
-      metadata: {
-        createdAt: "2024-12-16T09:30:00Z"
-      },
-      author: {
-        name: "Zygo",
-        handle: "zygo_app",
-        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.LIBRARY_BOOK_REMINDER,
-      post: "You have 2 library books due in 3 days: 'The Very Hungry Caterpillar' and 'Where the Wild Things Are'. Remember to return them on time!",
-      stats: {
-        likes: 0,
-        shares: 0,
-        comments: 0
-      },
-      privacy: {
-        visibility: "private",
-        sharedWith: []
-      }
-    },
-    {
-      id: 1,
-      post: "Here's an example of something i care about !",
-      author: {
-        name: "Mike Johnson",
-        handle: "mike_dad",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-      },
-      title: "My First Post",
-      metadata: {
-        createdAt: "2023-10-01T12:00:00Z"
-      },
-      type: "post",
-      stats: {
-        likes: 120,
-        shares: 45,
-        comments: 10
-      },
-      privacy: {
-        visibility: "public",
-        sharedWith: []
-      }
-    },
-    {
-      id: 2,
-      title: "",
-      metadata: {
-        createdAt: "2023-10-01T12:00:00Z"
-      },
-      author: {
-        name: "Sarah Johnson",
-        handle: "sarah_mama",
-        image: "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face"
-      },
-      type: "milestone",
-      post: "And Just Like That First Steps ",
-      image: "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&h=600&fit=crop&crop=center",
-      stats: {
-        likes: 1,
-        shares: 0,
-        comments: 10
-      },
-      privacy: {
-        visibility: "group",
-        sharedWith: [
-          { type: "group", name: "Family", id: "family_1" },
-          { type: "group", name: "Close Friends", id: "friends_1" }
-        ]
-      },
-      milestoneId: "early_childhood_24_30_physical_1" // Link to "First steps" milestone
-    },
-    {
-      id: 3,
-      name: "Jessica Davis",
-      type: "link",
-      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&h=600&fit=crop&crop=center",
-      title: "Data Scientist",
-      metadata: {
-        createdAt: "2023-10-01T12:00:00Z"
-      },
-      description: "A data scientist with a knack for turning data into actionable insights.",
-      author: {
-        name: "Jessica Davis",
-        handle: "jessica_mama2",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-      },
-      stats: {
-        likes: 0,
-        shares: 0,
-        comments: 0
-      },
-      privacy: {
-        visibility: "private",
-        sharedWith: [
-          { type: "individual", name: "Sarah Johnson", id: "user_1" },
-          { type: "individual", name: "Mike Davis", id: "user_2" },
-          { type: "individual", name: "Emma Wilson", id: "user_3" },
-          { type: "individual", name: "Tom Anderson", id: "user_4" }
-        ]
-      }
-    },
-    {
-      id: 4,
-      name: "Mary Wilson",
-      type: "link",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&crop=center",
-      title: "Product Manager",
-      description: "An experienced product manager with a focus on user-centered design.",
-      author: {
-        name: "Mary Wilson",
-        handle: "mary_nana",
-        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
-      },
-      metadata: {
-        createdAt: "2023-10-01T12:00:00Z"
-      },
-      privacy: {
-        visibility: "group",
-        sharedWith: [
-          { type: "group", name: "Work Team", id: "work_1" }
-        ]
-      }
-    },
-    {
-      id: 6,
-      title: "Excellence in Education at Kambala",
-      metadata: {
-        createdAt: "2023-10-03T10:00:00Z"
-      },
-      author: {
-        name: "Kambala School",
-        title: "Independent Anglican School",
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&h=150&fit=crop&crop=center"
-      },
-      type: FeedItemType.SPONSORED,
-      post: "Discover where tradition meets innovation. At Kambala, we empower young women to become confident, creative, and compassionate leaders. Our holistic approach to education nurtures academic excellence, creativity, and character development in a supportive community environment.",
-      description: "Join our community of inspiring educators and remarkable students. Excellence is not just our standard – it's our passion.",
-      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop&crop=center",
-      stats: {
-        likes: 42,
-        shares: 15,
-        comments: 8
-      },
-      privacy: {
-        visibility: "public",
-        sharedWith: []
-      },
-      sponsoredData: {
-        advertiserName: "Kambala School",
-        advertiserLogo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=32&h=32&fit=crop&crop=center",
-        ctaText: "Learn More",
-        ctaUrl: "https://kambala.nsw.edu.au/",
-        sponsorshipType: "sponsored"
-      }
-    },
-    {
-      id: 7,
-      title: "Today's Feeding Sessions",
-      metadata: {
-        createdAt: "2024-11-01T14:30:00Z"
-      },
-      author: {
-        name: "Emma Wilson",
-        handle: "emma_mom2",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-      },
-      type: FeedItemType.BREASTFEEDING_DAILY_SUMMARY,
-      post: "Tracking my feeding sessions today from 7am to 7am. Some longer sessions this morning but overall feeling good about our routine! 🤱",
-      stats: {
-        likes: 28,
-        shares: 3,
-        comments: 12
-      },
-      privacy: {
-        visibility: "group",
-        sharedWith: [
-          { type: "group", name: "New Moms Support", id: "newmoms_1" }
-        ]
-      },
-      breastfeedingDailyData: [
-        { time: "7:30 AM", duration: 25, happiness: 8, soreness: 3, notes: "Good morning feed" },
-        { time: "10:15 AM", duration: 30, happiness: 7, soreness: 4, notes: "Cluster feeding started" },
-        { time: "12:45 PM", duration: 20, happiness: 9, soreness: 2, notes: "Quick lunch feed" },
-        { time: "3:20 PM", duration: 28, happiness: 8, soreness: 3, notes: "Afternoon session" },
-        { time: "6:00 PM", duration: 35, happiness: 6, soreness: 5, notes: "Tired but going well" },
-        { time: "8:30 PM", duration: 22, happiness: 9, soreness: 2, notes: "Bedtime routine" },
-        { time: "11:45 PM", duration: 18, happiness: 7, soreness: 3, notes: "Late night feed" },
-        { time: "2:30 AM", duration: 15, happiness: 8, soreness: 2, notes: "Night feeding" },
-        { time: "5:15 AM", duration: 26, happiness: 8, soreness: 3, notes: "Early morning" }
-      ]
-    }
-  ]
+  results: feedItemsData
 };
 
 // Legacy interface for backward compatibility  
@@ -623,13 +307,13 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
     filteredItems = allItems.filter(item => {
       // Filter by author - check both handle and metadata.authorId for consistency
       if (filters.authorId && 
-          item.author.handle !== filters.authorId && 
-          item.metadata?.authorId !== filters.authorId) {
+          item.author?.handle !== filters.authorId && 
+          item.author?.providerId !== filters.authorId) {
         return false;
       }
 
-      // Filter by type
-      if (filters.type && !filters.type.includes(item.type)) {
+      // Filter by type (convert to string for comparison)
+      if (filters.type && !filters.type.includes(item.type as FeedItemType)) {
         return false;
       }
 
@@ -638,8 +322,8 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
         return false;
       }
 
-      // Filter by visibility
-      if (filters.visibility && !filters.visibility.includes(item.privacy.visibility)) {
+      // Filter by visibility (convert to enum for comparison)
+      if (filters.visibility && !filters.visibility.includes(item.privacy?.visibility as VisibilityLevel)) {
         return false;
       }
 
@@ -675,14 +359,33 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
       handle: item.author?.handle || 'unknown',
       avatar: item.author?.avatar || item.author?.image || 'https://via.placeholder.com/48',
       verified: item.author?.verified || false,
+      actorType: item.author?.actorType || ActorType.COMMUNITY_MEMBER, // Default to community member
+      // Community member fields
+      role: item.author?.role,
+      location: item.author?.location,
+      // Service provider fields
+      title: item.author?.title,
+      credentials: item.author?.credentials,
+      yearsExperience: item.author?.yearsExperience,
+      specializations: item.author?.specializations,
+      centerName: item.author?.centerName,
+      centerId: item.author?.centerId,
+      // Service center fields
+      organizationType: item.author?.organizationType,
+      features: item.author?.features,
+      certifications: item.author?.certifications,
     },
     metadata: {
       createdAt: item.metadata?.createdAt || new Date().toISOString(),
       source: item.metadata?.source || 'unknown',
       sourceUrl: item.metadata?.sourceUrl,
+      authorId: item.author?.handle || item.author?.providerId, // Add authorId for compatibility
     },
     stats: item.stats || { likes: 0, shares: 0, comments: 0, reposts: 0 },
-    privacy: item.privacy || { visibility: VisibilityLevel.PUBLIC, sharedWith: [] },
+    privacy: { 
+      visibility: item.privacy?.visibility || 'public', 
+      sharedWith: item.privacy?.sharedWith || [] 
+    },
     // Preserve specific data
     breastfeedingData: item.breastfeedingData,
     breastfeedingDailyData: item.breastfeedingDailyData,
@@ -694,6 +397,8 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
     milestoneId: item.milestoneId,
     hasReferences: item.hasReferences,
     peerLikes: item.peerLikes,
+    awardData: item.awardData,
+    mentions: item.mentions,
   }));
 
   // Implement pagination

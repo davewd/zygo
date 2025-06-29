@@ -23,7 +23,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
-import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
+import { FeedItemType, FeedItemTypeMap, ActorType } from '../../lib/api/feed';
 import { loadMilestonesFromCSV } from '../../lib/api/milestones';
 
 interface MilestoneDetailData {
@@ -113,6 +113,13 @@ const MilestoneDetailPage: React.FC = () => {
               handle: 'sarah_mama',
               avatar:
                 'https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face',
+              actorType: ActorType.COMMUNITY_MEMBER,
+              role: 'parent',
+              location: {
+                suburb: 'Paddington',
+                state: 'NSW',
+                country: 'Australia'
+              }
             },
             title: `Achievement: ${foundMilestone.title}`,
             post: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
@@ -139,6 +146,19 @@ const MilestoneDetailPage: React.FC = () => {
               avatar:
                 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
               verified: true,
+              actorType: ActorType.SERVICE_PROVIDER,
+              title: 'Pediatric Development Specialist',
+              credentials: [
+                {
+                  title: 'Doctor of Medicine',
+                  abbreviation: 'MD',
+                  issuingBody: 'Medical Board',
+                  verified: true
+                }
+              ],
+              yearsExperience: 12,
+              specializations: ['child development', 'pediatrics'],
+              centerName: 'Children\'s Development Centre'
             },
             title: `Tip for ${foundMilestone.title}`,
             post: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
@@ -164,6 +184,13 @@ const MilestoneDetailPage: React.FC = () => {
               handle: 'mike_dad',
               avatar:
                 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+              actorType: ActorType.COMMUNITY_MEMBER,
+              role: 'parent',
+              location: {
+                suburb: 'Bondi',
+                state: 'NSW',
+                country: 'Australia'
+              }
             },
             title: `Question about ${foundMilestone.title}`,
             post: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,

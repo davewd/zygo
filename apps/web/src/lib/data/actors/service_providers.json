@@ -231,5 +231,50 @@
       "currency": "AUD"
     },
     "centerId": "start-training"
+  },
+  {
+    "id": "catherine-ryan",
+    "actorId": "actor_catherine_ryan",
+    "firstName": "Catherine",
+    "lastName": "Ryan",
+    "title": "Headmistress",
+    "profileImage": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face",
+    "headerBackgroundImage": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=600&fit=crop&crop=center",
+    "bio": "Catherine Ryan is the dedicated Headmistress of Bronte Public School, with over 15 years of experience in educational leadership. She is passionate about fostering academic excellence and personal growth in every student.",
+    "personalStory": "My career in education began as a primary school teacher, and I've been privileged to watch countless students discover their potential. As Headmistress, I'm committed to creating an environment where every child feels valued and inspired to achieve their best.",
+    "credentials": [
+      {
+        "title": "Master of Educational Leadership",
+        "abbreviation": "M.Ed.Lead",
+        "issuingBody": "University of Sydney",
+        "verified": true
+      },
+      {
+        "title": "Bachelor of Education (Primary)",
+        "abbreviation": "B.Ed",
+        "issuingBody": "University of New South Wales",
+        "verified": true
+      }
+    ],
+    "specializations": [
+      "Educational Leadership",
+      "Primary Education",
+      "Student Development",
+      "Curriculum Planning",
+      "School Administration",
+      "Parent-School Communication"
+    ],
+    "languages": ["English"],
+    "yearsExperience": 15,
+    "approach": "I believe in nurturing the whole child - academically, socially, and emotionally. Our school is a community where students, parents, and teachers work together to create positive learning experiences.",
+    "availability": {
+      "inPerson": true,
+      "telehealth": false,
+      "homeVisits": false,
+      "emergency": false
+    },
+    "centerId": "bronte-public-school",
+    "centerName": "Bronte Public School",
+    "serviceType": "education"
   }
 ]

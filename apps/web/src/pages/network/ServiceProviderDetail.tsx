@@ -338,15 +338,6 @@ const ServiceProviderDetail = () => {
                 <div className="space-y-6">
                   {/* Provider Activity Feed - Polymorphic for all providers */}
                   <div className="space-y-6">
-                    <div className="text-center mb-6">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                        Recent Activity & Insights
-                      </h3>
-                      <p className="text-gray-600">
-                        Professional content and updates from {provider?.name}
-                      </p>
-                    </div>
-
                     {/* Provider Activity Feed - Using unified API for all providers */}
                     {feedLoading && (
                       <div className="space-y-4">

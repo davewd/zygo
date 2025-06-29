@@ -7,9 +7,16 @@ import {
   Share,
   ThumbsUp,
   Users,
+  Award,
+  MapPin,
+  Building,
+  GraduationCap,
+  Stethoscope,
+  Baby,
+  Activity,
 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
-import { FeedItemTypeMap } from '../../../lib/api/feed';
+import { FeedItemTypeMap, ActorType } from '../../../lib/api/feed';
 import { formatStats } from './feedUtils';
 
 interface PeerLike {
@@ -64,6 +71,52 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
 
   const displayedHashtags = showAllHashtags ? hashtags : hashtags.slice(0, 3);
 
+  // Get actor-specific badge and info
+  const getActorBadge = () => {
+    switch (item.author.actorType) {
+      case ActorType.COMMUNITY_MEMBER:
+        return {
+          icon: item.author.role === 'parent' ? Baby : 
+                item.author.role === 'grandparent' ? Heart : 
+                item.author.role === 'child' ? Activity : Users,
+          text: item.author.role || 'Community Member',
+          bgColor: 'bg-blue-100',
+          textColor: 'text-blue-700',
+          description: item.author.location ? `${item.author.location.suburb}, ${item.author.location.state}` : undefined
+        };
+      case ActorType.SERVICE_PROVIDER:
+        return {
+          icon: item.author.title?.includes('Dr') ? Stethoscope : 
+                item.author.specializations?.some(s => s.toLowerCase().includes('education')) ? GraduationCap : 
+                Award,
+          text: item.author.title || 'Service Provider',
+          bgColor: 'bg-green-100',
+          textColor: 'text-green-700',
+          description: item.author.centerName ? `at ${item.author.centerName}` : 
+                      item.author.yearsExperience ? `${item.author.yearsExperience} years experience` : undefined
+        };
+      case ActorType.SERVICE_CENTER:
+        return {
+          icon: Building,
+          text: item.author.organizationType ? 
+                `${item.author.organizationType.charAt(0).toUpperCase() + item.author.organizationType.slice(1)} Center` : 
+                'Service Center',
+          bgColor: 'bg-purple-100',
+          textColor: 'text-purple-700',
+          description: item.author.features ? `${item.author.features.length} services` : undefined
+        };
+      default:
+        return {
+          icon: Users,
+          text: 'Community',
+          bgColor: 'bg-gray-100',
+          textColor: 'text-gray-700'
+        };
+    }
+  };
+
+  const actorBadge = getActorBadge();
+
   return (
     <div className={`pt-4 space-y-3 ${className}`}>
       {/* Hashtags Section */}
@@ -99,6 +152,66 @@ export const FeedItemFeedback: React.FC<FeedItemFeedbackProps> = ({
           )}
         </div>
       )}
+
+      {/* Actor Information */}
+      <div className="flex items-center justify-between py-2">
+        <div className="flex items-center space-x-3">
+          {/* Actor Badge */}
+          <div className={`flex items-center space-x-2 px-3 py-1 rounded-full ${actorBadge.bgColor}`}>
+            <actorBadge.icon className={`w-4 h-4 ${actorBadge.textColor}`} />
+            <span className={`text-sm font-medium ${actorBadge.textColor}`}>
+              {actorBadge.text}
+            </span>
+          </div>
+          
+          {/* Additional Info */}
+          {actorBadge.description && (
+            <span className="text-sm text-gray-500">
+              {actorBadge.description}
+            </span>
+          )}
+        </div>
+
+        {/* Credentials/Specializations for Service Providers */}
+        {item.author.actorType === ActorType.SERVICE_PROVIDER && item.author.credentials && (
+          <div className="flex flex-wrap gap-1">
+            {item.author.credentials.slice(0, 2).map((credential, index) => (
+              <span
+                key={index}
+                className={`text-xs px-2 py-1 rounded ${
+                  credential.verified 
+                    ? 'bg-zygo-red/10 text-zygo-red border border-zygo-red/20' 
+                    : 'bg-gray-100 text-gray-600'
+                }`}
+              >
+                {credential.abbreviation || credential.title}
+                {credential.verified && <Award className="w-3 h-3 inline ml-1" />}
+              </span>
+            ))}
+            {item.author.credentials.length > 2 && (
+              <span className="text-xs text-gray-500">
+                +{item.author.credentials.length - 2} more
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Location for Community Members */}
+        {item.author.actorType === ActorType.COMMUNITY_MEMBER && item.author.location && (
+          <div className="flex items-center text-sm text-gray-500">
+            <MapPin className="w-3 h-3 mr-1" />
+            <span>{item.author.location.suburb}, {item.author.location.state}</span>
+          </div>
+        )}
+
+        {/* Organization Type for Service Centers */}
+        {item.author.actorType === ActorType.SERVICE_CENTER && item.author.organizationType && (
+          <div className="flex items-center text-sm text-gray-500">
+            <Building className="w-3 h-3 mr-1" />
+            <span className="capitalize">{item.author.organizationType}</span>
+          </div>
+        )}
+      </div>
 
       {/* Main Feedback Row */}
       <div className="flex items-center justify-between pt-2 border-t border-gray-100">
