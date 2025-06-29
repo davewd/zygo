@@ -3,7 +3,14 @@ import { createContext, useContext, useEffect, useState } from 'react';
 //import { GoogleAuthProvider, signInWithPopup, signOut } from '../services/authService';
 import supabase from '../clients/supabaseClient';
 
-const UserAuthContext = createContext({});
+interface UserAuthContextType {
+  session: any;
+  signUpNewUser: (email: string, password: string) => Promise<any>;
+  signInUser: (email: string, password: string) => Promise<any>;
+  signOutUser: () => Promise<void>;
+}
+
+const UserAuthContext = createContext<UserAuthContextType | undefined>(undefined);
 
 export function UserAuthContextProvider({ children }) {
   const [session, setSession] = useState(undefined);
@@ -65,5 +72,9 @@ export function UserAuthContextProvider({ children }) {
 }
 
 export function UserAuth() {
-  return useContext(UserAuthContext);
+  const context = useContext(UserAuthContext);
+  if (context === undefined) {
+    throw new Error('UserAuth must be used within a UserAuthContextProvider');
+  }
+  return context;
 }
