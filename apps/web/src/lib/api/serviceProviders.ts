@@ -45,7 +45,7 @@ interface Service {
   id: string;
   name: string;
   description: string;
-  category: ServiceCategory;
+  ageGroups?: string[];
   duration?: number;
   price?: {
     amount: number;
@@ -55,7 +55,6 @@ interface Service {
       amount: number;
     };
   };
-  ageGroups?: ('prenatal' | 'newborn' | 'infant' | 'toddler' | 'preschool' | 'child' | 'adolescent' | 'adult')[];
   tags?: string[];
 }
 
@@ -69,7 +68,7 @@ interface ServiceProvider {
   bio: string;
   personalStory?: string;
   credentials: Credential[];
-  services: Service[];
+  services: string[]; // Array of service IDs
   specializations: string[];
   languages: string[];
   yearsExperience: number;
@@ -85,6 +84,7 @@ interface ServiceProvider {
     followUpFee?: number;
     currency: string;
   };
+  centerId?: string; // ID of the service center this provider belongs to
 }
 
 interface ServiceCenter {
@@ -95,158 +95,98 @@ interface ServiceCenter {
   mission?: string;
   location: Location;
   contact: ContactInfo;
-  providers: ServiceProvider[];
+  providers: string[]; // Array of provider IDs
+  operatingHours?: {
+    [day: string]: {
+      open: string;
+      close: string;
+    };
+  };
+  services?: Service[];
 }
 
-// Import all the hardcoded data from data/network files
-import {
-  ACTIVE8_CENTER,
-  EMILY_MCCONAGHY,
-  JAKE_THOMPSON,
-} from '../../data/network/active8KidsCenter';
-import {
-  ELIXR_SWIM_SCHOOL_CENTER,
-  EMMA_RODRIGUEZ,
-  MARCUS_CHEN,
-  SARAH_MITCHELL,
-} from '../../data/network/elixrSwimSchoolCenter';
-import { DR_SHELLEY_ROWLANDS, EMOG_CENTER } from '../../data/network/emogCenter';
-import { FULL_CIRCLE_CENTER, REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
-import {
-  GAVIN_MCCORMACK,
-  GAVIN_MCCORMACK_CENTER
-} from '../../data/network/gavinMccormackCenter';
-import {
-  JAMES_THOMPSON,
-  KICKEROOS_SOCCER_CENTER,
-  MICHAEL_OCONNOR,
-  SOFIA_MARTINEZ,
-} from '../../data/network/kickeroosSoccerCenter';
-import {
-  JESSICA_DAWSON_DIETITIAN,
-  KIDNEY_NUTRITION_CENTER,
-} from '../../data/network/kidneyNutritionCenter';
-import {
-  CAROLINE_MATERNITY_CONSULTANT,
-  MUMMYS_WHISPERS_CENTER,
-} from '../../data/network/mummysWhispersCenter';
-import {
-  ANDREA_DUNNE,
-  DR_JUSTIN_TUCKER,
-  POLLY_DELANEY,
-  PROLOGUE_CENTER,
-} from '../../data/network/prologueCenter';
-import { PETA_CARIGE, START_TRAINING_CENTER } from '../../data/network/startTrainingCenter';
-import {
-  MICHAEL_CHEN_MUSIC,
-  REBECCA_THOMPSON_OUTDOOR,
-  SARAH_MITCHELL_DIRECTOR,
-  ST_MARYS_CHILDCARE_CENTER,
-} from '../../data/network/stMarysChildcareCenter';
-import {
-  DANIELLE_HARMSEN,
-  LUCY_WOOD,
-  STEVE_LOEFFLER,
-  WHITE_CITY_TENNIS_CENTER,
-} from '../../data/network/whiteCityTennisCenter';
-import {
-  DR_ALEXANDRA_THOMPSON,
-  SARAH_DIGITAL_SPECIALIST,
-  ZYGO_APP_CENTER,
-} from '../../data/network/zygoAppCenter';
+// Import providers data from our API data files
+import providersData from './data/providers.json';
+import serviceCentersData from './data/serviceCenters.json';
 
-// Consolidated arrays of all providers and centers
-const ALL_PROVIDERS: ServiceProvider[] = [
-  REBECCA_CAVALLARO,
-  DR_JUSTIN_TUCKER,
-  ANDREA_DUNNE,
-  POLLY_DELANEY,
-  EMILY_MCCONAGHY,
-  JAKE_THOMPSON,
-  STEVE_LOEFFLER,
-  LUCY_WOOD,
-  DANIELLE_HARMSEN,
-  SARAH_MITCHELL,
-  MARCUS_CHEN,
-  EMMA_RODRIGUEZ,
-  JAMES_THOMPSON,
-  SOFIA_MARTINEZ,
-  MICHAEL_OCONNOR,
-  SARAH_MITCHELL_DIRECTOR,
-  REBECCA_THOMPSON_OUTDOOR,
-  MICHAEL_CHEN_MUSIC,
-  CAROLINE_MATERNITY_CONSULTANT,
-  DR_SHELLEY_ROWLANDS,
-  JESSICA_DAWSON_DIETITIAN,
-  PETA_CARIGE,
-  SARAH_DIGITAL_SPECIALIST,
-  DR_ALEXANDRA_THOMPSON,
-  GAVIN_MCCORMACK,
-];
-
-const ALL_CENTERS: ServiceCenter[] = [
-  FULL_CIRCLE_CENTER,
-  PROLOGUE_CENTER,
-  ACTIVE8_CENTER,
-  WHITE_CITY_TENNIS_CENTER,
-  ELIXR_SWIM_SCHOOL_CENTER,
-  KICKEROOS_SOCCER_CENTER,
-  ST_MARYS_CHILDCARE_CENTER,
-  MUMMYS_WHISPERS_CENTER,
-  EMOG_CENTER,
-  KIDNEY_NUTRITION_CENTER,
-  START_TRAINING_CENTER,
-  ZYGO_APP_CENTER,
-  GAVIN_MCCORMACK_CENTER,
-];
+// Mock delay for API simulation
+const API_DELAY = 300;
 
 /**
  * Get all service providers
  */
-export function getAllServiceProviders(): ServiceProvider[] {
-  return ALL_PROVIDERS;
+export async function getAllServiceProviders(): Promise<ServiceProvider[]> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, API_DELAY));
+  
+  return providersData.serviceProviders as ServiceProvider[];
 }
 
 /**
  * Get all service centers
  */
-export function getAllServiceCenters(): ServiceCenter[] {
-  return ALL_CENTERS;
+export async function getAllServiceCenters(): Promise<ServiceCenter[]> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, API_DELAY));
+  
+  return serviceCentersData.serviceCenters as ServiceCenter[];
 }
 
 /**
  * Get a service provider by ID
  */
-export function getServiceProviderById(id: string): ServiceProvider | undefined {
-  return ALL_PROVIDERS.find((provider) => provider.id === id);
+export async function getServiceProviderById(id: string): Promise<ServiceProvider | null> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, API_DELAY));
+  
+  const provider = providersData.serviceProviders.find(
+    provider => provider.id === id
+  ) as ServiceProvider | undefined;
+  
+  return provider || null;
 }
 
 /**
  * Get a service center by ID
  */
-export function getServiceCenterById(id: string): ServiceCenter | undefined {
-  return ALL_CENTERS.find((center) => center.id === id);
+export async function getServiceCenterById(id: string): Promise<ServiceCenter | null> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, API_DELAY));
+  
+  const center = serviceCentersData.serviceCenters.find(
+    center => center.id === id
+  ) as ServiceCenter | undefined;
+  
+  return center || null;
 }
 
 /**
  * Get the center that a provider belongs to
  */
 export function getCenterForProvider(providerId: string): ServiceCenter | undefined {
-  return ALL_CENTERS.find((center) =>
-    center.providers.some((provider) => provider.id === providerId)
-  );
+  // Find the provider first to get their centerId
+  const provider = providersData.serviceProviders.find(p => p.id === providerId);
+  if (!provider || !provider.centerId) {
+    return undefined;
+  }
+  
+  // Find the center by ID
+  const allCenters = serviceCentersData.serviceCenters as ServiceCenter[];
+  return allCenters.find((center) => center.id === provider.centerId);
 }
 
 /**
  * Get all providers for a specific center
  */
-export function getProvidersForCenter(centerId: string): ServiceProvider[] {
-  const center = getServiceCenterById(centerId);
+export async function getProvidersForCenter(centerId: string): Promise<ServiceProvider[]> {
+  const center = await getServiceCenterById(centerId);
   if (!center) return [];
   
-  return center.providers.map((provider) => 
-    getServiceProviderById(provider.id)
-  ).filter((provider): provider is ServiceProvider => provider !== undefined);
+  // Get all providers and filter by centerId
+  const allProviders = await getAllServiceProviders();
+  return allProviders.filter(provider => 
+    provider.centerId === centerId
+  );
 }
 
 /**
@@ -262,8 +202,10 @@ export interface ProviderSearchFilters {
   serviceType?: string;
 }
 
-export function searchServiceProviders(filters: ProviderSearchFilters): ServiceProvider[] {
-  return ALL_PROVIDERS.filter((provider) => {
+export async function searchServiceProviders(filters: ProviderSearchFilters): Promise<ServiceProvider[]> {
+  const allProviders = await getAllServiceProviders();
+  
+  return allProviders.filter((provider) => {
     // Filter by name
     if (filters.name) {
       const fullName = `${provider.firstName} ${provider.lastName}`.toLowerCase();

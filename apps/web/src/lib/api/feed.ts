@@ -30,12 +30,10 @@ export enum ActorType {
   SERVICE_CENTER = 'service_center'
 }
 
-// Import blog posts data
-import { REBECCA_CAVALLARO_BLOG_POSTS } from '../../data/network/blogPosts';
-import { GAVIN_MCCORMACK_BLOG_POSTS } from '../../data/network/gavinMccormackBlogPosts';
-
 // Import feed items data from JSON
-import feedItemsData from '../data/feed/feed_items.json';
+import feedItemsData from './data/feed/feed_items.json';
+// Import blog API for getting provider blog posts
+import { getAllBlogPosts } from './blog';
 
 export enum VisibilityLevel {
   PUBLIC = 'public',
@@ -320,13 +318,17 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
   
   // Add blog posts if not filtered out by source
   if (!filters?.source || filters.source.includes('zygo-blog')) {
-    const rebeccaBlogFeedItems = REBECCA_CAVALLARO_BLOG_POSTS
-      .map(convertBlogPostToFeedItem);
-    
-    const gavinBlogFeedItems = GAVIN_MCCORMACK_BLOG_POSTS
-      .map(convertBlogPostToFeedItem);
-    
-    allItems = [...rebeccaBlogFeedItems, ...gavinBlogFeedItems, ...allItems];
+    try {
+      // Get all blog posts from API
+      const blogResponse = await getAllBlogPosts();
+      const allBlogPosts = blogResponse.blogPosts;
+      
+      const blogFeedItems = allBlogPosts.map(convertBlogPostToFeedItem);
+      allItems = [...blogFeedItems, ...allItems];
+    } catch (error) {
+      console.error('Failed to load blog posts for feed:', error);
+      // Continue without blog posts if API fails
+    }
   }
 
   // Apply filters

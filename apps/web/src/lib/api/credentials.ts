@@ -4,17 +4,35 @@
 import type {
   CredentialCategory,
   CredentialDefinition,
-  CredentialDisplayInfo,
   CredentialProvider,
-  CredentialSearchFilters,
-  CredentialSearchResult,
-  CredentialSummary,
   CredentialType,
-  CredentialVerificationRequest,
   PersonalCredential,
   VerificationStatus
-} from '@zygo/types';
+} from '@zygo/types/src/credentials';
 import supabase from '../../clients/supabaseClient';
+
+// Import JSON data for mock/fallback
+import credentialsData from './data/credentials.json';
+
+// Legacy compatibility exports (TODO: Remove after full migration)
+export const CREDENTIAL_PROVIDERS = credentialsData.credentialProviders;
+export const CREDENTIAL_DEFINITIONS = credentialsData.credentialDefinitions;
+
+// Mock delay for fallback mode
+const mockDelay = (ms: number = 100): Promise<void> => 
+  new Promise(resolve => setTimeout(resolve, ms));
+
+// Fallback function to get credential definition by title
+export async function getCredentialDefinition(title: string): Promise<any> {
+  await mockDelay();
+  
+  const definition = credentialsData.credentialDefinitions.find(d => 
+    d.title.toLowerCase() === title.toLowerCase() ||
+    d.abbreviation.toLowerCase() === title.toLowerCase()
+  );
+  
+  return definition || null;
+}
 
 // Error types
 export class CredentialAPIError extends Error {
