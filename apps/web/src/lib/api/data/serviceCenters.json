@@ -23,29 +23,7 @@
         "bookingUrl": "https://fullcirclemidwifery.com.au/book-now"
       },
       "providers": ["rebecca-cavallaro"],
-      "services": [
-        {
-          "id": "initial-lactation-consultation",
-          "name": "Initial Lactation Consultation",
-          "description": "Comprehensive lactation assessment and personalized feeding plan development.",
-          "category": {
-            "id": "lactation-support",
-            "name": "Lactation Support",
-            "taxonomy": "healthcare"
-          },
-          "duration": 90,
-          "price": {
-            "amount": 230,
-            "currency": "AUD",
-            "rebate": {
-              "provider": "Medicare",
-              "amount": 105.85
-            }
-          },
-          "ageGroups": ["newborn", "infant"],
-          "tags": ["lactation", "breastfeeding", "consultation"]
-        }
-      ],
+      "services": ["initial-lactation-consultation"],
       "operatingHours": {
         "monday": { "open": "09:00", "close": "17:00" },
         "tuesday": { "open": "09:00", "close": "17:00" },
@@ -85,51 +63,7 @@
         "bookingUrl": "https://gavinmccormack.com.au/book-gavin-as-your-next-keynote-speaker"
       },
       "providers": ["gavin-mccormack"],
-      "services": [
-        {
-          "id": "educational-blog",
-          "name": "Educational Blog Content",
-          "description": "Regular blog posts covering child development, progressive education, and practical parenting advice.",
-          "category": {
-            "id": "educational-content",
-            "name": "Educational Content",
-            "taxonomy": "education"
-          },
-          "duration": 0,
-          "price": {
-            "amount": 0,
-            "currency": "AUD"
-          },
-          "ageGroups": [
-            "prenatal",
-            "newborn",
-            "infant",
-            "toddler",
-            "preschool",
-            "child",
-            "adolescent",
-            "adult"
-          ],
-          "tags": ["education", "blog", "free-content", "child-development"]
-        },
-        {
-          "id": "keynote-speaking",
-          "name": "Keynote Speaking Services",
-          "description": "Inspiring keynote presentations on education, child development, and unlocking potential in children.",
-          "category": {
-            "id": "speaking-consultation",
-            "name": "Speaking & Consultation",
-            "taxonomy": "education"
-          },
-          "duration": 90,
-          "price": {
-            "amount": 2500,
-            "currency": "AUD"
-          },
-          "ageGroups": ["adult"],
-          "tags": ["keynote-speaking", "education-consultation", "professional-development"]
-        }
-      ],
+      "services": ["educational-blog", "keynote-speaking"],
       "operatingHours": {
         "monday": { "open": "09:00", "close": "17:00" },
         "tuesday": { "open": "09:00", "close": "17:00" },
@@ -174,29 +108,7 @@
         "bookingUrl": "https://prologue.com.au/appointments"
       },
       "providers": ["dr-justin-tucker"],
-      "services": [
-        {
-          "id": "fertility-consultation",
-          "name": "Fertility Consultation",
-          "description": "Comprehensive fertility assessment and treatment planning.",
-          "category": {
-            "id": "fertility-medicine",
-            "name": "Fertility Medicine",
-            "taxonomy": "healthcare"
-          },
-          "duration": 60,
-          "price": {
-            "amount": 350,
-            "currency": "AUD",
-            "rebate": {
-              "provider": "Medicare",
-              "amount": 105.85
-            }
-          },
-          "ageGroups": ["adult"],
-          "tags": ["fertility", "consultation", "reproductive-health"]
-        }
-      ],
+      "services": ["fertility-consultation"],
       "operatingHours": {
         "monday": { "open": "08:00", "close": "18:00" },
         "tuesday": { "open": "08:00", "close": "18:00" },
@@ -253,147 +165,12 @@
       },
       "providers": ["emily-mcconaghy", "jake-thompson"],
       "services": [
-        {
-          "id": "kindy-gym-classes",
-          "name": "Kindy Gym Classes",
-          "description": "Early movement classes designed for children aged 0-5 years. Focus on fundamental movement skills, balance, coordination, and social interaction through structured play and gymnastics basics.",
-          "category": {
-            "id": "kindy-gym",
-            "name": "Kindy Gym",
-            "description": "Early movement and gymnastics for toddlers and preschoolers",
-            "taxonomy": "activities"
-          },
-          "duration": 45,
-          "price": {
-            "amount": 32,
-            "currency": "AUD"
-          },
-          "ageGroups": ["infant", "toddler", "preschool"],
-          "tags": [
-            "movement",
-            "coordination",
-            "balance",
-            "social-skills",
-            "parent-child",
-            "early-development"
-          ]
-        },
-        {
-          "id": "recreational-gymnastics",
-          "name": "Recreational Gymnastics",
-          "description": "Fun and engaging gymnastics classes for children aged 5-12. Learn basic gymnastics skills on floor, beam, vault, and bars in a supportive environment that builds confidence and physical literacy.",
-          "category": {
-            "id": "recreational-gymnastics",
-            "name": "Recreational Gymnastics",
-            "description": "Fun gymnastics classes for children of all skill levels",
-            "taxonomy": "activities"
-          },
-          "duration": 60,
-          "price": {
-            "amount": 38,
-            "currency": "AUD"
-          },
-          "ageGroups": ["preschool", "child"],
-          "tags": [
-            "gymnastics",
-            "strength",
-            "flexibility",
-            "confidence",
-            "skill-development",
-            "physical-literacy"
-          ]
-        },
-        {
-          "id": "ninja-gym-parkour",
-          "name": "Ninja-Gym-Parkour",
-          "description": "Dynamic classes combining gymnastics, ninja warrior obstacles, and parkour movements. Perfect for children who love adventure and challenge, focusing on agility, strength, and problem-solving.",
-          "category": {
-            "id": "ninja-parkour",
-            "name": "Ninja & Parkour",
-            "description": "Ninja warrior and parkour training for kids",
-            "taxonomy": "activities"
-          },
-          "duration": 60,
-          "price": {
-            "amount": 38,
-            "currency": "AUD"
-          },
-          "ageGroups": ["child", "adolescent"],
-          "tags": [
-            "ninja-warrior",
-            "parkour",
-            "agility",
-            "strength",
-            "problem-solving",
-            "adventure"
-          ]
-        },
-        {
-          "id": "playn-move",
-          "name": "Play'n Move",
-          "description": "Early childhood movement program focusing on fundamental motor skills through play. Designed for children aged 2-4 years to develop gross motor skills, spatial awareness, and confidence.",
-          "category": {
-            "id": "playn-move",
-            "name": "Play'n Move",
-            "description": "Movement and play-based activities for young children",
-            "taxonomy": "activities"
-          },
-          "duration": 45,
-          "price": {
-            "amount": 32,
-            "currency": "AUD"
-          },
-          "ageGroups": ["toddler", "preschool"],
-          "tags": [
-            "motor-skills",
-            "play-based",
-            "spatial-awareness",
-            "confidence",
-            "early-childhood"
-          ]
-        },
-        {
-          "id": "birthday-party-packages",
-          "name": "Birthday Party Packages",
-          "description": "Active birthday party experiences with gymnastics, games, and fun activities. Includes party host, equipment use, and celebration time. Perfect for children aged 3-12.",
-          "category": {
-            "id": "birthday-parties",
-            "name": "Birthday Parties",
-            "description": "Active birthday party experiences with gymnastics and games",
-            "taxonomy": "recreation"
-          },
-          "duration": 90,
-          "price": {
-            "amount": 450,
-            "currency": "AUD"
-          },
-          "ageGroups": ["toddler", "preschool", "child"],
-          "tags": ["birthday-parties", "celebrations", "group-activities", "games", "fun"]
-        },
-        {
-          "id": "holiday-camps",
-          "name": "School Holiday Camps",
-          "description": "Full day or half day holiday camps combining gymnastics, ninja activities, games, and crafts. Designed to keep children active and engaged during school holidays.",
-          "category": {
-            "id": "holiday-camps",
-            "name": "Holiday Camps",
-            "description": "School holiday camps with varied physical activities",
-            "taxonomy": "recreation"
-          },
-          "duration": 360,
-          "price": {
-            "amount": 85,
-            "currency": "AUD"
-          },
-          "ageGroups": ["preschool", "child"],
-          "tags": [
-            "holiday-camps",
-            "school-holidays",
-            "full-day",
-            "varied-activities",
-            "active-play"
-          ]
-        }
+        "kindy-gym-classes",
+        "recreational-gymnastics", 
+        "ninja-gym-parkour",
+        "playn-move",
+        "birthday-party-packages",
+        "holiday-camps"
       ],
       "operatingHours": {
         "monday": { "open": "09:00", "close": "17:00" },
@@ -458,38 +235,7 @@
         "website": "https://www.emog.com.au"
       },
       "providers": [],
-      "services": [
-        {
-          "id": "obstetric-care",
-          "name": "Obstetric Care",
-          "description": "Comprehensive pregnancy and birthing care",
-          "ageGroups": ["prenatal", "adult"],
-          "duration": 30,
-          "price": {
-            "amount": 350,
-            "currency": "AUD",
-            "rebate": {
-              "provider": "Medicare",
-              "amount": 108.75
-            }
-          }
-        },
-        {
-          "id": "gynaecology-consultation",
-          "name": "Gynaecology Consultation",
-          "description": "Specialist women's health and gynaecological care",
-          "ageGroups": ["adult"],
-          "duration": 30,
-          "price": {
-            "amount": 320,
-            "currency": "AUD",
-            "rebate": {
-              "provider": "Medicare",
-              "amount": 108.75
-            }
-          }
-        }
-      ],
+      "services": ["obstetric-care", "gynaecology-consultation"],
       "operatingHours": {
         "monday": { "open": "8:00 AM", "close": "5:00 PM" },
         "tuesday": { "open": "8:00 AM", "close": "5:00 PM" },
@@ -534,19 +280,7 @@
         "website": "https://www.calmbirth.com.au"
       },
       "providers": [],
-      "services": [
-        {
-          "id": "calmbirth-classes",
-          "name": "Calmbirth Classes",
-          "description": "Evidence-based childbirth education program",
-          "ageGroups": ["prenatal", "adult"],
-          "duration": 480,
-          "price": {
-            "amount": 395,
-            "currency": "AUD"
-          }
-        }
-      ],
+      "services": ["calmbirth-course"],
       "operatingHours": {
         "monday": { "open": "9:00 AM", "close": "5:00 PM" },
         "tuesday": { "open": "9:00 AM", "close": "5:00 PM" },
@@ -608,135 +342,12 @@
         "sarah-thompson-calmbirth"
       ],
       "services": [
-        {
-          "id": "calmbirth-course",
-          "name": "Calmbirth® Childbirth Education Course",
-          "description": "Australia's most highly acclaimed childbirth education program. A comprehensive 12-hour face-to-face antenatal program that includes psychological and emotional preparation for childbirth.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "description": "Comprehensive antenatal education programs for expectant parents",
-            "taxonomy": "education"
-          },
-          "duration": 720,
-          "price": {
-            "amount": 395,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": [
-            "childbirth-education",
-            "antenatal",
-            "fear-release",
-            "relaxation",
-            "couples",
-            "weekend-intensive",
-            "mind-body-connection",
-            "birth-preparation"
-          ]
-        },
-        {
-          "id": "calmbirth-refresher",
-          "name": "Calmbirth® Refresher Course",
-          "description": "A condensed refresher course for couples who have previously completed Calmbirth or other childbirth education programs.",
-          "category": {
-            "id": "antenatal-preparation",
-            "name": "Antenatal Preparation",
-            "description": "Psychological and emotional preparation for childbirth",
-            "taxonomy": "education"
-          },
-          "duration": 240,
-          "price": {
-            "amount": 195,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["refresher", "subsequent-pregnancy", "review", "condensed-program"]
-        },
-        {
-          "id": "private-calmbirth-session",
-          "name": "Private Calmbirth® Session",
-          "description": "One-on-one or private group Calmbirth education session tailored to your specific needs, concerns, and birth preferences.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "description": "Comprehensive antenatal education programs for expectant parents",
-            "taxonomy": "education"
-          },
-          "duration": 480,
-          "price": {
-            "amount": 650,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": [
-            "private-session",
-            "personalized",
-            "flexible-scheduling",
-            "one-on-one",
-            "customized"
-          ]
-        },
-        {
-          "id": "birth-partner-workshop",
-          "name": "Birth Partner Support Workshop",
-          "description": "Specialized workshop focusing on the birth partner's role in supporting during labor and birth.",
-          "category": {
-            "id": "antenatal-preparation",
-            "name": "Antenatal Preparation",
-            "description": "Psychological and emotional preparation for childbirth",
-            "taxonomy": "education"
-          },
-          "duration": 180,
-          "price": {
-            "amount": 150,
-            "currency": "AUD"
-          },
-          "ageGroups": ["adult"],
-          "tags": ["birth-partner", "support-techniques", "labor-support", "practical-skills"]
-        },
-        {
-          "id": "fear-release-session",
-          "name": "Fear Release & Relaxation Session",
-          "description": "Focused session on fear release techniques and guided relaxation for birth preparation.",
-          "category": {
-            "id": "fear-release",
-            "name": "Fear Release & Relaxation",
-            "description": "Guided relaxation and fear release techniques for birth preparation",
-            "taxonomy": "therapy"
-          },
-          "duration": 120,
-          "price": {
-            "amount": 120,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": [
-            "fear-release",
-            "anxiety-support",
-            "guided-relaxation",
-            "meditation",
-            "birth-anxiety"
-          ]
-        },
-        {
-          "id": "hospital-program",
-          "name": "Hospital-Based Calmbirth® Program",
-          "description": "Calmbirth program delivered within partner hospitals and birthing centers.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "description": "Comprehensive antenatal education programs for expectant parents",
-            "taxonomy": "education"
-          },
-          "duration": 720,
-          "price": {
-            "amount": 295,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["hospital-based", "integrated-care", "medical-setting", "antenatal-program"]
-        }
+        "calmbirth-course",
+        "calmbirth-refresher", 
+        "private-calmbirth-session",
+        "birth-partner-workshop",
+        "fear-release-session",
+        "hospital-program"
       ],
       "operatingHours": {
         "monday": { "open": "09:00", "close": "17:00" },
@@ -821,25 +432,7 @@
         "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/sydney-north"
       },
       "providers": ["sarah-thompson-calmbirth"],
-      "services": [
-        {
-          "id": "calmbirth-course",
-          "name": "Calmbirth® Childbirth Education Course",
-          "description": "Comprehensive 12-hour weekend intensive program for expectant couples.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "taxonomy": "education"
-          },
-          "duration": 720,
-          "price": {
-            "amount": 395,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["childbirth-education", "weekend-intensive", "couples", "north-shore"]
-        }
-      ],
+      "services": ["calmbirth-course"],
       "operatingHours": {
         "saturday": { "open": "09:00", "close": "17:00" },
         "sunday": { "open": "09:00", "close": "17:00" }
@@ -879,42 +472,7 @@
         "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/melbourne-east"
       },
       "providers": ["sarah-thompson-calmbirth"],
-      "services": [
-        {
-          "id": "calmbirth-course",
-          "name": "Calmbirth® Childbirth Education Course",
-          "description": "Evidence-based childbirth education with mind-body medicine approach.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "taxonomy": "education"
-          },
-          "duration": 720,
-          "price": {
-            "amount": 395,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["childbirth-education", "mind-body", "melbourne-east"]
-        },
-        {
-          "id": "calmbirth-refresher",
-          "name": "Calmbirth® Refresher Course",
-          "description": "Refresher course for subsequent pregnancies.",
-          "category": {
-            "id": "antenatal-preparation",
-            "name": "Antenatal Preparation",
-            "taxonomy": "education"
-          },
-          "duration": 240,
-          "price": {
-            "amount": 195,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["refresher", "subsequent-pregnancy"]
-        }
-      ],
+      "services": ["calmbirth-course", "calmbirth-refresher"],
       "operatingHours": {
         "saturday": { "open": "09:00", "close": "17:00" },
         "sunday": { "open": "09:00", "close": "17:00" }
@@ -953,42 +511,7 @@
         "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/brisbane"
       },
       "providers": ["karen-mcclay-calmbirth"],
-      "services": [
-        {
-          "id": "calmbirth-course",
-          "name": "Calmbirth® Childbirth Education Course",
-          "description": "Comprehensive childbirth education with psychological preparation focus.",
-          "category": {
-            "id": "childbirth-education",
-            "name": "Childbirth Education",
-            "taxonomy": "education"
-          },
-          "duration": 720,
-          "price": {
-            "amount": 395,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["childbirth-education", "psychological-preparation", "brisbane"]
-        },
-        {
-          "id": "fear-release-session",
-          "name": "Fear Release & Relaxation Session",
-          "description": "Specialized sessions for managing birth anxiety and fears.",
-          "category": {
-            "id": "fear-release",
-            "name": "Fear Release & Relaxation",
-            "taxonomy": "therapy"
-          },
-          "duration": 120,
-          "price": {
-            "amount": 120,
-            "currency": "AUD"
-          },
-          "ageGroups": ["prenatal", "adult"],
-          "tags": ["fear-release", "anxiety-support", "relaxation"]
-        }
-      ],
+      "services": ["calmbirth-course", "fear-release-session"],
       "operatingHours": {
         "thursday": { "open": "18:00", "close": "21:00" },
         "saturday": { "open": "09:00", "close": "17:00" },
@@ -1005,6 +528,266 @@
       "certifications": ["Calmbirth Senior Educator", "Queensland Health Approved"],
       "accessibility": ["Public transport accessible", "Wheelchair friendly", "Parking available"],
       "establishedYear": 2010
+    },
+    {
+      "id": "mummys-whispers",
+      "name": "Mummy's Whispers Maternity Care",
+      "description": "Comprehensive maternity care services including in-home consultations, sleep training programs, and professional maternity nurse services.",
+      "overview": "Mummy's Whispers Maternity Care specializes in supporting new families through the transition to parenthood. Our services include personalized in-home consultations, gentle sleep training programs, and professional maternity nurse care to ensure families feel confident and supported.",
+      "location": {
+        "address": "Home-based Services",
+        "suburb": "Sydney Metropolitan",
+        "state": "NSW",
+        "postcode": "2000",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "0430 987 654",
+        "email": "info@mummyswhispers.com.au",
+        "website": "https://mummyswhispers.com.au",
+        "bookingUrl": "https://mummyswhispers.com.au/book-now"
+      },
+      "providers": [],
+      "services": ["in-home-consultation", "14-day-sleep-program-online", "maternity-nurse-service"],
+      "operatingHours": {
+        "monday": { "open": "08:00", "close": "18:00" },
+        "tuesday": { "open": "08:00", "close": "18:00" },
+        "wednesday": { "open": "08:00", "close": "18:00" },
+        "thursday": { "open": "08:00", "close": "18:00" },
+        "friday": { "open": "08:00", "close": "18:00" },
+        "saturday": { "open": "09:00", "close": "15:00" },
+        "sunday": { "open": "09:00", "close": "15:00" }
+      },
+      "features": [
+        "Home Visit Services",
+        "Online Sleep Programs",
+        "24-Hour Nursing Care",
+        "Personalized Family Support",
+        "Newborn Care Specialists"
+      ],
+      "certifications": ["Registered Nurses", "Maternity Care Specialists"],
+      "insurance": ["Professional Indemnity", "Public Liability"],
+      "accessibility": ["Home-based services", "Flexible scheduling"],
+      "establishedYear": 2015
+    },
+    {
+      "id": "st-marys-childcare",
+      "name": "St Mary's Child Care Centre",
+      "description": "Quality early childhood education and care for children aged 2-4 years with specialized programs including music education.",
+      "overview": "St Mary's Child Care Centre provides nurturing care and early learning programs for toddlers and preschool children. Our experienced educators focus on developing independence, social skills, and school readiness through play-based learning and structured activities.",
+      "location": {
+        "address": "123 Mary Street",
+        "suburb": "Paddington",
+        "state": "NSW",
+        "postcode": "2021",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8848,
+          "lng": 151.2273
+        }
+      },
+      "contact": {
+        "phone": "02 9360 1234",
+        "email": "info@stmaryschildcare.com.au",
+        "website": "https://stmaryschildcare.com.au",
+        "bookingUrl": "https://stmaryschildcare.com.au/enroll"
+      },
+      "providers": [],
+      "services": ["joey-room-program", "wombat-room-program", "music-education-program"],
+      "operatingHours": {
+        "monday": { "open": "07:00", "close": "18:00" },
+        "tuesday": { "open": "07:00", "close": "18:00" },
+        "wednesday": { "open": "07:00", "close": "18:00" },
+        "thursday": { "open": "07:00", "close": "18:00" },
+        "friday": { "open": "07:00", "close": "18:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Play-Based Learning",
+        "Qualified Music Educator",
+        "School Readiness Programs",
+        "Indoor and Outdoor Play Areas",
+        "Nutritious Meals Provided"
+      ],
+      "certifications": [
+        "NSW Department of Education Approved",
+        "Early Childhood Australia Member"
+      ],
+      "insurance": ["Public Liability", "Professional Indemnity"],
+      "accessibility": ["Wheelchair Access", "Parking Available", "Public Transport Nearby"],
+      "establishedYear": 1995
+    },
+    {
+      "id": "kambala-school",
+      "name": "Kambala School",
+      "description": "Independent Anglican school for girls from Prep to Year 12, offering comprehensive education with boarding facilities.",
+      "overview": "Kambala School is a prestigious independent Anglican school providing exceptional education for girls from Prep to Year 12. The school combines academic excellence with character development, creative arts, and physical education in a nurturing environment that prepares students for future success.",
+      "location": {
+        "address": "794 New South Head Road",
+        "suburb": "Rose Bay",
+        "state": "NSW",
+        "postcode": "2029",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8743,
+          "lng": 151.2574
+        }
+      },
+      "contact": {
+        "phone": "02 9388 6777",
+        "email": "info@kambala.nsw.edu.au",
+        "website": "https://www.kambala.nsw.edu.au",
+        "bookingUrl": "https://www.kambala.nsw.edu.au/admissions"
+      },
+      "providers": [],
+      "services": ["prep-program", "primary-education", "boarding-program"],
+      "operatingHours": {
+        "monday": { "open": "08:00", "close": "15:30" },
+        "tuesday": { "open": "08:00", "close": "15:30" },
+        "wednesday": { "open": "08:00", "close": "15:30" },
+        "thursday": { "open": "08:00", "close": "15:30" },
+        "friday": { "open": "08:00", "close": "15:30" },
+        "saturday": { "open": "08:00", "close": "12:00" },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Academic Excellence",
+        "Boarding Facilities",
+        "Creative Arts Programs",
+        "Physical Education",
+        "Character Development",
+        "Small Class Sizes",
+        "Experienced Teaching Staff"
+      ],
+      "certifications": [
+        "Independent Schools NSW",
+        "Anglican Schools Commission",
+        "NESA Accredited"
+      ],
+      "insurance": ["Public Liability", "Professional Indemnity", "Student Accident Insurance"],
+      "accessibility": ["Wheelchair Access", "Disability Support Services", "Transport Services"],
+      "establishedYear": 1887
+    },
+    {
+      "id": "kidney-nutrition-center",
+      "name": "Kidney Nutrition",
+      "description": "Specialized renal nutrition services providing expert dietary guidance for kidney health, kidney disease management, and prevention through evidence-based nutrition therapy.",
+      "overview": "Kidney Nutrition specializes in renal dietetics, offering comprehensive nutrition services for people with kidney disease, those at risk of kidney disease, and kidney transplant recipients. Led by Dr. Jessica Dawson, a PhD-qualified Accredited Practicing Dietitian with specialized expertise in renal nutrition.",
+      "location": {
+        "address": "Via Forum Specialists",
+        "suburb": "Sydney",
+        "state": "NSW",
+        "postcode": "2000",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8688,
+          "lng": 151.2093
+        }
+      },
+      "contact": {
+        "phone": "02 9188 2325",
+        "email": "info@kidneynutrition.com.au",
+        "website": "https://kidneynutrition.com.au",
+        "bookingUrl": "https://kidneynutrition.com.au/contact"
+      },
+      "providers": ["jessica-dawson-dietitian"],
+      "services": ["renal-nutrition-consultation", "kidney-disease-prevention", "dialysis-nutrition-support"],
+      "operatingHours": {
+        "monday": { "open": "09:00", "close": "17:00" },
+        "tuesday": { "open": "09:00", "close": "17:00" },
+        "wednesday": { "open": "09:00", "close": "17:00" },
+        "thursday": { "open": "09:00", "close": "17:00" },
+        "friday": { "open": "09:00", "close": "16:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Specialized Renal Nutrition Expertise",
+        "PhD-Qualified Dietitian",
+        "Over 10 Years Renal Nutrition Experience",
+        "Kidney Disease Prevention Programs",
+        "Dialysis Nutrition Support",
+        "Kidney Transplant Nutrition Care",
+        "Telehealth Consultations Available"
+      ],
+      "certifications": [
+        "Accredited Practicing Dietitian (APD)",
+        "Renal Nutrition Specialist",
+        "Medicare Provider",
+        "Dietitians Australia Member"
+      ],
+      "insurance": ["Medicare", "Private Health Insurance"],
+      "accessibility": [
+        "Telehealth Consultations Available",
+        "Flexible Appointment Scheduling",
+        "Phone Consultations",
+        "Email Support Available"
+      ],
+      "establishedYear": 2012
+    },
+    {
+      "id": "start-training-stafford",
+      "name": "Start Training Stafford",
+      "description": "A premium allied health clinic offering high-quality sports nutrition, exercise physiology, physiotherapy, and sports therapy services. Home to advanced sports dietitian Peta Carige and a team of experienced practitioners.",
+      "overview": "Start Training Stafford believes everyone should have access to the same high quality of allied health service delivery irrespective of level of competition or ability. Located at Hickey Park in Stafford, the clinic provides comprehensive sports nutrition and allied health services for athletes and community members.",
+      "location": {
+        "address": "Hickey Park, 35 Babarra Street",
+        "suburb": "Stafford",
+        "state": "QLD",
+        "postcode": "4053",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -27.4038,
+          "lng": 153.0175
+        }
+      },
+      "contact": {
+        "phone": "0428 080 028",
+        "email": "info@starttrainingstafford.com.au",
+        "website": "https://starttrainingstafford.com.au",
+        "bookingUrl": "https://starttrainingstafford.com.au/book-online-now"
+      },
+      "providers": ["peta-carige"],
+      "services": ["sports-nutrition-consultation", "exercise-physiology-assessment", "team-nutrition-program"],
+      "operatingHours": {
+        "monday": { "open": "06:00", "close": "19:00" },
+        "tuesday": { "open": "06:00", "close": "19:00" },
+        "wednesday": { "open": "06:00", "close": "19:00" },
+        "thursday": { "open": "06:00", "close": "19:00" },
+        "friday": { "open": "06:00", "close": "19:00" },
+        "saturday": { "open": "07:00", "close": "16:00" },
+        "sunday": { "open": "08:00", "close": "15:00" }
+      },
+      "features": [
+        "Premium Allied Health Clinic Environment",
+        "Sports Nutrition Specialization",
+        "Exercise Physiology Services",
+        "High-Performance Athlete Support",
+        "Community Wellness Programs",
+        "Evidence-Based Practice Approach",
+        "Extended Operating Hours"
+      ],
+      "certifications": [
+        "Sports Dietitians Australia Member",
+        "Dietitians Australia Member",
+        "Allied Health Professions Australia Member",
+        "Australian Health Practitioner Regulation Agency Registered"
+      ],
+      "insurance": [
+        "Private Health Insurance",
+        "WorkCover Queensland",
+        "DVA (Department of Veterans Affairs)",
+        "Medicare (for eligible services)"
+      ],
+      "accessibility": [
+        "Ground Floor Clinic Access",
+        "Accessible Parking Available",
+        "Wide Entrance and Doorways",
+        "Accessible Bathroom Facilities",
+        "Online Consultations for Remote Access"
+      ],
+      "establishedYear": 2018
     }
   ]
 }

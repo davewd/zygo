@@ -74,6 +74,45 @@
       "tags": ["nipple-care", "pain-management", "trauma-healing"]
     },
     {
+      "id": "in-home-consultation",
+      "name": "In-Home Consultation",
+      "description": "Comprehensive in-home assessment and consultation covering all aspects of newborn care, sleep routines, feeding support, and family transition guidance.",
+      "categoryId": "newborn-care",
+      "duration": 120,
+      "price": {
+        "amount": 325,
+        "currency": "AUD"
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["newborn-care", "family-transition", "personalized-care", "home-visit"]
+    },
+    {
+      "id": "14-day-sleep-program-online",
+      "name": "14 Days of Sleep Training Program (Online)",
+      "description": "Comprehensive online sleep training program using gentle methods, tailored specifically to your child's needs.",
+      "categoryId": "sleep-training",
+      "duration": 2016,
+      "price": {
+        "amount": 1495,
+        "currency": "AUD"
+      },
+      "ageGroups": ["newborn", "infant", "toddler"],
+      "tags": ["sleep-training", "gentle-methods", "online-support", "personalized-program"]
+    },
+    {
+      "id": "maternity-nurse-service",
+      "name": "Maternity Nurse Service",
+      "description": "Professional maternity nurse care including 24-hour support, newborn care, feeding assistance, and family support.",
+      "categoryId": "newborn-care",
+      "duration": 1440,
+      "price": {
+        "amount": 280,
+        "currency": "AUD"
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["24-hour-care", "professional-nurse", "feeding-support", "newborn-care"]
+    },
+    {
       "id": "fertility-consultation",
       "name": "Fertility Consultation",
       "description": "Comprehensive fertility assessment and treatment planning",
@@ -150,6 +189,177 @@
       },
       "ageGroups": ["preschool", "school-age"],
       "tags": ["learning", "support", "intervention"]
+    },
+    {
+      "id": "joey-room-program",
+      "name": "Joey Room (2-3 years)",
+      "description": "Nurturing care and early learning program for toddlers aged 2-3 years. Focus on developing independence, social skills, and language through play-based learning.",
+      "categoryId": "early-childhood-education",
+      "duration": 600,
+      "price": {
+        "amount": 180,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler"],
+      "tags": ["toddler-care", "play-based-learning", "social-skills", "early-education"]
+    },
+    {
+      "id": "wombat-room-program",
+      "name": "Wombat Room (3-4 years)",
+      "description": "Pre-kindergarten program focusing on school readiness, language development, and social-emotional learning through structured activities.",
+      "categoryId": "early-childhood-education",
+      "duration": 600,
+      "price": {
+        "amount": 175,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool"],
+      "tags": ["pre-kindergarten", "school-readiness", "language-development", "structured-learning"]
+    },
+    {
+      "id": "music-education-program",
+      "name": "Music Education Program",
+      "description": "Specialized music and creative arts program led by qualified music educator, developing musical skills and creativity.",
+      "categoryId": "creative-arts",
+      "duration": 45,
+      "price": {
+        "amount": 35,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool"],
+      "tags": ["music-education", "creative-arts", "qualified-educator", "skill-development"]
+    },
+    {
+      "id": "prep-program",
+      "name": "Preparatory Program",
+      "description": "Foundation learning program for the youngest students, focusing on literacy, numeracy, and social development in a nurturing environment.",
+      "categoryId": "preparatory-education",
+      "duration": 360,
+      "price": {
+        "amount": 0,
+        "currency": "AUD",
+        "note": "School fees handled separately"
+      },
+      "ageGroups": ["preschool"],
+      "tags": ["foundation-learning", "literacy", "numeracy", "social-development"]
+    },
+    {
+      "id": "primary-education",
+      "name": "Primary Education (Years 1-6)",
+      "description": "Comprehensive primary education combining academic excellence with character development, creative arts, and physical education.",
+      "categoryId": "primary-education",
+      "duration": 360,
+      "price": {
+        "amount": 0,
+        "currency": "AUD",
+        "note": "School fees handled separately"
+      },
+      "ageGroups": ["child"],
+      "tags": ["primary-education", "academic-excellence", "character-development", "holistic-learning"]
+    },
+    {
+      "id": "boarding-program",
+      "name": "Boarding Program",
+      "description": "Comprehensive boarding program providing a home away from home with pastoral care, academic support, and life skills development.",
+      "categoryId": "boarding-education",
+      "duration": 1440,
+      "price": {
+        "amount": 0,
+        "currency": "AUD",
+        "note": "Boarding fees handled separately"
+      },
+      "ageGroups": ["child", "adolescent"],
+      "tags": ["boarding", "pastoral-care", "academic-support", "life-skills"]
+    },
+    {
+      "id": "renal-nutrition-consultation",
+      "name": "Renal Nutrition Consultation",
+      "description": "Comprehensive renal nutrition assessment and personalized dietary planning for kidney health management.",
+      "categoryId": "nutrition-counseling",
+      "duration": 60,
+      "price": {
+        "amount": 180,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 87.45
+        }
+      },
+      "ageGroups": ["adult", "senior"],
+      "tags": ["kidney-health", "nutrition", "dietary-planning", "chronic-disease"]
+    },
+    {
+      "id": "kidney-disease-prevention",
+      "name": "Kidney Disease Prevention Program",
+      "description": "Preventive nutrition education and dietary strategies to reduce kidney disease risk factors.",
+      "categoryId": "nutrition-counseling",
+      "duration": 45,
+      "price": {
+        "amount": 150,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult", "senior"],
+      "tags": ["prevention", "education", "lifestyle-modification", "risk-reduction"]
+    },
+    {
+      "id": "dialysis-nutrition-support",
+      "name": "Dialysis Nutrition Support",
+      "description": "Specialized nutrition guidance for patients undergoing dialysis treatment to optimize nutritional status.",
+      "categoryId": "nutrition-counseling",
+      "duration": 60,
+      "price": {
+        "amount": 180,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 87.45
+        }
+      },
+      "ageGroups": ["adult", "senior"],
+      "tags": ["dialysis", "nutrition-optimization", "medical-nutrition-therapy"]
+    },
+    {
+      "id": "sports-nutrition-consultation",
+      "name": "Sports Nutrition Consultation",
+      "description": "Comprehensive sports nutrition assessment and performance optimization strategies for athletes and active individuals.",
+      "categoryId": "nutrition-counseling",
+      "duration": 60,
+      "price": {
+        "amount": 180,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adolescent", "adult"],
+      "tags": ["sports-nutrition", "performance", "athlete-support", "nutrition-planning"]
+    },
+    {
+      "id": "exercise-physiology-assessment",
+      "name": "Exercise Physiology Assessment",
+      "description": "Comprehensive movement and exercise assessment with personalized exercise prescription for optimal performance and injury prevention.",
+      "categoryId": "allied-health",
+      "duration": 75,
+      "price": {
+        "amount": 150,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Private Health Insurance",
+          "amount": 75
+        }
+      },
+      "ageGroups": ["adolescent", "adult", "senior"],
+      "tags": ["exercise-assessment", "injury-prevention", "movement-analysis", "performance-optimization"]
+    },
+    {
+      "id": "team-nutrition-program",
+      "name": "Team Nutrition Program",
+      "description": "Comprehensive nutrition education and support programs designed for sports teams and athletic groups.",
+      "categoryId": "nutrition-counseling",
+      "duration": 120,
+      "price": {
+        "amount": 350,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adolescent", "adult"],
+      "tags": ["team-nutrition", "group-education", "sports-teams", "nutrition-workshops"]
     },
     {
       "id": "kindy-gym-classes",
@@ -373,11 +583,145 @@
       },
       "ageGroups": ["toddler", "preschool"],
       "tags": ["gymnastics", "motor-skills", "confidence-building", "physical-development"]
+    },
+    {
+      "id": "educational-blog",
+      "name": "Educational Blog Content",
+      "description": "Regular blog posts covering child development, progressive education, and practical parenting advice.",
+      "categoryId": "educational-content",
+      "duration": 0,
+      "price": {
+        "amount": 0,
+        "currency": "AUD"
+      },
+      "ageGroups": [
+        "prenatal",
+        "newborn",
+        "infant",
+        "toddler",
+        "preschool",
+        "child",
+        "adolescent",
+        "adult"
+      ],
+      "tags": ["education", "blog", "free-content", "child-development"]
+    },
+    {
+      "id": "keynote-speaking",
+      "name": "Keynote Speaking Services",
+      "description": "Inspiring keynote presentations on education, child development, and unlocking potential in children.",
+      "categoryId": "speaking-consultation",
+      "duration": 90,
+      "price": {
+        "amount": 2500,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["keynote-speaking", "education-consultation", "professional-development"]
+    },
+    {
+      "id": "recreational-gymnastics",
+      "name": "Recreational Gymnastics",
+      "description": "Fun and engaging gymnastics classes for children aged 5-12. Learn basic gymnastics skills on floor, beam, vault, and bars in a supportive environment that builds confidence and physical literacy.",
+      "categoryId": "recreational-gymnastics",
+      "duration": 60,
+      "price": {
+        "amount": 38,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool", "child"],
+      "tags": ["gymnastics", "strength", "flexibility", "confidence", "skill-development", "physical-literacy"]
+    },
+    {
+      "id": "ninja-gym-parkour",
+      "name": "Ninja-Gym-Parkour",
+      "description": "Dynamic classes combining gymnastics, ninja warrior obstacles, and parkour movements. Perfect for children who love adventure and challenge, focusing on agility, strength, and problem-solving.",
+      "categoryId": "ninja-parkour",
+      "duration": 60,
+      "price": {
+        "amount": 38,
+        "currency": "AUD"
+      },
+      "ageGroups": ["child", "adolescent"],
+      "tags": ["ninja-warrior", "parkour", "agility", "strength", "problem-solving", "adventure"]
+    },
+    {
+      "id": "playn-move",
+      "name": "Play'n Move",
+      "description": "Early childhood movement program focusing on fundamental motor skills through play. Designed for children aged 2-4 years to develop gross motor skills, spatial awareness, and confidence.",
+      "categoryId": "playn-move",
+      "duration": 45,
+      "price": {
+        "amount": 32,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool"],
+      "tags": ["motor-skills", "play-based", "spatial-awareness", "confidence", "early-childhood"]
+    },
+    {
+      "id": "birthday-party-packages",
+      "name": "Birthday Party Packages",
+      "description": "Active birthday party experiences with gymnastics, games, and fun activities. Includes party host, equipment use, and celebration time. Perfect for children aged 3-12.",
+      "categoryId": "birthday-parties",
+      "duration": 90,
+      "price": {
+        "amount": 450,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool", "child"],
+      "tags": ["birthday-parties", "celebrations", "group-activities", "games", "fun"]
+    },
+    {
+      "id": "holiday-camps",
+      "name": "School Holiday Camps",
+      "description": "Full day or half day holiday camps combining gymnastics, ninja activities, games, and crafts. Designed to keep children active and engaged during school holidays.",
+      "categoryId": "holiday-camps",
+      "duration": 360,
+      "price": {
+        "amount": 85,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool", "child"],
+      "tags": ["holiday-camps", "school-holidays", "full-day", "varied-activities", "active-play"]
+    },
+    {
+      "id": "obstetric-care",
+      "name": "Obstetric Care",
+      "description": "Comprehensive pregnancy and birthing care",
+      "categoryId": "obstetric-care",
+      "duration": 30,
+      "price": {
+        "amount": 350,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 108.75
+        }
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": ["pregnancy", "birthing", "prenatal-care", "obstetrics"]
+    },
+    {
+      "id": "gynaecology-consultation",
+      "name": "Gynaecology Consultation",
+      "description": "Specialist women's health and gynaecological care",
+      "categoryId": "gynaecology",
+      "duration": 30,
+      "price": {
+        "amount": 320,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 108.75
+        }
+      },
+      "ageGroups": ["adult"],
+      "tags": ["womens-health", "gynaecology", "specialist-care", "consultation"]
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalServices": 28,
+    "totalServices": 52,
     "dataSource": "mock-api"
   }
 }
