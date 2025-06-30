@@ -13,7 +13,6 @@ import CredentialVerify from './pages/credentials/CredentialVerify';
 import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/Landing';
-import Library from './pages/library/Library';
 import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
 import ServiceNetworkProviderDetail from './pages/network/ServiceNetworkProviderDetail';
 import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
@@ -43,7 +42,16 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/community/centers/:id', element: <ServiceCenterDetail />, errorElement: <Error /> },
-
+      {
+        path: '/community/network-providers',
+        element: <ServiceNetworkProviders />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/community/network-providers/:id',
+        element: <ServiceNetworkProviderDetail />,
+        errorElement: <Error />,
+      },
       // Credentials routes
       { path: '/credentials', element: <CredentialsHub />, errorElement: <Error /> },
       { path: '/credentials/providers', element: <CredentialProviders />, errorElement: <Error /> },
@@ -54,30 +62,6 @@ export const routes = createBrowserRouter([
       },
       { path: '/credentials/verify', element: <CredentialVerify />, errorElement: <Error /> },
       { path: '/credentials/search', element: <CredentialSearch />, errorElement: <Error /> },
-
-      // Legacy network routes - redirect to community
-      { path: '/network', element: <CommunityHub />, errorElement: <Error /> },
-      { path: '/network/services', element: <CommunityHub />, errorElement: <Error /> },
-      { path: '/network/centers', element: <CommunityHub />, errorElement: <Error /> },
-      { path: '/network/centers/:id', element: <ServiceCenterDetail />, errorElement: <Error /> },
-      { path: '/network/providers', element: <CommunityProviders />, errorElement: <Error /> },
-      {
-        path: '/network/providers/:id',
-        element: <ServiceProviderDetail />,
-        errorElement: <Error />,
-      },
-      {
-        path: '/network/network-providers',
-        element: <ServiceNetworkProviders />,
-        errorElement: <Error />,
-      },
-      {
-        path: '/network/network-providers/:id',
-        element: <ServiceNetworkProviderDetail />,
-        errorElement: <Error />,
-      },
-
-      { path: '/library', element: <Library />, errorElement: <Error /> },
 
       { path: '/tools', element: <Tools />, errorElement: <Error /> },
       {
