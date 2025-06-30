@@ -8,7 +8,8 @@
     "author": {
       "name": "Family Calendar",
       "handle": "family_events",
-      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "event",
     "post": "Attend Child's assembly to watch @Lily get an award",
@@ -123,7 +124,8 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "breastfeeding_reminder",
     "post": "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
@@ -147,7 +149,8 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "library_book_reminder",
     "post": "You have 2 library books due in 3 days: 'The Very Hungry Caterpillar' and 'Where the Wild Things Are'. Remember to return them on time!",
@@ -253,7 +256,8 @@
       "name": "Jessica Stevenson",
       "handle": "jessica_stevenson",
       "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-      "verified": true
+      "verified": true,
+      "actorType": "service_provider"
     },
     "type": "post",
     "post": "<div><p>🥗 <strong>Eating for Healthy Kidneys</strong> 🥗</p><p>Your kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is <em>really important</em> to keep your kidneys healthy!</p><h3>Key principles for kidney-healthy eating:</h3><ul><li>🧂 <strong>Watch your sodium</strong> - aim for less than 2,300mg per day</li><li>🥤 <strong>Stay hydrated</strong> - drink plenty of water throughout the day</li><li>🫘 <strong>Choose quality protein</strong> - lean meats, fish, eggs, and plant proteins</li><li>🍎 <strong>Eat plenty of fruits and vegetables</strong> - they're rich in antioxidants</li><li>🌾 <strong>Opt for whole grains</strong> - better for blood sugar control</li><li>❤️ <strong>Heart-healthy = kidney-healthy</strong> - what's good for your heart helps your kidneys too!</li></ul><p>Remember: <strong>prevention is always better than treatment</strong>. Small dietary changes today can make a huge difference for your kidney health in the long run.</p><p>💡 <em>If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.</em></p><p>#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare</p></div>",
@@ -278,7 +282,8 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "avatar": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "tool_cta_temporal",
     "post": "Make this summer unforgettable with activities tailored to your family's interests. Connect with friends, discover new experiences, and create lasting memories.",
@@ -324,7 +329,8 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "breastfeeding_reminder",
     "post": "It's been about 3 hours since your last feeding session. Your little one might be getting ready for another feed soon!",
@@ -348,7 +354,8 @@
     "author": {
       "name": "Zygo",
       "handle": "zygo_app",
-      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=center",
+      "actorType": "system"
     },
     "type": "library_book_reminder",
     "post": "You have 2 library books due in 3 days: 'The Very Hungry Caterpillar' and 'Where the Wild Things Are'. Remember to return them on time!",
@@ -372,7 +379,8 @@
     "author": {
       "name": "Mike Johnson",
       "handle": "mike_dad",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member"
     },
     "type": "post",
     "post": "Here's an example of something i care about !",
@@ -396,7 +404,8 @@
     "author": {
       "name": "Sarah Johnson",
       "handle": "sarah_mama",
-      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member"
     },
     "type": "milestone",
     "post": "And Just Like That First Steps ✨",
@@ -425,7 +434,8 @@
     "author": {
       "name": "Jessica Davis",
       "handle": "jessica_mama2",
-      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member"
     },
     "type": "link",
     "description": "A data scientist with a knack for turning data into actionable insights.",
@@ -455,7 +465,8 @@
     "author": {
       "name": "Mary Wilson",
       "handle": "mary_nana",
-      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member"
     },
     "type": "link",
     "description": "An experienced product manager with a focus on user-centered design.",
@@ -480,7 +491,8 @@
     "author": {
       "name": "Kambala School",
       "handle": "kambala_school",
-      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&h=150&fit=crop&crop=center"
+      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&h=150&fit=crop&crop=center",
+      "actorType": "organization"
     },
     "type": "sponsored",
     "post": "Discover where tradition meets innovation. At Kambala, we empower young women to become confident, creative, and compassionate leaders. Our holistic approach to education nurtures academic excellence, creativity, and character development in a supportive community environment.",
@@ -513,7 +525,8 @@
     "author": {
       "name": "Emma Wilson",
       "handle": "emma_mom2",
-      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member"
     },
     "type": "breastfeeding_daily_summary",
     "post": "Tracking my feeding sessions today from 7am to 7am. Some longer sessions this morning but overall feeling good about our routine! 🤱",

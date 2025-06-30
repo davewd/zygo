@@ -206,6 +206,59 @@
         "currency": "AUD"
       },
       "centerId": "active8-center"
+    },
+    {
+      "id": "gavin-mccormack",
+      "firstName": "Gavin",
+      "lastName": "McCormack",
+      "title": "Educational Psychologist, PhD",
+      "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=400&fit=crop",
+      "bio": "Gavin is an Educational Psychologist specializing in child development and learning with a PhD in Educational Psychology.",
+      "personalStory": "With over 15 years in educational psychology, I focus on supporting children's developmental milestones and helping parents understand their child's unique learning journey.",
+      "credentials": [
+        {
+          "title": "Doctor of Philosophy in Educational Psychology",
+          "abbreviation": "PhD",
+          "issuingBody": "University of Sydney",
+          "year": 2005,
+          "verified": true
+        },
+        {
+          "title": "Educational Psychologist",
+          "abbreviation": "EP",
+          "issuingBody": "Australian Psychological Society",
+          "year": 2008,
+          "verified": true
+        }
+      ],
+      "services": [
+        "child-development-assessment",
+        "educational-consultation",
+        "learning-support"
+      ],
+      "specializations": [
+        "Child Development",
+        "Educational Psychology",
+        "Learning Difficulties",
+        "Behavioral Support",
+        "Developmental Milestones"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 19,
+      "approach": "Evidence-based developmental support focused on understanding each child's unique learning profile and helping families navigate developmental challenges.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": true,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 180,
+        "followUpFee": 160,
+        "currency": "AUD"
+      },
+      "centerId": "full-circle-center"
     }
   ],
   "serviceCenters": [
