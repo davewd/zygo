@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ProviderCard, type ProviderCardData } from '../../components/providers';
 import { getAllServiceProviders } from '../../lib/api/serviceProviders';
 
 // Define the service provider type from the API
@@ -215,103 +216,33 @@ const CommunityProviders = () => {
             viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'
           }`}
         >
-          {filteredProviders.map((provider) => (
-            <div
-              key={provider.id}
-              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              {/* Provider Image */}
-              <div className="h-48 bg-gradient-to-br from-zygo-blue to-zygo-mint relative">
-                {provider.profileImage && (
-                  <img
-                    src={provider.profileImage}
-                    alt={`${provider.firstName} ${provider.lastName}`}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-white text-xl font-bold mb-1">
-                    {provider.firstName} {provider.lastName}
-                  </h3>
-                  {provider.title && <p className="text-white/90 text-sm">{provider.title}</p>}
-                </div>
-              </div>
+          {filteredProviders.map((provider) => {
+            // Transform the provider data to match ProviderCardData interface
+            const providerCardData: ProviderCardData = {
+              id: provider.id,
+              firstName: provider.firstName,
+              lastName: provider.lastName,
+              title: provider.title,
+              profileImage: provider.profileImage,
+              bio: provider.bio,
+              credentials: provider.credentials,
+              specializations: provider.specializations,
+              yearsExperience: provider.yearsExperience,
+              availability: provider.availability,
+            };
 
-              {/* Provider Content */}
-              <div className="p-6">
-                {/* Credentials */}
-                {provider.credentials.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {provider.credentials.slice(0, 2).map((credential, index) => (
-                      <span
-                        key={index}
-                        className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {credential.abbreviation || credential.title}
-                      </span>
-                    ))}
-                    {provider.credentials.length > 2 && (
-                      <span className="text-gray-500 text-xs">
-                        +{provider.credentials.length - 2} more
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                {/* Specializations */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {provider.specializations.slice(0, 3).map((specialization) => (
-                    <span
-                      key={specialization}
-                      className="bg-zygo-red/10 text-zygo-red px-3 py-1 rounded-full text-sm font-medium"
-                    >
-                      {specialization}
-                    </span>
-                  ))}
-                  {provider.specializations.length > 3 && (
-                    <span className="text-gray-500 text-sm">
-                      +{provider.specializations.length - 3} more
-                    </span>
-                  )}
-                </div>
-
-                {/* Bio */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{provider.bio}</p>
-
-                {/* Experience */}
-                <p className="text-gray-500 text-xs mb-4">
-                  ⭐ {provider.yearsExperience} years experience
-                </p>
-
-                {/* Availability */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {provider.availability.inPerson && (
-                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                      In-Person
-                    </span>
-                  )}
-                  {provider.availability.telehealth && (
-                    <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
-                      Telehealth
-                    </span>
-                  )}
-                  {provider.availability.homeVisits && (
-                    <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">
-                      Home Visits
-                    </span>
-                  )}
-                </div>
-
-                {/* View Profile Button */}
-                <Link
-                  to={`/community/providers/${provider.id}`}
-                  className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-3 rounded-lg transition-colors font-medium"
-                >
-                  View Profile
-                </Link>
-              </div>
-            </div>
-          ))}
+            return (
+              <ProviderCard
+                key={provider.id}
+                provider={providerCardData}
+                variant="default"
+                showBio={true}
+                showExperience={true}
+                showAvailability={true}
+                showConnectionInfo={false}
+              />
+            );
+          })}
         </div>
 
         {/* Empty State */}
