@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { FeedListItemSponsored } from '../../../src/components/feed/generic/FeedListItemSponsored';
-import { FeedItemType, FeedItemTypeMap } from '../../../src/lib/api/feed';
+import { MemoryRouter } from 'react-router-dom';
+import { FeedListItemSponsored } from '../FeedListItemSponsored';
+import { FeedItemType, FeedItemTypeMap, ActorType, VisibilityLevel } from '../../../../lib/api/feed';
 
 // Mock window.open
 const mockWindowOpen = jest.fn();
@@ -22,6 +23,7 @@ describe('FeedListItemSponsored', () => {
       handle: 'kambala_school',
       avatar: 'https://example.com/kambala-avatar.jpg',
       verified: true,
+      actorType: ActorType.SERVICE_CENTER,
     },
     metadata: {
       createdAt: '2023-10-03T10:00:00Z',
@@ -34,7 +36,7 @@ describe('FeedListItemSponsored', () => {
       likes: 42,
     },
     privacy: {
-      visibility: 'public',
+      visibility: VisibilityLevel.PUBLIC,
       sharedWith: [],
     },
     sponsoredData: {
@@ -51,11 +53,15 @@ describe('FeedListItemSponsored', () => {
   });
 
   it('renders sponsored content correctly', () => {
-    render(<FeedListItemSponsored item={mockSponsoredItem} />);
+    render(
+      <MemoryRouter>
+        <FeedListItemSponsored item={mockSponsoredItem} />
+      </MemoryRouter>
+    );
 
     // Check that sponsored indicator is present
-    expect(screen.getByText('SPONSORED')).toBeInTheDocument();
-    expect(screen.getByText('by Kambala School')).toBeInTheDocument();
+    expect(screen.getByText('• Sponsored')).toBeInTheDocument();
+    expect(screen.getByText('Kambala School')).toBeInTheDocument();
 
     // Check content
     expect(screen.getByText('Excellence in Education at Kambala')).toBeInTheDocument();
@@ -66,7 +72,11 @@ describe('FeedListItemSponsored', () => {
   });
 
   it('opens Kambala URL when CTA button is clicked', () => {
-    render(<FeedListItemSponsored item={mockSponsoredItem} />);
+    render(
+      <MemoryRouter>
+        <FeedListItemSponsored item={mockSponsoredItem} />
+      </MemoryRouter>
+    );
 
     const ctaButton = screen.getByText('Learn More');
     fireEvent.click(ctaButton);
@@ -84,7 +94,11 @@ describe('FeedListItemSponsored', () => {
       sponsoredData: undefined,
     };
 
-    render(<FeedListItemSponsored item={itemWithoutSponsoredData} />);
+    render(
+      <MemoryRouter>
+        <FeedListItemSponsored item={itemWithoutSponsoredData} />
+      </MemoryRouter>
+    );
 
     // Should still render content but without sponsored-specific elements
     expect(screen.getByText('Excellence in Education at Kambala')).toBeInTheDocument();
@@ -92,12 +106,17 @@ describe('FeedListItemSponsored', () => {
   });
 
   it('applies medium gray styling to sponsored text', () => {
-    render(<FeedListItemSponsored item={mockSponsoredItem} />);
+    render(
+      <MemoryRouter>
+        <FeedListItemSponsored item={mockSponsoredItem} />
+      </MemoryRouter>
+    );
 
-    const sponsoredText = screen.getByText('SPONSORED');
-    expect(sponsoredText).toHaveClass('text-gray-500');
+    const sponsoredText = screen.getByText('• Sponsored');
+    expect(sponsoredText).toHaveClass('text-gray-400');
 
-    const advertiserText = screen.getByText('by Kambala School');
-    expect(advertiserText).toHaveClass('text-gray-500');
+    // Check that the handle has gray styling - the @ and handle are in the same span
+    const handleText = screen.getByText('@kambala_school');
+    expect(handleText).toHaveClass('text-gray-500');
   });
 });

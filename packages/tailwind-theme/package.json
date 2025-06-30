@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules"
+    "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules",
+    "test": "jest --passWithNoTests"
   },
   "exports": {
     "./zygo_theme.css": "./zygo_theme.css"

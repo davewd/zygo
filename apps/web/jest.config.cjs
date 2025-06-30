@@ -1,8 +1,6 @@
-import type { Config } from 'jest';
-
-const config: Config = {
+const config = {
   // Display name for this package
-  displayName: 'apps/web', // Replace with actual package name
+  displayName: 'apps/web',
 
   // Root directory for this package
   rootDir: '.',
@@ -11,7 +9,7 @@ const config: Config = {
   preset: 'ts-jest',
   
   // Test environment
-  testEnvironment: 'node', // Use 'jsdom' for React/browser code
+  testEnvironment: 'jsdom',
 
   // TypeScript configuration
   transform: {
@@ -44,14 +42,14 @@ const config: Config = {
   ],
 
   // Module name mapping for absolute imports
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@workspace/(.*)$': '<rootDir>/../$1/src'
   },
 
   // Setup files
   setupFilesAfterEnv: [
-    '<rootDir>/src/test-setup.ts' // Optional: create if needed
+    '<rootDir>/src/test-setup.ts'
   ],
 
   // Clear mocks between tests
@@ -61,4 +59,4 @@ const config: Config = {
   restoreMocks: true
 };
 
-export default config;
+module.exports = config;

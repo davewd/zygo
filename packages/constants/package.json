@@ -10,7 +10,8 @@
     "clean": "rimraf dist tsconfig[ 0-9]+.tsbuildinfo .turbo node_modules",
     "typecheck": "tsc --noEmit",
     "build": "tsup && tsc --emitDeclarationOnly",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@zygo/typescript-config": "workspace:*"

@@ -1,10 +1,8 @@
-import type { Config } from 'jest';
-
-const config: Config = {
+const config = {
   // Use projects to define multiple Jest configurations for different packages
   projects: [
-    '<rootDir>/packages/*/jest.config.ts',
-    '<rootDir>/apps/*/jest.config.ts'
+    '<rootDir>/packages/*/jest.config.cjs',
+    '<rootDir>/apps/*/jest.config.cjs'
   ],
 
   // Collect coverage from all packages
@@ -54,7 +52,7 @@ const config: Config = {
   ],
 
   // Module paths for workspace packages
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@workspace/(.*)$': '<rootDir>/packages/$1/src'
   },
 
@@ -63,10 +61,6 @@ const config: Config = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
   ],
-
-  // Global setup and teardown
-  // globalSetup: '<rootDir>/jest.global-setup.ts',
-  // globalTeardown: '<rootDir>/jest.global-teardown.ts',
 
   // Max workers for parallel execution
   maxWorkers: '50%',
@@ -81,4 +75,4 @@ const config: Config = {
   restoreMocks: true
 };
 
-export default config;
+module.exports = config;
