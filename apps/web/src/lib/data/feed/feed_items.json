@@ -1,53 +1,5 @@
 [
   {
-    "id": "feed-1",
-    "title": "Eating for Healthy Kidneys",
-    "metadata": {
-      "createdAt": "2024-12-19T14:30:00Z",
-      "source": "web",
-      "sourceUrl": "https://kidneynutrition.com.au/f/eating-for-healthy-kidneys"
-    },
-    "author": {
-      "name": "Jessica Stevenson",
-      "handle": "jessica_stevenson",
-      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-      "verified": true,
-      "actorType": "service_provider",
-      "title": "Advanced Sports Dietitian, APD",
-      "credentials": [
-        {
-          "title": "Advanced Sports Dietitian",
-          "abbreviation": "APD",
-          "issuingBody": "Sports Dietitians Australia",
-          "verified": true
-        },
-        {
-          "title": "Registered Nutritionist",
-          "abbreviation": "RN",
-          "issuingBody": "Nutrition Society",
-          "verified": true
-        }
-      ],
-      "yearsExperience": 8,
-      "specializations": ["sports nutrition", "kidney health", "performance nutrition"],
-      "centerName": "Kidney Nutrition Centre",
-      "centerId": "kidney-nutrition-center"
-    },
-    "type": "post",
-    "post": "🥗 Eating for Healthy Kidneys 🥗\n\nYour kidneys are vital organs that help detoxify your body, control blood pressure, make red blood cells, keep bones healthy, and maintain chemical balance. A healthy diet is really important to keep your kidneys healthy!\n\nKey principles for kidney-healthy eating:\n• 🧂 Watch your sodium - aim for less than 2,300mg per day\n• 🥤 Stay hydrated - drink plenty of water throughout the day\n• 🫘 Choose quality protein - lean meats, fish, eggs, and plant proteins\n• 🍎 Eat plenty of fruits and vegetables - they're rich in antioxidants\n• 🌾 Opt for whole grains - better for blood sugar control\n• ❤️ Heart-healthy = kidney-healthy - what's good for your heart helps your kidneys too!\n\nRemember: prevention is always better than treatment. Small dietary changes today can make a huge difference for your kidney health in the long run.\n\n💡 If you have kidney disease or are at risk, always consult with a qualified renal dietitian for personalized advice.\n\n#KidneyHealth #HealthyEating #NutritionTips #PreventiveCare",
-    "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "stats": {
-      "likes": 24,
-      "shares": 8,
-      "comments": 12,
-      "reposts": 3
-    },
-    "privacy": {
-      "visibility": "public",
-      "sharedWith": []
-    }
-  },
-  {
     "id": "feed-2",
     "title": "Child's Assembly Award Ceremony",
     "metadata": {

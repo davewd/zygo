@@ -1,0 +1,108 @@
+{
+  "blogPosts": [
+    {
+      "id": "jaundice-breastfeeding",
+      "title": "Jaundice & Breastfeeding",
+      "excerpt": "Jaundice is the most common diagnosis in full-term infants during the immediate post-natal period, occurring in approximately 60 percent",
+      "content": "Jaundice is the most common diagnosis in full-term infants during the immediate post-natal period, occurring in approximately 60 percent of all babies. Here, we will explore the effects of jaundice on breastfeeding and offer practical tips for parents struggling to breastfeed a jaundice baby.",
+      "imageUrl": "/images/blog/jaundice-breastfeeding.jpg",
+      "authorId": "rebecca-cavallaro",
+      "publishDate": "2024-01-15T09:00:00Z",
+      "tags": ["breastfeeding", "jaundice", "newborn", "lactation", "support"],
+      "hasReferences": true,
+      "peerLikes": {
+        "count": 12,
+        "likedBy": [
+          {
+            "providerId": "dr-justin-tucker",
+            "providerName": "Dr. Justin Tucker",
+            "credentials": ["Psychologist"],
+            "specializations": ["Child Psychology", "Family Therapy"],
+            "dateLiked": "2024-01-16T10:30:00Z"
+          }
+        ]
+      },
+      "readingTime": 5
+    },
+    {
+      "id": "establishing-milk-supply",
+      "title": "Establishing Your Milk Supply: The First Two Weeks",
+      "excerpt": "The first two weeks after birth are crucial for establishing a strong milk supply. Here's what you need to know.",
+      "content": "The first two weeks after birth are crucial for establishing a strong milk supply. During this time, your body is learning to produce milk based on your baby's needs.",
+      "imageUrl": "/images/blog/milk-supply.jpg",
+      "authorId": "rebecca-cavallaro",
+      "publishDate": "2024-01-10T08:00:00Z",
+      "tags": ["breastfeeding", "milk-supply", "postpartum", "newborn"],
+      "hasReferences": true,
+      "peerLikes": {
+        "count": 8,
+        "likedBy": []
+      },
+      "readingTime": 7
+    },
+    {
+      "id": "tongue-tie-assessment",
+      "title": "Understanding Tongue Tie: When to Seek Assessment",
+      "excerpt": "Tongue tie can significantly impact breastfeeding. Learn the signs and when to seek professional assessment.",
+      "content": "Tongue tie, or ankyloglossia, occurs when the strip of skin connecting the baby's tongue to the floor of their mouth is shorter than usual. This can affect breastfeeding in various ways.",
+      "imageUrl": "/images/blog/tongue-tie.jpg",
+      "authorId": "rebecca-cavallaro",
+      "publishDate": "2024-01-05T09:30:00Z",
+      "tags": ["tongue-tie", "breastfeeding", "assessment", "newborn"],
+      "hasReferences": true,
+      "peerLikes": {
+        "count": 15,
+        "likedBy": []
+      },
+      "readingTime": 6
+    },
+    {
+      "id": "child-development-milestones",
+      "title": "Understanding Child Development Milestones",
+      "excerpt": "A comprehensive guide to child development milestones and when to seek professional support.",
+      "content": "Child development follows predictable patterns, but every child develops at their own pace. Understanding milestones helps parents know what to expect and when to seek support.",
+      "imageUrl": "/images/blog/development-milestones.jpg",
+      "authorId": "gavin-mccormack",
+      "publishDate": "2024-01-20T10:00:00Z",
+      "tags": ["child-development", "milestones", "parenting", "psychology"],
+      "hasReferences": true,
+      "peerLikes": {
+        "count": 20,
+        "likedBy": []
+      },
+      "readingTime": 8
+    },
+    {
+      "id": "managing-toddler-behavior",
+      "title": "Positive Strategies for Managing Toddler Behavior",
+      "excerpt": "Evidence-based strategies for understanding and managing challenging toddler behaviors.",
+      "content": "Toddler behavior can be challenging for parents. Understanding the developmental reasons behind these behaviors and implementing positive strategies can help create a more harmonious home environment.",
+      "imageUrl": "/images/blog/toddler-behavior.jpg",
+      "authorId": "gavin-mccormack",
+      "publishDate": "2024-01-12T11:00:00Z",
+      "tags": ["toddler", "behavior", "parenting", "child-psychology"],
+      "hasReferences": true,
+      "peerLikes": {
+        "count": 18,
+        "likedBy": []
+      },
+      "readingTime": 10
+    }
+  ],
+  "authors": [
+    {
+      "id": "rebecca-cavallaro",
+      "name": "Rebecca Cavallaro",
+      "credentials": ["IBCLC", "Registered Midwife"],
+      "specializations": ["Lactation Consulting", "Maternal Health"],
+      "bio": "Rebecca is an International Board Certified Lactation Consultant and Registered Midwife with over 10 years of experience supporting families."
+    },
+    {
+      "id": "gavin-mccormack",
+      "name": "Gavin McCormack",
+      "credentials": ["Educational Psychologist", "PhD"],
+      "specializations": ["Child Development", "Educational Psychology"],
+      "bio": "Gavin is an Educational Psychologist specializing in child development and learning."
+    }
+  ]
+}

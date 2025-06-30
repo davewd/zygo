@@ -1,0 +1,328 @@
+{
+  "serviceCenters": [
+    {
+      "id": "active8-center",
+      "name": "Active 8 Kids",
+      "description": "Gymnastics, movement, and recreational activities for children from infants to teenagers",
+      "overview": "Active 8 Kids provides fun, safe, and educational gymnastics and movement programs for children of all ages and abilities. Our experienced coaches create a nurturing environment where children can develop fundamental movement skills, build confidence, and make friends.",
+      "mission": "To inspire children to lead active, healthy lifestyles through the joy of movement and gymnastics.",
+      "location": {
+        "address": "123 Recreation Drive",
+        "suburb": "Canberra",
+        "state": "ACT",
+        "postcode": "2600",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "(02) 6241 0200",
+        "email": "info@active8kids.com.au",
+        "website": "https://www.active8kids.com.au"
+      },
+      "providers": [],
+      "operatingHours": {
+        "monday": { "open": "9:00 AM", "close": "8:00 PM" },
+        "tuesday": { "open": "9:00 AM", "close": "8:00 PM" },
+        "wednesday": { "open": "9:00 AM", "close": "8:00 PM" },
+        "thursday": { "open": "9:00 AM", "close": "8:00 PM" },
+        "friday": { "open": "9:00 AM", "close": "8:00 PM" },
+        "saturday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "sunday": { "open": "8:00 AM", "close": "5:00 PM" }
+      },
+      "services": [
+        {
+          "id": "kindy-gym-classes",
+          "name": "Kindy Gym Classes",
+          "description": "Early movement classes designed for children aged 0-5 years",
+          "ageGroups": ["infant", "toddler", "preschooler"],
+          "duration": 45,
+          "price": {
+            "amount": 25,
+            "currency": "AUD"
+          }
+        },
+        {
+          "id": "recreational-gymnastics",
+          "name": "Recreational Gymnastics",
+          "description": "Fun gymnastics classes for children of all skill levels",
+          "ageGroups": ["preschooler", "primary", "secondary"],
+          "duration": 60,
+          "price": {
+            "amount": 30,
+            "currency": "AUD"
+          }
+        },
+        {
+          "id": "ninja-parkour",
+          "name": "Ninja & Parkour",
+          "description": "Ninja warrior and parkour training for kids",
+          "ageGroups": ["primary", "secondary"],
+          "duration": 60,
+          "price": {
+            "amount": 35,
+            "currency": "AUD"
+          }
+        }
+      ],
+      "features": ["gymnastics", "movement", "recreation", "kids", "fitness", "birthday-parties", "holiday-camps"],
+      "certifications": ["Gymnastics Australia", "First Aid Certified"],
+      "insurance": ["Public Liability", "Professional Indemnity"],
+      "accessibility": ["Wheelchair accessible", "Sensory-friendly programs"],
+      "images": ["/images/active8-facility.jpg", "/images/active8-classes.jpg"],
+      "establishedYear": 2010,
+      "culturalConsiderations": "Inclusive programs for children of all abilities and backgrounds"
+    },
+    {
+      "id": "full-circle-center",
+      "name": "Full Circle Maternity Services",
+      "description": "Comprehensive maternity and lactation support services",
+      "overview": "Full Circle Maternity Services provides expert lactation consultation, antenatal education, and comprehensive support for families throughout their breastfeeding journey. Our certified consultants offer personalized care in clinic, home, or online settings.",
+      "mission": "To support families in achieving their breastfeeding goals through evidence-based care and compassionate support.",
+      "location": {
+        "address": "456 Health Avenue",
+        "suburb": "Canberra",
+        "state": "ACT",
+        "postcode": "2601",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "(02) 6123 4567",
+        "email": "info@fullcirclematernity.com.au",
+        "website": "https://www.fullcirclematernity.com.au"
+      },
+      "providers": [],
+      "operatingHours": {
+        "monday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "tuesday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "wednesday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "thursday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "friday": { "open": "8:00 AM", "close": "6:00 PM" },
+        "saturday": { "open": "9:00 AM", "close": "1:00 PM" },
+        "sunday": { "closed": true }
+      },
+      "services": [
+        {
+          "id": "initial-lactation-consultation",
+          "name": "Initial Lactation Consultation",
+          "description": "Comprehensive lactation assessment and care plan",
+          "ageGroups": ["prenatal", "newborn", "infant"],
+          "duration": 90,
+          "price": {
+            "amount": 230,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 105.85
+            }
+          }
+        },
+        {
+          "id": "antenatal-consultation",
+          "name": "Before Birth Consultation",
+          "description": "Preparation for breastfeeding success before baby arrives",
+          "ageGroups": ["prenatal"],
+          "duration": 105,
+          "price": {
+            "amount": 230,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 107.95
+            }
+          }
+        }
+      ],
+      "features": ["lactation-support", "home-visits", "online-consultations", "antenatal-education", "medicare-rebates"],
+      "certifications": ["IBCLC - International Board Certified Lactation Consultant", "Registered Midwife"],
+      "insurance": ["Medicare Provider", "Private Health Insurance"],
+      "accessibility": ["Home visits available", "Online consultations", "Multilingual support"],
+      "images": ["/images/fullcircle-clinic.jpg", "/images/fullcircle-consultation.jpg"],
+      "establishedYear": 2015,
+      "culturalConsiderations": "Culturally sensitive care for diverse families, multilingual support available"
+    },
+    {
+      "id": "prologue-center",
+      "name": "Prologue Psychology & Wellness",
+      "description": "Comprehensive psychology and wellness services for children and families",
+      "overview": "Prologue Psychology & Wellness provides evidence-based psychological services for children, adolescents, and families. Our team of registered psychologists specializes in developmental, behavioral, and emotional support.",
+      "mission": "To support families in building resilience, wellbeing, and positive relationships through professional psychological care.",
+      "location": {
+        "address": "789 Wellness Street",
+        "suburb": "Canberra",
+        "state": "ACT",
+        "postcode": "2602",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "(02) 6234 5678",
+        "email": "info@prologuepsychology.com.au",
+        "website": "https://www.prologuepsychology.com.au"
+      },
+      "providers": [],
+      "operatingHours": {
+        "monday": { "open": "8:30 AM", "close": "5:30 PM" },
+        "tuesday": { "open": "8:30 AM", "close": "5:30 PM" },
+        "wednesday": { "open": "8:30 AM", "close": "5:30 PM" },
+        "thursday": { "open": "8:30 AM", "close": "5:30 PM" },
+        "friday": { "open": "8:30 AM", "close": "5:30 PM" },
+        "saturday": { "open": "By appointment", "close": "By appointment" },
+        "sunday": { "closed": true }
+      },
+      "services": [
+        {
+          "id": "child-psychology",
+          "name": "Child Psychology Services",
+          "description": "Professional psychology services for children and adolescents",
+          "ageGroups": ["toddler", "preschooler", "primary", "secondary"],
+          "duration": 60,
+          "price": {
+            "amount": 180,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 93.35
+            }
+          }
+        },
+        {
+          "id": "family-therapy",
+          "name": "Family Therapy",
+          "description": "Family-focused therapeutic interventions and support",
+          "ageGroups": ["toddler", "preschooler", "primary", "secondary", "adult"],
+          "duration": 75,
+          "price": {
+            "amount": 220,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 93.35
+            }
+          }
+        }
+      ],
+      "features": ["psychology", "therapy", "mental-health", "family-support", "assessment", "intervention"],
+      "certifications": ["Australian Health Practitioner Regulation Agency (AHPRA)", "Psychology Board of Australia"],
+      "insurance": ["Medicare Provider", "Private Health Insurance", "Department of Veterans' Affairs"],
+      "accessibility": ["Wheelchair accessible", "Easy parking", "Sensory-friendly spaces"],
+      "images": ["/images/prologue-clinic.jpg", "/images/prologue-therapy-room.jpg"],
+      "establishedYear": 2018,
+      "culturalConsiderations": "Culturally responsive practice, trauma-informed care, LGBTI+ affirming"
+    },
+    {
+      "id": "emog-center",
+      "name": "EMOG - East Melbourne Obstetrics & Gynaecology",
+      "description": "Specialist obstetrics and gynaecology services",
+      "overview": "EMOG provides comprehensive specialist obstetric and gynaecological care with a team of experienced specialists committed to women's health throughout all life stages.",
+      "mission": "To provide exceptional specialist care for women in a compassionate, professional environment.",
+      "location": {
+        "address": "100 Victoria Parade",
+        "suburb": "East Melbourne",
+        "state": "VIC",
+        "postcode": "3002",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "(03) 9417 6372",
+        "email": "info@emog.com.au",
+        "website": "https://www.emog.com.au"
+      },
+      "providers": [],
+      "services": [
+        {
+          "id": "obstetric-care",
+          "name": "Obstetric Care",
+          "description": "Comprehensive pregnancy and birthing care",
+          "ageGroups": ["prenatal", "adult"],
+          "duration": 30,
+          "price": {
+            "amount": 350,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 108.75
+            }
+          }
+        },
+        {
+          "id": "gynaecology-consultation",
+          "name": "Gynaecology Consultation",
+          "description": "Specialist women's health and gynaecological care",
+          "ageGroups": ["adult"],
+          "duration": 30,
+          "price": {
+            "amount": 320,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 108.75
+            }
+          }
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "8:00 AM", "close": "5:00 PM" },
+        "tuesday": { "open": "8:00 AM", "close": "5:00 PM" },
+        "wednesday": { "open": "8:00 AM", "close": "5:00 PM" },
+        "thursday": { "open": "8:00 AM", "close": "5:00 PM" },
+        "friday": { "open": "8:00 AM", "close": "5:00 PM" },
+        "saturday": { "open": "Emergency only", "close": "Emergency only" },
+        "sunday": { "open": "Emergency only", "close": "Emergency only" }
+      },
+      "features": ["obstetrics", "gynaecology", "pregnancy-care", "women-health", "specialist-care"],
+      "certifications": ["Royal Australian and New Zealand College of Obstetricians and Gynaecologists (RANZCOG)"],
+      "insurance": ["Medicare Provider", "Private Health Insurance"],
+      "accessibility": ["Wheelchair accessible", "Public transport access"],
+      "images": ["/images/emog-clinic.jpg", "/images/emog-consultation.jpg"],
+      "establishedYear": 1995,
+      "culturalConsiderations": "Multilingual support available, culturally sensitive care"
+    },
+    {
+      "id": "calmbirth-center",
+      "name": "Calmbirth Center",
+      "description": "Childbirth education and preparation classes",
+      "overview": "Calmbirth provides evidence-based childbirth education programs designed to help expectant parents prepare for a positive birth experience with practical skills and knowledge.",
+      "mission": "To empower families with knowledge and confidence for a positive birth experience.",
+      "location": {
+        "address": "321 Birth Preparation Lane",
+        "suburb": "Canberra",
+        "state": "ACT",
+        "postcode": "2603",
+        "country": "Australia"
+      },
+      "contact": {
+        "phone": "(02) 6345 6789",
+        "email": "info@calmbirth.com.au",
+        "website": "https://www.calmbirth.com.au"
+      },
+      "providers": [],
+      "services": [
+        {
+          "id": "calmbirth-classes",
+          "name": "Calmbirth Classes",
+          "description": "Evidence-based childbirth education program",
+          "ageGroups": ["prenatal", "adult"],
+          "duration": 480,
+          "price": {
+            "amount": 395,
+            "currency": "AUD"
+          }
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "9:00 AM", "close": "5:00 PM" },
+        "tuesday": { "open": "9:00 AM", "close": "5:00 PM" },
+        "wednesday": { "open": "9:00 AM", "close": "5:00 PM" },
+        "thursday": { "open": "9:00 AM", "close": "5:00 PM" },
+        "friday": { "open": "9:00 AM", "close": "5:00 PM" },
+        "saturday": { "open": "9:00 AM", "close": "3:00 PM" },
+        "sunday": { "closed": true }
+      },
+      "features": ["childbirth-education", "birth-preparation", "antenatal-classes", "evidence-based"],
+      "certifications": ["Calmbirth Accredited Educators", "Australian Doula College"],
+      "insurance": ["Some private health rebates available"],
+      "accessibility": ["Wheelchair accessible", "Partner-friendly facilities"],
+      "images": ["/images/calmbirth-classroom.jpg", "/images/calmbirth-materials.jpg"],
+      "establishedYear": 2008,
+      "culturalConsiderations": "Inclusive education for all family types, culturally responsive teaching"
+    }
+  ]
+}

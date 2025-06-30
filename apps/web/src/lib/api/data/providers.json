@@ -1,0 +1,352 @@
+{
+  "serviceProviders": [
+    {
+      "id": "rebecca-cavallaro",
+      "firstName": "Rebecca",
+      "lastName": "Cavallaro",
+      "title": "IBCLC, Midwife, RN",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=400&fit=crop",
+      "bio": "Rebecca is an International Board Certified Lactation Consultant (IBCLC) and registered midwife with over 12 years of experience in maternal and newborn care.",
+      "personalStory": "As a mother of three myself, I understand the unique challenges and joys of the breastfeeding journey. My passion lies in providing evidence-based, compassionate care to help families achieve their feeding goals.",
+      "credentials": [
+        {
+          "title": "International Board Certified Lactation Consultant",
+          "abbreviation": "IBCLC",
+          "issuingBody": "International Board of Lactation Consultant Examiners",
+          "year": 2012,
+          "verified": true,
+          "credentialDefinitionId": "ibclc-2023",
+          "personalCredentialId": "rc-ibclc-001",
+          "expiryDate": "2027-07-31",
+          "verificationReference": "IBLCE-456789"
+        },
+        {
+          "title": "Registered Midwife",
+          "abbreviation": "RM",
+          "issuingBody": "Nursing and Midwifery Board of Australia",
+          "year": 2010,
+          "verified": true,
+          "credentialDefinitionId": "rm-australia-2023",
+          "personalCredentialId": "rc-rm-001"
+        },
+        {
+          "title": "Registered Nurse",
+          "abbreviation": "RN",
+          "issuingBody": "Nursing and Midwifery Board of Australia",
+          "year": 2008,
+          "verified": true,
+          "credentialDefinitionId": "rn-australia-2023",
+          "personalCredentialId": "rc-rn-001"
+        }
+      ],
+      "services": [
+        "initial-lactation-consultation",
+        "follow-up-lactation-consultation",
+        "before-birth-consultation",
+        "essential-knowledge-preparation",
+        "nipple-care-specialist-consultation"
+      ],
+      "specializations": [
+        "Lactation Support",
+        "Breastfeeding Difficulties",
+        "Milk Supply Issues",
+        "Positioning and Attachment",
+        "Mastitis Management",
+        "Tongue-tie Assessment",
+        "Premature Baby Feeding",
+        "Exclusive Expressing",
+        "Weaning Support",
+        "Antenatal Preparation"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 16,
+      "approach": "Evidence-based practice combined with compassionate, individualized care. I believe every family's journey is unique, and I'm committed to providing support that aligns with your personal goals and values.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": true,
+        "homeVisits": true,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 230,
+        "followUpFee": 210,
+        "currency": "AUD"
+      },
+      "centerId": "full-circle-center"
+    },
+    {
+      "id": "dr-justin-tucker",
+      "firstName": "Justin",
+      "lastName": "Tucker",
+      "title": "Dr., Obstetrician & Fertility Specialist",
+      "profileImage": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=400&fit=crop",
+      "bio": "Dr. Justin Tucker is a leading obstetrician and fertility specialist with over 15 years of experience helping families achieve their dreams of parenthood.",
+      "personalStory": "My journey in reproductive medicine began with a deep desire to help couples navigate the complex path to parenthood. I'm committed to providing cutting-edge treatments with a personal touch.",
+      "credentials": [
+        {
+          "title": "Fellow of the Royal Australian and New Zealand College of Obstetricians and Gynaecologists",
+          "abbreviation": "FRANZCOG",
+          "issuingBody": "RANZCOG",
+          "year": 2015,
+          "verified": true
+        },
+        {
+          "title": "Certificate in Reproductive Endocrinology and Infertility",
+          "abbreviation": "CREI",
+          "issuingBody": "RANZCOG",
+          "year": 2016,
+          "verified": true
+        },
+        {
+          "title": "Bachelor of Medicine, Bachelor of Surgery",
+          "abbreviation": "MBBS",
+          "issuingBody": "University of Sydney",
+          "year": 2005,
+          "verified": true
+        }
+      ],
+      "services": [
+        "fertility-consultation",
+        "ivf-treatment",
+        "pregnancy-care",
+        "reproductive-surgery",
+        "fertility-preservation"
+      ],
+      "specializations": [
+        "Fertility Treatment",
+        "IVF",
+        "ICSI",
+        "Egg Freezing",
+        "Male Fertility",
+        "Recurrent Pregnancy Loss",
+        "Endometriosis",
+        "PCOS",
+        "High-Risk Pregnancy",
+        "Reproductive Surgery"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 19,
+      "approach": "Personalized, evidence-based fertility care with a focus on emotional support throughout the journey. I believe in treating the whole person, not just the condition.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": true,
+        "homeVisits": false,
+        "emergency": true
+      },
+      "pricing": {
+        "consultationFee": 350,
+        "followUpFee": 200,
+        "currency": "AUD"
+      },
+      "centerId": "prologue-center"
+    },
+    {
+      "id": "emily-mcconaghy",
+      "firstName": "Emily",
+      "lastName": "McConaghy",
+      "title": "Lead Gymnastics Coach & Child Development Specialist",
+      "profileImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=400&fit=crop",
+      "bio": "Emily is a passionate gymnastics coach with a specialized focus on early childhood development through movement and play.",
+      "personalStory": "Having worked with children for over 8 years, I've seen firsthand how movement and physical activity can transform a child's confidence and development. Every child has their own unique potential.",
+      "credentials": [
+        {
+          "title": "Certificate IV in Fitness",
+          "abbreviation": "Cert IV Fitness",
+          "issuingBody": "Australian Institute of Fitness",
+          "year": 2018,
+          "verified": true
+        },
+        {
+          "title": "Gymnastics Australia Level 2 Coach",
+          "abbreviation": "GA L2",
+          "issuingBody": "Gymnastics Australia",
+          "year": 2017,
+          "verified": true
+        },
+        {
+          "title": "First Aid Certificate",
+          "abbreviation": "First Aid",
+          "issuingBody": "Red Cross Australia",
+          "year": 2023,
+          "verified": true,
+          "expiryDate": "2026-03-15"
+        }
+      ],
+      "services": [
+        "pre-school-gymnastics",
+        "toddler-tumbling",
+        "movement-development",
+        "birthday-parties",
+        "school-holiday-programs"
+      ],
+      "specializations": [
+        "Early Childhood Development",
+        "Motor Skills Development",
+        "Gymnastics Fundamentals",
+        "Confidence Building",
+        "Sensory Integration",
+        "Group Classes",
+        "Individual Support",
+        "Parent-Child Programs"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 8,
+      "approach": "Play-based learning that focuses on building confidence, coordination, and social skills in a safe, supportive environment. Every child progresses at their own pace.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": false,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 35,
+        "currency": "AUD"
+      },
+      "centerId": "active8-center"
+    }
+  ],
+  "serviceCenters": [
+    {
+      "id": "full-circle-center",
+      "name": "Full Circle Midwifery & Lactation",
+      "description": "Comprehensive midwifery and lactation support services",
+      "overview": "Full Circle Midwifery & Lactation provides holistic care for families throughout the childbearing journey, from preconception through the postpartum period.",
+      "mission": "To provide evidence-based, compassionate care that empowers families to achieve their birthing and feeding goals.",
+      "location": {
+        "address": "123 Family Way",
+        "suburb": "Paddington",
+        "state": "NSW",
+        "postcode": "2021",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8886,
+          "lng": 151.2073
+        }
+      },
+      "contact": {
+        "phone": "+61 2 9999 0001",
+        "email": "hello@fullcirclemidwifery.com.au",
+        "website": "https://fullcirclemidwifery.com.au",
+        "bookingUrl": "https://fullcirclemidwifery.com.au/book"
+      },
+      "providers": ["rebecca-cavallaro"],
+      "services": [
+        "initial-lactation-consultation",
+        "follow-up-lactation-consultation",
+        "before-birth-consultation",
+        "essential-knowledge-preparation",
+        "nipple-care-specialist-consultation"
+      ],
+      "operatingHours": {
+        "monday": { "open": "09:00", "close": "17:00" },
+        "tuesday": { "open": "09:00", "close": "17:00" },
+        "wednesday": { "open": "09:00", "close": "17:00" },
+        "thursday": { "open": "09:00", "close": "17:00" },
+        "friday": { "open": "09:00", "close": "17:00" },
+        "saturday": { "open": "09:00", "close": "13:00" },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Home Visits Available",
+        "Telehealth Consultations",
+        "Medicare Rebates",
+        "Multilingual Support",
+        "Evidence-Based Practice",
+        "Family-Centered Care"
+      ],
+      "certifications": [
+        "IBCLC Certified",
+        "Registered Midwife",
+        "Australian Health Practitioner Regulation Agency"
+      ],
+      "insurance": ["Professional Indemnity", "Public Liability"],
+      "accessibility": ["Wheelchair Access", "Baby-Friendly Facilities", "Parking Available"],
+      "images": [
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop"
+      ],
+      "establishedYear": 2015,
+      "culturalConsiderations": "Full Circle Midwifery welcomes families from all cultural backgrounds and provides culturally sensitive care that respects diverse birthing and parenting traditions."
+    }
+  ],
+  "serviceCategories": [
+    {
+      "id": "lactation-support",
+      "name": "Lactation Support",
+      "description": "Professional breastfeeding support and consultation",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "antenatal-care",
+      "name": "Antenatal Care",
+      "description": "Pregnancy and pre-birth preparation and support",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "fertility-treatment",
+      "name": "Fertility Treatment",
+      "description": "Reproductive health and fertility services",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "child-development",
+      "name": "Child Development",
+      "description": "Programs supporting physical and cognitive development",
+      "taxonomy": "education"
+    }
+  ],
+  "services": [
+    {
+      "id": "initial-lactation-consultation",
+      "name": "Initial Lactation Consultation",
+      "description": "Comprehensive assessment and support for breastfeeding challenges",
+      "categoryId": "lactation-support",
+      "duration": 90,
+      "price": {
+        "amount": 230,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 105.85
+        }
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["breastfeeding", "latching", "milk-supply", "positioning", "mastitis", "tongue-tie"]
+    },
+    {
+      "id": "fertility-consultation",
+      "name": "Fertility Consultation",
+      "description": "Comprehensive fertility assessment and treatment planning",
+      "categoryId": "fertility-treatment",
+      "duration": 60,
+      "price": {
+        "amount": 350,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["fertility", "IVF", "pregnancy-planning", "reproductive-health"]
+    },
+    {
+      "id": "pre-school-gymnastics",
+      "name": "Pre-School Gymnastics",
+      "description": "Age-appropriate gymnastics classes for toddlers and preschoolers",
+      "categoryId": "child-development",
+      "duration": 45,
+      "price": {
+        "amount": 35,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool"],
+      "tags": ["gymnastics", "motor-skills", "confidence-building", "physical-development"]
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2024-12-30T00:00:00Z",
+    "totalProviders": 3,
+    "totalCenters": 1,
+    "dataSource": "mock-api"
+  }
+}
