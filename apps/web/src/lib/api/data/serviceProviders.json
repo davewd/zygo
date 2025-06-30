@@ -14,6 +14,7 @@
           "title": "International Board Certified Lactation Consultant",
           "abbreviation": "IBCLC",
           "issuingBody": "International Board of Lactation Consultant Examiners",
+          "issuingProviderId": "iblce",
           "year": 2012,
           "verified": true,
           "credentialDefinitionId": "ibclc-2023",
@@ -25,6 +26,7 @@
           "title": "Registered Midwife",
           "abbreviation": "RM",
           "issuingBody": "Nursing and Midwifery Board of Australia",
+          "issuingProviderId": "ahpra",
           "year": 2010,
           "verified": true,
           "credentialDefinitionId": "rm-australia-2023",
@@ -34,6 +36,7 @@
           "title": "Registered Nurse",
           "abbreviation": "RN",
           "issuingBody": "Nursing and Midwifery Board of Australia",
+          "issuingProviderId": "ahpra",
           "year": 2008,
           "verified": true,
           "credentialDefinitionId": "rn-australia-2023",
@@ -86,6 +89,7 @@
       "personalStory": "My journey in reproductive medicine began with a deep desire to help couples navigate the complex path to parenthood. I'm committed to providing cutting-edge treatments with a personal touch.",
       "credentials": [
         {
+          "issuingProviderId": "ranzcog",
           "title": "Fellow of the Royal Australian and New Zealand College of Obstetricians and Gynaecologists",
           "abbreviation": "FRANZCOG",
           "issuingBody": "RANZCOG",
@@ -96,6 +100,7 @@
           "title": "Certificate in Reproductive Endocrinology and Infertility",
           "abbreviation": "CREI",
           "issuingBody": "RANZCOG",
+          "issuingProviderId": "ranzcog",
           "year": 2016,
           "verified": true
         },
@@ -103,6 +108,7 @@
           "title": "Bachelor of Medicine, Bachelor of Surgery",
           "abbreviation": "MBBS",
           "issuingBody": "University of Sydney",
+          "issuingProviderId": "usyd",
           "year": 2005,
           "verified": true
         }
@@ -156,6 +162,7 @@
           "title": "Doctor of Philosophy in Educational Psychology",
           "abbreviation": "PhD",
           "issuingBody": "University of Sydney",
+          "issuingProviderId": "usyd",
           "year": 2005,
           "verified": true
         },
@@ -205,6 +212,7 @@
           "title": "Gymnastics Australia Level 2 Coaching Certification",
           "abbreviation": "GA L2",
           "issuingBody": "Gymnastics Australia",
+          "issuingProviderId": "gymnastics-australia",
           "year": 2020,
           "verified": true,
           "credentialDefinitionId": "ga-level2-2023",
@@ -264,6 +272,7 @@
           "title": "Parkour Australia Instructor Certification",
           "abbreviation": "PA Instructor",
           "issuingBody": "Parkour Australia",
+          "issuingProviderId": "parkour-australia",
           "year": 2021,
           "verified": true,
           "credentialDefinitionId": "pa-instructor-2023",
@@ -323,18 +332,21 @@
           "title": "Registered Midwife",
           "abbreviation": "RM",
           "issuingBody": "Australian Health Practitioner Regulation Agency",
+          "issuingProviderId": "ahpra",
           "verified": true
         },
         {
           "title": "Bachelor of Health Science (Midwifery)",
           "abbreviation": "BHSc",
           "issuingBody": "University of Technology Sydney",
+          "issuingProviderId": "uts",
           "verified": true
         },
         {
           "title": "Calmbirth® Program Developer",
           "abbreviation": "Founder",
           "issuingBody": "Calmbirth® Australia",
+          "issuingProviderId": "calmbirth-australia",
           "verified": true
         },
         {
@@ -400,6 +412,7 @@
           "title": "Calmbirth® Director Certification",
           "abbreviation": "Director",
           "issuingBody": "Calmbirth® Australia",
+          "issuingProviderId": "calmbirth-australia",
           "verified": true
         },
         {
@@ -454,18 +467,21 @@
           "title": "Certified Calmbirth® Educator",
           "abbreviation": "CCE",
           "issuingBody": "Calmbirth® Australia",
+          "issuingProviderId": "calmbirth-australia",
           "verified": true
         },
         {
           "title": "Bachelor of Psychology",
           "abbreviation": "BPsych",
           "issuingBody": "University of Sydney",
+          "issuingProviderId": "usyd",
           "verified": true
         },
         {
           "title": "First Aid Certificate",
           "abbreviation": "First Aid",
           "issuingBody": "St John Ambulance",
+          "issuingProviderId": "st-john-ambulance",
           "verified": true
         }
       ],
@@ -522,6 +538,7 @@
           "title": "Accredited Practicing Dietitian",
           "abbreviation": "APD",
           "issuingBody": "Dietitians Australia",
+          "issuingProviderId": "dietitians-australia",
           "verified": true,
           "credentialDefinitionId": "apd-australia-2023",
           "personalCredentialId": "pc-apd-001"
@@ -586,6 +603,7 @@
           "title": "Master of Educational Leadership",
           "abbreviation": "M.Ed.Lead",
           "issuingBody": "University of Sydney",
+          "issuingProviderId": "usyd",
           "verified": true,
           "credentialDefinitionId": "med-lead-sydney-2023",
           "personalCredentialId": "cr-med-001"
@@ -594,6 +612,7 @@
           "title": "Bachelor of Education (Primary)",
           "abbreviation": "B.Ed",
           "issuingBody": "University of New South Wales",
+          "issuingProviderId": "unsw",
           "verified": true,
           "credentialDefinitionId": "bed-primary-unsw-2023",
           "personalCredentialId": "cr-bed-001"

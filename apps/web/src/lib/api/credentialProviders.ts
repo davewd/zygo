@@ -10,8 +10,8 @@ import supabase from '../../clients/supabaseClient';
 import { CredentialAPIError, CredentialAPIResponse } from './credentials';
 
 // Import fallback data
-import credentialsData from './data/credentials.json';
 import { CREDENTIAL_PROVIDERS as newCredentialProviders } from '../../data/credentials/credentialProviders_new';
+import credentialsData from './data/credentials.json';
 
 // Combine all credential providers from different sources
 const FALLBACK_CREDENTIAL_PROVIDERS = [

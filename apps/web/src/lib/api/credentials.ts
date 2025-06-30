@@ -4,21 +4,21 @@
 import type {
   CredentialCategory,
   CredentialDefinition,
-  CredentialProvider,
-  CredentialType,
-  PersonalCredential,
-  VerificationStatus,
-  CredentialVerificationRequest,
-  CredentialSummary,
   CredentialDisplayInfo,
+  CredentialProvider,
+  CredentialSearchFilters,
   CredentialSearchResult,
-  CredentialSearchFilters
+  CredentialSummary,
+  CredentialType,
+  CredentialVerificationRequest,
+  PersonalCredential,
+  VerificationStatus
 } from '@zygo/types/src/credentials';
 import supabase from '../../clients/supabaseClient';
 
 // Import JSON data for mock/fallback
-import credentialsData from './data/credentials.json';
 import { CREDENTIAL_PROVIDERS as newCredentialProviders } from '../../data/credentials/credentialProviders_new';
+import credentialsData from './data/credentials.json';
 
 // Legacy compatibility exports (TODO: Remove after full migration)
 export const CREDENTIAL_PROVIDERS = newCredentialProviders; // Use the typed data instead of JSON
