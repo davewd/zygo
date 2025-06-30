@@ -105,7 +105,7 @@ interface APIService {
 }
 
 // Import JSON data
-import providersData from './data/providers.json';
+import providersData from './data/serviceProviders.json';
 
 export interface ProvidersAPIResponse<T> {
   data: T;

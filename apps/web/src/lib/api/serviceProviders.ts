@@ -106,8 +106,8 @@ interface ServiceCenter {
 }
 
 // Import providers data from our API data files
-import providersData from './data/providers.json';
 import serviceCentersData from './data/serviceCenters.json';
+import providersData from './data/serviceProviders.json';
 // Import service center functions
 import { getServiceCenterById } from './serviceCenters';
 

@@ -5,7 +5,7 @@
 
 import type { ServiceCenter } from '@zygo/types';
 import serviceCentersData from './data/serviceCenters.json';
-import providersData from './data/providers.json';
+import providersData from './data/serviceProviders.json';
 
 // Mock delay for API simulation
 const API_DELAY = 300;
