@@ -1,4 +1,4 @@
-import type { PrimaryConsumer, UserRole } from '@zygo/types';
+import type { CommunityProfile, PrimaryConsumer, UserRole } from '@zygo/types/src/community';
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
 import {
   Activity,
@@ -18,14 +18,14 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import {
-  getCommunityProfileByHandle,
-  getCommunityProfileById,
-} from '../../data/community/primaryConsumers';
+import { getCommunityProfileByHandle, getCommunityProfileById } from '../../lib/api/community';
 
 const ProfileDetail = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [communityProfile, setCommunityProfile] = useState<CommunityProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Get tab from URL params, default to 'activity'
   const tabFromUrl = searchParams.get('tab') || 'activity';
@@ -37,6 +37,39 @@ const ProfileDetail = () => {
     { id: 'connections', label: 'Connections', icon: Users },
     { id: 'details', label: 'Details', icon: Star },
   ];
+
+  // Fetch community profile data
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!id) return;
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Try to get by ID first, then by handle if it's not a valid ID format
+        let response;
+        if (id.startsWith('consumer_')) {
+          response = await getCommunityProfileById(id);
+        } else {
+          response = await getCommunityProfileByHandle(id);
+        }
+
+        if (response.data) {
+          setCommunityProfile(response.data);
+        } else {
+          setError('Profile not found');
+        }
+      } catch (err) {
+        setError('Failed to load profile');
+        console.error('Error fetching profile:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [id]);
 
   // Update URL when tab changes
   const handleTabChange = (tabId: string) => {
@@ -54,17 +87,24 @@ const ProfileDetail = () => {
     }
   }, [searchParams]);
 
-  // Try to get profile by ID first, then by handle
-  let communityProfile = id ? getCommunityProfileById(id) : undefined;
-  if (!communityProfile && id) {
-    communityProfile = getCommunityProfileByHandle(id);
-  }
-
-  if (!communityProfile) {
+  // Show loading state
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile Not Found</h1>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zygo-red mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error || !communityProfile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">{error || 'Profile Not Found'}</h1>
           <Link to="/community/profiles">
             <Button variant="outline">Back to Community</Button>
           </Link>

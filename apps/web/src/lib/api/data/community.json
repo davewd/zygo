@@ -242,11 +242,300 @@
       "hasLimitedProfile": false,
       "interests": ["grandparenting", "child-development", "reading", "gardening", "cooking"],
       "preferredLanguages": ["English"]
+    },
+    {
+      "id": "consumer_005",
+      "handle": "jessica_mama2",
+      "firstName": "Jessica",
+      "lastName": "Chen",
+      "displayName": "Jess",
+      "profileImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "1985-11-28",
+      "role": "parent",
+      "ageGroup": "adult",
+      "tagline": "Mum of twins, advocate for inclusive parenting 👶👶",
+      "bio": "Speech pathologist and mum to beautiful twin boys. Passionate about supporting other parents and creating inclusive communities for all families.",
+      "location": {
+        "suburb": "Surry Hills",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [
+        {
+          "id": "rel_011",
+          "relatedUserId": "consumer_006",
+          "relationshipType": "child",
+          "description": "son",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        },
+        {
+          "id": "rel_012",
+          "relatedUserId": "consumer_007",
+          "relationshipType": "child",
+          "description": "son",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        }
+      ],
+      "followedProviders": [
+        {
+          "providerId": "rebecca-cavallaro",
+          "providerName": "Rebecca Cavallaro",
+          "providerTitle": "IBCLC, Midwife, RN",
+          "centerName": "Full Circle Midwifery",
+          "dateFollowed": "2022-06-01",
+          "tags": ["lactation-support", "twins-support"],
+          "status": "past"
+        },
+        {
+          "providerId": "sarah-mitchell",
+          "providerName": "Sarah Mitchell",
+          "providerTitle": "Head Swim Instructor",
+          "centerName": "Elixr Swim School",
+          "dateFollowed": "2024-03-20",
+          "tags": ["swimming", "child-safety"],
+          "status": "active"
+        }
+      ],
+      "isActive": true,
+      "joinedDate": "2022-05-01",
+      "lastActiveDate": "2024-12-14",
+      "privacyLevel": "public",
+      "hasLimitedProfile": false,
+      "interests": ["twin-parenting", "speech-development", "inclusive-education", "swimming"],
+      "preferredLanguages": ["English", "Mandarin"]
+    },
+    {
+      "id": "consumer_006",
+      "handle": "alex_twin1",
+      "firstName": "Alex",
+      "displayName": "Alex",
+      "profileImage": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "2022-09-15",
+      "role": "child",
+      "ageGroup": "toddler",
+      "tagline": "Twin brother exploring the world! 🚀",
+      "location": {
+        "suburb": "Surry Hills",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [
+        {
+          "id": "rel_013",
+          "relatedUserId": "consumer_005",
+          "relationshipType": "parent",
+          "description": "mummy",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        },
+        {
+          "id": "rel_014",
+          "relatedUserId": "consumer_007",
+          "relationshipType": "sibling",
+          "description": "twin brother",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        }
+      ],
+      "followedProviders": [],
+      "isActive": true,
+      "joinedDate": "2022-09-15",
+      "lastActiveDate": "2024-12-13",
+      "privacyLevel": "family",
+      "hasLimitedProfile": true,
+      "parentalControls": {
+        "parentId": "consumer_005",
+        "restrictedFields": ["bio", "interests", "location.suburb"]
+      },
+      "interests": ["trucks", "blocks", "swimming", "music"],
+      "preferredLanguages": ["English", "Mandarin"]
+    },
+    {
+      "id": "consumer_007",
+      "handle": "ben_twin2",
+      "firstName": "Ben",
+      "displayName": "Ben",
+      "profileImage": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "2022-09-15",
+      "role": "child",
+      "ageGroup": "toddler",
+      "tagline": "Twin brother loves books and puzzles! 📚",
+      "location": {
+        "suburb": "Surry Hills",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [
+        {
+          "id": "rel_015",
+          "relatedUserId": "consumer_005",
+          "relationshipType": "parent",
+          "description": "mummy",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        },
+        {
+          "id": "rel_016",
+          "relatedUserId": "consumer_006",
+          "relationshipType": "sibling",
+          "description": "twin brother",
+          "isPrimary": true,
+          "dateEstablished": "2022-09-15"
+        }
+      ],
+      "followedProviders": [],
+      "isActive": true,
+      "joinedDate": "2022-09-15",
+      "lastActiveDate": "2024-12-13",
+      "privacyLevel": "family",
+      "hasLimitedProfile": true,
+      "parentalControls": {
+        "parentId": "consumer_005",
+        "restrictedFields": ["bio", "interests", "location.suburb"]
+      },
+      "interests": ["books", "puzzles", "singing", "drawing"],
+      "preferredLanguages": ["English", "Mandarin"]
+    },
+    {
+      "id": "consumer_008",
+      "handle": "software_engineer",
+      "firstName": "John",
+      "lastName": "Doe",
+      "displayName": "John",
+      "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "1985-03-22",
+      "role": "parent",
+      "ageGroup": "adult",
+      "tagline": "Dad in tech, building cool things and raising tiny humans 🚀",
+      "bio": "Full-stack software engineer with a passion for building innovative solutions. When I'm not coding, I'm chasing after my kids and sharing parenting adventures.",
+      "location": {
+        "suburb": "Pyrmont",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [],
+      "followedProviders": [],
+      "isActive": true,
+      "joinedDate": "2022-08-01",
+      "lastActiveDate": "2024-12-14",
+      "privacyLevel": "public",
+      "hasLimitedProfile": false,
+      "interests": ["technology", "coding", "parenting", "innovation"],
+      "preferredLanguages": ["English"]
+    },
+    {
+      "id": "consumer_009",
+      "handle": "mum_of_17",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "displayName": "Jane",
+      "profileImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "1982-07-10",
+      "role": "parent",
+      "ageGroup": "adult",
+      "tagline": "Mum of 17 amazing kids - yes, you read that right! 🏠👨‍👩‍👧‍👦",
+      "bio": "Experienced parent navigating the joys and challenges of raising a large family. Always ready to share tips, support other parents, and celebrate the beautiful chaos of family life.",
+      "location": {
+        "suburb": "Castle Hill",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [],
+      "followedProviders": [],
+      "isActive": true,
+      "joinedDate": "2022-08-01",
+      "lastActiveDate": "2024-12-14",
+      "privacyLevel": "public",
+      "hasLimitedProfile": false,
+      "interests": ["large families", "parenting tips", "organization", "cooking", "homeschooling"],
+      "preferredLanguages": ["English"]
+    },
+    {
+      "id": "consumer_010",
+      "handle": "new_mom",
+      "firstName": "Sarah",
+      "lastName": "Martinez",
+      "displayName": "Sarah",
+      "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "1993-11-18",
+      "role": "parent",
+      "ageGroup": "adult",
+      "tagline": "New mum figuring it all out one feeding at a time 🤱✨",
+      "bio": "First-time mum on an incredible journey of discovery. Passionate about breastfeeding, gentle parenting, and connecting with other new parents for support and encouragement.",
+      "location": {
+        "suburb": "Bondi",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "familyRelationships": [],
+      "followedProviders": [
+        {
+          "providerId": "rebecca-cavallaro",
+          "providerName": "Rebecca Cavallaro",
+          "providerTitle": "IBCLC, Midwife, RN",
+          "centerName": "Full Circle Midwifery",
+          "dateFollowed": "2023-12-01",
+          "tags": ["lactation-support", "new-parent-support"],
+          "status": "active"
+        }
+      ],
+      "isActive": true,
+      "joinedDate": "2022-08-01",
+      "lastActiveDate": "2024-12-14",
+      "privacyLevel": "public",
+      "hasLimitedProfile": false,
+      "interests": ["breastfeeding", "baby development", "new parent support", "sleep training"],
+      "preferredLanguages": ["English", "Spanish"]
+    },
+    {
+      "id": "consumer_011",
+      "handle": "jessica_stevenson",
+      "firstName": "Jessica",
+      "lastName": "Stevenson",
+      "displayName": "Jessica Stevenson",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "dateOfBirth": "1987-06-14",
+      "role": "parent",
+      "ageGroup": "adult",
+      "tagline": "Dietitian passionate about kidney health and nutrition 🥗💚",
+      "bio": "Accredited Practicing Dietitian specializing in kidney health and chronic disease prevention. Mother of two, sharing evidence-based nutrition advice to help families eat for optimal health.",
+      "location": {
+        "suburb": "Melbourne",
+        "state": "VIC",
+        "country": "Australia"
+      },
+      "familyRelationships": [],
+      "followedProviders": [
+        {
+          "providerId": "jessica-dawson-dietitian",
+          "providerName": "Jessica Dawson",
+          "providerTitle": "PhD, Accredited Practicing Dietitian - Renal Specialist",
+          "centerName": "Kidney Nutrition",
+          "dateFollowed": "2024-01-15",
+          "tags": ["kidney-health", "nutrition", "dietitian-collaboration"],
+          "status": "active"
+        }
+      ],
+      "isActive": true,
+      "joinedDate": "2023-09-20",
+      "lastActiveDate": "2024-12-19",
+      "privacyLevel": "public",
+      "hasLimitedProfile": false,
+      "interests": [
+        "kidney-health",
+        "nutrition",
+        "healthy-eating",
+        "chronic-disease-prevention",
+        "family-wellness"
+      ],
+      "preferredLanguages": ["English"]
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalConsumers": 4,
+    "totalConsumers": 11,
     "dataSource": "mock-api"
   }
 }

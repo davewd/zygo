@@ -30,7 +30,7 @@ This document describes the complete organization of all sample/mock data extrac
 ## Data Sources and Content
 
 ### Actors
-- **community_members.json**: Sample community members and families extracted from `/apps/web/src/data/community/primaryConsumers.ts`
+- **community_members.json**: Sample community members and families (now in `/apps/web/src/lib/api/data/community.json`)
 - **service_providers.json**: Service providers from various network centers including Rebecca Cavallaro, healthcare providers, coaches, and educators
 
 ### Credentials
