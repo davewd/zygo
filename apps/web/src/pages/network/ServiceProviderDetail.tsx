@@ -36,6 +36,9 @@ const ServiceProviderDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [providerFeedItems, setProviderFeedItems] = useState<any[]>([]);
   const [feedLoading, setFeedLoading] = useState(false);
+  const [provider, setProvider] = useState<any>(null);
+  const [center, setCenter] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   // Get tab from URL params, default to 'activity'
   const tabFromUrl = searchParams.get('tab') || 'activity';
@@ -64,6 +67,31 @@ const ServiceProviderDetail = () => {
     }
   }, [searchParams]);
 
+  // Load provider data
+  useEffect(() => {
+    const loadProvider = async () => {
+      if (!id) return;
+
+      setLoading(true);
+      try {
+        const providerData = await getServiceProviderById(id);
+        setProvider(providerData);
+
+        if (providerData?.id) {
+          const centerData = getCenterForProvider(providerData.id);
+          setCenter(centerData);
+        }
+      } catch (error) {
+        console.error('Error loading provider:', error);
+        setProvider(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProvider();
+  }, [id]);
+
   // Load provider feed data using the unified API
   useEffect(() => {
     const loadProviderFeed = async () => {
@@ -84,9 +112,16 @@ const ServiceProviderDetail = () => {
     loadProviderFeed();
   }, [id]);
 
-  // Get provider and center by ID using API
-  const provider = getServiceProviderById(id || '');
-  const center = provider ? getCenterForProvider(provider.id) : null;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zygo-red mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading provider details...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!provider) {
     return (
@@ -294,7 +329,7 @@ const ServiceProviderDetail = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {provider.specializations.map((spec, index) => (
+                        {provider.specializations?.map((spec, index) => (
                           <div key={index} className="bg-zygo-mint/20 p-3 rounded-lg text-center">
                             <span className="text-gray-700 font-medium text-sm">{spec}</span>
                           </div>
@@ -313,7 +348,7 @@ const ServiceProviderDetail = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid gap-4">
-                        {provider.services.map((service) => (
+                        {provider.services?.map((service) => (
                           <div
                             key={service.id}
                             className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
@@ -524,7 +559,7 @@ const ServiceProviderDetail = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid gap-4">
-                        {provider.credentials.map((credential, index) => (
+                        {provider.credentials?.map((credential, index) => (
                           <ClickableCredentialCard key={index} credential={credential} />
                         ))}
                       </div>
@@ -576,7 +611,7 @@ const ServiceProviderDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {provider.availability.inPerson && (
+                  {provider.availability?.inPerson && (
                     <div className="flex items-center p-3 bg-zygo-mint/20 rounded-lg">
                       <MapPin className="w-4 h-4 mr-3 text-zygo-red" />
                       <div>
@@ -585,7 +620,7 @@ const ServiceProviderDetail = () => {
                       </div>
                     </div>
                   )}
-                  {provider.availability.telehealth && (
+                  {provider.availability?.telehealth && (
                     <div className="flex items-center p-3 bg-zygo-blue/20 rounded-lg">
                       <Video className="w-4 h-4 mr-3 text-zygo-red" />
                       <div>
@@ -594,7 +629,7 @@ const ServiceProviderDetail = () => {
                       </div>
                     </div>
                   )}
-                  {provider.availability.homeVisits && (
+                  {provider.availability?.homeVisits && (
                     <div className="flex items-center p-3 bg-zygo-yellow/20 rounded-lg">
                       <Home className="w-4 h-4 mr-3 text-zygo-red" />
                       <div>
@@ -603,7 +638,7 @@ const ServiceProviderDetail = () => {
                       </div>
                     </div>
                   )}
-                  {provider.availability.emergency && (
+                  {provider.availability?.emergency && (
                     <div className="flex items-center p-3 bg-red-50 rounded-lg">
                       <Phone className="w-4 h-4 mr-3 text-red-600" />
                       <div>
@@ -630,13 +665,13 @@ const ServiceProviderDetail = () => {
                     <div className="flex justify-between items-center">
                       <span className="text-gray-600">Initial Consultation</span>
                       <span className="font-semibold text-zygo-red">
-                        ${provider.pricing.consultationFee} {provider.pricing.currency}
+                        ${provider.pricing?.consultationFee} {provider.pricing?.currency}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-600">Follow-up</span>
                       <span className="font-semibold text-zygo-red">
-                        ${provider.pricing.followUpFee} {provider.pricing.currency}
+                        ${provider.pricing?.followUpFee} {provider.pricing?.currency}
                       </span>
                     </div>
                     <div className="pt-2 border-t">
@@ -690,7 +725,7 @@ const ServiceProviderDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {provider.languages.map((language) => (
+                    {provider.languages?.map((language) => (
                       <span
                         key={language}
                         className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full"

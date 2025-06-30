@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FeedItemTypeMap, ActorType } from '../../../lib/api/feed';
+import { ActorType, FeedItemTypeMap } from '../../../lib/api/feed';
 import { formatDate } from './feedUtils';
 import { PrivacyIndicator } from './PrivacyIndicator';
 
@@ -9,33 +9,33 @@ import { PrivacyIndicator } from './PrivacyIndicator';
  */
 const getProfileLink = (author: FeedItemTypeMap['author']): string | null => {
   const actorType = author.actorType as string;
-  
+
   switch (actorType) {
     case ActorType.COMMUNITY_MEMBER:
     case 'community_member':
       // Community members link to community profiles using their handle
       return `/community/profiles/${author.handle}`;
-    
+
     case ActorType.SERVICE_PROVIDER:
     case 'service_provider':
       // Service providers link to provider profiles using their providerId or handle
       const providerId = (author as any).providerId || author.handle;
       return `/network/providers/${providerId}`;
-    
+
     case ActorType.SERVICE_CENTER:
     case 'service_center':
       // Service centers link to center profiles using their centerId or handle
       const centerId = (author as any).centerId || author.handle;
       return `/network/centers/${centerId}`;
-    
+
     case 'organization':
       // Organizations may not have profile pages, return null for now
       return null;
-    
+
     case 'system':
       // System posts don't have profile pages
       return null;
-    
+
     default:
       // Fallback to community profiles for unknown types
       return `/community/profiles/${author.handle}`;
@@ -86,9 +86,7 @@ export const FeedItemHeader: React.FC<FeedItemHeaderProps> = ({
               {item.author.name}
             </Link>
           ) : (
-            <span className="font-semibold text-gray-900">
-              {item.author.name}
-            </span>
+            <span className="font-semibold text-gray-900">{item.author.name}</span>
           )}
           {item.author.verified && (
             <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
