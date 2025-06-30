@@ -1,7 +1,7 @@
 import { Calendar, Globe, Search, SlidersHorizontal } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
+import { CREDENTIAL_PROVIDERS } from '../../lib/api/credentials';
 
 const CredentialSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');

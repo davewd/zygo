@@ -1,6 +1,6 @@
 import { AlertCircle, CheckCircle, ExternalLink, Search, XCircle } from 'lucide-react';
 import { useState } from 'react';
-import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
+import { CREDENTIAL_PROVIDERS } from '../../lib/api/credentials';
 
 const CredentialVerify = () => {
   const [credentialId, setCredentialId] = useState('');

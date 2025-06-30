@@ -1,3 +1,4 @@
+import type { CredentialProvider } from '@zygo/types/src/credentials';
 import {
   ArrowLeft,
   Calendar,
@@ -9,12 +10,58 @@ import {
   Shield,
   XCircle,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { CREDENTIAL_PROVIDERS } from '../../data/credentials/credentialProviders_new';
+import { getCredentialProviders } from '../../lib/api/credentials';
 
 const CredentialProviderDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const provider = CREDENTIAL_PROVIDERS.find((p) => p.id === id);
+  const [provider, setProvider] = useState<CredentialProvider | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadProvider = async () => {
+      try {
+        setLoading(true);
+        const response = await getCredentialProviders();
+        const foundProvider = response.data?.find((p) => p.id === id) || null;
+        setProvider(foundProvider);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load credential provider:', err);
+        setError('Failed to load credential provider. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProvider();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <span className="ml-3 text-gray-600">Loading provider details...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="flex items-center">
+            <XCircle className="w-5 h-5 text-red-500 mr-2" />
+            <span className="text-red-700">{error}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!provider) {
     return (

@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
 import {
+  AlertCircle,
   ArrowLeft,
   Calendar,
   CheckCircle,
@@ -8,6 +9,7 @@ import {
   Eye,
   Globe,
   Heart,
+  Loader2,
   Mail,
   MapPin,
   Phone,
@@ -15,54 +17,133 @@ import {
   Stethoscope,
   Users,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ACTIVE8_CENTER } from '../../data/network/active8KidsCenter';
-import { CALMBIRTH_CENTER } from '../../data/network/calmbirthCenter';
-import { ELIXR_SWIM_SCHOOL_CENTER } from '../../data/network/elixrSwimSchoolCenter';
-import { EMOG_CENTER } from '../../data/network/emogCenter';
-import { FULL_CIRCLE_CENTER } from '../../data/network/fullCircleCenter';
-import { KICKEROOS_SOCCER_CENTER } from '../../data/network/kickeroosSoccerCenter';
-import { KIDNEY_NUTRITION_CENTER } from '../../data/network/kidneyNutritionCenter';
-import { MUMMYS_WHISPERS_CENTER } from '../../data/network/mummysWhispersCenter';
-import { PROLOGUE_CENTER } from '../../data/network/prologueCenter';
-import { START_TRAINING_CENTER } from '../../data/network/startTrainingCenter';
-import { ST_MARYS_CHILDCARE_CENTER } from '../../data/network/stMarysChildcareCenter';
-import { WHITE_CITY_TENNIS_CENTER } from '../../data/network/whiteCityTennisCenter';
+import { getServiceCenterById } from '../../lib/api/serviceCenters';
+
+// Define a local ServiceCenter type that matches our API structure
+interface ServiceCenter {
+  id: string;
+  name: string;
+  description: string;
+  overview: string;
+  mission?: string;
+  location: {
+    address: string;
+    suburb: string;
+    state: string;
+    postcode: string;
+    country: string;
+  };
+  contact: {
+    phone?: string;
+    email?: string;
+    website?: string;
+    bookingUrl?: string;
+  };
+  providers: any[];
+  services: Array<{
+    id: string;
+    name: string;
+    description: string;
+    duration?: number;
+    price?: {
+      amount: number;
+      currency: string;
+      rebate?: {
+        provider: string;
+        amount: number;
+      };
+    };
+  }>;
+  operatingHours: {
+    [key: string]: {
+      open?: string;
+      close?: string;
+      closed?: boolean;
+    };
+  };
+  features: string[];
+  certifications?: string[];
+  insurance?: string[];
+  accessibility?: string[];
+  images?: string[];
+  establishedYear?: number;
+  culturalConsiderations?: string;
+}
 
 const ServiceCenterDetail = () => {
   const { id } = useParams();
-
-  // State for controlling contact information visibility
+  const [center, setCenter] = useState<ServiceCenter | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [showPhone, setShowPhone] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
 
-  // Get the center by ID
-  const centers = [
-    FULL_CIRCLE_CENTER,
-    PROLOGUE_CENTER,
-    CALMBIRTH_CENTER,
-    ACTIVE8_CENTER,
-    WHITE_CITY_TENNIS_CENTER,
-    ELIXR_SWIM_SCHOOL_CENTER,
-    KICKEROOS_SOCCER_CENTER,
-    ST_MARYS_CHILDCARE_CENTER,
-    MUMMYS_WHISPERS_CENTER,
-    EMOG_CENTER,
-    KIDNEY_NUTRITION_CENTER,
-    START_TRAINING_CENTER,
-  ];
+  // Load service center details
+  useEffect(() => {
+    const loadCenter = async () => {
+      if (!id) {
+        setError('Service center ID not provided');
+        setLoading(false);
+        return;
+      }
 
-  const center = centers.find((c) => c.id === id);
+      try {
+        setLoading(true);
+        setError(null);
 
-  if (!center) {
+        const centerData = await getServiceCenterById(id);
+
+        if (!centerData) {
+          setError('Service center not found');
+          return;
+        }
+
+        setCenter(centerData as ServiceCenter);
+      } catch (err) {
+        setError('Failed to load service center details. Please try again.');
+        console.error('Error loading service center:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCenter();
+  }, [id]);
+
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Center Not Found</h1>
-          <Link to="/network/centers">
-            <Button variant="outline">Back to Centers</Button>
-          </Link>
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="h-8 w-8 animate-spin text-zygo-red" />
+            <span className="ml-2 text-lg text-gray-600">Loading service center details...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !center) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="flex items-center justify-center py-20">
+            <AlertCircle className="h-8 w-8 text-red-500" />
+            <div className="ml-4">
+              <h3 className="text-lg font-medium text-gray-900">Service Center Not Found</h3>
+              <p className="text-gray-600">
+                {error || 'The requested service center could not be found.'}
+              </p>
+              <Link to="/network/service-centers">
+                <div className="mt-4 inline-flex items-center px-4 py-2 bg-zygo-red text-white rounded-lg hover:bg-zygo-red/90 transition-colors">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Service Centers
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );

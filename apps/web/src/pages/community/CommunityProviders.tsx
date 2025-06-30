@@ -1,339 +1,347 @@
-import { Button, Card, CardContent, CardHeader } from '@zygo/ui';
-import { ArrowLeft, Grid3X3, List, MapPin, Search, Star, User } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { EMILY_MCCONAGHY, JAKE_THOMPSON } from '../../data/network/active8KidsCenter';
-import {
-  EMMA_RODRIGUEZ,
-  MARCUS_CHEN,
-  SARAH_MITCHELL,
-} from '../../data/network/elixrSwimSchoolCenter';
-import { DR_SHELLEY_ROWLANDS } from '../../data/network/emogCenter';
-import { REBECCA_CAVALLARO } from '../../data/network/fullCircleCenter';
-import {
-  JAMES_THOMPSON,
-  MICHAEL_OCONNOR,
-  SOFIA_MARTINEZ,
-} from '../../data/network/kickeroosSoccerCenter';
-import { JESSICA_DAWSON_DIETITIAN } from '../../data/network/kidneyNutritionCenter';
-import { CAROLINE_MATERNITY_CONSULTANT } from '../../data/network/mummysWhispersCenter';
-import { ANDREA_DUNNE, DR_JUSTIN_TUCKER, POLLY_DELANEY } from '../../data/network/prologueCenter';
-import { PETA_CARIGE } from '../../data/network/startTrainingCenter';
-import {
-  DANIELLE_HARMSEN,
-  LUCY_WOOD,
-  STEVE_LOEFFLER,
-} from '../../data/network/whiteCityTennisCenter';
-import { DR_ALEXANDRA_THOMPSON, SARAH_DIGITAL_SPECIALIST } from '../../data/network/zygoAppCenter';
+import { 
+  getAllServiceProviders,
+  searchProviders,
+  getProvidersBySpecialization 
+} from '../../lib/api/providers';
+
+// Define the service provider type from the API
+interface ServiceProvider {
+  id: string;
+  firstName: string;
+  lastName: string;
+  title?: string;
+  profileImage?: string;
+  bio: string;
+  credentials: {
+    title: string;
+    abbreviation?: string;
+    issuingBody: string;
+    verified: boolean;
+  }[];
+  services: string[];
+  specializations: string[];
+  languages: string[];
+  yearsExperience: number;
+  availability: {
+    inPerson: boolean;
+    telehealth: boolean;
+    homeVisits: boolean;
+    emergency: boolean;
+  };
+  centerId?: string;
+}
 
 const CommunityProviders = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  
+  // API state management
+  const [providers, setProviders] = useState<ServiceProvider[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [availableSpecialties, setAvailableSpecialties] = useState<string[]>([]);
 
-  const providers = [
-    REBECCA_CAVALLARO,
-    DR_JUSTIN_TUCKER,
-    ANDREA_DUNNE,
-    POLLY_DELANEY,
-    EMILY_MCCONAGHY,
-    JAKE_THOMPSON,
-    STEVE_LOEFFLER,
-    LUCY_WOOD,
-    DANIELLE_HARMSEN,
-    SARAH_MITCHELL,
-    MARCUS_CHEN,
-    EMMA_RODRIGUEZ,
-    JAMES_THOMPSON,
-    SOFIA_MARTINEZ,
-    MICHAEL_OCONNOR,
-    CAROLINE_MATERNITY_CONSULTANT,
-    DR_SHELLEY_ROWLANDS,
-    JESSICA_DAWSON_DIETITIAN,
-    PETA_CARIGE,
-    SARAH_DIGITAL_SPECIALIST,
-    DR_ALEXANDRA_THOMPSON,
-  ];
-
-  const specialties = [
-    'All Specialties',
-    'Lactation Support',
-    'Fertility',
-    'Obstetrics',
-    'Swimming',
-    'Gymnastics',
-    'Soccer',
-    'Tennis',
-    'Parkour',
-    'Sleep Consulting',
-    'Maternity Care',
-    'Newborn Care',
-    'Sports Nutrition',
-    'Nutrition',
-  ];
-
-  const filteredProviders = providers.filter((provider) => {
-    const matchesSearch =
-      provider.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      provider.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      provider.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      provider.specializations.some((spec) =>
-        spec.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-
-    const matchesSpecialty =
-      selectedSpecialty === '' ||
-      selectedSpecialty === 'All Specialties' ||
-      provider.specializations.some((spec) =>
-        spec.toLowerCase().includes(selectedSpecialty.toLowerCase())
-      );
-
-    return matchesSearch && matchesSpecialty;
-  });
-
-  const getProviderRating = (providerId: string) => {
-    // Mock rating data - in a real app this would come from reviews
-    const ratings: { [key: string]: number } = {
-      'rebecca-cavallaro': 4.9,
-      'dr-justin-tucker': 4.8,
-      'andrea-dunne': 4.9,
-      'polly-delaney': 4.8,
-      'emily-mcconaghy': 4.7,
-      'jake-thompson': 4.6,
-      'steve-loeffler': 4.5,
-      'lucy-wood': 4.7,
-      'danielle-harmsen': 4.8,
-      'sarah-mitchell': 4.6,
-      'marcus-chen': 4.5,
-      'emma-rodriguez': 4.7,
-      'james-thompson': 4.8,
-      'sofia-martinez': 4.6,
-      'michael-oconnor': 4.5,
-      'caroline-maternity-consultant': 4.9,
+  // Load service providers on component mount
+  useEffect(() => {
+    const loadProviders = async () => {
+      try {
+        setLoading(true);
+        const response = await getAllServiceProviders();
+        setProviders(response.data);
+        
+        // Extract unique specializations for filter
+        const specialties = Array.from(
+          new Set(response.data.flatMap(provider => provider.specializations))
+        ).sort();
+        setAvailableSpecialties(specialties);
+        
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load service providers:', err);
+        setError('Failed to load service providers. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
     };
-    return ratings[providerId] || 4.5;
-  };
 
-  const renderProviderCard = (provider: any) => {
-    const rating = getProviderRating(provider.id);
+    loadProviders();
+  }, []);
 
-    if (viewMode === 'list') {
+  // Filter providers based on search and specialty
+  const filteredProviders = providers.filter((provider) => {
+    // Specialty filter
+    if (selectedSpecialty && !provider.specializations.includes(selectedSpecialty)) {
+      return false;
+    }
+
+    // Search query filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
       return (
-        <Link key={provider.id} to={`/community/providers/${provider.id}`}>
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-4">
-                <img
-                  src={provider.profileImage}
-                  alt={`${provider.firstName} ${provider.lastName}`}
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div className="flex-1">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800">
-                        {provider.firstName} {provider.lastName}
-                      </h3>
-                      <p className="text-gray-600 mb-2">{provider.title}</p>
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                        <div className="flex items-center space-x-1">
-                          <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                          <span className="font-medium">{rating}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <MapPin className="w-4 h-4" />
-                          <span>Sydney, NSW</span>
-                        </div>
-                        <span>{provider.yearsExperience} years experience</span>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {provider.specializations.slice(0, 3).map((spec: string, index: number) => (
-                          <span
-                            key={index}
-                            className="bg-zygo-mint/20 text-zygo-blue text-xs px-2 py-1 rounded-full"
-                          >
-                            {spec}
-                          </span>
-                        ))}
-                        {provider.specializations.length > 3 && (
-                          <span className="text-xs text-gray-500">
-                            +{provider.specializations.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-lg font-semibold text-gray-800">
-                        ${provider.pricing.consultationFee}
-                      </div>
-                      <div className="text-sm text-gray-600">Initial consultation</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
+        provider.firstName.toLowerCase().includes(query) ||
+        provider.lastName.toLowerCase().includes(query) ||
+        provider.bio.toLowerCase().includes(query) ||
+        provider.specializations.some(spec => spec.toLowerCase().includes(query)) ||
+        provider.services.some(service => service.toLowerCase().includes(query))
       );
     }
 
+    return true;
+  });
+
+  if (loading) {
     return (
-      <Link key={provider.id} to={`/community/providers/${provider.id}`}>
-        <Card className="hover:shadow-lg transition-shadow h-full">
-          <CardHeader className="pb-4">
-            <div className="flex items-center space-x-3">
-              <img
-                src={provider.profileImage}
-                alt={`${provider.firstName} ${provider.lastName}`}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div className="flex-1">
-                <h3 className="font-semibold text-gray-800">
-                  {provider.firstName} {provider.lastName}
-                </h3>
-                <p className="text-sm text-gray-600">{provider.title}</p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center space-x-1">
-                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                  <span className="font-medium">{rating}</span>
-                </div>
-                <span className="text-gray-600">{provider.yearsExperience} years</span>
-              </div>
-
-              <div className="text-sm text-gray-600 line-clamp-2">{provider.bio}</div>
-
-              <div className="flex flex-wrap gap-1">
-                {provider.specializations.slice(0, 2).map((spec: string, index: number) => (
-                  <span
-                    key={index}
-                    className="bg-zygo-mint/20 text-zygo-blue text-xs px-2 py-1 rounded-full"
-                  >
-                    {spec}
-                  </span>
-                ))}
-                {provider.specializations.length > 2 && (
-                  <span className="text-xs text-gray-500">
-                    +{provider.specializations.length - 2}
-                  </span>
-                )}
-              </div>
-
-              <div className="pt-2 border-t">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">From</span>
-                  <span className="font-semibold text-gray-800">
-                    ${provider.pricing.consultationFee}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </Link>
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-zygo-red mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading service providers...</p>
+          </div>
+        </div>
+      </div>
     );
-  };
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="text-center py-12">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+              <p className="text-red-600 mb-4">{error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
-      <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <Link to="/community">
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Community
-              </Button>
-            </Link>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">Service Providers</h1>
-              <p className="text-gray-600">
-                Professional support for your family's health, development, and wellbeing
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Button
-              variant={viewMode === 'grid' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('grid')}
-            >
-              <Grid3X3 className="w-4 h-4" />
-            </Button>
-            <Button
-              variant={viewMode === 'list' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('list')}
-            >
-              <List className="w-4 h-4" />
-            </Button>
-          </div>
+      <div className="container mx-auto px-6 py-12">
+        {/* Navigation */}
+        <div className="mb-6">
+          <Link
+            to="/community"
+            className="inline-flex items-center text-zygo-red hover:text-zygo-red/80 transition-colors"
+          >
+            ← Back to Community Hub
+          </Link>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            Community <span className="text-zygo-red">Service Providers</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Connect with trusted service providers in our community. Find healthcare professionals,
+            educators, childcare specialists, and more.
+          </p>
+        </div>
+
+        {/* Search and Filters */}
+        <div className="mb-8">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Search Bar */}
+            <div className="flex-1 max-w-md">
               <input
                 type="text"
-                placeholder="Search providers, specialties..."
+                placeholder="Search providers..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zygo-blue focus:border-transparent"
+                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zygo-red focus:border-transparent"
               />
             </div>
 
-            <select
-              value={selectedSpecialty}
-              onChange={(e) => setSelectedSpecialty(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zygo-blue focus:border-transparent"
-            >
-              {specialties.map((specialty) => (
-                <option key={specialty} value={specialty}>
-                  {specialty}
-                </option>
-              ))}
-            </select>
+            {/* Specialty Filter */}
+            <div className="min-w-48">
+              <select
+                value={selectedSpecialty}
+                onChange={(e) => setSelectedSpecialty(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zygo-red focus:border-transparent"
+              >
+                <option value="">All Specialties</option>
+                {availableSpecialties.map((specialty) => (
+                  <option key={specialty} value={specialty}>
+                    {specialty}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">
-                {filteredProviders.length} providers found
-              </span>
+            {/* View Mode Toggle */}
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded ${
+                  viewMode === 'grid'
+                    ? 'bg-white shadow-sm text-zygo-red'
+                    : 'text-gray-600 hover:text-gray-800'
+                } transition-colors`}
+              >
+                <span className="sr-only">Grid view</span>
+                ⚏
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 rounded ${
+                  viewMode === 'list'
+                    ? 'bg-white shadow-sm text-zygo-red'
+                    : 'text-gray-600 hover:text-gray-800'
+                } transition-colors`}
+              >
+                <span className="sr-only">List view</span>
+                ☰
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Providers Grid/List */}
-        <div
-          className={viewMode === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}
-        >
-          {filteredProviders.map(renderProviderCard)}
+        {/* Results Summary */}
+        <div className="mb-6 text-center">
+          <p className="text-gray-600">
+            Showing <span className="font-semibold">{filteredProviders.length}</span> of{' '}
+            <span className="font-semibold">{providers.length}</span> service providers
+          </p>
         </div>
 
-        {filteredProviders.length === 0 && (
-          <div className="text-center py-12">
-            <User className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No providers found</h3>
-            <p className="text-gray-500">
-              Try adjusting your search criteria or browse all providers
-            </p>
-            <Button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedSpecialty('');
-              }}
-              className="mt-4"
-              variant="outline"
+        {/* Providers Grid */}
+        <div className={`grid gap-6 ${
+          viewMode === 'grid' 
+            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+            : 'grid-cols-1'
+        }`}>
+          {filteredProviders.map((provider) => (
+            <div
+              key={provider.id}
+              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
-              Clear Filters
-            </Button>
+              {/* Provider Image */}
+              <div className="h-48 bg-gradient-to-br from-zygo-blue to-zygo-mint relative">
+                {provider.profileImage && (
+                  <img
+                    src={provider.profileImage}
+                    alt={`${provider.firstName} ${provider.lastName}`}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-white text-xl font-bold mb-1">
+                    {provider.firstName} {provider.lastName}
+                  </h3>
+                  {provider.title && (
+                    <p className="text-white/90 text-sm">{provider.title}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Provider Content */}
+              <div className="p-6">
+                {/* Credentials */}
+                {provider.credentials.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {provider.credentials.slice(0, 2).map((credential, index) => (
+                      <span
+                        key={index}
+                        className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium"
+                      >
+                        {credential.abbreviation || credential.title}
+                      </span>
+                    ))}
+                    {provider.credentials.length > 2 && (
+                      <span className="text-gray-500 text-xs">
+                        +{provider.credentials.length - 2} more
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Specializations */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {provider.specializations.slice(0, 3).map((specialization) => (
+                    <span
+                      key={specialization}
+                      className="bg-zygo-red/10 text-zygo-red px-3 py-1 rounded-full text-sm font-medium"
+                    >
+                      {specialization}
+                    </span>
+                  ))}
+                  {provider.specializations.length > 3 && (
+                    <span className="text-gray-500 text-sm">
+                      +{provider.specializations.length - 3} more
+                    </span>
+                  )}
+                </div>
+
+                {/* Bio */}
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {provider.bio}
+                </p>
+
+                {/* Experience */}
+                <p className="text-gray-500 text-xs mb-4">
+                  ⭐ {provider.yearsExperience} years experience
+                </p>
+
+                {/* Availability */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {provider.availability.inPerson && (
+                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
+                      In-Person
+                    </span>
+                  )}
+                  {provider.availability.telehealth && (
+                    <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
+                      Telehealth
+                    </span>
+                  )}
+                  {provider.availability.homeVisits && (
+                    <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">
+                      Home Visits
+                    </span>
+                  )}
+                </div>
+
+                {/* View Profile Button */}
+                <Link
+                  to={`/network/providers/${provider.id}`}
+                  className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-3 rounded-lg transition-colors font-medium"
+                >
+                  View Profile
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredProviders.length === 0 && !loading && (
+          <div className="text-center py-12">
+            <div className="bg-gray-50 rounded-lg p-8 max-w-md mx-auto">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">No providers found</h3>
+              <p className="text-gray-600 mb-4">
+                Try adjusting your search or filters to find service providers.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedSpecialty('');
+                }}
+                className="bg-zygo-red text-white px-4 py-2 rounded hover:bg-zygo-red/90 transition-colors"
+              >
+                Clear Filters
+              </button>
+            </div>
           </div>
         )}
       </div>

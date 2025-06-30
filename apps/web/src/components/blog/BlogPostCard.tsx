@@ -1,7 +1,6 @@
-import { Button } from '@zygo/ui';
 import { Award, Clock, Heart, ThumbsUp, Users } from 'lucide-react';
 import { useState } from 'react';
-import type { BlogPost } from '../../data/network/blogPosts';
+import type { BlogPost } from '../../lib/api/blog';
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -22,16 +21,13 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <h3 className="font-semibold text-gray-900 text-lg">{post.title}</h3>
-              {post.isReferenced && (
+              {post.hasReferences && (
                 <div className="flex items-center bg-zygo-red/10 text-zygo-red px-2 py-1 rounded-full text-xs font-medium">
                   <Award className="w-3 h-3 mr-1" />
                   Referenced
                 </div>
               )}
             </div>
-            {post.referenceBadge && (
-              <div className="text-xs text-zygo-red font-medium mb-2">{post.referenceBadge}</div>
-            )}
             <div className="flex items-center text-sm text-gray-500 gap-4">
               <span className="flex items-center">
                 <Clock className="w-4 h-4 mr-1" />
@@ -57,14 +53,12 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
         </p>
 
         {post.content.length > 120 && (
-          <Button
-            variant="outline"
-            size="sm"
+          <button
             onClick={() => setExpanded(!expanded)}
-            className="mb-4"
+            className="bg-transparent border border-gray-300 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-50 transition-colors mb-4"
           >
             {expanded ? 'Show Less' : 'Show More'}
-          </Button>
+          </button>
         )}
 
         {/* Tags */}
@@ -88,10 +82,10 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
               <span className="text-gray-400 ml-2">from service providers</span>
             </button>
 
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <button className="bg-transparent border border-gray-300 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-50 transition-colors flex items-center gap-2">
               <Heart className="w-4 h-4" />
               Like
-            </Button>
+            </button>
           </div>
 
           {/* Peer Likes Dropdown */}

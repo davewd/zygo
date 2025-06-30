@@ -1,28 +1,48 @@
-// import type { UserRole } from '@zygo/types';
-// import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
+import React, { useState, useEffect } from 'react';
 import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ServiceCategories } from '../../components/community';
-import { FriendNetworkAvailability } from '../../components/community/FriendNetworkAvailability';
-import { COMMUNITY_PROFILES } from '../../data/community/primaryConsumers';
-
-// Define UserRole locally to avoid type issues
-type UserRole = 'grandparent' | 'parent' | 'child' | 'guardian' | 'caregiver';
+import { getAllCommunityProfiles } from '../../lib/api/community';
+import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
 
 const CommunityHub = () => {
+  // API state management
+  const [profiles, setProfiles] = useState<CommunityProfile[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Load community profiles on component mount
+  useEffect(() => {
+    const loadProfiles = async () => {
+      try {
+        setLoading(true);
+        const response = await getAllCommunityProfiles();
+        setProfiles(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load community profiles:', err);
+        setError('Failed to load community profiles. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfiles();
+  }, []);
+
   // Community stats
-  const totalMembers = COMMUNITY_PROFILES.length;
-  const activeMembers = COMMUNITY_PROFILES.filter((p) => p.consumer.isActive).length;
-  const parentCount = COMMUNITY_PROFILES.filter((p) => p.consumer.role === 'parent').length;
-  const grandparentCount = COMMUNITY_PROFILES.filter(
+  const totalMembers = profiles.length;
+  const activeMembers = profiles.filter((p) => p.consumer.isActive).length;
+  const parentCount = profiles.filter((p) => p.consumer.role === 'parent').length;
+  const grandparentCount = profiles.filter(
     (p) => p.consumer.role === 'grandparent'
   ).length;
-  const childrenCount = COMMUNITY_PROFILES.filter((p) => p.consumer.role === 'child').length;
+  const childrenCount = profiles.filter((p) => p.consumer.role === 'child').length;
 
-  // Featured community members
-  const featuredMembers = COMMUNITY_PROFILES.sort(
-    (a, b) => b.stats.postsCount - a.stats.postsCount
-  ).slice(0, 6);
+  // Featured community members (sort by engagement stats if available)
+  const featuredMembers = profiles
+    .filter(p => p.stats) // Only include profiles with stats
+    .sort((a, b) => (b.stats?.postsCount || 0) - (a.stats?.postsCount || 0))
+    .slice(0, 6);
 
   const getRoleIcon = (role: UserRole) => {
     switch (role) {
@@ -50,220 +70,259 @@ const CommunityHub = () => {
     }
   };
 
-  const communityStats = [
-    { label: 'Total Members', value: totalMembers, icon: Users, color: 'text-blue-600' },
-    { label: 'Active Today', value: activeMembers, icon: TrendingUp, color: 'text-green-600' },
-    { label: 'Parents', value: parentCount, icon: Heart, color: 'text-zygo-red' },
-    { label: 'Grandparents', value: grandparentCount, icon: Star, color: 'text-zygo-yellow' },
-    { label: 'Children', value: childrenCount, icon: Baby, color: 'text-zygo-blue' },
-  ];
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-zygo-red mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading community hub...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  // Service categories for the services section
-  const serviceTypes = [
-    {
-      title: 'Prenatal Care',
-      description: 'Comprehensive pregnancy support and preparation for expecting parents',
-      familyMember: 'For You & Your Partner',
-      icon: Baby,
-      iconColor: 'text-pink-600',
-      bgColor: 'bg-pink-50',
-      services: [
-        {
-          title: 'Egg Freezing at Prologue with Dr. Justin Tucker',
-          description: 'Expert fertility preservation consultation and treatment',
-          location: 'Sydney CBD',
-          price: 'From $350',
-          provider: 'Dr. Justin Tucker',
-          center: 'Prologue',
-          route: '/community/providers/dr-justin-tucker',
-        },
-        {
-          title: 'Before Birth Consultation at Full Circle with Rebecca Cavallaro',
-          description: 'Comprehensive antenatal preparation and planning',
-          location: 'Windsor, QLD',
-          price: 'From $230',
-          provider: 'Rebecca Cavallaro',
-          center: 'Full Circle Midwifery',
-          route: '/community/providers/rebecca-cavallaro',
-        },
-      ],
-    },
-    {
-      title: 'Early Development (0-2 years)',
-      description: 'Support for infants and toddlers in their first years',
-      familyMember: 'For Your Baby',
-      icon: Heart,
-      iconColor: 'text-zygo-red',
-      bgColor: 'bg-zygo-mint/30',
-      services: [
-        {
-          title: 'Breastfeeding Support with Rebecca Cavallaro',
-          description: 'Expert lactation consultation and ongoing support',
-          location: 'Windsor, QLD',
-          price: 'From $230',
-          provider: 'Rebecca Cavallaro',
-          center: 'Full Circle Midwifery',
-          route: '/community/providers/rebecca-cavallaro',
-        },
-        {
-          title: 'Swimming Lessons at Elixr with Sarah Mitchell',
-          description: 'Parent-baby swimming programs for water safety and development',
-          location: 'Bondi Junction',
-          price: 'From $85',
-          provider: 'Sarah Mitchell',
-          center: 'Elixr Swim School',
-          route: '/community/providers/sarah-mitchell',
-        },
-      ],
-    },
-    {
-      title: 'Active Development (2-5 years)',
-      description: 'Physical activities and sports for growing children',
-      familyMember: 'For Your Toddler',
-      icon: Activity,
-      iconColor: 'text-green-600',
-      bgColor: 'bg-green-50',
-      services: [
-        {
-          title: 'Gymnastics Classes at Active8Kids with Emily McConaghy',
-          description: 'Fun gymnastics and movement classes for toddlers',
-          location: 'Brookvale',
-          price: 'From $35',
-          provider: 'Emily McConaghy',
-          center: 'Active8Kids',
-          route: '/community/providers/emily-mcconaghy',
-        },
-        {
-          title: 'Soccer Training at Kickeroos with James Thompson',
-          description: 'Age-appropriate soccer skills and team play',
-          location: 'Paddington',
-          price: 'From $25',
-          provider: 'James Thompson',
-          center: 'Kickeroos Soccer Academy',
-          route: '/community/providers/james-thompson',
-        },
-      ],
-    },
-  ];
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
+        <div className="container mx-auto px-6 py-12">
+          <div className="text-center py-12">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+              <p className="text-red-600 mb-4">{error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Community Hub</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Connect with families, discover services, and grow together in your parenting journey
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            Community <span className="text-zygo-red">Hub</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Connect, share experiences, and grow together with families in our vibrant community.
+            Find support, share wisdom, and celebrate the journey of parenting and child development.
           </p>
         </div>
 
-        {/* Summer Holidays Activity Planning Section */}
-        <section className="mb-16">
-          {/* Friend Network Availability */}
-          <div className="mb-8">
+        {/* Community Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-red">
+            <Users className="w-8 h-8 text-zygo-red mx-auto mb-3" />
+            <div className="text-2xl font-bold text-gray-800">{totalMembers}</div>
+            <div className="text-gray-600 text-sm">Total Members</div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-green-500">
+            <Activity className="w-8 h-8 text-green-500 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-gray-800">{activeMembers}</div>
+            <div className="text-gray-600 text-sm">Active Members</div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-blue">
+            <Heart className="w-8 h-8 text-zygo-blue mx-auto mb-3" />
+            <div className="text-2xl font-bold text-gray-800">{parentCount}</div>
+            <div className="text-gray-600 text-sm">Parents</div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-yellow">
+            <Star className="w-8 h-8 text-zygo-yellow mx-auto mb-3" />
+            <div className="text-2xl font-bold text-gray-800">{grandparentCount}</div>
+            <div className="text-gray-600 text-sm">Grandparents</div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <Link
+            to="/community/profiles"
+            className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 border border-gray-200 hover:border-zygo-red"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <Users className="w-8 h-8 text-zygo-red" />
+              <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-zygo-red group-hover:translate-x-1 transition-all" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Community Profiles</h3>
+            <p className="text-gray-600 text-sm">
+              Browse and connect with families, parents, and caregivers in your area.
+            </p>
+          </Link>
+
+          <Link
+            to="/community/providers"
+            className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 border border-gray-200 hover:border-zygo-red"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <User className="w-8 h-8 text-zygo-red" />
+              <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-zygo-red group-hover:translate-x-1 transition-all" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Service Providers</h3>
+            <p className="text-gray-600 text-sm">
+              Find trusted healthcare professionals, educators, and specialists.
+            </p>
+          </Link>
+
+          <Link
+            to="/community/groups"
+            className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 border border-gray-200 hover:border-zygo-red"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <TrendingUp className="w-8 h-8 text-zygo-red" />
+              <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-zygo-red group-hover:translate-x-1 transition-all" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Community Groups</h3>
+            <p className="text-gray-600 text-sm">
+              Join interest-based groups and participate in community discussions.
+            </p>
+          </Link>
+        </div>
+
+        {/* Featured Community Members */}
+        {featuredMembers.length > 0 && (
+          <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-1">Activities with Friends</h3>
-                <p className="text-gray-600">
-                  See when your friends are available for a playdate or activity.
-                </p>
-              </div>
-              <Link to="/tools/holiday-planner">
-                <button className="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg flex items-center space-x-2">
-                  <Users className="w-4 h-4" />
-                  <span>View Full Calendar</span>
-                </button>
+              <h2 className="text-2xl font-bold text-gray-800">Featured Community Members</h2>
+              <Link
+                to="/community/profiles"
+                className="text-zygo-red hover:text-zygo-red/80 font-medium text-sm flex items-center gap-2"
+              >
+                View All <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
-            <FriendNetworkAvailability
-              compact={true}
-              onCreatePlaydate={(timeSlot) => {
-                // Navigate to holiday planner with pre-selected time
-                console.log('Navigate to holiday planner with time:', timeSlot);
-              }}
-            />
-          </div>
-        </section>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredMembers.map((profile) => {
+                const RoleIcon = getRoleIcon(profile.consumer.role);
+                const roleColor = getRoleColor(profile.consumer.role);
 
-        {/* Community Members Section */}
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                Community Members you may know
-              </h2>
-            </div>
-            <Link to="/community/profiles">
-              <button className="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors">
-                <span>View All Profiles</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
-
-          {/* Featured Members */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {featuredMembers.map((profile) => {
-              const { consumer, stats } = profile;
-              const RoleIcon = getRoleIcon(consumer.role);
-              const roleColor = getRoleColor(consumer.role);
-
-              return (
-                <Link key={consumer.id} to={`/community/profiles/${consumer.handle}`}>
-                  <div className="rounded-lg border bg-white shadow-sm hover:shadow-lg transition-shadow">
-                    <div className="flex flex-col space-y-1.5 p-6 pb-4">
-                      <div className="flex items-center space-x-3">
+                return (
+                  <div
+                    key={profile.consumer.id}
+                    className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
+                  >
+                    {/* Profile Header */}
+                    <div className="h-32 bg-gradient-to-br from-zygo-blue to-zygo-mint relative">
+                      {profile.consumer.profileImage && (
                         <img
-                          src={consumer.profileImage}
-                          alt={consumer.displayName}
-                          className="w-12 h-12 rounded-full object-cover"
+                          src={profile.consumer.profileImage}
+                          alt={profile.consumer.displayName}
+                          className="w-full h-full object-cover"
                         />
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-800">{consumer.displayName}</h3>
-                          <div className="flex items-center space-x-1">
-                            <RoleIcon className={`w-4 h-4 ${roleColor}`} />
-                            <span className="text-sm text-gray-600 capitalize">
-                              {consumer.role}
-                            </span>
-                          </div>
-                        </div>
+                      )}
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <h3 className="text-white font-semibold text-sm">
+                          {profile.consumer.displayName}
+                        </h3>
+                        <p className="text-white/80 text-xs">@{profile.consumer.handle}</p>
                       </div>
                     </div>
-                    <div className="p-6 pt-0">
-                      <p className="text-gray-600 text-sm mb-3">{consumer.tagline}</p>
-                      <div className="flex justify-between text-xs text-gray-500">
-                        <span>{stats.postsCount} posts</span>
-                        <span>{stats.connectionsCount} connections</span>
+
+                    {/* Profile Content */}
+                    <div className="p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <RoleIcon className={`w-4 h-4 ${roleColor}`} />
+                        <span className="text-sm font-medium text-gray-600 capitalize">
+                          {profile.consumer.role}
+                        </span>
+                        <span className="text-sm text-gray-400">•</span>
+                        <span className="text-sm text-gray-500 capitalize">
+                          {profile.consumer.ageGroup}
+                        </span>
                       </div>
+
+                      {profile.consumer.tagline && (
+                        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                          {profile.consumer.tagline}
+                        </p>
+                      )}
+
+                      {/* Stats */}
+                      {profile.stats && (
+                        <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                          <span>{profile.stats.postsCount || 0} posts</span>
+                          <span>{profile.stats.connectionsCount || 0} connections</span>
+                        </div>
+                      )}
+
+                      {/* View Profile Button */}
+                      <Link
+                        to={`/community/profile/${profile.consumer.id}`}
+                        className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-2 rounded transition-colors text-sm font-medium"
+                      >
+                        View Profile
+                      </Link>
                     </div>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Services Section */}
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Services & Support</h2>
-              <p className="text-gray-600">
-                Discover professional services tailored to your family's needs
-              </p>
+                );
+              })}
             </div>
-            <Link to="/community/providers">
-              <button className="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-md flex items-center space-x-2 transition-colors">
-                <span>Browse All Providers</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+          </div>
+        )}
+
+        {/* Service Categories - TODO: Migrate ServiceCategories component */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Service Categories</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <p className="text-gray-600 text-center">
+              Service categories will be displayed here once the ServiceCategories component is migrated.
+            </p>
+            <div className="text-center mt-4">
+              <Link
+                to="/network/providers"
+                className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+              >
+                Browse All Services
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Friend Network Availability - TODO: Migrate FriendNetworkAvailability component */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Friend Network</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <p className="text-gray-600 text-center">
+              Friend network availability will be displayed here once the component is migrated.
+            </p>
+          </div>
+        </div>
+
+        {/* Community Insights */}
+        <div className="bg-gradient-to-r from-zygo-mint/20 to-zygo-blue/20 rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Join Our Growing Community
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Be part of a supportive network where families share experiences, find resources,
+            and grow together. Your journey matters, and our community is here to support you every step of the way.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/community/profiles"
+              className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            >
+              Explore Profiles
+            </Link>
+            <Link
+              to="/community/join"
+              className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            >
+              Join Community
             </Link>
           </div>
-
-          {/* Service Categories */}
-          <ServiceCategories serviceTypes={serviceTypes} />
-        </section>
+        </div>
       </div>
     </div>
   );

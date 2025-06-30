@@ -25,11 +25,7 @@ import {
 } from '@zygo/ui';
 import { Info, Search, Upload } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import {
-  getCredentialDefinition,
-  getCredentialProvider,
-  searchCredentials,
-} from '../../data/credentials/credentialProviders';
+import { getCredentialDefinition } from '../../lib/api/credentials';
 
 interface CredentialFormProps {
   open: boolean;
