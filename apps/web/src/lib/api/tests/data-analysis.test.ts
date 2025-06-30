@@ -116,7 +116,16 @@ describe('Data Analysis Tests', () => {
     
     // Validate that we have some actor types
     expect(Object.keys(actorCounts).length).toBeGreaterThan(0);
-    expect(actorCounts['unknown']).toBeDefined();
+    
+    // After our fixes, we should have these actor types
+    expect(actorCounts['system']).toBeGreaterThan(0);
+    expect(actorCounts['community_member']).toBeGreaterThan(0);
+    expect(actorCounts['service_provider']).toBeGreaterThan(0);
+    expect(actorCounts['organization']).toBeGreaterThan(0);
+    
+    // We should NOT have any unknown or undefined actor types
+    expect(actorCounts['unknown']).toBeUndefined();
+    expect(actorCounts['undefined']).toBeUndefined();
   });
 
   test('Should provide summary of data consistency', () => {
