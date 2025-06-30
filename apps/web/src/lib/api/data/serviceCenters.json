@@ -63,7 +63,15 @@
           }
         }
       ],
-      "features": ["gymnastics", "movement", "recreation", "kids", "fitness", "birthday-parties", "holiday-camps"],
+      "features": [
+        "gymnastics",
+        "movement",
+        "recreation",
+        "kids",
+        "fitness",
+        "birthday-parties",
+        "holiday-camps"
+      ],
       "certifications": ["Gymnastics Australia", "First Aid Certified"],
       "insurance": ["Public Liability", "Professional Indemnity"],
       "accessibility": ["Wheelchair accessible", "Sensory-friendly programs"],
@@ -131,8 +139,17 @@
           }
         }
       ],
-      "features": ["lactation-support", "home-visits", "online-consultations", "antenatal-education", "medicare-rebates"],
-      "certifications": ["IBCLC - International Board Certified Lactation Consultant", "Registered Midwife"],
+      "features": [
+        "lactation-support",
+        "home-visits",
+        "online-consultations",
+        "antenatal-education",
+        "medicare-rebates"
+      ],
+      "certifications": [
+        "IBCLC - International Board Certified Lactation Consultant",
+        "Registered Midwife"
+      ],
       "insurance": ["Medicare Provider", "Private Health Insurance"],
       "accessibility": ["Home visits available", "Online consultations", "Multilingual support"],
       "images": ["/images/fullcircle-clinic.jpg", "/images/fullcircle-consultation.jpg"],
@@ -199,9 +216,23 @@
           }
         }
       ],
-      "features": ["psychology", "therapy", "mental-health", "family-support", "assessment", "intervention"],
-      "certifications": ["Australian Health Practitioner Regulation Agency (AHPRA)", "Psychology Board of Australia"],
-      "insurance": ["Medicare Provider", "Private Health Insurance", "Department of Veterans' Affairs"],
+      "features": [
+        "psychology",
+        "therapy",
+        "mental-health",
+        "family-support",
+        "assessment",
+        "intervention"
+      ],
+      "certifications": [
+        "Australian Health Practitioner Regulation Agency (AHPRA)",
+        "Psychology Board of Australia"
+      ],
+      "insurance": [
+        "Medicare Provider",
+        "Private Health Insurance",
+        "Department of Veterans' Affairs"
+      ],
       "accessibility": ["Wheelchair accessible", "Easy parking", "Sensory-friendly spaces"],
       "images": ["/images/prologue-clinic.jpg", "/images/prologue-therapy-room.jpg"],
       "establishedYear": 2018,
@@ -267,8 +298,16 @@
         "saturday": { "open": "Emergency only", "close": "Emergency only" },
         "sunday": { "open": "Emergency only", "close": "Emergency only" }
       },
-      "features": ["obstetrics", "gynaecology", "pregnancy-care", "women-health", "specialist-care"],
-      "certifications": ["Royal Australian and New Zealand College of Obstetricians and Gynaecologists (RANZCOG)"],
+      "features": [
+        "obstetrics",
+        "gynaecology",
+        "pregnancy-care",
+        "women-health",
+        "specialist-care"
+      ],
+      "certifications": [
+        "Royal Australian and New Zealand College of Obstetricians and Gynaecologists (RANZCOG)"
+      ],
       "insurance": ["Medicare Provider", "Private Health Insurance"],
       "accessibility": ["Wheelchair accessible", "Public transport access"],
       "images": ["/images/emog-clinic.jpg", "/images/emog-consultation.jpg"],
@@ -316,7 +355,12 @@
         "saturday": { "open": "9:00 AM", "close": "3:00 PM" },
         "sunday": { "closed": true }
       },
-      "features": ["childbirth-education", "birth-preparation", "antenatal-classes", "evidence-based"],
+      "features": [
+        "childbirth-education",
+        "birth-preparation",
+        "antenatal-classes",
+        "evidence-based"
+      ],
       "certifications": ["Calmbirth Accredited Educators", "Australian Doula College"],
       "insurance": ["Some private health rebates available"],
       "accessibility": ["Wheelchair accessible", "Partner-friendly facilities"],
