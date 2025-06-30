@@ -339,6 +339,7 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
       // Filter by author - check both handle and metadata.authorId for consistency
       if (filters.authorId && 
           item.author?.handle !== filters.authorId && 
+          item.metadata?.authorId !== filters.authorId &&
           item.author?.providerId !== filters.authorId) {
         return false;
       }
