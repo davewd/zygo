@@ -111,7 +111,9 @@ describe('Data Consistency Tests', () => {
       const providerIds = new Set(providersData.serviceProviders.map(provider => provider.id));
       
       serviceCentersData.serviceCenters.forEach(center => {
-        center.providers.forEach(providerId => {
+        // Handle both provider objects and provider ID strings
+        center.providers.forEach(provider => {
+          const providerId = typeof provider === 'string' ? provider : provider.id;
           expect(providerIds.has(providerId)).toBe(true);
           if (!providerIds.has(providerId)) {
             console.warn(`Service center ${center.id} lists unknown provider: ${providerId}`);

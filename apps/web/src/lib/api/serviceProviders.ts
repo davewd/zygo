@@ -108,34 +108,48 @@ interface ServiceCenter {
 // Import providers data from our API data files
 import providersData from './data/providers.json';
 import serviceCentersData from './data/serviceCenters.json';
+// Import service center functions
+import { getServiceCenterById } from './serviceCenters';
 
 // Mock delay for API simulation
 const API_DELAY = 300;
 
 /**
- * Get all service providers
+ * Enhanced ServiceProvider interface with joined service center data
  */
-export async function getAllServiceProviders(): Promise<ServiceProvider[]> {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, API_DELAY));
-  
-  return providersData.serviceProviders as ServiceProvider[];
+export interface ServiceProviderWithCenter extends ServiceProvider {
+  serviceCenter?: ServiceCenter;
 }
 
 /**
- * Get all service centers
+ * Get all service providers with optional service center data joined
  */
-export async function getAllServiceCenters(): Promise<ServiceCenter[]> {
+export async function getAllServiceProviders(includeServiceCenter: boolean = false): Promise<ServiceProvider[]> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, API_DELAY));
   
-  return serviceCentersData.serviceCenters as ServiceCenter[];
+  const providers = providersData.serviceProviders as ServiceProvider[];
+  
+  if (!includeServiceCenter) {
+    return providers;
+  }
+  
+  // Join with service center data
+  return providers.map(provider => ({
+    ...provider,
+    serviceCenter: provider.centerId 
+      ? serviceCentersData.serviceCenters.find(center => center.id === provider.centerId)
+      : undefined
+  })) as ServiceProviderWithCenter[];
 }
 
 /**
- * Get a service provider by ID
+ * Get a service provider by ID with optional service center data
  */
-export async function getServiceProviderById(id: string): Promise<ServiceProvider | null> {
+export async function getServiceProviderById(
+  id: string, 
+  includeServiceCenter: boolean = false
+): Promise<ServiceProvider | ServiceProviderWithCenter | null> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, API_DELAY));
   
@@ -143,21 +157,35 @@ export async function getServiceProviderById(id: string): Promise<ServiceProvide
     provider => provider.id === id
   ) as ServiceProvider | undefined;
   
-  return provider || null;
+  if (!provider) {
+    return null;
+  }
+  
+  if (!includeServiceCenter) {
+    return provider;
+  }
+  
+  // Join with service center data
+  const serviceCenter = provider.centerId 
+    ? serviceCentersData.serviceCenters.find(center => center.id === provider.centerId)
+    : undefined;
+    
+  return {
+    ...provider,
+    serviceCenter
+  } as ServiceProviderWithCenter;
 }
 
 /**
- * Get a service center by ID
+ * Get providers by service center ID
  */
-export async function getServiceCenterById(id: string): Promise<ServiceCenter | null> {
+export async function getProvidersByServiceCenter(centerId: string): Promise<ServiceProvider[]> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, API_DELAY));
   
-  const center = serviceCentersData.serviceCenters.find(
-    center => center.id === id
-  ) as ServiceCenter | undefined;
-  
-  return center || null;
+  return providersData.serviceProviders.filter(
+    provider => provider.centerId === centerId
+  ) as ServiceProvider[];
 }
 
 /**

@@ -1,10 +1,11 @@
 /**
  * Service Centers API
- * Provides access to service center data
+ * Provides access to service center data with provider relationships
  */
 
 import type { ServiceCenter } from '@zygo/types';
 import serviceCentersData from './data/serviceCenters.json';
+import providersData from './data/providers.json';
 
 // Mock delay for API simulation
 const API_DELAY = 300;
@@ -19,6 +20,13 @@ export interface ServiceCenterFilters {
   location?: string;
   services?: string[];
   certifications?: string[];
+}
+
+/**
+ * Enhanced ServiceCenter interface with providers populated
+ */
+export interface ServiceCenterWithProviders extends ServiceCenter {
+  providersData?: any[]; // The actual provider objects from the providers API
 }
 
 /**
@@ -79,9 +87,12 @@ export async function getAllServiceCenters(
 }
 
 /**
- * Get service center by ID
+ * Get service center by ID with optional provider data populated
  */
-export async function getServiceCenterById(id: string): Promise<ServiceCenter | null> {
+export async function getServiceCenterById(
+  id: string, 
+  includeProviders: boolean = false
+): Promise<ServiceCenter | ServiceCenterWithProviders | null> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, API_DELAY));
   
@@ -89,7 +100,23 @@ export async function getServiceCenterById(id: string): Promise<ServiceCenter | 
     center => center.id === id
   ) as ServiceCenter | undefined;
   
-  return center || null;
+  if (!center) {
+    return null;
+  }
+  
+  if (!includeProviders) {
+    return center;
+  }
+  
+  // Get providers for this center from providers data
+  const centerProviders = providersData.serviceProviders.filter(
+    provider => provider.centerId === id
+  );
+  
+  return {
+    ...center,
+    providersData: centerProviders
+  } as ServiceCenterWithProviders;
 }
 
 /**

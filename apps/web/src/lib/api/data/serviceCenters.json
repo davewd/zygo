@@ -22,51 +22,7 @@
         "website": "https://fullcirclemidwifery.com.au",
         "bookingUrl": "https://fullcirclemidwifery.com.au/book-now"
       },
-      "providers": [
-        {
-          "id": "rebecca-cavallaro",
-          "firstName": "Rebecca",
-          "lastName": "Cavallaro",
-          "title": "IBCLC, Midwife, RN",
-          "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
-          "bio": "Rebecca is a passionate midwife and International Board Certified Lactation Consultant (IBCLC) with over 15 years of experience supporting families. She provides evidence-based care with a focus on empowering mothers and families to achieve their feeding goals.",
-          "credentials": [
-            {
-              "title": "International Board Certified Lactation Consultant",
-              "abbreviation": "IBCLC",
-              "issuingBody": "IBLCE",
-              "verified": true
-            },
-            {
-              "title": "Registered Midwife",
-              "abbreviation": "RM",
-              "issuingBody": "AHPRA",
-              "verified": true
-            },
-            {
-              "title": "Registered Nurse",
-              "abbreviation": "RN",
-              "issuingBody": "AHPRA",
-              "verified": true
-            }
-          ],
-          "specializations": [
-            "Lactation Support",
-            "Breastfeeding Difficulties",
-            "Antenatal Care",
-            "Postnatal Support",
-            "Infant Feeding"
-          ],
-          "languages": ["English"],
-          "yearsExperience": 15,
-          "availability": {
-            "inPerson": true,
-            "telehealth": true,
-            "homeVisits": true,
-            "emergency": false
-          }
-        }
-      ],
+      "providers": ["rebecca-cavallaro"],
       "services": [
         {
           "id": "initial-lactation-consultation",
@@ -128,45 +84,7 @@
         "website": "https://gavinmccormack.com.au",
         "bookingUrl": "https://gavinmccormack.com.au/book-gavin-as-your-next-keynote-speaker"
       },
-      "providers": [
-        {
-          "id": "gavin-mccormack",
-          "firstName": "Gavin",
-          "lastName": "McCormack",
-          "title": "Educator, Author & Child Development Specialist",
-          "profileImage": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face",
-          "bio": "Gavin is a passionate educator and author with over 25 years of teaching experience worldwide. Named one of the Most Influential Educators for 2022, he specializes in Montessori education and progressive teaching methods.",
-          "credentials": [
-            {
-              "title": "Bachelor of Education",
-              "abbreviation": "BEd",
-              "issuingBody": "Australian University",
-              "verified": true
-            },
-            {
-              "title": "Master of Education (Montessori)",
-              "abbreviation": "MEd",
-              "issuingBody": "Montessori Education Institute",
-              "verified": true
-            }
-          ],
-          "specializations": [
-            "Montessori Education",
-            "Child Development",
-            "Progressive Teaching Methods",
-            "Educational Leadership",
-            "Parent Education"
-          ],
-          "languages": ["English"],
-          "yearsExperience": 25,
-          "availability": {
-            "inPerson": true,
-            "telehealth": false,
-            "homeVisits": false,
-            "emergency": false
-          }
-        }
-      ],
+      "providers": ["gavin-mccormack"],
       "services": [
         {
           "id": "educational-blog",
@@ -255,45 +173,7 @@
         "website": "https://prologue.com.au",
         "bookingUrl": "https://prologue.com.au/appointments"
       },
-      "providers": [
-        {
-          "id": "dr-justin-tucker",
-          "firstName": "Justin",
-          "lastName": "Tucker",
-          "title": "Obstetrician & Fertility Specialist",
-          "profileImage": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
-          "bio": "Dr. Justin Tucker is a leading fertility specialist and obstetrician with extensive experience in reproductive medicine and fertility treatments.",
-          "credentials": [
-            {
-              "title": "Fellowship in Obstetrics and Gynaecology",
-              "abbreviation": "FRANZCOG",
-              "issuingBody": "RANZCOG",
-              "verified": true
-            },
-            {
-              "title": "Fertility Specialist",
-              "abbreviation": "CREi",
-              "issuingBody": "Australian Fertility Society",
-              "verified": true
-            }
-          ],
-          "specializations": [
-            "Fertility Medicine",
-            "IVF Treatments",
-            "Reproductive Endocrinology",
-            "Pregnancy Care",
-            "Fertility Preservation"
-          ],
-          "languages": ["English"],
-          "yearsExperience": 15,
-          "availability": {
-            "inPerson": true,
-            "telehealth": true,
-            "homeVisits": false,
-            "emergency": true
-          }
-        }
-      ],
+      "providers": ["dr-justin-tucker"],
       "services": [
         {
           "id": "fertility-consultation",
@@ -371,98 +251,7 @@
           }
         ]
       },
-      "providers": [
-        {
-          "id": "emily-mcconaghy",
-          "firstName": "Emily",
-          "lastName": "McConaghy",
-          "title": "Lead Gymnastics Coach & Program Director",
-          "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-          "bio": "Emily is a passionate gymnastics coach with over 8 years of experience working with children aged 0-12. She specializes in creating safe, nurturing environments where children can develop confidence, strength, and a love of movement through gymnastics, ninja warrior, and parkour activities.",
-          "credentials": [
-            {
-              "title": "Gymnastics Australia Level 2 Coaching Certification",
-              "abbreviation": "GA L2",
-              "issuingBody": "Gymnastics Australia",
-              "verified": true
-            },
-            {
-              "title": "Working with Children Check",
-              "abbreviation": "WWCC",
-              "issuingBody": "NSW Government",
-              "verified": true
-            },
-            {
-              "title": "First Aid and CPR Certification",
-              "abbreviation": "First Aid",
-              "issuingBody": "St John Ambulance",
-              "verified": true
-            },
-            {
-              "title": "Certificate IV in Sport and Recreation",
-              "abbreviation": "Cert IV",
-              "issuingBody": "TAFE NSW",
-              "verified": true
-            }
-          ],
-          "specializations": [
-            "Recreational Gymnastics",
-            "Early Childhood Movement",
-            "Confidence Building",
-            "Motor Skill Development",
-            "Safe Coaching Practices",
-            "Inclusive Programming",
-            "Parent-Child Classes",
-            "Birthday Party Coordination"
-          ],
-          "yearsExperience": 8
-        },
-        {
-          "id": "jake-thompson",
-          "firstName": "Jake",
-          "lastName": "Thompson",
-          "title": "Ninja & Parkour Specialist",
-          "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-          "bio": "Jake brings high-energy enthusiasm to Active8Kids as our ninja warrior and parkour specialist. With a background in martial arts and parkour training, he creates exciting challenges that help children build strength, agility, and problem-solving skills while having fun.",
-          "credentials": [
-            {
-              "title": "Parkour Australia Instructor Certification",
-              "abbreviation": "PA Instructor",
-              "issuingBody": "Parkour Australia",
-              "verified": true
-            },
-            {
-              "title": "Martial Arts Black Belt - Karate",
-              "abbreviation": "Karate BB",
-              "issuingBody": "Australian Karate Federation",
-              "verified": true
-            },
-            {
-              "title": "Working with Children Check",
-              "abbreviation": "WWCC",
-              "issuingBody": "NSW Government",
-              "verified": true
-            },
-            {
-              "title": "First Aid and CPR Certification",
-              "abbreviation": "First Aid",
-              "issuingBody": "St John Ambulance",
-              "verified": true
-            }
-          ],
-          "specializations": [
-            "Ninja Warrior Training",
-            "Parkour Movement",
-            "Obstacle Course Design",
-            "Agility Development",
-            "Risk Assessment",
-            "Adventure-Based Learning",
-            "Problem-Solving Skills",
-            "Confidence Through Challenge"
-          ],
-          "yearsExperience": 6
-        }
-      ],
+      "providers": ["emily-mcconaghy", "jake-thompson"],
       "services": [
         {
           "id": "kindy-gym-classes",

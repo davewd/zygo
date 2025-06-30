@@ -73,7 +73,7 @@
         "followUpFee": 210,
         "currency": "AUD"
       },
-      "centerId": "full-circle-center"
+      "centerId": "full-circle-midwifery"
     },
     {
       "id": "dr-justin-tucker",
@@ -140,7 +140,7 @@
         "followUpFee": 200,
         "currency": "AUD"
       },
-      "centerId": "prologue-center"
+      "centerId": "prologue"
     },
     {
       "id": "gavin-mccormack",
@@ -189,71 +189,137 @@
         "followUpFee": 160,
         "currency": "AUD"
       },
-      "centerId": "full-circle-center"
-    }
-  ],
-  "serviceCenters": [
+      "centerId": "gavin-mccormack-education"
+    },
     {
-      "id": "full-circle-center",
-      "name": "Full Circle Midwifery & Lactation",
-      "description": "Comprehensive midwifery and lactation support services",
-      "overview": "Full Circle Midwifery & Lactation provides holistic care for families throughout the childbearing journey, from preconception through the postpartum period.",
-      "mission": "To provide evidence-based, compassionate care that empowers families to achieve their birthing and feeding goals.",
-      "location": {
-        "address": "123 Family Way",
-        "suburb": "Paddington",
-        "state": "NSW",
-        "postcode": "2021",
-        "country": "Australia",
-        "coordinates": {
-          "lat": -33.8886,
-          "lng": 151.2073
+      "id": "emily-mcconaghy",
+      "firstName": "Emily",
+      "lastName": "McConaghy",
+      "title": "Lead Gymnastics Coach & Program Director",
+      "profileImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=400&fit=crop",
+      "bio": "Emily is a passionate gymnastics coach with over 8 years of experience working with children aged 0-12.",
+      "personalStory": "I love creating safe, nurturing environments where children can develop confidence, strength, and a love of movement through gymnastics and physical activities.",
+      "credentials": [
+        {
+          "title": "Gymnastics Australia Level 2 Coaching Certification",
+          "abbreviation": "GA L2",
+          "issuingBody": "Gymnastics Australia",
+          "year": 2020,
+          "verified": true,
+          "credentialDefinitionId": "ga-level2-2023",
+          "personalCredentialId": "em-ga-001",
+          "expiryDate": "2025-12-31",
+          "verificationReference": "GA-789012"
         }
-      },
+      ],
+      "education": [
+        {
+          "institution": "University of Technology Sydney",
+          "degree": "Bachelor of Sport and Exercise Science",
+          "year": 2018,
+          "verified": true
+        }
+      ],
+      "specializations": ["Child Development", "Gymnastics Coaching", "Movement Education"],
+      "servicesOffered": [
+        {
+          "id": "kindy-gym-classes",
+          "name": "Kindy Gym Classes",
+          "description": "Fun gymnastics classes for toddlers and preschoolers",
+          "duration": 45,
+          "ageRange": "1-5 years"
+        }
+      ],
+      "availability": [
+        {
+          "day": "Monday",
+          "times": ["9:00 AM - 12:00 PM", "1:00 PM - 4:00 PM"]
+        },
+        {
+          "day": "Wednesday",
+          "times": ["9:00 AM - 12:00 PM", "1:00 PM - 4:00 PM"]
+        },
+        {
+          "day": "Friday",
+          "times": ["9:00 AM - 12:00 PM", "1:00 PM - 4:00 PM"]
+        }
+      ],
       "contact": {
-        "phone": "+61 2 9999 0001",
-        "email": "hello@fullcirclemidwifery.com.au",
-        "website": "https://fullcirclemidwifery.com.au",
-        "bookingUrl": "https://fullcirclemidwifery.com.au/book"
+        "phone": "0430 567 890",
+        "email": "emily@active8kids.com.au"
       },
-      "providers": ["rebecca-cavallaro"],
-      "services": [
-        "initial-lactation-consultation",
-        "follow-up-lactation-consultation",
-        "before-birth-consultation",
-        "essential-knowledge-preparation",
-        "nipple-care-specialist-consultation"
-      ],
-      "operatingHours": {
-        "monday": { "open": "09:00", "close": "17:00" },
-        "tuesday": { "open": "09:00", "close": "17:00" },
-        "wednesday": { "open": "09:00", "close": "17:00" },
-        "thursday": { "open": "09:00", "close": "17:00" },
-        "friday": { "open": "09:00", "close": "17:00" },
-        "saturday": { "open": "09:00", "close": "13:00" },
-        "sunday": { "closed": true }
+      "pricing": {
+        "consultationFee": 80,
+        "followUpFee": 70,
+        "currency": "AUD"
       },
-      "features": [
-        "Home Visits Available",
-        "Telehealth Consultations",
-        "Medicare Rebates",
-        "Multilingual Support",
-        "Evidence-Based Practice",
-        "Family-Centered Care"
+      "centerId": "active8kids-bondi-junction"
+    },
+    {
+      "id": "jake-thompson",
+      "firstName": "Jake",
+      "lastName": "Thompson",
+      "title": "Ninja & Parkour Specialist",
+      "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=400&fit=crop",
+      "bio": "Jake brings high-energy enthusiasm as our ninja warrior and parkour specialist with a background in martial arts.",
+      "personalStory": "I love creating exciting challenges that help children build strength, agility, and problem-solving skills while having fun.",
+      "credentials": [
+        {
+          "title": "Parkour Australia Instructor Certification",
+          "abbreviation": "PA Instructor",
+          "issuingBody": "Parkour Australia",
+          "year": 2021,
+          "verified": true,
+          "credentialDefinitionId": "pa-instructor-2023",
+          "personalCredentialId": "jt-pa-001",
+          "expiryDate": "2026-06-30",
+          "verificationReference": "PA-345678"
+        }
       ],
-      "certifications": [
-        "IBCLC Certified",
-        "Registered Midwife",
-        "Australian Health Practitioner Regulation Agency"
+      "education": [
+        {
+          "institution": "Australian College of Physical Education",
+          "degree": "Certificate IV in Sport and Recreation",
+          "year": 2019,
+          "verified": true
+        }
       ],
-      "insurance": ["Professional Indemnity", "Public Liability"],
-      "accessibility": ["Wheelchair Access", "Baby-Friendly Facilities", "Parking Available"],
-      "images": [
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop"
+      "specializations": ["Parkour Training", "Ninja Warrior Coaching", "Martial Arts"],
+      "servicesOffered": [
+        {
+          "id": "ninja-warrior-classes",
+          "name": "Ninja Warrior Classes",
+          "description": "High-energy obstacle course training for kids",
+          "duration": 60,
+          "ageRange": "6-12 years"
+        }
       ],
-      "establishedYear": 2015,
-      "culturalConsiderations": "Full Circle Midwifery welcomes families from all cultural backgrounds and provides culturally sensitive care that respects diverse birthing and parenting traditions."
+      "availability": [
+        {
+          "day": "Tuesday",
+          "times": ["3:00 PM - 6:00 PM"]
+        },
+        {
+          "day": "Thursday",
+          "times": ["3:00 PM - 6:00 PM"]
+        },
+        {
+          "day": "Saturday",
+          "times": ["9:00 AM - 12:00 PM", "1:00 PM - 4:00 PM"]
+        }
+      ],
+      "contact": {
+        "phone": "0430 678 901",
+        "email": "jake@active8kids.com.au"
+      },
+      "pricing": {
+        "consultationFee": 85,
+        "followUpFee": 75,
+        "currency": "AUD"
+      },
+      "centerId": "active8kids-bondi-junction"
     }
   ],
   "serviceCategories": [
@@ -329,8 +395,7 @@
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalProviders": 3,
-    "totalCenters": 1,
+    "totalProviders": 5,
     "dataSource": "mock-api"
   }
 }
