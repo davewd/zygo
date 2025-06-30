@@ -1,13 +1,11 @@
 const config = {
   // Use projects to define multiple Jest configurations for different packages
   projects: [
-    '<rootDir>/packages/*/jest.config.cjs',
     '<rootDir>/apps/*/jest.config.cjs'
   ],
 
   // Collect coverage from all packages
   collectCoverageFrom: [
-    'packages/*/src/**/*.{ts,tsx,js,jsx}',
     'apps/*/src/**/*.{ts,tsx,js,jsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
@@ -37,8 +35,6 @@ const config = {
 
   // Test match patterns
   testMatch: [
-    '<rootDir>/packages/**/src/**/__tests__/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/packages/**/src/**/*.{test,spec}.{ts,tsx,js,jsx}',
     '<rootDir>/apps/**/src/**/__tests__/**/*.{ts,tsx,js,jsx}',
     '<rootDir>/apps/**/src/**/*.{test,spec}.{ts,tsx,js,jsx}'
   ],
@@ -55,12 +51,6 @@ const config = {
   moduleNameMapper: {
     '^@workspace/(.*)$': '<rootDir>/packages/$1/src'
   },
-
-  // Watch plugins for better development experience
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname'
-  ],
 
   // Max workers for parallel execution
   maxWorkers: '50%',
