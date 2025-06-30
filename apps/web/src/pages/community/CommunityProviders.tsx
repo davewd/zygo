@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  getAllServiceProviders,
-  searchProviders,
-  getProvidersBySpecialization 
-} from '../../lib/api/providers';
+  getAllServiceProviders
+} from '../../lib/api/serviceProviders';
 
 // Define the service provider type from the API
 interface ServiceProvider {
@@ -50,11 +48,11 @@ const CommunityProviders = () => {
       try {
         setLoading(true);
         const response = await getAllServiceProviders();
-        setProviders(response.data);
+        setProviders(response);
         
         // Extract unique specializations for filter
         const specialties = Array.from(
-          new Set(response.data.flatMap(provider => provider.specializations))
+          new Set(response.flatMap(provider => provider.specializations))
         ).sort();
         setAvailableSpecialties(specialties);
         
