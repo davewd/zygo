@@ -232,11 +232,7 @@
           "verified": true
         }
       ],
-      "services": [
-        "child-development-assessment",
-        "educational-consultation",
-        "learning-support"
-      ],
+      "services": ["child-development-assessment", "educational-consultation", "learning-support"],
       "specializations": [
         "Child Development",
         "Educational Psychology",

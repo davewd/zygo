@@ -30,7 +30,7 @@ global.IntersectionObserver = jest.fn().mockImplementation(() => ({
 }));
 
 // Add TextEncoder/TextDecoder polyfills for jsdom
-import { TextEncoder, TextDecoder } from 'util';
+import { TextDecoder, TextEncoder } from 'util';
 
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;

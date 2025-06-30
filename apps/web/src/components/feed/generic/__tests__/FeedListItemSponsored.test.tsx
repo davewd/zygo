@@ -1,7 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import {
+  ActorType,
+  FeedItemType,
+  FeedItemTypeMap,
+  VisibilityLevel,
+} from '../../../../lib/api/feed';
 import { FeedListItemSponsored } from '../FeedListItemSponsored';
-import { FeedItemType, FeedItemTypeMap, ActorType, VisibilityLevel } from '../../../../lib/api/feed';
 
 // Mock window.open
 const mockWindowOpen = jest.fn();
