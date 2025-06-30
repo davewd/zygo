@@ -892,5 +892,251 @@
       "visibility": "public",
       "sharedWith": []
     }
+  },
+  {
+    "id": "christie-post-1",
+    "title": "New Free Printable: Mindful Affirmations for Kids",
+    "metadata": {
+      "createdAt": "2024-12-20T14:30:00Z",
+      "source": "childhood101",
+      "sourceUrl": "https://childhood101.com/mindful-affirmations-cards-kids/",
+      "authorId": "christie-burnett"
+    },
+    "author": {
+      "name": "Christie Burnett",
+      "handle": "christie-burnett",
+      "avatar": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "verified": true,
+      "actorType": "service_provider",
+      "centerId": "childhood101-digital",
+      "organizationType": "digital-platform",
+      "features": ["educational-resources", "printable-activities", "social-emotional-learning"]
+    },
+    "type": "post",
+    "post": "Just released 55 powerful mindful affirmations for kids! These free printable cards help children develop self-confidence, emotional regulation, and positive self-talk. Perfect for morning routines, bedtime, or whenever kids need a gentle reminder of their worth. 💕 #socialemotionallearning #mindfulness #freeprintables #parenting",
+    "imageUrl": "https://childhood101.com/wp-content/uploads/2024/mindful-affirmations-feature.jpg",
+    "stats": {
+      "likes": 24,
+      "shares": 8,
+      "comments": 12,
+      "reposts": 5
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "peerLikes": {
+      "count": 6,
+      "likedBy": [
+        {
+          "providerId": "rebecca-cavallaro",
+          "providerName": "Rebecca Cavallaro",
+          "credentials": ["IBCLC", "RM", "RN"],
+          "specializations": ["Lactation Support", "Postnatal Care"],
+          "dateLiked": "2024-12-20"
+        },
+        {
+          "providerId": "gavin-mccormack",
+          "providerName": "Gavin McCormack",
+          "credentials": ["PhD", "EP"],
+          "specializations": ["Educational Psychology", "Child Development"],
+          "dateLiked": "2024-12-20"
+        }
+      ]
+    }
+  },
+  {
+    "id": "christie-post-2",
+    "title": "Earth Day Activities for Young Learners",
+    "metadata": {
+      "createdAt": "2024-12-18T11:15:00Z",
+      "source": "childhood101",
+      "sourceUrl": "https://childhood101.com/earth-day-headband-craft/",
+      "authorId": "christie-burnett"
+    },
+    "author": {
+      "name": "Christie Burnett",
+      "handle": "christie-burnett",
+      "avatar": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "verified": true,
+      "actorType": "service_provider",
+      "centerId": "childhood101-digital",
+      "organizationType": "digital-platform",
+      "features": ["educational-resources", "printable-activities", "environmental-education"]
+    },
+    "type": "post",
+    "post": "🌍 Earth Day is coming up! Here's a simple craft that helps kids connect with nature while developing fine motor skills. This Earth Day headband craft combines creativity with environmental awareness - perfect for preschoolers and early primary students. What are your favorite ways to teach kids about caring for our planet? #earthday #environment #kidscraft #sustainability #teacherresources",
+    "imageUrl": "https://childhood101.com/wp-content/uploads/2024/earth-day-headband-feature.jpg",
+    "stats": {
+      "likes": 18,
+      "shares": 6,
+      "comments": 9,
+      "reposts": 4
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "peerLikes": {
+      "count": 4,
+      "likedBy": [
+        {
+          "providerId": "emily-mcconaghy",
+          "providerName": "Emily McConaghy",
+          "credentials": ["Child Development Specialist"],
+          "specializations": ["Toddler Development", "Motor Skills"],
+          "dateLiked": "2024-12-18"
+        }
+      ]
+    }
+  },
+  {
+    "id": "christie-post-3",
+    "title": "The Magic of Fairy Tale Story Starters",
+    "metadata": {
+      "createdAt": "2024-12-16T16:45:00Z",
+      "source": "childhood101",
+      "sourceUrl": "https://childhood101.com/fairy-tale-story-starters/",
+      "authorId": "christie-burnett"
+    },
+    "author": {
+      "name": "Christie Burnett",
+      "handle": "christie-burnett",
+      "avatar": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "verified": true,
+      "actorType": "service_provider",
+      "centerId": "childhood101-digital",
+      "organizationType": "digital-platform",
+      "features": ["educational-resources", "literacy-development", "creative-writing"]
+    },
+    "type": "post",
+    "post": "✨ New free printable! These Fairy Tale Spin-A-Story starters are perfect for sparking creativity in young writers. Kids spin the wheel to get unique story combinations - it's amazing how imaginative they get when given a fun framework! Great for building narrative skills, vocabulary, and confidence in writing. Teachers love using these for writing centers! #literacy #creativewriting #storytelling #teacherresources #freeprintables",
+    "imageUrl": "https://childhood101.com/wp-content/uploads/2024/fairy-tale-starters-feature.jpg",
+    "stats": {
+      "likes": 32,
+      "shares": 12,
+      "comments": 15,
+      "reposts": 8
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "peerLikes": {
+      "count": 5,
+      "likedBy": [
+        {
+          "providerId": "gavin-mccormack",
+          "providerName": "Gavin McCormack",
+          "credentials": ["PhD", "EP"],
+          "specializations": ["Educational Psychology", "Child Development"],
+          "dateLiked": "2024-12-16"
+        }
+      ]
+    }
+  },
+  {
+    "id": "christie-post-4",
+    "title": "Supporting Emotional Development Through Books",
+    "metadata": {
+      "createdAt": "2024-12-14T09:20:00Z",
+      "source": "childhood101",
+      "sourceUrl": "https://childhood101.com/families-books/",
+      "authorId": "christie-burnett"
+    },
+    "author": {
+      "name": "Christie Burnett",
+      "handle": "christie-burnett",
+      "avatar": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "verified": true,
+      "actorType": "service_provider",
+      "centerId": "childhood101-digital",
+      "organizationType": "digital-platform",
+      "features": ["educational-resources", "book-recommendations", "social-emotional-learning"]
+    },
+    "type": "post",
+    "post": "📚 Just updated my list of the 35 Best Picture Books About Families! These books celebrate diverse family structures and help children understand that families come in all shapes and sizes. Reading diverse family stories helps kids develop empathy, acceptance, and pride in their own family structure. Which family-themed books do your children love? #diversefamilies #picturebooks #inclusion #socialemotionallearning #readinglist",
+    "imageUrl": "https://childhood101.com/wp-content/uploads/2023/families-books-feature.jpg",
+    "stats": {
+      "likes": 28,
+      "shares": 14,
+      "comments": 18,
+      "reposts": 7
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "peerLikes": {
+      "count": 7,
+      "likedBy": [
+        {
+          "providerId": "rebecca-cavallaro",
+          "providerName": "Rebecca Cavallaro",
+          "credentials": ["IBCLC", "RM", "RN"],
+          "specializations": ["Lactation Support", "Postnatal Care"],
+          "dateLiked": "2024-12-14"
+        },
+        {
+          "providerId": "emily-mcconaghy",
+          "providerName": "Emily McConaghy",
+          "credentials": ["Child Development Specialist"],
+          "specializations": ["Toddler Development", "Motor Skills"],
+          "dateLiked": "2024-12-14"
+        }
+      ]
+    }
+  },
+  {
+    "id": "christie-post-5",
+    "title": "Free Kids Kindness Pack - Building Empathy",
+    "metadata": {
+      "createdAt": "2024-12-12T13:00:00Z",
+      "source": "childhood101",
+      "sourceUrl": "https://childhood101.com/printable-kids-kindness-pack/",
+      "authorId": "christie-burnett"
+    },
+    "author": {
+      "name": "Christie Burnett",
+      "handle": "christie-burnett",
+      "avatar": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "verified": true,
+      "actorType": "service_provider",
+      "centerId": "childhood101-digital",
+      "organizationType": "digital-platform",
+      "features": ["educational-resources", "social-emotional-learning", "character-education"]
+    },
+    "type": "post",
+    "post": "💝 Our most popular free resource! The Kids Kindness Pack includes activities, discussion cards, and reflection sheets to help children develop empathy and kindness. In a world that sometimes feels divided, teaching children to be kind and understanding is more important than ever. These activities work beautifully at home or in the classroom. Download yours free! #kindness #empathy #charactereducation #socialemotionallearning #freeprintables #teacherresources",
+    "imageUrl": "https://childhood101.com/wp-content/uploads/2024/kindness-pack-feature.jpg",
+    "stats": {
+      "likes": 45,
+      "shares": 22,
+      "comments": 25,
+      "reposts": 12
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    },
+    "peerLikes": {
+      "count": 8,
+      "likedBy": [
+        {
+          "providerId": "gavin-mccormack",
+          "providerName": "Gavin McCormack",
+          "credentials": ["PhD", "EP"],
+          "specializations": ["Educational Psychology", "Child Development"],
+          "dateLiked": "2024-12-12"
+        },
+        {
+          "providerId": "rebecca-cavallaro",
+          "providerName": "Rebecca Cavallaro",
+          "credentials": ["IBCLC", "RM", "RN"],
+          "specializations": ["Lactation Support", "Postnatal Care"],
+          "dateLiked": "2024-12-12"
+        }
+      ]
+    }
   }
 ]

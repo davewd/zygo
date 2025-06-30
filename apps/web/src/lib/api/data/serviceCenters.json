@@ -800,6 +800,221 @@
         "Online Consultations for Remote Access"
       ],
       "establishedYear": 2018
+    },
+    {
+      "id": "childhood101-digital",
+      "name": "Childhood101",
+      "description": "Quality learning resources for teachers & parents with over 15 years of educational content, printables, and play ideas focused on social emotional development and engaging learning.",
+      "overview": "Childhood101 is a comprehensive digital platform created by Christie Burnett, providing high-quality educational resources, free printables, and learning activities for children from babies through grade 12. The platform specializes in social emotional learning, curriculum development, and making learning fun and engaging through play-based activities.",
+      "location": {
+        "address": "Digital Platform",
+        "suburb": "Online",
+        "state": "Global",
+        "postcode": "0000",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -25.2744,
+          "lng": 133.7751
+        }
+      },
+      "contact": {
+        "email": "hello@childhood101.com",
+        "website": "https://childhood101.com",
+        "bookingUrl": "https://childhood101.com/contact",
+        "shopUrl": "https://shop.childhood101.com"
+      },
+      "providers": ["christie-burnett"],
+      "services": [
+        "educational-resources",
+        "printable-activities",
+        "social-emotional-learning",
+        "curriculum-development",
+        "digital-learning-platform"
+      ],
+      "operatingHours": {
+        "monday": { "available": "24/7" },
+        "tuesday": { "available": "24/7" },
+        "wednesday": { "available": "24/7" },
+        "thursday": { "available": "24/7" },
+        "friday": { "available": "24/7" },
+        "saturday": { "available": "24/7" },
+        "sunday": { "available": "24/7" }
+      },
+      "features": [
+        "Free Educational Resources",
+        "Premium Digital Downloads",
+        "Social Emotional Learning Focus",
+        "Age-Appropriate Content (Babies to Grade 12)",
+        "Printable Activities",
+        "Educational Blog Content",
+        "Teacher Resources",
+        "Parent Support Materials",
+        "Play-Based Learning Activities",
+        "Curriculum Development Support"
+      ],
+      "categories": [
+        "Social Emotional Learning",
+        "Free Printables",
+        "Mathematics",
+        "English/Literacy",
+        "Science & STEM",
+        "Art & Creativity",
+        "Digital Technology",
+        "Physical Education",
+        "Holidays & Celebrations",
+        "Books for Kids",
+        "Games & Activities"
+      ],
+      "ageGroups": [
+        "Babies",
+        "Toddlers",
+        "Preschool",
+        "K-2",
+        "Grades 3-5",
+        "Grades 6-8",
+        "Grades 9-12"
+      ],
+      "resources": [
+        {
+          "type": "printable",
+          "title": "Kids Kindness Pack",
+          "description": "Free printable activities focused on kindness and social emotional learning",
+          "url": "https://childhood101.com/printable-kids-kindness-pack/",
+          "category": "Social Emotional Learning",
+          "ageGroup": "All Ages",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Color Monster Emotions Activity",
+          "description": "Free printable emotion recognition and regulation activity",
+          "url": "https://childhood101.com/color-monster-emotions-activity/",
+          "category": "Social Emotional Learning",
+          "ageGroup": "Preschool-K2",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Mindful Affirmations Cards for Kids",
+          "description": "55 powerful printable affirmation cards for children",
+          "url": "https://childhood101.com/mindful-affirmations-cards-kids/",
+          "category": "Social Emotional Learning",
+          "ageGroup": "All Ages",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Earth Day Headband Craft",
+          "description": "Creative Earth Day craft activity for kids",
+          "url": "https://childhood101.com/earth-day-headband-craft/",
+          "category": "Holidays & Celebrations",
+          "ageGroup": "Preschool-K2",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Inspiring Women Quotes Coloring Pages",
+          "description": "Empowering coloring pages featuring inspiring women quotes",
+          "url": "https://childhood101.com/inspiring-women-quotes-coloring-pages/",
+          "category": "Art & Creativity",
+          "ageGroup": "Grades 3-8",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Fairy Tale Spin-A-Story Story Starters",
+          "description": "Creative writing prompts with fairy tale themes",
+          "url": "https://childhood101.com/fairy-tale-story-starters/",
+          "category": "English/Literacy",
+          "ageGroup": "Grades K-5",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Mother's Day Coloring Cards",
+          "description": "Printable Mother's Day cards for coloring and gifting",
+          "url": "https://childhood101.com/mothers-day-coloring-cards/",
+          "category": "Holidays & Celebrations",
+          "ageGroup": "All Ages",
+          "price": "Free"
+        },
+        {
+          "type": "printable",
+          "title": "Bee Word Search Printables",
+          "description": "3 different bee-themed word search puzzles",
+          "url": "https://childhood101.com/bee-word-search/",
+          "category": "English/Literacy",
+          "ageGroup": "Grades 2-6",
+          "price": "Free"
+        },
+        {
+          "type": "premium",
+          "title": "Coping Skills Cards",
+          "description": "36 printable coping skills cards for kids",
+          "url": "https://shop.childhood101.com/product/36-coping-skills-for-kids-cards-printable/",
+          "category": "Social Emotional Learning",
+          "ageGroup": "All Ages",
+          "price": "Premium"
+        },
+        {
+          "type": "premium",
+          "title": "Times Tables Games Pack",
+          "description": "Fun and engaging printable times tables games",
+          "url": "https://shop.childhood101.com/product/printable-times-tables-games/",
+          "category": "Mathematics",
+          "ageGroup": "Grades 2-6",
+          "price": "Premium"
+        },
+        {
+          "type": "premium",
+          "title": "Breathing Exercises for Kids",
+          "description": "Calming breathing exercises and activities for children",
+          "url": "https://shop.childhood101.com/product/breathing-exercises-kids/",
+          "category": "Social Emotional Learning",
+          "ageGroup": "All Ages",
+          "price": "Premium"
+        },
+        {
+          "type": "premium",
+          "title": "Spelling Activities for Any Word List",
+          "description": "Versatile spelling activities that work with any word list",
+          "url": "https://shop.childhood101.com/product/spelling-activities/",
+          "category": "English/Literacy",
+          "ageGroup": "Grades K-8",
+          "price": "Premium"
+        }
+      ],
+      "certifications": [
+        "Educational Content Creator - 15+ Years Experience",
+        "Published Author - Time to Create Book",
+        "Bachelor of Education",
+        "Bachelor of Education (Early Childhood)"
+      ],
+      "insurance": [
+        "Digital Platform Security",
+        "Content Licensing Protection",
+        "Affiliate Partner Compliance"
+      ],
+      "accessibility": [
+        "Mobile-Responsive Design",
+        "Screen Reader Compatible",
+        "Multiple Format Downloads",
+        "Age-Appropriate Content Filtering",
+        "Global Digital Access"
+      ],
+      "establishedYear": 2009,
+      "specialtyType": "Digital Educational Platform",
+      "socialMedia": {
+        "facebook": "https://www.facebook.com/childhood101",
+        "instagram": "https://www.instagram.com/childhood101",
+        "pinterest": "https://www.pinterest.com/childhood101",
+        "youtube": "https://www.youtube.com/childhood101"
+      },
+      "affiliateProgram": {
+        "enabled": true,
+        "description": "Maintains affiliate partnerships for book recommendations and educational products",
+        "policy": "All affiliate links preserved to support content creator"
+      }
     }
   ]
 }

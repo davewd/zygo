@@ -475,6 +475,7 @@
           "abbreviation": "BPsych",
           "issuingBody": "University of Sydney",
           "issuingProviderId": "usyd",
+          "year": 2005,
           "verified": true
         },
         {
@@ -647,11 +648,88 @@
         "currency": "AUD"
       },
       "centerId": "bronte-public-school"
+    },
+    {
+      "id": "christie-burnett",
+      "firstName": "Christie",
+      "lastName": "Burnett",
+      "title": "Teacher, Author & Educational Resource Creator",
+      "profileImage": "https://childhood101.com/wp-content/uploads/2024/03/sidebar-profile-140.jpg",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=400&fit=crop",
+      "bio": "Christie Burnett is an experienced teacher, author, and parent behind Childhood 101, sharing quality learning resources, printables, and play ideas online for over 15 years with a passion for supporting engaged learning and social emotional development of children.",
+      "personalStory": "My passion for making learning fun and engaging for children led me to start Childhood 101 in 2009. As a teacher and parent, I've been privileged to support teachers, homeschooling parents, and families by creating truly engaging educational resources across all age ranges - from toddlers through elementary school.",
+      "credentials": [
+        {
+          "title": "Bachelor of Education",
+          "abbreviation": "B.Ed",
+          "issuingBody": "University",
+          "issuingProviderId": "university-education",
+          "year": 2000,
+          "verified": true,
+          "credentialDefinitionId": "bed-education-2023",
+          "personalCredentialId": "cb-bed-001"
+        },
+        {
+          "title": "Bachelor of Education (Early Childhood)",
+          "abbreviation": "B.Ed (ECE)",
+          "issuingBody": "University",
+          "issuingProviderId": "university-education",
+          "year": 2002,
+          "verified": true,
+          "credentialDefinitionId": "bed-ece-2023",
+          "personalCredentialId": "cb-bed-ece-001"
+        },
+        {
+          "title": "Published Author - Time to Create",
+          "abbreviation": "Author",
+          "issuingBody": "Gryphon House Publishers",
+          "issuingProviderId": "gryphon-house",
+          "year": 2013,
+          "verified": true,
+          "credentialDefinitionId": "published-author-2023",
+          "personalCredentialId": "cb-author-001"
+        }
+      ],
+      "services": [
+        "educational-resources",
+        "printable-activities",
+        "curriculum-development",
+        "teacher-professional-development"
+      ],
+      "specializations": [
+        "Early Childhood Education",
+        "Social Emotional Learning",
+        "Educational Resource Development",
+        "Printable Learning Activities",
+        "Curriculum Planning",
+        "Play-Based Learning",
+        "Children's Literature",
+        "Teacher Support",
+        "Parent Education",
+        "Child Development"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 25,
+      "approach": "I believe in making learning fun and engaging for children through play-based, hands-on activities. My resources are designed to support both teachers and parents in creating meaningful learning experiences that develop the whole child - academically, socially, and emotionally.",
+      "availability": {
+        "inPerson": false,
+        "telehealth": false,
+        "homeVisits": false,
+        "emergency": false,
+        "digitalPlatform": true
+      },
+      "pricing": {
+        "consultationFee": 0,
+        "followUpFee": 0,
+        "currency": "FREE",
+        "notes": "Free resources available, premium resources through online store"
+      },
+      "centerId": "childhood101-digital"
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalProviders": 12,
+    "totalProviders": 13,
     "dataSource": "mock-api"
   }
 }

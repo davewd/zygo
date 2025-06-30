@@ -697,7 +697,7 @@ const ServiceProviderDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <Link
-                    to={`/network/centers/${center.id}`}
+                    to={`/community/centers/${center.id}`}
                     className="block hover:bg-gray-50 p-3 rounded-lg transition-colors"
                   >
                     <h4 className="font-semibold text-gray-800 mb-2">{center.name}</h4>

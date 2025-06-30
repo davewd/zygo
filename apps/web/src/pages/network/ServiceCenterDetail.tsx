@@ -70,6 +70,23 @@ interface ServiceCenter {
   images?: string[];
   establishedYear?: number;
   culturalConsiderations?: string;
+  resources?: Array<{
+    type: string;
+    title: string;
+    description: string;
+    url: string;
+    category: string;
+    ageGroup: string;
+    price: string;
+  }>;
+  blogPosts?: Array<{
+    title: string;
+    description: string;
+    url: string;
+    category: string;
+    imageUrl?: string;
+    tags?: string[];
+  }>;
 }
 
 const ServiceCenterDetail = () => {
@@ -100,7 +117,13 @@ const ServiceCenterDetail = () => {
           return;
         }
 
-        setCenter(centerData as ServiceCenter);
+        // Map providersData to providers for component compatibility
+        const processedCenter = {
+          ...centerData,
+          providers: (centerData as any).providersData || centerData.providers || [],
+        };
+
+        setCenter(processedCenter as ServiceCenter);
       } catch (err) {
         setError('Failed to load service center details. Please try again.');
         console.error('Error loading service center:', err);
@@ -319,69 +342,77 @@ const ServiceCenterDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {center.providers.map((provider) => (
-                    <div
-                      key={provider.id}
-                      className="border-b border-gray-200 pb-6 last:border-b-0"
-                    >
-                      <div className="flex items-start justify-between mb-4">
+                  {center.providers && center.providers.length > 0 ? (
+                    center.providers.map((provider) => (
+                      <div
+                        key={provider.id}
+                        className="border-b border-gray-200 pb-6 last:border-b-0"
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div>
+                            <h4 className="font-semibold text-lg text-gray-800">
+                              {provider.firstName} {provider.lastName}
+                            </h4>
+                            {provider.title && (
+                              <p className="text-zygo-red font-medium">{provider.title}</p>
+                            )}
+                            <p className="text-gray-600 text-sm mt-1">
+                              {provider.yearsExperience} years experience
+                            </p>
+                          </div>
+                          <Link to={`/community/providers/${provider.id}`}>
+                            <Button variant="outline" size="sm">
+                              View Profile
+                            </Button>
+                          </Link>
+                        </div>
+
+                        <p className="text-gray-600 leading-relaxed mb-4">{provider.bio}</p>
+
+                        {/* Credentials */}
+                        <div className="mb-4">
+                          <h5 className="font-medium text-gray-800 mb-2">Credentials</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {provider.credentials?.map((credential, index) => (
+                              <span
+                                key={index}
+                                className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded flex items-center"
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                {credential.abbreviation || credential.title}
+                              </span>
+                            )) || (
+                              <span className="text-gray-500 text-sm">No credentials listed</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Specializations */}
                         <div>
-                          <h4 className="font-semibold text-lg text-gray-800">
-                            {provider.firstName} {provider.lastName}
-                          </h4>
-                          {provider.title && (
-                            <p className="text-zygo-red font-medium">{provider.title}</p>
-                          )}
-                          <p className="text-gray-600 text-sm mt-1">
-                            {provider.yearsExperience} years experience
-                          </p>
-                        </div>
-                        <Link to={`/community/providers/${provider.id}`}>
-                          <Button variant="outline" size="sm">
-                            View Profile
-                          </Button>
-                        </Link>
-                      </div>
-
-                      <p className="text-gray-600 leading-relaxed mb-4">{provider.bio}</p>
-
-                      {/* Credentials */}
-                      <div className="mb-4">
-                        <h5 className="font-medium text-gray-800 mb-2">Credentials</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {provider.credentials.map((credential, index) => (
-                            <span
-                              key={index}
-                              className="bg-green-50 text-green-700 text-xs px-2 py-1 rounded flex items-center"
-                            >
-                              <CheckCircle className="w-3 h-3 mr-1" />
-                              {credential.abbreviation || credential.title}
-                            </span>
-                          ))}
+                          <h5 className="font-medium text-gray-800 mb-2">Specializations</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {provider.specializations?.slice(0, 4).map((spec) => (
+                              <span
+                                key={spec}
+                                className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded"
+                              >
+                                {spec}
+                              </span>
+                            ))}
+                            {provider.specializations && provider.specializations.length > 4 && (
+                              <span className="text-xs text-gray-500">
+                                +{provider.specializations.length - 4} more
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
-
-                      {/* Specializations */}
-                      <div>
-                        <h5 className="font-medium text-gray-800 mb-2">Specializations</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {provider.specializations.slice(0, 4).map((spec) => (
-                            <span
-                              key={spec}
-                              className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded"
-                            >
-                              {spec}
-                            </span>
-                          ))}
-                          {provider.specializations.length > 4 && (
-                            <span className="text-xs text-gray-500">
-                              +{provider.specializations.length - 4} more
-                            </span>
-                          )}
-                        </div>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <p className="text-gray-500">No providers found for this service center.</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -539,6 +570,125 @@ const ServiceCenterDetail = () => {
               </Card>
             )}
           </div>
+
+          {/* Resources Section */}
+          {center.resources && center.resources.length > 0 && (
+            <div className="mt-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-gray-800">
+                    <Heart className="w-5 h-5 mr-2 text-zygo-red" />
+                    Educational Resources
+                  </CardTitle>
+                  <CardDescription>
+                    Free and premium educational resources, printables, and learning activities
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {center.resources.map((resource, index) => (
+                      <div
+                        key={index}
+                        className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="font-medium text-gray-800 text-sm">{resource.title}</h4>
+                          <span
+                            className={`text-xs px-2 py-1 rounded ${
+                              resource.price === 'Free'
+                                ? 'bg-green-100 text-green-700'
+                                : 'bg-blue-100 text-blue-700'
+                            }`}
+                          >
+                            {resource.price}
+                          </span>
+                        </div>
+                        <p className="text-gray-600 text-sm mb-3">{resource.description}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-wrap gap-1">
+                            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                              {resource.category}
+                            </span>
+                            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                              {resource.ageGroup}
+                            </span>
+                          </div>
+                          <a
+                            href={resource.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-zygo-red hover:text-zygo-red/80 text-sm font-medium"
+                          >
+                            View Resource →
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Blog Posts / Articles Section */}
+          {center.blogPosts && center.blogPosts.length > 0 && (
+            <div className="mt-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center text-gray-800">
+                    <Star className="w-5 h-5 mr-2 text-zygo-red" />
+                    Latest Articles & Insights
+                  </CardTitle>
+                  <CardDescription>
+                    Educational articles, book recommendations, and expert insights
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {center.blogPosts.map((post, index) => (
+                      <div
+                        key={index}
+                        className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+                      >
+                        {post.imageUrl && (
+                          <div
+                            className="h-48 bg-gray-200 bg-cover bg-center"
+                            style={{ backgroundImage: `url(${post.imageUrl})` }}
+                          />
+                        )}
+                        <div className="p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="bg-zygo-yellow/20 text-zygo-red text-xs px-2 py-1 rounded">
+                              {post.category}
+                            </span>
+                            {post.tags &&
+                              post.tags.slice(0, 2).map((tag, tagIndex) => (
+                                <span
+                                  key={tagIndex}
+                                  className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                          </div>
+                          <h4 className="font-medium text-gray-800 mb-2">{post.title}</h4>
+                          <p className="text-gray-600 text-sm mb-3">{post.description}</p>
+                          <a
+                            href={post.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-zygo-red hover:text-zygo-red/80 text-sm font-medium"
+                          >
+                            Read Article →
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
         </div>
       </div>
     </div>
