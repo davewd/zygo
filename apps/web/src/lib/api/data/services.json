@@ -1,15 +1,239 @@
 {
   "services": [
     {
+      "id": "initial-lactation-consultation",
+      "name": "Initial Lactation Consultation",
+      "description": "Comprehensive assessment and support for breastfeeding challenges",
+      "categoryId": "lactation-support",
+      "duration": 90,
+      "price": {
+        "amount": 230,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 105.85
+        }
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["breastfeeding", "latching", "milk-supply", "positioning", "mastitis", "tongue-tie"]
+    },
+    {
+      "id": "follow-up-lactation-consultation",
+      "name": "Follow-up Lactation Consultation",
+      "description": "Ongoing support and monitoring for breastfeeding progress",
+      "categoryId": "lactation-support",
+      "duration": 60,
+      "price": {
+        "amount": 210,
+        "currency": "AUD",
+        "rebate": {
+          "provider": "Medicare",
+          "amount": 85.55
+        }
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["breastfeeding", "follow-up", "progress-monitoring"]
+    },
+    {
+      "id": "before-birth-consultation",
+      "name": "Before Birth Consultation",
+      "description": "Prenatal breastfeeding preparation and education",
+      "categoryId": "antenatal-care",
+      "duration": 75,
+      "price": {
+        "amount": 190,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal"],
+      "tags": ["prenatal", "preparation", "education"]
+    },
+    {
+      "id": "essential-knowledge-preparation",
+      "name": "Essential Knowledge Preparation",
+      "description": "Comprehensive prenatal education and preparation",
+      "categoryId": "antenatal-care",
+      "duration": 120,
+      "price": {
+        "amount": 280,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal"],
+      "tags": ["prenatal", "education", "comprehensive"]
+    },
+    {
+      "id": "nipple-care-specialist-consultation",
+      "name": "Nipple Care Specialist Consultation",
+      "description": "Specialized care for nipple pain and trauma",
+      "categoryId": "lactation-support",
+      "duration": 60,
+      "price": {
+        "amount": 180,
+        "currency": "AUD"
+      },
+      "ageGroups": ["newborn", "infant"],
+      "tags": ["nipple-care", "pain-management", "trauma-healing"]
+    },
+    {
+      "id": "fertility-consultation",
+      "name": "Fertility Consultation",
+      "description": "Comprehensive fertility assessment and treatment planning",
+      "categoryId": "fertility-treatment",
+      "duration": 60,
+      "price": {
+        "amount": 350,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["fertility", "IVF", "pregnancy-planning", "reproductive-health"]
+    },
+    {
+      "id": "ivf-treatment",
+      "name": "IVF Treatment",
+      "description": "In-vitro fertilization treatment and monitoring",
+      "categoryId": "fertility-treatment",
+      "duration": 180,
+      "price": {
+        "amount": 8500,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["IVF", "assisted-reproduction", "fertility-treatment"]
+    },
+    {
+      "id": "pregnancy-monitoring",
+      "name": "Pregnancy Monitoring",
+      "description": "Regular monitoring and care throughout pregnancy",
+      "categoryId": "antenatal-care",
+      "duration": 45,
+      "price": {
+        "amount": 120,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal"],
+      "tags": ["pregnancy", "monitoring", "antenatal-care"]
+    },
+    {
+      "id": "child-development-assessment",
+      "name": "Child Development Assessment",
+      "description": "Comprehensive assessment of child's developmental milestones",
+      "categoryId": "child-development",
+      "duration": 90,
+      "price": {
+        "amount": 280,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool", "school-age"],
+      "tags": ["assessment", "milestones", "development"]
+    },
+    {
+      "id": "educational-consultation",
+      "name": "Educational Consultation",
+      "description": "Educational planning and support consultation",
+      "categoryId": "child-development",
+      "duration": 60,
+      "price": {
+        "amount": 180,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool", "school-age"],
+      "tags": ["education", "planning", "consultation"]
+    },
+    {
+      "id": "learning-support",
+      "name": "Learning Support",
+      "description": "Individualized learning support and intervention",
+      "categoryId": "child-development",
+      "duration": 60,
+      "price": {
+        "amount": 160,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool", "school-age"],
+      "tags": ["learning", "support", "intervention"]
+    },
+    {
+      "id": "kindy-gym-classes",
+      "name": "Kindy Gym Classes",
+      "description": "Fun and engaging gym classes for kindergarten children",
+      "categoryId": "child-development",
+      "duration": 45,
+      "price": {
+        "amount": 30,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool"],
+      "tags": ["gym", "physical-activity", "group-class"]
+    },
+    {
+      "id": "gymnastics-classes",
+      "name": "Gymnastics Classes",
+      "description": "Structured gymnastics training for children",
+      "categoryId": "child-development",
+      "duration": 60,
+      "price": {
+        "amount": 40,
+        "currency": "AUD"
+      },
+      "ageGroups": ["preschool", "school-age"],
+      "tags": ["gymnastics", "training", "physical-development"]
+    },
+    {
+      "id": "movement-development",
+      "name": "Movement Development",
+      "description": "Programs focused on developing gross motor skills",
+      "categoryId": "child-development",
+      "duration": 45,
+      "price": {
+        "amount": 35,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool"],
+      "tags": ["movement", "motor-skills", "development"]
+    },
+    {
+      "id": "ninja-warrior-classes",
+      "name": "Ninja Warrior Classes",
+      "description": "Fun obstacle course training inspired by ninja warrior",
+      "categoryId": "child-development",
+      "duration": 60,
+      "price": {
+        "amount": 45,
+        "currency": "AUD"
+      },
+      "ageGroups": ["school-age", "teen"],
+      "tags": ["ninja-warrior", "obstacle-course", "fitness"]
+    },
+    {
+      "id": "parkour-training",
+      "name": "Parkour Training",
+      "description": "Safe parkour training for children and teens",
+      "categoryId": "child-development",
+      "duration": 75,
+      "price": {
+        "amount": 50,
+        "currency": "AUD"
+      },
+      "ageGroups": ["school-age", "teen"],
+      "tags": ["parkour", "training", "movement"]
+    },
+    {
+      "id": "martial-arts-instruction",
+      "name": "Martial Arts Instruction",
+      "description": "Traditional martial arts training for discipline and fitness",
+      "categoryId": "child-development",
+      "duration": 60,
+      "price": {
+        "amount": 40,
+        "currency": "AUD"
+      },
+      "ageGroups": ["school-age", "teen"],
+      "tags": ["martial-arts", "discipline", "fitness"]
+    },
+    {
       "id": "calmbirth-course",
       "name": "Calmbirth® Childbirth Education Course",
-      "description": "Australia's most highly acclaimed childbirth education program. A comprehensive 12-hour face-to-face antenatal program that includes psychological and emotional preparation for childbirth. Learn to reframe birth, work with your body, and move past negative emotions through fear release techniques and guided relaxation.",
-      "category": {
-        "id": "childbirth-education",
-        "name": "Childbirth Education",
-        "description": "Comprehensive antenatal education programs for expectant parents",
-        "taxonomy": "education"
-      },
+      "description": "Australia's most highly acclaimed childbirth education program. A comprehensive 12-hour face-to-face antenatal program that includes psychological and emotional preparation for childbirth.",
+      "categoryId": "antenatal-care",
       "duration": 720,
       "price": {
         "amount": 395,
@@ -28,33 +252,10 @@
       ]
     },
     {
-      "id": "calmbirth-refresher",
-      "name": "Calmbirth® Refresher Course",
-      "description": "A condensed refresher course for couples who have previously completed Calmbirth or other childbirth education programs. Perfect for subsequent pregnancies or to reinforce key concepts and techniques.",
-      "category": {
-        "id": "antenatal-preparation",
-        "name": "Antenatal Preparation",
-        "description": "Psychological and emotional preparation for childbirth",
-        "taxonomy": "education"
-      },
-      "duration": 240,
-      "price": {
-        "amount": 195,
-        "currency": "AUD"
-      },
-      "ageGroups": ["prenatal", "adult"],
-      "tags": ["refresher", "subsequent-pregnancy", "review", "condensed-program"]
-    },
-    {
       "id": "private-calmbirth-session",
       "name": "Private Calmbirth® Session",
-      "description": "One-on-one or private group Calmbirth education session tailored to your specific needs, concerns, and birth preferences. Perfect for couples wanting personalized attention or those with scheduling constraints.",
-      "category": {
-        "id": "childbirth-education",
-        "name": "Childbirth Education",
-        "description": "Comprehensive antenatal education programs for expectant parents",
-        "taxonomy": "education"
-      },
+      "description": "One-on-one or private group Calmbirth education session tailored to your specific needs, concerns, and birth preferences.",
+      "categoryId": "antenatal-care",
       "duration": 480,
       "price": {
         "amount": 650,
@@ -64,33 +265,10 @@
       "tags": ["private-session", "personalized", "flexible-scheduling", "one-on-one", "customized"]
     },
     {
-      "id": "birth-partner-workshop",
-      "name": "Birth Partner Support Workshop",
-      "description": "Specialized workshop focusing on the birth partner's role in supporting during labor and birth. Learn practical techniques for providing emotional and physical support throughout the birthing process.",
-      "category": {
-        "id": "antenatal-preparation",
-        "name": "Antenatal Preparation",
-        "description": "Psychological and emotional preparation for childbirth",
-        "taxonomy": "education"
-      },
-      "duration": 180,
-      "price": {
-        "amount": 150,
-        "currency": "AUD"
-      },
-      "ageGroups": ["adult"],
-      "tags": ["birth-partner", "support-techniques", "labor-support", "practical-skills"]
-    },
-    {
       "id": "fear-release-session",
       "name": "Fear Release & Relaxation Session",
-      "description": "Focused session on fear release techniques and guided relaxation for birth preparation. Ideal for those experiencing significant birth anxiety or wanting to deepen their relaxation practice.",
-      "category": {
-        "id": "fear-release",
-        "name": "Fear Release & Relaxation",
-        "description": "Guided relaxation and fear release techniques for birth preparation",
-        "taxonomy": "therapy"
-      },
+      "description": "Focused session on fear release techniques and guided relaxation for birth preparation. Ideal for those experiencing significant birth anxiety.",
+      "categoryId": "antenatal-care",
       "duration": 120,
       "price": {
         "amount": 120,
@@ -106,15 +284,75 @@
       ]
     },
     {
+      "id": "pregnancy-care",
+      "name": "Pregnancy Care",
+      "description": "Comprehensive pregnancy care and monitoring throughout all trimesters",
+      "categoryId": "antenatal-care",
+      "duration": 60,
+      "price": {
+        "amount": 200,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal"],
+      "tags": ["pregnancy", "antenatal", "monitoring", "care"]
+    },
+    {
+      "id": "reproductive-surgery",
+      "name": "Reproductive Surgery",
+      "description": "Surgical procedures to address reproductive health issues",
+      "categoryId": "fertility-treatment",
+      "duration": 120,
+      "price": {
+        "amount": 2500,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["surgery", "reproductive-health", "fertility"]
+    },
+    {
+      "id": "fertility-preservation",
+      "name": "Fertility Preservation",
+      "description": "Services to preserve fertility for future family planning",
+      "categoryId": "fertility-treatment",
+      "duration": 90,
+      "price": {
+        "amount": 1200,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["fertility-preservation", "family-planning", "reproductive-health"]
+    },
+    {
+      "id": "calmbirth-refresher",
+      "name": "Calmbirth® Refresher Course",
+      "description": "A condensed refresher course for couples who have previously completed Calmbirth or other childbirth education programs",
+      "categoryId": "antenatal-care",
+      "duration": 240,
+      "price": {
+        "amount": 195,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": ["refresher", "subsequent-pregnancy", "review", "condensed-program"]
+    },
+    {
+      "id": "birth-partner-workshop",
+      "name": "Birth Partner Support Workshop",
+      "description": "Specialized workshop focusing on the birth partner's role in supporting during labor and birth",
+      "categoryId": "antenatal-care",
+      "duration": 180,
+      "price": {
+        "amount": 150,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["birth-partner", "support-techniques", "labor-support", "practical-skills"]
+    },
+    {
       "id": "hospital-program",
       "name": "Hospital-Based Calmbirth® Program",
-      "description": "Calmbirth program delivered within partner hospitals and birthing centers. Integrated into antenatal care pathways and often available through hospital antenatal education programs.",
-      "category": {
-        "id": "childbirth-education",
-        "name": "Childbirth Education",
-        "description": "Comprehensive antenatal education programs for expectant parents",
-        "taxonomy": "education"
-      },
+      "description": "Calmbirth program delivered within partner hospitals and birthing centers",
+      "categoryId": "antenatal-care",
       "duration": 720,
       "price": {
         "amount": 295,
@@ -122,6 +360,24 @@
       },
       "ageGroups": ["prenatal", "adult"],
       "tags": ["hospital-based", "integrated-care", "medical-setting", "antenatal-program"]
+    },
+    {
+      "id": "pre-school-gymnastics",
+      "name": "Pre-School Gymnastics",
+      "description": "Age-appropriate gymnastics classes for toddlers and preschoolers",
+      "categoryId": "child-development",
+      "duration": 45,
+      "price": {
+        "amount": 35,
+        "currency": "AUD"
+      },
+      "ageGroups": ["toddler", "preschool"],
+      "tags": ["gymnastics", "motor-skills", "confidence-building", "physical-development"]
     }
-  ]
+  ],
+  "metadata": {
+    "lastUpdated": "2024-12-30T00:00:00Z",
+    "totalServices": 28,
+    "dataSource": "mock-api"
+  }
 }

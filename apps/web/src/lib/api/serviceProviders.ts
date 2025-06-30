@@ -1,4 +1,5 @@
 // Local type definitions for service providers and centers
+
 interface Location {
   address: string;
   suburb: string;
@@ -34,30 +35,6 @@ interface Credential {
   verificationReference?: string;
 }
 
-interface ServiceCategory {
-  id: string;
-  name: string;
-  description: string;
-  taxonomy: 'healthcare' | 'education' | 'support' | 'therapy' | 'wellness' | 'emergency' | 'activities' | 'recreation';
-}
-
-interface Service {
-  id: string;
-  name: string;
-  description: string;
-  ageGroups?: string[];
-  duration?: number;
-  price?: {
-    amount: number;
-    currency: string;
-    rebate?: {
-      provider: string;
-      amount: number;
-    };
-  };
-  tags?: string[];
-}
-
 interface ServiceProvider {
   id: string;
   firstName: string;
@@ -87,6 +64,29 @@ interface ServiceProvider {
   centerId?: string; // ID of the service center this provider belongs to
 }
 
+// Local interface for services embedded in service centers (different structure)
+interface ServiceCenterService {
+  id: string;
+  name: string;
+  description: string;
+  category: {
+    id: string;
+    name: string;
+    taxonomy: string;
+  };
+  duration?: number;
+  price?: {
+    amount: number;
+    currency: string;
+    rebate?: {
+      provider: string;
+      amount: number;
+    };
+  };
+  ageGroups?: string[];
+  tags?: string[];
+}
+
 interface ServiceCenter {
   id: string;
   name: string;
@@ -102,7 +102,7 @@ interface ServiceCenter {
       close: string;
     };
   };
-  services?: Service[];
+  services?: ServiceCenterService[];
 }
 
 // Import providers data from our API data files
@@ -138,7 +138,7 @@ export async function getAllServiceProviders(includeServiceCenter: boolean = fal
   return providers.map(provider => ({
     ...provider,
     serviceCenter: provider.centerId 
-      ? serviceCentersData.serviceCenters.find(center => center.id === provider.centerId)
+      ? serviceCentersData.serviceCenters.find(center => center.id === provider.centerId) as ServiceCenter
       : undefined
   })) as ServiceProviderWithCenter[];
 }
@@ -172,7 +172,7 @@ export async function getServiceProviderById(
     
   return {
     ...provider,
-    serviceCenter
+    serviceCenter: serviceCenter as ServiceCenter
   } as ServiceProviderWithCenter;
 }
 

@@ -1,0 +1,33 @@
+{
+  "serviceCategories": [
+    {
+      "id": "lactation-support",
+      "name": "Lactation Support",
+      "description": "Professional breastfeeding support and consultation",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "antenatal-care",
+      "name": "Antenatal Care",
+      "description": "Pregnancy and pre-birth preparation and support",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "fertility-treatment",
+      "name": "Fertility Treatment",
+      "description": "Reproductive health and fertility services",
+      "taxonomy": "healthcare"
+    },
+    {
+      "id": "child-development",
+      "name": "Child Development",
+      "description": "Programs supporting physical and cognitive development",
+      "taxonomy": "education"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2024-12-30T00:00:00Z",
+    "totalCategories": 4,
+    "dataSource": "mock-api"
+  }
+}

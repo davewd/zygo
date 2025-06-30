@@ -143,7 +143,7 @@ describe('Data Consistency Tests', () => {
             console.warn(`Credential definition ${definition.id} references unknown provider: ${definition.issuingProviderId}`);
           }
           // Don't fail the test for missing credential providers as this may be expected
-          // expect(credentialProviderIds.has(definition.issuingProviderId)).toBe(true);
+          expect(credentialProviderIds.has(definition.issuingProviderId)).toBe(true);
         }
       });
     });
