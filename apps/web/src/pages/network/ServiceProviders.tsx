@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  getAllServiceProviders,
-  searchProviders 
-} from '../../lib/api/providers';
+  getAllServiceProviders
+} from '../../lib/api/serviceProviders';
 
 // Define the service provider type from the API
 interface ServiceProvider {
@@ -49,7 +48,7 @@ const ServiceProviders = () => {
       try {
         setLoading(true);
         const response = await getAllServiceProviders();
-        setProviders(response.data);
+        setProviders(response);
         setError(null);
       } catch (err) {
         console.error('Failed to load service providers:', err);
