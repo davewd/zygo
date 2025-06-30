@@ -7,15 +7,21 @@ import type {
   CredentialProvider,
   CredentialType,
   PersonalCredential,
-  VerificationStatus
+  VerificationStatus,
+  CredentialVerificationRequest,
+  CredentialSummary,
+  CredentialDisplayInfo,
+  CredentialSearchResult,
+  CredentialSearchFilters
 } from '@zygo/types/src/credentials';
 import supabase from '../../clients/supabaseClient';
 
 // Import JSON data for mock/fallback
 import credentialsData from './data/credentials.json';
+import { CREDENTIAL_PROVIDERS as newCredentialProviders } from '../../data/credentials/credentialProviders_new';
 
 // Legacy compatibility exports (TODO: Remove after full migration)
-export const CREDENTIAL_PROVIDERS = credentialsData.credentialProviders;
+export const CREDENTIAL_PROVIDERS = newCredentialProviders; // Use the typed data instead of JSON
 export const CREDENTIAL_DEFINITIONS = credentialsData.credentialDefinitions;
 
 // Mock delay for fallback mode
@@ -445,7 +451,29 @@ export async function getCredentialProviders(
     const { data, error } = await query.order('name');
 
     if (error) {
-      throw new CredentialAPIError('Failed to fetch credential providers', 400, error);
+      // Fallback to JSON data if database query fails
+      console.log('Database query failed, using fallback data:', error.message);
+      await mockDelay();
+      
+      let fallbackData = [...CREDENTIAL_PROVIDERS];
+      
+      // Apply filters to fallback data
+      if (filters) {
+        if (filters.type?.length) {
+          fallbackData = fallbackData.filter(p => filters.type!.includes(p.type));
+        }
+        if (filters.country) {
+          fallbackData = fallbackData.filter(p => p.country === filters.country);
+        }
+        if (filters.isActive !== undefined) {
+          fallbackData = fallbackData.filter(p => p.isActive === filters.isActive);
+        }
+      }
+      
+      return {
+        data: fallbackData.sort((a, b) => a.name.localeCompare(b.name)),
+        success: true,
+      };
     }
 
     const mappedData = data?.map(mapDatabaseToCredentialProvider) || [];
@@ -456,10 +484,35 @@ export async function getCredentialProviders(
     };
   } catch (error) {
     console.error('Error fetching credential providers:', error);
-    return {
-      error: error instanceof CredentialAPIError ? error.message : 'Failed to fetch providers',
-      success: false,
-    };
+    
+    // Fallback to JSON data as last resort
+    try {
+      await mockDelay();
+      let fallbackData = [...CREDENTIAL_PROVIDERS];
+      
+      // Apply filters to fallback data
+      if (filters) {
+        if (filters.type?.length) {
+          fallbackData = fallbackData.filter(p => filters.type!.includes(p.type));
+        }
+        if (filters.country) {
+          fallbackData = fallbackData.filter(p => p.country === filters.country);
+        }
+        if (filters.isActive !== undefined) {
+          fallbackData = fallbackData.filter(p => p.isActive === filters.isActive);
+        }
+      }
+      
+      return {
+        data: fallbackData.sort((a, b) => a.name.localeCompare(b.name)),
+        success: true,
+      };
+    } catch (fallbackError) {
+      return {
+        error: error instanceof CredentialAPIError ? error.message : 'Failed to fetch providers',
+        success: false,
+      };
+    }
   }
 }
 

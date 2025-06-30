@@ -5,9 +5,23 @@ import type {
   CredentialCategory,
   CredentialDefinition,
   CredentialProvider
-} from '@zygo/types';
+} from '@zygo/types/src/credentials';
 import supabase from '../../clients/supabaseClient';
 import { CredentialAPIError, CredentialAPIResponse } from './credentials';
+
+// Import fallback data
+import credentialsData from './data/credentials.json';
+import { CREDENTIAL_PROVIDERS as newCredentialProviders } from '../../data/credentials/credentialProviders_new';
+
+// Combine all credential providers from different sources
+const FALLBACK_CREDENTIAL_PROVIDERS = [
+  ...credentialsData.credentialProviders,
+  ...newCredentialProviders
+];
+
+// Mock delay for fallback mode
+const mockDelay = (ms: number = 100): Promise<void> => 
+  new Promise(resolve => setTimeout(resolve, ms));
 
 // =====================================
 // CREDENTIAL PROVIDER OPERATIONS
@@ -93,7 +107,19 @@ export async function getCredentialProviderById(
       .single();
 
     if (error) {
-      throw new CredentialAPIError('Failed to fetch credential provider', 404, error);
+      // If database query fails, fall back to static data
+      console.log('Database query failed, using fallback data:', error.message);
+      
+      const fallbackProvider = FALLBACK_CREDENTIAL_PROVIDERS.find(p => p.id === providerId);
+      if (fallbackProvider) {
+        await mockDelay();
+        return {
+          data: fallbackProvider,
+          success: true,
+        };
+      }
+      
+      throw new CredentialAPIError('Provider not found in database or fallback data', 404, error);
     }
 
     return {
@@ -102,6 +128,18 @@ export async function getCredentialProviderById(
     };
   } catch (error) {
     console.error('Error fetching credential provider:', error);
+    
+    // Try fallback data as last resort
+    const fallbackProvider = FALLBACK_CREDENTIAL_PROVIDERS.find(p => p.id === providerId);
+    if (fallbackProvider) {
+      console.log('Using fallback data for provider:', providerId);
+      await mockDelay();
+      return {
+        data: fallbackProvider,
+        success: true,
+      };
+    }
+    
     return {
       error: error instanceof CredentialAPIError ? error.message : 'Failed to fetch provider',
       success: false,
@@ -420,8 +458,10 @@ export async function getCredentialStatsByCategory(): Promise<CredentialAPIRespo
     const stats: Record<CredentialCategory, number> = {} as Record<CredentialCategory, number>;
     
     data?.forEach(item => {
-      const category = item.credential_definitions.category as CredentialCategory;
-      stats[category] = (stats[category] || 0) + 1;
+      const category = (item.credential_definitions as any)[0]?.category as CredentialCategory;
+      if (category) {
+        stats[category] = (stats[category] || 0) + 1;
+      }
     });
 
     return {

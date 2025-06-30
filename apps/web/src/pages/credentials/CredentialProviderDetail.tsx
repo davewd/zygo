@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getCredentialProviders } from '../../lib/api/credentials';
+import { getCredentialProviderById } from '../../lib/api/credentialProviders';
 
 const CredentialProviderDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,12 +22,22 @@ const CredentialProviderDetail = () => {
 
   useEffect(() => {
     const loadProvider = async () => {
+      if (!id) {
+        setError('No provider ID provided');
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
-        const response = await getCredentialProviders();
-        const foundProvider = response.data?.find((p) => p.id === id) || null;
-        setProvider(foundProvider);
-        setError(null);
+        const response = await getCredentialProviderById(id);
+        if (response.success && response.data) {
+          setProvider(response.data);
+          setError(null);
+        } else {
+          setProvider(null);
+          setError(response.error || 'Provider not found');
+        }
       } catch (err) {
         console.error('Failed to load credential provider:', err);
         setError('Failed to load credential provider. Please try again.');
