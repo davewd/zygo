@@ -214,7 +214,12 @@
         "currency": "AUD"
       },
       "ageGroups": ["preschool"],
-      "tags": ["pre-kindergarten", "school-readiness", "language-development", "structured-learning"]
+      "tags": [
+        "pre-kindergarten",
+        "school-readiness",
+        "language-development",
+        "structured-learning"
+      ]
     },
     {
       "id": "music-education-program",
@@ -255,7 +260,12 @@
         "note": "School fees handled separately"
       },
       "ageGroups": ["child"],
-      "tags": ["primary-education", "academic-excellence", "character-development", "holistic-learning"]
+      "tags": [
+        "primary-education",
+        "academic-excellence",
+        "character-development",
+        "holistic-learning"
+      ]
     },
     {
       "id": "boarding-program",
@@ -346,7 +356,12 @@
         }
       },
       "ageGroups": ["adolescent", "adult", "senior"],
-      "tags": ["exercise-assessment", "injury-prevention", "movement-analysis", "performance-optimization"]
+      "tags": [
+        "exercise-assessment",
+        "injury-prevention",
+        "movement-analysis",
+        "performance-optimization"
+      ]
     },
     {
       "id": "team-nutrition-program",
@@ -630,7 +645,14 @@
         "currency": "AUD"
       },
       "ageGroups": ["preschool", "child"],
-      "tags": ["gymnastics", "strength", "flexibility", "confidence", "skill-development", "physical-literacy"]
+      "tags": [
+        "gymnastics",
+        "strength",
+        "flexibility",
+        "confidence",
+        "skill-development",
+        "physical-literacy"
+      ]
     },
     {
       "id": "ninja-gym-parkour",

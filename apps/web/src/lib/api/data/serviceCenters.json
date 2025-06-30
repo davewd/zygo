@@ -166,7 +166,7 @@
       "providers": ["emily-mcconaghy", "jake-thompson"],
       "services": [
         "kindy-gym-classes",
-        "recreational-gymnastics", 
+        "recreational-gymnastics",
         "ninja-gym-parkour",
         "playn-move",
         "birthday-party-packages",
@@ -343,7 +343,7 @@
       ],
       "services": [
         "calmbirth-course",
-        "calmbirth-refresher", 
+        "calmbirth-refresher",
         "private-calmbirth-session",
         "birth-partner-workshop",
         "fear-release-session",
@@ -548,7 +548,11 @@
         "bookingUrl": "https://mummyswhispers.com.au/book-now"
       },
       "providers": [],
-      "services": ["in-home-consultation", "14-day-sleep-program-online", "maternity-nurse-service"],
+      "services": [
+        "in-home-consultation",
+        "14-day-sleep-program-online",
+        "maternity-nurse-service"
+      ],
       "operatingHours": {
         "monday": { "open": "08:00", "close": "18:00" },
         "tuesday": { "open": "08:00", "close": "18:00" },
@@ -692,7 +696,11 @@
         "bookingUrl": "https://kidneynutrition.com.au/contact"
       },
       "providers": ["jessica-dawson-dietitian"],
-      "services": ["renal-nutrition-consultation", "kidney-disease-prevention", "dialysis-nutrition-support"],
+      "services": [
+        "renal-nutrition-consultation",
+        "kidney-disease-prevention",
+        "dialysis-nutrition-support"
+      ],
       "operatingHours": {
         "monday": { "open": "09:00", "close": "17:00" },
         "tuesday": { "open": "09:00", "close": "17:00" },
@@ -749,7 +757,11 @@
         "bookingUrl": "https://starttrainingstafford.com.au/book-online-now"
       },
       "providers": ["peta-carige"],
-      "services": ["sports-nutrition-consultation", "exercise-physiology-assessment", "team-nutrition-program"],
+      "services": [
+        "sports-nutrition-consultation",
+        "exercise-physiology-assessment",
+        "team-nutrition-program"
+      ],
       "operatingHours": {
         "monday": { "open": "06:00", "close": "19:00" },
         "tuesday": { "open": "06:00", "close": "19:00" },
