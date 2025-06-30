@@ -1,0 +1,342 @@
+{
+  "serviceCenters": [
+    {
+      "id": "full-circle-midwifery",
+      "name": "Full Circle Midwifery & Lactation Services",
+      "description": "Expert lactation consultation and midwifery services supporting families through pregnancy, birth, and breastfeeding journeys.",
+      "overview": "Full Circle Midwifery & Lactation Services provides comprehensive support for mothers and families, specializing in lactation consultation, antenatal care, and midwifery services. Led by Rebecca Cavallaro, an experienced IBCLC and midwife, the practice combines evidence-based care with compassionate support.",
+      "location": {
+        "address": "Suite 4, 90 Mona Vale Road",
+        "suburb": "Mona Vale",
+        "state": "NSW",
+        "postcode": "2103",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.6789,
+          "lng": 151.3056
+        }
+      },
+      "contact": {
+        "phone": "0430 123 456",
+        "email": "rebecca@fullcirclemidwifery.com.au",
+        "website": "https://fullcirclemidwifery.com.au",
+        "bookingUrl": "https://fullcirclemidwifery.com.au/book-now"
+      },
+      "providers": [
+        {
+          "id": "rebecca-cavallaro",
+          "firstName": "Rebecca",
+          "lastName": "Cavallaro",
+          "title": "IBCLC, Midwife, RN",
+          "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+          "bio": "Rebecca is a passionate midwife and International Board Certified Lactation Consultant (IBCLC) with over 15 years of experience supporting families. She provides evidence-based care with a focus on empowering mothers and families to achieve their feeding goals.",
+          "credentials": [
+            {
+              "title": "International Board Certified Lactation Consultant",
+              "abbreviation": "IBCLC",
+              "issuingBody": "IBLCE",
+              "verified": true
+            },
+            {
+              "title": "Registered Midwife",
+              "abbreviation": "RM",
+              "issuingBody": "AHPRA",
+              "verified": true
+            },
+            {
+              "title": "Registered Nurse",
+              "abbreviation": "RN",
+              "issuingBody": "AHPRA",
+              "verified": true
+            }
+          ],
+          "specializations": [
+            "Lactation Support",
+            "Breastfeeding Difficulties",
+            "Antenatal Care",
+            "Postnatal Support",
+            "Infant Feeding"
+          ],
+          "languages": ["English"],
+          "yearsExperience": 15,
+          "availability": {
+            "inPerson": true,
+            "telehealth": true,
+            "homeVisits": true,
+            "emergency": false
+          }
+        }
+      ],
+      "services": [
+        {
+          "id": "initial-lactation-consultation",
+          "name": "Initial Lactation Consultation",
+          "description": "Comprehensive lactation assessment and personalized feeding plan development.",
+          "category": {
+            "id": "lactation-support",
+            "name": "Lactation Support",
+            "taxonomy": "healthcare"
+          },
+          "duration": 90,
+          "price": {
+            "amount": 230,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 105.85
+            }
+          },
+          "ageGroups": ["newborn", "infant"],
+          "tags": ["lactation", "breastfeeding", "consultation"]
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "09:00", "close": "17:00" },
+        "tuesday": { "open": "09:00", "close": "17:00" },
+        "wednesday": { "open": "09:00", "close": "17:00" },
+        "thursday": { "open": "09:00", "close": "17:00" },
+        "friday": { "open": "09:00", "close": "15:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Lactation Consultation",
+        "Home Visits Available",
+        "Telehealth Consultations",
+        "Medicare Rebates",
+        "Evidence-Based Care"
+      ],
+      "certifications": ["IBCLC", "AHPRA Registered"],
+      "insurance": ["Professional Indemnity", "Public Liability"],
+      "accessibility": ["Wheelchair Access", "Parking Available"],
+      "establishedYear": 2018
+    },
+    {
+      "id": "gavin-mccormack-education",
+      "name": "Gavin McCormack Educational Services",
+      "description": "Progressive education resources and content delivered through digital platforms, books, and speaking engagements.",
+      "overview": "Gavin McCormack Educational Services provides comprehensive educational content through blog posts, published books, free resources, and inspiring keynote presentations focused on progressive education and child development.",
+      "location": {
+        "address": "Digital Platform",
+        "suburb": "Online",
+        "state": "Australia",
+        "postcode": "0000",
+        "country": "Australia"
+      },
+      "contact": {
+        "email": "regarded.com.au@gmail.com",
+        "website": "https://gavinmccormack.com.au",
+        "bookingUrl": "https://gavinmccormack.com.au/book-gavin-as-your-next-keynote-speaker"
+      },
+      "providers": [
+        {
+          "id": "gavin-mccormack",
+          "firstName": "Gavin",
+          "lastName": "McCormack",
+          "title": "Educator, Author & Child Development Specialist",
+          "profileImage": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face",
+          "bio": "Gavin is a passionate educator and author with over 25 years of teaching experience worldwide. Named one of the Most Influential Educators for 2022, he specializes in Montessori education and progressive teaching methods.",
+          "credentials": [
+            {
+              "title": "Bachelor of Education",
+              "abbreviation": "BEd",
+              "issuingBody": "Australian University",
+              "verified": true
+            },
+            {
+              "title": "Master of Education (Montessori)",
+              "abbreviation": "MEd",
+              "issuingBody": "Montessori Education Institute",
+              "verified": true
+            }
+          ],
+          "specializations": [
+            "Montessori Education",
+            "Child Development",
+            "Progressive Teaching Methods",
+            "Educational Leadership",
+            "Parent Education"
+          ],
+          "languages": ["English"],
+          "yearsExperience": 25,
+          "availability": {
+            "inPerson": true,
+            "telehealth": false,
+            "homeVisits": false,
+            "emergency": false
+          }
+        }
+      ],
+      "services": [
+        {
+          "id": "educational-blog",
+          "name": "Educational Blog Content",
+          "description": "Regular blog posts covering child development, progressive education, and practical parenting advice.",
+          "category": {
+            "id": "educational-content",
+            "name": "Educational Content",
+            "taxonomy": "education"
+          },
+          "duration": 0,
+          "price": {
+            "amount": 0,
+            "currency": "AUD"
+          },
+          "ageGroups": [
+            "prenatal",
+            "newborn",
+            "infant",
+            "toddler",
+            "preschool",
+            "child",
+            "adolescent",
+            "adult"
+          ],
+          "tags": ["education", "blog", "free-content", "child-development"]
+        },
+        {
+          "id": "keynote-speaking",
+          "name": "Keynote Speaking Services",
+          "description": "Inspiring keynote presentations on education, child development, and unlocking potential in children.",
+          "category": {
+            "id": "speaking-consultation",
+            "name": "Speaking & Consultation",
+            "taxonomy": "education"
+          },
+          "duration": 90,
+          "price": {
+            "amount": 2500,
+            "currency": "AUD"
+          },
+          "ageGroups": ["adult"],
+          "tags": ["keynote-speaking", "education-consultation", "professional-development"]
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "09:00", "close": "17:00" },
+        "tuesday": { "open": "09:00", "close": "17:00" },
+        "wednesday": { "open": "09:00", "close": "17:00" },
+        "thursday": { "open": "09:00", "close": "17:00" },
+        "friday": { "open": "09:00", "close": "15:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Educational Blog Content",
+        "Published Books & Resources",
+        "Free Educational Downloads",
+        "Keynote Speaking Services",
+        "Progressive Education Focus"
+      ],
+      "certifications": ["Most Influential Educator 2022"],
+      "insurance": ["Professional Indemnity Insurance"],
+      "accessibility": ["Online Platform Access", "Mobile-Friendly Website"],
+      "establishedYear": 2010
+    },
+    {
+      "id": "prologue",
+      "name": "Prologue",
+      "description": "Leading fertility and reproductive health clinic providing comprehensive fertility treatments and support.",
+      "overview": "Prologue is a state-of-the-art fertility clinic specializing in reproductive medicine, IVF treatments, and comprehensive fertility support services.",
+      "location": {
+        "address": "Level 1, 123 Collins Street",
+        "suburb": "Melbourne",
+        "state": "VIC",
+        "postcode": "3000",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -37.8136,
+          "lng": 144.9631
+        }
+      },
+      "contact": {
+        "phone": "03 9123 4567",
+        "email": "info@prologue.com.au",
+        "website": "https://prologue.com.au",
+        "bookingUrl": "https://prologue.com.au/appointments"
+      },
+      "providers": [
+        {
+          "id": "dr-justin-tucker",
+          "firstName": "Justin",
+          "lastName": "Tucker",
+          "title": "Obstetrician & Fertility Specialist",
+          "profileImage": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+          "bio": "Dr. Justin Tucker is a leading fertility specialist and obstetrician with extensive experience in reproductive medicine and fertility treatments.",
+          "credentials": [
+            {
+              "title": "Fellowship in Obstetrics and Gynaecology",
+              "abbreviation": "FRANZCOG",
+              "issuingBody": "RANZCOG",
+              "verified": true
+            },
+            {
+              "title": "Fertility Specialist",
+              "abbreviation": "CREi",
+              "issuingBody": "Australian Fertility Society",
+              "verified": true
+            }
+          ],
+          "specializations": [
+            "Fertility Medicine",
+            "IVF Treatments",
+            "Reproductive Endocrinology",
+            "Pregnancy Care",
+            "Fertility Preservation"
+          ],
+          "languages": ["English"],
+          "yearsExperience": 15,
+          "availability": {
+            "inPerson": true,
+            "telehealth": true,
+            "homeVisits": false,
+            "emergency": true
+          }
+        }
+      ],
+      "services": [
+        {
+          "id": "fertility-consultation",
+          "name": "Fertility Consultation",
+          "description": "Comprehensive fertility assessment and treatment planning.",
+          "category": {
+            "id": "fertility-medicine",
+            "name": "Fertility Medicine",
+            "taxonomy": "healthcare"
+          },
+          "duration": 60,
+          "price": {
+            "amount": 350,
+            "currency": "AUD",
+            "rebate": {
+              "provider": "Medicare",
+              "amount": 105.85
+            }
+          },
+          "ageGroups": ["adult"],
+          "tags": ["fertility", "consultation", "reproductive-health"]
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "08:00", "close": "18:00" },
+        "tuesday": { "open": "08:00", "close": "18:00" },
+        "wednesday": { "open": "08:00", "close": "18:00" },
+        "thursday": { "open": "08:00", "close": "18:00" },
+        "friday": { "open": "08:00", "close": "17:00" },
+        "saturday": { "open": "09:00", "close": "13:00" },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "IVF Treatments",
+        "Fertility Testing",
+        "Genetic Counseling",
+        "Egg Freezing",
+        "Male Fertility Services"
+      ],
+      "certifications": ["RTAC Accredited", "AHPRA Registered"],
+      "insurance": ["All Private Health Funds", "Medicare"],
+      "accessibility": ["Wheelchair Access", "Private Parking"],
+      "establishedYear": 2015
+    }
+  ]
+}

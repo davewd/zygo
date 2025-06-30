@@ -599,5 +599,298 @@
       },
       { "time": "5:15 AM", "duration": 26, "happiness": 8, "soreness": 3, "notes": "Early morning" }
     ]
+  },
+  {
+    "id": "blog-jaundice-breastfeeding",
+    "title": "Jaundice & Breastfeeding",
+    "metadata": {
+      "createdAt": "2024-01-15T09:00:00Z",
+      "source": "zygo-blog",
+      "sourceUrl": "/blog/jaundice-breastfeeding",
+      "authorId": "rebecca-cavallaro"
+    },
+    "author": {
+      "name": "Rebecca Cavallaro",
+      "handle": "rebecca-cavallaro",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Lactation Consultant",
+      "credentials": [
+        {
+          "title": "International Board Certified Lactation Consultant",
+          "abbreviation": "IBCLC",
+          "issuingBody": "International Board of Lactation Consultant Examiners",
+          "verified": true
+        },
+        {
+          "title": "Registered Midwife",
+          "abbreviation": "RM",
+          "issuingBody": "Nursing and Midwifery Board of Australia",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 10,
+      "specializations": ["Lactation Consulting", "Maternal Health"],
+      "centerName": "Northern Beaches Lactation",
+      "centerId": "northern-beaches-lactation"
+    },
+    "type": "post",
+    "description": "Jaundice is the most common diagnosis in full-term infants during the immediate post-natal period, occurring in approximately 60 percent",
+    "post": "Jaundice is the most common diagnosis in full-term infants during the immediate post-natal period, occurring in approximately 60 percent of all babies. Here, we will explore the effects of jaundice on breastfeeding and offer practical tips for parents struggling to breastfeed a jaundice baby.",
+    "imageUrl": "/images/blog/jaundice-breastfeeding.jpg",
+    "tags": ["breastfeeding", "jaundice", "newborn", "lactation", "support"],
+    "hasReferences": true,
+    "peerLikes": {
+      "count": 12,
+      "likedBy": [
+        {
+          "providerId": "dr-justin-tucker",
+          "providerName": "Dr. Justin Tucker",
+          "credentials": ["Psychologist"],
+          "specializations": ["Child Psychology", "Family Therapy"],
+          "dateLiked": "2024-01-16T10:30:00Z"
+        }
+      ]
+    },
+    "readingTime": 5,
+    "stats": {
+      "likes": 12,
+      "shares": 4,
+      "comments": 6,
+      "reposts": 2
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "blog-establishing-milk-supply",
+    "title": "Establishing Your Milk Supply: The First Two Weeks",
+    "metadata": {
+      "createdAt": "2024-01-10T08:00:00Z",
+      "source": "zygo-blog",
+      "sourceUrl": "/blog/establishing-milk-supply",
+      "authorId": "rebecca-cavallaro"
+    },
+    "author": {
+      "name": "Rebecca Cavallaro",
+      "handle": "rebecca-cavallaro",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Lactation Consultant",
+      "credentials": [
+        {
+          "title": "International Board Certified Lactation Consultant",
+          "abbreviation": "IBCLC",
+          "issuingBody": "International Board of Lactation Consultant Examiners",
+          "verified": true
+        },
+        {
+          "title": "Registered Midwife",
+          "abbreviation": "RM",
+          "issuingBody": "Nursing and Midwifery Board of Australia",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 10,
+      "specializations": ["Lactation Consulting", "Maternal Health"],
+      "centerName": "Northern Beaches Lactation",
+      "centerId": "northern-beaches-lactation"
+    },
+    "type": "post",
+    "description": "The first two weeks after birth are crucial for establishing a strong milk supply. Here's what you need to know.",
+    "post": "The first two weeks after birth are crucial for establishing a strong milk supply. During this time, your body is learning to produce milk based on your baby's needs.",
+    "imageUrl": "/images/blog/milk-supply.jpg",
+    "tags": ["breastfeeding", "milk-supply", "postpartum", "newborn"],
+    "hasReferences": true,
+    "peerLikes": {
+      "count": 8,
+      "likedBy": []
+    },
+    "readingTime": 7,
+    "stats": {
+      "likes": 8,
+      "shares": 2,
+      "comments": 4,
+      "reposts": 1
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "blog-tongue-tie-assessment",
+    "title": "Understanding Tongue Tie: When to Seek Assessment",
+    "metadata": {
+      "createdAt": "2024-01-05T09:30:00Z",
+      "source": "zygo-blog",
+      "sourceUrl": "/blog/tongue-tie-assessment",
+      "authorId": "rebecca-cavallaro"
+    },
+    "author": {
+      "name": "Rebecca Cavallaro",
+      "handle": "rebecca-cavallaro",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Lactation Consultant",
+      "credentials": [
+        {
+          "title": "International Board Certified Lactation Consultant",
+          "abbreviation": "IBCLC",
+          "issuingBody": "International Board of Lactation Consultant Examiners",
+          "verified": true
+        },
+        {
+          "title": "Registered Midwife",
+          "abbreviation": "RM",
+          "issuingBody": "Nursing and Midwifery Board of Australia",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 10,
+      "specializations": ["Lactation Consulting", "Maternal Health"],
+      "centerName": "Northern Beaches Lactation",
+      "centerId": "northern-beaches-lactation"
+    },
+    "type": "post",
+    "description": "Tongue tie can significantly impact breastfeeding. Learn the signs and when to seek professional assessment.",
+    "post": "Tongue tie, or ankyloglossia, occurs when the strip of skin connecting the baby's tongue to the floor of their mouth is shorter than usual. This can affect breastfeeding in various ways.",
+    "imageUrl": "/images/blog/tongue-tie.jpg",
+    "tags": ["tongue-tie", "breastfeeding", "assessment", "newborn"],
+    "hasReferences": true,
+    "peerLikes": {
+      "count": 15,
+      "likedBy": []
+    },
+    "readingTime": 6,
+    "stats": {
+      "likes": 15,
+      "shares": 5,
+      "comments": 8,
+      "reposts": 3
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "blog-child-development-milestones",
+    "title": "Understanding Child Development Milestones",
+    "metadata": {
+      "createdAt": "2024-01-20T10:00:00Z",
+      "source": "zygo-blog",
+      "sourceUrl": "/blog/child-development-milestones",
+      "authorId": "gavin-mccormack"
+    },
+    "author": {
+      "name": "Gavin McCormack",
+      "handle": "gavin-mccormack",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Educational Psychologist",
+      "credentials": [
+        {
+          "title": "Educational Psychologist",
+          "abbreviation": "EP",
+          "issuingBody": "Psychology Board of Australia",
+          "verified": true
+        },
+        {
+          "title": "Doctor of Philosophy",
+          "abbreviation": "PhD",
+          "issuingBody": "University of Sydney",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 15,
+      "specializations": ["Child Development", "Educational Psychology"],
+      "centerName": "Sydney Child Psychology",
+      "centerId": "sydney-child-psychology"
+    },
+    "type": "post",
+    "description": "A comprehensive guide to child development milestones and when to seek professional support.",
+    "post": "Child development follows predictable patterns, but every child develops at their own pace. Understanding milestones helps parents know what to expect and when to seek support.",
+    "imageUrl": "/images/blog/development-milestones.jpg",
+    "tags": ["child-development", "milestones", "parenting", "psychology"],
+    "hasReferences": true,
+    "peerLikes": {
+      "count": 20,
+      "likedBy": []
+    },
+    "readingTime": 8,
+    "stats": {
+      "likes": 20,
+      "shares": 6,
+      "comments": 10,
+      "reposts": 4
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
+    "id": "blog-managing-toddler-behavior",
+    "title": "Positive Strategies for Managing Toddler Behavior",
+    "metadata": {
+      "createdAt": "2024-01-12T11:00:00Z",
+      "source": "zygo-blog",
+      "sourceUrl": "/blog/managing-toddler-behavior",
+      "authorId": "gavin-mccormack"
+    },
+    "author": {
+      "name": "Gavin McCormack",
+      "handle": "gavin-mccormack",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Educational Psychologist",
+      "credentials": [
+        {
+          "title": "Educational Psychologist",
+          "abbreviation": "EP",
+          "issuingBody": "Psychology Board of Australia",
+          "verified": true
+        },
+        {
+          "title": "Doctor of Philosophy",
+          "abbreviation": "PhD",
+          "issuingBody": "University of Sydney",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 15,
+      "specializations": ["Child Development", "Educational Psychology"],
+      "centerName": "Sydney Child Psychology",
+      "centerId": "sydney-child-psychology"
+    },
+    "type": "post",
+    "description": "Evidence-based strategies for understanding and managing challenging toddler behaviors.",
+    "post": "Toddler behavior can be challenging for parents. Understanding the developmental reasons behind these behaviors and implementing positive strategies can help create a more harmonious home environment.",
+    "imageUrl": "/images/blog/toddler-behavior.jpg",
+    "tags": ["toddler", "behavior", "parenting", "child-psychology"],
+    "hasReferences": true,
+    "peerLikes": {
+      "count": 18,
+      "likedBy": []
+    },
+    "readingTime": 10,
+    "stats": {
+      "likes": 18,
+      "shares": 5,
+      "comments": 9,
+      "reposts": 3
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
   }
 ]
