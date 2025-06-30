@@ -7,7 +7,7 @@
 
 import communityData from '../data/community.json';
 import feedItemsData from '../data/feed/feed_items.json';
-import providersData from '../data/providers.json';
+import providersData from '../data/serviceProviders.json';
 
 interface MissingActorType {
   feedId: string;

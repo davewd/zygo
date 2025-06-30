@@ -10,8 +10,8 @@ import blogPostsData from '../data/blogPosts.json';
 import communityData from '../data/community.json';
 import credentialsData from '../data/credentials.json';
 import feedItemsData from '../data/feed/feed_items.json';
-import providersData from '../data/providers.json';
 import serviceCentersData from '../data/serviceCenters.json';
+import providersData from '../data/serviceProviders.json';
 
 describe('Data Consistency Tests', () => {
   
