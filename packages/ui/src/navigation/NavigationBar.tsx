@@ -1,5 +1,6 @@
 import { Bell, Search, User, Users } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
 import {
@@ -108,6 +109,12 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const searchRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const location = useLocation();
+
+    // Helper function to check if a route is active
+    const isActiveRoute = (path: string) => {
+      return location.pathname === path || location.pathname.startsWith(path + '/');
+    };
 
     // Filter suggestions based on search query
     const filteredSuggestions = PROVIDER_SUGGESTIONS.filter((provider) => {
@@ -186,53 +193,15 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       <div
         ref={ref}
         className={cn(
-          'flex items-center justify-between p-4 bg-popover text-popover-foreground',
+          'fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-white text-black shadow-md',
           className
         )}
       >
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem className="bg-popover text-popover-foreground">
-              <NavigationMenuLink href="/feed" className={cn(navigationMenuTriggerStyle())}>
-                Feed
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink href="/community" className={cn(navigationMenuTriggerStyle())}>
-                Community
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink href="/updates" className={cn(navigationMenuTriggerStyle())}>
-                Updates
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink href="/tools" className={cn(navigationMenuTriggerStyle())}>
-                Tools
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink href="/timeline" className={cn(navigationMenuTriggerStyle())}>
-                Timeline
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/notifications"
-                className={cn(navigationMenuTriggerStyle())}
-              >
-                Notifications
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-
-        {/* Center - Search Bar with Dropdown */}
-        <div ref={searchRef} className="relative max-w-md">
+        {/* Left - Search Bar with Dropdown */}
+        <div ref={searchRef} className="relative">
           <form onSubmit={handleSearchSubmit} className="relative">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5" />
               <Input
                 ref={inputRef}
                 type="text"
@@ -245,7 +214,7 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                     setShowDropdown(true);
                   }
                 }}
-                className="pl-10 pr-4 h-9 w-64 bg-background border-input focus:ring-2 focus:ring-ring focus:border-transparent"
+                className="pl-12 pr-4 h-10 w-80 bg-gray-100 border-black text-black placeholder:text-gray-600 focus:ring-2 focus:ring-black focus:border-black"
                 autoComplete="off"
               />
             </div>
@@ -253,14 +222,14 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
 
           {/* Dropdown */}
           {showDropdown && filteredSuggestions.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-sm border border-input rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-black rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
               {filteredSuggestions.map((provider, index) => (
                 <div
                   key={provider.id}
                   className={cn(
                     'flex items-center gap-3 p-3 cursor-pointer transition-colors',
-                    'hover:bg-gray-100/80 hover:text-gray-900',
-                    selectedIndex === index && 'bg-gray-100/80 text-gray-900'
+                    'hover:bg-gray-100 hover:text-black',
+                    selectedIndex === index && 'bg-gray-100 text-black'
                   )}
                   onClick={() => handleProviderSelect(provider)}
                   onMouseEnter={() => setSelectedIndex(index)}
@@ -269,15 +238,15 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                     <img
                       src={provider.profileImage}
                       alt={`${provider.firstName} ${provider.lastName}`}
-                      className="w-10 h-10 rounded-full object-cover border border-border"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-300"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                      <User className="w-5 h-5 text-muted-foreground" />
+                    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                      <User className="w-5 h-5 text-gray-600" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm truncate text-gray-900">
+                    <div className="font-medium text-sm truncate text-black">
                       {provider.firstName} {provider.lastName}
                     </div>
                     <div className="text-xs text-gray-600 truncate">{provider.title}</div>
@@ -289,21 +258,87 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
           )}
         </div>
 
+        {/* Center - Navigation Menu */}
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/feed"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'text-black hover:bg-gray-100 hover:text-black',
+                  isActiveRoute('/feed') && 'bg-zygo-yellow text-black'
+                )}
+              >
+                Feed
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/community"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'text-black hover:bg-gray-100 hover:text-black',
+                  isActiveRoute('/community') && 'bg-zygo-yellow text-black'
+                )}
+              >
+                Community
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/updates"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'text-black hover:bg-gray-100 hover:text-black',
+                  isActiveRoute('/updates') && 'bg-zygo-yellow text-black'
+                )}
+              >
+                Updates
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/tools"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'text-black hover:bg-gray-100 hover:text-black',
+                  isActiveRoute('/tools') && 'bg-zygo-yellow text-black'
+                )}
+              >
+                Tools
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/timeline"
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'text-black hover:bg-gray-100 hover:text-black',
+                  isActiveRoute('/timeline') && 'bg-zygo-yellow text-black'
+                )}
+              >
+                Timeline
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
         {/* Right - Notifications, Current User and User Switch */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {/* Notification Icon with Badge */}
           <div className="relative">
             <Button
               variant="ghost"
               size="sm"
-              className="h-8 w-8 p-0 rounded-full"
+              className="h-10 w-10 p-0 rounded-full hover:bg-gray-100 text-black"
               onClick={onNotificationClick}
               title="Notifications"
             >
-              <Bell className="h-4 w-4" />
+              <Bell className="h-6 w-6" />
             </Button>
             {notificationCount > 0 && (
-              <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
+              <div className="absolute -top-1 -right-1 h-6 w-6 bg-red-500 rounded-full flex items-center justify-center">
                 <span className="text-xs font-bold text-white">
                   {notificationCount > 9 ? '9+' : notificationCount}
                 </span>
@@ -314,18 +349,18 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
           {/* Current User Display */}
           {currentUser && (
             <div className="flex items-center gap-2">
-              <Avatar className="h-8 w-8">
+              <Avatar className="h-9 w-9">
                 <AvatarImage
                   src={currentUser.avatar}
                   alt={`${currentUser.firstName} ${currentUser.lastName}`}
                 />
-                <AvatarFallback className="text-xs">
+                <AvatarFallback className="text-sm text-black bg-gray-200">
                   {currentUser.firstName.charAt(0)}
                   {currentUser.lastName.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               <div className="hidden sm:block">
-                <div className="text-sm font-medium">
+                <div className="text-sm font-medium text-black">
                   {currentUser.firstName} {currentUser.lastName}
                 </div>
               </div>
@@ -339,33 +374,36 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 w-8 p-0 rounded-full"
+                  className="h-10 w-10 p-0 rounded-full hover:bg-gray-100 text-black"
                   title="Switch user"
                 >
-                  <Users className="h-4 w-4" />
+                  <Users className="h-6 w-6" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuContent align="end" className="w-56 bg-white border-gray-300">
                 {otherUsers.map((user) => (
-                  <DropdownMenuItem key={user.id} className="gap-2">
+                  <DropdownMenuItem key={user.id} className="gap-2 text-black hover:bg-gray-100">
                     <Avatar className="h-6 w-6">
                       <AvatarImage src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
-                      <AvatarFallback className="text-xs">
+                      <AvatarFallback className="text-xs text-black bg-gray-200">
                         {user.firstName.charAt(0)}
                         {user.lastName.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium">
+                      <span className="text-sm font-medium text-black">
                         {user.firstName} {user.lastName}
                       </span>
-                      <span className="text-xs text-muted-foreground">{user.email}</span>
+                      <span className="text-xs text-gray-600">{user.email}</span>
                     </div>
                   </DropdownMenuItem>
                 ))}
                 {otherUsers.length > 0 && <DropdownMenuSeparator />}
                 {onUserSwitch && (
-                  <DropdownMenuItem onClick={onUserSwitch} className="gap-2">
+                  <DropdownMenuItem
+                    onClick={onUserSwitch}
+                    className="gap-2 text-black hover:bg-gray-100"
+                  >
                     <Users className="h-4 w-4" />
                     <span>Switch Account</span>
                   </DropdownMenuItem>

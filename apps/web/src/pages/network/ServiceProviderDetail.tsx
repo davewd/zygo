@@ -377,9 +377,11 @@ const ServiceProviderDetail = () => {
 
                             <div className="flex items-center justify-between">
                               <div className="flex flex-wrap gap-1">
-                                <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
-                                  {service.category.name}
-                                </span>
+                                {service.category?.name && (
+                                  <span className="bg-zygo-blue/20 text-gray-700 text-xs px-2 py-1 rounded">
+                                    {service.category.name}
+                                  </span>
+                                )}
                                 {service.ageGroups?.map((age) => (
                                   <span
                                     key={age}
