@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import type { UserRole } from '@zygo/types/src/community';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
+import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
 import {
   ArrowRight,
   Award,
   Baby,
-  Calendar,
   Heart,
   MessageCircle,
   Star,
@@ -13,9 +10,9 @@ import {
   User,
   Users,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCommunityProfiles } from '../../lib/api/community';
-import type { CommunityProfile } from '@zygo/types/src/community';
 
 const Community = () => {
   // API state management
@@ -46,14 +43,12 @@ const Community = () => {
   const totalMembers = profiles.length;
   const activeMembers = profiles.filter((p) => p.consumer.isActive).length;
   const parentCount = profiles.filter((p) => p.consumer.role === 'parent').length;
-  const grandparentCount = profiles.filter(
-    (p) => p.consumer.role === 'grandparent'
-  ).length;
+  const grandparentCount = profiles.filter((p) => p.consumer.role === 'grandparent').length;
   const childrenCount = profiles.filter((p) => p.consumer.role === 'child').length;
 
   // Featured community members (most active or recently joined)
   const featuredMembers = profiles
-    .filter(p => p.stats) // Only profiles with stats
+    .filter((p) => p.stats) // Only profiles with stats
     .sort((a, b) => (b.stats?.postsCount || 0) - (a.stats?.postsCount || 0))
     .slice(0, 3);
 
@@ -103,8 +98,8 @@ const Community = () => {
           <div className="text-center py-12">
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -129,10 +124,16 @@ const Community = () => {
             where every voice matters and every story is valued.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/community/profiles" className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors">
+            <Link
+              to="/community/profiles"
+              className="bg-zygo-red hover:bg-zygo-red/90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors"
+            >
               Explore Profiles
             </Link>
-            <Link to="/community/hub" className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors">
+            <Link
+              to="/community/hub"
+              className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors"
+            >
               Community Hub
             </Link>
           </div>
@@ -232,7 +233,7 @@ const Community = () => {
 
                       {/* View Profile Button */}
                       <Link
-                        to={`/community/profile/${profile.consumer.id}`}
+                        to={`/community/profiles/${profile.consumer.id}`}
                         className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-3 rounded-lg transition-colors font-medium"
                       >
                         View Profile
@@ -295,12 +296,10 @@ const Community = () => {
 
         {/* Call to Action */}
         <div className="bg-gradient-to-r from-zygo-mint/20 to-zygo-blue/20 rounded-lg p-12 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
-            Ready to Join Our Community?
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Join Our Community?</h2>
           <p className="text-gray-600 mb-8 max-w-3xl mx-auto text-lg">
-            Whether you're a new parent seeking guidance, a grandparent wanting to share wisdom,
-            or a family looking for connections, our community welcomes you with open arms.
+            Whether you're a new parent seeking guidance, a grandparent wanting to share wisdom, or
+            a family looking for connections, our community welcomes you with open arms.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -218,7 +218,7 @@ const CommunityHub = () => {
 
                       {/* View Profile Button */}
                       <Link
-                        to={`/community/profile/${profile.consumer.id}`}
+                        to={`/community/profiles/${profile.consumer.id}`}
                         className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-2 rounded transition-colors text-sm font-medium"
                       >
                         View Profile
