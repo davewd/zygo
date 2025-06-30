@@ -1,6 +1,6 @@
-import { PrimaryConsumer } from '@zygo/types';
+import type { PrimaryConsumer } from '@zygo/types/src/community';
 import { useCallback, useEffect, useState } from 'react';
-import { primaryConsumers } from '../data/community/primaryConsumers';
+import { getAllPrimaryConsumers } from '../lib/api/community';
 
 export interface TimelineMember {
   id: string;
@@ -67,8 +67,9 @@ export const useTimelineIntegration = (): UseTimelineIntegrationReturn => {
       setLoading(true);
       setError(null);
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // Load primary consumers from API
+      const response = await getAllPrimaryConsumers();
+      const primaryConsumers = response.data;
       
       // Link timeline members to community profiles by name matching
       const membersWithProfiles = mockTimelineMembers.map(member => {
@@ -101,8 +102,9 @@ export const useTimelineIntegration = (): UseTimelineIntegrationReturn => {
       setLoading(true);
       setError(null);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 300));
+      // Load primary consumers to find the profile
+      const response = await getAllPrimaryConsumers();
+      const primaryConsumers = response.data;
       
       const profile = primaryConsumers.find(p => p.id === profileId);
       if (!profile) {
@@ -148,7 +150,7 @@ export interface UseFeedProfileConnectionState {
 }
 
 export interface UseFeedProfileConnectionActions {
-  getProfileByAuthor: (authorName: string, authorHandle: string) => PrimaryConsumer | undefined;
+  getProfileByAuthor: (authorName: string, authorHandle: string) => Promise<PrimaryConsumer | undefined>;
   connectAuthorToProfile: (authorHandle: string, profileId: string) => Promise<void>;
 }
 
@@ -158,20 +160,29 @@ export const useFeedProfileConnection = (): UseFeedProfileConnectionReturn => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getProfileByAuthor = useCallback((authorName: string, authorHandle: string): PrimaryConsumer | undefined => {
-    // First try to find by handle
-    let profile = primaryConsumers.find(p => p.profile.handle === authorHandle);
-    
-    if (!profile) {
-      // Fallback to name matching
-      const [firstName, lastName] = authorName.split(' ');
-      profile = primaryConsumers.find(p => 
-        p.firstName === firstName && 
-        (p.lastName === lastName || !lastName)
-      );
+  const getProfileByAuthor = useCallback(async (authorName: string, authorHandle: string): Promise<PrimaryConsumer | undefined> => {
+    try {
+      // Load primary consumers from API
+      const response = await getAllPrimaryConsumers();
+      const primaryConsumers = response.data;
+      
+      // First try to find by handle
+      let profile = primaryConsumers.find(p => p.handle === authorHandle);
+      
+      if (!profile) {
+        // Fallback to name matching
+        const [firstName, lastName] = authorName.split(' ');
+        profile = primaryConsumers.find(p => 
+          p.firstName === firstName && 
+          (p.lastName === lastName || !lastName)
+        );
+      }
+      
+      return profile;
+    } catch (err) {
+      console.error('Failed to get profile by author:', err);
+      return undefined;
     }
-    
-    return profile;
   }, []);
 
   const connectAuthorToProfile = useCallback(async (authorHandle: string, profileId: string): Promise<void> => {
@@ -179,8 +190,9 @@ export const useFeedProfileConnection = (): UseFeedProfileConnectionReturn => {
       setLoading(true);
       setError(null);
       
-      // Simulate API call to create author-profile connection
-      await new Promise(resolve => setTimeout(resolve, 300));
+      // Load primary consumers from API
+      const response = await getAllPrimaryConsumers();
+      const primaryConsumers = response.data;
       
       const profile = primaryConsumers.find(p => p.id === profileId);
       if (!profile) {
