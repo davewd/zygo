@@ -1,0 +1,127 @@
+{
+  "services": [
+    {
+      "id": "calmbirth-course",
+      "name": "Calmbirth® Childbirth Education Course",
+      "description": "Australia's most highly acclaimed childbirth education program. A comprehensive 12-hour face-to-face antenatal program that includes psychological and emotional preparation for childbirth. Learn to reframe birth, work with your body, and move past negative emotions through fear release techniques and guided relaxation.",
+      "category": {
+        "id": "childbirth-education",
+        "name": "Childbirth Education",
+        "description": "Comprehensive antenatal education programs for expectant parents",
+        "taxonomy": "education"
+      },
+      "duration": 720,
+      "price": {
+        "amount": 395,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": [
+        "childbirth-education",
+        "antenatal",
+        "fear-release",
+        "relaxation",
+        "couples",
+        "weekend-intensive",
+        "mind-body-connection",
+        "birth-preparation"
+      ]
+    },
+    {
+      "id": "calmbirth-refresher",
+      "name": "Calmbirth® Refresher Course",
+      "description": "A condensed refresher course for couples who have previously completed Calmbirth or other childbirth education programs. Perfect for subsequent pregnancies or to reinforce key concepts and techniques.",
+      "category": {
+        "id": "antenatal-preparation",
+        "name": "Antenatal Preparation",
+        "description": "Psychological and emotional preparation for childbirth",
+        "taxonomy": "education"
+      },
+      "duration": 240,
+      "price": {
+        "amount": 195,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": ["refresher", "subsequent-pregnancy", "review", "condensed-program"]
+    },
+    {
+      "id": "private-calmbirth-session",
+      "name": "Private Calmbirth® Session",
+      "description": "One-on-one or private group Calmbirth education session tailored to your specific needs, concerns, and birth preferences. Perfect for couples wanting personalized attention or those with scheduling constraints.",
+      "category": {
+        "id": "childbirth-education",
+        "name": "Childbirth Education",
+        "description": "Comprehensive antenatal education programs for expectant parents",
+        "taxonomy": "education"
+      },
+      "duration": 480,
+      "price": {
+        "amount": 650,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": ["private-session", "personalized", "flexible-scheduling", "one-on-one", "customized"]
+    },
+    {
+      "id": "birth-partner-workshop",
+      "name": "Birth Partner Support Workshop",
+      "description": "Specialized workshop focusing on the birth partner's role in supporting during labor and birth. Learn practical techniques for providing emotional and physical support throughout the birthing process.",
+      "category": {
+        "id": "antenatal-preparation",
+        "name": "Antenatal Preparation",
+        "description": "Psychological and emotional preparation for childbirth",
+        "taxonomy": "education"
+      },
+      "duration": 180,
+      "price": {
+        "amount": 150,
+        "currency": "AUD"
+      },
+      "ageGroups": ["adult"],
+      "tags": ["birth-partner", "support-techniques", "labor-support", "practical-skills"]
+    },
+    {
+      "id": "fear-release-session",
+      "name": "Fear Release & Relaxation Session",
+      "description": "Focused session on fear release techniques and guided relaxation for birth preparation. Ideal for those experiencing significant birth anxiety or wanting to deepen their relaxation practice.",
+      "category": {
+        "id": "fear-release",
+        "name": "Fear Release & Relaxation",
+        "description": "Guided relaxation and fear release techniques for birth preparation",
+        "taxonomy": "therapy"
+      },
+      "duration": 120,
+      "price": {
+        "amount": 120,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": [
+        "fear-release",
+        "anxiety-support",
+        "guided-relaxation",
+        "meditation",
+        "birth-anxiety"
+      ]
+    },
+    {
+      "id": "hospital-program",
+      "name": "Hospital-Based Calmbirth® Program",
+      "description": "Calmbirth program delivered within partner hospitals and birthing centers. Integrated into antenatal care pathways and often available through hospital antenatal education programs.",
+      "category": {
+        "id": "childbirth-education",
+        "name": "Childbirth Education",
+        "description": "Comprehensive antenatal education programs for expectant parents",
+        "taxonomy": "education"
+      },
+      "duration": 720,
+      "price": {
+        "amount": 295,
+        "currency": "AUD"
+      },
+      "ageGroups": ["prenatal", "adult"],
+      "tags": ["hospital-based", "integrated-care", "medical-setting", "antenatal-program"]
+    }
+  ]
+}

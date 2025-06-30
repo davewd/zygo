@@ -391,11 +391,201 @@
       },
       "ageGroups": ["toddler", "preschool"],
       "tags": ["gymnastics", "motor-skills", "confidence-building", "physical-development"]
+    },
+    {
+      "id": "peter-jackson-calmbirth",
+      "firstName": "Peter",
+      "lastName": "Jackson",
+      "title": "Founder & Lead Calmbirth® Educator, Registered Midwife",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&h=600&fit=crop&crop=center",
+      "bio": "Peter Jackson is the founder and gifted architect behind the incredible Calmbirth program. A registered midwife for over 40 years with extensive experience in mental health, Peter revolutionized childbirth education in Australia in the late 1990s. He has been internationally recognized for his success in changing and improving childbirth education both in Australia and overseas.",
+      "personalStory": "Peter's journey began with a passion for mind-body medicine, which he has practiced for over 20 years. His extensive knowledge of the mind and its impact on physical health and wellbeing, combined with his background in therapeutic medicine, means he understands the powerful connection between a woman's emotional state and how her body responds in birth. Peter believes that preparation is the precursor to the experience, and developed the Calmbirth Program to assist couples in preparing for birth confidently with evidence-based knowledge and tools.",
+      "credentials": [
+        {
+          "title": "Registered Midwife",
+          "abbreviation": "RM",
+          "issuingBody": "Australian Health Practitioner Regulation Agency",
+          "verified": true
+        },
+        {
+          "title": "Bachelor of Health Science (Midwifery)",
+          "abbreviation": "BHSc",
+          "issuingBody": "University of Technology Sydney",
+          "verified": true
+        },
+        {
+          "title": "Calmbirth® Program Developer",
+          "abbreviation": "Founder",
+          "issuingBody": "Calmbirth® Australia",
+          "verified": true
+        },
+        {
+          "title": "Mind-Body Medicine Practitioner",
+          "abbreviation": "MBM",
+          "issuingBody": "International Association of Mind-Body Medicine",
+          "verified": true
+        },
+        {
+          "title": "Mental Health Specialist Training",
+          "abbreviation": "MH Spec",
+          "issuingBody": "NSW Health",
+          "verified": true
+        }
+      ],
+      "services": [
+        "calmbirth-course",
+        "calmbirth-refresher",
+        "private-calmbirth-session",
+        "birth-partner-workshop",
+        "fear-release-session",
+        "hospital-program"
+      ],
+      "specializations": [
+        "Childbirth Education",
+        "Fear Release Techniques",
+        "Mind-Body Medicine",
+        "Antenatal Psychology",
+        "Birth Preparation",
+        "Educator Training",
+        "Midwifery Care",
+        "Birth Anxiety Management",
+        "Couples Education",
+        "Relaxation Techniques"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 40,
+      "approach": "My approach is grounded in the understanding that preparation is the precursor to experience. I believe in empowering couples with evidence-based knowledge and practical tools while addressing the powerful mind-body connection in birth. The Calmbirth program focuses on reframing birth as a natural process, teaching couples to work with their bodies rather than against them, and providing fear release techniques that facilitate emotional healing and confidence building.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": false,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 395,
+        "followUpFee": 195,
+        "currency": "AUD"
+      },
+      "centerId": "calmbirth-australia"
+    },
+    {
+      "id": "karen-mcclay-calmbirth",
+      "firstName": "Karen",
+      "lastName": "McClay",
+      "title": "Calmbirth® Director & Senior Educator",
+      "profileImage": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=600&fit=crop&crop=center",
+      "bio": "Karen McClay is the Director of Calmbirth® Australia and a highly experienced childbirth educator. She is passionate about empowering women to birth with confidence and fearlessness, believing strongly that women will birth best when they feel safe, undisturbed, and respected.",
+      "personalStory": "Karen's dedication to improving birthing outcomes for women and their families goes beyond the physical aspects of birth to include emotional wellbeing. She works tirelessly to change the current birth culture to one that is talked about and experienced more positively, now and for future generations.",
+      "credentials": [
+        {
+          "title": "Calmbirth® Director Certification",
+          "abbreviation": "Director",
+          "issuingBody": "Calmbirth® Australia",
+          "verified": true
+        },
+        {
+          "title": "Advanced Childbirth Educator",
+          "abbreviation": "ACE",
+          "issuingBody": "International Childbirth Education Association",
+          "verified": true
+        },
+        {
+          "title": "Lamaze Certified Childbirth Educator",
+          "abbreviation": "LCCE",
+          "issuingBody": "Lamaze International",
+          "verified": true
+        }
+      ],
+      "services": ["calmbirth-course", "private-calmbirth-session", "fear-release-session"],
+      "specializations": [
+        "Childbirth Education",
+        "Birth Psychology",
+        "Fear Release Techniques",
+        "Antenatal Education",
+        "Cultural Birth Change",
+        "Women's Empowerment",
+        "Birth Confidence Building"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 15,
+      "approach": "I believe that women will birth best when they feel safe, undisturbed, and respected. My goal is to educate and improve birthing outcomes for all women and their families, not just physically but emotionally as well. I strive to be a leader in cultural change by empowering birthing couples to experience birth as a natural part of life with confidence and fearlessness.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": false,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 395,
+        "followUpFee": 195,
+        "currency": "AUD"
+      },
+      "centerId": "calmbirth-australia"
+    },
+    {
+      "id": "sarah-thompson-calmbirth",
+      "firstName": "Sarah",
+      "lastName": "Thompson",
+      "title": "Certified Calmbirth® Educator",
+      "profileImage": "https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&crop=face",
+      "bio": "Sarah is a certified Calmbirth® educator based in Sydney's Northern Beaches. With a background in psychology and a passion for supporting families through their birthing journey, she creates a warm and supportive environment where couples can learn and grow together.",
+      "personalStory": "After experiencing the transformative power of Calmbirth during her own pregnancies, Sarah was inspired to become an educator to share this valuable program with other families. She particularly enjoys helping couples overcome birth fears and build confidence for their upcoming birth experience.",
+      "credentials": [
+        {
+          "title": "Certified Calmbirth® Educator",
+          "abbreviation": "CCE",
+          "issuingBody": "Calmbirth® Australia",
+          "verified": true
+        },
+        {
+          "title": "Bachelor of Psychology",
+          "abbreviation": "BPsych",
+          "issuingBody": "University of Sydney",
+          "verified": true
+        },
+        {
+          "title": "First Aid Certificate",
+          "abbreviation": "First Aid",
+          "issuingBody": "St John Ambulance",
+          "verified": true
+        }
+      ],
+      "services": [
+        "calmbirth-course",
+        "calmbirth-refresher",
+        "birth-partner-workshop",
+        "fear-release-session"
+      ],
+      "specializations": [
+        "Childbirth Education",
+        "Birth Psychology",
+        "Couples Support",
+        "Fear Release",
+        "Northern Beaches Programs",
+        "Weekend Intensives"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 8,
+      "approach": "I create a safe, non-judgmental space where couples can explore their feelings about birth and learn practical techniques for managing the birthing process. My background in psychology helps me understand the emotional aspects of birth preparation, and I focus on building confidence and reducing anxiety through education and support.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": true,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 395,
+        "followUpFee": 195,
+        "currency": "AUD"
+      },
+      "centerId": "calmbirth-australia"
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalProviders": 5,
+    "totalProviders": 8,
     "dataSource": "mock-api"
   }
 }

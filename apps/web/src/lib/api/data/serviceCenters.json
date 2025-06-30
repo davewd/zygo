@@ -568,6 +568,443 @@
       "images": ["/images/calmbirth-classroom.jpg", "/images/calmbirth-materials.jpg"],
       "establishedYear": 2008,
       "culturalConsiderations": "Inclusive education for all family types, culturally responsive teaching"
+    },
+    {
+      "id": "calmbirth-australia",
+      "name": "Calmbirth® Australia",
+      "description": "Australia's most highly acclaimed and trusted childbirth education program. Calmbirth® protects emotional and mental wellbeing before, during, and after birth through evidence-based education and fear release techniques.",
+      "overview": "Calmbirth® is a revolutionary 12-hour childbirth education program that focuses on psychological and emotional preparation for birth. With close to 100 registered educators throughout Australia, New Zealand, and France, we have successfully changed the birth culture for thousands of families. Our evidence-based approach combines mind-body medicine with practical birthing techniques to help couples experience birth as a natural, positive part of life.",
+      "mission": "To change our current birth culture to one that is talked about and experienced far more positively, now and for future generations. We strive to be leaders in cultural change by empowering and enabling birthing couples to experience birth as a natural part of life with confidence and fearlessness.",
+      "location": {
+        "address": "National Head Office",
+        "suburb": "Blue Mountains",
+        "state": "NSW",
+        "postcode": "2780",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.7774,
+          "lng": 150.3109
+        }
+      },
+      "contact": {
+        "phone": "(02) 4871 1806",
+        "email": "info@calmbirth.com.au",
+        "website": "https://calmbirth.com.au",
+        "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/",
+        "socialMedia": [
+          {
+            "platform": "Instagram",
+            "url": "https://www.instagram.com/calmbirth_australia/"
+          },
+          {
+            "platform": "Facebook",
+            "url": "https://www.facebook.com/calmbirth/"
+          }
+        ]
+      },
+      "providers": [
+        "peter-jackson-calmbirth",
+        "karen-mcclay-calmbirth",
+        "sarah-thompson-calmbirth"
+      ],
+      "services": [
+        {
+          "id": "calmbirth-course",
+          "name": "Calmbirth® Childbirth Education Course",
+          "description": "Australia's most highly acclaimed childbirth education program. A comprehensive 12-hour face-to-face antenatal program that includes psychological and emotional preparation for childbirth.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "description": "Comprehensive antenatal education programs for expectant parents",
+            "taxonomy": "education"
+          },
+          "duration": 720,
+          "price": {
+            "amount": 395,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": [
+            "childbirth-education",
+            "antenatal",
+            "fear-release",
+            "relaxation",
+            "couples",
+            "weekend-intensive",
+            "mind-body-connection",
+            "birth-preparation"
+          ]
+        },
+        {
+          "id": "calmbirth-refresher",
+          "name": "Calmbirth® Refresher Course",
+          "description": "A condensed refresher course for couples who have previously completed Calmbirth or other childbirth education programs.",
+          "category": {
+            "id": "antenatal-preparation",
+            "name": "Antenatal Preparation",
+            "description": "Psychological and emotional preparation for childbirth",
+            "taxonomy": "education"
+          },
+          "duration": 240,
+          "price": {
+            "amount": 195,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["refresher", "subsequent-pregnancy", "review", "condensed-program"]
+        },
+        {
+          "id": "private-calmbirth-session",
+          "name": "Private Calmbirth® Session",
+          "description": "One-on-one or private group Calmbirth education session tailored to your specific needs, concerns, and birth preferences.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "description": "Comprehensive antenatal education programs for expectant parents",
+            "taxonomy": "education"
+          },
+          "duration": 480,
+          "price": {
+            "amount": 650,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": [
+            "private-session",
+            "personalized",
+            "flexible-scheduling",
+            "one-on-one",
+            "customized"
+          ]
+        },
+        {
+          "id": "birth-partner-workshop",
+          "name": "Birth Partner Support Workshop",
+          "description": "Specialized workshop focusing on the birth partner's role in supporting during labor and birth.",
+          "category": {
+            "id": "antenatal-preparation",
+            "name": "Antenatal Preparation",
+            "description": "Psychological and emotional preparation for childbirth",
+            "taxonomy": "education"
+          },
+          "duration": 180,
+          "price": {
+            "amount": 150,
+            "currency": "AUD"
+          },
+          "ageGroups": ["adult"],
+          "tags": ["birth-partner", "support-techniques", "labor-support", "practical-skills"]
+        },
+        {
+          "id": "fear-release-session",
+          "name": "Fear Release & Relaxation Session",
+          "description": "Focused session on fear release techniques and guided relaxation for birth preparation.",
+          "category": {
+            "id": "fear-release",
+            "name": "Fear Release & Relaxation",
+            "description": "Guided relaxation and fear release techniques for birth preparation",
+            "taxonomy": "therapy"
+          },
+          "duration": 120,
+          "price": {
+            "amount": 120,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": [
+            "fear-release",
+            "anxiety-support",
+            "guided-relaxation",
+            "meditation",
+            "birth-anxiety"
+          ]
+        },
+        {
+          "id": "hospital-program",
+          "name": "Hospital-Based Calmbirth® Program",
+          "description": "Calmbirth program delivered within partner hospitals and birthing centers.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "description": "Comprehensive antenatal education programs for expectant parents",
+            "taxonomy": "education"
+          },
+          "duration": 720,
+          "price": {
+            "amount": 295,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["hospital-based", "integrated-care", "medical-setting", "antenatal-program"]
+        }
+      ],
+      "operatingHours": {
+        "monday": { "open": "09:00", "close": "17:00" },
+        "tuesday": { "open": "09:00", "close": "17:00" },
+        "wednesday": { "open": "09:00", "close": "17:00" },
+        "thursday": { "open": "09:00", "close": "17:00" },
+        "friday": { "open": "09:00", "close": "17:00" },
+        "saturday": { "open": "09:00", "close": "15:00" },
+        "sunday": { "closed": true, "open": "", "close": "" }
+      },
+      "features": [
+        "Australia's most acclaimed childbirth education program",
+        "Close to 100 registered educators across Australia, New Zealand & France",
+        "Evidence-based 12-hour face-to-face program",
+        "Multiple locations: ACT (1), NSW (43), QLD (13), SA (3), TAS (5), VIC (12), WA (4)",
+        "Hospital partnerships with private and public maternity hospitals",
+        "Founded by internationally recognized midwife Peter Jackson",
+        "Over 50,000 couples trained since inception",
+        "Psychological and emotional birth preparation focus",
+        "Fear release techniques and guided relaxation",
+        "Mind-body medicine approach",
+        "Weekend intensive format available",
+        "Private and group session options",
+        "Hospital-based programs available",
+        "Refresher courses for subsequent pregnancies",
+        "Birth partner support workshops",
+        "Educator training and certification programs",
+        "Cultural change advocacy for positive birth experiences",
+        "Inclusive approach welcoming all pregnant couples",
+        "Gift vouchers available",
+        "Podcast and educational resources",
+        "International program delivery"
+      ],
+      "certifications": [
+        "Internationally Recognized Childbirth Education Program",
+        "Australian Health Practitioner Regulation Agency Affiliated",
+        "Professional Indemnity Insurance",
+        "Continuous Professional Development Accredited"
+      ],
+      "insurance": [
+        "Some Private Health Insurance providers offer rebates",
+        "Check with your provider for maternity and allied health coverage"
+      ],
+      "accessibility": [
+        "Multiple locations across Australia for accessibility",
+        "Weekend programs to accommodate working couples",
+        "Private sessions available for specific needs",
+        "Online resources and podcast available",
+        "Hospital-based programs in major cities",
+        "Cultural diversity welcomed and respected",
+        "LGBTQ+ inclusive approach",
+        "Flexible scheduling options"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      "establishedYear": 2004,
+      "culturalConsiderations": "Calmbirth® is an inclusive organisation that embraces cultural diversity and accepts all pregnant couples regardless of gender and sexuality. We acknowledge the Traditional Custodians of the land on which we live and teach our Calmbirth program, and pay our respects to their Elders past and present."
+    },
+    {
+      "id": "calmbirth-sydney-north",
+      "name": "Calmbirth® Sydney North",
+      "description": "Calmbirth childbirth education classes serving Sydney's Northern Beaches and North Shore communities.",
+      "overview": "Offering comprehensive Calmbirth programs in a welcoming environment on Sydney's North Shore, helping couples prepare for positive birth experiences through evidence-based education and fear release techniques.",
+      "location": {
+        "address": "Community Centre",
+        "suburb": "Chatswood",
+        "state": "NSW",
+        "postcode": "2067",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.7969,
+          "lng": 151.1835
+        }
+      },
+      "contact": {
+        "phone": "(02) 9876 5432",
+        "email": "sydney.north@calmbirth.com.au",
+        "website": "https://calmbirth.com.au",
+        "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/sydney-north"
+      },
+      "providers": ["sarah-thompson-calmbirth"],
+      "services": [
+        {
+          "id": "calmbirth-course",
+          "name": "Calmbirth® Childbirth Education Course",
+          "description": "Comprehensive 12-hour weekend intensive program for expectant couples.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "taxonomy": "education"
+          },
+          "duration": 720,
+          "price": {
+            "amount": 395,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["childbirth-education", "weekend-intensive", "couples", "north-shore"]
+        }
+      ],
+      "operatingHours": {
+        "saturday": { "open": "09:00", "close": "17:00" },
+        "sunday": { "open": "09:00", "close": "17:00" }
+      },
+      "features": [
+        "Weekend intensive programs",
+        "Small group sizes for personalized attention",
+        "Evidence-based childbirth education",
+        "Fear release techniques",
+        "Partner support focus",
+        "Convenient North Shore location"
+      ],
+      "certifications": ["Calmbirth Accredited Educator"],
+      "accessibility": ["Wheelchair accessible", "Public transport nearby", "Parking available"],
+      "establishedYear": 2015
+    },
+    {
+      "id": "calmbirth-melbourne-east",
+      "name": "Calmbirth® Melbourne East",
+      "description": "Calmbirth childbirth education serving Melbourne's eastern suburbs with comprehensive antenatal programs.",
+      "overview": "Providing expert Calmbirth education to couples in Melbourne's eastern communities, focusing on building confidence and reducing anxiety around childbirth through proven techniques and supportive group learning.",
+      "location": {
+        "address": "Wellness Centre",
+        "suburb": "Box Hill",
+        "state": "VIC",
+        "postcode": "3128",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -37.8197,
+          "lng": 145.1231
+        }
+      },
+      "contact": {
+        "phone": "(03) 9876 5432",
+        "email": "melbourne.east@calmbirth.com.au",
+        "website": "https://calmbirth.com.au",
+        "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/melbourne-east"
+      },
+      "providers": ["sarah-thompson-calmbirth"],
+      "services": [
+        {
+          "id": "calmbirth-course",
+          "name": "Calmbirth® Childbirth Education Course",
+          "description": "Evidence-based childbirth education with mind-body medicine approach.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "taxonomy": "education"
+          },
+          "duration": 720,
+          "price": {
+            "amount": 395,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["childbirth-education", "mind-body", "melbourne-east"]
+        },
+        {
+          "id": "calmbirth-refresher",
+          "name": "Calmbirth® Refresher Course",
+          "description": "Refresher course for subsequent pregnancies.",
+          "category": {
+            "id": "antenatal-preparation",
+            "name": "Antenatal Preparation",
+            "taxonomy": "education"
+          },
+          "duration": 240,
+          "price": {
+            "amount": 195,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["refresher", "subsequent-pregnancy"]
+        }
+      ],
+      "operatingHours": {
+        "saturday": { "open": "09:00", "close": "17:00" },
+        "sunday": { "open": "09:00", "close": "17:00" }
+      },
+      "features": [
+        "Mind-body medicine approach",
+        "Multicultural community focus",
+        "Refresher courses available",
+        "Eastern suburbs location",
+        "Flexible scheduling options"
+      ],
+      "certifications": ["Calmbirth Accredited Educator", "Victorian Health Registration"],
+      "accessibility": ["Wheelchair accessible", "Family-friendly facilities", "Easy parking"],
+      "establishedYear": 2012
+    },
+    {
+      "id": "calmbirth-brisbane-central",
+      "name": "Calmbirth® Brisbane Central",
+      "description": "Premier Calmbirth education center serving Brisbane and surrounding areas with comprehensive childbirth preparation programs.",
+      "overview": "Brisbane's leading Calmbirth education center, offering transformational childbirth education that combines evidence-based knowledge with emotional preparation, helping Queensland families achieve positive birth experiences.",
+      "location": {
+        "address": "Birth Education Centre",
+        "suburb": "New Farm",
+        "state": "QLD",
+        "postcode": "4005",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -27.4618,
+          "lng": 153.0464
+        }
+      },
+      "contact": {
+        "phone": "(07) 3876 5432",
+        "email": "brisbane@calmbirth.com.au",
+        "website": "https://calmbirth.com.au",
+        "bookingUrl": "https://calmbirth.com.au/calmbirth-classes/brisbane"
+      },
+      "providers": ["karen-mcclay-calmbirth"],
+      "services": [
+        {
+          "id": "calmbirth-course",
+          "name": "Calmbirth® Childbirth Education Course",
+          "description": "Comprehensive childbirth education with psychological preparation focus.",
+          "category": {
+            "id": "childbirth-education",
+            "name": "Childbirth Education",
+            "taxonomy": "education"
+          },
+          "duration": 720,
+          "price": {
+            "amount": 395,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["childbirth-education", "psychological-preparation", "brisbane"]
+        },
+        {
+          "id": "fear-release-session",
+          "name": "Fear Release & Relaxation Session",
+          "description": "Specialized sessions for managing birth anxiety and fears.",
+          "category": {
+            "id": "fear-release",
+            "name": "Fear Release & Relaxation",
+            "taxonomy": "therapy"
+          },
+          "duration": 120,
+          "price": {
+            "amount": 120,
+            "currency": "AUD"
+          },
+          "ageGroups": ["prenatal", "adult"],
+          "tags": ["fear-release", "anxiety-support", "relaxation"]
+        }
+      ],
+      "operatingHours": {
+        "thursday": { "open": "18:00", "close": "21:00" },
+        "saturday": { "open": "09:00", "close": "17:00" },
+        "sunday": { "open": "09:00", "close": "17:00" }
+      },
+      "features": [
+        "Evening and weekend classes available",
+        "Fear release specialization",
+        "Central Brisbane location",
+        "Experienced senior educators",
+        "Cultural diversity support",
+        "River views and calming environment"
+      ],
+      "certifications": ["Calmbirth Senior Educator", "Queensland Health Approved"],
+      "accessibility": ["Public transport accessible", "Wheelchair friendly", "Parking available"],
+      "establishedYear": 2010
     }
   ]
 }

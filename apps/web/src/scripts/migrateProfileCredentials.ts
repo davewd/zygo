@@ -18,11 +18,13 @@ import {
   EMILY_MCCONAGHY,
   JAKE_THOMPSON
 } from '../data/network/active8KidsCenter';
-import {
-  KAREN_MCCLAY,
-  PETER_JACKSON,
-  SARAH_THOMPSON_EDUCATOR
-} from '../data/network/calmbirthCenter';
+import serviceProvidersData from '../lib/api/data/serviceProviders.json';
+
+// Get Calmbirth providers from the generic data
+const PETER_JACKSON = serviceProvidersData.serviceProviders.find(p => p.id === 'peter-jackson-calmbirth');
+const KAREN_MCCLAY = serviceProvidersData.serviceProviders.find(p => p.id === 'karen-mcclay-calmbirth');
+const SARAH_THOMPSON_EDUCATOR = serviceProvidersData.serviceProviders.find(p => p.id === 'sarah-thompson-calmbirth');
+
 import {
   EMMA_RODRIGUEZ,
   MARCUS_CHEN,
