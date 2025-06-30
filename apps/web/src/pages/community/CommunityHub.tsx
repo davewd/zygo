@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Activity, ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
+import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
+import { ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCommunityProfiles } from '../../lib/api/community';
-import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
 
 const CommunityHub = () => {
   // API state management
@@ -33,14 +33,12 @@ const CommunityHub = () => {
   const totalMembers = profiles.length;
   const activeMembers = profiles.filter((p) => p.consumer.isActive).length;
   const parentCount = profiles.filter((p) => p.consumer.role === 'parent').length;
-  const grandparentCount = profiles.filter(
-    (p) => p.consumer.role === 'grandparent'
-  ).length;
+  const grandparentCount = profiles.filter((p) => p.consumer.role === 'grandparent').length;
   const childrenCount = profiles.filter((p) => p.consumer.role === 'child').length;
 
   // Featured community members (sort by engagement stats if available)
   const featuredMembers = profiles
-    .filter(p => p.stats) // Only include profiles with stats
+    .filter((p) => p.stats) // Only include profiles with stats
     .sort((a, b) => (b.stats?.postsCount || 0) - (a.stats?.postsCount || 0))
     .slice(0, 6);
 
@@ -90,8 +88,8 @@ const CommunityHub = () => {
           <div className="text-center py-12">
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -106,44 +104,6 @@ const CommunityHub = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
       <div className="container mx-auto px-6 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Community <span className="text-zygo-red">Hub</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Connect, share experiences, and grow together with families in our vibrant community.
-            Find support, share wisdom, and celebrate the journey of parenting and child development.
-          </p>
-        </div>
-
-        {/* Community Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-red">
-            <Users className="w-8 h-8 text-zygo-red mx-auto mb-3" />
-            <div className="text-2xl font-bold text-gray-800">{totalMembers}</div>
-            <div className="text-gray-600 text-sm">Total Members</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-green-500">
-            <Activity className="w-8 h-8 text-green-500 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-gray-800">{activeMembers}</div>
-            <div className="text-gray-600 text-sm">Active Members</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-blue">
-            <Heart className="w-8 h-8 text-zygo-blue mx-auto mb-3" />
-            <div className="text-2xl font-bold text-gray-800">{parentCount}</div>
-            <div className="text-gray-600 text-sm">Parents</div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6 text-center border-l-4 border-zygo-yellow">
-            <Star className="w-8 h-8 text-zygo-yellow mx-auto mb-3" />
-            <div className="text-2xl font-bold text-gray-800">{grandparentCount}</div>
-            <div className="text-gray-600 text-sm">Grandparents</div>
-          </div>
-        </div>
-
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Link
@@ -276,7 +236,8 @@ const CommunityHub = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Service Categories</h2>
           <div className="bg-white rounded-lg shadow-md p-6">
             <p className="text-gray-600 text-center">
-              Service categories will be displayed here once the ServiceCategories component is migrated.
+              Service categories will be displayed here once the ServiceCategories component is
+              migrated.
             </p>
             <div className="text-center mt-4">
               <Link
@@ -296,31 +257,6 @@ const CommunityHub = () => {
             <p className="text-gray-600 text-center">
               Friend network availability will be displayed here once the component is migrated.
             </p>
-          </div>
-        </div>
-
-        {/* Community Insights */}
-        <div className="bg-gradient-to-r from-zygo-mint/20 to-zygo-blue/20 rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Join Our Growing Community
-          </h2>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Be part of a supportive network where families share experiences, find resources,
-            and grow together. Your journey matters, and our community is here to support you every step of the way.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/community/profiles"
-              className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg transition-colors font-medium"
-            >
-              Explore Profiles
-            </Link>
-            <Link
-              to="/community/join"
-              className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-6 py-3 rounded-lg transition-colors font-medium"
-            >
-              Join Community
-            </Link>
           </div>
         </div>
       </div>
