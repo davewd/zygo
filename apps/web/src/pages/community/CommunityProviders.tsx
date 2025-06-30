@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  getAllServiceProviders
-} from '../../lib/api/serviceProviders';
+import { getAllServiceProviders } from '../../lib/api/serviceProviders';
 
 // Define the service provider type from the API
 interface ServiceProvider {
@@ -35,7 +33,7 @@ const CommunityProviders = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  
+
   // API state management
   const [providers, setProviders] = useState<ServiceProvider[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,13 +47,13 @@ const CommunityProviders = () => {
         setLoading(true);
         const response = await getAllServiceProviders();
         setProviders(response);
-        
+
         // Extract unique specializations for filter
         const specialties = Array.from(
-          new Set(response.flatMap(provider => provider.specializations))
+          new Set(response.flatMap((provider) => provider.specializations))
         ).sort();
         setAvailableSpecialties(specialties);
-        
+
         setError(null);
       } catch (err) {
         console.error('Failed to load service providers:', err);
@@ -82,8 +80,8 @@ const CommunityProviders = () => {
         provider.firstName.toLowerCase().includes(query) ||
         provider.lastName.toLowerCase().includes(query) ||
         provider.bio.toLowerCase().includes(query) ||
-        provider.specializations.some(spec => spec.toLowerCase().includes(query)) ||
-        provider.services.some(service => service.toLowerCase().includes(query))
+        provider.specializations.some((spec) => spec.toLowerCase().includes(query)) ||
+        provider.services.some((service) => service.toLowerCase().includes(query))
       );
     }
 
@@ -110,8 +108,8 @@ const CommunityProviders = () => {
           <div className="text-center py-12">
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -187,8 +185,7 @@ const CommunityProviders = () => {
                     : 'text-gray-600 hover:text-gray-800'
                 } transition-colors`}
               >
-                <span className="sr-only">Grid view</span>
-                ⚏
+                <span className="sr-only">Grid view</span>⚏
               </button>
               <button
                 onClick={() => setViewMode('list')}
@@ -198,8 +195,7 @@ const CommunityProviders = () => {
                     : 'text-gray-600 hover:text-gray-800'
                 } transition-colors`}
               >
-                <span className="sr-only">List view</span>
-                ☰
+                <span className="sr-only">List view</span>☰
               </button>
             </div>
           </div>
@@ -214,11 +210,11 @@ const CommunityProviders = () => {
         </div>
 
         {/* Providers Grid */}
-        <div className={`grid gap-6 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-            : 'grid-cols-1'
-        }`}>
+        <div
+          className={`grid gap-6 ${
+            viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'
+          }`}
+        >
           {filteredProviders.map((provider) => (
             <div
               key={provider.id}
@@ -237,9 +233,7 @@ const CommunityProviders = () => {
                   <h3 className="text-white text-xl font-bold mb-1">
                     {provider.firstName} {provider.lastName}
                   </h3>
-                  {provider.title && (
-                    <p className="text-white/90 text-sm">{provider.title}</p>
-                  )}
+                  {provider.title && <p className="text-white/90 text-sm">{provider.title}</p>}
                 </div>
               </div>
 
@@ -282,9 +276,7 @@ const CommunityProviders = () => {
                 </div>
 
                 {/* Bio */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {provider.bio}
-                </p>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{provider.bio}</p>
 
                 {/* Experience */}
                 <p className="text-gray-500 text-xs mb-4">

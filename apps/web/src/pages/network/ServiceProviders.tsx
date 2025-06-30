@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  getAllServiceProviders
-} from '../../lib/api/serviceProviders';
+import { getAllServiceProviders } from '../../lib/api/serviceProviders';
 
 // Define the service provider type from the API
 interface ServiceProvider {
@@ -81,8 +79,8 @@ const ServiceProviders = () => {
           <div className="text-center py-12">
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -113,8 +111,8 @@ const ServiceProviders = () => {
             Service <span className="text-zygo-red">Providers</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover trusted healthcare professionals, educators, childcare specialists, and wellness
-            practitioners in our network.
+            Discover trusted healthcare professionals, educators, childcare specialists, and
+            wellness practitioners in our network.
           </p>
         </div>
 
@@ -132,7 +130,7 @@ const ServiceProviders = () => {
           </div>
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="text-3xl font-bold text-zygo-red mb-2">
-              {providers.filter(p => p.availability.telehealth).length}
+              {providers.filter((p) => p.availability.telehealth).length}
             </div>
             <div className="text-gray-600">Telehealth Available</div>
           </div>
@@ -160,9 +158,7 @@ const ServiceProviders = () => {
                     <h3 className="text-white text-xl font-bold mb-1">
                       {provider.firstName} {provider.lastName}
                     </h3>
-                    {provider.title && (
-                      <p className="text-white/90 text-sm">{provider.title}</p>
-                    )}
+                    {provider.title && <p className="text-white/90 text-sm">{provider.title}</p>}
                   </div>
                 </div>
 
@@ -200,9 +196,7 @@ const ServiceProviders = () => {
                   </div>
 
                   {/* Bio */}
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {provider.bio}
-                  </p>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{provider.bio}</p>
 
                   {/* Experience */}
                   <div className="flex items-center gap-2 mb-4">
@@ -263,11 +257,10 @@ const ServiceProviders = () => {
               >
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{category}</h3>
                 <p className="text-gray-600 mb-3">
-                  {categoryProviders.length} provider{categoryProviders.length !== 1 ? 's' : ''} available
+                  {categoryProviders.length} provider{categoryProviders.length !== 1 ? 's' : ''}{' '}
+                  available
                 </p>
-                <div className="text-zygo-red font-medium text-sm">
-                  Explore {category} →
-                </div>
+                <div className="text-zygo-red font-medium text-sm">Explore {category} →</div>
               </Link>
             ))}
           </div>

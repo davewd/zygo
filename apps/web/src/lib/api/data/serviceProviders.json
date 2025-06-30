@@ -221,16 +221,10 @@
           "verified": true
         }
       ],
+      "services": ["kindy-gym-classes", "gymnastics-classes", "movement-development"],
       "specializations": ["Child Development", "Gymnastics Coaching", "Movement Education"],
-      "servicesOffered": [
-        {
-          "id": "kindy-gym-classes",
-          "name": "Kindy Gym Classes",
-          "description": "Fun gymnastics classes for toddlers and preschoolers",
-          "duration": 45,
-          "ageRange": "1-5 years"
-        }
-      ],
+      "languages": ["English"],
+      "yearsExperience": 8,
       "availability": [
         {
           "day": "Monday",
@@ -286,16 +280,10 @@
           "verified": true
         }
       ],
+      "services": ["ninja-warrior-classes", "parkour-training", "martial-arts-instruction"],
       "specializations": ["Parkour Training", "Ninja Warrior Coaching", "Martial Arts"],
-      "servicesOffered": [
-        {
-          "id": "ninja-warrior-classes",
-          "name": "Ninja Warrior Classes",
-          "description": "High-energy obstacle course training for kids",
-          "duration": 60,
-          "ageRange": "6-12 years"
-        }
-      ],
+      "languages": ["English"],
+      "yearsExperience": 6,
       "availability": [
         {
           "day": "Tuesday",
@@ -585,7 +573,7 @@
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalProviders": 8,
+    "totalProviders": 5,
     "dataSource": "mock-api"
   }
 }

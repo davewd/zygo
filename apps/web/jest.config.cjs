@@ -56,7 +56,9 @@ const config = {
   clearMocks: true,
 
   // Restore mocks after each test
-  restoreMocks: true
+  restoreMocks: true,
+
+  verbose: false
 };
 
 module.exports = config;
