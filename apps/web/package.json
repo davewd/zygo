@@ -12,7 +12,10 @@
     "generate-seo": "npm run generate-sitemap && npm run generate-robots",
     "build": "vite build && npm run generate-sitemap",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:routes": "jest --testPathPattern=route-validation.test.ts",
+    "validate-routes": "npm run test:routes",
+    "migrate-routes": "node scripts/migrate-routes.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

@@ -234,7 +234,7 @@ const ServiceProviders = () => {
 
                   {/* View Profile Button */}
                   <Link
-                    to={`/network/providers/${provider.id}`}
+                    to={`/community/providers/${provider.id}`}
                     className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-3 rounded-lg transition-colors font-medium"
                   >
                     View Profile →
@@ -252,7 +252,7 @@ const ServiceProviders = () => {
             {Object.entries(providersByCategory).map(([category, categoryProviders]) => (
               <Link
                 key={category}
-                to={`/network/providers?specialization=${encodeURIComponent(category)}`}
+                to={`/community/providers?specialization=${encodeURIComponent(category)}`}
                 className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 border-l-4 border-zygo-red"
               >
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{category}</h3>
@@ -278,13 +278,13 @@ const ServiceProviders = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/network/providers/search"
+                to="/community/providers/search"
                 className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg transition-colors font-medium"
               >
                 Advanced Search
               </Link>
               <Link
-                to="/network/centers"
+                to="/community/centers"
                 className="border border-zygo-red text-zygo-red hover:bg-zygo-red hover:text-white px-6 py-3 rounded-lg transition-colors font-medium"
               >
                 Browse Centers

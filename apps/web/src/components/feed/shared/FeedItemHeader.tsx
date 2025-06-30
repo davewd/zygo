@@ -20,13 +20,13 @@ const getProfileLink = (author: FeedItemTypeMap['author']): string | null => {
     case 'service_provider':
       // Service providers link to provider profiles using their providerId or handle
       const providerId = (author as any).providerId || author.handle;
-      return `/network/providers/${providerId}`;
+      return `/community/providers/${providerId}`;
 
     case ActorType.SERVICE_CENTER:
     case 'service_center':
       // Service centers link to center profiles using their centerId or handle
       const centerId = (author as any).centerId || author.handle;
-      return `/network/centers/${centerId}`;
+      return `/community/centers/${centerId}`;
 
     case 'organization':
       // Organizations may not have profile pages, return null for now

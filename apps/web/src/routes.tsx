@@ -82,6 +82,37 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/notifications', element: <Notifications />, errorElement: <Error /> },
+
+      // Add missing routes that are referenced in the codebase
+      {
+        path: '/terms',
+        element: <div>Terms of Service - Coming Soon</div>,
+        errorElement: <Error />,
+      },
+      { path: '/about', element: <div>About Us - Coming Soon</div>, errorElement: <Error /> },
+      { path: '/library', element: <div>Library - Coming Soon</div>, errorElement: <Error /> },
+      {
+        path: '/community/groups',
+        element: <div>Groups - Coming Soon</div>,
+        errorElement: <Error />,
+      },
+
+      // Additional tools routes
+      {
+        path: '/tools/postnatal/sleep-tracker',
+        element: <div>Sleep Tracker - Coming Soon</div>,
+        errorElement: <Error />,
+      },
+      {
+        path: '/tools/health/growth-tracker',
+        element: <div>Growth Tracker - Coming Soon</div>,
+        errorElement: <Error />,
+      },
+      {
+        path: '/tools/health/medication-reminder',
+        element: <div>Medication Reminder - Coming Soon</div>,
+        errorElement: <Error />,
+      },
     ],
     errorElement: <Error />,
   },

@@ -49,7 +49,7 @@ const Services = () => {
           price: 'From $200',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
         {
           title: 'Comprehensive Pregnancy Care at EMOG with Dr. Shelley Rowlands',
@@ -59,7 +59,7 @@ const Services = () => {
           price: 'From $380',
           provider: 'Dr. Shelley Rowlands',
           center: 'EMOG',
-          route: '/network/providers/dr-shelley-rowlands',
+          route: '/community/providers/dr-shelley-rowlands',
         },
         {
           title: 'High-Risk Pregnancy Management at EMOG with Dr. Shelley Rowlands',
@@ -68,7 +68,7 @@ const Services = () => {
           price: 'From $450',
           provider: 'Dr. Shelley Rowlands',
           center: 'EMOG',
-          route: '/network/providers/dr-shelley-rowlands',
+          route: '/community/providers/dr-shelley-rowlands',
         },
         {
           title: 'Calmbirth® Childbirth Education Course with Peter Jackson',
@@ -78,7 +78,7 @@ const Services = () => {
           price: 'From $395',
           provider: 'Peter Jackson',
           center: 'Calmbirth® Australia',
-          route: '/network/providers/peter-jackson-calmbirth',
+          route: '/community/providers/peter-jackson-calmbirth',
         },
         {
           title: 'Calmbirth® Fear Release & Relaxation with Karen McClay',
@@ -88,7 +88,7 @@ const Services = () => {
           price: 'From $195',
           provider: 'Karen McClay',
           center: 'Calmbirth® Australia',
-          route: '/network/providers/karen-mcclay-calmbirth',
+          route: '/community/providers/karen-mcclay-calmbirth',
         },
         {
           title: 'Calmbirth® Private Session with Sarah Thompson',
@@ -97,7 +97,7 @@ const Services = () => {
           price: 'From $450',
           provider: 'Sarah Thompson',
           center: 'Calmbirth® Australia',
-          route: '/network/providers/sarah-thompson-calmbirth',
+          route: '/community/providers/sarah-thompson-calmbirth',
         },
       ],
     },
@@ -125,7 +125,7 @@ const Services = () => {
           price: 'From $32',
           provider: 'Emily McConaghy',
           center: 'Active8Kids',
-          route: '/network/providers/emily-mcconaghy',
+          route: '/community/providers/emily-mcconaghy',
         },
         {
           title: "In-Home Newborn Consultation at Mummy's Whispers with Caroline",
@@ -134,7 +134,7 @@ const Services = () => {
           price: 'From $325',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
         {
           title: "Sleep Training Program at Mummy's Whispers with Caroline",
@@ -143,7 +143,7 @@ const Services = () => {
           price: 'From $1495',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
         {
           title: "Postpartum Support at Mummy's Whispers with Caroline",
@@ -152,7 +152,7 @@ const Services = () => {
           price: 'From $250',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
       ],
     },
@@ -171,7 +171,7 @@ const Services = () => {
           price: 'From $38',
           provider: 'Emily McConaghy',
           center: 'Active8Kids',
-          route: '/network/providers/emily-mcconaghy',
+          route: '/community/providers/emily-mcconaghy',
         },
         {
           title: "Play'n Move at Active8Kids with Emily McConaghy",
@@ -180,7 +180,7 @@ const Services = () => {
           price: 'From $32',
           provider: 'Emily McConaghy',
           center: 'Active8Kids',
-          route: '/network/providers/emily-mcconaghy',
+          route: '/community/providers/emily-mcconaghy',
         },
       ],
     },
@@ -199,7 +199,7 @@ const Services = () => {
           price: 'From $38',
           provider: 'Jake Thompson',
           center: 'Active8Kids',
-          route: '/network/providers/jake-thompson',
+          route: '/community/providers/jake-thompson',
         },
         {
           title: 'Holiday Camps at Active8Kids with Jake Thompson',
@@ -208,7 +208,7 @@ const Services = () => {
           price: 'From $85',
           provider: 'Jake Thompson',
           center: 'Active8Kids',
-          route: '/network/providers/jake-thompson',
+          route: '/community/providers/jake-thompson',
         },
       ],
     },
@@ -227,7 +227,7 @@ const Services = () => {
           price: 'From $450',
           provider: 'Dr. Justin Tucker',
           center: 'Prologue',
-          route: '/network/providers/dr-justin-tucker',
+          route: '/community/providers/dr-justin-tucker',
         },
         {
           title: 'Fertility Nursing Support at Prologue with Andrea Dunne',
@@ -236,7 +236,7 @@ const Services = () => {
           price: 'From $220',
           provider: 'Andrea Dunne',
           center: 'Prologue',
-          route: '/network/providers/andrea-dunne',
+          route: '/community/providers/andrea-dunne',
         },
         {
           title: 'Fertility Assessment & Counseling at EMOG with Dr. Shelley Rowlands',
@@ -246,7 +246,7 @@ const Services = () => {
           price: 'From $350',
           provider: 'Dr. Shelley Rowlands',
           center: 'EMOG',
-          route: '/network/providers/dr-shelley-rowlands',
+          route: '/community/providers/dr-shelley-rowlands',
         },
         {
           title: "Infant Flight Assistance at Mummy's Whispers with Caroline",
@@ -256,7 +256,7 @@ const Services = () => {
           price: 'From $150',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
       ],
     },
@@ -275,7 +275,7 @@ const Services = () => {
           price: 'From $450',
           provider: 'Emily McConaghy',
           center: 'Active8Kids',
-          route: '/network/providers/emily-mcconaghy',
+          route: '/community/providers/emily-mcconaghy',
         },
         {
           title: "Premium Maternity Nurse at Mummy's Whispers with Caroline",
@@ -284,7 +284,7 @@ const Services = () => {
           price: 'From $316/day',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
         {
           title: "Multiples Specialist Care at Mummy's Whispers with Caroline",
@@ -294,7 +294,7 @@ const Services = () => {
           price: 'From $350',
           provider: 'Caroline Johnson',
           center: "Mummy's Whispers",
-          route: '/network/providers/caroline-maternity-consultant',
+          route: '/community/providers/caroline-maternity-consultant',
         },
       ],
     },
@@ -313,7 +313,7 @@ const Services = () => {
           price: 'From $160',
           provider: 'Jessica Dawson',
           center: 'Kidney Nutrition',
-          route: '/network/providers/jessica-dawson-dietitian',
+          route: '/community/providers/jessica-dawson-dietitian',
         },
         {
           title: 'Kidney Stone Prevention Program at Kidney Nutrition with Jessica Dawson',
@@ -322,7 +322,7 @@ const Services = () => {
           price: 'From $140',
           provider: 'Jessica Dawson',
           center: 'Kidney Nutrition',
-          route: '/network/providers/jessica-dawson-dietitian',
+          route: '/community/providers/jessica-dawson-dietitian',
         },
         {
           title: 'Gynaecological Consultation at EMOG with Dr. Shelley Rowlands',
@@ -331,7 +331,7 @@ const Services = () => {
           price: 'From $280',
           provider: 'Dr. Shelley Rowlands',
           center: 'EMOG',
-          route: '/network/providers/dr-shelley-rowlands',
+          route: '/community/providers/dr-shelley-rowlands',
         },
         {
           title: 'General Nutrition Consultation at Start Training with Peta Carige',
@@ -341,7 +341,7 @@ const Services = () => {
           price: 'From $150',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
         {
           title: 'Online Nutrition Consultation with Peta Carige',
@@ -351,7 +351,7 @@ const Services = () => {
           price: 'From $160',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
       ],
     },
@@ -371,7 +371,7 @@ const Services = () => {
           price: 'From $180',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
         {
           title: 'Team Sport Nutrition Program with Peta Carige',
@@ -381,7 +381,7 @@ const Services = () => {
           price: 'From $250',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
         {
           title: 'Customized Athletic Meal Plans with Peta Carige',
@@ -391,7 +391,7 @@ const Services = () => {
           price: 'From $120',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
         {
           title: 'Corporate Nutrition Presentations with Peta Carige',
@@ -401,7 +401,7 @@ const Services = () => {
           price: 'From $300',
           provider: 'Peta Carige',
           center: 'Start Training Stafford',
-          route: '/network/providers/peta-carige',
+          route: '/community/providers/peta-carige',
         },
       ],
     },
@@ -578,7 +578,7 @@ const Services = () => {
                 centers to find the perfect fit for your needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/network/providers">
+                <Link to="/community/providers">
                   <Button className="bg-zygo-red hover:bg-zygo-red/90 text-white">
                     Browse All Providers
                   </Button>

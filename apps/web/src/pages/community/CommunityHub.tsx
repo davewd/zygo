@@ -241,7 +241,7 @@ const CommunityHub = () => {
             </p>
             <div className="text-center mt-4">
               <Link
-                to="/network/providers"
+                to="/community/providers"
                 className="bg-zygo-red hover:bg-zygo-red/90 text-white px-6 py-3 rounded-lg transition-colors font-medium"
               >
                 Browse All Services

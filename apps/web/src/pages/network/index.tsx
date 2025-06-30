@@ -31,7 +31,7 @@ const Network = () => {
       iconColor: 'text-zygo-blue',
       bgColor: 'bg-zygo-blue/20',
       items: ['Doctors', 'Nurses', 'Therapists', 'Counselors'],
-      route: '/network/providers',
+      route: '/community/providers',
       comingSoon: false,
     },
     {
@@ -41,7 +41,7 @@ const Network = () => {
       iconColor: 'text-zygo-yellow',
       bgColor: 'bg-zygo-yellow/20',
       items: ['Hospitals', 'Clinics', 'Schools', 'Community Centers'],
-      route: '/network/centers',
+      route: '/community/centers',
       comingSoon: false,
     },
     {

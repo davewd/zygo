@@ -128,7 +128,7 @@ const ServiceProviderDetail = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Provider Not Found</h1>
-          <Link to="/network/providers">
+          <Link to="/community/providers">
             <Button variant="outline">Back to Providers</Button>
           </Link>
         </div>
@@ -189,7 +189,7 @@ const ServiceProviderDetail = () => {
         {/* Navigation */}
         <div className="mb-6">
           <Link
-            to="/network/providers"
+            to="/community/providers"
             className="inline-flex items-center text-zygo-red hover:text-zygo-red/80 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

@@ -347,7 +347,7 @@ const ServiceNetworkProviderDetail = () => {
                   {network.providers.slice(0, 3).map((provider) => (
                     <Link
                       key={provider.id}
-                      to={`/network/providers/${provider.id}`}
+                      to={`/community/providers/${provider.id}`}
                       className="block hover:bg-gray-50 p-3 rounded-lg transition-colors"
                     >
                       <h4 className="font-semibold text-gray-800">
@@ -360,7 +360,7 @@ const ServiceNetworkProviderDetail = () => {
                     </Link>
                   ))}
                   {network.providers.length > 3 && (
-                    <Link to="/network/providers">
+                    <Link to="/community/providers">
                       <Button variant="outline" size="sm" className="w-full mt-3">
                         View All {network.providers.length} Providers
                       </Button>

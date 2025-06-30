@@ -336,7 +336,7 @@ const ServiceCenterDetail = () => {
                             {provider.yearsExperience} years experience
                           </p>
                         </div>
-                        <Link to={`/network/providers/${provider.id}`}>
+                        <Link to={`/community/providers/${provider.id}`}>
                           <Button variant="outline" size="sm">
                             View Profile
                           </Button>

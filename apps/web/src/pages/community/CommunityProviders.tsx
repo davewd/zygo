@@ -304,7 +304,7 @@ const CommunityProviders = () => {
 
                 {/* View Profile Button */}
                 <Link
-                  to={`/network/providers/${provider.id}`}
+                  to={`/community/providers/${provider.id}`}
                   className="block w-full bg-zygo-red hover:bg-zygo-red/90 text-white text-center py-3 rounded-lg transition-colors font-medium"
                 >
                   View Profile

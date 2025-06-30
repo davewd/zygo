@@ -25,7 +25,7 @@ const staticRoutes = [
   '/network',
   '/network/services',
   '/network/centers',
-  '/network/providers',
+  '/community/providers',
   '/network/network-providers',
   '/tools',
   '/tools/postnatal/breastfeeding-timer',
@@ -38,9 +38,6 @@ const dynamicRoutes = [
   // '/community/providers/:id',
   // '/community/centers/:id',
   // '/credentials/providers/:id',
-  // '/network/centers/:id',
-  // '/network/providers/:id',
-  // '/network/network-providers/:id',
   // '/timeline/milestone/:milestoneId/:familyMemberId?',
 ];
 

@@ -145,7 +145,7 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       setShowDropdown(false);
       setSelectedIndex(-1);
       // Navigate to provider page
-      window.location.href = `/network/providers/${provider.id}`;
+      window.location.href = `/community/providers/${provider.id}`;
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
