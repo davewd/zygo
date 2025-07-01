@@ -470,6 +470,8 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
     peerLikes: item.peerLikes,
     awardData: item.awardData,
     mentions: item.mentions,
+    // Context data for feed items
+    context: item.context,
   }));
 
   // Implement pagination
