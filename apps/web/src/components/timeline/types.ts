@@ -81,6 +81,7 @@ export interface MilestoneData {
   months: [number, number];
   period: string;
   isTypical: boolean;
+  isKeyMilestone?: boolean;
   importance: string;
   createdDate: string;
   modifiedDate: string;

@@ -74,7 +74,6 @@ export const useTimelineData = ({
         ]);
         
         setCsvMilestones(milestones as any); // TODO: Fix type mismatch between API and component types
-        setJsonMilestones([]); // No longer using separate JSON milestones
         setAllAgeRanges(ageRanges);
         setAgeRanges(ageRanges);
         setAchievements(achievementsData);
@@ -172,121 +171,117 @@ export const useTimelineData = ({
 
     // Generate milestones
     if (shouldIncludeNode('milestone')) {
-      // Show all age groups for milestone generation in granular view
-      const ageGroups = allAgeRanges;
+      // Track created milestone IDs to avoid duplicates
+      const createdMilestones = new Set<string>();
 
-      ageGroups.forEach((ageGroup) => {
-        const ageGroupId = `ageGroup-${ageGroup.key}`;
+      DEVELOPMENT_CATEGORIES.forEach((category) => {
+        if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
+          return;
+        }
 
-        DEVELOPMENT_CATEGORIES.forEach((category) => {
-          if (selectedCategories.length > 0 && !selectedCategories.includes(category)) {
-            return;
-          }
+        const categoryMilestones = allMilestones.filter(
+          (m) => m.category === category
+        );
 
-          const categoryMilestones = allMilestones.filter(
-            (m) => m.ageRangeKey === ageGroup.key && m.category === category
-          );
+        // Debug logging for milestones per category (only if > 0)
+        if (categoryMilestones.length > 0) {
+          // console.log(`📍 Found ${categoryMilestones.length} milestones for ${category}`);
+        }
 
-          // Debug logging for milestones per category (only if > 0)
-          if (categoryMilestones.length > 0) {
-            // console.log(`📍 Found ${categoryMilestones.length} milestones for ${ageGroup.key} - ${category}`);
-          }
+        if (categoryMilestones.length === 0) return;
 
-          if (categoryMilestones.length === 0) return;
+        categoryMilestones.forEach((milestone, milestoneIndex) => {
+          const milestoneId = `milestone-${milestone.id}`;
 
-          categoryMilestones.forEach((milestone, milestoneIndex) => {
-            const milestoneId = `milestone-${milestone.id}`;
+          createdMilestones.add(milestoneId);
 
-            // Create mock progress data
-            const relevantProgress =
-              pedagogyData?.milestoneProgress?.filter(
-                (p: any) =>
-                  p.milestoneId === milestone.id &&
-                  (selectedFamilyMembers.length === 0 ||
-                    selectedFamilyMembers.includes(p.familyMemberId))
-              ) || [];
+          // Create mock progress data
+          const relevantProgress =
+            pedagogyData?.milestoneProgress?.filter(
+              (p: any) =>
+                p.milestoneId === milestone.id &&
+                (selectedFamilyMembers.length === 0 ||
+                  selectedFamilyMembers.includes(p.familyMemberId))
+            ) || [];
 
-            const relevantFamilyMembers =
-              pedagogyData?.familyMembers?.filter(
-                (fm: any) =>
-                  selectedFamilyMembers.length === 0 || selectedFamilyMembers.includes(fm.id)
-              ) || [];
+          const relevantFamilyMembers =
+            pedagogyData?.familyMembers?.filter(
+              (fm: any) =>
+                selectedFamilyMembers.length === 0 || selectedFamilyMembers.includes(fm.id)
+            ) || [];
 
-            // Calculate completion percentage
-            const completionPercentage =
-              relevantProgress.length > 0
-                ? (relevantProgress.filter((p: any) => p.status === 'completed').length /
-                    relevantProgress.length) *
-                  100
-                : Math.floor((milestoneIndex * 13 + category.length * 7) % 100);
+          // Calculate completion percentage
+          const completionPercentage =
+            relevantProgress.length > 0
+              ? (relevantProgress.filter((p: any) => p.status === 'completed').length /
+                  relevantProgress.length) *
+                100
+              : Math.floor((milestoneIndex * 13 + category.length * 7) % 100);
 
-            // Check if this milestone is a key milestone based on its ID
-            const keyMilestoneIds = ['conception', 'birth', 'puberty', 'legal_adult'];
-            const isKeyMilestone = keyMilestoneIds.includes(milestone.id) || 
-                                   keyMilestoneIds.some(key => milestone.id.includes(key) || milestone.title.toLowerCase().includes(key));
-            const nodeType = isKeyMilestone ? 'keyMilestone' : 'milestone';
+          // Check if this milestone is a key milestone using the data property
+          const isKeyMilestone = milestone.isKeyMilestone === true;
+          const nodeType = isKeyMilestone ? 'keyMilestone' : 'milestone';
 
-            generatedNodes.push({
-              id: milestoneId,
-              type: nodeType,
-              data: {
-                title: milestone.title,
-                description: milestone.description,
-                milestone: milestone,
-                progress: relevantProgress,
-                familyMembers: relevantFamilyMembers,
-                completionPercentage: completionPercentage,
-                category: category,
-                ageRange: milestone.ageRange,
-                period: milestone.period,
-                importance: milestone.importance,
-                months: milestone.months,
-                milestoneType: isKeyMilestone ? milestone.id : undefined, // Pass milestone ID as type for key milestones
-              },
-              position: { x: 0, y: 0 },
-              style: {
-                zIndex: nodeType === 'keyMilestone' ? 5 : 4, // Key milestones get highest priority
-              },
-            });
+          generatedNodes.push({
+            id: milestoneId,
+            type: nodeType,
+            data: {
+              title: milestone.title,
+              description: milestone.description,
+              milestone: milestone,
+              progress: relevantProgress,
+              familyMembers: relevantFamilyMembers,
+              completionPercentage: completionPercentage,
+              category: category,
+              ageRange: milestone.ageRange,
+              period: milestone.period,
+              importance: milestone.importance,
+              months: milestone.months,
+              milestoneType: isKeyMilestone ? milestone.id : undefined, // Pass milestone ID as type for key milestones
+            },
+            position: { x: 0, y: 0 },
+            style: {
+              zIndex: nodeType === 'keyMilestone' ? 5 : 4, // Key milestones get highest priority
+            },
+          });
 
-            // Add prerequisite edges between milestones (only if valid prerequisite exists)
-            const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
-            
-            // Handle prerequisites as either string (CSV format) or array (JSON format)
-            let prerequisiteIds: string[] = [];
-            if (milestoneAny.prerequisites) {
-              if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
-                prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
-              } else if (Array.isArray(milestoneAny.prerequisites)) {
-                prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
-              }
+          // Add prerequisite edges between milestones (only if valid prerequisite exists)
+          const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
+          
+          // Handle prerequisites as either string (CSV format) or array (JSON format)
+          let prerequisiteIds: string[] = [];
+          if (milestoneAny.prerequisites) {
+            if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
+              prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
+            } else if (Array.isArray(milestoneAny.prerequisites)) {
+              prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
             }
-            
-            prerequisiteIds.forEach((prereqId: string) => {
-              // Only create edge if prerequisite milestone exists in our generated nodes
-              const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
-              if (prereqId && prereqExists) {
-                generatedEdges.push({
-                  id: `prerequisite-${prereqId}-to-${milestone.id}`,
-                  source: `milestone-${prereqId}`,
-                  target: milestoneId,
-                  sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
-                  targetHandle: 'top', // Connect to top of dependent milestone
-                  type: 'smoothstep', // Use smoothstep for better curves
-                  style: {
-                    stroke: '#059669', // Green for prerequisites
-                    strokeWidth: 2,
-                    strokeDasharray: '8,4',
-                    opacity: 0.7,
-                    zIndex: 4, // Top layer - milestone edges
-                  },
-                  markerEnd: {
-                    type: MarkerType.ArrowClosed,
-                    color: '#059669',
-                  },
-                });
-              }
-            });
+          }
+          
+          prerequisiteIds.forEach((prereqId: string) => {
+            // Only create edge if prerequisite milestone exists in our generated nodes
+            const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
+            if (prereqId && prereqExists) {
+              generatedEdges.push({
+                id: `prerequisite-${prereqId}-to-${milestone.id}`,
+                source: `milestone-${prereqId}`,
+                target: milestoneId,
+                sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
+                targetHandle: 'top', // Connect to top of dependent milestone
+                type: 'smoothstep', // Use smoothstep for better curves
+                style: {
+                  stroke: '#059669', // Green for prerequisites
+                  strokeWidth: 2,
+                  strokeDasharray: '8,4',
+                  opacity: 0.7,
+                  zIndex: 4, // Top layer - milestone edges
+                },
+                markerEnd: {
+                  type: MarkerType.ArrowClosed,
+                  color: '#059669',
+                },
+              });
+            }
           });
         });
       });

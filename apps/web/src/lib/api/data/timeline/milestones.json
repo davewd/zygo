@@ -11,6 +11,7 @@
     "period": "conception",
     "importance": "critical",
     "isTypical": true,
+    "isKeyMilestone": true,
     "prerequisites": [],
     "skills": ["Genetic formation", "Cellular division"],
     "observationTips": "Monitor reproductive health and timing",
@@ -284,7 +285,12 @@
     "period": "birth",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["prenatal_third_physical_1", "prenatal_third_cognitive_1"],
+    "isKeyMilestone": true,
+    "prerequisites": [
+      "prenatal_third_cognitive_1",
+      "prenatal_third_physical_1",
+      "prenatal_third_social_emotional_1"
+    ],
     "skills": [
       "Independent breathing",
       "Circulatory adaptation",
@@ -1403,6 +1409,7 @@
     "period": "puberty",
     "importance": "critical",
     "isTypical": true,
+    "isKeyMilestone": true,
     "prerequisites": ["year_7_8_physical_1"],
     "skills": [
       "Sexual maturation",
@@ -1681,6 +1688,7 @@
     "period": "adulthood",
     "importance": "critical",
     "isTypical": true,
+    "isKeyMilestone": true,
     "prerequisites": ["teen_16_18_social_emotional_1", "teen_16_18_cognitive_1"],
     "skills": [
       "Legal responsibility",

@@ -13,6 +13,7 @@ export interface MilestoneData {
   period: string;
   importance: 'low' | 'medium' | 'high' | 'critical';
   isTypical: boolean;
+  isKeyMilestone?: boolean;
   prerequisites?: string[];
   skills?: string[];
   observationTips?: string;
