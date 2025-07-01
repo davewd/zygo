@@ -65,7 +65,9 @@ export const ReactFlowTimeline = ({
     }
   }, [reactFlowInstance, onCanvasWidthChange]);
 
-  // Enhanced focus behavior
+  // Allow free panning - disabled automatic focus behavior
+  // Enhanced focus behavior commented out to enable free movement
+  /*
   useEffect(() => {
     if (focusNodeId && reactFlowInstance && nodes.length > 0) {
       const node = nodes.find((n) => n.id === focusNodeId);
@@ -114,8 +116,11 @@ export const ReactFlowTimeline = ({
       }
     }
   }, [focusNodeId, focusArea, nodes, reactFlowInstance, canvasDimensions]);
+  */
 
-  // Initial centering when component mounts
+  // Allow free panning - disabled initial centering
+  // Initial centering when component mounts commented out to enable free movement
+  /*
   useEffect(() => {
     if (reactFlowInstance && nodes.length > 0) {
       setTimeout(() => {
@@ -133,6 +138,7 @@ export const ReactFlowTimeline = ({
       }, 200);
     }
   }, [reactFlowInstance, nodes.length, canvasDimensions]);
+  */
 
   // Handle visual zoom controls
   const handleVisualZoomIn = useCallback(() => {
@@ -145,21 +151,20 @@ export const ReactFlowTimeline = ({
 
   const handleFitView = useCallback(() => {
     if (nodes.length > 0) {
+      // Allow free panning - removed centering constraint
       reactFlowInstance.fitView({
         duration: 800,
         padding: 0.1,
         minZoom: 0.5,
         maxZoom: 1.5,
       });
-      setTimeout(() => {
-        const viewport = reactFlowInstance.getViewport();
-        const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
-        reactFlowInstance.setViewport({ x: screenCenterX, y: viewport.y, zoom: viewport.zoom });
-      }, 100);
+      // Removed automatic recentering to allow free movement
     }
-  }, [reactFlowInstance, nodes, canvasDimensions]);
+  }, [reactFlowInstance, nodes]);
 
-  // Only restrict horizontal viewport movement, allow vertical panning
+  // Allow free panning - removed viewport movement restrictions
+  // Commented out horizontal constraint to enable free movement
+  /*
   const onMoveEnd = useCallback(
     (event: any, viewport: any) => {
       const screenCenterX = canvasDimensions ? -canvasDimensions.width / 2 : -400;
@@ -170,34 +175,11 @@ export const ReactFlowTimeline = ({
     },
     [reactFlowInstance, canvasDimensions]
   );
+  */
 
-  // Custom nodes change handler to prevent horizontal movement
-  const onNodesChange = useCallback(
-    (changes: any[]) => {
-      const filteredChanges = changes.filter((change) => {
-        if (change.type === 'position' && change.id?.includes('ageGroup')) {
-          return false;
-        }
-
-        if (change.type === 'position' && change.position) {
-          const node = reactFlowNodes.find((n) => n.id === change.id);
-          if (node && change.position.x !== undefined) {
-            const maxHorizontalDistance = 600;
-            const constrainedX = Math.max(
-              -maxHorizontalDistance,
-              Math.min(maxHorizontalDistance, change.position.x)
-            );
-            change.position.x = constrainedX;
-          }
-        }
-
-        return true;
-      });
-
-      onNodesChangeInternal(filteredChanges);
-    },
-    [onNodesChangeInternal, reactFlowNodes]
-  );
+  // Allow free movement - removed horizontal movement constraints
+  // Use default nodes change handler to enable free dragging
+  const onNodesChange = onNodesChangeInternal;
 
   // Update nodes when generated nodes change
   useEffect(() => {
@@ -207,7 +189,9 @@ export const ReactFlowTimeline = ({
     setEdges(edges);
   }, [nodes, edges, setNodes, setEdges]);
 
-  // Auto-center horizontally when nodes change
+  // Allow free panning - disabled auto-centering when nodes change
+  // Commented out to enable free movement
+  /*
   useEffect(() => {
     if (nodes.length > 0) {
       const hasNodesChanged = nodes.length !== prevNodesLength.current;
@@ -221,6 +205,7 @@ export const ReactFlowTimeline = ({
       prevNodesLength.current = nodes.length;
     }
   }, [nodes.length, reactFlowInstance, canvasDimensions]);
+  */
 
   return (
     <div className="w-full h-full">
@@ -233,16 +218,18 @@ export const ReactFlowTimeline = ({
         nodeTypes={nodeTypes}
         connectionMode={ConnectionMode.Loose}
         fitView={false}
-        minZoom={0.3}
-        maxZoom={2}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        minZoom={0.2}
+        maxZoom={3}
+        defaultViewport={{ x: 0, y: 50, zoom: 0.6 }} // Start with better overview position
         nodesDraggable={true}
         nodesConnectable={false}
         elementsSelectable={true}
         panOnDrag={true}
-        onMoveEnd={onMoveEnd}
+        panOnScroll={true} // Enable pan on scroll
+        zoomOnScroll={true} // Enable zoom on scroll
+        // Removed onMoveEnd to allow free panning
         preventScrolling={false}
-        zoomOnDoubleClick={false}
+        zoomOnDoubleClick={true} // Allow double-click zoom
       >
         <Background />
         <Controls />
