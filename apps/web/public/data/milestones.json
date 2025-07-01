@@ -1,317 +1,1994 @@
 [
   {
-    "id": "milestone-conception",
+    "id": "conception",
     "title": "Conception",
-    "description": "The beginning of human development when sperm fertilizes egg",
+    "description": "The moment of fertilization when sperm meets egg, marking the beginning of human development",
+    "category": "physical",
+    "ageRangeKey": "conception",
+    "ageRange": "Conception",
+    "startMonths": -9.5,
+    "endMonths": -9.5,
+    "period": "conception",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Genetic formation",
+      "Cellular division"
+    ],
+    "observationTips": "Monitor reproductive health and timing",
+    "supportStrategies": "Preconception health optimization, proper nutrition",
+    "redFlags": "Conception difficulties, genetic abnormalities",
+    "resources": "Fertility and preconception care resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_first_physical_1",
+    "title": "Neural tube formation",
+    "description": "Neural tube formation and early brain development",
     "category": "physical",
     "ageRangeKey": "prenatal_early",
-    "ageRange": "Day 0",
+    "ageRange": "Prenatal (First Trimester)",
     "startMonths": -9,
-    "endMonths": -9,
+    "endMonths": -6,
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
     "prerequisites": [],
-    "skills": ["Cell division", "Genetic combination", "Implantation"],
-    "observationTips": "Not directly observable - confirmed through pregnancy tests",
-    "supportStrategies": "Healthy lifestyle, prenatal vitamins, medical care",
-    "redFlags": "Failure to implant, chromosomal abnormalities",
-    "resources": "Prenatal care guidelines, fertility support",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "skills": [
+      "Neural development"
+    ],
+    "observationTips": "Monitor prenatal health",
+    "supportStrategies": "Proper prenatal care and nutrition",
+    "redFlags": "Severe developmental abnormalities",
+    "resources": "Prenatal care resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-neural-tube",
-    "title": "Neural Tube Formation",
-    "description": "Development of the basic nervous system structure",
+    "id": "prenatal_first_cognitive_1",
+    "title": "Basic neural connections",
+    "description": "Basic neural connections and pathway formation",
     "category": "cognitive",
     "ageRangeKey": "prenatal_early",
-    "ageRange": "3-4 weeks gestation",
-    "startMonths": -8,
-    "endMonths": -8,
+    "ageRange": "Prenatal (First Trimester)",
+    "startMonths": -9,
+    "endMonths": -6,
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["milestone-conception"],
-    "skills": ["Neural development", "Brain formation", "Spinal cord development"],
-    "observationTips": "Visible on early ultrasound scans",
-    "supportStrategies": "Folic acid supplementation, avoid teratogens",
-    "redFlags": "Neural tube defects, spina bifida",
-    "resources": "Prenatal screening, genetic counseling",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [],
+    "skills": [
+      "Brain development"
+    ],
+    "observationTips": "Regular prenatal checkups",
+    "supportStrategies": "Avoid harmful substances",
+    "redFlags": "Neural tube defects",
+    "resources": "Educational prenatal materials",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-heartbeat",
-    "title": "First Heartbeat",
-    "description": "Heart begins to beat and pump blood",
-    "category": "physical",
+    "id": "prenatal_first_social_emotional_1",
+    "title": "Maternal bonding begins",
+    "description": "Maternal bonding begins through prenatal connection",
+    "category": "social_emotional",
     "ageRangeKey": "prenatal_early",
-    "ageRange": "5-6 weeks gestation",
-    "startMonths": -7,
-    "endMonths": -7,
+    "ageRange": "Prenatal (First Trimester)",
+    "startMonths": -9,
+    "endMonths": -6,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Emotional response"
+    ],
+    "observationTips": "Manage maternal stress",
+    "supportStrategies": "Stress reduction techniques",
+    "redFlags": "Extreme maternal stress",
+    "resources": "Stress management resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_first_language_1",
+    "title": "Auditory system formation",
+    "description": "Auditory system formation and early hearing development",
+    "category": "language",
+    "ageRangeKey": "prenatal_early",
+    "ageRange": "Prenatal (First Trimester)",
+    "startMonths": -9,
+    "endMonths": -6,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Hearing development"
+    ],
+    "observationTips": "Monitor auditory development",
+    "supportStrategies": "Healthy prenatal environment",
+    "redFlags": "Hearing defects",
+    "resources": "Prenatal hearing information",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_second_physical_1",
+    "title": "Heart development begins",
+    "description": "Heart development begins with organ formation",
+    "category": "physical",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Second Trimester)",
+    "startMonths": -6,
+    "endMonths": -3,
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["milestone-conception"],
-    "skills": ["Cardiac development", "Circulation", "Blood flow"],
-    "observationTips": "Detectable via ultrasound Doppler",
-    "supportStrategies": "Regular prenatal checkups, healthy diet",
-    "redFlags": "Absent heartbeat, irregular rhythm",
-    "resources": "Prenatal monitoring, cardiac screening",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [
+      "prenatal_first_physical_1"
+    ],
+    "skills": [
+      "Organ development"
+    ],
+    "observationTips": "Regular ultrasounds",
+    "supportStrategies": "Continued prenatal care",
+    "redFlags": "Major organ defects",
+    "resources": "Medical prenatal support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-reflexes",
-    "title": "Primitive Reflexes",
-    "description": "Development of basic survival reflexes",
-    "category": "motor_skills",
-    "ageRangeKey": "infancy_0_6",
-    "ageRange": "0-1 months",
-    "startMonths": 0,
-    "endMonths": 1,
-    "period": "newborn",
+    "id": "prenatal_second_cognitive_1",
+    "title": "Sensory system development",
+    "description": "Sensory system development and early processing",
+    "category": "cognitive",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Second Trimester)",
+    "startMonths": -6,
+    "endMonths": -3,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_first_cognitive_1"
+    ],
+    "skills": [
+      "Sensory development"
+    ],
+    "observationTips": "Monitor fetal responses",
+    "supportStrategies": "Provide sensory stimulation",
+    "redFlags": "Sensory processing delays",
+    "resources": "Sensory development information",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_second_social_emotional_1",
+    "title": "Stress response system",
+    "description": "Stress response system development",
+    "category": "social_emotional",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Second Trimester)",
+    "startMonths": -6,
+    "endMonths": -3,
+    "period": "prenatal",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_first_social_emotional_1"
+    ],
+    "skills": [
+      "Stress regulation"
+    ],
+    "observationTips": "Maintain maternal well-being",
+    "supportStrategies": "Relaxation techniques",
+    "redFlags": "Excessive stress responses",
+    "resources": "Maternal wellness resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_second_language_1",
+    "title": "Sound processing development",
+    "description": "Sound processing development and recognition",
+    "category": "language",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Second Trimester)",
+    "startMonths": -6,
+    "endMonths": -3,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_first_language_1"
+    ],
+    "skills": [
+      "Sound recognition"
+    ],
+    "observationTips": "Monitor hearing development",
+    "supportStrategies": "Provide musical stimulation",
+    "redFlags": "Hearing impairments",
+    "resources": "Prenatal music resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_third_physical_1",
+    "title": "Rapid brain growth",
+    "description": "Rapid brain growth and preparation for birth",
+    "category": "physical",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Third Trimester)",
+    "startMonths": -3,
+    "endMonths": 0,
+    "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["milestone-neural-tube"],
-    "skills": ["Moro reflex", "Rooting reflex", "Sucking reflex", "Grasping reflex"],
-    "observationTips": "Test reflexes during newborn examination",
-    "supportStrategies": "Gentle handling, skin-to-skin contact",
-    "redFlags": "Absent or asymmetrical reflexes",
-    "resources": "Newborn assessment tools, pediatric guidelines",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [
+      "prenatal_second_physical_1"
+    ],
+    "skills": [
+      "Brain maturation"
+    ],
+    "observationTips": "Monitor brain development",
+    "supportStrategies": "Optimal nutrition and care",
+    "redFlags": "Brain development concerns",
+    "resources": "Brain development resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-eye-contact",
-    "title": "First Eye Contact",
-    "description": "Baby begins to make and maintain eye contact with caregivers",
+    "id": "prenatal_third_cognitive_1",
+    "title": "Memory pathway formation",
+    "description": "Memory pathway formation and early learning capacity",
+    "category": "cognitive",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Third Trimester)",
+    "startMonths": -3,
+    "endMonths": 0,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_second_cognitive_1"
+    ],
+    "skills": [
+      "Memory development"
+    ],
+    "observationTips": "Assess cognitive responses",
+    "supportStrategies": "Provide learning opportunities",
+    "redFlags": "Memory formation issues",
+    "resources": "Cognitive development guides",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_third_social_emotional_1",
+    "title": "Attachment preparation",
+    "description": "Attachment preparation and bonding readiness",
     "category": "social_emotional",
-    "ageRangeKey": "infancy_0_6",
-    "ageRange": "0-1 months",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Third Trimester)",
+    "startMonths": -3,
+    "endMonths": 0,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_second_social_emotional_1"
+    ],
+    "skills": [
+      "Bonding preparation"
+    ],
+    "observationTips": "Foster maternal-infant connection",
+    "supportStrategies": "Bonding activities",
+    "redFlags": "Attachment difficulties",
+    "resources": "Bonding resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "prenatal_third_language_1",
+    "title": "Maternal voice recognition",
+    "description": "Maternal voice recognition and language preparation",
+    "category": "language",
+    "ageRangeKey": "prenatal_late",
+    "ageRange": "Prenatal (Third Trimester)",
+    "startMonths": -3,
+    "endMonths": 0,
+    "period": "prenatal",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "prenatal_second_language_1"
+    ],
+    "skills": [
+      "Voice recognition"
+    ],
+    "observationTips": "Talk to baby regularly",
+    "supportStrategies": "Reading and singing",
+    "redFlags": "Voice recognition issues",
+    "resources": "Language preparation materials",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "birth",
+    "title": "Birth",
+    "description": "The moment of birth marking the transition from prenatal to postnatal life",
+    "category": "physical",
+    "ageRangeKey": "birth",
+    "ageRange": "Birth (0 months)",
     "startMonths": 0,
-    "endMonths": 1,
-    "period": "newborn",
-    "importance": "high",
+    "endMonths": 0,
+    "period": "birth",
+    "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["milestone-reflexes"],
-    "skills": ["Visual focus", "Social awareness", "Bonding"],
-    "observationTips": "Hold baby 8-12 inches from face during feeding",
-    "supportStrategies": "Face-to-face interaction, talking to baby",
-    "redFlags": "Consistently avoids eye contact after 2 months",
-    "resources": "Social development guides, attachment resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [
+      "prenatal_third_physical_1",
+      "prenatal_third_cognitive_1"
+    ],
+    "skills": [
+      "Independent breathing",
+      "Circulatory adaptation",
+      "Temperature regulation",
+      "Basic reflexes",
+      "Sensory adaptation"
+    ],
+    "observationTips": "Monitor vital signs, breathing, feeding, and basic reflexes",
+    "supportStrategies": "Immediate medical care, skin-to-skin contact, early bonding",
+    "redFlags": "Breathing difficulties, poor vital signs, failure to thrive",
+    "resources": "Newborn care guidelines, pediatric support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-social-smile",
-    "title": "First Social Smile",
-    "description": "Baby smiles in response to social interaction",
+    "id": "months_0_6_physical_1",
+    "title": "Head control",
+    "description": "Head control and neck strength development",
+    "category": "physical",
+    "ageRangeKey": "infancy_0_6",
+    "ageRange": "0-6 months",
+    "startMonths": 0,
+    "endMonths": 6,
+    "period": "infancy",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "birth"
+    ],
+    "skills": [
+      "Neck strength"
+    ],
+    "observationTips": "Tummy time practice",
+    "supportStrategies": "Daily tummy time",
+    "redFlags": "No head control by 4 months",
+    "resources": "Tummy time activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_0_6_cognitive_1",
+    "title": "Tracking objects with eyes",
+    "description": "Visual tracking and focus development",
+    "category": "cognitive",
+    "ageRangeKey": "infancy_0_6",
+    "ageRange": "0-6 months",
+    "startMonths": 0,
+    "endMonths": 6,
+    "period": "infancy",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "birth"
+    ],
+    "skills": [
+      "Visual focus"
+    ],
+    "observationTips": "Follow objects with eyes",
+    "supportStrategies": "Use colorful toys",
+    "redFlags": "No visual tracking by 3 months",
+    "resources": "Visual stimulation toys",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_0_6_social_emotional_1",
+    "title": "Social smiling",
+    "description": "Social smiling and interaction with caregivers",
     "category": "social_emotional",
     "ageRangeKey": "infancy_0_6",
-    "ageRange": "1-2 months",
-    "startMonths": 1,
-    "endMonths": 2,
-    "period": "early_infancy",
+    "ageRange": "0-6 months",
+    "startMonths": 0,
+    "endMonths": 6,
+    "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": ["milestone-eye-contact"],
-    "skills": ["Facial expression", "Social response", "Emotional expression"],
-    "observationTips": "Smile should be responsive to faces and voices",
-    "supportStrategies": "Frequent social interaction, talking and singing",
-    "redFlags": "No social smiling by 3 months",
-    "resources": "Social-emotional development milestones",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [],
+    "skills": [
+      "Social response"
+    ],
+    "observationTips": "Respond to smiles",
+    "supportStrategies": "Frequent face-to-face interaction",
+    "redFlags": "No social smiling by 2 months",
+    "resources": "Social interaction guides",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-head-control",
-    "title": "Head Control",
-    "description": "Baby can lift and control head movements",
-    "category": "motor_skills",
-    "ageRangeKey": "infancy_0_6",
-    "ageRange": "2-3 months",
-    "startMonths": 2,
-    "endMonths": 3,
-    "period": "early_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-reflexes"],
-    "skills": ["Neck muscle strength", "Motor control", "Spatial awareness"],
-    "observationTips": "Place baby on tummy to encourage head lifting",
-    "supportStrategies": "Tummy time, supported sitting",
-    "redFlags": "No head control by 4 months",
-    "resources": "Motor development guidelines, tummy time resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-cooing",
-    "title": "Cooing and Vocalization",
-    "description": "Baby begins making vowel sounds and cooing",
+    "id": "months_0_6_language_1",
+    "title": "Cooing and babbling",
+    "description": "Cooing and early vocalizations",
     "category": "language",
     "ageRangeKey": "infancy_0_6",
-    "ageRange": "2-3 months",
-    "startMonths": 2,
-    "endMonths": 3,
-    "period": "early_infancy",
+    "ageRange": "0-6 months",
+    "startMonths": 0,
+    "endMonths": 6,
+    "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": ["milestone-social-smile"],
-    "skills": ["Vocal control", "Sound production", "Communication attempt"],
-    "observationTips": "Listen for 'ooh', 'aah', and other vowel sounds",
-    "supportStrategies": "Talk back to baby, narrate activities",
-    "redFlags": "No vocalization by 4 months",
-    "resources": "Language development milestones, speech resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [],
+    "skills": [
+      "Vocalization"
+    ],
+    "observationTips": "Make cooing sounds",
+    "supportStrategies": "Talk back to baby",
+    "redFlags": "No vocalizations by 4 months",
+    "resources": "Language development activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-rolling",
-    "title": "Rolling Over",
-    "description": "Baby can roll from front to back and back to front",
-    "category": "motor_skills",
-    "ageRangeKey": "infancy_0_6",
-    "ageRange": "4-5 months",
-    "startMonths": 4,
-    "endMonths": 5,
-    "period": "middle_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-head-control"],
-    "skills": ["Core strength", "Coordination", "Spatial awareness"],
-    "observationTips": "Usually rolls front to back first",
-    "supportStrategies": "Tummy time, encourage reaching across body",
-    "redFlags": "No rolling by 6 months",
-    "resources": "Motor milestone charts, physical development guides",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-sitting",
-    "title": "Sitting Without Support",
-    "description": "Baby can sit independently without falling over",
-    "category": "motor_skills",
+    "id": "months_6_12_physical_1",
+    "title": "Rolling over",
+    "description": "Rolling over and basic mobility skills",
+    "category": "physical",
     "ageRangeKey": "infancy_6_12",
-    "ageRange": "6-7 months",
+    "ageRange": "6 months - 1 year",
     "startMonths": 6,
-    "endMonths": 7,
-    "period": "middle_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-rolling"],
-    "skills": ["Balance", "Core stability", "Postural control"],
-    "observationTips": "Baby should sit steadily for several minutes",
-    "supportStrategies": "Practice supported sitting, use pillows for safety",
-    "redFlags": "Cannot sit without support by 9 months",
-    "resources": "Gross motor development guides",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-babbling",
-    "title": "Babbling",
-    "description": "Baby produces consonant-vowel combinations like 'ba-ba', 'ma-ma'",
-    "category": "language",
-    "ageRangeKey": "infancy_6_12",
-    "ageRange": "6-7 months",
-    "startMonths": 6,
-    "endMonths": 7,
-    "period": "middle_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-cooing"],
-    "skills": ["Consonant production", "Syllable formation", "Speech rhythm"],
-    "observationTips": "Listen for repetitive syllables",
-    "supportStrategies": "Repeat baby's sounds, read aloud daily",
-    "redFlags": "No babbling by 8 months",
-    "resources": "Speech development guides, early intervention resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-crawling",
-    "title": "Crawling",
-    "description": "Baby moves forward on hands and knees",
-    "category": "motor_skills",
-    "ageRangeKey": "infancy_6_12",
-    "ageRange": "8-9 months",
-    "startMonths": 8,
-    "endMonths": 9,
-    "period": "late_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-sitting"],
-    "skills": ["Coordination", "Bilateral movement", "Spatial navigation"],
-    "observationTips": "Some babies skip crawling and go to cruising",
-    "supportStrategies": "Create safe crawling spaces, encourage exploration",
-    "redFlags": "No mobility by 12 months",
-    "resources": "Motor development charts, mobility milestones",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-first-words",
-    "title": "First Words",
-    "description": "Baby says first meaningful words like 'mama', 'dada'",
-    "category": "language",
-    "ageRangeKey": "infancy_6_12",
-    "ageRange": "10-11 months",
-    "startMonths": 10,
-    "endMonths": 11,
-    "period": "late_infancy",
-    "importance": "high",
-    "isTypical": true,
-    "prerequisites": ["milestone-babbling"],
-    "skills": ["Word formation", "Meaning association", "Communication intent"],
-    "observationTips": "Words should be used consistently with meaning",
-    "supportStrategies": "Respond to attempts, narrate daily activities",
-    "redFlags": "No words by 15 months",
-    "resources": "Language milestone guides, speech therapy resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
-  },
-  {
-    "id": "milestone-walking",
-    "title": "First Steps",
-    "description": "Baby takes first independent steps",
-    "category": "motor_skills",
-    "ageRangeKey": "infancy_6_12",
-    "ageRange": "11-12 months",
-    "startMonths": 11,
     "endMonths": 12,
-    "period": "late_infancy",
-    "importance": "high",
+    "period": "infancy",
+    "importance": "critical",
     "isTypical": true,
-    "prerequisites": ["milestone-crawling"],
-    "skills": ["Balance", "Leg strength", "Coordination", "Confidence"],
-    "observationTips": "Baby may cruise along furniture first",
-    "supportStrategies": "Provide safe walking space, encourage practice",
-    "redFlags": "Not walking by 18 months",
-    "resources": "Walking milestone guides, motor development resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [
+      "months_0_6_physical_1"
+    ],
+    "skills": [
+      "Rolling mobility"
+    ],
+    "observationTips": "Roll from back to tummy",
+    "supportStrategies": "Encourage rolling practice",
+    "redFlags": "No rolling by 8 months",
+    "resources": "Mobility development activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   },
   {
-    "id": "milestone-symbolic-play",
-    "title": "Symbolic Play",
-    "description": "Child engages in pretend play and uses objects symbolically",
+    "id": "months_6_12_cognitive_1",
+    "title": "Object permanence",
+    "description": "Object permanence understanding",
+    "category": "cognitive",
+    "ageRangeKey": "infancy_6_12",
+    "ageRange": "6 months - 1 year",
+    "startMonths": 6,
+    "endMonths": 12,
+    "period": "infancy",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_0_6_cognitive_1"
+    ],
+    "skills": [
+      "Memory development"
+    ],
+    "observationTips": "Look for hidden objects",
+    "supportStrategies": "Peek-a-boo games",
+    "redFlags": "No object permanence by 10 months",
+    "resources": "Cognitive development toys",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_6_12_social_emotional_1",
+    "title": "Stranger anxiety",
+    "description": "Stranger anxiety and appropriate caution",
+    "category": "social_emotional",
+    "ageRangeKey": "infancy_6_12",
+    "ageRange": "6 months - 1 year",
+    "startMonths": 6,
+    "endMonths": 12,
+    "period": "infancy",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_0_6_social_emotional_1"
+    ],
+    "skills": [
+      "Social discrimination"
+    ],
+    "observationTips": "Show wariness of strangers",
+    "supportStrategies": "Gradual social exposure",
+    "redFlags": "No stranger awareness or extreme fear",
+    "resources": "Social development guidance",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_6_12_language_1",
+    "title": "First words",
+    "description": "First words and meaningful sounds",
+    "category": "language",
+    "ageRangeKey": "infancy_6_12",
+    "ageRange": "6 months - 1 year",
+    "startMonths": 6,
+    "endMonths": 12,
+    "period": "infancy",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_0_6_language_1"
+    ],
+    "skills": [
+      "Word production"
+    ],
+    "observationTips": "Say first meaningful words",
+    "supportStrategies": "Repeat and reinforce words",
+    "redFlags": "No words by 12 months",
+    "resources": "First words encouragement",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_12_18_physical_1",
+    "title": "Sitting without support",
+    "description": "Sitting without support and balance",
+    "category": "physical",
+    "ageRangeKey": "early_childhood_12_18",
+    "ageRange": "1 year - 1 year 6 months",
+    "startMonths": 12,
+    "endMonths": 18,
+    "period": "infancy",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_6_12_physical_1"
+    ],
+    "skills": [
+      "Sitting balance"
+    ],
+    "observationTips": "Sit independently",
+    "supportStrategies": "Provide sitting practice",
+    "redFlags": "No sitting by 15 months",
+    "resources": "Sitting development aids",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_12_18_cognitive_1",
+    "title": "Cause and effect understanding",
+    "description": "Cause and effect recognition",
     "category": "cognitive",
     "ageRangeKey": "early_childhood_12_18",
-    "ageRange": "12-15 months",
+    "ageRange": "1 year - 1 year 6 months",
     "startMonths": 12,
-    "endMonths": 15,
-    "period": "toddler",
+    "endMonths": 18,
+    "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": ["milestone-first-words"],
-    "skills": ["Imagination", "Abstract thinking", "Representation"],
-    "observationTips": "Child pretends to feed doll, talk on toy phone",
-    "supportStrategies": "Provide dress-up clothes, kitchen toys, dolls",
-    "redFlags": "No pretend play by 18 months",
-    "resources": "Cognitive development guides, play therapy resources",
-    "createdDate": "2025-07-01",
-    "modifiedDate": "2025-07-01"
+    "prerequisites": [
+      "months_6_12_cognitive_1"
+    ],
+    "skills": [
+      "Logic development"
+    ],
+    "observationTips": "Understand cause and effect",
+    "supportStrategies": "Interactive cause-effect toys",
+    "redFlags": "No understanding by 15 months",
+    "resources": "Cause-effect learning toys",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_12_18_social_emotional_1",
+    "title": "Separation anxiety",
+    "description": "Separation anxiety and attachment security",
+    "category": "social_emotional",
+    "ageRangeKey": "early_childhood_12_18",
+    "ageRange": "1 year - 1 year 6 months",
+    "startMonths": 12,
+    "endMonths": 18,
+    "period": "infancy",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_6_12_social_emotional_1"
+    ],
+    "skills": [
+      "Attachment security"
+    ],
+    "observationTips": "Show appropriate separation distress",
+    "supportStrategies": "Gradual separation practice",
+    "redFlags": "Extreme or no separation anxiety",
+    "resources": "Attachment development guides",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_12_18_language_1",
+    "title": "Vocabulary growth",
+    "description": "Vocabulary growth and word combinations",
+    "category": "language",
+    "ageRangeKey": "early_childhood_12_18",
+    "ageRange": "1 year - 1 year 6 months",
+    "startMonths": 12,
+    "endMonths": 18,
+    "period": "infancy",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_6_12_language_1"
+    ],
+    "skills": [
+      "Vocabulary expansion"
+    ],
+    "observationTips": "Use increasing number of words",
+    "supportStrategies": "Read together daily",
+    "redFlags": "Limited vocabulary growth",
+    "resources": "Vocabulary building activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_18_24_physical_1",
+    "title": "Crawling/creeping",
+    "description": "Crawling and early mobility development",
+    "category": "physical",
+    "ageRangeKey": "early_childhood_18_24",
+    "ageRange": "1 year 6 months - 2 years",
+    "startMonths": 18,
+    "endMonths": 24,
+    "period": "infancy",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_12_18_physical_1"
+    ],
+    "skills": [
+      "Mobility skills"
+    ],
+    "observationTips": "Crawl and explore",
+    "supportStrategies": "Safe crawling spaces",
+    "redFlags": "No crawling by 18 months",
+    "resources": "Crawling development support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_18_24_cognitive_1",
+    "title": "Simple problem solving",
+    "description": "Simple problem solving with toys and objects",
+    "category": "cognitive",
+    "ageRangeKey": "early_childhood_18_24",
+    "ageRange": "1 year 6 months - 2 years",
+    "startMonths": 18,
+    "endMonths": 24,
+    "period": "infancy",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_12_18_cognitive_1"
+    ],
+    "skills": [
+      "Problem solving"
+    ],
+    "observationTips": "Solve simple problems",
+    "supportStrategies": "Provide puzzles and challenges",
+    "redFlags": "No problem-solving attempts",
+    "resources": "Problem-solving toys",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_18_24_social_emotional_1",
+    "title": "Emotional expression",
+    "description": "Emotional expression and regulation development",
+    "category": "social_emotional",
+    "ageRangeKey": "early_childhood_18_24",
+    "ageRange": "1 year 6 months - 2 years",
+    "startMonths": 18,
+    "endMonths": 24,
+    "period": "infancy",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_12_18_social_emotional_1"
+    ],
+    "skills": [
+      "Emotional control"
+    ],
+    "observationTips": "Express basic emotions",
+    "supportStrategies": "Model emotional expression",
+    "redFlags": "Extreme emotional outbursts",
+    "resources": "Emotional development activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_18_24_language_1",
+    "title": "Two-word combinations",
+    "description": "Two-word combinations and phrases",
+    "category": "language",
+    "ageRangeKey": "early_childhood_18_24",
+    "ageRange": "1 year 6 months - 2 years",
+    "startMonths": 18,
+    "endMonths": 24,
+    "period": "infancy",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_12_18_language_1"
+    ],
+    "skills": [
+      "Phrase formation"
+    ],
+    "observationTips": "Combine words into phrases",
+    "supportStrategies": "Model two-word phrases",
+    "redFlags": "No word combinations by 24 months",
+    "resources": "Language combination practice",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_24_30_physical_1",
+    "title": "Standing with support",
+    "description": "Standing with support and balance development",
+    "category": "physical",
+    "ageRangeKey": "early_childhood_24_30",
+    "ageRange": "2 years - 2 years 6 months",
+    "startMonths": 24,
+    "endMonths": 30,
+    "period": "early_childhood",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_18_24_physical_1"
+    ],
+    "skills": [
+      "Standing balance"
+    ],
+    "observationTips": "Stand with assistance",
+    "supportStrategies": "Practice standing activities",
+    "redFlags": "No standing by 24 months",
+    "resources": "Standing development aids",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_24_30_cognitive_1",
+    "title": "Imitation of actions",
+    "description": "Imitation of actions and learning through copying",
+    "category": "cognitive",
+    "ageRangeKey": "early_childhood_24_30",
+    "ageRange": "2 years - 2 years 6 months",
+    "startMonths": 24,
+    "endMonths": 30,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_18_24_cognitive_1"
+    ],
+    "skills": [
+      "Imitative learning"
+    ],
+    "observationTips": "Copy actions and behaviors",
+    "supportStrategies": "Demonstrate activities",
+    "redFlags": "Limited imitation abilities",
+    "resources": "Imitation learning activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_24_30_social_emotional_1",
+    "title": "Empathy development",
+    "description": "Empathy development and caring behaviors",
+    "category": "social_emotional",
+    "ageRangeKey": "early_childhood_24_30",
+    "ageRange": "2 years - 2 years 6 months",
+    "startMonths": 24,
+    "endMonths": 30,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_18_24_social_emotional_1"
+    ],
+    "skills": [
+      "Empathetic response"
+    ],
+    "observationTips": "Show concern for others",
+    "supportStrategies": "Model and discuss empathy",
+    "redFlags": "Lack of empathy or concern",
+    "resources": "Empathy development activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_24_30_language_1",
+    "title": "Understanding simple commands",
+    "description": "Understanding and following simple commands",
+    "category": "language",
+    "ageRangeKey": "early_childhood_24_30",
+    "ageRange": "2 years - 2 years 6 months",
+    "startMonths": 24,
+    "endMonths": 30,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_18_24_language_1"
+    ],
+    "skills": [
+      "Command comprehension"
+    ],
+    "observationTips": "Follow simple instructions",
+    "supportStrategies": "Use clear simple commands",
+    "redFlags": "No command following",
+    "resources": "Language comprehension activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_30_36_physical_1",
+    "title": "Walking independently",
+    "description": "Walking independently and coordination",
+    "category": "physical",
+    "ageRangeKey": "early_childhood_30_36",
+    "ageRange": "2 years 6 months - 3 years",
+    "startMonths": 30,
+    "endMonths": 36,
+    "period": "early_childhood",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_24_30_physical_1"
+    ],
+    "skills": [
+      "Independent walking"
+    ],
+    "observationTips": "Walk without support",
+    "supportStrategies": "Encourage walking practice",
+    "redFlags": "No independent walking by 30 months",
+    "resources": "Walking development support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_30_36_cognitive_1",
+    "title": "Symbolic thinking begins",
+    "description": "Symbolic thinking and pretend play",
+    "category": "cognitive",
+    "ageRangeKey": "early_childhood_30_36",
+    "ageRange": "2 years 6 months - 3 years",
+    "startMonths": 30,
+    "endMonths": 36,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_24_30_cognitive_1"
+    ],
+    "skills": [
+      "Symbolic thought"
+    ],
+    "observationTips": "Engage in pretend play",
+    "supportStrategies": "Encourage imaginative play",
+    "redFlags": "No pretend play by 36 months",
+    "resources": "Pretend play materials",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_30_36_social_emotional_1",
+    "title": "Self-awareness begins",
+    "description": "Self-awareness and identity development",
+    "category": "social_emotional",
+    "ageRangeKey": "early_childhood_30_36",
+    "ageRange": "2 years 6 months - 3 years",
+    "startMonths": 30,
+    "endMonths": 36,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_24_30_social_emotional_1"
+    ],
+    "skills": [
+      "Self-recognition"
+    ],
+    "observationTips": "Recognize self in mirror",
+    "supportStrategies": "Self-awareness activities",
+    "redFlags": "No self-recognition",
+    "resources": "Identity development support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_30_36_language_1",
+    "title": "Gesture communication",
+    "description": "Gesture communication and non-verbal expression",
+    "category": "language",
+    "ageRangeKey": "early_childhood_30_36",
+    "ageRange": "2 years 6 months - 3 years",
+    "startMonths": 30,
+    "endMonths": 36,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_24_30_language_1"
+    ],
+    "skills": [
+      "Gesture use"
+    ],
+    "observationTips": "Use gestures to communicate",
+    "supportStrategies": "Encourage gesture communication",
+    "redFlags": "Limited gesture use",
+    "resources": "Gesture development activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_36_42_physical_1",
+    "title": "Running and jumping",
+    "description": "Running and jumping development",
+    "category": "physical",
+    "ageRangeKey": "preschool_36_42",
+    "ageRange": "3 years - 3 years 6 months",
+    "startMonths": 36,
+    "endMonths": 42,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_30_36_physical_1"
+    ],
+    "skills": [
+      "Advanced mobility"
+    ],
+    "observationTips": "Run and jump with coordination",
+    "supportStrategies": "Active play opportunities",
+    "redFlags": "Poor coordination in running",
+    "resources": "Gross motor activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_36_42_cognitive_1",
+    "title": "Memory development",
+    "description": "Memory development and recall abilities",
+    "category": "cognitive",
+    "ageRangeKey": "preschool_36_42",
+    "ageRange": "3 years - 3 years 6 months",
+    "startMonths": 36,
+    "endMonths": 42,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_30_36_cognitive_1"
+    ],
+    "skills": [
+      "Memory skills"
+    ],
+    "observationTips": "Remember familiar people and places",
+    "supportStrategies": "Memory games and repetition",
+    "redFlags": "Poor memory recall",
+    "resources": "Memory enhancement activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_36_42_social_emotional_1",
+    "title": "Peer interest",
+    "description": "Peer interest and early social interaction",
+    "category": "social_emotional",
+    "ageRangeKey": "preschool_36_42",
+    "ageRange": "3 years - 3 years 6 months",
+    "startMonths": 36,
+    "endMonths": 42,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_30_36_social_emotional_1"
+    ],
+    "skills": [
+      "Social engagement"
+    ],
+    "observationTips": "Show interest in other children",
+    "supportStrategies": "Arrange playdates",
+    "redFlags": "No interest in peers",
+    "resources": "Social skill development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_36_42_language_1",
+    "title": "Story comprehension",
+    "description": "Story comprehension and narrative understanding",
+    "category": "language",
+    "ageRangeKey": "preschool_36_42",
+    "ageRange": "3 years - 3 years 6 months",
+    "startMonths": 36,
+    "endMonths": 42,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_30_36_language_1"
+    ],
+    "skills": [
+      "Narrative understanding"
+    ],
+    "observationTips": "Understand simple stories",
+    "supportStrategies": "Read stories together",
+    "redFlags": "No story comprehension",
+    "resources": "Story comprehension activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_42_48_physical_1",
+    "title": "Climbing up stairs",
+    "description": "Climbing up stairs and advanced coordination",
+    "category": "physical",
+    "ageRangeKey": "preschool_42_48",
+    "ageRange": "3 years 6 months - 4 years",
+    "startMonths": 42,
+    "endMonths": 48,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_36_42_physical_1"
+    ],
+    "skills": [
+      "Stair climbing"
+    ],
+    "observationTips": "Climb stairs independently",
+    "supportStrategies": "Stair climbing practice",
+    "redFlags": "Fear or inability to climb",
+    "resources": "Climbing development support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_42_48_cognitive_1",
+    "title": "Attention span increases",
+    "description": "Attention span increases and focus development",
+    "category": "cognitive",
+    "ageRangeKey": "preschool_42_48",
+    "ageRange": "3 years 6 months - 4 years",
+    "startMonths": 42,
+    "endMonths": 48,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_36_42_cognitive_1"
+    ],
+    "skills": [
+      "Sustained attention"
+    ],
+    "observationTips": "Focus on activities longer",
+    "supportStrategies": "Structured activities",
+    "redFlags": "Very short attention span",
+    "resources": "Attention development strategies",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_42_48_social_emotional_1",
+    "title": "Question asking begins",
+    "description": "Question asking and curiosity expression",
+    "category": "social_emotional",
+    "ageRangeKey": "preschool_42_48",
+    "ageRange": "3 years 6 months - 4 years",
+    "startMonths": 42,
+    "endMonths": 48,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_36_42_social_emotional_1"
+    ],
+    "skills": [
+      "Curiosity expression"
+    ],
+    "observationTips": "Ask questions about the world",
+    "supportStrategies": "Answer questions patiently",
+    "redFlags": "No questioning behavior",
+    "resources": "Curiosity encouragement",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_42_48_language_1",
+    "title": "Question asking begins",
+    "description": "Asking questions and showing curiosity",
+    "category": "language",
+    "ageRangeKey": "preschool_42_48",
+    "ageRange": "3 years 6 months - 4 years",
+    "startMonths": 42,
+    "endMonths": 48,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_36_42_language_1"
+    ],
+    "skills": [
+      "Question formation"
+    ],
+    "observationTips": "Ask why and how questions",
+    "supportStrategies": "Encourage and answer questions",
+    "redFlags": "No questioning behavior",
+    "resources": "Question encouragement strategies",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_48_54_physical_1",
+    "title": "Pedaling tricycle",
+    "description": "Pedaling tricycle and coordinated movement",
+    "category": "physical",
+    "ageRangeKey": "preschool_48_54",
+    "ageRange": "4 years - 4 years 6 months",
+    "startMonths": 48,
+    "endMonths": 54,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_42_48_physical_1"
+    ],
+    "skills": [
+      "Pedaling coordination"
+    ],
+    "observationTips": "Pedal tricycle or bike",
+    "supportStrategies": "Provide riding opportunities",
+    "redFlags": "Inability to pedal",
+    "resources": "Bike riding development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_48_54_cognitive_1",
+    "title": "Learning through play",
+    "description": "Learning through play and exploration",
+    "category": "cognitive",
+    "ageRangeKey": "preschool_48_54",
+    "ageRange": "4 years - 4 years 6 months",
+    "startMonths": 48,
+    "endMonths": 54,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_42_48_cognitive_1"
+    ],
+    "skills": [
+      "Play-based learning"
+    ],
+    "observationTips": "Learn concepts through play",
+    "supportStrategies": "Educational play activities",
+    "redFlags": "Limited learning through play",
+    "resources": "Educational toys and games",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_48_54_social_emotional_1",
+    "title": "Self-control",
+    "description": "Self-control and emotional regulation",
+    "category": "social_emotional",
+    "ageRangeKey": "preschool_48_54",
+    "ageRange": "4 years - 4 years 6 months",
+    "startMonths": 48,
+    "endMonths": 54,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_42_48_social_emotional_1"
+    ],
+    "skills": [
+      "Self-regulation"
+    ],
+    "observationTips": "Control impulses and emotions",
+    "supportStrategies": "Emotional regulation strategies",
+    "redFlags": "Poor self-control",
+    "resources": "Self-regulation activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_48_54_language_1",
+    "title": "Vocabulary expansion",
+    "description": "Vocabulary expansion and complex language",
+    "category": "language",
+    "ageRangeKey": "preschool_48_54",
+    "ageRange": "4 years - 4 years 6 months",
+    "startMonths": 48,
+    "endMonths": 54,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_42_48_language_1"
+    ],
+    "skills": [
+      "Language growth"
+    ],
+    "observationTips": "Use varied vocabulary",
+    "supportStrategies": "Rich language exposure",
+    "redFlags": "Limited vocabulary",
+    "resources": "Vocabulary building activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_54_60_physical_1",
+    "title": "Throwing and catching",
+    "description": "Throwing and catching development",
+    "category": "physical",
+    "ageRangeKey": "preschool_54_60",
+    "ageRange": "4 years 6 months - 5 years",
+    "startMonths": 54,
+    "endMonths": 60,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_48_54_physical_1"
+    ],
+    "skills": [
+      "Ball skills"
+    ],
+    "observationTips": "Throw and catch balls",
+    "supportStrategies": "Ball play activities",
+    "redFlags": "Poor ball handling",
+    "resources": "Ball skill development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_54_60_cognitive_1",
+    "title": "Problem-solving strategies",
+    "description": "Problem-solving strategies development",
+    "category": "cognitive",
+    "ageRangeKey": "preschool_54_60",
+    "ageRange": "4 years 6 months - 5 years",
+    "startMonths": 54,
+    "endMonths": 60,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_48_54_cognitive_1"
+    ],
+    "skills": [
+      "Strategic thinking"
+    ],
+    "observationTips": "Use strategies to solve problems",
+    "supportStrategies": "Provide challenging puzzles",
+    "redFlags": "No problem-solving strategies",
+    "resources": "Problem-solving skill building",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_54_60_social_emotional_1",
+    "title": "Emotional intelligence",
+    "description": "Emotional intelligence and understanding",
+    "category": "social_emotional",
+    "ageRangeKey": "preschool_54_60",
+    "ageRange": "4 years 6 months - 5 years",
+    "startMonths": 54,
+    "endMonths": 60,
+    "period": "early_childhood",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_48_54_social_emotional_1"
+    ],
+    "skills": [
+      "Emotional understanding"
+    ],
+    "observationTips": "Understand and express emotions",
+    "supportStrategies": "Emotion coaching",
+    "redFlags": "Limited emotional awareness",
+    "resources": "Emotional intelligence activities",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "months_54_60_language_1",
+    "title": "Narrative skills",
+    "description": "Narrative skills and storytelling",
+    "category": "language",
+    "ageRangeKey": "preschool_54_60",
+    "ageRange": "4 years 6 months - 5 years",
+    "startMonths": 54,
+    "endMonths": 60,
+    "period": "early_childhood",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_48_54_language_1"
+    ],
+    "skills": [
+      "Storytelling ability"
+    ],
+    "observationTips": "Tell coherent stories",
+    "supportStrategies": "Storytelling practice",
+    "redFlags": "Poor narrative skills",
+    "resources": "Storytelling development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_5_6_physical_1",
+    "title": "Balance beam walking",
+    "description": "Balance beam walking and coordination",
+    "category": "physical",
+    "ageRangeKey": "school_age_60_72",
+    "ageRange": "5-6 years",
+    "startMonths": 60,
+    "endMonths": 72,
+    "period": "schoolAge",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "months_54_60_physical_1"
+    ],
+    "skills": [
+      "Balance skills"
+    ],
+    "observationTips": "Walk on balance beam",
+    "supportStrategies": "Balance activities",
+    "redFlags": "Poor balance",
+    "resources": "Balance development exercises",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_5_6_cognitive_1",
+    "title": "Academic readiness",
+    "description": "Academic readiness and learning skills",
+    "category": "cognitive",
+    "ageRangeKey": "school_age_60_72",
+    "ageRange": "5-6 years",
+    "startMonths": 60,
+    "endMonths": 72,
+    "period": "schoolAge",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "months_54_60_cognitive_1"
+    ],
+    "skills": [
+      "Learning readiness"
+    ],
+    "observationTips": "Show readiness for formal learning",
+    "supportStrategies": "School preparation activities",
+    "redFlags": "Lack of academic readiness",
+    "resources": "School readiness programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_5_6_social_emotional_1",
+    "title": "Achievement motivation",
+    "description": "Achievement motivation and goal setting",
+    "category": "social_emotional",
+    "ageRangeKey": "school_age_60_72",
+    "ageRange": "5-6 years",
+    "startMonths": 60,
+    "endMonths": 72,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_54_60_social_emotional_1"
+    ],
+    "skills": [
+      "Goal orientation"
+    ],
+    "observationTips": "Set and work toward goals",
+    "supportStrategies": "Goal-setting activities",
+    "redFlags": "Lack of motivation",
+    "resources": "Motivation building strategies",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_5_6_language_1",
+    "title": "Grammar mastery",
+    "description": "Grammar mastery and complex sentence structure",
+    "category": "language",
+    "ageRangeKey": "school_age_60_72",
+    "ageRange": "5-6 years",
+    "startMonths": 60,
+    "endMonths": 72,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "months_54_60_language_1"
+    ],
+    "skills": [
+      "Grammar skills"
+    ],
+    "observationTips": "Use correct grammar",
+    "supportStrategies": "Grammar practice activities",
+    "redFlags": "Poor grammar use",
+    "resources": "Grammar development resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_6_7_physical_1",
+    "title": "Fine motor precision",
+    "description": "Fine motor precision and tool use",
+    "category": "physical",
+    "ageRangeKey": "school_age_72_84",
+    "ageRange": "6-7 years",
+    "startMonths": 72,
+    "endMonths": 84,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_5_6_physical_1"
+    ],
+    "skills": [
+      "Precision skills"
+    ],
+    "observationTips": "Use tools with precision",
+    "supportStrategies": "Fine motor activities",
+    "redFlags": "Poor fine motor control",
+    "resources": "Fine motor development tools",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_6_7_cognitive_1",
+    "title": "Critical thinking",
+    "description": "Critical thinking and analysis",
+    "category": "cognitive",
+    "ageRangeKey": "school_age_72_84",
+    "ageRange": "6-7 years",
+    "startMonths": 72,
+    "endMonths": 84,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_5_6_cognitive_1"
+    ],
+    "skills": [
+      "Analytical skills"
+    ],
+    "observationTips": "Think critically about problems",
+    "supportStrategies": "Critical thinking exercises",
+    "redFlags": "Limited analytical thinking",
+    "resources": "Critical thinking development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_6_7_social_emotional_1",
+    "title": "Social skills",
+    "description": "Social skills and peer interaction",
+    "category": "social_emotional",
+    "ageRangeKey": "school_age_72_84",
+    "ageRange": "6-7 years",
+    "startMonths": 72,
+    "endMonths": 84,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_5_6_social_emotional_1"
+    ],
+    "skills": [
+      "Peer relationships"
+    ],
+    "observationTips": "Interact well with peers",
+    "supportStrategies": "Social skills practice",
+    "redFlags": "Difficulty with social interaction",
+    "resources": "Social skills programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_6_7_language_1",
+    "title": "Reading fluency",
+    "description": "Reading fluency and comprehension",
+    "category": "language",
+    "ageRangeKey": "school_age_72_84",
+    "ageRange": "6-7 years",
+    "startMonths": 72,
+    "endMonths": 84,
+    "period": "schoolAge",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "year_5_6_language_1"
+    ],
+    "skills": [
+      "Reading skills"
+    ],
+    "observationTips": "Read fluently with comprehension",
+    "supportStrategies": "Reading practice",
+    "redFlags": "Poor reading skills",
+    "resources": "Reading development programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_7_8_physical_1",
+    "title": "Sports participation",
+    "description": "Sports participation and athletic skills",
+    "category": "physical",
+    "ageRangeKey": "school_age_84_96",
+    "ageRange": "7-8 years",
+    "startMonths": 84,
+    "endMonths": 96,
+    "period": "schoolAge",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "year_6_7_physical_1"
+    ],
+    "skills": [
+      "Athletic abilities"
+    ],
+    "observationTips": "Participate in sports",
+    "supportStrategies": "Sports opportunities",
+    "redFlags": "Lack of interest in physical activity",
+    "resources": "Sports programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_7_8_cognitive_1",
+    "title": "Study strategies",
+    "description": "Study strategies and learning methods",
+    "category": "cognitive",
+    "ageRangeKey": "school_age_84_96",
+    "ageRange": "7-8 years",
+    "startMonths": 84,
+    "endMonths": 96,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_6_7_cognitive_1"
+    ],
+    "skills": [
+      "Study skills"
+    ],
+    "observationTips": "Use effective study methods",
+    "supportStrategies": "Study skills training",
+    "redFlags": "Poor study habits",
+    "resources": "Study skills development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_7_8_social_emotional_1",
+    "title": "Emotional maturity",
+    "description": "Emotional maturity and self-regulation",
+    "category": "social_emotional",
+    "ageRangeKey": "school_age_84_96",
+    "ageRange": "7-8 years",
+    "startMonths": 84,
+    "endMonths": 96,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_6_7_social_emotional_1"
+    ],
+    "skills": [
+      "Emotional development"
+    ],
+    "observationTips": "Show age-appropriate emotional control",
+    "supportStrategies": "Emotional development activities",
+    "redFlags": "Emotional immaturity",
+    "resources": "Emotional maturity support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "year_7_8_language_1",
+    "title": "Communication skills",
+    "description": "Communication skills and expression",
+    "category": "language",
+    "ageRangeKey": "school_age_84_96",
+    "ageRange": "7-8 years",
+    "startMonths": 84,
+    "endMonths": 96,
+    "period": "schoolAge",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "year_6_7_language_1"
+    ],
+    "skills": [
+      "Communication ability"
+    ],
+    "observationTips": "Communicate effectively",
+    "supportStrategies": "Communication practice",
+    "redFlags": "Poor communication skills",
+    "resources": "Communication development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "puberty",
+    "title": "Puberty Onset",
+    "description": "The beginning of puberty marked by hormonal changes and sexual maturation",
+    "category": "physical",
+    "ageRangeKey": "puberty_onset",
+    "ageRange": "11-13 years (onset)",
+    "startMonths": 132,
+    "endMonths": 156,
+    "period": "puberty",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "years_10_12_physical_1"
+    ],
+    "skills": [
+      "Sexual maturation",
+      "Hormonal development",
+      "Growth spurts",
+      "Secondary sexual characteristics"
+    ],
+    "observationTips": "Monitor physical development, emotional changes, and growth patterns",
+    "supportStrategies": "Education about puberty, emotional support, proper nutrition",
+    "redFlags": "Extremely early or delayed puberty, severe emotional distress",
+    "resources": "Puberty education materials, healthcare guidance",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_12_14_physical_1",
+    "title": "Athletic peak",
+    "description": "Athletic peak and physical performance",
+    "category": "physical",
+    "ageRangeKey": "adolescence_144_168",
+    "ageRange": "12-14 years",
+    "startMonths": 144,
+    "endMonths": 168,
+    "period": "adolescence",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Athletic performance"
+    ],
+    "observationTips": "Develop athletic abilities",
+    "supportStrategies": "Sports training",
+    "redFlags": "Physical performance issues",
+    "resources": "Athletic development programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_12_14_cognitive_1",
+    "title": "Abstract reasoning",
+    "description": "Abstract reasoning and complex thinking",
+    "category": "cognitive",
+    "ageRangeKey": "adolescence_144_168",
+    "ageRange": "12-14 years",
+    "startMonths": 144,
+    "endMonths": 168,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Abstract thinking"
+    ],
+    "observationTips": "Think abstractly about concepts",
+    "supportStrategies": "Abstract reasoning activities",
+    "redFlags": "Concrete thinking only",
+    "resources": "Abstract thinking development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_12_14_social_emotional_1",
+    "title": "Identity development",
+    "description": "Identity development and self-discovery",
+    "category": "social_emotional",
+    "ageRangeKey": "adolescence_144_168",
+    "ageRange": "12-14 years",
+    "startMonths": 144,
+    "endMonths": 168,
+    "period": "adolescence",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Identity formation"
+    ],
+    "observationTips": "Explore personal identity",
+    "supportStrategies": "Identity exploration support",
+    "redFlags": "Identity confusion",
+    "resources": "Identity development resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_12_14_language_1",
+    "title": "Advanced communication",
+    "description": "Advanced communication and expression",
+    "category": "language",
+    "ageRangeKey": "adolescence_144_168",
+    "ageRange": "12-14 years",
+    "startMonths": 144,
+    "endMonths": 168,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [],
+    "skills": [
+      "Communication mastery"
+    ],
+    "observationTips": "Communicate complex ideas",
+    "supportStrategies": "Advanced communication practice",
+    "redFlags": "Communication difficulties",
+    "resources": "Communication skill enhancement",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_14_16_physical_1",
+    "title": "Body image acceptance",
+    "description": "Body image acceptance and health awareness",
+    "category": "physical",
+    "ageRangeKey": "adolescence_168_192",
+    "ageRange": "14-16 years",
+    "startMonths": 168,
+    "endMonths": 192,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_12_14_physical_1"
+    ],
+    "skills": [
+      "Body awareness"
+    ],
+    "observationTips": "Develop healthy body image",
+    "supportStrategies": "Body positivity education",
+    "redFlags": "Body image issues",
+    "resources": "Body image support resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_14_16_cognitive_1",
+    "title": "Future planning",
+    "description": "Future planning and goal setting",
+    "category": "cognitive",
+    "ageRangeKey": "adolescence_168_192",
+    "ageRange": "14-16 years",
+    "startMonths": 168,
+    "endMonths": 192,
+    "period": "adolescence",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_12_14_cognitive_1"
+    ],
+    "skills": [
+      "Planning skills"
+    ],
+    "observationTips": "Plan for future goals",
+    "supportStrategies": "Goal-setting activities",
+    "redFlags": "Lack of future planning",
+    "resources": "Future planning resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_14_16_social_emotional_1",
+    "title": "Adult relationships",
+    "description": "Adult relationships and mature interaction",
+    "category": "social_emotional",
+    "ageRangeKey": "adolescence_168_192",
+    "ageRange": "14-16 years",
+    "startMonths": 168,
+    "endMonths": 192,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_12_14_social_emotional_1"
+    ],
+    "skills": [
+      "Relationship skills"
+    ],
+    "observationTips": "Develop mature relationships",
+    "supportStrategies": "Relationship guidance",
+    "redFlags": "Relationship difficulties",
+    "resources": "Relationship development support",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_14_16_language_1",
+    "title": "Lifelong learning",
+    "description": "Lifelong learning and continued education",
+    "category": "language",
+    "ageRangeKey": "adolescence_168_192",
+    "ageRange": "14-16 years",
+    "startMonths": 168,
+    "endMonths": 192,
+    "period": "adolescence",
+    "importance": "medium",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_12_14_language_1"
+    ],
+    "skills": [
+      "Learning commitment"
+    ],
+    "observationTips": "Commit to ongoing learning",
+    "supportStrategies": "Learning opportunities",
+    "redFlags": "Resistance to learning",
+    "resources": "Lifelong learning encouragement",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_16_18_physical_1",
+    "title": "Physical independence",
+    "description": "Physical independence and self-care mastery",
+    "category": "physical",
+    "ageRangeKey": "adolescence_192_216",
+    "ageRange": "16-18 years",
+    "startMonths": 192,
+    "endMonths": 216,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_14_16_physical_1"
+    ],
+    "skills": [
+      "Independence"
+    ],
+    "observationTips": "Manage physical needs independently",
+    "supportStrategies": "Independence training",
+    "redFlags": "Dependence on others",
+    "resources": "Independence development",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_16_18_cognitive_1",
+    "title": "Life skills mastery",
+    "description": "Life skills mastery and practical application",
+    "category": "cognitive",
+    "ageRangeKey": "adolescence_192_216",
+    "ageRange": "16-18 years",
+    "startMonths": 192,
+    "endMonths": 216,
+    "period": "adolescence",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_14_16_cognitive_1"
+    ],
+    "skills": [
+      "Life management"
+    ],
+    "observationTips": "Apply life skills effectively",
+    "supportStrategies": "Life skills training",
+    "redFlags": "Poor life skills",
+    "resources": "Life skills development programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_16_18_social_emotional_1",
+    "title": "Social responsibility",
+    "description": "Social responsibility and community engagement",
+    "category": "social_emotional",
+    "ageRangeKey": "adolescence_192_216",
+    "ageRange": "16-18 years",
+    "startMonths": 192,
+    "endMonths": 216,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_14_16_social_emotional_1"
+    ],
+    "skills": [
+      "Social awareness"
+    ],
+    "observationTips": "Show social responsibility",
+    "supportStrategies": "Community involvement",
+    "redFlags": "Lack of social responsibility",
+    "resources": "Community engagement programs",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "teen_16_18_language_1",
+    "title": "Professional communication",
+    "description": "Professional communication and workplace skills",
+    "category": "language",
+    "ageRangeKey": "adolescence_192_216",
+    "ageRange": "16-18 years",
+    "startMonths": 192,
+    "endMonths": 216,
+    "period": "adolescence",
+    "importance": "high",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_14_16_language_1"
+    ],
+    "skills": [
+      "Professional skills"
+    ],
+    "observationTips": "Communicate professionally",
+    "supportStrategies": "Professional communication training",
+    "redFlags": "Poor professional communication",
+    "resources": "Professional development resources",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "legal_adult",
+    "title": "Legal Adulthood",
+    "description": "Reaching the age of legal majority with full adult rights and responsibilities",
+    "category": "social_emotional",
+    "ageRangeKey": "legal_adulthood",
+    "ageRange": "18 years",
+    "startMonths": 216,
+    "endMonths": 216,
+    "period": "adulthood",
+    "importance": "critical",
+    "isTypical": true,
+    "prerequisites": [
+      "teen_16_18_social_emotional_1",
+      "teen_16_18_cognitive_1"
+    ],
+    "skills": [
+      "Legal responsibility",
+      "Independent decision making",
+      "Full citizenship rights",
+      "Financial independence",
+      "Adult relationships"
+    ],
+    "observationTips": "Assess readiness for adult responsibilities and independence",
+    "supportStrategies": "Life skills education, financial literacy, independence training",
+    "redFlags": "Inability to make independent decisions, lack of life skills",
+    "resources": "Adult transition programs, life skills resources, legal education",
+    "createdDate": "2024-01-01T00:00:00Z",
+    "modifiedDate": "2024-01-01T00:00:00Z"
   }
 ]
