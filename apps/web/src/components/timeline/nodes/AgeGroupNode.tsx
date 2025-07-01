@@ -18,7 +18,7 @@ export const AgeGroupNode = ({ data }: { data: any }) => {
         type="target"
         position={Position.Top}
         id="top"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually but keep functional
           top: -5, // Position slightly outside the node
         }}
@@ -27,18 +27,18 @@ export const AgeGroupNode = ({ data }: { data: any }) => {
         type="source"
         position={Position.Bottom}
         id="bottom"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually but keep functional
           bottom: -5, // Position slightly outside the node
         }}
       />
-      
+
       {/* Add side handles for milestone connections */}
       <Handle
         type="source"
         position={Position.Left}
         id="left"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           left: -5,
         }}
@@ -47,7 +47,7 @@ export const AgeGroupNode = ({ data }: { data: any }) => {
         type="source"
         position={Position.Right}
         id="right"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           right: -5,
         }}

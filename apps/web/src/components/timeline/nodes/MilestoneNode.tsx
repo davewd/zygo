@@ -1,5 +1,5 @@
-import { Users } from 'lucide-react';
 import { Handle, Position } from '@xyflow/react';
+import { Users } from 'lucide-react';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLORS } from '../constants';
 import { DevelopmentCategory, MilestoneStatus } from '../types';
 
@@ -34,7 +34,7 @@ export const MilestoneNode = ({ data }: { data: any }) => {
         type="target"
         position={Position.Top}
         id="top"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           top: -5,
         }}
@@ -43,7 +43,7 @@ export const MilestoneNode = ({ data }: { data: any }) => {
         type="source"
         position={Position.Bottom}
         id="bottom"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           bottom: -5,
         }}
@@ -52,7 +52,7 @@ export const MilestoneNode = ({ data }: { data: any }) => {
         type="target"
         position={Position.Left}
         id="left"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           left: -5,
         }}
@@ -61,7 +61,7 @@ export const MilestoneNode = ({ data }: { data: any }) => {
         type="source"
         position={Position.Right}
         id="right"
-        style={{ 
+        style={{
           opacity: 0, // Hide the handle visually
           right: -5,
         }}

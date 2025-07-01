@@ -10,7 +10,7 @@
     "inProgress": true
   },
   {
-    "id": "step-2", 
+    "id": "step-2",
     "title": "Controlled Finger Movement",
     "description": "Beginning to control individual finger movements",
     "achievementId": "achievement-1",
@@ -23,7 +23,7 @@
     "id": "step-3",
     "title": "Object Reaching",
     "description": "Attempting to reach for nearby objects",
-    "achievementId": "achievement-1", 
+    "achievementId": "achievement-1",
     "achievementTitle": "Early Motor Coordination",
     "duration": "3-4 weeks",
     "completed": false,
@@ -44,7 +44,7 @@
     "title": "Facial Expression Mimicking",
     "description": "Starting to mirror simple facial expressions",
     "achievementId": "achievement-2",
-    "achievementTitle": "First Social Responses", 
+    "achievementTitle": "First Social Responses",
     "duration": "2-3 weeks",
     "completed": false,
     "inProgress": true
@@ -65,7 +65,7 @@
     "description": "Beginning to recognize primary caregivers",
     "achievementId": "achievement-2",
     "achievementTitle": "First Social Responses",
-    "duration": "4-6 weeks", 
+    "duration": "4-6 weeks",
     "completed": false,
     "inProgress": false
   }

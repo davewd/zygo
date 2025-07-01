@@ -29,37 +29,19 @@ export const StepNode = ({ data }: StepNodeProps) => {
 
   return (
     <div
-      className={`p-3 rounded-md border shadow-sm min-w-48 max-w-64 bg-gradient-to-r ${getStepColor(status)} transform-gpu pointer-events-auto`}
+      className={`p-3 rounded-md border shadow-sm min-w-48 max-w-64 bg-gradient-to-r ${getStepColor(
+        status
+      )} transform-gpu pointer-events-auto`}
       style={{
         zIndex: 12,
         cursor: 'default',
       }}
     >
       {/* Add handles for edge connections */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="left"
-        style={{ opacity: 0 }}
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="right"
-        style={{ opacity: 0 }}
-      />
-      <Handle
-        type="target"
-        position={Position.Top}
-        id="top"
-        style={{ opacity: 0 }}
-      />
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="bottom"
-        style={{ opacity: 0 }}
-      />
+      <Handle type="target" position={Position.Left} id="left" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Right} id="right" style={{ opacity: 0 }} />
+      <Handle type="target" position={Position.Top} id="top" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Bottom} id="bottom" style={{ opacity: 0 }} />
 
       <div className="flex items-start space-x-2">
         {status === 'completed' ? (
@@ -67,13 +49,13 @@ export const StepNode = ({ data }: StepNodeProps) => {
         ) : (
           <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
         )}
-        
+
         <div className="flex-1">
           <h5 className="font-medium text-xs mb-1">{data.title}</h5>
           {data.description && (
             <p className="text-xs opacity-80 leading-relaxed">{data.description}</p>
           )}
-          
+
           {data.duration && (
             <div className="text-xs opacity-70 mt-1">
               <span className="font-medium">Duration:</span> {data.duration}
@@ -81,9 +63,7 @@ export const StepNode = ({ data }: StepNodeProps) => {
           )}
 
           {data.achievementId && (
-            <div className="text-xs opacity-60 mt-1">
-              Part of: {data.achievementTitle}
-            </div>
+            <div className="text-xs opacity-60 mt-1">Part of: {data.achievementTitle}</div>
           )}
         </div>
       </div>

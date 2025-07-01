@@ -18,6 +18,14 @@ import {
   TimelineEdge,
   TimelineNode
 } from '../types';
+
+/**
+ * Z-Index Layer System:
+ * - Layer 1 (z-index: 1): Age ranges and their edges (bottom layer)
+ * - Layer 2 (z-index: 2): Steps and their edges
+ * - Layer 3 (z-index: 3): Achievements and their edges  
+ * - Layer 4 (z-index: 4): Milestones, conception, and their edges (top layer)
+ */
 import { calculateNodePositions } from '../utils/layoutCalculation';
 
 interface UseTimelineDataProps {
@@ -151,6 +159,9 @@ export const useTimelineData = ({
         },
         position: { x: 0, y: 0 },
         draggable: false,
+        style: {
+          zIndex: 4, // Top layer - same as milestones
+        },
       });
     }
 
@@ -180,6 +191,9 @@ export const useTimelineData = ({
           },
           position: { x: 0, y: 0 },
           draggable: false,
+          style: {
+            zIndex: 1, // Bottom layer - age ranges
+          },
         });
 
         // Connect age groups with timeline flow
@@ -200,6 +214,7 @@ export const useTimelineData = ({
                 stroke: '#6b7280',
                 strokeWidth: 3,
                 strokeDasharray: '10,5',
+                zIndex: 1, // Bottom layer - age range edges
               },
               markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
             });
@@ -275,6 +290,9 @@ export const useTimelineData = ({
                 months: milestone.months,
               },
               position: { x: 0, y: 0 },
+              style: {
+                zIndex: 4, // Top layer - milestones
+              },
             });
 
             // Add prerequisite edges between milestones (only if valid prerequisite exists)
@@ -306,6 +324,7 @@ export const useTimelineData = ({
                     strokeWidth: 2,
                     strokeDasharray: '8,4',
                     opacity: 0.7,
+                    zIndex: 4, // Top layer - milestone edges
                   },
                   markerEnd: {
                     type: MarkerType.ArrowClosed,
@@ -338,6 +357,9 @@ export const useTimelineData = ({
           },
           position: { x: 0, y: 0 },
           draggable: false,
+          style: {
+            zIndex: 3, // Third layer - achievements (below milestones, above steps)
+          },
         });
 
         // Connect achievements to related milestones
@@ -356,6 +378,7 @@ export const useTimelineData = ({
               stroke: '#f59e0b', // Amber for achievements
               strokeWidth: 2,
               opacity: 0.8,
+              zIndex: 3, // Third layer - achievement edges
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,
@@ -385,6 +408,9 @@ export const useTimelineData = ({
           },
           position: { x: 0, y: 0 },
           draggable: false,
+          style: {
+            zIndex: 2, // Second layer - steps (above age ranges, below achievements)
+          },
         });
 
         // Connect steps to their achievements
@@ -401,6 +427,7 @@ export const useTimelineData = ({
               stroke: '#10b981', // Emerald for steps
               strokeWidth: 1.5,
               opacity: 0.7,
+              zIndex: 2, // Second layer - step edges
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,
@@ -433,6 +460,7 @@ export const useTimelineData = ({
               stroke: '#8b5cf6', // Purple for conception connections
               strokeWidth: 3,
               opacity: 0.9,
+              zIndex: 4, // Top layer - conception edges
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,

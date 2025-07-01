@@ -1,8 +1,8 @@
+import { AchievementNode } from './AchievementNode';
 import { AgeGroupNode } from './AgeGroupNode';
 import { CategoryNode } from './CategoryNode';
-import { MilestoneNode } from './MilestoneNode';
 import { ConceptionNode } from './ConceptionNode';
-import { AchievementNode } from './AchievementNode';
+import { MilestoneNode } from './MilestoneNode';
 import { StepNode } from './StepNode';
 
 export const nodeTypes = {
@@ -14,5 +14,5 @@ export const nodeTypes = {
   step: StepNode,
 };
 
-export { AgeGroupNode, CategoryNode, MilestoneNode, ConceptionNode, AchievementNode, StepNode };
+export { AchievementNode, AgeGroupNode, CategoryNode, ConceptionNode, MilestoneNode, StepNode };
 

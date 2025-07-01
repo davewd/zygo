@@ -21,18 +21,8 @@ export const ConceptionNode = ({ data }: ConceptionNodeProps) => {
         id="bottom"
         style={{ opacity: 0 }} // Hide the handle visually
       />
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="right"
-        style={{ opacity: 0 }}
-      />
-      <Handle
-        type="source"
-        position={Position.Left}
-        id="left"
-        style={{ opacity: 0 }}
-      />
+      <Handle type="source" position={Position.Right} id="right" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Left} id="left" style={{ opacity: 0 }} />
 
       <div className="flex flex-col items-center text-center">
         <Sparkles className="w-8 h-8 text-purple-600 mb-3" />
@@ -40,9 +30,7 @@ export const ConceptionNode = ({ data }: ConceptionNodeProps) => {
         {data.description && (
           <p className="text-sm text-purple-600 opacity-90">{data.description}</p>
         )}
-        {data.date && (
-          <div className="text-xs text-purple-500 mt-2 font-medium">{data.date}</div>
-        )}
+        {data.date && <div className="text-xs text-purple-500 mt-2 font-medium">{data.date}</div>}
       </div>
     </div>
   );

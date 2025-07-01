@@ -10,7 +10,6 @@ import {
 } from '@xyflow/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { nodeTypes } from './nodes';
-import { TimelineControlPanel } from './panels/TimelineControlPanel';
 import { TimelineFilterPanel } from './panels/TimelineFilterPanel';
 
 export const ReactFlowTimeline = ({
