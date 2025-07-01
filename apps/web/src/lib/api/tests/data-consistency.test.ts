@@ -208,13 +208,35 @@ describe('Data Consistency Tests', () => {
     
     test('Community profiles following providers should reference valid providers', () => {
       const providerIds = new Set(providersData.serviceProviders.map(p => p.id));
+      const invalidReferences: Array<{profileId: string, profileName: string, invalidProviderId: string}> = [];
       
+      // First, collect all invalid references
+      communityData.primaryConsumers.forEach(profile => {
+        profile.followedProviders.forEach(followedProvider => {
+          if (!providerIds.has(followedProvider.providerId)) {
+            invalidReferences.push({
+              profileId: profile.id,
+              profileName: `${profile.firstName} ${profile.lastName}`,
+              invalidProviderId: followedProvider.providerId
+            });
+          }
+        });
+      });
+      
+      // Display detailed failure information if there are invalid references
+      if (invalidReferences.length > 0) {
+        console.log(`\n❌ Found ${invalidReferences.length} invalid provider references:`);
+        invalidReferences.forEach(ref => {
+          console.log(`   - Community profile "${ref.profileName}" (${ref.profileId}) follows unknown provider: ${ref.invalidProviderId}`);
+        });
+        console.log(`\n📋 Available provider IDs: ${Array.from(providerIds).join(', ')}`);
+        console.log(`\n💡 Fix: Either remove the invalid references or add the missing providers to serviceProviders.json`);
+      }
+      
+      // Now run the assertions that will fail with clear context
       communityData.primaryConsumers.forEach(profile => {
         profile.followedProviders.forEach(followedProvider => {
           expect(providerIds.has(followedProvider.providerId)).toBe(true);
-          if (!providerIds.has(followedProvider.providerId)) {
-            console.warn(`Community profile ${profile.id} follows unknown provider: ${followedProvider.providerId}`);
-          }
         });
       });
     });

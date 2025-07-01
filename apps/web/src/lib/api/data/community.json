@@ -287,15 +287,6 @@
           "dateFollowed": "2022-06-01",
           "tags": ["lactation-support", "twins-support"],
           "status": "past"
-        },
-        {
-          "providerId": "sarah-mitchell",
-          "providerName": "Sarah Mitchell",
-          "providerTitle": "Head Swim Instructor",
-          "centerName": "Elixr Swim School",
-          "dateFollowed": "2024-03-20",
-          "tags": ["swimming", "child-safety"],
-          "status": "active"
         }
       ],
       "isActive": true,
