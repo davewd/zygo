@@ -220,9 +220,11 @@ export const useTimelineData = ({
                   100
                 : Math.floor((milestoneIndex * 13 + category.length * 7) % 100);
 
-            // Check if this milestone has a milestoneType and should be a key milestone
-            const milestoneAnyForType = milestone as any;
-            const nodeType = milestoneAnyForType.milestoneType ? 'keyMilestone' : 'milestone';
+            // Check if this milestone is a key milestone based on its ID
+            const keyMilestoneIds = ['conception', 'birth', 'puberty', 'legal_adult'];
+            const isKeyMilestone = keyMilestoneIds.includes(milestone.id) || 
+                                   keyMilestoneIds.some(key => milestone.id.includes(key) || milestone.title.toLowerCase().includes(key));
+            const nodeType = isKeyMilestone ? 'keyMilestone' : 'milestone';
 
             generatedNodes.push({
               id: milestoneId,
@@ -239,7 +241,7 @@ export const useTimelineData = ({
                 period: milestone.period,
                 importance: milestone.importance,
                 months: milestone.months,
-                milestoneType: milestoneAnyForType.milestoneType, // Pass milestoneType to component
+                milestoneType: isKeyMilestone ? milestone.id : undefined, // Pass milestone ID as type for key milestones
               },
               position: { x: 0, y: 0 },
               style: {
