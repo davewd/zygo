@@ -289,7 +289,8 @@
     "prerequisites": [
       "prenatal_third_cognitive_1",
       "prenatal_third_physical_1",
-      "prenatal_third_social_emotional_1"
+      "prenatal_third_social_emotional_1",
+      "prenatal_third_language_1"
     ],
     "skills": [
       "Independent breathing",

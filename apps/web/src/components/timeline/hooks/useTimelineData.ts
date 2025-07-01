@@ -8,6 +8,7 @@ import {
   type Achievement,
   type Step
 } from '../../../lib/api/timeline';
+import { removeTransitiveRedundancy } from '../../../lib/utils/milestonePrerequisiteCleanup';
 import { DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
   AgeRange,
@@ -100,6 +101,21 @@ export const useTimelineData = ({
   const { nodes, edges } = useMemo(() => {
     // Use milestones from JSON (now stored in csvMilestones for backward compatibility)
     const allMilestones = [...csvMilestones];
+    
+    // Apply transitive redundancy cleanup to the milestone data based on current filters
+    // This ensures that when users apply filters, redundant edges are removed dynamically
+    const filteredMilestones = selectedCategories.length > 0 
+      ? allMilestones.filter(m => selectedCategories.includes(m.category))
+      : allMilestones;
+    
+    // Remove transitive redundancy from the filtered milestone set
+    const cleanedMilestones = removeTransitiveRedundancy(filteredMilestones);
+    
+    // Log cleanup results if any changes were made
+    if (cleanedMilestones.length !== filteredMilestones.length) {
+      console.log(`🧹 Applied milestone prerequisite cleanup: ${filteredMilestones.length - cleanedMilestones.length} redundant edges removed`);
+    }
+
     const currentLevel = ZOOM_LEVELS[currentZoomLevel];
     const generatedNodes: TimelineNode[] = [];
     const generatedEdges: TimelineEdge[] = [];
@@ -179,7 +195,7 @@ export const useTimelineData = ({
           return;
         }
 
-        const categoryMilestones = allMilestones.filter(
+        const categoryMilestones = cleanedMilestones.filter(
           (m) => m.category === category
         );
 
@@ -244,45 +260,58 @@ export const useTimelineData = ({
               zIndex: nodeType === 'keyMilestone' ? 5 : 4, // Key milestones get highest priority
             },
           });
+        });
+      });
+    }
 
-          // Add prerequisite edges between milestones (only if valid prerequisite exists)
-          const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
-          
-          // Handle prerequisites as either string (CSV format) or array (JSON format)
-          let prerequisiteIds: string[] = [];
-          if (milestoneAny.prerequisites) {
-            if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
-              prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
-            } else if (Array.isArray(milestoneAny.prerequisites)) {
-              prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
-            }
+    // Generate prerequisite edges after all milestones have been created
+    // Use the cleaned milestones to ensure no redundant edges are created
+    if (shouldIncludeNode('milestone')) {
+      cleanedMilestones.forEach((milestone) => {
+        const milestoneId = `milestone-${milestone.id}`;
+        
+        // Skip if milestone wasn't created (duplicate check)
+        if (!generatedNodes.some(node => node.id === milestoneId)) {
+          return;
+        }
+
+        // Add prerequisite edges between milestones (only if valid prerequisite exists)
+        const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
+        
+        // Handle prerequisites as either string (CSV format) or array (JSON format)
+        let prerequisiteIds: string[] = [];
+        if (milestoneAny.prerequisites) {
+          if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
+            prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
+          } else if (Array.isArray(milestoneAny.prerequisites)) {
+            prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
           }
-          
-          prerequisiteIds.forEach((prereqId: string) => {
-            // Only create edge if prerequisite milestone exists in our generated nodes
-            const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
-            if (prereqId && prereqExists) {
-              generatedEdges.push({
-                id: `prerequisite-${prereqId}-to-${milestone.id}`,
-                source: `milestone-${prereqId}`,
-                target: milestoneId,
-                sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
-                targetHandle: 'top', // Connect to top of dependent milestone
-                type: 'smoothstep', // Use smoothstep for better curves
-                style: {
-                  stroke: '#059669', // Green for prerequisites
-                  strokeWidth: 2,
-                  strokeDasharray: '8,4',
-                  opacity: 0.7,
-                  zIndex: 4, // Top layer - milestone edges
-                },
-                markerEnd: {
-                  type: MarkerType.ArrowClosed,
-                  color: '#059669',
-                },
-              });
-            }
-          });
+        }
+        
+        prerequisiteIds.forEach((prereqId: string) => {
+          // Only create edge if prerequisite milestone exists in our generated nodes
+          const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
+          if (prereqId && prereqExists) {
+            generatedEdges.push({
+              id: `prerequisite-${prereqId}-to-${milestone.id}`,
+              source: `milestone-${prereqId}`,
+              target: milestoneId,
+              sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
+              targetHandle: 'top', // Connect to top of dependent milestone
+              type: 'smoothstep', // Use smoothstep for better curves
+              style: {
+                stroke: '#059669', // Green for prerequisites
+                strokeWidth: 2,
+                strokeDasharray: '8,4',
+                opacity: 0.7,
+                zIndex: 4, // Top layer - milestone edges
+              },
+              markerEnd: {
+                type: MarkerType.ArrowClosed,
+                color: '#059669',
+              },
+            });
+          }
         });
       });
     }
