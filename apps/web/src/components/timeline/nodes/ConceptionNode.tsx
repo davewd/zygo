@@ -8,22 +8,20 @@ export interface ConceptionNodeProps {
 export const ConceptionNode = ({ data }: ConceptionNodeProps) => {
   return (
     <div
-      className="p-8 rounded-full border-4 border-purple-400 bg-gradient-to-br from-purple-100 to-pink-100 shadow-xl min-w-48 max-w-48 transform-gpu pointer-events-auto"
+      className="p-6 rounded-full border-4 border-pink-400 bg-gradient-to-br from-pink-100 to-purple-100 shadow-xl min-w-48 max-w-48 transform-gpu"
       style={{
-        zIndex: 20, // Highest priority
+        zIndex: 15, // High priority
         cursor: 'default',
       }}
     >
-      {/* Use standardized vertical handles - conception node only outputs */}
+      {/* Use standardized vertical handles */}
       <VerticalHandles showTarget={false} showSource={true} />
 
       <div className="flex flex-col items-center text-center">
-        <Sparkles className="w-8 h-8 text-purple-600 mb-3" />
-        <h3 className="font-bold text-xl text-purple-800 mb-2">{data.title}</h3>
-        {data.description && (
-          <p className="text-sm text-purple-600 opacity-90">{data.description}</p>
-        )}
-        {data.date && <div className="text-xs text-purple-500 mt-2 font-medium">{data.date}</div>}
+        <Sparkles className="w-8 h-8 text-pink-600 mb-3" />
+        <h3 className="font-bold text-lg text-pink-800 mb-2">{data.title}</h3>
+        {data.description && <p className="text-sm text-pink-600 opacity-90">{data.description}</p>}
+        {data.date && <div className="text-xs text-pink-500 mt-2 font-medium">{data.date}</div>}
       </div>
     </div>
   );
