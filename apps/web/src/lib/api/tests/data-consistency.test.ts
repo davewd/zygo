@@ -85,13 +85,28 @@ describe('Data Consistency Tests', () => {
     
     test('All providers should have valid service center assignments', () => {
       const centerIds = new Set(serviceCentersData.serviceCenters.map(center => center.id));
+      const invalidAssignments: string[] = [];
       
       providersData.serviceProviders.forEach(provider => {
         if (provider.centerId) {
-          expect(centerIds.has(provider.centerId)).toBe(true);
           if (!centerIds.has(provider.centerId)) {
-            console.warn(`Provider ${provider.id} assigned to unknown center: ${provider.centerId}`);
+            const errorMsg = `Provider '${provider.firstName} ${provider.lastName}' (${provider.id}) assigned to unknown center: ${provider.centerId}`;
+            invalidAssignments.push(errorMsg);
+            console.warn(`⚠️ ${errorMsg}`);
           }
+        }
+      });
+      
+      if (invalidAssignments.length > 0) {
+        console.log(`\n❌ Found ${invalidAssignments.length} providers with invalid center assignments:`);
+        invalidAssignments.forEach(assignment => console.log(`   - ${assignment}`));
+        console.log(`\n💡 These assignments should be updated or the missing centers should be added to serviceCenters.json`);
+      }
+      
+      // Now run the actual expectation for each provider
+      providersData.serviceProviders.forEach(provider => {
+        if (provider.centerId) {
+          expect(centerIds.has(provider.centerId)).toBe(true);
         }
       });
     });

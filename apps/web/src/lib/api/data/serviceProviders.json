@@ -725,11 +725,86 @@
         "notes": "Free resources available, premium resources through online store"
       },
       "centerId": "childhood101-digital"
+    },
+    {
+      "id": "jessica-dawson-dietitian",
+      "firstName": "Jessica",
+      "lastName": "Dawson",
+      "title": "PhD, Accredited Practicing Dietitian",
+      "profileImage": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=face",
+      "headerBackgroundImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=400&fit=crop",
+      "bio": "Jessica is an Accredited Practicing Dietitian with a PhD who has been specializing in renal nutrition for over 10 years. She has extensive experience working with people to prevent kidney disease and those who have kidney disease, including people receiving dialysis or who have received a kidney transplant.",
+      "personalStory": "My passion for kidney nutrition stems from understanding how powerful proper nutrition can be in managing and preventing kidney disease. I work closely with individuals to develop personalized nutrition plans that support both kidney and heart health.",
+      "credentials": [
+        {
+          "title": "Doctor of Philosophy",
+          "abbreviation": "PhD",
+          "issuingBody": "University of Sydney",
+          "issuingProviderId": "usyd",
+          "year": 2021,
+          "verified": true,
+          "credentialDefinitionId": "phd-2023",
+          "personalCredentialId": "jd-phd-001"
+        },
+        {
+          "title": "Accredited Practicing Dietitian",
+          "abbreviation": "APD",
+          "issuingBody": "Dietitians Australia",
+          "issuingProviderId": "dietitians-australia",
+          "year": 2013,
+          "verified": true,
+          "credentialDefinitionId": "apd-australia-2023",
+          "personalCredentialId": "jd-apd-001"
+        }
+      ],
+      "services": [
+        "nutrition-consultation",
+        "kidney-health-assessment",
+        "dialysis-nutrition-support",
+        "transplant-nutrition-guidance",
+        "heart-health-nutrition",
+        "kidney-stone-prevention"
+      ],
+      "specializations": [
+        "Renal Nutrition",
+        "Kidney Disease Prevention",
+        "Dialysis Nutrition",
+        "Transplant Nutrition",
+        "Heart Health",
+        "Kidney Stone Prevention",
+        "Chronic Disease Management"
+      ],
+      "languages": ["English"],
+      "yearsExperience": 12,
+      "approach": "Evidence-based nutrition therapy tailored to individual needs. I believe in empowering patients with the knowledge and tools they need to manage their health through proper nutrition.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": true,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 180,
+        "followUpFee": 150,
+        "currency": "AUD"
+      },
+      "location": {
+        "city": "Sydney",
+        "state": "NSW",
+        "country": "Australia"
+      },
+      "contactInfo": {
+        "website": "https://kidneynutrition.com.au/",
+        "bookingPhone": "02 9188 2325",
+        "bookingProvider": "Forum Specialists",
+        "notes": "Telehealth appointments available upon request"
+      },
+      "centerId": "forum-specialists-sydney"
     }
   ],
   "metadata": {
-    "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalProviders": 13,
+    "lastUpdated": "2025-07-01T00:00:00Z",
+    "totalProviders": 14,
     "dataSource": "mock-api"
   }
 }

@@ -1015,6 +1015,178 @@
         "description": "Maintains affiliate partnerships for book recommendations and educational products",
         "policy": "All affiliate links preserved to support content creator"
       }
+    },
+    {
+      "id": "forum-specialists-sydney",
+      "name": "Forum Specialists",
+      "description": "Medical specialists providing comprehensive care across multiple specialities, including specialized renal dietitian services.",
+      "overview": "Forum Specialists brings together medical specialists from a range of medical specialities to care for patients at their home in Leichhardt, Sydney. The practice offers expert renal dietitian services working closely with nephrologists and GPs to help manage kidney disease through specialized nutritional guidance.",
+      "location": {
+        "address": "Suite 3, Level 1, The Italian Forum, 21-23 Norton Street",
+        "suburb": "Leichhardt",
+        "state": "NSW",
+        "postcode": "2040",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8839,
+          "lng": 151.1544
+        }
+      },
+      "contact": {
+        "phone": "02 9188 2325",
+        "fax": "02 8080 8313",
+        "email": "reception@forumspecialists.com.au",
+        "website": "https://forumspecialists.com.au",
+        "bookingInstructions": "Call reception or fax referral for consultation bookings"
+      },
+      "providers": ["jessica-dawson-dietitian"],
+      "services": [
+        "nutrition-consultation",
+        "kidney-health-assessment",
+        "dialysis-nutrition-support",
+        "transplant-nutrition-guidance",
+        "heart-health-nutrition",
+        "kidney-stone-prevention"
+      ],
+      "operatingHours": {
+        "monday": { "open": "08:00", "close": "17:00" },
+        "tuesday": { "open": "08:00", "close": "17:00" },
+        "wednesday": { "open": "08:00", "close": "17:00" },
+        "thursday": { "open": "08:00", "close": "17:00" },
+        "friday": { "open": "08:00", "close": "17:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Specialist Medical Care",
+        "Renal Dietitian Services",
+        "Telehealth Available",
+        "Referral-Based Practice",
+        "Multidisciplinary Team",
+        "2-Hour Free Parking",
+        "Accessible by Public Transport"
+      ],
+      "certifications": ["Medical Specialist Accreditation", "Dietitians Australia"],
+      "insurance": ["Professional Indemnity", "Medical Malpractice"],
+      "accessibility": [
+        "Wheelchair Access",
+        "Lift Access to Level 1",
+        "Free Parking Available",
+        "Public Transport Accessible"
+      ],
+      "parking": {
+        "available": true,
+        "free": true,
+        "duration": "2 hours",
+        "validation": "Available at reception",
+        "entrance": "Norton Street or Balmain Road",
+        "location": "Culture Centre Parking area, near Palazzo Napoli lift"
+      },
+      "publicTransport": {
+        "train": {
+          "station": "Petersham Station",
+          "walkingTime": "10 minutes",
+          "directions": "Follow Railway Road to Parramatta Road, Norton Street to your right"
+        },
+        "bus": {
+          "routes": "Regular buses along Parramatta Road and Norton Street",
+          "accessibility": "From city and western suburbs"
+        }
+      },
+      "establishedYear": 2020,
+      "specializations": [
+        "Renal Nutrition",
+        "Kidney Disease Management",
+        "Chronic Disease Care",
+        "Multidisciplinary Medical Services"
+      ]
+    },
+    {
+      "id": "bronte-public-school",
+      "name": "Bronte Public School",
+      "description": "A NSW Department of Education primary school providing quality education with a focus on inclusiveness, respect, and student agency.",
+      "overview": "Bronte Public School operates under the motto 'ONE FOR ALL', emphasizing inclusiveness, individuality, respect for each other, and a strong sense of belonging. The school provides comprehensive primary education with a focus on student wellbeing, technology integration, and creative arts programs.",
+      "location": {
+        "address": "13 Hewlett Street",
+        "suburb": "Bronte",
+        "state": "NSW",
+        "postcode": "2024",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.9017,
+          "lng": 151.2635
+        }
+      },
+      "contact": {
+        "phone": "02 9389 4527",
+        "email": "bronte-p.school@det.nsw.edu.au",
+        "website": "https://bronte-p.schools.nsw.gov.au",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/BrontePS",
+          "twitter": "https://www.twitter.com/BrontePublic"
+        }
+      },
+      "providers": [],
+      "services": [
+        "primary-education",
+        "student-wellbeing",
+        "creative-arts-programs",
+        "technology-integration",
+        "library-services",
+        "extra-curricular-activities"
+      ],
+      "operatingHours": {
+        "monday": { "open": "08:30", "close": "15:00" },
+        "tuesday": { "open": "08:30", "close": "15:00" },
+        "wednesday": { "open": "08:30", "close": "15:00" },
+        "thursday": { "open": "08:30", "close": "15:00" },
+        "friday": { "open": "08:30", "close": "15:00" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "schoolHolidays": {
+        "followsNSWSchoolCalendar": true,
+        "department": "NSW Department of Education"
+      },
+      "features": [
+        "Primary Education (K-6)",
+        "Student Wellbeing Programs",
+        "Creative Arts (CAPA)",
+        "Technology Integration",
+        "Library Resources",
+        "Extra-Curricular Activities",
+        "Canteen Services",
+        "School Concerts and Events",
+        "Swimming Programs",
+        "Athletics Programs"
+      ],
+      "certifications": ["NSW Department of Education", "NESA Accredited"],
+      "insurance": ["Public Liability", "Professional Indemnity"],
+      "accessibility": [
+        "Wheelchair Access",
+        "Inclusive Education Programs",
+        "Student Support Services"
+      ],
+      "establishedYear": 1900,
+      "schoolType": "Public Primary School",
+      "educationSector": "Government",
+      "principalAuthority": "NSW Department of Education",
+      "motto": "ONE FOR ALL",
+      "vision": "Belonging for students, staff and community, Respect for self, for others, the land and the sea, Ownership and responsibility, for our behaviour and learning, Nurturing student agency, teachers and parents as partners, Trust and compassion, the heart of our team, fostering connections to build our shared vision, Empowered students, with voices so strong, together we strive All for One.",
+      "culturalAcknowledgment": "We acknowledge the traditional Custodians of this Land, the Bidiagal people of the Dharawal nation",
+      "specializations": [
+        "Primary Education",
+        "Student Wellbeing",
+        "Creative Arts",
+        "Technology in Education",
+        "Inclusive Learning"
+      ],
+      "enrolment": {
+        "availableFor": ["Kindergarten", "Years 1-6"],
+        "process": "Online enrolment through NSW Department of Education",
+        "zones": "Local catchment area",
+        "currentlyEnrolling": "Kindergarten 2026"
+      }
     }
   ]
 }
