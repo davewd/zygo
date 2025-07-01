@@ -1,44 +1,96 @@
-import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+/**
+ * Users API
+ * 
+ * Mock API functions for accessing user data.
+ * This provides a clean interface for accessing user data as if it were coming from an API.
+ */
 
-// Mock API response interface
-interface UsersResponse {
+import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+import usersData from './data/users.json';
+
+// Type definitions
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar?: string;
+}
+
+export interface UsersData {
   currentUser: CurrentUser;
   otherUsers: CurrentUser[];
 }
 
+// API Functions
+
 /**
- * Simulates fetching current user and other available users for switching
- * In a real app, this would make an HTTP request to your backend API
+ * Get current user
  */
-export const getCurrentUserData = async (): Promise<UsersResponse> => {
-  try {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
-    // Fetch data from local JSON file
-    const response = await fetch('/data/users.json');
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch users: ${response.statusText}`);
-    }
-    
-    const data: UsersResponse = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    
-    // Fallback data in case of error
-    return {
-      currentUser: {
-        id: 'fallback-user',
-        firstName: 'Guest',
-        lastName: 'User',
-        email: 'guest@example.com',
-      },
-      otherUsers: []
-    };
+export async function getCurrentUser(): Promise<CurrentUser> {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 10));
+  return usersData.currentUser as CurrentUser;
+}
+
+/**
+ * Get user by ID
+ */
+export async function getUserById(id: string): Promise<CurrentUser | null> {
+  await new Promise(resolve => setTimeout(resolve, 10));
+  
+  // Check current user
+  if (usersData.currentUser.id === id) {
+    return usersData.currentUser as CurrentUser;
   }
-};
+  
+  // Check other users
+  const user = usersData.otherUsers.find(u => u.id === id);
+  return user ? user as CurrentUser : null;
+}
+
+/**
+ * Get all users (current + others)
+ */
+export async function getAllUsers(): Promise<CurrentUser[]> {
+  await new Promise(resolve => setTimeout(resolve, 10));
+  return [usersData.currentUser, ...usersData.otherUsers] as CurrentUser[];
+}
+
+/**
+ * Get other users (excluding current user)
+ */
+export async function getOtherUsers(): Promise<CurrentUser[]> {
+  await new Promise(resolve => setTimeout(resolve, 10));
+  return usersData.otherUsers as CurrentUser[];
+}
+
+/**
+ * Get current user data with other users (for compatibility with existing code)
+ */
+export async function getCurrentUserData(): Promise<UsersData> {
+  await new Promise(resolve => setTimeout(resolve, 10));
+  return {
+    currentUser: usersData.currentUser as CurrentUser,
+    otherUsers: usersData.otherUsers as CurrentUser[]
+  };
+}
+
+/**
+ * Search users by name or email
+ */
+export async function searchUsers(query: string): Promise<CurrentUser[]> {
+  await new Promise(resolve => setTimeout(resolve, 10));
+  
+  const allUsers = [usersData.currentUser, ...usersData.otherUsers];
+  const searchTerm = query.toLowerCase();
+  
+  return allUsers.filter(user => 
+    user.firstName.toLowerCase().includes(searchTerm) ||
+    user.lastName.toLowerCase().includes(searchTerm) ||
+    user.email.toLowerCase().includes(searchTerm)
+  ) as CurrentUser[];
+}
 
 /**
  * Mock function to switch to a different user
@@ -49,8 +101,7 @@ export const switchUser = async (userId: string): Promise<CurrentUser> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 200));
     
-    const data = await getCurrentUserData();
-    const targetUser = data.otherUsers.find(user => user.id === userId);
+    const targetUser = await getUserById(userId);
     
     if (!targetUser) {
       throw new Error(`User with ID ${userId} not found`);
@@ -65,3 +116,17 @@ export const switchUser = async (userId: string): Promise<CurrentUser> => {
     throw error;
   }
 };
+
+/**
+ * Get user's full name
+ */
+export function getUserFullName(user: CurrentUser): string {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+/**
+ * Get user's initials
+ */
+export function getUserInitials(user: CurrentUser): string {
+  return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase();
+}

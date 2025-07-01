@@ -1,6 +1,8 @@
 // Unified search API for typeahead functionality
 // Searches across service providers, service centers, service networks, and community profiles
 
+import searchData from './data/search.json';
+
 export interface SearchResult {
   id: string;
   firstName?: string;
@@ -51,18 +53,16 @@ const createDebouncer = () => {
 const debouncer = createDebouncer();
 
 /**
- * Load search data from JSON file
+ * Load search data from imported JSON
  */
 const loadSearchData = async () => {
   if (searchDataCache) return searchDataCache;
 
   try {
-    const response = await fetch('/data/search.json');
-    if (!response.ok) {
-      throw new Error(`Failed to fetch search data: ${response.statusText}`);
-    }
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 10));
     
-    searchDataCache = await response.json();
+    searchDataCache = searchData as any;
     return searchDataCache;
   } catch (error) {
     console.error('Error loading search data:', error);

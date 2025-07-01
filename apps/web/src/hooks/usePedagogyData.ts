@@ -1,8 +1,8 @@
-import type { PedagogyProfile } from '@zygo/types';
 import { useEffect, useState } from 'react';
+import { Pedagogy } from '../lib/api/pedagogy';
 
 export const usePedagogyData = () => {
-  const [pedagogyData, setPedagogyData] = useState<PedagogyProfile | null>(null);
+  const [pedagogyData, setPedagogyData] = useState<Pedagogy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -10,14 +10,10 @@ export const usePedagogyData = () => {
     const loadPedagogyData = async () => {
       try {
         setLoading(true);
-        // In a real app, this would be an API call
-        // For now, we'll simulate loading the JSON file
-        const response = await fetch('/data/pedagogy.json');
-        if (!response.ok) {
-          throw new Error('Failed to load pedagogy data');
-        }
-        const data = await response.json();
-        setPedagogyData(data as PedagogyProfile);
+        // Use the new pedagogy API
+        const { getPedagogyData } = await import('../lib/api/pedagogy');
+        const data = await getPedagogyData();
+        setPedagogyData(data as Pedagogy);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
         console.error('Error loading pedagogy data:', err);

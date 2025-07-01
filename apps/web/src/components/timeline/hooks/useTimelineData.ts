@@ -1,13 +1,13 @@
 import { MarkerType } from '@xyflow/react';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  loadAchievementsFromAPI,
-  loadAgeRangesFromAPI,
-  loadMilestonesFromJSON,
-  loadStepsFromAPI,
+  getAllAchievements,
+  getAllAgeRanges,
+  getAllMilestones,
+  getAllSteps,
   type Achievement,
   type Step
-} from '../../../lib/api/milestones';
+} from '../../../lib/api/timeline';
 import { DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
   AgeRange,
@@ -67,10 +67,10 @@ export const useTimelineData = ({
         
         // Load all data concurrently
         const [milestones, ageRanges, achievementsData, stepsData] = await Promise.all([
-          loadMilestonesFromJSON(),
-          loadAgeRangesFromAPI(),
-          loadAchievementsFromAPI(),
-          loadStepsFromAPI()
+          getAllMilestones(),
+          getAllAgeRanges(),
+          getAllAchievements(),
+          getAllSteps()
         ]);
         
         setCsvMilestones(milestones as any); // TODO: Fix type mismatch between API and component types
