@@ -1,5 +1,92 @@
 [
   {
+    "id": "feed-demo-context-milestone",
+    "title": "Great progress on emotional development! 🌟",
+    "metadata": {
+      "createdAt": "2024-12-17T14:30:00Z"
+    },
+    "author": {
+      "name": "Sarah Johnson",
+      "handle": "sarah_mama",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face",
+      "actorType": "community_member",
+      "role": "parent",
+      "location": {
+        "suburb": "Paddington",
+        "state": "NSW",
+        "country": "Australia"
+      }
+    },
+    "type": "post",
+    "post": "Isabella has been making incredible progress with her emotional intelligence development! Today she showed such empathy when comforting her friend at daycare. These small moments really show how much she's grown. ❤️",
+    "context": {
+      "type": "profile_milestone",
+      "profileName": "Isabella Dawson",
+      "profileId": "isabella_dawson_001",
+      "profileType": "family_member",
+      "activityName": "Emotional Intelligence",
+      "activityId": "months_24_30_social_emotional_1",
+      "activityType": "milestone"
+    },
+    "stats": {
+      "likes": 15,
+      "shares": 3,
+      "comments": 8,
+      "reposts": 1
+    },
+    "privacy": {
+      "visibility": "group",
+      "sharedWith": [{ "type": "group", "name": "Family Updates", "id": "family_updates" }]
+    }
+  },
+  {
+    "id": "feed-demo-context-collaboration",
+    "title": "Partnership update on literacy development 📚",
+    "metadata": {
+      "createdAt": "2024-12-17T11:15:00Z"
+    },
+    "author": {
+      "name": "Dr. Emily Chen",
+      "handle": "dr_emily_chen",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "verified": true,
+      "actorType": "service_provider",
+      "title": "Pediatric Development Specialist",
+      "credentials": [
+        {
+          "title": "Doctor of Medicine",
+          "abbreviation": "MD",
+          "issuingBody": "Medical Board",
+          "verified": true
+        }
+      ],
+      "yearsExperience": 12,
+      "specializations": ["child development", "pediatrics"],
+      "centerName": "Children's Development Centre"
+    },
+    "type": "post",
+    "post": "Wonderful to see the collaborative approach with the Johnson family! Our joint efforts on early literacy development are showing fantastic results. When families and professionals work together, children truly thrive. 📖✨",
+    "context": {
+      "type": "collaboration",
+      "profileName": "Dr. Emily Chen",
+      "profileId": "dr_emily_chen_001",
+      "profileType": "service_provider",
+      "activityName": "Johnson Family Literacy Program",
+      "activityId": "literacy_program_johnson",
+      "activityType": "goal"
+    },
+    "stats": {
+      "likes": 28,
+      "shares": 7,
+      "comments": 14,
+      "reposts": 4
+    },
+    "privacy": {
+      "visibility": "public",
+      "sharedWith": []
+    }
+  },
+  {
     "id": "feed-1-shekicks-match-photos",
     "title": "Amazing photos from yesterday's match! 📸⚽️",
     "metadata": {
@@ -20,8 +107,8 @@
       "reposts": 3
     },
     "privacy": {
-      "visibility": "public",
-      "sharedWith": []
+      "visibility": "group",
+      "sharedWith": [{ "type": "group", "name": "She Kicks U9 Girls", "id": "girl_u9_she_kicks" }]
     },
     "eventFollowUpData": {
       "eventType": "Soccer Match",
@@ -1188,6 +1275,15 @@
       "shares": 22,
       "comments": 25,
       "reposts": 12
+    },
+    "context": {
+      "type": "profile_milestone",
+      "profileName": "Isabella Dawson",
+      "profileId": "isabella_dawson_001",
+      "profileType": "family_member",
+      "activityName": "Emotional Intelligence",
+      "activityId": "months_24_30_social_emotional_1",
+      "activityType": "milestone"
     },
     "privacy": {
       "visibility": "public",

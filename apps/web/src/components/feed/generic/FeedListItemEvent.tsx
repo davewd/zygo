@@ -1,10 +1,12 @@
 import { Calendar, Clock, MapPin, Users } from 'lucide-react';
 import React from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
-import { FeedItemActions, FeedItemHeader } from '../shared';
+import { FeedItemActions, FeedItemContext, FeedItemHeader, type ContextData } from '../shared';
 
 interface FeedListItemEventProps {
-  item: FeedItemTypeMap;
+  item: FeedItemTypeMap & {
+    context?: ContextData;
+  };
 }
 
 export const FeedListItemEvent: React.FC<FeedListItemEventProps> = ({ item }) => {
@@ -18,6 +20,12 @@ export const FeedListItemEvent: React.FC<FeedListItemEventProps> = ({ item }) =>
 
   const eventHeader = (
     <div>
+      {/* Context (if available) */}
+      <FeedItemContext item={item} />
+
+      {/* Separator line between context and header */}
+      {item.context && <div className="border-t border-gray-200 mb-4" />}
+
       <FeedItemHeader item={item} />
 
       {/* Event Header with Icon */}

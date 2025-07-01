@@ -2,11 +2,12 @@ import DOMPurify from 'dompurify';
 import { BookOpen } from 'lucide-react';
 import React, { useState } from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
-import { FeedItemActions, FeedItemHeader } from '../shared';
+import { FeedItemActions, FeedItemContext, FeedItemHeader, type ContextData } from '../shared';
 
 interface FeedListItemPostProps {
   item: FeedItemTypeMap & {
     hasReferences?: boolean;
+    context?: ContextData;
     peerLikes?: {
       count: number;
       likedBy: Array<{
@@ -114,6 +115,12 @@ export const FeedListItemPost: React.FC<FeedListItemPostProps> = ({
 
   return (
     <div className="space-y-4">
+      {/* Context (if available) */}
+      <FeedItemContext item={item} />
+
+      {/* Separator line between context and header */}
+      {item.context && <div className="border-t border-gray-200" />}
+
       {/* Header */}
       <FeedItemHeader item={item} />
 

@@ -2,10 +2,12 @@ import { Trophy } from 'lucide-react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
-import { FeedItemActions, FeedItemHeader } from '../shared';
+import { FeedItemActions, FeedItemContext, FeedItemHeader, type ContextData } from '../shared';
 
 interface FeedListItemMilestoneProps {
-  item: FeedItemTypeMap;
+  item: FeedItemTypeMap & {
+    context?: ContextData;
+  };
 }
 
 export const FeedListItemMilestone: React.FC<FeedListItemMilestoneProps> = ({ item }) => {
@@ -23,6 +25,12 @@ export const FeedListItemMilestone: React.FC<FeedListItemMilestoneProps> = ({ it
 
   return (
     <div>
+      {/* Context (if available) */}
+      <FeedItemContext item={item} />
+
+      {/* Separator line between context and header */}
+      {item.context && <div className="border-t border-gray-200 mb-4" />}
+
       {/* Standard Header with milestone indicator as child */}
       <FeedItemHeader item={item}>
         <div className="flex items-center space-x-2 text-purple-600 text-sm font-medium">

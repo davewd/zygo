@@ -231,6 +231,17 @@ export interface FeedItemTypeMap {
     name: string;
     handle: string;
   }>;
+  // Context data for feed items
+  context?: {
+    type: 'profile_milestone' | 'profile_activity' | 'collaboration' | 'custom';
+    profileName?: string;
+    profileId?: string;
+    profileType?: 'family_member' | 'service_provider' | 'community_member';
+    activityName?: string;
+    activityId?: string;
+    activityType?: 'milestone' | 'event' | 'goal' | 'assessment';
+    customText?: string;
+  };
 }
 
 // Simulate API endpoints
