@@ -1,5 +1,5 @@
-import { Handle, Position } from '@xyflow/react';
 import { Target, Trophy } from 'lucide-react';
+import { VerticalHandles } from '../shared/VerticalHandles';
 
 export interface AchievementNodeProps {
   data: any;
@@ -28,11 +28,8 @@ export const AchievementNode = ({ data }: AchievementNodeProps) => {
         cursor: 'default',
       }}
     >
-      {/* Add handles for edge connections */}
-      <Handle type="target" position={Position.Top} id="top" style={{ opacity: 0 }} />
-      <Handle type="source" position={Position.Bottom} id="bottom" style={{ opacity: 0 }} />
-      <Handle type="target" position={Position.Left} id="left" style={{ opacity: 0 }} />
-      <Handle type="source" position={Position.Right} id="right" style={{ opacity: 0 }} />
+      {/* Use standardized vertical handles for Y-axis layout */}
+      <VerticalHandles />
 
       <div className="flex items-start space-x-3">
         <Trophy className="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0" />

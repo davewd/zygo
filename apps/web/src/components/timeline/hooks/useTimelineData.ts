@@ -27,6 +27,7 @@ import {
  * - Layer 4 (z-index: 4): Milestones, conception, and their edges (top layer)
  */
 import { calculateNodePositions } from '../utils/layoutCalculation';
+import { getHierarchicalLayout, getTimelineLayout, getVerticalTimelineLayout } from '../utils/dagreLayout';
 
 interface UseTimelineDataProps {
   pedagogyData?: PedagogyProfile;
@@ -109,14 +110,6 @@ export const useTimelineData = ({
       const demoNodesData = [{ id: 'demo-overview', type: 'ageGroup' }];
       const demoEdgesData: any[] = [];
 
-      const { positions } = calculateNodePositions(
-        demoNodesData,
-        demoEdgesData,
-        currentZoomLevel,
-        focusArea,
-        canvasWidth
-      );
-
       const demoNodes: TimelineNode[] = [
         {
           id: 'demo-overview',
@@ -128,12 +121,15 @@ export const useTimelineData = ({
             completedMilestones: 8,
             inProgressMilestones: 5,
           },
-          position: positions.get('demo-overview') || { x: 0, y: 100 },
+          position: { x: 0, y: 100 },
           draggable: false,
         },
       ];
 
-      return { nodes: demoNodes, edges: [] };
+      // Apply Dagre layout to demo nodes with vertical Y-axis flow
+      const layoutedDemo = getVerticalTimelineLayout(demoNodes, demoEdgesData);
+
+      return { nodes: layoutedDemo.nodes, edges: [] };
     }
 
     const currentLevel = ZOOM_LEVELS[currentZoomLevel];
@@ -316,8 +312,8 @@ export const useTimelineData = ({
                   id: `prerequisite-${prereqId}-to-${milestone.id}`,
                   source: `milestone-${prereqId}`,
                   target: milestoneId,
-                  sourceHandle: 'right', // Connect from right of prerequisite
-                  targetHandle: 'left', // Connect to left of dependent milestone
+                  sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
+                  targetHandle: 'top', // Connect to top of dependent milestone
                   type: 'smoothstep', // Use smoothstep for better curves
                   style: {
                     stroke: '#059669', // Green for prerequisites
@@ -371,8 +367,8 @@ export const useTimelineData = ({
             id: `milestone-to-achievement-${achievement.id}`,
             source: fromMilestoneNode.id,
             target: achievementId,
-            sourceHandle: 'right',
-            targetHandle: 'left',
+            sourceHandle: 'bottom',
+            targetHandle: 'top',
             type: 'smoothstep',
             style: {
               stroke: '#f59e0b', // Amber for achievements
@@ -471,31 +467,35 @@ export const useTimelineData = ({
       }
     }
 
-    // Calculate positions
-    const { positions } = calculateNodePositions(
-      generatedNodes,
-      generatedEdges,
-      currentZoomLevel,
-      focusArea,
-      canvasWidth
-    );
+    // Calculate positions using Dagre layout with Y-axis vertical flow
+    const isTimelineView = currentZoomLevel >= 2; // Use timeline layout for detailed views
+    
+    const layoutedElements = isTimelineView 
+      ? getVerticalTimelineLayout(generatedNodes, generatedEdges, {
+          ranksep: 400,  // Increased for better vertical spacing
+          nodesep: 150,  // Improved horizontal spacing
+          marginx: canvasWidth ? canvasWidth * 0.1 : 150,
+          marginy: 150,  // Better vertical margins
+        })
+      : getVerticalTimelineLayout(generatedNodes, generatedEdges, {
+          ranksep: 350,  // Consistent vertical layout
+          nodesep: 180,  // Good node separation
+          marginx: canvasWidth ? canvasWidth * 0.1 : 120,
+          marginy: 120,  // Proper margins
+        });
 
-    // Apply calculated positions
-    generatedNodes.forEach((node) => {
-      const pos = positions.get(node.id);
-      if (pos) {
-        node.position = pos;
-      }
-    });
+    // Use the layouted nodes and edges
+    const finalNodes = layoutedElements.nodes;
+    const finalEdges = layoutedElements.edges;
 
     // Debug total node counts
     // Simple summary logging
-    const ageGroupNodes = generatedNodes.filter(n => n.type === 'ageGroup').length;
-    const milestoneNodes = generatedNodes.filter(n => n.type === 'milestone').length;
+    const ageGroupNodes = finalNodes.filter(n => n.type === 'ageGroup').length;
+    const milestoneNodes = finalNodes.filter(n => n.type === 'milestone').length;
     
-    console.log(`🎯 Timeline: ${ageGroupNodes} age groups, ${milestoneNodes} milestones, ${generatedEdges.length} edges`);
+    console.log(`🎯 Timeline (Dagre): ${ageGroupNodes} age groups, ${milestoneNodes} milestones, ${finalEdges.length} edges`);
 
-    return { nodes: generatedNodes, edges: generatedEdges };
+    return { nodes: finalNodes, edges: finalEdges };
   }, [
     currentZoomLevel,
     selectedCategories,

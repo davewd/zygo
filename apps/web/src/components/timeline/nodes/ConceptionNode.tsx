@@ -1,5 +1,5 @@
-import { Handle, Position } from '@xyflow/react';
 import { Sparkles } from 'lucide-react';
+import { VerticalHandles } from '../shared/VerticalHandles';
 
 export interface ConceptionNodeProps {
   data: any;
@@ -14,15 +14,8 @@ export const ConceptionNode = ({ data }: ConceptionNodeProps) => {
         cursor: 'default',
       }}
     >
-      {/* Add handles for edge connections */}
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="bottom"
-        style={{ opacity: 0 }} // Hide the handle visually
-      />
-      <Handle type="source" position={Position.Right} id="right" style={{ opacity: 0 }} />
-      <Handle type="source" position={Position.Left} id="left" style={{ opacity: 0 }} />
+      {/* Use standardized vertical handles - conception node only outputs */}
+      <VerticalHandles showTarget={false} showSource={true} />
 
       <div className="flex flex-col items-center text-center">
         <Sparkles className="w-8 h-8 text-purple-600 mb-3" />

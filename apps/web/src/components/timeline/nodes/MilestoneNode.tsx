@@ -1,7 +1,7 @@
-import { Handle, Position } from '@xyflow/react';
 import { Users } from 'lucide-react';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLORS } from '../constants';
 import { DevelopmentCategory, MilestoneStatus } from '../types';
+import { VerticalHandles } from '../shared/VerticalHandles';
 
 interface MilestoneNodeProps {
   data: any;
@@ -29,43 +29,9 @@ export const MilestoneNode = ({ data }: { data: any }) => {
         milestone?.category
       )}`}
     >
-      {/* Add handles for edge connections from all directions */}
-      <Handle
-        type="target"
-        position={Position.Top}
-        id="top"
-        style={{
-          opacity: 0, // Hide the handle visually
-          top: -5,
-        }}
-      />
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="bottom"
-        style={{
-          opacity: 0, // Hide the handle visually
-          bottom: -5,
-        }}
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="left"
-        style={{
-          opacity: 0, // Hide the handle visually
-          left: -5,
-        }}
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="right"
-        style={{
-          opacity: 0, // Hide the handle visually
-          right: -5,
-        }}
-      />
+      {/* Use standardized vertical handles for Y-axis layout */}
+      <VerticalHandles />
+
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-semibold text-sm">{data.title}</h3>
         {getStatusIcon(progress?.status)}
