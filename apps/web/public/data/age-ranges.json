@@ -1,0 +1,114 @@
+[
+  {
+    "range": "Prenatal (First Trimester)",
+    "key": "prenatal_early",
+    "description": "Early prenatal development",
+    "months": [-12, -6],
+    "period": "prenatal"
+  },
+  {
+    "range": "Prenatal (Second/Third Trimester)",
+    "key": "prenatal_late",
+    "description": "Late prenatal development",
+    "months": [-6, 0],
+    "period": "prenatal"
+  },
+  {
+    "range": "0-6 months",
+    "key": "infancy_0_6",
+    "description": "Early infancy period",
+    "months": [0, 6],
+    "period": "infancy"
+  },
+  {
+    "range": "6 months - 1 year",
+    "key": "infancy_6_12",
+    "description": "Late infancy period",
+    "months": [6, 12],
+    "period": "infancy"
+  },
+  {
+    "range": "1 year - 1 year 6 months",
+    "key": "early_childhood_12_18",
+    "description": "Early toddler development",
+    "months": [12, 18],
+    "period": "early_childhood"
+  },
+  {
+    "range": "1 year 6 months - 2 years",
+    "key": "early_childhood_18_24",
+    "description": "Mid toddler development",
+    "months": [18, 24],
+    "period": "early_childhood"
+  },
+  {
+    "range": "2 years - 2 years 6 months",
+    "key": "early_childhood_24_30",
+    "description": "Late toddler development",
+    "months": [24, 30],
+    "period": "early_childhood"
+  },
+  {
+    "range": "2 years 6 months - 3 years",
+    "key": "early_childhood_30_36",
+    "description": "Early preschool transition",
+    "months": [30, 36],
+    "period": "early_childhood"
+  },
+  {
+    "range": "3-4 years",
+    "key": "preschool_36_48",
+    "description": "Early preschool years",
+    "months": [36, 48],
+    "period": "preschool"
+  },
+  {
+    "range": "4-5 years",
+    "key": "preschool_48_60",
+    "description": "Late preschool years",
+    "months": [48, 60],
+    "period": "preschool"
+  },
+  {
+    "range": "5-6 years",
+    "key": "school_age_60_72",
+    "description": "Early school age",
+    "months": [60, 72],
+    "period": "school_age"
+  },
+  {
+    "range": "6-7 years",
+    "key": "school_age_72_84",
+    "description": "Elementary school age",
+    "months": [72, 84],
+    "period": "school_age"
+  },
+  {
+    "range": "7-8 years",
+    "key": "school_age_84_96",
+    "description": "Mid-elementary school age",
+    "months": [84, 96],
+    "period": "school_age"
+  },
+  {
+    "range": "12-14 years",
+    "key": "adolescence_144_168",
+    "description": "Early adolescence",
+    "months": [144, 168],
+    "period": "adolescence"
+  },
+  {
+    "range": "14-16 years",
+    "key": "adolescence_168_192",
+    "description": "Mid adolescence",
+    "months": [168, 192],
+    "period": "adolescence"
+  },
+  {
+    "range": "16-18 years",
+    "key": "adolescence_192_216",
+    "description": "Late adolescence",
+    "months": [192, 216],
+    "period": "adolescence"
+  }
+]

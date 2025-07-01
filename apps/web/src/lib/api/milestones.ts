@@ -39,37 +39,99 @@ export interface MilestoneFilters {
   searchTerm?: string;
 }
 
+// Achievement and Step data types
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  fromMilestone: string;
+  toMilestone: string;
+  ageRangeKey: string;
+  stepCount: number;
+}
+
+export interface Step {
+  id: string;
+  title: string;
+  description: string;
+  achievementId: string;
+  achievementTitle: string;
+  duration: string;
+  completed: boolean;
+  inProgress: boolean;
+}
+
 // Cache for parsed data
 let cachedMilestones: MilestoneData[] | null = null;
+let cachedAgeRanges: AgeRange[] | null = null;
 let lastModified: number | null = null;
+let ageRangesLastModified: number | null = null;
+
+// Cache for achievements and steps
+let cachedAchievements: Achievement[] | null = null;
+let achievementsLastModified: number | null = null;
+let cachedSteps: Step[] | null = null;
+let stepsLastModified: number | null = null;
+
+// Cache for JSON milestones
+let cachedJsonMilestones: MilestoneData[] | null = null;
+let jsonMilestonesLastModified: number | null = null;
 
 /**
- * Generate comprehensive age ranges from -12 months to 18 years
+ * Load age ranges from JSON API
  */
-export function generateAgeRanges(): AgeRange[] {
+export async function loadAgeRangesFromAPI(): Promise<AgeRange[]> {
+  try {
+    // Check cache first
+    const now = Date.now();
+    if (cachedAgeRanges && ageRangesLastModified && (now - ageRangesLastModified) < 5 * 60 * 1000) {
+      return cachedAgeRanges;
+    }
+
+    console.log('🔄 Loading age ranges from API...');
+    
+    const response = await fetch('/data/age-ranges.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const ageRanges: AgeRange[] = await response.json();
+    
+    // Cache the results
+    cachedAgeRanges = ageRanges;
+    ageRangesLastModified = now;
+    
+    console.log(`✅ Loaded ${ageRanges.length} age ranges from API`);
+    return ageRanges;
+    
+  } catch (error) {
+    console.error('❌ Error loading age ranges from API:', error);
+    
+    // Fallback to generated age ranges if API fails
+    console.log('🔄 Falling back to generated age ranges...');
+    return generateAgeRangesFallback();
+  }
+}
+
+/**
+ * Fallback function to generate age ranges (original logic)
+ */
+export function generateAgeRangesFallback(): AgeRange[] {
   const ranges: AgeRange[] = [];
   
-  // Prenatal period: -12 months to 0 months (2 ranges)
-  ranges.push(
-    {
-      range: '-12 to -6 months',
-      key: 'prenatal_early',
-      description: 'Early prenatal development',
-      months: [-12, -6],
-      period: 'prenatal'
-    },
-    {
-      range: '-6 to 0 months',
-      key: 'prenatal_late',
-      description: 'Late prenatal development',
-      months: [-6, 0],
-      period: 'prenatal'
-    }
-  );
+  // Prenatal period: -12 months to 0 months (1 range)
+  ranges.push({
+    range: '-12 to 0 months',
+    key: 'prenatal',
+    description: 'Prenatal development period',
+    months: [-12, 0],
+    period: 'prenatal'
+  });
   
-  // Generate age ranges from 0 to 18 years (216 months) in 6-month intervals
-  for (let months = 0; months <= 216; months += 6) {
-    const endMonths = Math.min(months + 6, 216);
+  // Generate age ranges from 0 to 18 years (216 months) in 12-month (yearly) intervals
+  for (let months = 0; months <= 216; months += 12) {
+    const endMonths = Math.min(months + 12, 216);
     const startYears = Math.floor(months / 12);
     const endYears = Math.floor(endMonths / 12);
     
@@ -99,32 +161,19 @@ export function generateAgeRanges(): AgeRange[] {
       key = `adolescence_${months}_${endMonths}`;
     }
     
-    // Format range display
+    // Format range display for yearly intervals
     const formatRange = (start: number, end: number) => {
-      if (start === 0 && end === 6) return '0-6 months';
-      if (start < 12 && end <= 12) return `${start}-${end} months`;
+      if (start === 0 && end === 12) return '0-1 year';
       
       const startYears = Math.floor(start / 12);
       const endYears = Math.floor(end / 12);
       
-      if (startYears === endYears) {
-        const startRemainder = start % 12;
-        const endRemainder = end % 12;
-        
-        if (startRemainder === 0 && endRemainder === 0) {
-          return `${startYears} years`;
-        } else {
-          return `${startYears}y ${startRemainder}m - ${startYears}y ${endRemainder}m`;
-        }
+      if (startYears === 0) {
+        return `${end} months`;
+      } else if (endYears === startYears + 1 && end % 12 === 0) {
+        return `${startYears + 1} year${startYears + 1 > 1 ? 's' : ''}`;
       } else {
-        const startRemainder = start % 12;
-        const endRemainder = end % 12;
-        
-        if (startRemainder === 0 && endRemainder === 0) {
-          return `${startYears}-${endYears} years`;
-        } else {
-          return `${startYears}y ${startRemainder}m - ${endYears}y ${endRemainder}m`;
-        }
+        return `${startYears}-${endYears} years`;
       }
     };
     
@@ -132,7 +181,8 @@ export function generateAgeRanges(): AgeRange[] {
       range: formatRange(months, endMonths),
       key: key,
       description: description,
-      months: [months, endMonths]
+      months: [months, endMonths],
+      period: period
     });
   }
   
@@ -212,9 +262,139 @@ export async function loadMilestonesFromCSV(): Promise<MilestoneData[]> {
   } catch (error) {
     console.error('Error loading milestones from CSV:', error);
     
-    // Return fallback comprehensive milestones if CSV fails
-    return generateFallbackMilestones();
+    // Return empty array if CSV fails
+    return [];
   }
+}
+
+/**
+ * Load achievements from JSON API
+ */
+export async function loadAchievementsFromAPI(): Promise<Achievement[]> {
+  try {
+    // Check cache first
+    const now = Date.now();
+    if (cachedAchievements && achievementsLastModified && (now - achievementsLastModified) < 5 * 60 * 1000) {
+      return cachedAchievements;
+    }
+
+    console.log('🔄 Loading achievements from API...');
+    
+    const response = await fetch('/data/achievements.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const achievements: Achievement[] = await response.json();
+    
+    // Cache the results
+    cachedAchievements = achievements;
+    achievementsLastModified = now;
+    
+    console.log(`✅ Loaded ${achievements.length} achievements from API`);
+    return achievements;
+    
+  } catch (error) {
+    console.error('❌ Error loading achievements from API:', error);
+    return [];
+  }
+}
+
+/**
+ * Load steps from JSON API
+ */
+export async function loadStepsFromAPI(): Promise<Step[]> {
+  try {
+    // Check cache first
+    const now = Date.now();
+    if (cachedSteps && stepsLastModified && (now - stepsLastModified) < 5 * 60 * 1000) {
+      return cachedSteps;
+    }
+
+    console.log('🔄 Loading steps from API...');
+    
+    const response = await fetch('/data/steps.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const steps: Step[] = await response.json();
+    
+    // Cache the results
+    cachedSteps = steps;
+    stepsLastModified = now;
+    
+    console.log(`✅ Loaded ${steps.length} steps from API`);
+    return steps;
+    
+  } catch (error) {
+    console.error('❌ Error loading steps from API:', error);
+    return [];
+  }
+}
+
+/**
+ * Load milestones from JSON API
+ */
+export async function loadMilestonesFromJSON(): Promise<MilestoneData[]> {
+  try {
+    // Check cache first
+    const now = Date.now();
+    if (cachedJsonMilestones && jsonMilestonesLastModified && (now - jsonMilestonesLastModified) < 5 * 60 * 1000) {
+      return cachedJsonMilestones;
+    }
+
+    console.log('🔄 Loading milestones from JSON API...');
+    
+    const response = await fetch('/data/milestones.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const rawMilestones: any[] = await response.json();
+    
+    // Convert JSON format to timeline component format
+    const milestones: MilestoneData[] = rawMilestones.map(milestone => ({
+      ...milestone,
+      // Convert startMonths/endMonths to months array for timeline compatibility
+      months: [milestone.startMonths, milestone.endMonths] as [number, number]
+    }));
+    
+    // Cache the results
+    cachedJsonMilestones = milestones;
+    jsonMilestonesLastModified = now;
+    
+    console.log(`✅ Loaded ${milestones.length} milestones from JSON API`);
+    return milestones;
+    
+  } catch (error) {
+    console.error('❌ Error loading milestones from JSON API:', error);
+    return [];
+  }
+}
+
+/**
+ * Clear achievements cache
+ */
+export function clearAchievementsCache(): void {
+  cachedAchievements = null;
+  achievementsLastModified = null;
+}
+
+/**
+ * Clear steps cache
+ */
+export function clearStepsCache(): void {
+  cachedSteps = null;
+  stepsLastModified = null;
+}
+
+/**
+ * Clear JSON milestones cache
+ */
+export function clearJsonMilestonesCache(): void {
+  cachedJsonMilestones = null;
+  jsonMilestonesLastModified = null;
 }
 
 /**
@@ -296,306 +476,4 @@ export function getMilestonesForAgeRange(
     
     return true;
   });
-}
-
-/**
- * Get milestone statistics
- */
-export function getMilestoneStatistics(milestones: MilestoneData[]) {
-  const stats = {
-    total: milestones.length,
-    byCategory: {} as Record<string, number>,
-    byPeriod: {} as Record<string, number>,
-    byImportance: {} as Record<string, number>,
-    ageRangeCoverage: {
-      min: Math.min(...milestones.map(m => m.startMonths)),
-      max: Math.max(...milestones.map(m => m.endMonths))
-    }
-  };
-  
-  milestones.forEach(milestone => {
-    // Count by category
-    stats.byCategory[milestone.category] = (stats.byCategory[milestone.category] || 0) + 1;
-    
-    // Count by period
-    stats.byPeriod[milestone.period] = (stats.byPeriod[milestone.period] || 0) + 1;
-    
-    // Count by importance
-    stats.byImportance[milestone.importance] = (stats.byImportance[milestone.importance] || 0) + 1;
-  });
-  
-  return stats;
-}
-
-/**
- * Generate fallback milestones if CSV loading fails
- */
-export function generateFallbackMilestones(): MilestoneData[] {
-  const ageRanges = generateAgeRanges();
-  const categories = ['physical', 'cognitive', 'social_emotional', 'language'];
-  const milestones: MilestoneData[] = [];
-  
-  // Milestone templates by period and category
-  const templates = {
-    prenatal: {
-      physical: [
-        'Neural tube formation and early brain development',
-        'Organ formation and basic body structure development'
-      ],
-      cognitive: [
-        'Basic neural pathway formation',
-        'Sensory organ development and initial response capabilities'
-      ],
-      social_emotional: [
-        'Response to maternal stress and emotions',
-        'Initial bonding preparation through maternal interactions'
-      ],
-      language: [
-        'Auditory system development for hearing',
-        'Vocal cord formation and preparation for sound production'
-      ]
-    },
-    infancy: {
-      physical: [
-        'Head control and neck strength',
-        'Rolling over and basic mobility',
-        'Sitting with and without support',
-        'Crawling and pulling to stand',
-        'First steps and independent walking'
-      ],
-      cognitive: [
-        'Visual tracking and focus',
-        'Object permanence understanding',
-        'Cause and effect recognition',
-        'Problem-solving with toys',
-        'Memory development and recognition'
-      ],
-      social_emotional: [
-        'Social smiling and interaction',
-        'Attachment formation with caregivers',
-        'Stranger awareness and anxiety',
-        'Emotional regulation development',
-        'Basic social play and interaction'
-      ],
-      language: [
-        'Cooing and early vocalizations',
-        'Babbling and sound experimentation',
-        'First words and meaningful sounds',
-        'Understanding simple commands',
-        'Basic vocabulary development'
-      ]
-    },
-    early_childhood: {
-      physical: [
-        'Running and advanced mobility',
-        'Climbing and playground skills',
-        'Fine motor development and tool use',
-        'Toilet training and self-care',
-        'Advanced coordination and balance'
-      ],
-      cognitive: [
-        'Symbolic thinking and pretend play',
-        'Basic counting and number concepts',
-        'Pattern recognition and sorting',
-        'Memory games and recall',
-        'Problem-solving strategies'
-      ],
-      social_emotional: [
-        'Parallel play with other children',
-        'Emotional expression and labeling',
-        'Sharing and turn-taking',
-        'Independence and autonomy',
-        'Empathy and caring behaviors'
-      ],
-      language: [
-        'Two-word phrases and combinations',
-        'Vocabulary expansion and naming',
-        'Following multi-step instructions',
-        'Asking questions and curiosity',
-        'Story understanding and retelling'
-      ]
-    },
-    preschool: {
-      physical: [
-        'Advanced gross motor skills',
-        'Pre-writing and drawing skills',
-        'Sports and recreational activities',
-        'Self-care and hygiene independence',
-        'Complex playground navigation'
-      ],
-      cognitive: [
-        'Pre-academic skills development',
-        'Mathematical concepts and operations',
-        'Scientific thinking and exploration',
-        'Memory strategies and learning',
-        'Abstract thinking introduction'
-      ],
-      social_emotional: [
-        'Cooperative play and friendship',
-        'Emotional self-regulation',
-        'Conflict resolution skills',
-        'Leadership and following',
-        'Cultural awareness and diversity'
-      ],
-      language: [
-        'Complex sentence formation',
-        'Reading readiness and phonics',
-        'Storytelling and narrative skills',
-        'Conversational abilities',
-        'Early literacy development'
-      ]
-    },
-    school_age: {
-      physical: [
-        'Team sports participation',
-        'Advanced fine motor precision',
-        'Physical endurance development',
-        'Coordination and athletic skills',
-        'Health and fitness awareness'
-      ],
-      cognitive: [
-        'Academic subject mastery',
-        'Critical thinking development',
-        'Research and study skills',
-        'Technology literacy',
-        'Creative problem solving'
-      ],
-      social_emotional: [
-        'Peer relationship navigation',
-        'Moral reasoning development',
-        'Self-concept and identity',
-        'Responsibility and accountability',
-        'Community involvement'
-      ],
-      language: [
-        'Advanced reading comprehension',
-        'Written communication skills',
-        'Vocabulary expansion',
-        'Multiple language exposure',
-        'Communication across contexts'
-      ]
-    },
-    adolescence: {
-      physical: [
-        'Puberty and physical changes',
-        'Advanced athletic performance',
-        'Body image and health awareness',
-        'Physical independence',
-        'Health decision making'
-      ],
-      cognitive: [
-        'Abstract reasoning mastery',
-        'Future planning and goal setting',
-        'Complex problem solving',
-        'Academic specialization',
-        'Career exploration'
-      ],
-      social_emotional: [
-        'Identity formation and exploration',
-        'Peer influence and independence',
-        'Romantic relationships',
-        'Values and belief development',
-        'Social responsibility'
-      ],
-      language: [
-        'Advanced communication skills',
-        'Professional presentation abilities',
-        'Creative expression',
-        'Multilingual competency',
-        'Digital communication literacy'
-      ]
-    }
-  };
-  
-  ageRanges.forEach((ageRange, rangeIndex) => {
-    const period = ageRange.period;
-    const periodTemplates = templates[period as keyof typeof templates];
-    
-    if (periodTemplates) {
-      categories.forEach((category, categoryIndex) => {
-        const categoryTemplates = periodTemplates[category as keyof typeof periodTemplates];
-        
-        if (categoryTemplates && categoryTemplates.length > 0) {
-          // Create 1-2 milestones per category per age range
-          const milestonesToCreate = Math.min(categoryTemplates.length, 2);
-          
-          for (let i = 0; i < milestonesToCreate; i++) {
-            const template = categoryTemplates[i];
-            const milestoneId = `${period}_${category}_${ageRange.key}_${i}`;
-            
-            milestones.push({
-              id: milestoneId,
-              title: template,
-              description: `Important developmental milestone for ${category} development during ${period}`,
-              category: category,
-              ageRangeKey: ageRange.key,
-              ageRange: ageRange.range,
-              startMonths: ageRange.months[0],
-              endMonths: ageRange.months[1],
-              period: period,
-              importance: categoryIndex === 0 ? 'high' : 'medium',
-              isTypical: true,
-              prerequisites: rangeIndex > 0 ? [`${templates[period as keyof typeof templates] ? Object.keys(templates)[Math.max(0, Object.keys(templates).indexOf(period) - 1)] : 'infancy'}_${category}_milestone`] : [],
-              skills: [template.split(' ').slice(0, 3).join(' ')],
-              observationTips: `Observe child's progress with ${template.toLowerCase()}`,
-              supportStrategies: `Encourage practice and provide support for ${template.toLowerCase()}`,
-              redFlags: `Significant delays or regression in ${template.toLowerCase()}`,
-              resources: `Educational activities for ${template.toLowerCase()}`,
-              createdDate: new Date().toISOString(),
-              modifiedDate: new Date().toISOString(),
-            });
-          }
-        }
-      });
-    }
-  });
-  
-  return milestones;
-}
-
-/**
- * Export milestones to CSV format
- */
-export function exportMilestonesToCSV(milestones: MilestoneData[]): string {
-  const headers = [
-    'id', 'title', 'description', 'category', 'ageRangeKey', 'ageRange',
-    'startMonths', 'endMonths', 'period', 'importance', 'isTypical',
-    'prerequisites', 'skills', 'observationTips', 'supportStrategies',
-    'redFlags', 'resources', 'createdDate', 'modifiedDate'
-  ];
-  
-  const csvData = milestones.map(milestone => [
-    milestone.id,
-    milestone.title,
-    milestone.description,
-    milestone.category,
-    milestone.ageRangeKey,
-    milestone.ageRange,
-    milestone.startMonths,
-    milestone.endMonths,
-    milestone.period,
-    milestone.importance,
-    milestone.isTypical,
-    (milestone.prerequisites || []).join(','),
-    (milestone.skills || []).join(','),
-    milestone.observationTips,
-    milestone.supportStrategies,
-    milestone.redFlags,
-    milestone.resources,
-    milestone.createdDate,
-    milestone.modifiedDate
-  ]);
-  
-  return Papa.unparse({
-    fields: headers,
-    data: csvData
-  });
-}
-
-/**
- * Clear cached data (useful for development/testing)
- */
-export function clearMilestoneCache(): void {
-  cachedMilestones = null;
-  lastModified = null;
 }

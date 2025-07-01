@@ -1,0 +1,42 @@
+[
+  {
+    "id": "achievement-1",
+    "title": "Early Motor Coordination",
+    "description": "Developing basic motor skills and hand-eye coordination",
+    "category": "physical",
+    "fromMilestone": "milestone-1",
+    "toMilestone": "milestone-5",
+    "ageRangeKey": "0_1_months",
+    "stepCount": 3
+  },
+  {
+    "id": "achievement-2", 
+    "title": "First Social Responses",
+    "description": "Beginning to respond to social stimuli and caregivers",
+    "category": "social_emotional",
+    "fromMilestone": "milestone-2",
+    "toMilestone": "milestone-6",
+    "ageRangeKey": "0_1_months",
+    "stepCount": 4
+  },
+  {
+    "id": "achievement-3",
+    "title": "Visual Tracking Development",
+    "description": "Learning to track moving objects and focus vision",
+    "category": "cognitive",
+    "fromMilestone": "milestone-3",
+    "toMilestone": "milestone-7",
+    "ageRangeKey": "1_2_months",
+    "stepCount": 2
+  },
+  {
+    "id": "achievement-4",
+    "title": "Early Communication Attempts",
+    "description": "First attempts at vocal communication and expression",
+    "category": "language",
+    "fromMilestone": "milestone-4",
+    "toMilestone": "milestone-8",
+    "ageRangeKey": "2_3_months",
+    "stepCount": 5
+  }
+]

@@ -9,6 +9,12 @@ export const getNodeDimensions = (nodeType: string): NodeDimensions => {
       return NODE_DIMENSIONS.category;
     case 'milestone':
       return NODE_DIMENSIONS.milestone;
+    case 'conception':
+      return NODE_DIMENSIONS.conception;
+    case 'achievement':
+      return NODE_DIMENSIONS.achievement;
+    case 'step':
+      return NODE_DIMENSIONS.step;
     default:
       return NODE_DIMENSIONS.default;
   }
@@ -199,16 +205,20 @@ export const calculateNodePositions = (
       );
 
       ageGroupMilestones.forEach((milestone, mIndex) => {
-        // Create a radial pattern around the age group
+        // Create a more structured radial pattern around the age group
         const totalMilestones = ageGroupMilestones.length;
-        const angle = (mIndex / totalMilestones) * Math.PI * 2;
-        const radius = 300 + (mIndex % 3) * 100;
-        const offsetX = Math.cos(angle) * radius;
-        const offsetY = Math.sin(angle) * radius;
-
+        
+        // Use a grid-like pattern instead of pure radial for better readability
+        const milestonesPerSide = Math.ceil(totalMilestones / 2);
+        const sideIndex = mIndex % 2; // 0 = left, 1 = right
+        const positionInSide = Math.floor(mIndex / 2);
+        
+        const horizontalOffset = sideIndex === 0 ? -500 : 500; // Left or right side
+        const verticalOffset = (positionInSide - milestonesPerSide / 2) * 120; // Spread vertically
+        
         const initialPos = {
-          x: ageGroupPos.x + offsetX,
-          y: ageGroupPos.y + offsetY,
+          x: ageGroupPos.x + horizontalOffset,
+          y: ageGroupPos.y + verticalOffset,
         };
 
         // Apply positioning with constraints
@@ -232,6 +242,72 @@ export const calculateNodePositions = (
           y: finalPos.y,
         });
       });
+    });
+  }
+
+  // Position conception node at the very top center
+  if (nodesByType.conception) {
+    nodesByType.conception.forEach((node) => {
+      const nodeWidth = nodeWidths.get(node.id) || 200;
+      positions.set(node.id, {
+        x: centerX - nodeWidth / 2,
+        y: padding - 150, // Above everything else
+      });
+    });
+  }
+
+  // Position achievement nodes in between milestones and age groups
+  if (nodesByType.achievement) {
+    nodesByType.achievement.forEach((achievement, index) => {
+      // Position achievements closer to the center, between milestones and age groups
+      const baseX = centerX + (index % 2 === 0 ? -350 : 350); // Alternate left and right
+      const baseY = padding + 200 + (index * 180); // Spread vertically
+      
+      const finalPos = findNonCollidingPosition(
+        { x: baseX, y: baseY },
+        achievement.id,
+        positions,
+        nodeWidths,
+        nodeHeights
+      );
+      
+      positions.set(achievement.id, finalPos);
+    });
+  }
+
+  // Position step nodes around their achievements
+  if (nodesByType.step) {
+    nodesByType.step.forEach((step, index) => {
+      // Find the related achievement
+      const achievementId = `achievement-${step.data.achievementId}`;
+      const achievementPos = positions.get(achievementId);
+      
+      if (achievementPos) {
+        // Position steps in a grid around the achievement
+        const stepsPerRow = 3;
+        const stepRow = Math.floor(index / stepsPerRow);
+        const stepCol = index % stepsPerRow;
+        
+        const baseX = achievementPos.x + (stepCol - 1) * 200; // Spread horizontally
+        const baseY = achievementPos.y + 180 + (stepRow * 120); // Below achievement
+        
+        const finalPos = findNonCollidingPosition(
+          { x: baseX, y: baseY },
+          step.id,
+          positions,
+          nodeWidths,
+          nodeHeights
+        );
+        
+        positions.set(step.id, finalPos);
+      } else {
+        // Fallback positioning if achievement not found
+        const fallbackPos = {
+          x: centerX + (index % 2 === 0 ? -600 : 600),
+          y: padding + 400 + (index * 100),
+        };
+        positions.set(step.id, fallbackPos);
+      }
     });
   }
 

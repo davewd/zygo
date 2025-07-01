@@ -202,6 +202,8 @@ export const ReactFlowTimeline = ({
 
   // Update nodes when generated nodes change
   useEffect(() => {
+    console.log(`🔄 ReactFlow updating: ${nodes.length} nodes, ${edges.length} edges`);
+    console.log('📊 Edge details:', edges.slice(0, 3)); // Show first 3 edges
     setNodes(nodes);
     setEdges(edges);
   }, [nodes, edges, setNodes, setEdges]);
@@ -260,6 +262,8 @@ export const ReactFlowTimeline = ({
           position="bottom-right"
         />
 
+        {/* Temporarily disabled zoom controls for granular view development */}
+        {/*
         <TimelineControlPanel
           currentZoomLevel={currentZoomLevel}
           zoomLevels={zoomLevels}
@@ -270,6 +274,7 @@ export const ReactFlowTimeline = ({
           onVisualZoomIn={handleVisualZoomIn}
           onVisualZoomOut={handleVisualZoomOut}
         />
+        */}
 
         <TimelineFilterPanel
           selectedCategories={selectedCategories}

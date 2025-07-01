@@ -1,4 +1,4 @@
-import { Calendar } from 'lucide-react';
+import { Handle, Position } from '@xyflow/react';
 
 interface AgeGroupNodeProps {
   data: any;
@@ -13,30 +13,52 @@ export const AgeGroupNode = ({ data }: { data: any }) => {
         cursor: 'default', // Indicate non-draggable
       }}
     >
+      {/* Add handles for vertical timeline flow */}
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="top"
+        style={{ 
+          opacity: 0, // Hide the handle visually but keep functional
+          top: -5, // Position slightly outside the node
+        }}
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="bottom"
+        style={{ 
+          opacity: 0, // Hide the handle visually but keep functional
+          bottom: -5, // Position slightly outside the node
+        }}
+      />
+      
+      {/* Add side handles for milestone connections */}
+      <Handle
+        type="source"
+        position={Position.Left}
+        id="left"
+        style={{ 
+          opacity: 0, // Hide the handle visually
+          left: -5,
+        }}
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="right"
+        style={{ 
+          opacity: 0, // Hide the handle visually
+          right: -5,
+        }}
+      />
       <div className="flex items-center justify-between mb-3">
         <div>
           <h3 className="font-bold text-lg text-gray-800">{data.title}</h3>
-          <div className="text-sm text-gray-600">{data.ageRange}</div>
-        </div>
-        <Calendar className="w-6 h-6 text-gray-600" />
-      </div>
-
-      {data.description && <p className="text-gray-600 mb-4">{data.description}</p>}
-
-      <div className="grid grid-cols-3 gap-4 text-sm">
-        <div className="text-center">
-          <div className="font-medium text-gray-700">Total</div>
-          <div className="text-xl font-bold text-gray-800">{data.totalMilestones || 0}</div>
-        </div>
-        <div className="text-center">
-          <div className="font-medium text-green-700">Completed</div>
-          <div className="text-xl font-bold text-green-800">{data.completedMilestones || 0}</div>
-        </div>
-        <div className="text-center">
-          <div className="font-medium text-blue-700">In Progress</div>
-          <div className="text-xl font-bold text-blue-800">{data.inProgressMilestones || 0}</div>
         </div>
       </div>
+
+      {data.description && <p className="text-gray-600">{data.description}</p>}
     </div>
   );
 };

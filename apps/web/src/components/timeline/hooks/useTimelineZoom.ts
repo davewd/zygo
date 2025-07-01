@@ -2,21 +2,19 @@ import { useCallback, useState } from 'react';
 import { ZOOM_LEVELS } from '../constants';
 
 export const useTimelineZoom = () => {
-  const [currentZoomLevel, setCurrentZoomLevel] = useState(0);
+  // Set to most granular level (level 2) and disable zoom changes
+  const [currentZoomLevel] = useState(2); // Fixed at most detailed level
   const [focusNodeId, setFocusNodeId] = useState<string | null>(null);
   const [focusArea, setFocusArea] = useState<string | null>(null);
 
+  // Disable zoom functionality
   const handleZoomIn = useCallback(() => {
-    if (currentZoomLevel < ZOOM_LEVELS.length - 1) {
-      setCurrentZoomLevel(currentZoomLevel + 1);
-    }
-  }, [currentZoomLevel]);
+    // Disabled - no zoom functionality
+  }, []);
 
   const handleZoomOut = useCallback(() => {
-    if (currentZoomLevel > 0) {
-      setCurrentZoomLevel(currentZoomLevel - 1);
-    }
-  }, [currentZoomLevel]);
+    // Disabled - no zoom functionality
+  }, []);
 
   const handleFocusNode = useCallback((nodeId: string) => {
     setFocusNodeId(nodeId);
@@ -33,12 +31,10 @@ export const useTimelineZoom = () => {
       // Set focus area based on node type
       if (nodeData.type === 'ageGroup') {
         setFocusArea(nodeData.ageRange);
-        if (currentZoomLevel === 0) {
-          setCurrentZoomLevel(1);
-        }
+        // No longer change zoom level - stay at granular view
       }
     },
-    [currentZoomLevel]
+    [] // Remove currentZoomLevel dependency since it's now fixed
   );
 
   return {

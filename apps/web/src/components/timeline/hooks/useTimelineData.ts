@@ -1,7 +1,15 @@
 import { MarkerType } from '@xyflow/react';
 import { useEffect, useMemo, useState } from 'react';
-import { generateAgeRanges, loadMilestonesFromCSV } from '../../../lib/api/milestones';
-import { CATEGORY_COLORS, DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
+import {
+  loadAchievementsFromAPI,
+  loadAgeRangesFromAPI,
+  loadMilestonesFromCSV,
+  loadMilestonesFromJSON,
+  loadStepsFromAPI,
+  type Achievement,
+  type Step
+} from '../../../lib/api/milestones';
+import { DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
   AgeRange,
   DevelopmentCategory,
@@ -31,43 +39,63 @@ export const useTimelineData = ({
 }: UseTimelineDataProps) => {
   // State for CSV-based milestones
   const [csvMilestones, setCsvMilestones] = useState<MilestoneData[]>([]);
+  const [jsonMilestones, setJsonMilestones] = useState<MilestoneData[]>([]);
   const [ageRanges, setAgeRanges] = useState<AgeRange[]>([]);
   const [milestonesLoading, setMilestonesLoading] = useState(true);
   const [milestonesError, setMilestonesError] = useState<string | null>(null);
 
-  // Generate age ranges (this is still needed for the timeline structure)
-  const [allAgeRanges] = useState(() => generateAgeRanges());
+  // State for age ranges
+  const [allAgeRanges, setAllAgeRanges] = useState<AgeRange[]>([]);
 
-  // Load milestone data from CSV on component mount
+  // State for achievements and steps
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [steps, setSteps] = useState<Step[]>([]);
+
+  // Load milestone and age range data from APIs on component mount
   useEffect(() => {
-    const loadMilestoneData = async () => {
+    const loadData = async () => {
       try {
         setMilestonesLoading(true);
         setMilestonesError(null);
         
-        // Load milestones from CSV using the API
-        const milestones = await loadMilestonesFromCSV();
-        setCsvMilestones(milestones);
-        setAgeRanges(allAgeRanges);
+        // Load all data concurrently
+        const [csvMilestones, jsonMilestones, ageRanges, achievementsData, stepsData] = await Promise.all([
+          loadMilestonesFromCSV(),
+          loadMilestonesFromJSON(),
+          loadAgeRangesFromAPI(),
+          loadAchievementsFromAPI(),
+          loadStepsFromAPI()
+        ]);
         
-        console.log(`✅ Loaded ${milestones.length} milestones from CSV`);
+        setCsvMilestones(csvMilestones as any); // TODO: Fix type mismatch between API and component types
+        setJsonMilestones(jsonMilestones as any); // TODO: Fix type mismatch between API and component types
+        setAllAgeRanges(ageRanges);
+        setAgeRanges(ageRanges);
+        setAchievements(achievementsData);
+        setSteps(stepsData);
+        
+        console.log(`✅ Loaded ${csvMilestones.length} CSV milestones, ${jsonMilestones.length} JSON milestones, ${ageRanges.length} age ranges, ${achievementsData.length} achievements, ${stepsData.length} steps`);
       } catch (error) {
-        console.error('Error loading milestone data:', error);
-        setMilestonesError(error instanceof Error ? error.message : 'Failed to load milestone data');
+        console.error('Error loading data:', error);
+        setMilestonesError(error instanceof Error ? error.message : 'Failed to load data');
         
-        // Fallback to empty data or could use fallback generation
+        // Fallback to empty data
         setCsvMilestones([]);
-        setAgeRanges(allAgeRanges);
+        setAllAgeRanges([]);
+        setAgeRanges([]);
       } finally {
         setMilestonesLoading(false);
       }
     };
 
-    loadMilestoneData();
+    loadData();
   }, []); // Load once on mount
 
   // Generate nodes and edges based on current state
   const { nodes, edges } = useMemo(() => {
+    // Combine CSV and JSON milestones
+    const allMilestones = [...csvMilestones, ...jsonMilestones];
+    
     if (!pedagogyData) {
       // Demo nodes
       const demoNodesData = [{ id: 'demo-overview', type: 'ageGroup' }];
@@ -111,13 +139,29 @@ export const useTimelineData = ({
       return true;
     };
 
+    // Generate conception node (starting point)
+    if (shouldIncludeNode('conception')) {
+      generatedNodes.push({
+        id: 'conception',
+        type: 'conception',
+        data: {
+          title: 'Conception',
+          description: 'The beginning of human development',
+          date: 'Day 0',
+        },
+        position: { x: 0, y: 0 },
+        draggable: false,
+      });
+    }
+
     // Generate age groups
     if (shouldIncludeNode('ageGroup')) {
-      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length));
+      // Show all age groups in granular view (no slice limitation)
+      const ageGroups = allAgeRanges;
 
       ageGroups.forEach((ageGroup, index) => {
         const ageGroupId = `ageGroup-${ageGroup.key}`;
-        const milestoneCountForRange = csvMilestones.filter(
+        const milestoneCountForRange = allMilestones.filter(
           (m) => m.ageRangeKey === ageGroup.key
         ).length;
 
@@ -149,13 +193,14 @@ export const useTimelineData = ({
               id: `timeline-flow-${index}`,
               source: `ageGroup-${sourceKey}`,
               target: ageGroupId,
-              type: 'smoothstep',
+              sourceHandle: 'bottom', // Connect from bottom of previous age group
+              targetHandle: 'top', // Connect to top of current age group
+              type: 'smoothstep', // Use smoothstep for better curves
               style: {
                 stroke: '#6b7280',
-                strokeWidth: 4,
-                strokeDasharray: '15,10',
+                strokeWidth: 3,
+                strokeDasharray: '10,5',
               },
-              label: 'Timeline Progression',
               markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
             });
           }
@@ -165,7 +210,8 @@ export const useTimelineData = ({
 
     // Generate milestones
     if (shouldIncludeNode('milestone')) {
-      const ageGroups = allAgeRanges.slice(0, Math.min(12, allAgeRanges.length));
+      // Show all age groups for milestone generation in granular view
+      const ageGroups = allAgeRanges;
 
       ageGroups.forEach((ageGroup) => {
         const ageGroupId = `ageGroup-${ageGroup.key}`;
@@ -175,9 +221,14 @@ export const useTimelineData = ({
             return;
           }
 
-          const categoryMilestones = csvMilestones.filter(
+          const categoryMilestones = allMilestones.filter(
             (m) => m.ageRangeKey === ageGroup.key && m.category === category
           );
+
+          // Debug logging for milestones per category (only if > 0)
+          if (categoryMilestones.length > 0) {
+            // console.log(`📍 Found ${categoryMilestones.length} milestones for ${ageGroup.key} - ${category}`);
+          }
 
           if (categoryMilestones.length === 0) return;
 
@@ -226,28 +277,170 @@ export const useTimelineData = ({
               position: { x: 0, y: 0 },
             });
 
-            // Enhanced directional edges from age group to milestones
-            if (ageGroupId && milestoneId && milestone.id) {
-              generatedEdges.push({
-                id: `age-to-milestone-${milestone.id}`,
-                source: ageGroupId,
-                target: milestoneId,
-                type: 'smoothstep',
-                style: {
-                  stroke: CATEGORY_COLORS[category]?.stroke || '#6b7280',
-                  strokeWidth: 2,
-                  opacity: 0.7,
-                },
-                label: milestoneIndex === 0 ? 'Contains' : undefined,
-                markerEnd: {
-                  type: MarkerType.ArrowClosed,
-                  color: CATEGORY_COLORS[category]?.stroke || '#6b7280',
-                },
-              });
+            // Add prerequisite edges between milestones (only if valid prerequisite exists)
+            const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
+            
+            // Handle prerequisites as either string (CSV format) or array (JSON format)
+            let prerequisiteIds: string[] = [];
+            if (milestoneAny.prerequisites) {
+              if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
+                prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
+              } else if (Array.isArray(milestoneAny.prerequisites)) {
+                prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
+              }
             }
+            
+            prerequisiteIds.forEach((prereqId: string) => {
+              // Only create edge if prerequisite milestone exists in our generated nodes
+              const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
+              if (prereqId && prereqExists) {
+                generatedEdges.push({
+                  id: `prerequisite-${prereqId}-to-${milestone.id}`,
+                  source: `milestone-${prereqId}`,
+                  target: milestoneId,
+                  sourceHandle: 'right', // Connect from right of prerequisite
+                  targetHandle: 'left', // Connect to left of dependent milestone
+                  type: 'smoothstep', // Use smoothstep for better curves
+                  style: {
+                    stroke: '#059669', // Green for prerequisites
+                    strokeWidth: 2,
+                    strokeDasharray: '8,4',
+                    opacity: 0.7,
+                  },
+                  markerEnd: {
+                    type: MarkerType.ArrowClosed,
+                    color: '#059669',
+                  },
+                });
+              }
+            });
           });
         });
       });
+    }
+
+    // Generate achievement nodes
+    if (shouldIncludeNode('achievement')) {
+      achievements.forEach((achievement) => {
+        const achievementId = `achievement-${achievement.id}`;
+        
+        generatedNodes.push({
+          id: achievementId,
+          type: 'achievement',
+          data: {
+            title: achievement.title,
+            description: achievement.description,
+            category: achievement.category,
+            fromMilestone: achievement.fromMilestone,
+            toMilestone: achievement.toMilestone,
+            stepCount: achievement.stepCount,
+            ageRangeKey: achievement.ageRangeKey,
+          },
+          position: { x: 0, y: 0 },
+          draggable: false,
+        });
+
+        // Connect achievements to related milestones
+        const fromMilestoneNode = generatedNodes.find(n => n.id === `milestone-${achievement.fromMilestone}`);
+        const toMilestoneNode = generatedNodes.find(n => n.id === `milestone-${achievement.toMilestone}`);
+        
+        if (fromMilestoneNode) {
+          generatedEdges.push({
+            id: `milestone-to-achievement-${achievement.id}`,
+            source: fromMilestoneNode.id,
+            target: achievementId,
+            sourceHandle: 'right',
+            targetHandle: 'left',
+            type: 'smoothstep',
+            style: {
+              stroke: '#f59e0b', // Amber for achievements
+              strokeWidth: 2,
+              opacity: 0.8,
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              color: '#f59e0b',
+            },
+          });
+        }
+      });
+    }
+
+    // Generate step nodes
+    if (shouldIncludeNode('step')) {
+      steps.forEach((step) => {
+        const stepId = `step-${step.id}`;
+        
+        generatedNodes.push({
+          id: stepId,
+          type: 'step',
+          data: {
+            title: step.title,
+            description: step.description,
+            achievementId: step.achievementId,
+            achievementTitle: step.achievementTitle,
+            duration: step.duration,
+            completed: step.completed,
+            inProgress: step.inProgress,
+          },
+          position: { x: 0, y: 0 },
+          draggable: false,
+        });
+
+        // Connect steps to their achievements
+        const achievementNode = generatedNodes.find(n => n.id === `achievement-${step.achievementId}`);
+        if (achievementNode) {
+          generatedEdges.push({
+            id: `achievement-to-step-${step.id}`,
+            source: achievementNode.id,
+            target: stepId,
+            sourceHandle: 'bottom',
+            targetHandle: 'top',
+            type: 'smoothstep',
+            style: {
+              stroke: '#10b981', // Emerald for steps
+              strokeWidth: 1.5,
+              opacity: 0.7,
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              color: '#10b981',
+            },
+          });
+        }
+      });
+    }
+
+    // Connect conception to the earliest milestones
+    if (shouldIncludeNode('conception') && shouldIncludeNode('milestone')) {
+      const conceptionNode = generatedNodes.find(n => n.type === 'conception');
+      if (conceptionNode) {
+        // Find milestones in the earliest age ranges
+        const earlyMilestones = generatedNodes.filter(n => 
+          n.type === 'milestone' && 
+          (n.data.ageRangeKey === '0_1_months' || n.data.ageRangeKey === 'prenatal')
+        );
+
+        earlyMilestones.forEach((milestone) => {
+          generatedEdges.push({
+            id: `conception-to-${milestone.id}`,
+            source: conceptionNode.id,
+            target: milestone.id,
+            sourceHandle: 'bottom',
+            targetHandle: 'top',
+            type: 'smoothstep',
+            style: {
+              stroke: '#8b5cf6', // Purple for conception connections
+              strokeWidth: 3,
+              opacity: 0.9,
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              color: '#8b5cf6',
+            },
+          });
+        });
+      }
     }
 
     // Calculate positions
@@ -266,6 +459,13 @@ export const useTimelineData = ({
         node.position = pos;
       }
     });
+
+    // Debug total node counts
+    // Simple summary logging
+    const ageGroupNodes = generatedNodes.filter(n => n.type === 'ageGroup').length;
+    const milestoneNodes = generatedNodes.filter(n => n.type === 'milestone').length;
+    
+    console.log(`🎯 Timeline: ${ageGroupNodes} age groups, ${milestoneNodes} milestones, ${generatedEdges.length} edges`);
 
     return { nodes: generatedNodes, edges: generatedEdges };
   }, [

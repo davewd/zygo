@@ -23,15 +23,15 @@ export const ZOOM_LEVELS: TimelineZoomLevel[] = [
     level: 1,
     name: 'Age Group Focus',
     description: 'Focused view on specific age groups and milestones',
-    nodeTypes: ['ageGroup', 'milestone'],
+    nodeTypes: ['conception', 'ageGroup', 'milestone'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 60 }, // Prenatal to 5 years focus
   },
   {
     level: 2,
-    name: 'Milestone Deep Dive',
-    description: 'Detailed view of individual milestones and progress',
-    nodeTypes: ['milestone'],
-    timeSpan: { minAgeMonths: -12, maxAgeMonths: 36 }, // Prenatal to 3 years focus
+    name: 'Complete Granular View',
+    description: 'All nodes: conception, age groups, milestones, achievements, and steps',
+    nodeTypes: ['conception', 'ageGroup', 'milestone', 'achievement', 'step'],
+    timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // Full range with all detail
   },
 ];
 
@@ -88,5 +88,8 @@ export const NODE_DIMENSIONS = {
   ageGroup: { width: 400, height: 200 },
   category: { width: 340, height: 180 },
   milestone: { width: 300, height: 160 },
+  conception: { width: 200, height: 200 }, // Circular node
+  achievement: { width: 280, height: 140 },
+  step: { width: 240, height: 100 },
   default: { width: 200, height: 120 },
 } as const;

@@ -14,7 +14,7 @@ export type MilestoneStatus = 'not_started' | 'in_progress' | 'completed' | 'def
 
 export interface TimelineNode {
   id: string;
-  type: 'milestone' | 'category' | 'ageGroup';
+  type: 'milestone' | 'category' | 'ageGroup' | 'conception' | 'achievement' | 'step';
   data: any;
   position: { x: number; y: number };
   style?: Record<string, any>;
@@ -25,6 +25,8 @@ export interface TimelineEdge {
   id: string;
   source: string;
   target: string;
+  sourceHandle?: string;
+  targetHandle?: string;
   type?: string;
   style?: Record<string, any>;
   label?: string;
@@ -38,7 +40,7 @@ export interface TimelineZoomLevel {
   level: number;
   name: string;
   description: string;
-  nodeTypes: ('milestone' | 'category' | 'ageGroup')[];
+  nodeTypes: ('milestone' | 'category' | 'ageGroup' | 'conception' | 'achievement' | 'step')[];
   timeSpan: {
     minAgeMonths: number;
     maxAgeMonths: number;
