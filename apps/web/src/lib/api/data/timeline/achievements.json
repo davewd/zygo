@@ -8,7 +8,7 @@
     "toMilestone": "months_0_6_physical_1",
     "ageRangeKey": "0_1_months",
     "stepCount": 3,
-    "prerequisites": ["conception"]
+    "prerequisites": ["months_6_12_physical_1"]
   },
   {
     "id": "achievement-2",
@@ -19,7 +19,7 @@
     "toMilestone": "months_0_6_social_emotional_1",
     "ageRangeKey": "0_1_months",
     "stepCount": 4,
-    "prerequisites": ["conception"]
+    "prerequisites": ["months_0_6_language_1"]
   },
   {
     "id": "achievement-3",
@@ -30,7 +30,7 @@
     "toMilestone": "months_0_6_cognitive_1",
     "ageRangeKey": "1_2_months",
     "stepCount": 2,
-    "prerequisites": ["conception"]
+    "prerequisites": ["prenatal_third_cognitive_1"]
   },
   {
     "id": "achievement-4",
