@@ -1187,6 +1187,94 @@
         "zones": "Local catchment area",
         "currentlyEnrolling": "Kindergarten 2026"
       }
+    },
+    {
+      "id": "start-training-stafford",
+      "name": "START Training Stafford",
+      "description": "Allied health service provider specializing in exercise physiology, physiotherapy, and sports therapy with a focus on high-quality care irrespective of competition level or ability.",
+      "overview": "START Training Stafford is an allied health clinic that provides comprehensive exercise physiology, physiotherapy, and sports therapy services. Built upon foundational values of going above and beyond, being passionate, supportive, and people-centric, they believe everyone should have access to high-quality allied health service delivery.",
+      "location": {
+        "address": "Hickey Park, 35 Babarra Street",
+        "suburb": "Stafford",
+        "state": "QLD",
+        "postcode": "4053",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -27.4108,
+          "lng": 153.0169
+        }
+      },
+      "contact": {
+        "phone": "0411 299 110",
+        "email": "info@starttrainingstafford.com.au",
+        "website": "https://starttrainingstafford.com.au",
+        "bookingUrl": "https://starttrainingstafford.com.au/book-online-now",
+        "socialMedia": {
+          "facebook": "https://www.facebook.com/starttrainingstafford/",
+          "instagram": "https://www.instagram.com/starttrainingstafford/"
+        }
+      },
+      "providers": [],
+      "services": [
+        "exercise-physiology",
+        "physiotherapy",
+        "sports-therapy",
+        "injury-surgical-rehabilitation",
+        "musculoskeletal-pain-management",
+        "sports-performance",
+        "chronic-health-conditions",
+        "group-programs-classes"
+      ],
+      "operatingHours": {
+        "monday": { "open": "06:00", "close": "19:00" },
+        "tuesday": { "open": "05:30", "close": "19:00" },
+        "wednesday": { "open": "05:30", "close": "19:00" },
+        "thursday": { "open": "05:30", "close": "19:00" },
+        "friday": { "open": "05:30", "close": "15:00" },
+        "saturday": { "open": "07:00", "close": "13:00" },
+        "sunday": { "closed": true }
+      },
+      "adminHours": {
+        "monday": { "open": "08:00", "close": "18:00" },
+        "tuesday": { "open": "07:00", "close": "18:00" },
+        "wednesday": { "open": "07:00", "close": "18:00" },
+        "thursday": { "open": "07:00", "close": "18:00" },
+        "friday": { "open": "07:00", "close": "15:30" },
+        "saturday": { "closed": true },
+        "sunday": { "closed": true }
+      },
+      "features": [
+        "Exercise Physiology",
+        "Physiotherapy Services",
+        "Sports Therapy",
+        "Injury & Surgical Rehabilitation",
+        "Musculoskeletal Pain Management",
+        "Sports Performance Enhancement",
+        "Chronic Health Condition Management",
+        "Group Programs & Classes",
+        "Online Booking System",
+        "Compensation Scheme Support"
+      ],
+      "certifications": ["Allied Health Professional Registration"],
+      "insurance": ["Professional Indemnity", "Public Liability"],
+      "accessibility": [
+        "Accessible Location",
+        "All Ability Levels Welcome",
+        "Inclusive Service Delivery"
+      ],
+      "establishedYear": 2020,
+      "clinicType": "Allied Health Clinic",
+      "specializations": [
+        "Exercise Physiology",
+        "Physiotherapy",
+        "Sports Therapy",
+        "Injury Rehabilitation",
+        "Sports Performance",
+        "Chronic Disease Management"
+      ],
+      "compensationSchemes": ["DVA (Department of Veterans' Affairs)", "Medicare", "WorkCover"],
+      "coreValues": ["Going Above & Beyond", "Passionate", "Supportive", "People Centric"],
+      "philosophy": "Everyone should have access to the same high quality of allied health service delivery irrespective of level of competition or ability"
     }
   ]
 }
