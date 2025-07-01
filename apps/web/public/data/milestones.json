@@ -407,7 +407,9 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [],
+    "prerequisites": [
+      "birth"
+    ],
     "skills": [
       "Social response"
     ],
@@ -430,7 +432,9 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [],
+    "prerequisites": [
+      "birth"
+    ],
     "skills": [
       "Vocalization"
     ],
@@ -1654,7 +1658,7 @@
     "importance": "critical",
     "isTypical": true,
     "prerequisites": [
-      "years_10_12_physical_1"
+      "year_7_8_physical_1"
     ],
     "skills": [
       "Sexual maturation",
@@ -1681,7 +1685,9 @@
     "period": "adolescence",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [],
+    "prerequisites": [
+      "puberty"
+    ],
     "skills": [
       "Athletic performance"
     ],
@@ -1704,7 +1710,9 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [],
+    "prerequisites": [
+      "puberty"
+    ],
     "skills": [
       "Abstract thinking"
     ],
