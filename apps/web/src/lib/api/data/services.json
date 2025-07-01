@@ -739,11 +739,50 @@
       },
       "ageGroups": ["adult"],
       "tags": ["womens-health", "gynaecology", "specialist-care", "consultation"]
+    },
+    {
+      "id": "shekicks-weekly-classes",
+      "name": "SheKicks Weekly Classes (5-12 Years)",
+      "description": "Girls-only soccer classes focusing on skill development, confidence building, and creating a supportive environment where girls can thrive and develop their passion for soccer.",
+      "categoryId": "girls-soccer",
+      "duration": 60,
+      "price": {
+        "amount": 35,
+        "currency": "AUD"
+      },
+      "ageGroups": ["child"],
+      "tags": ["girls-only", "weekly-classes", "confidence-building", "skill-development"]
+    },
+    {
+      "id": "shekicks-development-squads",
+      "name": "SheKicks Development Squads",
+      "description": "Advanced training programs for girls showing soccer potential with focus on technical skills, tactical awareness, and competitive preparation in a supportive girls-only environment.",
+      "categoryId": "girls-development",
+      "duration": 90,
+      "price": {
+        "amount": 52,
+        "currency": "AUD"
+      },
+      "ageGroups": ["child"],
+      "tags": ["girls-only", "development-squads", "advanced-training", "competitive-prep"]
+    },
+    {
+      "id": "shekicks-holiday-camps",
+      "name": "SheKicks Holiday Camps",
+      "description": "Multi-day girls-only soccer camps during school holidays combining skill development, games, leadership activities, and fun in an empowering environment.",
+      "categoryId": "girls-holiday-programs",
+      "duration": 300,
+      "price": {
+        "amount": 75,
+        "currency": "AUD"
+      },
+      "ageGroups": ["child"],
+      "tags": ["girls-only", "holiday-camp", "leadership", "empowerment"]
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalServices": 52,
+    "totalServices": 55,
     "dataSource": "mock-api"
   }
 }

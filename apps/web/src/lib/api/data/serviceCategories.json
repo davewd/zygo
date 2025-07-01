@@ -23,11 +23,29 @@
       "name": "Child Development",
       "description": "Programs supporting physical and cognitive development",
       "taxonomy": "education"
+    },
+    {
+      "id": "girls-soccer",
+      "name": "Girls Soccer Programs",
+      "description": "Soccer programs designed specifically for girls",
+      "taxonomy": "activities"
+    },
+    {
+      "id": "girls-development",
+      "name": "Girls Development Programs",
+      "description": "Skill development and confidence building for girls",
+      "taxonomy": "activities"
+    },
+    {
+      "id": "girls-holiday-programs",
+      "name": "Girls Holiday Programs",
+      "description": "Holiday camps and programs for girls",
+      "taxonomy": "activities"
     }
   ],
   "metadata": {
     "lastUpdated": "2024-12-30T00:00:00Z",
-    "totalCategories": 4,
+    "totalCategories": 7,
     "dataSource": "mock-api"
   }
 }

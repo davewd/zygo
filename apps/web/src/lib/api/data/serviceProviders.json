@@ -800,11 +800,67 @@
         "notes": "Telehealth appointments available upon request"
       },
       "centerId": "forum-specialists-sydney"
+    },
+    {
+      "id": "sofia-martinez-shekicks",
+      "firstName": "Sofia",
+      "lastName": "Martinez",
+      "title": "SheKicks Head Coach & Girls Program Director",
+      "profileImage": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "bio": "Sofia is a passionate advocate for girls' soccer and the founder of SheKicks. With over 8 years of experience in youth soccer development, she specializes in creating empowering environments where girls can develop confidence, leadership skills, and a lifelong love of soccer.",
+      "credentials": [
+        {
+          "title": "FFA/FA Level 2 Coaching Certificate",
+          "abbreviation": "FA Level 2",
+          "issuingBody": "Football Australia",
+          "verified": true
+        },
+        {
+          "title": "Women's Football Development Certificate",
+          "abbreviation": "Women's Dev",
+          "issuingBody": "Football Australia",
+          "verified": true
+        },
+        {
+          "title": "Girls Leadership in Sport Certificate",
+          "abbreviation": "Girls Leadership",
+          "issuingBody": "Australian Sports Commission",
+          "verified": true
+        }
+      ],
+      "services": [
+        "shekicks-weekly-classes",
+        "shekicks-development-squads",
+        "shekicks-holiday-camps"
+      ],
+      "specializations": [
+        "Girls Soccer Development",
+        "Confidence Building",
+        "Leadership Development",
+        "Inclusive Coaching",
+        "Youth Mentoring",
+        "Female Athlete Development"
+      ],
+      "languages": ["English", "Spanish"],
+      "yearsExperience": 8,
+      "approach": "I focus on creating a supportive and empowering environment where girls feel confident to express themselves through soccer. My coaching emphasizes teamwork, leadership, and personal growth alongside technical development.",
+      "availability": {
+        "inPerson": true,
+        "telehealth": false,
+        "homeVisits": false,
+        "emergency": false
+      },
+      "pricing": {
+        "consultationFee": 80,
+        "followUpFee": 80,
+        "currency": "AUD"
+      },
+      "centerId": "shekicks-girls-soccer"
     }
   ],
   "metadata": {
     "lastUpdated": "2025-07-01T00:00:00Z",
-    "totalProviders": 14,
+    "totalProviders": 15,
     "dataSource": "mock-api"
   }
 }

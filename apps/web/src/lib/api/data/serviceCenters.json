@@ -1275,6 +1275,91 @@
       "compensationSchemes": ["DVA (Department of Veterans' Affairs)", "Medicare", "WorkCover"],
       "coreValues": ["Going Above & Beyond", "Passionate", "Supportive", "People Centric"],
       "philosophy": "Everyone should have access to the same high quality of allied health service delivery irrespective of level of competition or ability"
+    },
+    {
+      "id": "shekicks-girls-soccer",
+      "name": "SheKicks",
+      "description": "A girls-only soccer program that aims to get girls to fall in love with the beautiful game. We focus on producing more Sam Kerrs, Ellie Carpenters, and Kyah Symons through design rather than chance.",
+      "overview": "SheKicks is a specialized girls-only soccer program designed to provide young girls aged 5-12 with appropriate coaching and resources to develop techniques, skills, knowledge of the game, and confidence on and off the pitch. Our focus is to inspire girls to aim higher and reach their soccer goals.",
+      "mission": "To get girls to fall in love with the beautiful game and produce more female soccer stars through design rather than chance. We aim to inspire girls to reach higher levels and push them to achieve whichever goals they set themselves.",
+      "location": {
+        "address": "Multiple Locations",
+        "suburb": "Eastern Suburbs",
+        "state": "NSW",
+        "postcode": "2021",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8839,
+          "lng": 151.2421
+        }
+      },
+      "contact": {
+        "phone": "0416 628 531",
+        "email": "info@kickeroos.com.au",
+        "website": "https://www.kickeroos.com.au/shekicks",
+        "bookingUrl": "https://kickeroos.intrac.com.au/school/register.cfm?class=0&title=kick",
+        "socialMedia": [
+          {
+            "platform": "Instagram",
+            "url": "https://www.instagram.com/kickeroos_soccer_academy/"
+          },
+          {
+            "platform": "Facebook",
+            "url": "https://www.facebook.com/kickeroos/"
+          }
+        ]
+      },
+      "providers": ["sofia-martinez-shekicks"],
+      "services": [
+        "shekicks-weekly-classes",
+        "shekicks-development-squads",
+        "shekicks-holiday-camps"
+      ],
+      "operatingHours": {
+        "monday": { "open": "16:00", "close": "17:00" },
+        "tuesday": { "open": "16:00", "close": "17:00" },
+        "wednesday": { "closed": true, "open": "", "close": "" },
+        "thursday": { "open": "16:00", "close": "17:00" },
+        "friday": { "open": "16:00", "close": "17:15" },
+        "saturday": { "open": "08:00", "close": "11:00" },
+        "sunday": { "closed": true, "open": "", "close": "" }
+      },
+      "features": [
+        "Girls-only soccer programs for ages 5-12",
+        "Qualified female coaches specializing in girls development",
+        "Focus on confidence building and leadership development",
+        "Progressive skill development pathways",
+        "Supportive and empowering environment",
+        "Development squad pathways for advanced players",
+        "Holiday camps with leadership activities",
+        "Connection to broader Kickeroos network",
+        "Active Kids voucher acceptance",
+        "Small group sizes for personalized attention",
+        "Parent involvement and communication",
+        "Cultural diversity and inclusion focus"
+      ],
+      "certifications": [
+        "Football Australia Approved Programs",
+        "AFC Coaching Accreditation",
+        "Child Safe Organization Certification",
+        "Active Kids Provider Status",
+        "Girls Sport Australia Recognition"
+      ],
+      "accessibility": [
+        "Multiple accessible venue locations",
+        "Public transport accessible sites",
+        "Parking available at all venues",
+        "Inclusive coaching approaches",
+        "Equipment suitable for all skill levels",
+        "Scholarships available for families in need"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1606936021121-d17faccb57b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "establishedYear": 2018,
+      "culturalConsiderations": "SheKicks celebrates diversity and welcomes girls from all cultural backgrounds. We acknowledge that soccer is a universal language that empowers girls globally and are committed to creating an inclusive environment where every girl feels valued, supported, and empowered to reach her potential."
     }
   ]
 }

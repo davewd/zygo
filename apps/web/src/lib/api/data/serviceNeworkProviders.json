@@ -191,6 +191,108 @@
           "issuingBody": "International Childbirth Education Association"
         }
       ]
+    },
+    {
+      "id": "kickeroos-network",
+      "name": "Kickeroos",
+      "description": "Premier kids soccer coaching network specializing in youth development and girls programs",
+      "overview": "Kickeroos is Sydney's leading network of youth soccer programs, providing professional coaching for children aged 18 months to 12 years. Our network includes specialized programs like SheKicks for girls and partnerships with complementary physical activity centers to create a comprehensive youth development ecosystem.",
+      "mission": "To develop confident, skilled, and passionate young soccer players through fun, inclusive, and professional coaching programs that build both technical abilities and life skills.",
+      "foundedYear": 2012,
+      "headquarters": {
+        "address": "Multiple Locations",
+        "suburb": "Eastern Suburbs",
+        "state": "NSW",
+        "postcode": "2021",
+        "country": "Australia",
+        "coordinates": {
+          "lat": -33.8839,
+          "lng": 151.2421
+        }
+      },
+      "contact": {
+        "phone": "0416 628 531",
+        "email": "info@kickeroos.com.au",
+        "website": "https://www.kickeroos.com.au",
+        "bookingUrl": "https://www.kickeroos.com.au/trial-class",
+        "socialMedia": [
+          {
+            "platform": "Instagram",
+            "url": "https://www.instagram.com/kickeroos_soccer_academy/"
+          },
+          {
+            "platform": "Facebook",
+            "url": "https://www.facebook.com/kickeroos/"
+          }
+        ]
+      },
+      "brandColors": {
+        "primary": "#2B5D31",
+        "secondary": "#F39C12",
+        "accent": "#E74C3C"
+      },
+      "networkStats": {
+        "totalEducators": 8,
+        "totalCenters": 3,
+        "totalLocations": 12,
+        "countriesServed": ["Australia"],
+        "familiesTrained": 2500
+      },
+      "locations": [
+        {
+          "country": "Australia",
+          "state": "NSW",
+          "region": "Eastern Suburbs",
+          "centerCount": 3,
+          "educatorCount": 8
+        }
+      ],
+      "centers": ["kickeroos-soccer-center", "shekicks-girls-soccer", "active8kids-bondi-junction"],
+      "providers": ["james-thompson", "sofia-martinez", "michael-oconnor"],
+      "networkFeatures": [
+        "Professional Football Australia certified coaches",
+        "Age-appropriate programs for 18 months to 12 years",
+        "SheKicks all-girls academy promoting female participation",
+        "Development pathway to elite soccer programs",
+        "Small group sizes for individual attention",
+        "Multiple convenient Eastern Suburbs locations",
+        "Active Kids voucher acceptance",
+        "Partnership with complementary physical activity centers",
+        "Holiday camps and birthday party programs",
+        "Positive coaching philosophy emphasizing fun and skill development"
+      ],
+      "certifications": [
+        "Football Australia Approved Programs",
+        "AFC Coaching Accreditation",
+        "Australian Sports Commission Recognition",
+        "Child Safe Organization Certification",
+        "Active Kids Provider Status"
+      ],
+      "accreditations": [
+        "Football Australia Coaching Certification",
+        "Play Soccer Australia Recognition",
+        "Australian Sports Commission Endorsement"
+      ],
+      "partnerships": [
+        "Active8Kids - Complementary physical development",
+        "SheKicks - Girls soccer specialization",
+        "Eastern Suburbs Schools Network",
+        "Active Kids Program NSW"
+      ],
+      "awards": [
+        {
+          "title": "Best Youth Soccer Program Eastern Suburbs",
+          "year": 2023,
+          "issuingBody": "Sydney Youth Sports Awards"
+        },
+        {
+          "title": "Excellence in Girls Sport Development",
+          "year": 2022,
+          "issuingBody": "NSW Sport Recognition"
+        }
+      ],
+      "culturalConsiderations": "Kickeroos celebrates diversity and welcomes families from all cultural backgrounds. We acknowledge soccer as a universal language that brings communities together and are committed to creating an inclusive environment where every child feels valued and supported.",
+      "socialImpact": "Through our programs, we promote physical activity, social development, and confidence building in children. Our SheKicks program specifically addresses the participation gap in girls' sports, creating safe spaces for girls to develop skills and leadership qualities."
     }
   ]
 }
