@@ -24,28 +24,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
 import { ActorType, FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
-import { loadMilestonesFromJSON } from '../../lib/api/milestones';
+import { getAllMilestones, Milestone } from '../../lib/api/timeline';
 
-interface MilestoneDetailData {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  ageRange: string;
-  startMonths: number;
-  endMonths: number;
-  period: string;
-  importance: 'low' | 'medium' | 'high' | 'critical';
-  isTypical: boolean;
-  prerequisites?: string[];
-  skills?: string[];
-  observationTips?: string;
-  supportStrategies?: string;
-  redFlags?: string;
-  resources?: string;
-  createdDate: string;
-  modifiedDate: string;
-}
+// Use the Milestone type from timeline API directly
+type MilestoneDetailData = Milestone;
 
 // Simple Badge component
 const Badge: React.FC<{ className: string; children: React.ReactNode }> = ({
@@ -85,7 +67,7 @@ const MilestoneDetailPage: React.FC = () => {
 
       try {
         setLoading(true);
-        const milestones = await loadMilestonesFromJSON();
+        const milestones = await getAllMilestones();
         const foundMilestone = milestones.find((m) => m.id === milestoneId);
 
         if (!foundMilestone) {
