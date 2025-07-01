@@ -6,10 +6,10 @@ interface VerticalHandlesProps {
   includeHorizontalHandles?: boolean; // For backward compatibility
 }
 
-export const VerticalHandles = ({ 
-  showTarget = true, 
+export const VerticalHandles = ({
+  showTarget = true,
   showSource = true,
-  includeHorizontalHandles = false
+  includeHorizontalHandles = false,
 }: VerticalHandlesProps) => {
   return (
     <>
@@ -30,7 +30,7 @@ export const VerticalHandles = ({
           }}
         />
       )}
-      
+
       {/* Bottom handle for outgoing connections */}
       {showSource && (
         <Handle
@@ -48,7 +48,7 @@ export const VerticalHandles = ({
           }}
         />
       )}
-      
+
       {/* Optional horizontal handles for backward compatibility */}
       {includeHorizontalHandles && (
         <>
@@ -92,7 +92,7 @@ export const AllHandlesWithVerticalPriority = () => {
     <>
       {/* Primary vertical handles */}
       <VerticalHandles />
-      
+
       {/* Secondary horizontal handles (less prominent) */}
       <Handle
         type="target"

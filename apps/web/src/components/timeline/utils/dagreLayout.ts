@@ -1,5 +1,5 @@
 import dagre from 'dagre';
-import { TimelineNode, TimelineEdge } from '../types';
+import { TimelineEdge, TimelineNode } from '../types';
 
 export interface DagreLayoutOptions {
   rankdir?: 'TB' | 'BT' | 'LR' | 'RL';
@@ -82,8 +82,8 @@ const getNodeDimensions = (nodeType: string) => {
       return { width: 280, height: 180 };
     case 'milestone':
       return { width: 240, height: 160 };
-    case 'conception':
-      return { width: 200, height: 120 };
+    case 'keyMilestone':
+      return { width: 280, height: 200 }; // Larger for key milestones
     case 'achievement':
       return { width: 220, height: 140 };
     case 'step':
@@ -137,17 +137,19 @@ export const getHierarchicalLayout = (
     // Set rank based on node type and data to create hierarchy
     let rank = 0;
     
-    if (node.type === 'conception') {
-      rank = 0; // Top level
+    if (node.type === 'keyMilestone') {
+      // Key milestones (conception, graduation, first child) get priority
+      const months = node.data.months ? node.data.months[0] : 0;
+      rank = Math.floor(months / 12) + 1; // Group by year
     } else if (node.type === 'ageGroup') {
       // Age groups ordered by months
       const months = node.data.months ? node.data.months[0] : 0;
-      rank = Math.floor(months / 6) + 1; // Group by 6-month periods
+      rank = Math.floor(months / 6) + 10; // Group by 6-month periods, start after key milestones
     } else if (node.type === 'milestone') {
       // Milestones ordered by age and importance
       const months = node.data.months ? node.data.months[0] : 0;
       const importanceWeight = getImportanceWeight(node.data.importance);
-      rank = Math.floor(months / 3) + 10 + importanceWeight; // Start after age groups
+      rank = Math.floor(months / 3) + 20 + importanceWeight; // Start after age groups
     } else if (node.type === 'achievement') {
       rank = 100; // Lower priority
     } else if (node.type === 'step') {

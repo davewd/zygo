@@ -24,7 +24,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
 import { ActorType, FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
-import { loadMilestonesFromCSV } from '../../lib/api/milestones';
+import { loadMilestonesFromJSON } from '../../lib/api/milestones';
 
 interface MilestoneDetailData {
   id: string;
@@ -85,7 +85,7 @@ const MilestoneDetailPage: React.FC = () => {
 
       try {
         setLoading(true);
-        const milestones = await loadMilestonesFromCSV();
+        const milestones = await loadMilestonesFromJSON();
         const foundMilestone = milestones.find((m) => m.id === milestoneId);
 
         if (!foundMilestone) {

@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   loadAchievementsFromAPI,
   loadAgeRangesFromAPI,
-  loadMilestonesFromCSV,
   loadMilestonesFromJSON,
   loadStepsFromAPI,
   type Achievement,
@@ -24,10 +23,9 @@ import {
  * - Layer 1 (z-index: 1): Age ranges and their edges (bottom layer)
  * - Layer 2 (z-index: 2): Steps and their edges
  * - Layer 3 (z-index: 3): Achievements and their edges  
- * - Layer 4 (z-index: 4): Milestones, conception, and their edges (top layer)
+ * - Layer 4 (z-index: 4): Milestones, key milestones, and their edges (top layer)
  */
-import { calculateNodePositions } from '../utils/layoutCalculation';
-import { getHierarchicalLayout, getTimelineLayout, getVerticalTimelineLayout } from '../utils/dagreLayout';
+import { getVerticalTimelineLayout } from '../utils/dagreLayout';
 
 interface UseTimelineDataProps {
   pedagogyData?: PedagogyProfile;
@@ -68,22 +66,21 @@ export const useTimelineData = ({
         setMilestonesError(null);
         
         // Load all data concurrently
-        const [csvMilestones, jsonMilestones, ageRanges, achievementsData, stepsData] = await Promise.all([
-          loadMilestonesFromCSV(),
+        const [milestones, ageRanges, achievementsData, stepsData] = await Promise.all([
           loadMilestonesFromJSON(),
           loadAgeRangesFromAPI(),
           loadAchievementsFromAPI(),
           loadStepsFromAPI()
         ]);
         
-        setCsvMilestones(csvMilestones as any); // TODO: Fix type mismatch between API and component types
-        setJsonMilestones(jsonMilestones as any); // TODO: Fix type mismatch between API and component types
+        setCsvMilestones(milestones as any); // TODO: Fix type mismatch between API and component types
+        setJsonMilestones([]); // No longer using separate JSON milestones
         setAllAgeRanges(ageRanges);
         setAgeRanges(ageRanges);
         setAchievements(achievementsData);
         setSteps(stepsData);
         
-        console.log(`✅ Loaded ${csvMilestones.length} CSV milestones, ${jsonMilestones.length} JSON milestones, ${ageRanges.length} age ranges, ${achievementsData.length} achievements, ${stepsData.length} steps`);
+        console.log(`✅ Loaded ${milestones.length} milestones, ${ageRanges.length} age ranges, ${achievementsData.length} achievements, ${stepsData.length} steps`);
       } catch (error) {
         console.error('Error loading data:', error);
         setMilestonesError(error instanceof Error ? error.message : 'Failed to load data');
@@ -102,36 +99,8 @@ export const useTimelineData = ({
 
   // Generate nodes and edges based on current state
   const { nodes, edges } = useMemo(() => {
-    // Combine CSV and JSON milestones
-    const allMilestones = [...csvMilestones, ...jsonMilestones];
-    
-    if (!pedagogyData) {
-      // Demo nodes
-      const demoNodesData = [{ id: 'demo-overview', type: 'ageGroup' }];
-      const demoEdgesData: any[] = [];
-
-      const demoNodes: TimelineNode[] = [
-        {
-          id: 'demo-overview',
-          type: 'ageGroup',
-          data: {
-            title: 'Early Childhood (0-2 years)',
-            description: 'Critical foundational period for development',
-            totalMilestones: 25,
-            completedMilestones: 8,
-            inProgressMilestones: 5,
-          },
-          position: { x: 0, y: 100 },
-          draggable: false,
-        },
-      ];
-
-      // Apply Dagre layout to demo nodes with vertical Y-axis flow
-      const layoutedDemo = getVerticalTimelineLayout(demoNodes, demoEdgesData);
-
-      return { nodes: layoutedDemo.nodes, edges: [] };
-    }
-
+    // Use milestones from JSON (now stored in csvMilestones for backward compatibility)
+    const allMilestones = [...csvMilestones];
     const currentLevel = ZOOM_LEVELS[currentZoomLevel];
     const generatedNodes: TimelineNode[] = [];
     const generatedEdges: TimelineEdge[] = [];
@@ -142,24 +111,6 @@ export const useTimelineData = ({
       if (focusArea && nodeData && !nodeData.id?.includes(focusArea)) return false;
       return true;
     };
-
-    // Generate conception node (starting point)
-    if (shouldIncludeNode('conception')) {
-      generatedNodes.push({
-        id: 'conception',
-        type: 'conception',
-        data: {
-          title: 'Conception',
-          description: 'The beginning of human development',
-          date: 'Day 0',
-        },
-        position: { x: 0, y: 0 },
-        draggable: false,
-        style: {
-          zIndex: 4, // Top layer - same as milestones
-        },
-      });
-    }
 
     // Generate age groups
     if (shouldIncludeNode('ageGroup')) {
@@ -269,9 +220,13 @@ export const useTimelineData = ({
                   100
                 : Math.floor((milestoneIndex * 13 + category.length * 7) % 100);
 
+            // Check if this milestone has a milestoneType and should be a key milestone
+            const milestoneAnyForType = milestone as any;
+            const nodeType = milestoneAnyForType.milestoneType ? 'keyMilestone' : 'milestone';
+
             generatedNodes.push({
               id: milestoneId,
-              type: 'milestone',
+              type: nodeType,
               data: {
                 title: milestone.title,
                 description: milestone.description,
@@ -284,10 +239,11 @@ export const useTimelineData = ({
                 period: milestone.period,
                 importance: milestone.importance,
                 months: milestone.months,
+                milestoneType: milestoneAnyForType.milestoneType, // Pass milestoneType to component
               },
               position: { x: 0, y: 0 },
               style: {
-                zIndex: 4, // Top layer - milestones
+                zIndex: nodeType === 'keyMilestone' ? 5 : 4, // Key milestones get highest priority
               },
             });
 
@@ -432,39 +388,6 @@ export const useTimelineData = ({
           });
         }
       });
-    }
-
-    // Connect conception to the earliest milestones
-    if (shouldIncludeNode('conception') && shouldIncludeNode('milestone')) {
-      const conceptionNode = generatedNodes.find(n => n.type === 'conception');
-      if (conceptionNode) {
-        // Find milestones in the earliest age ranges
-        const earlyMilestones = generatedNodes.filter(n => 
-          n.type === 'milestone' && 
-          (n.data.ageRangeKey === '0_1_months' || n.data.ageRangeKey === 'prenatal')
-        );
-
-        earlyMilestones.forEach((milestone) => {
-          generatedEdges.push({
-            id: `conception-to-${milestone.id}`,
-            source: conceptionNode.id,
-            target: milestone.id,
-            sourceHandle: 'bottom',
-            targetHandle: 'top',
-            type: 'smoothstep',
-            style: {
-              stroke: '#8b5cf6', // Purple for conception connections
-              strokeWidth: 3,
-              opacity: 0.9,
-              zIndex: 4, // Top layer - conception edges
-            },
-            markerEnd: {
-              type: MarkerType.ArrowClosed,
-              color: '#8b5cf6',
-            },
-          });
-        });
-      }
     }
 
     // Calculate positions using Dagre layout with Y-axis vertical flow

@@ -1,7 +1,7 @@
 import { Users } from 'lucide-react';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLORS } from '../constants';
-import { DevelopmentCategory, MilestoneStatus } from '../types';
 import { VerticalHandles } from '../shared/VerticalHandles';
+import { DevelopmentCategory, MilestoneStatus } from '../types';
 
 interface MilestoneNodeProps {
   data: any;

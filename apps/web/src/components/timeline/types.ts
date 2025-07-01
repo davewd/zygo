@@ -1,5 +1,16 @@
 // Timeline-specific types and interfaces
 
+export interface ZoomLevel {
+  level: number;
+  name: string;
+  description: string;
+  nodeTypes: ('milestone' | 'keyMilestone' | 'category' | 'ageGroup' | 'achievement' | 'step')[];
+  timeSpan: {
+    minAgeMonths: number;
+    maxAgeMonths: number;
+  };
+}
+
 export type DevelopmentCategory =
   | 'physical'
   | 'cognitive'
@@ -14,7 +25,7 @@ export type MilestoneStatus = 'not_started' | 'in_progress' | 'completed' | 'def
 
 export interface TimelineNode {
   id: string;
-  type: 'milestone' | 'category' | 'ageGroup' | 'conception' | 'achievement' | 'step';
+  type: 'milestone' | 'keyMilestone' | 'category' | 'ageGroup' | 'achievement' | 'step';
   data: any;
   position: { x: number; y: number };
   style?: Record<string, any>;
@@ -40,7 +51,7 @@ export interface TimelineZoomLevel {
   level: number;
   name: string;
   description: string;
-  nodeTypes: ('milestone' | 'category' | 'ageGroup' | 'conception' | 'achievement' | 'step')[];
+  nodeTypes: ('milestone' | 'keyMilestone' | 'category' | 'ageGroup' | 'achievement' | 'step')[];
   timeSpan: {
     minAgeMonths: number;
     maxAgeMonths: number;

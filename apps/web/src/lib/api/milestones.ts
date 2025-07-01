@@ -191,8 +191,11 @@ export function generateAgeRangesFallback(): AgeRange[] {
 
 /**
  * Load milestones from CSV file
+ * @deprecated Use loadMilestonesFromJSON() instead. CSV support will be removed in a future version.
  */
 export async function loadMilestonesFromCSV(): Promise<MilestoneData[]> {
+  console.warn('loadMilestonesFromCSV is deprecated. Use loadMilestonesFromJSON() instead.');
+  
   try {
     // Check cache first
     const now = Date.now();

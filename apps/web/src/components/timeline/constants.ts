@@ -16,21 +16,21 @@ export const ZOOM_LEVELS: TimelineZoomLevel[] = [
     level: 0,
     name: 'Overview',
     description: 'Complete timeline overview from prenatal to 18 years',
-    nodeTypes: ['ageGroup'],
+    nodeTypes: ['ageGroup','keyMilestone'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // -12 months to 18 years
   },
   {
     level: 1,
     name: 'Age Group Focus',
     description: 'Focused view on specific age groups and milestones',
-    nodeTypes: ['conception', 'ageGroup', 'milestone'],
+    nodeTypes: ['ageGroup', 'milestone', 'keyMilestone'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 60 }, // Prenatal to 5 years focus
   },
   {
     level: 2,
     name: 'Complete Granular View',
-    description: 'All nodes: conception, age groups, milestones, achievements, and steps',
-    nodeTypes: ['conception', 'ageGroup', 'milestone', 'achievement', 'step'],
+    description: 'All nodes: age groups, milestones, achievements, and steps',
+    nodeTypes: ['ageGroup', 'milestone', 'keyMilestone', 'achievement', 'step'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // Full range with all detail
   },
 ];
@@ -88,7 +88,7 @@ export const NODE_DIMENSIONS = {
   ageGroup: { width: 400, height: 200 },
   category: { width: 340, height: 180 },
   milestone: { width: 300, height: 160 },
-  conception: { width: 200, height: 200 }, // Circular node
+  keyMilestone: { width: 320, height: 200 }, // Larger size for key milestones
   achievement: { width: 280, height: 140 },
   step: { width: 240, height: 100 },
   default: { width: 200, height: 120 },
