@@ -243,42 +243,42 @@ export const ReactFlowTimeline = ({
         preventScrolling={false}
         zoomOnDoubleClick={false}
       >
-      <Background />
-      <Controls />
-      <MiniMap
-        nodeColor={(node) => {
-          switch (node.type) {
-            case 'ageGroup':
-              return '#6b7280';
-            case 'milestone':
-              return '#3b82f6';
-            default:
-              return '#9ca3af';
-          }
-        }}
-        maskColor="rgba(255, 255, 255, 0.8)"
-        position="bottom-right"
-      />
+        <Background />
+        <Controls />
+        <MiniMap
+          nodeColor={(node) => {
+            switch (node.type) {
+              case 'ageGroup':
+                return '#6b7280';
+              case 'milestone':
+                return '#3b82f6';
+              default:
+                return '#9ca3af';
+            }
+          }}
+          maskColor="rgba(255, 255, 255, 0.8)"
+          position="bottom-right"
+        />
 
-      <TimelineControlPanel
-        currentZoomLevel={currentZoomLevel}
-        zoomLevels={zoomLevels}
-        focusArea={focusArea}
-        onZoomIn={handleZoomIn}
-        onZoomOut={handleZoomOut}
-        onFitView={handleFitView}
-        onVisualZoomIn={handleVisualZoomIn}
-        onVisualZoomOut={handleVisualZoomOut}
-      />
+        <TimelineControlPanel
+          currentZoomLevel={currentZoomLevel}
+          zoomLevels={zoomLevels}
+          focusArea={focusArea}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
+          onFitView={handleFitView}
+          onVisualZoomIn={handleVisualZoomIn}
+          onVisualZoomOut={handleVisualZoomOut}
+        />
 
-      <TimelineFilterPanel
-        selectedCategories={selectedCategories}
-        selectedFamilyMembers={selectedFamilyMembers}
-        pedagogyData={pedagogyData}
-        onToggleCategoryFilter={toggleCategoryFilter}
-        onClearAllFilters={clearAllFilters}
-        onSetSelectedFamilyMembers={setSelectedFamilyMembers}
-      />
+        <TimelineFilterPanel
+          selectedCategories={selectedCategories}
+          selectedFamilyMembers={selectedFamilyMembers}
+          pedagogyData={pedagogyData}
+          onToggleCategoryFilter={toggleCategoryFilter}
+          onClearAllFilters={clearAllFilters}
+          onSetSelectedFamilyMembers={setSelectedFamilyMembers}
+        />
       </ReactFlow>
     </div>
   );

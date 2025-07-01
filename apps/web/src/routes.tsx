@@ -23,8 +23,8 @@ import TimeLine from './pages/timeline';
 import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
 import HolidayPlanner from './pages/tools/HolidayPlanner';
 import Tools from './pages/tools/index';
-import Updates from './pages/updates/index';
 import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
+import Updates from './pages/updates/index';
 
 export const routes = createBrowserRouter([
   {

@@ -1,4 +1,4 @@
-import { Calendar, Bell, Star, Clock, ArrowRight } from 'lucide-react';
+import { ArrowRight, Baby, Camera, Clock, Heart, Plus, Users } from 'lucide-react';
 
 const Updates = () => {
   return (
@@ -8,13 +8,11 @@ const Updates = () => {
           {/* Header */}
           <div className="mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6">
-              <Bell className="w-10 h-10 text-white" />
+              <Heart className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Updates Hub
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Share Updates</h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Stay informed with the latest news, feature updates, and community announcements from Zygo.
+              Share precious moments, milestones, and memories with your family and loved ones.
             </p>
           </div>
 
@@ -28,37 +26,32 @@ const Updates = () => {
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-left">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Calendar className="w-6 h-6 text-blue-600" />
+                <Camera className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Release Notes
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Photo & Video Updates</h3>
               <p className="text-gray-600 text-sm">
-                Detailed changelogs for all new features, improvements, and bug fixes.
+                Share precious moments with photos and videos to keep family members connected.
               </p>
             </div>
 
             <div className="bg-white/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-left">
               <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                <Star className="w-6 h-6 text-purple-600" />
+                <Baby className="w-6 h-6 text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Feature Highlights
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Milestone Celebrations</h3>
               <p className="text-gray-600 text-sm">
-                Spotlight on exciting new capabilities and improvements to your experience.
+                Document and celebrate important milestones and achievements in your family's
+                journey.
               </p>
             </div>
 
             <div className="bg-white/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-left">
               <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                <Bell className="w-6 h-6 text-green-600" />
+                <Users className="w-6 h-6 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Announcements
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Family Sharing</h3>
               <p className="text-gray-600 text-sm">
-                Important updates, community news, and upcoming events.
+                Keep grandparents, relatives, and close friends updated with your family's progress.
               </p>
             </div>
           </div>
@@ -66,33 +59,33 @@ const Updates = () => {
           {/* What to Expect */}
           <div className="bg-white/60 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-left max-w-2xl mx-auto mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              What to Expect
+              What You Can Share
             </h2>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Regular Updates</h4>
+                  <h4 className="font-semibold text-gray-900">Daily Moments</h4>
                   <p className="text-gray-600 text-sm">
-                    Weekly feature releases and monthly community highlights
+                    Share everyday joys, funny moments, and special activities with your family
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Community Insights</h4>
+                  <h4 className="font-semibold text-gray-900">Growth Milestones</h4>
                   <p className="text-gray-600 text-sm">
-                    Stories and feedback from families using Zygo
+                    Document first steps, words, achievements, and developmental progress
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Expert Content</h4>
+                  <h4 className="font-semibold text-gray-900">Family Adventures</h4>
                   <p className="text-gray-600 text-sm">
-                    Educational articles and tips from healthcare professionals
+                    Share outings, vacations, celebrations, and special family events
                   </p>
                 </div>
               </div>
@@ -101,12 +94,10 @@ const Updates = () => {
 
           {/* Call to Action */}
           <div className="text-center">
-            <p className="text-gray-600 mb-6">
-              Want to be notified when updates are available?
-            </p>
+            <p className="text-gray-600 mb-6">Ready to start sharing your family's journey?</p>
             <button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
-              <Bell className="w-4 h-4" />
-              <span>Enable Notifications</span>
+              <Plus className="w-4 h-4" />
+              <span>Create Your First Update</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -114,7 +105,8 @@ const Updates = () => {
           {/* Footer Note */}
           <div className="mt-16 text-center">
             <p className="text-sm text-gray-500">
-              The Updates hub is currently under development. Check back soon for the latest news and announcements!
+              The Updates feature is currently under development. Soon you'll be able to share
+              beautiful updates with your family circle!
             </p>
           </div>
         </div>
