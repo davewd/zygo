@@ -1,4 +1,4 @@
-import { Badge, Calendar, Clock, MapPin, Users } from 'lucide-react';
+import { Badge, Calendar, MapPin, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { FeedItemTypeMap } from '../../../lib/api/feed';
 import { FeedItemActions, FeedItemHeader } from '../shared';
@@ -11,15 +11,15 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
   const [expandedPhotos, setExpandedPhotos] = useState<{ [key: number]: boolean }>({});
 
   const eventFollowUpData = item.eventFollowUpData;
-  
+
   if (!eventFollowUpData) {
     return null;
   }
 
   const togglePhotoExpand = (index: number) => {
-    setExpandedPhotos(prev => ({
+    setExpandedPhotos((prev) => ({
       ...prev,
-      [index]: !prev[index]
+      [index]: !prev[index],
     }));
   };
 
@@ -65,7 +65,7 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
             )}
           </div>
         </div>
-        
+
         {/* Event Details */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div className="flex items-center space-x-2">
@@ -75,18 +75,20 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
               {eventFollowUpData.eventTime && ` at ${eventFollowUpData.eventTime}`}
             </span>
           </div>
-          
+
           {eventFollowUpData.location && (
             <div className="flex items-center space-x-2">
               <MapPin className="w-4 h-4 text-emerald-600" />
               <span className="text-sm text-gray-700">{eventFollowUpData.location}</span>
             </div>
           )}
-          
+
           {eventFollowUpData.score && (
             <div className="flex items-center space-x-2">
               <Badge className="w-4 h-4 text-emerald-600" />
-              <span className="text-sm text-gray-700 font-medium">Score: {eventFollowUpData.score}</span>
+              <span className="text-sm text-gray-700 font-medium">
+                Score: {eventFollowUpData.score}
+              </span>
             </div>
           )}
         </div>
@@ -98,7 +100,7 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
           <Users className="w-4 h-4 mr-2 text-gray-600" />
           Photos from The Match ({eventFollowUpData.photos.length})
         </h4>
-        
+
         <div className="grid grid-cols-2 gap-4">
           {eventFollowUpData.photos.map((photo, index) => (
             <div key={index} className="relative group">
@@ -113,14 +115,14 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
                   e.currentTarget.style.display = 'none';
                 }}
               />
-              
+
               {/* Photo overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-200 rounded-lg flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-white text-xs bg-black bg-opacity-60 px-2 py-1 rounded">
                   Click to {expandedPhotos[index] ? 'collapse' : 'expand'}
                 </div>
               </div>
-              
+
               {/* Photo caption */}
               {photo.caption && (
                 <div className="absolute bottom-2 left-2 right-2 bg-black bg-opacity-60 text-white text-xs p-2 rounded">
@@ -142,7 +144,7 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
             <Badge className="w-4 h-4 mr-2 text-blue-600" />
             Event Partners
           </h4>
-          
+
           <div className="space-y-2">
             {eventFollowUpData.serviceNetwork && (
               <div className="flex items-center space-x-2">
@@ -152,7 +154,7 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
                 </span>
               </div>
             )}
-            
+
             {eventFollowUpData.serviceCenters && eventFollowUpData.serviceCenters.length > 0 && (
               <div className="flex items-start space-x-2">
                 <span className="text-sm text-gray-600">Centers:</span>
