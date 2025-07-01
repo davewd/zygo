@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 import { FeedListItemAwardPresentation } from './generic/FeedListItemAwardPresentation';
 import { FeedListItemEvent } from './generic/FeedListItemEvent';
+import { FeedListItemEventFollowUp } from './generic/FeedListItemEventFollowUp';
 import { FeedListItemImage } from './generic/FeedListItemImage';
 import { FeedListItemLink } from './generic/FeedListItemLink';
 import { FeedListItemMilestone } from './generic/FeedListItemMilestone';
@@ -74,6 +75,8 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
         return <FeedListItemSponsored item={item} />;
       case FeedItemType.EVENT:
         return <FeedListItemEvent item={item} />;
+      case FeedItemType.EVENT_FOLLOW_UP:
+        return <FeedListItemEventFollowUp item={item} />;
       case FeedItemType.AWARD_PRESENTATION:
         return <FeedListItemAwardPresentation item={item} />;
       case FeedItemType.VIDEO:

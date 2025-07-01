@@ -1,10 +1,10 @@
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@zygo/ui';
 import { ArrowRight, Award, Globe, Heart, MapPin, Star, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { CALMBIRTH_NETWORK_PROVIDER } from '../../data/network/calmbirthCenter';
+import { getServiceNetworkProviders } from '../../lib/api/serviceNetworkProviders';
 
 const ServiceNetworkProviders = () => {
-  const networks = [CALMBIRTH_NETWORK_PROVIDER];
+  const networks = getServiceNetworkProviders();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">

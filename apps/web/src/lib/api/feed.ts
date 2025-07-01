@@ -20,7 +20,8 @@ export enum FeedItemType {
   LIBRARY_BOOK_REMINDER = 'library_book_reminder',
   TOOL_CTA_TEMPORAL = 'tool_cta_temporal',
   SPONSORED = 'sponsored',
-  AWARD_PRESENTATION = 'award_presentation'
+  AWARD_PRESENTATION = 'award_presentation',
+  EVENT_FOLLOW_UP = 'event_follow_up'
 }
 
 // Actor types for feed authors
@@ -197,6 +198,32 @@ export interface FeedItemTypeMap {
     presentationDate?: string;
     presentationTime?: string;
     achievements?: string[];
+  };
+  // Event follow-up specific data
+  eventFollowUpData?: {
+    eventType: string;
+    eventName: string;
+    eventDate: string;
+    eventTime?: string;
+    location?: string;
+    score?: string;
+    photos: Array<{
+      url: string;
+      caption?: string;
+      sharedBy?: string;
+    }>;
+    badge: {
+      text: string;
+      details?: string;
+    };
+    serviceNetwork?: {
+      name: string;
+      id: string;
+    };
+    serviceCenters?: Array<{
+      name: string;
+      id: string;
+    }>;
   };
   // Mentions for social features
   mentions?: Array<{

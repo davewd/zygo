@@ -14,13 +14,13 @@ import {
   Users,
 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
-import { CALMBIRTH_NETWORK_PROVIDER } from '../../data/network/calmbirthCenter';
+import { getServiceNetworkProviders } from '../../lib/api/serviceNetworkProviders';
 
 const ServiceNetworkProviderDetail = () => {
   const { id } = useParams();
 
   // Get the network provider by ID
-  const networks = [CALMBIRTH_NETWORK_PROVIDER];
+  const networks = getServiceNetworkProviders();
   const network = networks.find((n) => n.id === id);
 
   if (!network) {
