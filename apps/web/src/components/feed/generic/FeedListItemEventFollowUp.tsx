@@ -137,43 +137,6 @@ export const FeedListItemEventFollowUp: React.FC<FeedListItemEventFollowUpProps>
         </div>
       </div>
 
-      {/* Service Network Information */}
-      {(eventFollowUpData.serviceNetwork || eventFollowUpData.serviceCenters) && (
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-            <Badge className="w-4 h-4 mr-2 text-blue-600" />
-            Event Partners
-          </h4>
-
-          <div className="space-y-2">
-            {eventFollowUpData.serviceNetwork && (
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">Network:</span>
-                <span className="text-sm font-medium text-blue-700">
-                  {eventFollowUpData.serviceNetwork.name}
-                </span>
-              </div>
-            )}
-
-            {eventFollowUpData.serviceCenters && eventFollowUpData.serviceCenters.length > 0 && (
-              <div className="flex items-start space-x-2">
-                <span className="text-sm text-gray-600">Centers:</span>
-                <div className="flex flex-wrap gap-2">
-                  {eventFollowUpData.serviceCenters.map((center, index) => (
-                    <span
-                      key={index}
-                      className="text-sm bg-blue-100 text-blue-700 px-2 py-1 rounded-md"
-                    >
-                      {center.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Actions */}
       <FeedItemActions item={item} />
     </div>

@@ -452,6 +452,7 @@ export const fetchFilteredFeedItems = async (query: FeedQuery = {}): Promise<Fee
     breastfeedingWeeklySummary: item.breastfeedingWeeklySummary,
     sponsoredData: item.sponsoredData,
     eventData: item.eventData,
+    eventFollowUpData: item.eventFollowUpData,
     toolCTATemporalData: item.toolCTATemporalData,
     milestoneId: item.milestoneId,
     hasReferences: item.hasReferences,
