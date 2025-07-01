@@ -1,16 +1,50 @@
-import { NavigationBar } from '@zygo/ui';
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+import { NavigationBar } from '@zygo/ui/src/navigation/NavigationBar';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { getCurrentUserData, switchUser } from '../lib/api/users';
 
 const Layout = () => {
+  const [currentUser, setCurrentUser] = useState<CurrentUser | undefined>();
+  const [otherUsers, setOtherUsers] = useState<CurrentUser[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load user data on component mount
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        setLoading(true);
+        const userData = await getCurrentUserData();
+        setCurrentUser(userData.currentUser);
+        setOtherUsers(userData.otherUsers);
+      } catch (error) {
+        console.error('Failed to load user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUserData();
+  }, []);
+
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
-    return ['a', 'b', 'c'].filter((item) => item.includes(query));
+    // Here you would typically implement search logic
   };
 
-  const handleUserSwitch = () => {
+  const handleUserSwitch = async () => {
     console.log('User switch requested');
-    // Here you would typically open a modal or navigate to switch user
+    // Here you would typically open a modal to select user
+    // For demo purposes, let's switch to the first other user
+    if (otherUsers.length > 0) {
+      try {
+        const newUser = await switchUser(otherUsers[0].id);
+        setCurrentUser(newUser);
+        // In a real app, you might also need to update the otherUsers list
+      } catch (error) {
+        console.error('Failed to switch user:', error);
+      }
+    }
   };
 
   const handleNotificationClick = () => {
@@ -19,50 +53,34 @@ const Layout = () => {
     window.location.href = '/notifications';
   };
 
-  // Sample current user data
-  const currentUser: CurrentUser = {
-    id: 'user-1',
-    firstName: 'Sarah',
-    lastName: 'Johnson',
-    email: 'sarah.johnson@example.com',
-    avatar:
-      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-  };
-
-  // Sample other users for switching
-  const otherUsers: CurrentUser[] = [
-    {
-      id: 'user-2',
-      firstName: 'David',
-      lastName: 'Smith',
-      email: 'david.smith@example.com',
-      avatar:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-    },
-    {
-      id: 'user-3',
-      firstName: 'Emma',
-      lastName: 'Wilson',
-      email: 'emma.wilson@example.com',
-      // No avatar to test fallback initials
-    },
-  ];
+  // Show loading state if data is still loading
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+        <div className="text-gray-600">Loading...</div>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <NavigationBar
-        onSearch={handleSearch}
-        searchPlaceholder="Search Zygo..."
-        currentUser={currentUser}
-        otherUsers={otherUsers}
-        onUserSwitch={handleUserSwitch}
-        notificationCount={3}
-        onNotificationClick={handleNotificationClick}
-      />
-      <div className="pt-20">
-        <Outlet />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className=" flex items-center justify-center">
+        <NavigationBar
+          onSearch={handleSearch}
+          searchPlaceholder="Search Zygo..."
+          currentUser={currentUser}
+          otherUsers={otherUsers}
+          onUserSwitch={handleUserSwitch}
+          notificationCount={3}
+          onNotificationClick={handleNotificationClick}
+        />
       </div>
-    </>
+      <div className="pt-24 px-2 md:px-4 h-[calc(100vh-6rem)]">
+        <div className="h-full w-full">
+          <Outlet />
+        </div>
+      </div>
+    </div>
   );
 };
 

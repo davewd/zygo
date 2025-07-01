@@ -912,7 +912,8 @@
       "organizationType": "digital-platform",
       "features": ["educational-resources", "printable-activities", "social-emotional-learning"]
     },
-    "type": "post",
+    "type": "link",
+    "url": "https://childhood101.com/mindful-affirmations-cards-kids/",
     "post": "Just released 55 powerful mindful affirmations for kids! These free printable cards help children develop self-confidence, emotional regulation, and positive self-talk. Perfect for morning routines, bedtime, or whenever kids need a gentle reminder of their worth. 💕 #socialemotionallearning #mindfulness #freeprintables #parenting",
     "imageUrl": "https://childhood101.com/wp-content/uploads/2024/mindful-affirmations-feature.jpg",
     "stats": {
@@ -964,7 +965,7 @@
       "organizationType": "digital-platform",
       "features": ["educational-resources", "printable-activities", "environmental-education"]
     },
-    "type": "post",
+    "type": "link",
     "post": "🌍 Earth Day is coming up! Here's a simple craft that helps kids connect with nature while developing fine motor skills. This Earth Day headband craft combines creativity with environmental awareness - perfect for preschoolers and early primary students. What are your favorite ways to teach kids about caring for our planet? #earthday #environment #kidscraft #sustainability #teacherresources",
     "imageUrl": "https://childhood101.com/wp-content/uploads/2024/earth-day-headband-feature.jpg",
     "stats": {
@@ -1009,7 +1010,7 @@
       "organizationType": "digital-platform",
       "features": ["educational-resources", "literacy-development", "creative-writing"]
     },
-    "type": "post",
+    "type": "link",
     "post": "✨ New free printable! These Fairy Tale Spin-A-Story starters are perfect for sparking creativity in young writers. Kids spin the wheel to get unique story combinations - it's amazing how imaginative they get when given a fun framework! Great for building narrative skills, vocabulary, and confidence in writing. Teachers love using these for writing centers! #literacy #creativewriting #storytelling #teacherresources #freeprintables",
     "imageUrl": "https://childhood101.com/wp-content/uploads/2024/fairy-tale-starters-feature.jpg",
     "stats": {
@@ -1054,7 +1055,7 @@
       "organizationType": "digital-platform",
       "features": ["educational-resources", "book-recommendations", "social-emotional-learning"]
     },
-    "type": "post",
+    "type": "link",
     "post": "📚 Just updated my list of the 35 Best Picture Books About Families! These books celebrate diverse family structures and help children understand that families come in all shapes and sizes. Reading diverse family stories helps kids develop empathy, acceptance, and pride in their own family structure. Which family-themed books do your children love? #diversefamilies #picturebooks #inclusion #socialemotionallearning #readinglist",
     "imageUrl": "https://childhood101.com/wp-content/uploads/2023/families-books-feature.jpg",
     "stats": {
@@ -1106,7 +1107,7 @@
       "organizationType": "digital-platform",
       "features": ["educational-resources", "social-emotional-learning", "character-education"]
     },
-    "type": "post",
+    "type": "link",
     "post": "💝 Our most popular free resource! The Kids Kindness Pack includes activities, discussion cards, and reflection sheets to help children develop empathy and kindness. In a world that sometimes feels divided, teaching children to be kind and understanding is more important than ever. These activities work beautifully at home or in the classroom. Download yours free! #kindness #empathy #charactereducation #socialemotionallearning #freeprintables #teacherresources",
     "imageUrl": "https://childhood101.com/wp-content/uploads/2024/kindness-pack-feature.jpg",
     "stats": {

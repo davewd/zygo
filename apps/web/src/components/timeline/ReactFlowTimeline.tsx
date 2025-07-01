@@ -222,26 +222,27 @@ export const ReactFlowTimeline = ({
   }, [nodes.length, reactFlowInstance, canvasDimensions]);
 
   return (
-    <ReactFlow
-      nodes={reactFlowNodes}
-      edges={reactFlowEdges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onNodeClick={onNodeClick}
-      nodeTypes={nodeTypes}
-      connectionMode={ConnectionMode.Loose}
-      fitView={false}
-      minZoom={0.3}
-      maxZoom={2}
-      defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
-      nodesDraggable={true}
-      nodesConnectable={false}
-      elementsSelectable={true}
-      panOnDrag={true}
-      onMoveEnd={onMoveEnd}
-      preventScrolling={false}
-      zoomOnDoubleClick={false}
-    >
+    <div className="w-full h-full">
+      <ReactFlow
+        nodes={reactFlowNodes}
+        edges={reactFlowEdges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeClick={onNodeClick}
+        nodeTypes={nodeTypes}
+        connectionMode={ConnectionMode.Loose}
+        fitView={false}
+        minZoom={0.3}
+        maxZoom={2}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        nodesDraggable={true}
+        nodesConnectable={false}
+        elementsSelectable={true}
+        panOnDrag={true}
+        onMoveEnd={onMoveEnd}
+        preventScrolling={false}
+        zoomOnDoubleClick={false}
+      >
       <Background />
       <Controls />
       <MiniMap
@@ -278,6 +279,7 @@ export const ReactFlowTimeline = ({
         onClearAllFilters={clearAllFilters}
         onSetSelectedFamilyMembers={setSelectedFamilyMembers}
       />
-    </ReactFlow>
+      </ReactFlow>
+    </div>
   );
 };

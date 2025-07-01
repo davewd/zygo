@@ -39,7 +39,7 @@ export default function TimeLine() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-full w-full">
       <VerticalTimeLine pedagogyData={pedagogyData || undefined} onNodeClick={handleNodeClick} />
     </div>
   );

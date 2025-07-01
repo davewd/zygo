@@ -1,0 +1,153 @@
+{
+  "serviceProviders": [
+    {
+      "id": "rebecca-cavallaro",
+      "firstName": "Rebecca",
+      "lastName": "Cavallaro",
+      "title": "IBCLC, Midwife, RN",
+      "centerName": "Full Circle Midwifery",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "type": "serviceProvider",
+      "specializations": ["Breastfeeding", "Midwifery", "Prenatal Care"],
+      "location": "Sydney, NSW"
+    },
+    {
+      "id": "jessica-dawson-dietitian",
+      "firstName": "Jessica",
+      "lastName": "Dawson",
+      "title": "PhD, Accredited Practicing Dietitian",
+      "centerName": "Kidney Nutrition",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      "type": "serviceProvider",
+      "specializations": ["Nutrition", "Kidney Health", "Dietary Planning"],
+      "location": "Melbourne, VIC"
+    },
+    {
+      "id": "peta-carige",
+      "firstName": "Peta",
+      "lastName": "Carige",
+      "title": "Advanced Sports Dietitian, APD",
+      "centerName": "Start Training",
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      "type": "serviceProvider",
+      "specializations": ["Sports Nutrition", "Performance Nutrition", "Weight Management"],
+      "location": "Brisbane, QLD"
+    },
+    {
+      "id": "gavin-mccormack",
+      "firstName": "Gavin",
+      "lastName": "McCormack",
+      "title": "Nutritionist, Health Coach",
+      "centerName": "Gavin McCormack Nutrition",
+      "profileImage": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face",
+      "type": "serviceProvider",
+      "specializations": ["Health Coaching", "Nutrition Counseling", "Lifestyle Medicine"],
+      "location": "Perth, WA"
+    },
+    {
+      "id": "dr-sarah-williams",
+      "firstName": "Sarah",
+      "lastName": "Williams",
+      "title": "MD, Pediatrician",
+      "centerName": "Children's Health Clinic",
+      "profileImage": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face",
+      "type": "serviceProvider",
+      "specializations": ["Pediatrics", "Child Development", "Immunizations"],
+      "location": "Adelaide, SA"
+    }
+  ],
+  "serviceCenters": [
+    {
+      "id": "full-circle-midwifery",
+      "name": "Full Circle Midwifery",
+      "description": "Comprehensive midwifery services for families",
+      "profileImage": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=150&h=150&fit=crop",
+      "type": "serviceCenter",
+      "services": ["Prenatal Care", "Birth Support", "Postpartum Care"],
+      "location": "Sydney, NSW"
+    },
+    {
+      "id": "kidney-nutrition-center",
+      "name": "Kidney Nutrition",
+      "description": "Specialized nutrition services for kidney health",
+      "profileImage": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=150&h=150&fit=crop",
+      "type": "serviceCenter",
+      "services": ["Nutrition Counseling", "Meal Planning", "Health Education"],
+      "location": "Melbourne, VIC"
+    },
+    {
+      "id": "start-training-center",
+      "name": "Start Training",
+      "description": "Sports nutrition and performance training center",
+      "profileImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop",
+      "type": "serviceCenter",
+      "services": ["Sports Nutrition", "Performance Training", "Body Composition Analysis"],
+      "location": "Brisbane, QLD"
+    },
+    {
+      "id": "family-wellness-hub",
+      "name": "Family Wellness Hub",
+      "description": "Holistic health services for the whole family",
+      "profileImage": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=150&h=150&fit=crop",
+      "type": "serviceCenter",
+      "services": ["Family Medicine", "Mental Health", "Preventive Care"],
+      "location": "Canberra, ACT"
+    }
+  ],
+  "serviceNetworks": [
+    {
+      "id": "australian-midwives-network",
+      "name": "Australian Midwives Network",
+      "description": "National network of certified midwives",
+      "profileImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=150&h=150&fit=crop",
+      "type": "serviceNetwork",
+      "services": ["Birth Support", "Prenatal Education", "Breastfeeding Support"],
+      "memberCount": 450,
+      "coverage": "Australia-wide"
+    },
+    {
+      "id": "nutrition-professionals-network",
+      "name": "Nutrition Professionals Network",
+      "description": "Network of accredited practicing dietitians",
+      "profileImage": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?w=150&h=150&fit=crop",
+      "type": "serviceNetwork",
+      "services": ["Clinical Nutrition", "Sports Nutrition", "Community Nutrition"],
+      "memberCount": 320,
+      "coverage": "Australia-wide"
+    }
+  ],
+  "communityProfiles": [
+    {
+      "id": "sarah-community",
+      "firstName": "Sarah",
+      "lastName": "Johnson",
+      "title": "First-time Mom",
+      "profileImage": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      "type": "communityProfile",
+      "role": "parent",
+      "interests": ["Breastfeeding", "Baby Sleep", "Postpartum Recovery"],
+      "location": "Sydney, NSW"
+    },
+    {
+      "id": "david-community",
+      "firstName": "David",
+      "lastName": "Smith",
+      "title": "Expecting Father",
+      "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "type": "communityProfile",
+      "role": "parent",
+      "interests": ["Prenatal Classes", "Birth Preparation", "Newborn Care"],
+      "location": "Melbourne, VIC"
+    },
+    {
+      "id": "emma-community",
+      "firstName": "Emma",
+      "lastName": "Wilson",
+      "title": "Mom of Twins",
+      "type": "communityProfile",
+      "role": "parent",
+      "interests": ["Twin Care", "Sleep Training", "Feeding Schedules"],
+      "location": "Brisbane, QLD"
+    }
+  ]
+}

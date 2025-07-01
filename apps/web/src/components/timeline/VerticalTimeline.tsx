@@ -54,7 +54,7 @@ export const VerticalTimeline = ({ pedagogyData, onNodeClick }: TimelinePedagogy
   );
 
   return (
-    <div className="h-screen w-full bg-gray-50">
+    <div className="h-full w-full bg-gray-50">
       <ReactFlowProvider>
         <ReactFlowTimeline
           nodes={nodes}

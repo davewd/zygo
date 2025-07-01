@@ -23,6 +23,7 @@ import TimeLine from './pages/timeline';
 import MilestoneDetailPage from './pages/timeline/MilestoneDetailPage';
 import HolidayPlanner from './pages/tools/HolidayPlanner';
 import Tools from './pages/tools/index';
+import Updates from './pages/updates/index';
 import BreastfeedingTimer from './pages/tools/postnatal/BreastfeedingTimer';
 
 export const routes = createBrowserRouter([
@@ -82,6 +83,7 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/notifications', element: <Notifications />, errorElement: <Error /> },
+      { path: '/updates', element: <Updates />, errorElement: <Error /> },
 
       // Add missing routes that are referenced in the codebase
       {
