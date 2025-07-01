@@ -2,6 +2,7 @@ import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
 import { NavigationBar } from '@zygo/ui/src/navigation/NavigationBar';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { searchImmediate } from '../lib/api/search';
 import { getCurrentUserData, switchUser } from '../lib/api/users';
 
 const Layout = () => {
@@ -30,6 +31,16 @@ const Layout = () => {
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
     // Here you would typically implement search logic
+  };
+
+  const handleSearchFunction = async (query: string) => {
+    try {
+      const response = await searchImmediate(query, 10);
+      return response.results;
+    } catch (error) {
+      console.error('Search failed:', error);
+      return [];
+    }
   };
 
   const handleUserSwitch = async () => {
@@ -67,6 +78,7 @@ const Layout = () => {
       <div className=" flex items-center justify-center">
         <NavigationBar
           onSearch={handleSearch}
+          searchFunction={handleSearchFunction}
           searchPlaceholder="Search Zygo..."
           currentUser={currentUser}
           otherUsers={otherUsers}

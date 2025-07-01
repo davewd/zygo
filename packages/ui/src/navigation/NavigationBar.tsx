@@ -96,6 +96,7 @@ interface SearchResponse {
 interface INavigationBarProps {
   className?: string;
   onSearch?: (query: string) => void;
+  searchFunction?: (query: string) => Promise<SearchAPIResult[]>;
   searchPlaceholder?: string;
   currentUser?: CurrentUser;
   onUserSwitch?: () => void;
@@ -109,6 +110,7 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
     {
       className,
       onSearch,
+      searchFunction,
       searchPlaceholder = 'Search providers, centers, networks...',
       currentUser,
       onUserSwitch,
@@ -138,51 +140,60 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
     };
 
     // Search API function
-    const performSearch = useCallback(async (query: string): Promise<SearchAPIResult[]> => {
-      if (!query || query.trim().length === 0) {
-        return [];
-      }
-
-      try {
-        const response = await fetch('/data/search.json');
-        if (!response.ok) {
-          throw new Error(`Failed to fetch search data: ${response.statusText}`);
+    const performSearch = useCallback(
+      async (query: string): Promise<SearchAPIResult[]> => {
+        if (!query || query.trim().length === 0) {
+          return [];
         }
 
-        const data = await response.json();
-        const allItems: SearchAPIResult[] = [
-          ...data.serviceProviders,
-          ...data.serviceCenters,
-          ...data.serviceNetworks,
-          ...data.communityProfiles,
-        ];
+        try {
+          // Use provided search function if available
+          if (searchFunction) {
+            return await searchFunction(query);
+          }
 
-        // Simple search filtering
-        const searchableQuery = query.toLowerCase().trim();
-        const matchingItems = allItems.filter((item) => {
-          const searchableFields = [
-            item.firstName,
-            item.lastName,
-            item.name,
-            item.title,
-            item.centerName,
-            item.description,
-            item.location,
-            item.role,
-            ...(item.specializations || []),
-            ...(item.services || []),
-            ...(item.interests || []),
-          ].filter(Boolean) as string[];
+          // Fallback: try to fetch from public data
+          const response = await fetch('/data/search.json');
+          if (!response.ok) {
+            throw new Error(`Failed to fetch search data: ${response.statusText}`);
+          }
 
-          return searchableFields.some((field) => field.toLowerCase().includes(searchableQuery));
-        });
+          const data = await response.json();
+          const allItems: SearchAPIResult[] = [
+            ...data.serviceProviders,
+            ...data.serviceCenters,
+            ...data.serviceNetworks,
+            ...data.communityProfiles,
+          ];
 
-        return matchingItems.slice(0, 10); // Limit to 10 results
-      } catch (error) {
-        console.error('Search error:', error);
-        throw error;
-      }
-    }, []);
+          // Simple search filtering
+          const searchableQuery = query.toLowerCase().trim();
+          const matchingItems = allItems.filter((item) => {
+            const searchableFields = [
+              item.firstName,
+              item.lastName,
+              item.name,
+              item.title,
+              item.centerName,
+              item.description,
+              item.location,
+              item.role,
+              ...(item.specializations || []),
+              ...(item.services || []),
+              ...(item.interests || []),
+            ].filter(Boolean) as string[];
+
+            return searchableFields.some((field) => field.toLowerCase().includes(searchableQuery));
+          });
+
+          return matchingItems.slice(0, 10); // Limit to 10 results
+        } catch (error) {
+          console.error('Search error:', error);
+          throw error;
+        }
+      },
+      [searchFunction]
+    );
 
     // Perform search when debounced query changes
     useEffect(() => {
