@@ -5,6 +5,7 @@
  * incorrect actor types, and recommended actions to fix data consistency issues.
  */
 
+import { isCommunityMemberHandle, isServiceProviderHandle, isSystemHandle, suggestActorType } from '../../utils/dataValidation';
 import communityData from '../data/community.json';
 import feedItemsData from '../data/feed/feed_items.json';
 import providersData from '../data/serviceProviders.json';
@@ -88,10 +89,9 @@ describe('Missing Data Report Tests', () => {
       const providerId = item.author.providerId;
 
       // Check if this should be a community member but profile doesn't exist
-      if (handle !== 'zygo_app' && handle !== 'family_events' && handle !== 'kambala_school') {
+      if (!isSystemHandle(handle)) {
         if (!communityHandles.has(handle) && !providerId) {
-          if (handle.includes('_mom') || handle.includes('_dad') || handle.includes('_mama') || handle.includes('_nana') || 
-              actorType === 'community-member') {
+          if (isCommunityMemberHandle(handle) || actorType === 'community-member') {
             missingCommunityProfiles.push({
               feedId: item.id,
               handle: handle,
@@ -249,18 +249,17 @@ describe('Missing Data Report Tests', () => {
       console.log('3. SET MISSING ACTOR TYPES:');
       feedItemsData.forEach(item => {
         if (!item.author.actorType) {
-          let suggestedType = 'unknown';
+          const suggestedType = suggestActorType(
+            item.author.handle, 
+            Boolean(item.author.providerId)
+          );
+          
+          // Special case: if handle exists in community data, it should be community-member
           if (communityHandles.has(item.author.handle)) {
-            suggestedType = 'community-member';
-          } else if (item.author.handle === 'zygo_app') {
-            suggestedType = 'system';
-          } else if (item.author.handle.includes('_school')) {
-            suggestedType = 'service-provider';
-          } else if (item.author.handle.includes('_mom') || item.author.handle.includes('_dad') || 
-                     item.author.handle.includes('_mama') || item.author.handle.includes('_nana')) {
-            suggestedType = 'community-member';
+            console.log(`   - ${item.id}: Set actorType to "community-member" for @${item.author.handle}`);
+          } else {
+            console.log(`   - ${item.id}: Set actorType to "${suggestedType}" for @${item.author.handle}`);
           }
-          console.log(`   - ${item.id}: Set actorType to "${suggestedType}" for @${item.author.handle}`);
         }
       });
     }
