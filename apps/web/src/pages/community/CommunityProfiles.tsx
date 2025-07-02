@@ -1,4 +1,4 @@
-import type { CommunityProfile, CommunitySearchFilters } from '@zygo/types/src/community';
+import type { CommunitySearchFilters } from '@zygo/types/src/community';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAsyncData } from '../../hooks/useAsyncData';
@@ -14,7 +14,12 @@ const CommunityProfiles = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   // Use the new useAsyncData hook to manage community profiles data
-  const { data: profiles = [], loading, error, retry } = useAsyncData(async () => {
+  const {
+    data: profiles = [],
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
     const response = await getAllCommunityProfiles();
     return response.data;
   }, []);

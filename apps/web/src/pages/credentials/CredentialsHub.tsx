@@ -1,4 +1,3 @@
-import type { CredentialProvider } from '@zygo/types/src/credentials';
 import { Award, Filter, Globe, Loader2, Search, TrendingUp, Users } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,9 +6,14 @@ import { getCredentialProviders } from '../../lib/api/credentials';
 
 const CredentialsHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   // Use the new useAsyncData hook to manage credential providers data
-  const { data: providers = [], loading, error, retry } = useAsyncData(async () => {
+  const {
+    data: providers = [],
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
     const response = await getCredentialProviders();
     return response.data || [];
   }, []);

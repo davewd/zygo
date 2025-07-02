@@ -1,4 +1,4 @@
-import type { CommunityProfile, PrimaryConsumer, UserRole } from '@zygo/types/src/community';
+import type { PrimaryConsumer, UserRole } from '@zygo/types/src/community';
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
 import {
   Activity,
@@ -38,7 +38,12 @@ const ProfileDetail = () => {
   ];
 
   // Use the new useAsyncData hook to manage community profile data
-  const { data: communityProfile, loading, error, retry } = useAsyncData(async () => {
+  const {
+    data: communityProfile,
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
     if (!id) return null;
 
     // Try to get by ID first, then by handle if it's not a valid ID format

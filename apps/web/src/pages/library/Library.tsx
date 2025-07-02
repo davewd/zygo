@@ -26,7 +26,6 @@ import {
   getLibraryCategories,
   getLibraryItems,
   type LibraryItem,
-  type LibraryProvider,
 } from '../../lib/api/library';
 
 const Library = () => {
@@ -35,32 +34,35 @@ const Library = () => {
   const [showFreeOnly, setShowFreeOnly] = useState(false);
 
   // Use the new useMultipleAsyncData hook to manage multiple data sources
-  const { data, loading, error, retry } = useMultipleAsyncData({
-    libraryItems: async () => {
-      const response = await getLibraryItems();
-      if (response.success && response.data) {
-        return response.data;
-      } else {
-        throw new Error(response.error || 'Failed to load library items');
-      }
+  const { data, loading, error, retry } = useMultipleAsyncData(
+    {
+      libraryItems: async () => {
+        const response = await getLibraryItems();
+        if (response.success && response.data) {
+          return response.data;
+        } else {
+          throw new Error(response.error || 'Failed to load library items');
+        }
+      },
+      categories: async () => {
+        const response = await getLibraryCategories();
+        if (response.success && response.data) {
+          return response.data;
+        } else {
+          throw new Error(response.error || 'Failed to load categories');
+        }
+      },
+      featuredProviders: async () => {
+        const response = await getFeaturedLibraryProviders();
+        if (response.success && response.data) {
+          return response.data;
+        } else {
+          throw new Error(response.error || 'Failed to load featured providers');
+        }
+      },
     },
-    categories: async () => {
-      const response = await getLibraryCategories();
-      if (response.success && response.data) {
-        return response.data;
-      } else {
-        throw new Error(response.error || 'Failed to load categories');
-      }
-    },
-    featuredProviders: async () => {
-      const response = await getFeaturedLibraryProviders();
-      if (response.success && response.data) {
-        return response.data;
-      } else {
-        throw new Error(response.error || 'Failed to load featured providers');
-      }
-    }
-  }, []);
+    []
+  );
 
   // Extract data with defaults
   const libraryItems = data.libraryItems || [];

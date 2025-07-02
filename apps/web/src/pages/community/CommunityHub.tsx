@@ -1,13 +1,17 @@
-import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
+import type { UserRole } from '@zygo/types/src/community';
 import { ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAsyncData } from '../../hooks/useAsyncData';
 import { getAllCommunityProfiles } from '../../lib/api/community';
 
 const CommunityHub = () => {
   // Use the new useAsyncData hook to manage community profiles data
-  const { data: profiles = [], loading, error, retry } = useAsyncData(async () => {
+  const {
+    data: profiles = [],
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
     const response = await getAllCommunityProfiles();
     return response.data;
   }, []);
