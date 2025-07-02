@@ -17,8 +17,9 @@ import {
   Stethoscope,
   Users,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { getServiceCenterById } from '../../lib/api/serviceCenters';
 
 // Define a local ServiceCenter type that matches our API structure
@@ -91,48 +92,33 @@ interface ServiceCenter {
 
 const ServiceCenterDetail = () => {
   const { id } = useParams();
-  const [center, setCenter] = useState<ServiceCenter | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [showPhone, setShowPhone] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
 
-  // Load service center details
-  useEffect(() => {
-    const loadCenter = async () => {
-      if (!id) {
-        setError('Service center ID not provided');
-        setLoading(false);
-        return;
-      }
+  // Use the new useAsyncData hook to manage service center data
+  const {
+    data: center,
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
+    if (!id) {
+      throw new Error('Service center ID not provided');
+    }
 
-      try {
-        setLoading(true);
-        setError(null);
+    const centerData = await getServiceCenterById(id);
 
-        const centerData = await getServiceCenterById(id);
+    if (!centerData) {
+      throw new Error('Service center not found');
+    }
 
-        if (!centerData) {
-          setError('Service center not found');
-          return;
-        }
-
-        // Map providersData to providers for component compatibility
-        const processedCenter = {
-          ...centerData,
-          providers: (centerData as any).providersData || centerData.providers || [],
-        };
-
-        setCenter(processedCenter as ServiceCenter);
-      } catch (err) {
-        setError('Failed to load service center details. Please try again.');
-        console.error('Error loading service center:', err);
-      } finally {
-        setLoading(false);
-      }
+    // Map providersData to providers for component compatibility
+    const processedCenter = {
+      ...centerData,
+      providers: (centerData as any).providersData || centerData.providers || [],
     };
 
-    loadCenter();
+    return processedCenter as ServiceCenter;
   }, [id]);
 
   if (loading) {

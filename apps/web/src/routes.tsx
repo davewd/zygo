@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import Community from './pages/community';
 import CommunityHub from './pages/community/CommunityHub';
 import CommunityProfiles from './pages/community/CommunityProfiles';
 import CommunityProviders from './pages/community/CommunityProviders';
@@ -13,6 +14,7 @@ import CredentialVerify from './pages/credentials/CredentialVerify';
 import Error from './pages/error/index';
 import Feed from './pages/feed/index';
 import Landing from './pages/Landing';
+import Library from './pages/library/Library';
 import ServiceCenterDetail from './pages/network/ServiceCenterDetail';
 import ServiceNetworkProviderDetail from './pages/network/ServiceNetworkProviderDetail';
 import ServiceNetworkProviders from './pages/network/ServiceNetworkProviders';
@@ -33,7 +35,8 @@ export const routes = createBrowserRouter([
       { path: '/feed', element: <Feed />, errorElement: <Error /> },
 
       // Community routes (consolidated from network)
-      { path: '/community', element: <CommunityHub />, errorElement: <Error /> },
+      { path: '/community', element: <Community />, errorElement: <Error /> },
+      { path: '/community/hub', element: <CommunityHub />, errorElement: <Error /> },
       { path: '/community/profiles', element: <CommunityProfiles />, errorElement: <Error /> },
       { path: '/community/profiles/:id', element: <ProfileDetail />, errorElement: <Error /> },
       { path: '/community/providers', element: <CommunityProviders />, errorElement: <Error /> },
@@ -92,7 +95,7 @@ export const routes = createBrowserRouter([
         errorElement: <Error />,
       },
       { path: '/about', element: <div>About Us - Coming Soon</div>, errorElement: <Error /> },
-      { path: '/library', element: <div>Library - Coming Soon</div>, errorElement: <Error /> },
+      { path: '/library', element: <Library />, errorElement: <Error /> },
       {
         path: '/community/groups',
         element: <div>Groups - Coming Soon</div>,

@@ -1,64 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProviderCard, type ProviderCardData } from '../../components/providers';
-import { getAllServiceProviders } from '../../lib/api/serviceProviders';
-
-// Define the service provider type from the API
-interface ServiceProvider {
-  id: string;
-  firstName: string;
-  lastName: string;
-  title?: string;
-  profileImage?: string;
-  bio: string;
-  credentials: {
-    title: string;
-    abbreviation?: string;
-    issuingBody: string;
-    verified: boolean;
-  }[];
-  services: string[];
-  specializations: string[];
-  languages: string[];
-  yearsExperience: number;
-  availability: {
-    inPerson: boolean;
-    telehealth: boolean;
-    homeVisits: boolean;
-    emergency: boolean;
-  };
-  pricing?: {
-    consultationFee?: number;
-    followUpFee?: number;
-    currency: string;
-  };
-  centerId?: string;
-}
+import { useServiceProviders } from '../../hooks/useComplexData';
 
 const ServiceProviders = () => {
-  // API state management
-  const [providers, setProviders] = useState<ServiceProvider[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Load service providers on component mount
-  useEffect(() => {
-    const loadProviders = async () => {
-      try {
-        setLoading(true);
-        const response = await getAllServiceProviders();
-        setProviders(response);
-        setError(null);
-      } catch (err) {
-        console.error('Failed to load service providers:', err);
-        setError('Failed to load service providers. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProviders();
-  }, []);
+  // Use the specialized hook for service providers
+  const {
+    providers: allProviders,
+    availableSpecialties,
+    stats,
+    loading,
+    error,
+    retry,
+  } = useServiceProviders();
 
   if (loading) {
     return (
@@ -81,7 +37,7 @@ const ServiceProviders = () => {
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
               <button
-                onClick={() => window.location.reload()}
+                onClick={retry}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -94,14 +50,14 @@ const ServiceProviders = () => {
   }
 
   // Group providers by category/specialization for better organization
-  const providersByCategory = providers.reduce((acc, provider) => {
+  const providersByCategory = allProviders.reduce((acc, provider) => {
     const primarySpecialization = provider.specializations[0] || 'Other';
     if (!acc[primarySpecialization]) {
       acc[primarySpecialization] = [];
     }
     acc[primarySpecialization].push(provider);
     return acc;
-  }, {} as Record<string, ServiceProvider[]>);
+  }, {} as Record<string, typeof allProviders>);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zygo-cream/30 to-white">
@@ -120,7 +76,7 @@ const ServiceProviders = () => {
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <div className="text-3xl font-bold text-zygo-red mb-2">{providers.length}</div>
+            <div className="text-3xl font-bold text-zygo-red mb-2">{allProviders.length}</div>
             <div className="text-gray-600">Total Providers</div>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
@@ -131,7 +87,7 @@ const ServiceProviders = () => {
           </div>
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="text-3xl font-bold text-zygo-red mb-2">
-              {providers.filter((p) => p.availability.telehealth).length}
+              {allProviders.filter((p) => p.availability.telehealth).length}
             </div>
             <div className="text-gray-600">Telehealth Available</div>
           </div>
@@ -141,16 +97,21 @@ const ServiceProviders = () => {
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Featured Providers</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {providers.slice(0, 6).map((provider) => {
+            {allProviders.slice(0, 6).map((provider) => {
               // Transform the provider data to match ProviderCardData interface
               const providerCardData: ProviderCardData = {
                 id: provider.id,
-                firstName: provider.firstName,
-                lastName: provider.lastName,
+                firstName: provider.fullName.split(' ')[0],
+                lastName: provider.fullName.split(' ').slice(1).join(' '),
                 title: provider.title,
                 profileImage: provider.profileImage,
                 bio: provider.bio,
-                credentials: provider.credentials,
+                credentials: provider.credentials.map((cred) => ({
+                  title: cred.title,
+                  abbreviation: cred.abbreviation,
+                  issuingBody: cred.issuingBody,
+                  verified: cred.verified,
+                })),
                 specializations: provider.specializations,
                 yearsExperience: provider.yearsExperience,
                 availability: provider.availability,
@@ -183,8 +144,8 @@ const ServiceProviders = () => {
               >
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{category}</h3>
                 <p className="text-gray-600 mb-3">
-                  {categoryProviders.length} provider{categoryProviders.length !== 1 ? 's' : ''}{' '}
-                  available
+                  {(categoryProviders as any[]).length} provider
+                  {(categoryProviders as any[]).length !== 1 ? 's' : ''} available
                 </p>
                 <div className="text-zygo-red font-medium text-sm">Explore {category} →</div>
               </Link>

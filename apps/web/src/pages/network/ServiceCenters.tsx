@@ -16,8 +16,9 @@ import {
   Star,
   Users,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import {
   getAllServiceCenters,
   searchServiceCenters,
@@ -76,9 +77,6 @@ interface ServiceCenter {
 }
 
 const ServiceCenters = () => {
-  const [serviceCenters, setServiceCenters] = useState<ServiceCenter[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -86,36 +84,28 @@ const ServiceCenters = () => {
     [key: string]: { phone: boolean; email: boolean };
   }>({});
 
-  // Load service centers
-  useEffect(() => {
-    const loadServiceCenters = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  // Use useAsyncData to manage service centers data
+  const {
+    data: serviceCenters = [],
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
+    const filters: ServiceCenterFilters = {};
+    if (selectedTags.length > 0) {
+      filters.features = selectedTags;
+    }
 
-        const filters: ServiceCenterFilters = {};
-        if (selectedTags.length > 0) {
-          filters.features = selectedTags;
-        }
+    let response;
+    if (searchTerm.trim()) {
+      response = await searchServiceCenters(searchTerm, filters);
+    } else {
+      response = await getAllServiceCenters(filters);
+    }
 
-        let response;
-        if (searchTerm.trim()) {
-          response = await searchServiceCenters(searchTerm, filters);
-        } else {
-          response = await getAllServiceCenters(filters);
-        }
-
-        setServiceCenters(response.serviceCenters as ServiceCenter[]);
-      } catch (err) {
-        setError('Failed to load service centers. Please try again.');
-        console.error('Error loading service centers:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadServiceCenters();
-  }, [searchTerm, selectedTags]);
+    // Handle both array and wrapped response formats
+    return Array.isArray(response) ? response : response.serviceCenters || [];
+  }, [selectedTags, searchTerm]);
 
   const toggleContactVisibility = (centerId: string, type: 'phone' | 'email') => {
     setVisibleContact((prev) => ({

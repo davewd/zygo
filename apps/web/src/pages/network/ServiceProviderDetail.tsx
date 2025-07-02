@@ -26,27 +26,54 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import FeedListItem from '../../components/feed/FeedListItem';
-import { fetchProviderFeedItems, type FeedItemTypeMap } from '../../lib/api/feed';
-import {
-  getCenterForProvider,
-  getServiceProviderById,
-  type ServiceCenter,
-  type ServiceProvider,
-} from '../../lib/api/serviceProviders';
+import { useAsyncData, useMultipleAsyncData } from '../../hooks/useAsyncData';
+import { fetchProviderFeedItems } from '../../lib/api/feed';
+import { getCenterForProvider, getServiceProviderById } from '../../lib/api/serviceProviders';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [providerFeedItems, setProviderFeedItems] = useState<FeedItemTypeMap[]>([]);
-  const [feedLoading, setFeedLoading] = useState(false);
-  const [provider, setProvider] = useState<ServiceProvider | null>(null);
-  const [center, setCenter] = useState<ServiceCenter | null>(null);
-  const [loading, setLoading] = useState(true);
 
   // Get tab from URL params, default to 'activity'
   const tabFromUrl = searchParams.get('tab') || 'activity';
   const [activeTab, setActiveTab] = useState(tabFromUrl);
+
+  // Use useMultipleAsyncData to fetch both provider and center data
+  const { data, loading, error, retry } = useMultipleAsyncData(
+    {
+      provider: async () => {
+        if (!id) throw new Error('Provider ID is required');
+        return await getServiceProviderById(id);
+      },
+      center: async () => {
+        if (!id) return null;
+        try {
+          return await getCenterForProvider(id);
+        } catch (error) {
+          // Center might not exist for this provider
+          return null;
+        }
+      },
+    },
+    [id]
+  );
+
+  const provider = data.provider || null;
+  const center = data.center || null;
+
+  // Separate async data for feed items since they depend on the provider being loaded
+  const { data: feedResponse, loading: feedLoading } = useAsyncData(async () => {
+    if (!provider?.id) return { items: [] };
+    try {
+      return await fetchProviderFeedItems(provider.id);
+    } catch (error) {
+      console.error('Failed to load feed items:', error);
+      return { items: [] };
+    }
+  }, [provider?.id]);
+
+  const providerFeedItems = Array.isArray(feedResponse) ? feedResponse : feedResponse?.items || [];
 
   const tabs = [
     { id: 'activity', label: 'Activity', icon: Star },
@@ -71,57 +98,34 @@ const ServiceProviderDetail = () => {
     }
   }, [searchParams]);
 
-  // Load provider data
-  useEffect(() => {
-    const loadProvider = async () => {
-      if (!id) return;
-
-      setLoading(true);
-      try {
-        const providerData = await getServiceProviderById(id);
-        setProvider(providerData);
-
-        if (providerData?.id) {
-          const centerData = getCenterForProvider(providerData.id);
-          setCenter(centerData);
-        }
-      } catch (error) {
-        console.error('Error loading provider:', error);
-        setProvider(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProvider();
-  }, [id]);
-
-  // Load provider feed data using the unified API
-  useEffect(() => {
-    const loadProviderFeed = async () => {
-      if (!id) return;
-
-      setFeedLoading(true);
-      try {
-        const response = await fetchProviderFeedItems(id, { limit: 10 });
-        setProviderFeedItems(response.items);
-      } catch (error) {
-        console.error('Failed to load provider feed:', error);
-        setProviderFeedItems([]);
-      } finally {
-        setFeedLoading(false);
-      }
-    };
-
-    loadProviderFeed();
-  }, [id]);
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zygo-red mx-auto mb-4"></div>
           <p className="text-gray-600">Loading provider details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Error Loading Provider</h1>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <div className="space-x-4">
+            <button
+              onClick={retry}
+              className="bg-zygo-red text-white px-4 py-2 rounded hover:bg-zygo-red/90 transition-colors"
+            >
+              Try Again
+            </button>
+            <Link to="/community/providers">
+              <Button variant="outline">Back to Providers</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );

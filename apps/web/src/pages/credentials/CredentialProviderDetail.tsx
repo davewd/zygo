@@ -1,4 +1,3 @@
-import type { CredentialProvider } from '@zygo/types/src/credentials';
 import {
   ArrowLeft,
   Calendar,
@@ -10,43 +9,30 @@ import {
   Shield,
   XCircle,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { getCredentialProviderById } from '../../lib/api/credentialProviders';
 
 const CredentialProviderDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [provider, setProvider] = useState<CredentialProvider | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadProvider = async () => {
-      if (!id) {
-        setError('No provider ID provided');
-        setLoading(false);
-        return;
-      }
+  // Use the new useAsyncData hook to manage provider data
+  const {
+    data: provider,
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
+    if (!id) {
+      throw new Error('No provider ID provided');
+    }
 
-      try {
-        setLoading(true);
-        const response = await getCredentialProviderById(id);
-        if (response.success && response.data) {
-          setProvider(response.data);
-          setError(null);
-        } else {
-          setProvider(null);
-          setError(response.error || 'Provider not found');
-        }
-      } catch (err) {
-        console.error('Failed to load credential provider:', err);
-        setError('Failed to load credential provider. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProvider();
+    const response = await getCredentialProviderById(id);
+    if (response.success && response.data) {
+      return response.data;
+    } else {
+      throw new Error(response.error || 'Provider not found');
+    }
   }, [id]);
 
   if (loading) {

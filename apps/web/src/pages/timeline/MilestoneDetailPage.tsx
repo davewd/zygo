@@ -19,7 +19,7 @@ import {
   Users,
   Video,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { useAsyncData } from '../../hooks/useAsyncData';
@@ -52,10 +52,14 @@ const MilestoneDetailPage: React.FC = () => {
 
   const [selectedFamilyMember, setSelectedFamilyMember] = useState<string>('');
   const [currentProgress, setCurrentProgress] = useState<MilestoneProgress | null>(null);
-  const [relatedActivities, setRelatedActivities] = useState<FeedItemTypeMap[]>([]);
 
   // Use the new useAsyncData hook to manage milestone data
-  const { data: milestone, loading, error, retry } = useAsyncData(async () => {
+  const {
+    data: milestone,
+    loading,
+    error,
+    retry,
+  } = useAsyncData(async () => {
     if (!milestoneId) {
       throw new Error('Milestone ID is required');
     }
@@ -70,135 +74,131 @@ const MilestoneDetailPage: React.FC = () => {
     return foundMilestone;
   }, [milestoneId]);
 
-        // Set selected family member
-        if (familyMemberId) {
-          setSelectedFamilyMember(familyMemberId);
-        } else if (pedagogyData?.familyMembers?.[0]) {
-          setSelectedFamilyMember(pedagogyData.familyMembers[0].id);
-        }
-
-        // Generate mock activity posts as feed items
-        const mockActivities: FeedItemTypeMap[] = [
-          {
-            id: '1',
-            type: FeedItemType.POST,
-            author: {
-              name: 'Sarah Johnson',
-              handle: 'sarah_mama',
-              avatar:
-                'https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face',
-              actorType: ActorType.COMMUNITY_MEMBER,
-              role: 'parent',
-              location: {
-                suburb: 'Paddington',
-                state: 'NSW',
-                country: 'Australia',
+  // Generate mock activity posts as feed items for related activities
+  const relatedActivities: FeedItemTypeMap[] = milestone
+    ? [
+        {
+          id: '1',
+          type: FeedItemType.POST,
+          author: {
+            name: 'Sarah Johnson',
+            handle: 'sarah_mama',
+            avatar:
+              'https://images.unsplash.com/photo-1494790108755-2616b612b147?w=150&h=150&fit=crop&crop=face',
+            actorType: ActorType.COMMUNITY_MEMBER,
+            role: 'parent',
+            location: {
+              suburb: 'Paddington',
+              state: 'NSW',
+              country: 'Australia',
+            },
+          },
+          title: `Achievement: ${milestone.title}`,
+          post: `Just achieved the "${milestone.title}" milestone! So proud of our little one's progress.`,
+          metadata: {
+            createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+          },
+          stats: {
+            likes: 12,
+            comments: 3,
+            reposts: 0,
+            shares: 1,
+          },
+          privacy: {
+            visibility: 'group' as any,
+            sharedWith: [{ type: 'group', name: 'Family', id: 'family_1' }],
+          },
+        },
+        {
+          id: '2',
+          type: FeedItemType.POST,
+          author: {
+            name: 'Dr. Emily Chen',
+            handle: 'dr_emily_chen',
+            avatar:
+              'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+            verified: true,
+            actorType: ActorType.SERVICE_PROVIDER,
+            title: 'Pediatric Development Specialist',
+            credentials: [
+              {
+                title: 'Doctor of Medicine',
+                abbreviation: 'MD',
+                issuingBody: 'Medical Board',
+                verified: true,
               },
-            },
-            title: `Achievement: ${foundMilestone.title}`,
-            post: `Just achieved the "${foundMilestone.title}" milestone! So proud of our little one's progress.`,
-            metadata: {
-              createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-            },
-            stats: {
-              likes: 12,
-              comments: 3,
-              reposts: 0,
-              shares: 1,
-            },
-            privacy: {
-              visibility: 'group' as any,
-              sharedWith: [{ type: 'group', name: 'Family', id: 'family_1' }],
+            ],
+            yearsExperience: 12,
+            specializations: ['child development', 'pediatrics'],
+            centerName: "Children's Development Centre",
+          },
+          title: `Tip for ${milestone.title}`,
+          post: `Great question about ${milestone.title}! Here are some activities that can help: ${milestone.supportStrategies}`,
+          metadata: {
+            createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+          },
+          stats: {
+            likes: 8,
+            comments: 1,
+            reposts: 2,
+            shares: 0,
+          },
+          privacy: {
+            visibility: 'public' as any,
+            sharedWith: [],
+          },
+        },
+        {
+          id: '3',
+          type: FeedItemType.POST,
+          author: {
+            name: 'Mike Peterson',
+            handle: 'mike_dad',
+            avatar:
+              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+            actorType: ActorType.COMMUNITY_MEMBER,
+            role: 'parent',
+            location: {
+              suburb: 'Bondi',
+              state: 'NSW',
+              country: 'Australia',
             },
           },
-          {
-            id: '2',
-            type: FeedItemType.POST,
-            author: {
-              name: 'Dr. Emily Chen',
-              handle: 'dr_emily_chen',
-              avatar:
-                'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
-              verified: true,
-              actorType: ActorType.SERVICE_PROVIDER,
-              title: 'Pediatric Development Specialist',
-              credentials: [
-                {
-                  title: 'Doctor of Medicine',
-                  abbreviation: 'MD',
-                  issuingBody: 'Medical Board',
-                  verified: true,
-                },
-              ],
-              yearsExperience: 12,
-              specializations: ['child development', 'pediatrics'],
-              centerName: "Children's Development Centre",
-            },
-            title: `Tip for ${foundMilestone.title}`,
-            post: `Great question about ${foundMilestone.title}! Here are some activities that can help: ${foundMilestone.supportStrategies}`,
-            metadata: {
-              createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-            },
-            stats: {
-              likes: 8,
-              comments: 1,
-              reposts: 2,
-              shares: 0,
-            },
-            privacy: {
-              visibility: 'public' as any,
-              sharedWith: [],
-            },
+          title: `Question about ${milestone.title}`,
+          post: `Any tips for helping with ${milestone.title}? Our child seems to be struggling with this milestone.`,
+          metadata: {
+            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
           },
-          {
-            id: '3',
-            type: FeedItemType.POST,
-            author: {
-              name: 'Mike Peterson',
-              handle: 'mike_dad',
-              avatar:
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-              actorType: ActorType.COMMUNITY_MEMBER,
-              role: 'parent',
-              location: {
-                suburb: 'Bondi',
-                state: 'NSW',
-                country: 'Australia',
-              },
-            },
-            title: `Question about ${foundMilestone.title}`,
-            post: `Any tips for helping with ${foundMilestone.title}? Our child seems to be struggling with this milestone.`,
-            metadata: {
-              createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            },
-            stats: {
-              likes: 5,
-              comments: 6,
-              reposts: 0,
-              shares: 1,
-            },
-            privacy: {
-              visibility: 'group' as any,
-              sharedWith: [{ type: 'group', name: 'Parents Support', id: 'parents_1' }],
-            },
+          stats: {
+            likes: 5,
+            comments: 6,
+            reposts: 0,
+            shares: 1,
           },
-        ];
-        setRelatedActivities(mockActivities);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load milestone data');
-      } finally {
-        setLoading(false);
-      }
-    };
+          privacy: {
+            visibility: 'group' as any,
+            sharedWith: [{ type: 'group', name: 'Parents Support', id: 'parents_1' }],
+          },
+        },
+      ]
+    : [];
 
-    loadMilestoneData();
-  }, [milestoneId, familyMemberId, pedagogyData]);
+  // Set selected family member from URL param or default to first family member
+  React.useEffect(() => {
+    if (familyMemberId) {
+      setSelectedFamilyMember(familyMemberId);
+    } else if (pedagogyData?.familyMembers?.[0]) {
+      setSelectedFamilyMember(pedagogyData.familyMembers[0].id);
+    }
+  }, [familyMemberId, pedagogyData]);
 
   // Update current progress when family member or pedagogy data changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (pedagogyData && selectedFamilyMember && milestoneId) {
+      // Since this is a detail page for a specific milestone, we need to find the progress
+      // that corresponds to this family member. The progress entries might be structured differently
       const progress = pedagogyData.milestoneProgress?.find(
-        (p) => p.familyMemberId === selectedFamilyMember && p.milestoneId === milestoneId
+        (p) => p.familyMemberId === selectedFamilyMember
       );
       setCurrentProgress(progress || null);
     }

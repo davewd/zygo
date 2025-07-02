@@ -23,7 +23,7 @@ export function useAsyncData<T>(
   fetchFunction: () => Promise<T>,
   dependencies: any[] = []
 ) {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +35,7 @@ export function useAsyncData<T>(
       setData(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
-      setData(null);
+      setData(undefined); // Set to undefined instead of null so default destructuring works
     } finally {
       setLoading(false);
     }

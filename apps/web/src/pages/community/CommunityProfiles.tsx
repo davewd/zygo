@@ -1,8 +1,7 @@
 import type { CommunitySearchFilters } from '@zygo/types/src/community';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAsyncData } from '../../hooks/useAsyncData';
-import { getAllCommunityProfiles } from '../../lib/api/community';
+import { useCommunityProfiles } from '../../hooks/useComplexData';
 
 const CommunityProfiles = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,63 +12,30 @@ const CommunityProfiles = () => {
   });
   const [showFilters, setShowFilters] = useState(false);
 
-  // Use the new useAsyncData hook to manage community profiles data
+  // Use the specialized hook for community profiles with built-in filtering
   const {
-    data: profiles = [],
+    profiles: baseFilteredProfiles,
+    stats,
     loading,
     error,
     retry,
-  } = useAsyncData(async () => {
-    const response = await getAllCommunityProfiles();
-    return response.data;
-  }, []);
+  } = useCommunityProfiles(filters);
 
-  // Filter profiles based on search and filters
-  const filteredProfiles = profiles.filter((profile) => {
-    const consumer = profile.consumer;
+  // Apply additional search filtering
+  const finalProfiles = useMemo(() => {
+    if (!searchQuery) return baseFilteredProfiles;
 
-    // Privacy filter
-    if (filters.privacyLevel && !filters.privacyLevel.includes(consumer.privacyLevel)) {
-      return false;
-    }
-
-    // Active filter
-    if (filters.isActiveOnly && !consumer.isActive) {
-      return false;
-    }
-
-    // Role filter
-    if (filters.roles && filters.roles.length > 0 && !filters.roles.includes(consumer.role)) {
-      return false;
-    }
-
-    // Age group filter
-    if (
-      filters.ageGroups &&
-      filters.ageGroups.length > 0 &&
-      !filters.ageGroups.includes(consumer.ageGroup)
-    ) {
-      return false;
-    }
-
-    // Location filter
-    if (filters.location?.state && consumer.location?.state !== filters.location.state) {
-      return false;
-    }
-
-    // Search query filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase();
+    return baseFilteredProfiles.filter((profile) => {
+      const consumer = profile.consumer;
       return (
         consumer.displayName.toLowerCase().includes(query) ||
         consumer.handle.toLowerCase().includes(query) ||
         (consumer.tagline && consumer.tagline.toLowerCase().includes(query)) ||
         (consumer.bio && consumer.bio.toLowerCase().includes(query))
       );
-    }
-
-    return true;
-  });
+    });
+  }, [baseFilteredProfiles, searchQuery]);
 
   if (loading) {
     return (
@@ -144,14 +110,14 @@ const CommunityProfiles = () => {
         {/* Results Summary */}
         <div className="mb-6 text-center">
           <p className="text-gray-600">
-            Showing <span className="font-semibold">{filteredProfiles.length}</span> of{' '}
-            <span className="font-semibold">{profiles.length}</span> community members
+            Showing <span className="font-semibold">{finalProfiles.length}</span> of{' '}
+            <span className="font-semibold">{stats.total}</span> community members
           </p>
         </div>
 
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProfiles.map((profile) => (
+          {finalProfiles.map((profile) => (
             <div
               key={profile.consumer.id}
               className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
@@ -213,7 +179,7 @@ const CommunityProfiles = () => {
         </div>
 
         {/* Empty State */}
-        {filteredProfiles.length === 0 && !loading && (
+        {finalProfiles.length === 0 && !loading && (
           <div className="text-center py-12">
             <div className="bg-gray-50 rounded-lg p-8 max-w-md mx-auto">
               <h3 className="text-lg font-medium text-gray-800 mb-2">No profiles found</h3>

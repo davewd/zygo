@@ -1,93 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProviderCard, type ProviderCardData } from '../../components/providers';
-import { getAllServiceProviders } from '../../lib/api/serviceProviders';
-
-// Define the service provider type from the API
-interface ServiceProvider {
-  id: string;
-  firstName: string;
-  lastName: string;
-  title?: string;
-  profileImage?: string;
-  bio: string;
-  credentials: {
-    title: string;
-    abbreviation?: string;
-    issuingBody: string;
-    verified: boolean;
-  }[];
-  services: string[];
-  specializations: string[];
-  languages: string[];
-  yearsExperience: number;
-  availability: {
-    inPerson: boolean;
-    telehealth: boolean;
-    homeVisits: boolean;
-    emergency: boolean;
-  };
-  centerId?: string;
-}
+import { useServiceProviders } from '../../hooks/useComplexData';
 
 const CommunityProviders = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  // API state management
-  const [providers, setProviders] = useState<ServiceProvider[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [availableSpecialties, setAvailableSpecialties] = useState<string[]>([]);
-
-  // Load service providers on component mount
-  useEffect(() => {
-    const loadProviders = async () => {
-      try {
-        setLoading(true);
-        const response = await getAllServiceProviders();
-        setProviders(response);
-
-        // Extract unique specializations for filter
-        const specialties = Array.from(
-          new Set(response.flatMap((provider) => provider.specializations))
-        ).sort();
-        setAvailableSpecialties(specialties);
-
-        setError(null);
-      } catch (err) {
-        console.error('Failed to load service providers:', err);
-        setError('Failed to load service providers. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProviders();
-  }, []);
-
-  // Filter providers based on search and specialty
-  const filteredProviders = providers.filter((provider) => {
-    // Specialty filter
-    if (selectedSpecialty && !provider.specializations.includes(selectedSpecialty)) {
-      return false;
-    }
-
-    // Search query filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      return (
-        provider.firstName.toLowerCase().includes(query) ||
-        provider.lastName.toLowerCase().includes(query) ||
-        provider.bio.toLowerCase().includes(query) ||
-        provider.specializations.some((spec) => spec.toLowerCase().includes(query)) ||
-        provider.services.some((service) => service.toLowerCase().includes(query))
-      );
-    }
-
-    return true;
-  });
+  // Use the specialized hook for service providers
+  const {
+    providers: filteredProviders,
+    allProviders: providers,
+    availableSpecialties,
+    stats,
+    loading,
+    error,
+    retry,
+  } = useServiceProviders(searchQuery, selectedSpecialty);
 
   if (loading) {
     return (
@@ -110,7 +40,7 @@ const CommunityProviders = () => {
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 mb-4">{error}</p>
               <button
-                onClick={() => window.location.reload()}
+                onClick={retry}
                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Try Again
@@ -207,6 +137,12 @@ const CommunityProviders = () => {
           <p className="text-gray-600">
             Showing <span className="font-semibold">{filteredProviders.length}</span> of{' '}
             <span className="font-semibold">{providers.length}</span> service providers
+            {stats && (
+              <span className="text-sm text-gray-500 block mt-1">
+                {stats.verified} verified • {stats.byAvailability.telehealth} telehealth •{' '}
+                {stats.byAvailability.inPerson} in-person
+              </span>
+            )}
           </p>
         </div>
 
@@ -220,12 +156,17 @@ const CommunityProviders = () => {
             // Transform the provider data to match ProviderCardData interface
             const providerCardData: ProviderCardData = {
               id: provider.id,
-              firstName: provider.firstName,
-              lastName: provider.lastName,
+              firstName: provider.fullName.split(' ')[0],
+              lastName: provider.fullName.split(' ').slice(1).join(' '),
               title: provider.title,
               profileImage: provider.profileImage,
               bio: provider.bio,
-              credentials: provider.credentials,
+              credentials: provider.credentials.map((cred) => ({
+                title: cred.title,
+                abbreviation: cred.abbreviation,
+                issuingBody: cred.issuingBody,
+                verified: cred.verified,
+              })),
               specializations: provider.specializations,
               yearsExperience: provider.yearsExperience,
               availability: provider.availability,
