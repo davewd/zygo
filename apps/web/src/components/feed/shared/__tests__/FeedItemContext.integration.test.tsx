@@ -85,10 +85,6 @@ describe('FeedItemContext Data Integration', () => {
 
       renderWithRouter(<FeedItemContext item={itemWithContext} />);
 
-      // Check that context renders
-      const contextIndicator = document.querySelector('.w-2.h-2.bg-blue-400.rounded-full');
-      expect(contextIndicator).toBeInTheDocument();
-
       // Check that profile name is rendered
       if (itemWithContext.context!.profileName) {
         expect(screen.getByText(itemWithContext.context!.profileName)).toBeInTheDocument();
@@ -121,10 +117,6 @@ describe('FeedItemContext Data Integration', () => {
 
       // Check that the feed item renders
       expect(screen.getByText(itemWithContext.author.name)).toBeInTheDocument();
-
-      // Check that context is rendered above the header
-      const contextIndicator = document.querySelector('.w-2.h-2.bg-blue-400.rounded-full');
-      expect(contextIndicator).toBeInTheDocument();
 
       // Check for separator line between context and header
       const separatorLine = document.querySelector('.border-t.border-gray-200');

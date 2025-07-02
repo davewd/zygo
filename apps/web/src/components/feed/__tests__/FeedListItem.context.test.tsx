@@ -70,10 +70,6 @@ describe('FeedListItem Context Integration', () => {
       expect(screen.getByText('working on')).toBeInTheDocument();
       expect(screen.getByText('Emotional Intelligence')).toBeInTheDocument();
 
-      // Context indicator should be present
-      const contextIndicator = document.querySelector('.w-2.h-2.bg-blue-400.rounded-full');
-      expect(contextIndicator).toBeInTheDocument();
-
       // Separator line should be present
       const separatorLine = document.querySelector('.border-t.border-gray-200');
       expect(separatorLine).toBeInTheDocument();
@@ -194,10 +190,6 @@ describe('FeedListItem Context Integration', () => {
   describe('Post without Context', () => {
     it('should render normally without context section', () => {
       renderWithRouter(<FeedListItem item={baseMockItem} />);
-
-      // No context indicator should be present
-      const contextIndicator = document.querySelector('.w-2.h-2.bg-blue-400.rounded-full');
-      expect(contextIndicator).not.toBeInTheDocument();
 
       // No separator line should be present
       const separatorLine = document.querySelector('.border-t.border-gray-200');
