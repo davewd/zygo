@@ -1,6 +1,6 @@
 // Local type definitions for service providers and centers
 
-interface Location {
+export interface Location {
   address: string;
   suburb: string;
   state: string;
@@ -12,7 +12,7 @@ interface Location {
   };
 }
 
-interface ContactInfo {
+export interface ContactInfo {
   phone?: string;
   email?: string;
   website?: string;
@@ -23,7 +23,7 @@ interface ContactInfo {
   }[];
 }
 
-interface Credential {
+export interface Credential {
   title: string;
   abbreviation?: string;
   issuingBody: string;
@@ -35,7 +35,7 @@ interface Credential {
   verificationReference?: string;
 }
 
-interface ServiceProvider {
+export interface ServiceProvider {
   id: string;
   firstName: string;
   lastName: string;
@@ -65,7 +65,7 @@ interface ServiceProvider {
 }
 
 // Local interface for services embedded in service centers (different structure)
-interface ServiceCenterService {
+export interface ServiceCenterService {
   id: string;
   name: string;
   description: string;
@@ -87,7 +87,7 @@ interface ServiceCenterService {
   tags?: string[];
 }
 
-interface ServiceCenter {
+export interface ServiceCenter {
   id: string;
   name: string;
   description: string;
