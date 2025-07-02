@@ -5,7 +5,7 @@
  * incorrect actor types, and recommended actions to fix data consistency issues.
  */
 
-import { isCommunityMemberHandle, isServiceProviderHandle, isSystemHandle, suggestActorType } from '../../utils/dataValidation';
+import { isCommunityMemberHandle, isSystemHandle, suggestActorType } from '../../utils/dataValidation';
 import communityData from '../data/community.json';
 import feedItemsData from '../data/feed/feed_items.json';
 import providersData from '../data/serviceProviders.json';

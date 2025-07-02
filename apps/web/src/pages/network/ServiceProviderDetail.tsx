@@ -27,7 +27,12 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import FeedListItem from '../../components/feed/FeedListItem';
 import { fetchProviderFeedItems, type FeedItemTypeMap } from '../../lib/api/feed';
-import { getCenterForProvider, getServiceProviderById, type ServiceProvider, type ServiceCenter } from '../../lib/api/serviceProviders';
+import {
+  getCenterForProvider,
+  getServiceProviderById,
+  type ServiceCenter,
+  type ServiceProvider,
+} from '../../lib/api/serviceProviders';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();

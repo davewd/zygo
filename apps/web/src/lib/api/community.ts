@@ -3,10 +3,10 @@
 
 // Type imports - importing directly from community types
 import type {
-    CommunityProfile,
-    CommunitySearchFilters,
-    PrimaryConsumer,
-    UserRole
+  CommunityProfile,
+  CommunitySearchFilters,
+  PrimaryConsumer,
+  UserRole
 } from '@zygo/types/src/community';
 
 // Import JSON data
