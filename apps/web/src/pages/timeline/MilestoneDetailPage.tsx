@@ -22,6 +22,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedListItem from '../../components/feed/FeedListItem';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { usePedagogyData } from '../../hooks/usePedagogyData';
 import { ActorType, FeedItemType, FeedItemTypeMap } from '../../lib/api/feed';
 import { getAllMilestones, Milestone } from '../../lib/api/timeline';
@@ -49,34 +50,25 @@ const MilestoneDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const { pedagogyData, loading: pedagogyLoading } = usePedagogyData();
 
-  const [milestone, setMilestone] = useState<MilestoneDetailData | null>(null);
   const [selectedFamilyMember, setSelectedFamilyMember] = useState<string>('');
   const [currentProgress, setCurrentProgress] = useState<MilestoneProgress | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [relatedActivities, setRelatedActivities] = useState<FeedItemTypeMap[]>([]);
 
-  // Load milestone data
-  useEffect(() => {
-    const loadMilestoneData = async () => {
-      if (!milestoneId) {
-        setError('Milestone ID is required');
-        setLoading(false);
-        return;
-      }
+  // Use the new useAsyncData hook to manage milestone data
+  const { data: milestone, loading, error, retry } = useAsyncData(async () => {
+    if (!milestoneId) {
+      throw new Error('Milestone ID is required');
+    }
 
-      try {
-        setLoading(true);
-        const milestones = await getAllMilestones();
-        const foundMilestone = milestones.find((m) => m.id === milestoneId);
+    const milestones = await getAllMilestones();
+    const foundMilestone = milestones.find((m) => m.id === milestoneId);
 
-        if (!foundMilestone) {
-          setError('Milestone not found');
-          setLoading(false);
-          return;
-        }
+    if (!foundMilestone) {
+      throw new Error('Milestone not found');
+    }
 
-        setMilestone(foundMilestone);
+    return foundMilestone;
+  }, [milestoneId]);
 
         // Set selected family member
         if (familyMemberId) {

@@ -19,14 +19,12 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { ProviderCard, type ProviderCardData } from '../../components/providers';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { getCommunityProfileByHandle, getCommunityProfileById } from '../../lib/api/community';
 
 const ProfileDetail = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [communityProfile, setCommunityProfile] = useState<CommunityProfile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Get tab from URL params, default to 'activity'
   const tabFromUrl = searchParams.get('tab') || 'activity';
@@ -39,37 +37,23 @@ const ProfileDetail = () => {
     { id: 'details', label: 'Details', icon: Star },
   ];
 
-  // Fetch community profile data
-  useEffect(() => {
-    const fetchProfile = async () => {
-      if (!id) return;
+  // Use the new useAsyncData hook to manage community profile data
+  const { data: communityProfile, loading, error, retry } = useAsyncData(async () => {
+    if (!id) return null;
 
-      setLoading(true);
-      setError(null);
+    // Try to get by ID first, then by handle if it's not a valid ID format
+    let response;
+    if (id.startsWith('consumer_')) {
+      response = await getCommunityProfileById(id);
+    } else {
+      response = await getCommunityProfileByHandle(id);
+    }
 
-      try {
-        // Try to get by ID first, then by handle if it's not a valid ID format
-        let response;
-        if (id.startsWith('consumer_')) {
-          response = await getCommunityProfileById(id);
-        } else {
-          response = await getCommunityProfileByHandle(id);
-        }
-
-        if (response.data) {
-          setCommunityProfile(response.data);
-        } else {
-          setError('Profile not found');
-        }
-      } catch (err) {
-        setError('Failed to load profile');
-        console.error('Error fetching profile:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
+    if (response.data) {
+      return response.data;
+    } else {
+      throw new Error('Profile not found');
+    }
   }, [id]);
 
   // Update URL when tab changes

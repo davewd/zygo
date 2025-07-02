@@ -1,32 +1,17 @@
 import type { CredentialProvider } from '@zygo/types/src/credentials';
 import { Award, Filter, Globe, Loader2, Search, TrendingUp, Users } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { getCredentialProviders } from '../../lib/api/credentials';
 
 const CredentialsHub = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [providers, setProviders] = useState<CredentialProvider[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Load credential providers on component mount
-  useEffect(() => {
-    const loadProviders = async () => {
-      try {
-        setLoading(true);
-        const response = await getCredentialProviders();
-        setProviders(response.data || []);
-        setError(null);
-      } catch (err) {
-        console.error('Failed to load credential providers:', err);
-        setError('Failed to load credential providers. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProviders();
+  
+  // Use the new useAsyncData hook to manage credential providers data
+  const { data: providers = [], loading, error, retry } = useAsyncData(async () => {
+    const response = await getCredentialProviders();
+    return response.data || [];
   }, []);
 
   const activeProviders = providers; // All providers are considered active

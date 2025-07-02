@@ -1,32 +1,15 @@
 import type { CommunityProfile, UserRole } from '@zygo/types/src/community';
 import { ArrowRight, Baby, Heart, Star, TrendingUp, User, Users } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAsyncData } from '../../hooks/useAsyncData';
 import { getAllCommunityProfiles } from '../../lib/api/community';
 
 const CommunityHub = () => {
-  // API state management
-  const [profiles, setProfiles] = useState<CommunityProfile[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Load community profiles on component mount
-  useEffect(() => {
-    const loadProfiles = async () => {
-      try {
-        setLoading(true);
-        const response = await getAllCommunityProfiles();
-        setProfiles(response.data);
-        setError(null);
-      } catch (err) {
-        console.error('Failed to load community profiles:', err);
-        setError('Failed to load community profiles. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProfiles();
+  // Use the new useAsyncData hook to manage community profiles data
+  const { data: profiles = [], loading, error, retry } = useAsyncData(async () => {
+    const response = await getAllCommunityProfiles();
+    return response.data;
   }, []);
 
   // Community stats

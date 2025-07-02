@@ -19,7 +19,8 @@ import {
   Star,
   Video,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useMultipleAsyncData } from '../../hooks/useAsyncData';
 import {
   getFeaturedLibraryProviders,
   getLibraryCategories,
@@ -32,46 +33,39 @@ const Library = () => {
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [searchTerm, setSearchTerm] = useState('');
   const [showFreeOnly, setShowFreeOnly] = useState(false);
-  const [libraryItems, setLibraryItems] = useState<LibraryItem[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [featuredProviders, setFeaturedProviders] = useState<LibraryProvider[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // Fetch data on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const [itemsResponse, categoriesResponse, providersResponse] = await Promise.all([
-          getLibraryItems(),
-          getLibraryCategories(),
-          getFeaturedLibraryProviders(),
-        ]);
-
-        if (itemsResponse.success && itemsResponse.data) {
-          setLibraryItems(itemsResponse.data);
-        } else {
-          setError(itemsResponse.error || 'Failed to load library items');
-        }
-
-        if (categoriesResponse.success && categoriesResponse.data) {
-          setCategories(categoriesResponse.data);
-        }
-
-        if (providersResponse.success && providersResponse.data) {
-          setFeaturedProviders(providersResponse.data);
-        }
-      } catch (err) {
-        setError('Failed to load library data');
-        console.error('Error fetching library data:', err);
-      } finally {
-        setLoading(false);
+  // Use the new useMultipleAsyncData hook to manage multiple data sources
+  const { data, loading, error, retry } = useMultipleAsyncData({
+    libraryItems: async () => {
+      const response = await getLibraryItems();
+      if (response.success && response.data) {
+        return response.data;
+      } else {
+        throw new Error(response.error || 'Failed to load library items');
       }
-    };
-
-    fetchData();
+    },
+    categories: async () => {
+      const response = await getLibraryCategories();
+      if (response.success && response.data) {
+        return response.data;
+      } else {
+        throw new Error(response.error || 'Failed to load categories');
+      }
+    },
+    featuredProviders: async () => {
+      const response = await getFeaturedLibraryProviders();
+      if (response.success && response.data) {
+        return response.data;
+      } else {
+        throw new Error(response.error || 'Failed to load featured providers');
+      }
+    }
   }, []);
+
+  // Extract data with defaults
+  const libraryItems = data.libraryItems || [];
+  const categories = data.categories || [];
+  const featuredProviders = data.featuredProviders || [];
 
   const filteredItems = libraryItems.filter((item) => {
     const matchesCategory =
