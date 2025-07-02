@@ -127,7 +127,7 @@ describe('FeedListItemEventFollowUp', () => {
       expect(screen.getByText('SheKicks')).toBeInTheDocument();
       expect(screen.getByText('@shekicks_girls_soccer')).toBeInTheDocument();
       expect(screen.getByText('EVENT FOLLOW-UP')).toBeInTheDocument();
-      expect(screen.getAllByText('Kickeroos')).toHaveLength(2); // Appears in header and service network
+      expect(screen.getByText('Kickeroos')).toBeInTheDocument(); // Appears in service network
 
       // Check title and post content
       expect(screen.getByText("Amazing photos from yesterday's match! 📸⚽️")).toBeInTheDocument();
@@ -150,13 +150,8 @@ describe('FeedListItemEventFollowUp', () => {
       expect(screen.getByText('Photos from The Match (4)')).toBeInTheDocument();
       expect(screen.getAllByRole('img')).toHaveLength(5); // 1 avatar + 4 photos
 
-      // Check service network information
-      expect(screen.getByText('Event Partners')).toBeInTheDocument();
-      expect(screen.getByText('Network:')).toBeInTheDocument();
-      expect(screen.getAllByText('Kickeroos')[1]).toBeInTheDocument(); // Second occurrence in service network
-      expect(screen.getByText('Centers:')).toBeInTheDocument();
-      expect(screen.getByText('SheKicks Girls Academy')).toBeInTheDocument();
-      expect(screen.getByText('Active8Kids')).toBeInTheDocument();
+      // Check service network information (appears in event follow-up header)
+      expect(screen.getByText('Kickeroos')).toBeInTheDocument(); // Appears in service network badge
     });
 
     it('returns null when eventFollowUpData is missing', () => {

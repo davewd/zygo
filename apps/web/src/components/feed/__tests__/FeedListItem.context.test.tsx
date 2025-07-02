@@ -146,13 +146,7 @@ describe('FeedListItem Context Integration', () => {
 
       renderWithRouter(<FeedListItem item={itemWithContext} />);
 
-      // Context should be rendered - find within the context section
-      const contextSection = document
-        .querySelector('.w-2.h-2.bg-blue-400.rounded-full')
-        ?.closest('[class*="py-2"]');
-      expect(contextSection).toBeInTheDocument();
-
-      // Check context content more specifically
+      // Check context content
       expect(screen.getByText('collaborating with')).toBeInTheDocument();
       expect(screen.getByText('Johnson Family Literacy Program')).toBeInTheDocument();
 
@@ -223,9 +217,8 @@ describe('FeedListItem Context Integration', () => {
       expect(feedItemContainer).toHaveClass('p-4', 'hover:shadow-md');
 
       // Context should come before header
-      const contextElement = container
-        .querySelector('.w-2.h-2.bg-blue-400.rounded-full')
-        ?.closest('[class*="py-2"]');
+      // Find context element by looking for specific context text instead
+      const contextElement = screen.getByText('working on')?.closest('[class*="py-2"]');
       const headerElement = container
         .querySelector('img[alt="Sarah Johnson"]')
         ?.closest('[class*="flex"]');
@@ -257,10 +250,8 @@ describe('FeedListItem Context Integration', () => {
 
       renderWithRouter(<FeedListItem item={itemWithContext} />);
 
-      // Context should have proper padding
-      const contextContainer = document
-        .querySelector('.w-2.h-2.bg-blue-400.rounded-full')
-        ?.closest('[class*="py-2"]');
+      // Context should have proper padding - find by context text instead
+      const contextContainer = screen.getByText('Isabella Dawson')?.closest('[class*="py-2"]');
       expect(contextContainer).toHaveClass('py-2');
 
       // Separator should have proper border

@@ -168,8 +168,8 @@ export const FeedItemContext: React.FC<FeedItemContextProps> = ({ item, classNam
   }
 
   return (
-    <div className={`flex items-center py-0 ${className}`}>
-      <div className="flex items-center space-y-1 space-x-2 w-full">
+    <div className={`flex items-center py-2 ${className}`}>
+      <div className="flex items-center space-x-2 w-full">
         {/* Context content */}
         <div className="flex-1 min-w-0">{contextContent}</div>
       </div>

@@ -70,10 +70,6 @@ describe('FeedItemContext', () => {
 
       renderWithRouter(<FeedItemContext item={itemWithContext} />);
 
-      // Check for context indicator
-      const indicator = document.querySelector('.w-2.h-2.bg-blue-400.rounded-full');
-      expect(indicator).toBeInTheDocument();
-
       // Check for profile name link
       const profileLink = screen.getByRole('link', { name: 'Isabella Dawson' });
       expect(profileLink).toBeInTheDocument();

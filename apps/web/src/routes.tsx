@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
-import Community from './pages/community';
 import CommunityHub from './pages/community/CommunityHub';
 import CommunityProfiles from './pages/community/CommunityProfiles';
 import CommunityProviders from './pages/community/CommunityProviders';
@@ -35,8 +34,7 @@ export const routes = createBrowserRouter([
       { path: '/feed', element: <Feed />, errorElement: <Error /> },
 
       // Community routes (consolidated from network)
-      { path: '/community', element: <Community />, errorElement: <Error /> },
-      { path: '/community/hub', element: <CommunityHub />, errorElement: <Error /> },
+      { path: '/community', element: <CommunityHub />, errorElement: <Error /> },
       { path: '/community/profiles', element: <CommunityProfiles />, errorElement: <Error /> },
       { path: '/community/profiles/:id', element: <ProfileDetail />, errorElement: <Error /> },
       { path: '/community/providers', element: <CommunityProviders />, errorElement: <Error /> },
