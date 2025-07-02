@@ -1,14 +1,14 @@
-import { getAllMilestones } from '../../../lib/api/timeline';
 import '@testing-library/jest-dom';
+import { getAllMilestones } from '../../../lib/api/timeline';
 
 describe('Birth Milestone Integration Test', () => {
   describe('JSON Data Verification', () => {
     it('should have birth milestone with isKeyMilestone property in the JSON data', async () => {
       // Test the actual JSON data loading
       const milestones = await getAllMilestones();
-      
+
       const birthMilestone = milestones.find((milestone: any) => milestone.id === 'birth');
-      
+
       expect(birthMilestone).toBeDefined();
       expect(birthMilestone).toMatchObject({
         id: 'birth',
@@ -18,16 +18,16 @@ describe('Birth Milestone Integration Test', () => {
         isKeyMilestone: true,
         importance: 'critical',
         startMonths: 0,
-        endMonths: 0
+        endMonths: 0,
       });
     });
 
     it('should verify that isKeyMilestone property is preserved through type casting', async () => {
       // This test verifies the type interface fix
       const milestones = await getAllMilestones();
-      
+
       const birthMilestone = milestones.find((milestone: any) => milestone.id === 'birth');
-      
+
       // This assertion validates the interface fix
       expect(birthMilestone).toHaveProperty('isKeyMilestone');
       expect(birthMilestone.isKeyMilestone).toBe(true);
@@ -35,11 +35,11 @@ describe('Birth Milestone Integration Test', () => {
 
     it('should have all key milestones marked correctly', async () => {
       const milestones = await getAllMilestones();
-      
+
       // Check all known key milestones
       const keyMilestoneIds = ['birth', 'conception', 'puberty', 'legal_adult'];
-      
-      keyMilestoneIds.forEach(id => {
+
+      keyMilestoneIds.forEach((id) => {
         const milestone = milestones.find((m: any) => m.id === id);
         if (milestone) {
           expect(milestone.isKeyMilestone).toBe(true);
@@ -50,16 +50,17 @@ describe('Birth Milestone Integration Test', () => {
 
     it('should have regular milestones without isKeyMilestone flag', async () => {
       const milestones = await getAllMilestones();
-      
+
       // Find a regular milestone (one that's not in the key milestone list)
-      const regularMilestone = milestones.find((m: any) => 
-        m.id !== 'birth' && 
-        m.id !== 'conception' && 
-        m.id !== 'puberty' && 
-        m.id !== 'legal_adult' &&
-        m.category === 'physical'
+      const regularMilestone = milestones.find(
+        (m: any) =>
+          m.id !== 'birth' &&
+          m.id !== 'conception' &&
+          m.id !== 'puberty' &&
+          m.id !== 'legal_adult' &&
+          m.category === 'physical'
       );
-      
+
       expect(regularMilestone).toBeDefined();
       expect(regularMilestone?.isKeyMilestone).toBeFalsy();
     });
@@ -88,7 +89,7 @@ describe('Birth Milestone Integration Test', () => {
         redFlags: '',
         resources: '',
         createdDate: '2023-01-01',
-        modifiedDate: '2023-01-01'
+        modifiedDate: '2023-01-01',
       };
 
       // Simulate the transformation that happens in useTimelineData
@@ -106,16 +107,16 @@ describe('Birth Milestone Integration Test', () => {
         importance: mockMilestone.importance,
         prerequisites: mockMilestone.prerequisites,
         createdDate: mockMilestone.createdDate,
-        modifiedDate: mockMilestone.modifiedDate
+        modifiedDate: mockMilestone.modifiedDate,
       };
 
       // Verify the transformation preserves isKeyMilestone
       expect(transformedMilestone.isKeyMilestone).toBe(true);
-      
+
       // Verify node type logic
       const isKeyMilestone = transformedMilestone.isKeyMilestone === true;
       const nodeType = isKeyMilestone ? 'keyMilestone' : 'milestone';
-      
+
       expect(nodeType).toBe('keyMilestone');
     });
   });
