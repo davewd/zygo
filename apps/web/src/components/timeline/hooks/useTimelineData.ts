@@ -85,6 +85,7 @@ export const useTimelineData = ({
           months: [milestone.startMonths, milestone.endMonths],
           period: milestone.period,
           isTypical: milestone.isTypical,
+          isKeyMilestone: milestone.isKeyMilestone,
           importance: milestone.importance,
           prerequisites: milestone.prerequisites,
           createdDate: milestone.createdDate,

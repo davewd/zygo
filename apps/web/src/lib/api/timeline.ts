@@ -25,6 +25,7 @@ export interface Milestone {
   period: string;
   importance: MilestoneImportance;
   isTypical: boolean;
+  isKeyMilestone?: boolean;
   prerequisites: string[];
   skills: string[];
   observationTips: string;
