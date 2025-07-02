@@ -83,6 +83,7 @@ export interface MilestoneData {
   isTypical: boolean;
   isKeyMilestone?: boolean;
   importance: string;
+  prerequisites?: string[];
   createdDate: string;
   modifiedDate: string;
 }
