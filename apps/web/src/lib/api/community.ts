@@ -10,6 +10,7 @@ import type {
 } from '@zygo/types/src/community';
 
 // Import JSON data
+import { isFilterMatch } from '../utils/dataValidation';
 import communityData from './data/community.json';
 
 export interface CommunityAPIResponse<T> {
@@ -221,12 +222,12 @@ export async function filterCommunityProfiles(
     }
 
     // Role filter
-    if (filters.roles && filters.roles.length > 0 && !filters.roles.includes(consumer.role)) {
+    if (!isFilterMatch(filters.roles, consumer.role)) {
       return false;
     }
 
     // Age group filter
-    if (filters.ageGroups && filters.ageGroups.length > 0 && !filters.ageGroups.includes(consumer.ageGroup)) {
+    if (!isFilterMatch(filters.ageGroups, consumer.ageGroup)) {
       return false;
     }
 
