@@ -63,6 +63,8 @@ interface CurrentUser {
   lastName: string;
   email: string;
   avatar?: string;
+  profileType?: string;
+  title?: string;
 }
 
 interface SearchResult {
@@ -100,6 +102,8 @@ interface INavigationBarProps {
   searchPlaceholder?: string;
   currentUser?: CurrentUser;
   onUserSwitch?: () => void;
+  onUserSelect?: (user: CurrentUser) => void;
+  onAvatarClick?: (user: CurrentUser) => void;
   otherUsers?: CurrentUser[];
   notificationCount?: number;
   onNotificationClick?: () => void;
@@ -114,6 +118,8 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       searchPlaceholder = 'Search providers, centers, networks...',
       currentUser,
       onUserSwitch,
+      onUserSelect,
+      onAvatarClick,
       otherUsers = [],
       notificationCount = 0,
       onNotificationClick,
@@ -565,16 +571,22 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
             {/* Current User Display */}
             {currentUser && (
               <div className="flex items-center gap-2">
-                <Avatar className="h-8 w-8 ring-2 ring-white/20">
-                  <AvatarImage
-                    src={currentUser.avatar}
-                    alt={`${currentUser.firstName} ${currentUser.lastName}`}
-                  />
-                  <AvatarFallback className="text-sm text-white bg-gradient-to-r from-purple-500 to-pink-500">
-                    {currentUser.firstName.charAt(0)}
-                    {currentUser.lastName.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
+                <button
+                  onClick={() => onAvatarClick?.(currentUser)}
+                  className="hover:opacity-80 transition-opacity duration-200"
+                  title="Go to profile"
+                >
+                  <Avatar className="h-8 w-8 ring-2 ring-white/20">
+                    <AvatarImage
+                      src={currentUser.avatar}
+                      alt={`${currentUser.firstName} ${currentUser.lastName}`}
+                    />
+                    <AvatarFallback className="text-sm text-white bg-gradient-to-r from-purple-500 to-pink-500">
+                      {currentUser.firstName.charAt(0)}
+                      {currentUser.lastName.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                </button>
                 <div className="hidden sm:block">
                   <div className="text-sm font-medium text-gray-800">
                     {currentUser.firstName} {currentUser.lastName}
@@ -607,7 +619,8 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                   {otherUsers.map((user) => (
                     <DropdownMenuItem
                       key={user.id}
-                      className="gap-2 text-gray-800 hover:bg-white/30 focus:bg-white/30"
+                      onClick={() => onUserSelect?.(user)}
+                      className="gap-2 text-gray-800 hover:bg-white/30 focus:bg-white/30 cursor-pointer"
                     >
                       <Avatar className="h-6 w-6">
                         <AvatarImage src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
@@ -621,6 +634,9 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
                           {user.firstName} {user.lastName}
                         </span>
                         <span className="text-xs text-gray-600">{user.email}</span>
+                        {user.title && (
+                          <span className="text-xs text-gray-500 italic">{user.title}</span>
+                        )}
                       </div>
                     </DropdownMenuItem>
                   ))}
