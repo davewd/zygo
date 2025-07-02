@@ -1,5 +1,4 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
-// TODO: Fix UI component type issues - may need to rebuild @zygo/ui package
 import {
   ArrowLeft,
   Award,
@@ -27,17 +26,17 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ClickableCredentialCard } from '../../components/credentials/ClickableCredentialCard';
 import FeedListItem from '../../components/feed/FeedListItem';
-import { fetchProviderFeedItems } from '../../lib/api/feed';
-import { getCenterForProvider, getServiceProviderById } from '../../lib/api/serviceProviders';
+import { fetchProviderFeedItems, type FeedItemTypeMap } from '../../lib/api/feed';
+import { getCenterForProvider, getServiceProviderById, type ServiceProvider, type ServiceCenter } from '../../lib/api/serviceProviders';
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [providerFeedItems, setProviderFeedItems] = useState<any[]>([]);
+  const [providerFeedItems, setProviderFeedItems] = useState<FeedItemTypeMap[]>([]);
   const [feedLoading, setFeedLoading] = useState(false);
-  const [provider, setProvider] = useState<any>(null);
-  const [center, setCenter] = useState<any>(null);
+  const [provider, setProvider] = useState<ServiceProvider | null>(null);
+  const [center, setCenter] = useState<ServiceCenter | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Get tab from URL params, default to 'activity'
