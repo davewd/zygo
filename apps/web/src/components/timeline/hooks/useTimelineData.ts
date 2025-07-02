@@ -74,7 +74,23 @@ export const useTimelineData = ({
           getAllSteps()
         ]);
         
-        setCsvMilestones(milestones as any); // TODO: Fix type mismatch between API and component types
+        // Convert Milestone[] to MilestoneData[] format expected by the component
+        const milestonesData: MilestoneData[] = milestones.map(milestone => ({
+          id: milestone.id,
+          title: milestone.title,
+          description: milestone.description,
+          category: milestone.category as DevelopmentCategory,
+          ageRange: milestone.ageRange,
+          ageRangeKey: milestone.ageRangeKey,
+          months: [milestone.startMonths, milestone.endMonths],
+          period: milestone.period,
+          isTypical: milestone.isTypical,
+          importance: milestone.importance,
+          prerequisites: milestone.prerequisites,
+          createdDate: milestone.createdDate,
+          modifiedDate: milestone.modifiedDate
+        }));
+        setCsvMilestones(milestonesData);
         setAllAgeRanges(ageRanges);
         setAgeRanges(ageRanges);
         setAchievements(achievementsData);
@@ -276,16 +292,11 @@ export const useTimelineData = ({
         }
 
         // Add prerequisite edges between milestones (only if valid prerequisite exists)
-        const milestoneAny = milestone as any; // TODO: Fix type definition to include prerequisites
         
-        // Handle prerequisites as either string (CSV format) or array (JSON format)
+        // Handle prerequisites from the milestone data
         let prerequisiteIds: string[] = [];
-        if (milestoneAny.prerequisites) {
-          if (typeof milestoneAny.prerequisites === 'string' && milestoneAny.prerequisites.trim()) {
-            prerequisiteIds = milestoneAny.prerequisites.split(',').map((p: string) => p.trim());
-          } else if (Array.isArray(milestoneAny.prerequisites)) {
-            prerequisiteIds = milestoneAny.prerequisites.filter((p: string) => p && p.trim());
-          }
+        if (milestone.prerequisites && milestone.prerequisites.length > 0) {
+          prerequisiteIds = milestone.prerequisites;
         }
         
         prerequisiteIds.forEach((prereqId: string) => {
