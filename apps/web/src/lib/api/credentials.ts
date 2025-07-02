@@ -20,7 +20,7 @@ import supabase from '../../clients/supabaseClient';
 import { CREDENTIAL_PROVIDERS as newCredentialProviders } from '../../data/credentials/credentialProviders_new';
 import credentialsData from './data/credentials.json';
 
-// Legacy compatibility exports (TODO: Remove after full migration)
+// Legacy compatibility exports
 export const CREDENTIAL_PROVIDERS = newCredentialProviders; // Use the typed data instead of JSON
 export const CREDENTIAL_DEFINITIONS = credentialsData.credentialDefinitions;
 
