@@ -1,22 +1,22 @@
 import { MarkerType } from '@xyflow/react';
 import { useEffect, useMemo, useState } from 'react';
 import {
-    getAllAchievements,
-    getAllAgeRanges,
-    getAllMilestones,
-    getAllSteps,
-    type Achievement,
-    type Step
+  getAllAchievements,
+  getAllAgeRanges,
+  getAllMilestones,
+  getAllSteps,
+  type Achievement,
+  type Step
 } from '../../../lib/api/timeline';
 import { removeTransitiveRedundancy } from '../../../lib/utils/milestonePrerequisiteCleanup';
 import { DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
-    AgeRange,
-    DevelopmentCategory,
-    MilestoneData,
-    PedagogyProfile,
-    TimelineEdge,
-    TimelineNode
+  AgeRange,
+  DevelopmentCategory,
+  MilestoneData,
+  PedagogyProfile,
+  TimelineEdge,
+  TimelineNode
 } from '../types';
 
 /**
@@ -123,9 +123,8 @@ export const useTimelineData = ({
       const sourceData = sourceNode?.data;
       const targetData = targetNode?.data;
       
-      // Check if either node is a current goal
-      const isGoalConnection = sourceData?.milestone?.isCurrentGoal || targetData?.milestone?.isCurrentGoal ||
-                              sourceData?.isCurrentGoal || targetData?.isCurrentGoal;
+      // Check if the target node is a current goal (only highlight edges TO goal milestones, not FROM them)
+      const isGoalConnection = targetData?.milestone?.isCurrentGoal || targetData?.isCurrentGoal;
       
       // Check if both nodes are completed
       const isCompletedConnection = (sourceData?.milestone?.isCompleted || sourceData?.isCompleted) &&
