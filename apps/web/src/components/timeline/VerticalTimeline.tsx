@@ -7,7 +7,11 @@ import { useTimelineZoom } from './hooks/useTimelineZoom';
 import { ReactFlowTimeline } from './ReactFlowTimeline';
 import { TimelinePedagogyProps } from './types';
 
-export const VerticalTimeline = ({ pedagogyData, onNodeClick, profileAvatarSelector }: TimelinePedagogyProps) => {
+export const VerticalTimeline = ({
+  pedagogyData,
+  onNodeClick,
+  profileAvatarSelector,
+}: TimelinePedagogyProps) => {
   // Custom hooks for state management
   const {
     selectedCategories,

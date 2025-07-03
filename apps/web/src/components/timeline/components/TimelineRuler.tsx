@@ -97,15 +97,15 @@ export const TimelineRuler: React.FC<TimelineRulerProps> = ({
       }}
     >
       {/* Zoom Level Legend with Profile Avatar Selector */}
-      <div className="absolute top-2 left-2 right-2 z-20">
+      <div className="absolute top-2 left-2 right-2 z-20 pointer-events-auto">
         <div className="bg-white/25 backdrop-blur-sm border border-white/18 rounded-md p-2 shadow-sm">
           {/* Profile Avatar Selector */}
           {profileAvatarSelector && (
-            <div className="flex items-center justify-center mb-2">
-              {profileAvatarSelector}
+            <div className="flex items-center justify-center mb-2 relative z-30 pointer-events-auto w-full">
+              <div className="flex items-center justify-center">{profileAvatarSelector}</div>
             </div>
           )}
-          
+
           {/* Fallback to simple avatar if no ProfileAvatarSelector provided */}
           {!profileAvatarSelector && (
             <div className="flex items-center justify-center space-x-2 mb-2">

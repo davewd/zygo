@@ -1,7 +1,6 @@
 import { Bell, Building, Loader2, Network, Search, User, UserCheck } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
 import { Input } from '../components/input';
 import { ProfileAvatarSelector } from '../components/profile-avatar-selector';
@@ -59,6 +58,7 @@ interface CurrentUser {
   avatar?: string;
   profileType?: string;
   title?: string;
+  relationshipToCurrentUser?: string;
 }
 
 interface SearchResult {
@@ -101,11 +101,20 @@ interface INavigationBarProps {
   otherUsers?: CurrentUser[];
   notificationCount?: number;
   onNotificationClick?: () => void;
-  getProfileDisplayInfo?: (profileType: string | null, userName?: string) => {
+  getProfileDisplayInfo?: (
+    profileType: string | null,
+    userName?: string
+  ) => {
     title: string;
     description: string;
     icon: string;
   };
+  // Timeline-specific props
+  isTimelinePage?: boolean;
+  timelineAvatarSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  showTimelineRelationships?: boolean;
+  timelineUsers?: CurrentUser[];
+  onTimelineUserSelect?: (user: CurrentUser) => void;
 }
 
 const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
@@ -123,6 +132,12 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       notificationCount = 0,
       onNotificationClick,
       getProfileDisplayInfo,
+      // Timeline-specific props
+      isTimelinePage = false,
+      timelineAvatarSize = 'md',
+      showTimelineRelationships = false,
+      timelineUsers = [],
+      onTimelineUserSelect,
       ...props
     },
     ref
@@ -255,10 +270,15 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       setShowDropdown(false);
       setSelectedIndex(-1);
 
+      // Only navigate if this is actually a provider selection (not from ProfileAvatarSelector)
       // Navigate based on provider type
       const baseUrl =
         provider.type === 'communityProfile' ? '/community/profiles' : '/community/providers';
-      window.location.href = `${baseUrl}/${provider.id}`;
+
+      // Use a more controlled navigation approach
+      if (typeof window !== 'undefined' && window.location) {
+        window.location.href = `${baseUrl}/${provider.id}`;
+      }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -572,12 +592,18 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
             {currentUser && (
               <ProfileAvatarSelector
                 currentUser={currentUser}
-                otherUsers={otherUsers}
+                otherUsers={isTimelinePage ? timelineUsers : otherUsers}
                 onProfileClick={onAvatarClick}
-                onUserSelect={onUserSelect}
+                onUserSelect={isTimelinePage ? onTimelineUserSelect : onUserSelect}
                 onUserSwitch={onUserSwitch}
-                size="md"
+                size={isTimelinePage ? timelineAvatarSize : 'md'}
                 showNameLabel={true}
+                showRelationshipLabel={isTimelinePage && showTimelineRelationships}
+                relationshipText={
+                  isTimelinePage && showTimelineRelationships && currentUser
+                    ? (currentUser as any).relationshipToCurrentUser
+                    : undefined
+                }
                 variant="glassmorphism"
                 getProfileDisplayInfo={getProfileDisplayInfo}
                 className="flex items-center gap-2"

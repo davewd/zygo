@@ -1,0 +1,80 @@
+{
+  "currentUser": {
+    "id": "user-123",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@example.com",
+    "avatar": "/images/avatars/sarah-johnson.jpg",
+    "profileType": "parent",
+    "title": "Parent & Primary Caregiver",
+    "isCurrentUser": true
+  },
+  "timelineUsers": [
+    {
+      "id": "user-456",
+      "firstName": "Michael",
+      "lastName": "Johnson",
+      "email": "michael.johnson@example.com",
+      "avatar": "/images/avatars/michael-johnson.jpg",
+      "profileType": "parent",
+      "title": "Co-Parent",
+      "relationshipToCurrentUser": "Partner",
+      "isCurrentUser": false
+    },
+    {
+      "id": "user-789",
+      "firstName": "Dr. Emily",
+      "lastName": "Chen",
+      "email": "emily.chen@pediatrics.com",
+      "avatar": "/images/avatars/dr-emily-chen.jpg",
+      "profileType": "educational_psychologist",
+      "title": "Educational Psychologist",
+      "relationshipToCurrentUser": "Child's Specialist",
+      "isCurrentUser": false
+    },
+    {
+      "id": "user-101",
+      "firstName": "Ms. Jennifer",
+      "lastName": "Davis",
+      "email": "jennifer.davis@school.edu",
+      "avatar": "/images/avatars/jennifer-davis.jpg",
+      "profileType": "teacher",
+      "title": "Kindergarten Teacher",
+      "relationshipToCurrentUser": "Child's Teacher",
+      "isCurrentUser": false
+    },
+    {
+      "id": "user-202",
+      "firstName": "Maria",
+      "lastName": "Rodriguez",
+      "email": "maria.rodriguez@therapy.com",
+      "avatar": "/images/avatars/maria-rodriguez.jpg",
+      "profileType": "therapist",
+      "title": "Speech Therapist",
+      "relationshipToCurrentUser": "Child's Therapist",
+      "isCurrentUser": false
+    },
+    {
+      "id": "user-303",
+      "firstName": "Robert",
+      "lastName": "Johnson",
+      "email": "robert.johnson@example.com",
+      "avatar": "/images/avatars/robert-johnson.jpg",
+      "profileType": "family_member",
+      "title": "Grandfather",
+      "relationshipToCurrentUser": "Father",
+      "isCurrentUser": false
+    },
+    {
+      "id": "user-404",
+      "firstName": "Lisa",
+      "lastName": "Smith",
+      "email": "lisa.smith@example.com",
+      "avatar": "/images/avatars/lisa-smith.jpg",
+      "profileType": "family_member",
+      "title": "Grandmother",
+      "relationshipToCurrentUser": "Mother",
+      "isCurrentUser": false
+    }
+  ]
+}

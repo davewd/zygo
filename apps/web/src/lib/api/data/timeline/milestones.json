@@ -578,7 +578,8 @@
     "redFlags": "No crawling by 18 months",
     "resources": "Crawling development support",
     "createdDate": "2024-01-01T00:00:00Z",
-    "modifiedDate": "2024-01-01T00:00:00Z"
+    "modifiedDate": "2024-01-01T00:00:00Z",
+    "isCurrentGoal": true
   },
   {
     "id": "months_18_24_cognitive_1",

@@ -12,6 +12,7 @@ interface User {
   avatar?: string;
   profileType?: string;
   title?: string;
+  relationshipToCurrentUser?: string;
 }
 
 interface ProfileAvatarSelectorProps {
@@ -20,8 +21,10 @@ interface ProfileAvatarSelectorProps {
   onProfileClick?: (user: User) => void;
   onUserSelect?: (user: User) => void;
   onUserSwitch?: () => void;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   showNameLabel?: boolean;
+  showRelationshipLabel?: boolean;
+  relationshipText?: string;
   className?: string;
   dropdownAlign?: 'start' | 'end';
   variant?: 'default' | 'glassmorphism';
@@ -46,6 +49,8 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
       onUserSwitch,
       size = 'md',
       showNameLabel = false,
+      showRelationshipLabel = false,
+      relationshipText,
       className,
       dropdownAlign = 'end',
       variant = 'default',
@@ -54,6 +59,23 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
     },
     ref
   ) => {
+    // Debug logging for click events
+    const handleProfileClick = (user: User) => {
+      console.log('ProfileAvatarSelector: Profile clicked', user);
+      // Don't auto-navigate - let the parent component handle this
+      onProfileClick?.(user);
+    };
+
+    const handleUserSelect = (user: User) => {
+      console.log('ProfileAvatarSelector: User selected', user);
+      onUserSelect?.(user);
+    };
+
+    const handleUserSwitch = () => {
+      console.log('ProfileAvatarSelector: User switch clicked');
+      onUserSwitch?.();
+    };
+
     const hasMultipleProfiles = otherUsers.length > 0 || onUserSwitch;
 
     // Default profile display info function
@@ -120,6 +142,20 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
         badgePosition: '-top-1.5 -right-1.5',
         text: 'text-base',
       },
+      xl: {
+        avatar: 'h-12 w-12',
+        badge: 'h-6 w-6',
+        badgeIcon: 'h-3.5 w-3.5',
+        badgePosition: '-top-2 -right-2',
+        text: 'text-lg',
+      },
+      '2xl': {
+        avatar: 'h-16 w-16',
+        badge: 'h-8 w-8',
+        badgeIcon: 'h-4 w-4',
+        badgePosition: '-top-2.5 -right-2.5',
+        text: 'text-xl',
+      },
     };
 
     const config = sizeConfig[size];
@@ -127,7 +163,7 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
     const avatarContent = (
       <div className={cn('relative', className)} ref={ref} {...props}>
         <button
-          onClick={() => onProfileClick?.(currentUser)}
+          onClick={() => handleProfileClick(currentUser)}
           className="hover:opacity-80 transition-opacity duration-200 relative"
           title={hasMultipleProfiles ? 'Profile & Account Options' : 'Go to profile'}
         >
@@ -162,6 +198,23 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
             <div className={cn('font-medium text-gray-800', config.text)}>
               {currentUser.firstName} {currentUser.lastName}
             </div>
+            {/* Relationship Label */}
+            {showRelationshipLabel && relationshipText && (
+              <div
+                className={cn(
+                  'text-gray-600 mt-0.5',
+                  size === '2xl'
+                    ? 'text-base'
+                    : size === 'xl'
+                    ? 'text-sm'
+                    : size === 'lg'
+                    ? 'text-xs'
+                    : 'text-xs'
+                )}
+              >
+                {relationshipText}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -216,7 +269,11 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
               </h4>
 
               <button
-                onClick={() => onProfileClick?.(currentUser)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleProfileClick(currentUser);
+                }}
                 className={cn(
                   'w-full p-3 rounded-lg text-left transition-colors border-2 border-blue-500',
                   variant === 'glassmorphism'
@@ -293,7 +350,11 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
                     return (
                       <button
                         key={user.id}
-                        onClick={() => onUserSelect?.(user)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleUserSelect(user);
+                        }}
                         className={cn(
                           'w-full p-3 rounded-lg text-left transition-colors border',
                           variant === 'glassmorphism'
@@ -355,7 +416,11 @@ const ProfileAvatarSelector = React.forwardRef<HTMLDivElement, ProfileAvatarSele
                 />
 
                 <button
-                  onClick={onUserSwitch}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleUserSwitch();
+                  }}
                   className={cn(
                     'w-full px-3 py-2 text-sm rounded text-left hover:opacity-80 transition-colors flex items-center',
                     variant === 'glassmorphism'
