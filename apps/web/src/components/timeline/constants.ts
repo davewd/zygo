@@ -15,22 +15,22 @@ export const ZOOM_LEVELS: TimelineZoomLevel[] = [
   {
     level: 0,
     name: 'Overview',
-    description: 'Complete timeline overview from prenatal to 18 years',
-    nodeTypes: ['ageGroup','keyMilestone'],
+    description: 'Complete timeline overview with key milestones from prenatal to 18 years',
+    nodeTypes: ['keyMilestone'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // -12 months to 18 years
   },
   {
     level: 1,
-    name: 'Age Group Focus',
-    description: 'Focused view on specific age groups and milestones',
-    nodeTypes: ['ageGroup', 'milestone', 'keyMilestone'],
+    name: 'Milestone Focus',
+    description: 'Focused view on milestones and key achievements',
+    nodeTypes: ['milestone', 'keyMilestone'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 60 }, // Prenatal to 5 years focus
   },
   {
     level: 2,
     name: 'Complete Granular View',
-    description: 'All nodes: age groups, milestones, achievements, and steps',
-    nodeTypes: ['ageGroup', 'milestone', 'keyMilestone', 'achievement', 'step'],
+    description: 'All nodes: milestones, achievements, and steps',
+    nodeTypes: ['milestone', 'keyMilestone', 'achievement', 'step'],
     timeSpan: { minAgeMonths: -12, maxAgeMonths: 216 }, // Full range with all detail
   },
 ];
@@ -89,7 +89,14 @@ export const NODE_DIMENSIONS = {
   category: { width: 340, height: 180 },
   milestone: { width: 300, height: 160 },
   keyMilestone: { width: 320, height: 200 }, // Larger size for key milestones
+  conception: { width: 320, height: 180 }, // Added conception node dimensions
   achievement: { width: 280, height: 140 },
   step: { width: 240, height: 100 },
   default: { width: 200, height: 120 },
+} as const;
+
+// Timeline layout constants
+export const TIMELINE_LAYOUT = {
+  AGE_BAND_SPACING: 1120, // Vertical spacing between age bands (4x increased for better spacing)
+  BASE_Y_OFFSET: 100, // Starting Y position for first age band
 } as const;

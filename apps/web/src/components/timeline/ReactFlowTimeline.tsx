@@ -9,6 +9,9 @@ import {
   useReactFlow,
 } from '@xyflow/react';
 import { useCallback, useEffect, useState } from 'react';
+import { AgeAlignmentGuides, AgeAlignmentToggle } from './components/AgeAlignmentGuides';
+import { TimelineRuler, TimelineRulerToggle } from './components/TimelineRuler';
+import { TIMELINE_LAYOUT } from './constants';
 import { nodeTypes } from './nodes';
 import { TimelineFilterPanel } from './panels/TimelineFilterPanel';
 
@@ -39,9 +42,43 @@ export const ReactFlowTimeline = ({
     height: number;
   } | null>(null);
 
+  // Age alignment guides state
+  const [showAgeGuides, setShowAgeGuides] = useState(false);
+  const [showRuler, setShowRuler] = useState(true);
+
+  // Viewport tracking for ruler and guides positioning
+  const [viewport, setViewport] = useState({ x: 0, y: 50, zoom: 0.6 });
+
   // ReactFlow state
   const [reactFlowNodes, setNodes, onNodesChangeInternal] = useNodesState(nodes);
   const [reactFlowEdges, setEdges, onEdgesChange] = useEdgesState(edges);
+
+  // Handle node drag with Y-axis locking
+  const onNodesChange = useCallback(
+    (changes: any[]) => {
+      // Process each change to lock Y position
+      const processedChanges = changes.map((change) => {
+        if (change.type === 'position' && change.position) {
+          // Find the original node to get its locked Y position
+          const originalNode = reactFlowNodes.find((node) => node.id === change.id);
+          if (originalNode) {
+            // Allow X changes but lock Y to original position
+            return {
+              ...change,
+              position: {
+                x: change.position.x,
+                y: originalNode.position.y, // Lock Y position
+              },
+            };
+          }
+        }
+        return change;
+      });
+
+      onNodesChangeInternal(processedChanges);
+    },
+    [reactFlowNodes, onNodesChangeInternal]
+  );
 
   // Get canvas dimensions from ReactFlow container
   useEffect(() => {
@@ -88,9 +125,6 @@ export const ReactFlowTimeline = ({
 
   // Movement constraints removed to allow free panning
 
-  // Allow free movement - use default nodes change handler to enable free dragging
-  const onNodesChange = onNodesChangeInternal;
-
   // Update nodes when generated nodes change
   useEffect(() => {
     console.log(`🔄 ReactFlow updating: ${nodes.length} nodes, ${edges.length} edges`);
@@ -109,6 +143,7 @@ export const ReactFlowTimeline = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onNodeClick={onNodeClick}
+        onMove={(event, newViewport) => setViewport(newViewport)}
         nodeTypes={nodeTypes}
         connectionMode={ConnectionMode.Loose}
         fitView={false}
@@ -163,6 +198,104 @@ export const ReactFlowTimeline = ({
           onClearAllFilters={clearAllFilters}
           onSetSelectedFamilyMembers={setSelectedFamilyMembers}
         />
+
+        {/* Age Alignment Guides - bring back horizontal guides */}
+        <AgeAlignmentGuides
+          ageGroups={(() => {
+            // Use the same age range data for alignment guides
+            const ageRangeKeys = [
+              { key: 'prenatal_early', months: [-12, -6], title: 'Prenatal (First Trimester)' },
+              { key: 'prenatal_late', months: [-6, 0], title: 'Prenatal (Second/Third Trimester)' },
+              { key: 'infancy_0_6', months: [0, 6], title: '0-6 months' },
+              { key: 'infancy_6_12', months: [6, 12], title: '6 months - 1 year' },
+              { key: 'early_childhood_12_18', months: [12, 18], title: '1 year - 1 year 6 months' },
+              {
+                key: 'early_childhood_18_24',
+                months: [18, 24],
+                title: '1 year 6 months - 2 years',
+              },
+              {
+                key: 'early_childhood_24_30',
+                months: [24, 30],
+                title: '2 years - 2 years 6 months',
+              },
+              {
+                key: 'early_childhood_30_36',
+                months: [30, 36],
+                title: '2 years 6 months - 3 years',
+              },
+              { key: 'preschool_36_48', months: [36, 48], title: '3-4 years' },
+              { key: 'preschool_48_60', months: [48, 60], title: '4-5 years' },
+              { key: 'school_age_60_72', months: [60, 72], title: '5-6 years' },
+              { key: 'school_age_72_84', months: [72, 84], title: '6-7 years' },
+              { key: 'school_age_84_96', months: [84, 96], title: '7-8 years' },
+            ];
+
+            return ageRangeKeys.map((range, index) => ({
+              id: range.key,
+              position: {
+                x: 0,
+                y: TIMELINE_LAYOUT.BASE_Y_OFFSET + index * TIMELINE_LAYOUT.AGE_BAND_SPACING,
+              },
+              months: range.months as [number, number],
+            }));
+          })()}
+          show={showAgeGuides}
+          viewport={viewport}
+        />
+
+        {/* Age Alignment Toggle - always show since we have consistent age data */}
+        <AgeAlignmentToggle show={showAgeGuides} onToggle={setShowAgeGuides} />
+
+        {/* Timeline Ruler - use proper age ranges data */}
+        <TimelineRuler
+          ageGroups={(() => {
+            // Import the actual age ranges data instead of deriving from milestones
+            const ageRangeKeys = [
+              { key: 'prenatal_early', months: [-12, -6], title: 'Prenatal (First Trimester)' },
+              { key: 'prenatal_late', months: [-6, 0], title: 'Prenatal (Second/Third Trimester)' },
+              { key: 'infancy_0_6', months: [0, 6], title: '0-6 months' },
+              { key: 'infancy_6_12', months: [6, 12], title: '6 months - 1 year' },
+              { key: 'early_childhood_12_18', months: [12, 18], title: '1 year - 1 year 6 months' },
+              {
+                key: 'early_childhood_18_24',
+                months: [18, 24],
+                title: '1 year 6 months - 2 years',
+              },
+              {
+                key: 'early_childhood_24_30',
+                months: [24, 30],
+                title: '2 years - 2 years 6 months',
+              },
+              {
+                key: 'early_childhood_30_36',
+                months: [30, 36],
+                title: '2 years 6 months - 3 years',
+              },
+              { key: 'preschool_36_48', months: [36, 48], title: '3-4 years' },
+              { key: 'preschool_48_60', months: [48, 60], title: '4-5 years' },
+              { key: 'school_age_60_72', months: [60, 72], title: '5-6 years' },
+              { key: 'school_age_72_84', months: [72, 84], title: '6-7 years' },
+              { key: 'school_age_84_96', months: [84, 96], title: '7-8 years' },
+            ];
+
+            // Calculate positions based on chronological flow with wider spacing
+            return ageRangeKeys.map((range, index) => ({
+              id: range.key,
+              position: {
+                x: 0,
+                y: TIMELINE_LAYOUT.BASE_Y_OFFSET + index * TIMELINE_LAYOUT.AGE_BAND_SPACING,
+              },
+              months: range.months as [number, number],
+              title: range.title,
+            }));
+          })()}
+          show={showRuler}
+          viewport={viewport}
+        />
+
+        {/* Timeline Ruler Toggle */}
+        <TimelineRulerToggle show={showRuler} onToggle={setShowRuler} />
       </ReactFlow>
     </div>
   );

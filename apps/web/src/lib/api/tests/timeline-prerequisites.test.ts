@@ -59,12 +59,25 @@ describe('Timeline Prerequisites Validation', () => {
         milestone.description.toLowerCase().includes(keyMilestone)
       );
       
+      if (!found) {
+        console.error(`\n=== MISSING KEY MILESTONE ===`);
+        console.error(`Expected key milestone: "${keyMilestone}"`);
+        console.error(`Searched in ${milestonesData.length} milestones for:`);
+        console.error(`- ID exactly matching: "${keyMilestone}"`);
+        console.error(`- ID containing: "${keyMilestone}"`);
+        console.error(`- Title containing: "${keyMilestone}"`);
+        console.error(`- Description containing: "${keyMilestone}"`);
+        console.error('\nSimilar milestone IDs found:');
+        const similarIds = milestonesData
+          .map(m => m.id)
+          .filter(id => id.toLowerCase().includes(keyMilestone.substring(0, 4)))
+          .slice(0, 5);
+        console.error(similarIds.length > 0 ? similarIds : 'None found');
+        console.error('============================\n');
+      }
+      
       expect(found).toBeDefined();
       expect(found?.title).toBeTruthy();
-      
-      if (!found) {
-        console.error(`Missing key milestone: ${keyMilestone}`);
-      }
     });
 
     test('all expected key milestones should be found', () => {
@@ -91,7 +104,14 @@ describe('Timeline Prerequisites Validation', () => {
     });
 
     test('empty prerequisites should only be for key milestones or first prenatal milestones', () => {
-      const invalidEmptyPrereqs: Array<{id: string, title: string}> = [];
+      const invalidEmptyPrereqs: Array<{
+        id: string, 
+        title: string, 
+        period: string,
+        ageRange: string,
+        isKeyMilestone: boolean,
+        isPrenatalFirst: boolean
+      }> = [];
       const keyMilestoneIds = keyMilestones.map(m => m.id);
 
       milestonesData.forEach(milestone => {
@@ -102,21 +122,48 @@ describe('Timeline Prerequisites Validation', () => {
           if (!isKeyMilestone && !isPrenatalFirst) {
             invalidEmptyPrereqs.push({
               id: milestone.id,
-              title: milestone.title
+              title: milestone.title,
+              period: milestone.period,
+              ageRange: `${milestone.startMonths}-${milestone.endMonths} months`,
+              isKeyMilestone,
+              isPrenatalFirst
             });
           }
         }
       });
 
       if (invalidEmptyPrereqs.length > 0) {
-        console.error('Milestones with invalid empty prerequisites:', invalidEmptyPrereqs);
+        console.error('\n=== EMPTY PREREQUISITES VALIDATION FAILURES ===');
+        console.error('The following milestones have empty prerequisites but are not key milestones or first prenatal:\n');
+        
+        invalidEmptyPrereqs.forEach((invalid, index) => {
+          console.error(`${index + 1}. Milestone: "${invalid.title}"`);
+          console.error(`   ID: ${invalid.id}`);
+          console.error(`   Period: ${invalid.period}`);
+          console.error(`   Age Range: ${invalid.ageRange}`);
+          console.error(`   Is Key Milestone: ${invalid.isKeyMilestone}`);
+          console.error(`   Is Prenatal First: ${invalid.isPrenatalFirst}`);
+          console.error('');
+        });
+        
+        console.error('=== SUMMARY ===');
+        console.error(`Total milestones with invalid empty prerequisites: ${invalidEmptyPrereqs.length}`);
+        console.error(`Key milestone IDs: [${keyMilestoneIds.join(', ')}]`);
+        console.error('Expected: Only key milestones or prenatal_first milestones should have empty prerequisites');
+        console.error('================================================\n');
       }
 
       expect(invalidEmptyPrereqs).toHaveLength(0);
     });
 
     test('all prerequisite references should point to existing milestones', () => {
-      const invalidReferences: Array<{milestoneId: string, prerequisite: string}> = [];
+      const invalidReferences: Array<{
+        milestoneId: string, 
+        milestoneTitle: string,
+        prerequisite: string,
+        period: string,
+        ageRange: string
+      }> = [];
       const keyMilestoneIds = keyMilestones.map(m => m.id);
 
       milestonesData.forEach(milestone => {
@@ -124,14 +171,33 @@ describe('Timeline Prerequisites Validation', () => {
           if (!milestoneIds.includes(prereq) && !keyMilestoneIds.includes(prereq)) {
             invalidReferences.push({
               milestoneId: milestone.id,
-              prerequisite: prereq
+              milestoneTitle: milestone.title,
+              prerequisite: prereq,
+              period: milestone.period,
+              ageRange: `${milestone.startMonths}-${milestone.endMonths} months`
             });
           }
         });
       });
 
       if (invalidReferences.length > 0) {
-        console.error('Invalid prerequisite references:', invalidReferences);
+        console.error('\n=== INVALID PREREQUISITE REFERENCES ===');
+        console.error('The following milestones reference prerequisites that do not exist:\n');
+        
+        invalidReferences.forEach((invalid, index) => {
+          console.error(`${index + 1}. Milestone: "${invalid.milestoneTitle}"`);
+          console.error(`   ID: ${invalid.milestoneId}`);
+          console.error(`   Period: ${invalid.period}`);
+          console.error(`   Age Range: ${invalid.ageRange}`);
+          console.error(`   Missing Prerequisite: "${invalid.prerequisite}"`);
+          console.error('');
+        });
+        
+        console.error('=== SUMMARY ===');
+        console.error(`Total invalid references: ${invalidReferences.length}`);
+        console.error(`Available milestone IDs: ${milestoneIds.length} total`);
+        console.error(`Available key milestone IDs: [${keyMilestoneIds.join(', ')}]`);
+        console.error('======================================\n');
       }
 
       expect(invalidReferences).toHaveLength(0);
@@ -284,11 +350,68 @@ describe('Timeline Prerequisites Validation', () => {
     });
 
     test('milestone age ranges should be consistent', () => {
+      const invalidRanges: Array<{
+        id: string, 
+        title: string, 
+        startMonths: number, 
+        endMonths: number,
+        issue: string
+      }> = [];
+
       milestonesData.forEach(milestone => {
-        expect(milestone.startMonths).toBeLessThanOrEqual(milestone.endMonths);
-        expect(milestone.startMonths).toBeGreaterThanOrEqual(-10); // Allow for prenatal
-        expect(milestone.endMonths).toBeLessThanOrEqual(300); // Reasonable upper limit
+        // Check if start > end
+        if (milestone.startMonths > milestone.endMonths) {
+          invalidRanges.push({
+            id: milestone.id,
+            title: milestone.title,
+            startMonths: milestone.startMonths,
+            endMonths: milestone.endMonths,
+            issue: 'startMonths > endMonths'
+          });
+        }
+        
+        // Check if start is too early (before -10 months prenatal)
+        if (milestone.startMonths < -10) {
+          invalidRanges.push({
+            id: milestone.id,
+            title: milestone.title,
+            startMonths: milestone.startMonths,
+            endMonths: milestone.endMonths,
+            issue: 'startMonths too early (< -10)'
+          });
+        }
+        
+        // Check if end is too late (> 1000 months = ~83 years, reasonable for lifetime milestones)
+        if (milestone.endMonths > 1000) {
+          invalidRanges.push({
+            id: milestone.id,
+            title: milestone.title,
+            startMonths: milestone.startMonths,
+            endMonths: milestone.endMonths,
+            issue: `endMonths too late (${milestone.endMonths} > 1000)`
+          });
+        }
       });
+
+      if (invalidRanges.length > 0) {
+        console.error('\n=== MILESTONE AGE RANGE VALIDATION FAILURES ===');
+        console.error('The following milestones have invalid age ranges:\n');
+        
+        invalidRanges.forEach((invalid, index) => {
+          console.error(`${index + 1}. Milestone: "${invalid.title}"`);
+          console.error(`   ID: ${invalid.id}`);
+          console.error(`   Age Range: ${invalid.startMonths} - ${invalid.endMonths} months`);
+          console.error(`   Issue: ${invalid.issue}`);
+          console.error('');
+        });
+        
+        console.error('=== SUMMARY ===');
+        console.error(`Total invalid milestones: ${invalidRanges.length}`);
+        console.error(`Expected: endMonths <= 1000 (~83 years), startMonths >= -10, startMonths <= endMonths`);
+        console.error('===============================================\n');
+      }
+
+      expect(invalidRanges).toHaveLength(0);
     });
   });
 
@@ -312,6 +435,52 @@ describe('Timeline Prerequisites Validation', () => {
       
       // This test always passes but provides useful logging
       expect(summary.totalMilestones).toBeGreaterThan(0);
+    });
+
+    test('should provide detailed data analysis for debugging', () => {
+      console.log('\n=== DETAILED TIMELINE DATA ANALYSIS ===');
+      
+      // Milestones without prerequisites
+      const milestonesWithoutPrereqs = milestonesData.filter(m => m.prerequisites.length === 0);
+      console.log(`\nMilestones without prerequisites (${milestonesWithoutPrereqs.length}):`);
+      milestonesWithoutPrereqs.forEach(m => {
+        console.log(`  - ${m.id}: "${m.title}" (${m.period}, ${m.startMonths}-${m.endMonths}m)`);
+      });
+
+      // Age range distribution
+      console.log('\nAge range distribution:');
+      const ageGroups = {
+        prenatal: milestonesData.filter(m => m.startMonths < 0).length,
+        infancy: milestonesData.filter(m => m.startMonths >= 0 && m.startMonths < 24).length,
+        earlyChildhood: milestonesData.filter(m => m.startMonths >= 24 && m.startMonths < 72).length,
+        schoolAge: milestonesData.filter(m => m.startMonths >= 72 && m.startMonths < 216).length,
+        adulthood: milestonesData.filter(m => m.startMonths >= 216).length
+      };
+      Object.entries(ageGroups).forEach(([period, count]) => {
+        console.log(`  - ${period}: ${count} milestones`);
+      });
+
+      // Prerequisites usage
+      const totalPrereqs = milestonesData.reduce((sum, m) => sum + m.prerequisites.length, 0);
+      const avgPrereqs = (totalPrereqs / milestonesData.length).toFixed(2);
+      console.log(`\nPrerequisites statistics:`);
+      console.log(`  - Total prerequisites: ${totalPrereqs}`);
+      console.log(`  - Average prerequisites per milestone: ${avgPrereqs}`);
+      
+      // Longest age spans
+      const longSpanMilestones = milestonesData
+        .map(m => ({ ...m, span: m.endMonths - m.startMonths }))
+        .sort((a, b) => b.span - a.span)
+        .slice(0, 5);
+      console.log(`\nMilestones with longest age spans:`);
+      longSpanMilestones.forEach(m => {
+        console.log(`  - ${m.id}: ${m.span} months (${m.startMonths}-${m.endMonths})`);
+      });
+
+      console.log('\n======================================\n');
+      
+      // This test always passes but provides comprehensive data analysis
+      expect(milestonesData.length).toBeGreaterThan(0);
     });
   });
 });

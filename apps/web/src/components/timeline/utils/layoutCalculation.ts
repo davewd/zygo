@@ -1,4 +1,4 @@
-import { NODE_DIMENSIONS } from '../constants';
+import { NODE_DIMENSIONS, TIMELINE_LAYOUT } from '../constants';
 import { LayoutParams, NodeDimensions, PositionCalculationResult } from '../types';
 
 export const getNodeDimensions = (nodeType: string): NodeDimensions => {
@@ -31,23 +31,23 @@ export const getLayoutParams = (
   if (zoomLevel === 0) {
     return {
       centerX: FIXED_CENTER_X,
-      verticalSpacing: 350,
-      horizontalSpacing: 500,
-      padding: 100,
+      verticalSpacing: 500,  // Increased for better age alignment
+      horizontalSpacing: 600,
+      padding: 120,
     };
   } else if (zoomLevel === 1) {
     return {
       centerX: FIXED_CENTER_X,
-      verticalSpacing: 280,
-      horizontalSpacing: 400,
-      padding: 80,
+      verticalSpacing: 400,  // Increased for better age alignment
+      horizontalSpacing: 500,
+      padding: 100,
     };
   } else {
     return {
       centerX: FIXED_CENTER_X,
-      verticalSpacing: 220,
-      horizontalSpacing: 320,
-      padding: 60,
+      verticalSpacing: 320,  // Increased for better age alignment
+      horizontalSpacing: 400,
+      padding: 80,
     };
   }
 };
@@ -86,11 +86,6 @@ export const findNonCollidingPosition = (
 ): { x: number; y: number } => {
   if (attempts > 100) return startPos;
 
-  // Age groups are locked in center and should not be moved by collision detection
-  if (nodeId.includes('ageGroup')) {
-    return startPos;
-  }
-
   const nodeSize = {
     width: nodeWidths.get(nodeId) || 200,
     height: nodeHeights.get(nodeId) || 120,
@@ -99,9 +94,6 @@ export const findNonCollidingPosition = (
   // Check for collisions with existing positioned nodes
   for (const [existingId, existingPos] of positions.entries()) {
     if (existingId === nodeId) continue;
-
-    // Skip collision with age groups since they are locked in center
-    if (existingId.includes('ageGroup')) continue;
 
     const existingSize = {
       width: nodeWidths.get(existingId) || 200,
@@ -179,67 +171,53 @@ export const calculateNodePositions = (
     return acc;
   }, {} as Record<string, any[]>);
 
-  // Position age groups vertically down the center - LOCKED to prevent horizontal movement
-  if (nodesByType.ageGroup) {
-    nodesByType.ageGroup.forEach((node, index) => {
-      const nodeWidth = nodeWidths.get(node.id) || 400;
-      const fixedCenterPos = {
-        x: centerX - nodeWidth / 2,
-        y: padding + index * (verticalSpacing + 100),
-      };
-      positions.set(node.id, fixedCenterPos);
-    });
-  }
-
-  // Position milestones directly around age groups in a radial pattern
+  // Position milestones aligned to age range positions from the ruler
   if (nodesByType.milestone) {
-    const ageGroups = nodesByType.ageGroup || [];
+    // Define the age range positions (matching the ruler) with wider spacing
+    const ageRangePositions = new Map([
+      ['prenatal_early', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (0 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [-12, -6] }],
+      ['prenatal_late', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (1 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [-6, 0] }],
+      ['infancy_0_6', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (2 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [0, 6] }],
+      ['infancy_6_12', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (3 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [6, 12] }],
+      ['early_childhood_12_18', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (4 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [12, 18] }],
+      ['early_childhood_18_24', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (5 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [18, 24] }],
+      ['early_childhood_24_30', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (6 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [24, 30] }],
+      ['early_childhood_30_36', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (7 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [30, 36] }],
+      ['preschool_36_48', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (8 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [36, 48] }],
+      ['preschool_48_60', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (9 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [48, 60] }],
+      ['school_age_60_72', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (10 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [60, 72] }],
+      ['school_age_72_84', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (11 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [72, 84] }],
+      ['school_age_84_96', { y: TIMELINE_LAYOUT.BASE_Y_OFFSET + (12 * TIMELINE_LAYOUT.AGE_BAND_SPACING), months: [84, 96] }],
+    ]);
 
-    ageGroups.forEach((ageGroup) => {
-      const ageGroupPos = positions.get(ageGroup.id);
-      if (!ageGroupPos) return;
+    // Group milestones by age range
+    const milestonesByAgeRange = new Map<string, any[]>();
+    
+    nodesByType.milestone.forEach((milestone) => {
+      const ageRangeKey = milestone.data?.milestone?.ageRangeKey || 'infancy_0_6'; // Default fallback
+      if (!milestonesByAgeRange.has(ageRangeKey)) {
+        milestonesByAgeRange.set(ageRangeKey, []);
+      }
+      milestonesByAgeRange.get(ageRangeKey)!.push(milestone);
+    });
 
-      // Get milestones for this age group
-      const ageGroupMilestones = nodesByType.milestone.filter((m) =>
-        edgeData.some((edge) => edge.source === ageGroup.id && edge.target === m.id)
-      );
+    // Position milestones horizontally at their age range's Y position
+    milestonesByAgeRange.forEach((milestones, ageRangeKey) => {
+      const ageRangeInfo = ageRangePositions.get(ageRangeKey);
+      if (!ageRangeInfo) return;
 
-      ageGroupMilestones.forEach((milestone, mIndex) => {
-        // Create a more structured radial pattern around the age group
-        const totalMilestones = ageGroupMilestones.length;
+      const baseY = ageRangeInfo.y; // Fixed Y position from ruler
+      const cardWidth = 320;
+      const horizontalSpacing = 50;
+      const startX = centerX - ((milestones.length * cardWidth + (milestones.length - 1) * horizontalSpacing) / 2);
+
+      milestones.forEach((milestone, index) => {
+        const x = startX + (index * (cardWidth + horizontalSpacing));
         
-        // Use a grid-like pattern instead of pure radial for better readability
-        const milestonesPerSide = Math.ceil(totalMilestones / 2);
-        const sideIndex = mIndex % 2; // 0 = left, 1 = right
-        const positionInSide = Math.floor(mIndex / 2);
-        
-        const horizontalOffset = sideIndex === 0 ? -500 : 500; // Left or right side
-        const verticalOffset = (positionInSide - milestonesPerSide / 2) * 120; // Spread vertically
-        
-        const initialPos = {
-          x: ageGroupPos.x + horizontalOffset,
-          y: ageGroupPos.y + verticalOffset,
-        };
-
-        // Apply positioning with constraints
-        const finalPos = findNonCollidingPosition(
-          initialPos,
-          milestone.id,
-          positions,
-          nodeWidths,
-          nodeHeights
-        );
-
-        // Constrain milestone positions to stay within reasonable horizontal bounds
-        const maxHorizontalDistance = canvasWidth ? canvasWidth * 2 : 1600;
-        const constrainedX = Math.max(
-          -maxHorizontalDistance,
-          Math.min(maxHorizontalDistance, finalPos.x)
-        );
-
+        // Position milestone at the exact Y coordinate of its age range
         positions.set(milestone.id, {
-          x: constrainedX,
-          y: finalPos.y,
+          x,
+          y: baseY, // Lock to age range Y position
         });
       });
     });

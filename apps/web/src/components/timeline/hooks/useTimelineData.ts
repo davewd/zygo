@@ -144,63 +144,8 @@ export const useTimelineData = ({
       return true;
     };
 
-    // Generate age groups
-    if (shouldIncludeNode('ageGroup')) {
-      // Show all age groups in granular view (no slice limitation)
-      const ageGroups = allAgeRanges;
-
-      ageGroups.forEach((ageGroup, index) => {
-        const ageGroupId = `ageGroup-${ageGroup.key}`;
-        const milestoneCountForRange = allMilestones.filter(
-          (m) => m.ageRangeKey === ageGroup.key
-        ).length;
-
-        generatedNodes.push({
-          id: ageGroupId,
-          type: 'ageGroup',
-          data: {
-            title: ageGroup.range,
-            description: ageGroup.description,
-            ageRange: ageGroup.range,
-            totalMilestones: milestoneCountForRange,
-            completedMilestones: Math.floor(milestoneCountForRange * 0.3),
-            inProgressMilestones: Math.floor(milestoneCountForRange * 0.2),
-            months: ageGroup.months,
-            key: ageGroup.key,
-          },
-          position: { x: 0, y: 0 },
-          draggable: false,
-          style: {
-            zIndex: 1, // Bottom layer - age ranges
-          },
-        });
-
-        // Connect age groups with timeline flow
-        if (index > 0) {
-          const previousAgeGroup = ageGroups[index - 1];
-          const sourceKey = previousAgeGroup?.key;
-          
-          // Only create edge if both source and target keys exist
-          if (sourceKey && ageGroup.key) {
-            generatedEdges.push({
-              id: `timeline-flow-${index}`,
-              source: `ageGroup-${sourceKey}`,
-              target: ageGroupId,
-              sourceHandle: 'bottom', // Connect from bottom of previous age group
-              targetHandle: 'top', // Connect to top of current age group
-              type: 'smoothstep', // Use smoothstep for better curves
-              style: {
-                stroke: '#6b7280',
-                strokeWidth: 3,
-                strokeDasharray: '10,5',
-                zIndex: 1, // Bottom layer - age range edges
-              },
-              markerEnd: { type: MarkerType.ArrowClosed, color: '#6b7280' },
-            });
-          }
-        }
-      });
-    }
+    // Age groups are now handled by the sidebar ruler, so we skip generating the large age group cards
+    // This provides a cleaner timeline focused on milestones while the sidebar shows age context
 
     // Generate milestones
     if (shouldIncludeNode('milestone')) {
@@ -273,6 +218,7 @@ export const useTimelineData = ({
               milestoneType: isKeyMilestone ? milestone.id : undefined, // Pass milestone ID as type for key milestones
             },
             position: { x: 0, y: 0 },
+            draggable: true, // Enable dragging for horizontal movement
             style: {
               zIndex: nodeType === 'keyMilestone' ? 5 : 4, // Key milestones get highest priority
             },
