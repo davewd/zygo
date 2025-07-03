@@ -1,4 +1,4 @@
-import { Target, Trophy, Crosshair } from 'lucide-react';
+import { Crosshair, Target, Trophy } from 'lucide-react';
 import { VerticalHandles } from '../shared/VerticalHandles';
 import '../styles/goal-milestone.css';
 
@@ -18,23 +18,23 @@ export const AchievementNode = ({ data }: AchievementNodeProps) => {
     };
     return colors[category as keyof typeof colors] || colors.default;
   };
-  
+
   // Check for new flags
   const isCompleted = data.isCompleted || false;
   const isCurrentGoal = data.isCurrentGoal || false;
-  
+
   // Determine styling classes
   const getContainerClasses = () => {
     let classes = `p-4 rounded-lg border-2 shadow-lg min-w-56 max-w-72 bg-gradient-to-br ${getAchievementColor(
       data.category || 'default'
     )} transform-gpu pointer-events-auto relative`;
-    
+
     if (isCurrentGoal) {
       classes += ' zygo-goal-milestone';
     } else if (isCompleted) {
       classes += ' zygo-completed-milestone';
     }
-    
+
     return classes;
   };
 
@@ -48,10 +48,14 @@ export const AchievementNode = ({ data }: AchievementNodeProps) => {
     >
       {/* Use standardized vertical handles for Y-axis layout */}
       <VerticalHandles />
-      
+
       {/* Goal Icon */}
       {isCurrentGoal && (
-        <div className={`zygo-goal-icon ${isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'}`}>
+        <div
+          className={`zygo-goal-icon ${
+            isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'
+          }`}
+        >
           <Crosshair className="w-3 h-3" />
         </div>
       )}

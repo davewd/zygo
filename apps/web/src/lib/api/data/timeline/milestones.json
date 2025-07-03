@@ -13,10 +13,7 @@
     "isTypical": true,
     "isKeyMilestone": true,
     "prerequisites": [],
-    "skills": [
-      "Genetic formation",
-      "Cellular division"
-    ],
+    "skills": ["Genetic formation", "Cellular division"],
     "observationTips": "Monitor reproductive health and timing",
     "supportStrategies": "Preconception health optimization, proper nutrition",
     "redFlags": "Conception difficulties, genetic abnormalities",
@@ -38,12 +35,8 @@
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "conception"
-    ],
-    "skills": [
-      "Neural development"
-    ],
+    "prerequisites": ["conception"],
+    "skills": ["Neural development"],
     "observationTips": "Monitor prenatal health",
     "supportStrategies": "Proper prenatal care and nutrition",
     "redFlags": "Severe developmental abnormalities",
@@ -65,12 +58,8 @@
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "conception"
-    ],
-    "skills": [
-      "Brain development"
-    ],
+    "prerequisites": ["conception"],
+    "skills": ["Brain development"],
     "observationTips": "Regular prenatal checkups",
     "supportStrategies": "Avoid harmful substances",
     "redFlags": "Neural tube defects",
@@ -92,12 +81,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "conception"
-    ],
-    "skills": [
-      "Emotional response"
-    ],
+    "prerequisites": ["conception"],
+    "skills": ["Emotional response"],
     "observationTips": "Manage maternal stress",
     "supportStrategies": "Stress reduction techniques",
     "redFlags": "Extreme maternal stress",
@@ -119,12 +104,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "conception"
-    ],
-    "skills": [
-      "Hearing development"
-    ],
+    "prerequisites": ["conception"],
+    "skills": ["Hearing development"],
     "observationTips": "Monitor auditory development",
     "supportStrategies": "Healthy prenatal environment",
     "redFlags": "Hearing defects",
@@ -146,12 +127,8 @@
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_first_physical_1"
-    ],
-    "skills": [
-      "Organ development"
-    ],
+    "prerequisites": ["prenatal_first_physical_1"],
+    "skills": ["Organ development"],
     "observationTips": "Regular ultrasounds",
     "supportStrategies": "Continued prenatal care",
     "redFlags": "Major organ defects",
@@ -173,12 +150,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_first_cognitive_1"
-    ],
-    "skills": [
-      "Sensory development"
-    ],
+    "prerequisites": ["prenatal_first_cognitive_1"],
+    "skills": ["Sensory development"],
     "observationTips": "Monitor fetal responses",
     "supportStrategies": "Provide sensory stimulation",
     "redFlags": "Sensory processing delays",
@@ -200,12 +173,8 @@
     "period": "prenatal",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_first_social_emotional_1"
-    ],
-    "skills": [
-      "Stress regulation"
-    ],
+    "prerequisites": ["prenatal_first_social_emotional_1"],
+    "skills": ["Stress regulation"],
     "observationTips": "Maintain maternal well-being",
     "supportStrategies": "Relaxation techniques",
     "redFlags": "Excessive stress responses",
@@ -227,12 +196,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_first_language_1"
-    ],
-    "skills": [
-      "Sound recognition"
-    ],
+    "prerequisites": ["prenatal_first_language_1"],
+    "skills": ["Sound recognition"],
     "observationTips": "Monitor hearing development",
     "supportStrategies": "Provide musical stimulation",
     "redFlags": "Hearing impairments",
@@ -254,12 +219,8 @@
     "period": "prenatal",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_second_physical_1"
-    ],
-    "skills": [
-      "Brain maturation"
-    ],
+    "prerequisites": ["prenatal_second_physical_1"],
+    "skills": ["Brain maturation"],
     "observationTips": "Monitor brain development",
     "supportStrategies": "Optimal nutrition and care",
     "redFlags": "Brain development concerns",
@@ -281,12 +242,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_second_cognitive_1"
-    ],
-    "skills": [
-      "Memory development"
-    ],
+    "prerequisites": ["prenatal_second_cognitive_1"],
+    "skills": ["Memory development"],
     "observationTips": "Assess cognitive responses",
     "supportStrategies": "Provide learning opportunities",
     "redFlags": "Memory formation issues",
@@ -308,12 +265,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_second_social_emotional_1"
-    ],
-    "skills": [
-      "Bonding preparation"
-    ],
+    "prerequisites": ["prenatal_second_social_emotional_1"],
+    "skills": ["Bonding preparation"],
     "observationTips": "Foster maternal-infant connection",
     "supportStrategies": "Bonding activities",
     "redFlags": "Attachment difficulties",
@@ -335,12 +288,8 @@
     "period": "prenatal",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "prenatal_second_language_1"
-    ],
-    "skills": [
-      "Voice recognition"
-    ],
+    "prerequisites": ["prenatal_second_language_1"],
+    "skills": ["Voice recognition"],
     "observationTips": "Talk to baby regularly",
     "supportStrategies": "Reading and singing",
     "redFlags": "Voice recognition issues",
@@ -397,12 +346,8 @@
     "period": "infancy",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "birth"
-    ],
-    "skills": [
-      "Neck strength"
-    ],
+    "prerequisites": ["birth"],
+    "skills": ["Neck strength"],
     "observationTips": "Tummy time practice",
     "supportStrategies": "Daily tummy time",
     "redFlags": "No head control by 4 months",
@@ -424,12 +369,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "birth"
-    ],
-    "skills": [
-      "Visual focus"
-    ],
+    "prerequisites": ["birth"],
+    "skills": ["Visual focus"],
     "observationTips": "Follow objects with eyes",
     "supportStrategies": "Use colorful toys",
     "redFlags": "No visual tracking by 3 months",
@@ -451,12 +392,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "birth"
-    ],
-    "skills": [
-      "Social response"
-    ],
+    "prerequisites": ["birth"],
+    "skills": ["Social response"],
     "observationTips": "Respond to smiles",
     "supportStrategies": "Frequent face-to-face interaction",
     "redFlags": "No social smiling by 2 months",
@@ -478,12 +415,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "birth"
-    ],
-    "skills": [
-      "Vocalization"
-    ],
+    "prerequisites": ["birth"],
+    "skills": ["Vocalization"],
     "observationTips": "Make cooing sounds",
     "supportStrategies": "Talk back to baby",
     "redFlags": "No vocalizations by 4 months",
@@ -505,12 +438,8 @@
     "period": "infancy",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_0_6_physical_1"
-    ],
-    "skills": [
-      "Rolling mobility"
-    ],
+    "prerequisites": ["months_0_6_physical_1"],
+    "skills": ["Rolling mobility"],
     "observationTips": "Roll from back to tummy",
     "supportStrategies": "Encourage rolling practice",
     "redFlags": "No rolling by 8 months",
@@ -532,12 +461,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_0_6_cognitive_1"
-    ],
-    "skills": [
-      "Memory development"
-    ],
+    "prerequisites": ["months_0_6_cognitive_1"],
+    "skills": ["Memory development"],
     "observationTips": "Look for hidden objects",
     "supportStrategies": "Peek-a-boo games",
     "redFlags": "No object permanence by 10 months",
@@ -559,12 +484,8 @@
     "period": "infancy",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_0_6_social_emotional_1"
-    ],
-    "skills": [
-      "Social discrimination"
-    ],
+    "prerequisites": ["months_0_6_social_emotional_1"],
+    "skills": ["Social discrimination"],
     "observationTips": "Show wariness of strangers",
     "supportStrategies": "Gradual social exposure",
     "redFlags": "No stranger awareness or extreme fear",
@@ -587,13 +508,8 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "birth",
-      "months_0_6_language_1"
-    ],
-    "skills": [
-      "Word production"
-    ],
+    "prerequisites": ["birth", "months_0_6_language_1"],
+    "skills": ["Word production"],
     "observationTips": "Say first meaningful words",
     "supportStrategies": "Repeat and reinforce words",
     "redFlags": "No words by 12 months",
@@ -615,12 +531,8 @@
     "period": "infancy",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_6_12_physical_1"
-    ],
-    "skills": [
-      "Sitting balance"
-    ],
+    "prerequisites": ["months_6_12_physical_1"],
+    "skills": ["Sitting balance"],
     "observationTips": "Sit independently",
     "supportStrategies": "Provide sitting practice",
     "redFlags": "No sitting by 15 months",
@@ -642,12 +554,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_6_12_cognitive_1"
-    ],
-    "skills": [
-      "Logic development"
-    ],
+    "prerequisites": ["months_6_12_cognitive_1"],
+    "skills": ["Logic development"],
     "observationTips": "Understand cause and effect",
     "supportStrategies": "Interactive cause-effect toys",
     "redFlags": "No understanding by 15 months",
@@ -669,12 +577,8 @@
     "period": "infancy",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_6_12_social_emotional_1"
-    ],
-    "skills": [
-      "Attachment security"
-    ],
+    "prerequisites": ["months_6_12_social_emotional_1"],
+    "skills": ["Attachment security"],
     "observationTips": "Show appropriate separation distress",
     "supportStrategies": "Gradual separation practice",
     "redFlags": "Extreme or no separation anxiety",
@@ -696,12 +600,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_6_12_language_1"
-    ],
-    "skills": [
-      "Vocabulary expansion"
-    ],
+    "prerequisites": ["months_6_12_language_1"],
+    "skills": ["Vocabulary expansion"],
     "observationTips": "Use increasing number of words",
     "supportStrategies": "Read together daily",
     "redFlags": "Limited vocabulary growth",
@@ -723,12 +623,8 @@
     "period": "infancy",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_12_18_physical_1"
-    ],
-    "skills": [
-      "Mobility skills"
-    ],
+    "prerequisites": ["months_12_18_physical_1"],
+    "skills": ["Mobility skills"],
     "observationTips": "Crawl and explore",
     "supportStrategies": "Safe crawling spaces",
     "redFlags": "No crawling by 18 months",
@@ -750,12 +646,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_12_18_cognitive_1"
-    ],
-    "skills": [
-      "Problem solving"
-    ],
+    "prerequisites": ["months_12_18_cognitive_1"],
+    "skills": ["Problem solving"],
     "observationTips": "Solve simple problems",
     "supportStrategies": "Provide puzzles and challenges",
     "redFlags": "No problem-solving attempts",
@@ -777,12 +669,8 @@
     "period": "infancy",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_12_18_social_emotional_1"
-    ],
-    "skills": [
-      "Emotional control"
-    ],
+    "prerequisites": ["months_12_18_social_emotional_1"],
+    "skills": ["Emotional control"],
     "observationTips": "Express basic emotions",
     "supportStrategies": "Model emotional expression",
     "redFlags": "Extreme emotional outbursts",
@@ -804,12 +692,8 @@
     "period": "infancy",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_12_18_language_1"
-    ],
-    "skills": [
-      "Phrase formation"
-    ],
+    "prerequisites": ["months_12_18_language_1"],
+    "skills": ["Phrase formation"],
     "observationTips": "Combine words into phrases",
     "supportStrategies": "Model two-word phrases",
     "redFlags": "No word combinations by 24 months",
@@ -831,12 +715,8 @@
     "period": "early_childhood",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_18_24_physical_1"
-    ],
-    "skills": [
-      "Standing balance"
-    ],
+    "prerequisites": ["months_18_24_physical_1"],
+    "skills": ["Standing balance"],
     "observationTips": "Stand with assistance",
     "supportStrategies": "Practice standing activities",
     "redFlags": "No standing by 24 months",
@@ -858,12 +738,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_18_24_cognitive_1"
-    ],
-    "skills": [
-      "Imitative learning"
-    ],
+    "prerequisites": ["months_18_24_cognitive_1"],
+    "skills": ["Imitative learning"],
     "observationTips": "Copy actions and behaviors",
     "supportStrategies": "Demonstrate activities",
     "redFlags": "Limited imitation abilities",
@@ -885,12 +761,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_18_24_social_emotional_1"
-    ],
-    "skills": [
-      "Empathetic response"
-    ],
+    "prerequisites": ["months_18_24_social_emotional_1"],
+    "skills": ["Empathetic response"],
     "observationTips": "Show concern for others",
     "supportStrategies": "Model and discuss empathy",
     "redFlags": "Lack of empathy or concern",
@@ -912,12 +784,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_18_24_language_1"
-    ],
-    "skills": [
-      "Command comprehension"
-    ],
+    "prerequisites": ["months_18_24_language_1"],
+    "skills": ["Command comprehension"],
     "observationTips": "Follow simple instructions",
     "supportStrategies": "Use clear simple commands",
     "redFlags": "No command following",
@@ -940,13 +808,8 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "birth",
-      "months_24_30_physical_1"
-    ],
-    "skills": [
-      "Independent walking"
-    ],
+    "prerequisites": ["birth", "months_24_30_physical_1"],
+    "skills": ["Independent walking"],
     "observationTips": "Walk without support",
     "supportStrategies": "Encourage walking practice",
     "redFlags": "No independent walking by 30 months",
@@ -968,12 +831,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_24_30_cognitive_1"
-    ],
-    "skills": [
-      "Symbolic thought"
-    ],
+    "prerequisites": ["months_24_30_cognitive_1"],
+    "skills": ["Symbolic thought"],
     "observationTips": "Engage in pretend play",
     "supportStrategies": "Encourage imaginative play",
     "redFlags": "No pretend play by 36 months",
@@ -995,12 +854,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_24_30_social_emotional_1"
-    ],
-    "skills": [
-      "Self-recognition"
-    ],
+    "prerequisites": ["months_24_30_social_emotional_1"],
+    "skills": ["Self-recognition"],
     "observationTips": "Recognize self in mirror",
     "supportStrategies": "Self-awareness activities",
     "redFlags": "No self-recognition",
@@ -1022,12 +877,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_24_30_language_1"
-    ],
-    "skills": [
-      "Gesture use"
-    ],
+    "prerequisites": ["months_24_30_language_1"],
+    "skills": ["Gesture use"],
     "observationTips": "Use gestures to communicate",
     "supportStrategies": "Encourage gesture communication",
     "redFlags": "Limited gesture use",
@@ -1049,12 +900,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "first_steps"
-    ],
-    "skills": [
-      "Advanced mobility"
-    ],
+    "prerequisites": ["first_steps"],
+    "skills": ["Advanced mobility"],
     "observationTips": "Run and jump with coordination",
     "supportStrategies": "Active play opportunities",
     "redFlags": "Poor coordination in running",
@@ -1076,12 +923,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_30_36_cognitive_1"
-    ],
-    "skills": [
-      "Memory skills"
-    ],
+    "prerequisites": ["months_30_36_cognitive_1"],
+    "skills": ["Memory skills"],
     "observationTips": "Remember familiar people and places",
     "supportStrategies": "Memory games and repetition",
     "redFlags": "Poor memory recall",
@@ -1103,12 +946,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_30_36_social_emotional_1"
-    ],
-    "skills": [
-      "Social engagement"
-    ],
+    "prerequisites": ["months_30_36_social_emotional_1"],
+    "skills": ["Social engagement"],
     "observationTips": "Show interest in other children",
     "supportStrategies": "Arrange playdates",
     "redFlags": "No interest in peers",
@@ -1130,12 +969,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_30_36_language_1"
-    ],
-    "skills": [
-      "Narrative understanding"
-    ],
+    "prerequisites": ["months_30_36_language_1"],
+    "skills": ["Narrative understanding"],
     "observationTips": "Understand simple stories",
     "supportStrategies": "Read stories together",
     "redFlags": "No story comprehension",
@@ -1157,12 +992,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_36_42_physical_1"
-    ],
-    "skills": [
-      "Stair climbing"
-    ],
+    "prerequisites": ["months_36_42_physical_1"],
+    "skills": ["Stair climbing"],
     "observationTips": "Climb stairs independently",
     "supportStrategies": "Stair climbing practice",
     "redFlags": "Fear or inability to climb",
@@ -1184,12 +1015,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_36_42_cognitive_1"
-    ],
-    "skills": [
-      "Sustained attention"
-    ],
+    "prerequisites": ["months_36_42_cognitive_1"],
+    "skills": ["Sustained attention"],
     "observationTips": "Focus on activities longer",
     "supportStrategies": "Structured activities",
     "redFlags": "Very short attention span",
@@ -1211,12 +1038,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_36_42_social_emotional_1"
-    ],
-    "skills": [
-      "Curiosity expression"
-    ],
+    "prerequisites": ["months_36_42_social_emotional_1"],
+    "skills": ["Curiosity expression"],
     "observationTips": "Ask questions about the world",
     "supportStrategies": "Answer questions patiently",
     "redFlags": "No questioning behavior",
@@ -1238,12 +1061,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_36_42_language_1"
-    ],
-    "skills": [
-      "Question formation"
-    ],
+    "prerequisites": ["months_36_42_language_1"],
+    "skills": ["Question formation"],
     "observationTips": "Ask why and how questions",
     "supportStrategies": "Encourage and answer questions",
     "redFlags": "No questioning behavior",
@@ -1265,12 +1084,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_42_48_physical_1"
-    ],
-    "skills": [
-      "Pedaling coordination"
-    ],
+    "prerequisites": ["months_42_48_physical_1"],
+    "skills": ["Pedaling coordination"],
     "observationTips": "Pedal tricycle or bike",
     "supportStrategies": "Provide riding opportunities",
     "redFlags": "Inability to pedal",
@@ -1292,12 +1107,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_42_48_cognitive_1"
-    ],
-    "skills": [
-      "Play-based learning"
-    ],
+    "prerequisites": ["months_42_48_cognitive_1"],
+    "skills": ["Play-based learning"],
     "observationTips": "Learn concepts through play",
     "supportStrategies": "Educational play activities",
     "redFlags": "Limited learning through play",
@@ -1319,12 +1130,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_42_48_social_emotional_1"
-    ],
-    "skills": [
-      "Self-regulation"
-    ],
+    "prerequisites": ["months_42_48_social_emotional_1"],
+    "skills": ["Self-regulation"],
     "observationTips": "Control impulses and emotions",
     "supportStrategies": "Emotional regulation strategies",
     "redFlags": "Poor self-control",
@@ -1346,12 +1153,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_42_48_language_1"
-    ],
-    "skills": [
-      "Language growth"
-    ],
+    "prerequisites": ["months_42_48_language_1"],
+    "skills": ["Language growth"],
     "observationTips": "Use varied vocabulary",
     "supportStrategies": "Rich language exposure",
     "redFlags": "Limited vocabulary",
@@ -1373,12 +1176,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_48_54_physical_1"
-    ],
-    "skills": [
-      "Ball skills"
-    ],
+    "prerequisites": ["months_48_54_physical_1"],
+    "skills": ["Ball skills"],
     "observationTips": "Throw and catch balls",
     "supportStrategies": "Ball play activities",
     "redFlags": "Poor ball handling",
@@ -1400,12 +1199,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_48_54_cognitive_1"
-    ],
-    "skills": [
-      "Strategic thinking"
-    ],
+    "prerequisites": ["months_48_54_cognitive_1"],
+    "skills": ["Strategic thinking"],
     "observationTips": "Use strategies to solve problems",
     "supportStrategies": "Provide challenging puzzles",
     "redFlags": "No problem-solving strategies",
@@ -1427,12 +1222,8 @@
     "period": "early_childhood",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_48_54_social_emotional_1"
-    ],
-    "skills": [
-      "Emotional understanding"
-    ],
+    "prerequisites": ["months_48_54_social_emotional_1"],
+    "skills": ["Emotional understanding"],
     "observationTips": "Understand and express emotions",
     "supportStrategies": "Emotion coaching",
     "redFlags": "Limited emotional awareness",
@@ -1454,12 +1245,8 @@
     "period": "early_childhood",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_48_54_language_1"
-    ],
-    "skills": [
-      "Storytelling ability"
-    ],
+    "prerequisites": ["months_48_54_language_1"],
+    "skills": ["Storytelling ability"],
     "observationTips": "Tell coherent stories",
     "supportStrategies": "Storytelling practice",
     "redFlags": "Poor narrative skills",
@@ -1481,12 +1268,8 @@
     "period": "schoolAge",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "months_54_60_physical_1"
-    ],
-    "skills": [
-      "Balance skills"
-    ],
+    "prerequisites": ["months_54_60_physical_1"],
+    "skills": ["Balance skills"],
     "observationTips": "Walk on balance beam",
     "supportStrategies": "Balance activities",
     "redFlags": "Poor balance",
@@ -1508,12 +1291,8 @@
     "period": "schoolAge",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "months_54_60_cognitive_1"
-    ],
-    "skills": [
-      "Learning readiness"
-    ],
+    "prerequisites": ["months_54_60_cognitive_1"],
+    "skills": ["Learning readiness"],
     "observationTips": "Show readiness for formal learning",
     "supportStrategies": "School preparation activities",
     "redFlags": "Lack of academic readiness",
@@ -1535,12 +1314,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_54_60_social_emotional_1"
-    ],
-    "skills": [
-      "Goal orientation"
-    ],
+    "prerequisites": ["months_54_60_social_emotional_1"],
+    "skills": ["Goal orientation"],
     "observationTips": "Set and work toward goals",
     "supportStrategies": "Goal-setting activities",
     "redFlags": "Lack of motivation",
@@ -1562,12 +1337,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "months_54_60_language_1"
-    ],
-    "skills": [
-      "Grammar skills"
-    ],
+    "prerequisites": ["months_54_60_language_1"],
+    "skills": ["Grammar skills"],
     "observationTips": "Use correct grammar",
     "supportStrategies": "Grammar practice activities",
     "redFlags": "Poor grammar use",
@@ -1589,12 +1360,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_5_6_physical_1"
-    ],
-    "skills": [
-      "Precision skills"
-    ],
+    "prerequisites": ["year_5_6_physical_1"],
+    "skills": ["Precision skills"],
     "observationTips": "Use tools with precision",
     "supportStrategies": "Fine motor activities",
     "redFlags": "Poor fine motor control",
@@ -1616,12 +1383,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_5_6_cognitive_1"
-    ],
-    "skills": [
-      "Analytical skills"
-    ],
+    "prerequisites": ["year_5_6_cognitive_1"],
+    "skills": ["Analytical skills"],
     "observationTips": "Think critically about problems",
     "supportStrategies": "Critical thinking exercises",
     "redFlags": "Limited analytical thinking",
@@ -1643,12 +1406,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_5_6_social_emotional_1"
-    ],
-    "skills": [
-      "Peer relationships"
-    ],
+    "prerequisites": ["year_5_6_social_emotional_1"],
+    "skills": ["Peer relationships"],
     "observationTips": "Interact well with peers",
     "supportStrategies": "Social skills practice",
     "redFlags": "Difficulty with social interaction",
@@ -1670,12 +1429,8 @@
     "period": "schoolAge",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "year_5_6_language_1"
-    ],
-    "skills": [
-      "Reading skills"
-    ],
+    "prerequisites": ["year_5_6_language_1"],
+    "skills": ["Reading skills"],
     "observationTips": "Read fluently with comprehension",
     "supportStrategies": "Reading practice",
     "redFlags": "Poor reading skills",
@@ -1697,12 +1452,8 @@
     "period": "schoolAge",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "year_6_7_physical_1"
-    ],
-    "skills": [
-      "Athletic abilities"
-    ],
+    "prerequisites": ["year_6_7_physical_1"],
+    "skills": ["Athletic abilities"],
     "observationTips": "Participate in sports",
     "supportStrategies": "Sports opportunities",
     "redFlags": "Lack of interest in physical activity",
@@ -1724,12 +1475,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_6_7_cognitive_1"
-    ],
-    "skills": [
-      "Study skills"
-    ],
+    "prerequisites": ["year_6_7_cognitive_1"],
+    "skills": ["Study skills"],
     "observationTips": "Use effective study methods",
     "supportStrategies": "Study skills training",
     "redFlags": "Poor study habits",
@@ -1751,12 +1498,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_6_7_social_emotional_1"
-    ],
-    "skills": [
-      "Emotional development"
-    ],
+    "prerequisites": ["year_6_7_social_emotional_1"],
+    "skills": ["Emotional development"],
     "observationTips": "Show age-appropriate emotional control",
     "supportStrategies": "Emotional development activities",
     "redFlags": "Emotional immaturity",
@@ -1778,12 +1521,8 @@
     "period": "schoolAge",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_6_7_language_1"
-    ],
-    "skills": [
-      "Communication ability"
-    ],
+    "prerequisites": ["year_6_7_language_1"],
+    "skills": ["Communication ability"],
     "observationTips": "Communicate effectively",
     "supportStrategies": "Communication practice",
     "redFlags": "Poor communication skills",
@@ -1806,10 +1545,7 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "birth",
-      "year_7_8_physical_1"
-    ],
+    "prerequisites": ["birth", "year_7_8_physical_1"],
     "skills": [
       "Sexual maturation",
       "Hormonal development",
@@ -1837,13 +1573,8 @@
     "period": "adolescence",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "puberty",
-      "year_7_8_physical_1"
-    ],
-    "skills": [
-      "Athletic performance"
-    ],
+    "prerequisites": ["puberty", "year_7_8_physical_1"],
+    "skills": ["Athletic performance"],
     "observationTips": "Develop athletic abilities",
     "supportStrategies": "Sports training",
     "redFlags": "Physical performance issues",
@@ -1865,12 +1596,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_7_8_cognitive_1"
-    ],
-    "skills": [
-      "Abstract thinking"
-    ],
+    "prerequisites": ["year_7_8_cognitive_1"],
+    "skills": ["Abstract thinking"],
     "observationTips": "Think abstractly about concepts",
     "supportStrategies": "Abstract reasoning activities",
     "redFlags": "Concrete thinking only",
@@ -1892,12 +1619,8 @@
     "period": "adolescence",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "puberty"
-    ],
-    "skills": [
-      "Identity formation"
-    ],
+    "prerequisites": ["puberty"],
+    "skills": ["Identity formation"],
     "observationTips": "Explore personal identity",
     "supportStrategies": "Identity exploration support",
     "redFlags": "Identity confusion",
@@ -1919,12 +1642,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "year_7_8_language_1"
-    ],
-    "skills": [
-      "Communication mastery"
-    ],
+    "prerequisites": ["year_7_8_language_1"],
+    "skills": ["Communication mastery"],
     "observationTips": "Communicate complex ideas",
     "supportStrategies": "Advanced communication practice",
     "redFlags": "Communication difficulties",
@@ -1946,12 +1665,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "teen_12_14_physical_1"
-    ],
-    "skills": [
-      "Body awareness"
-    ],
+    "prerequisites": ["teen_12_14_physical_1"],
+    "skills": ["Body awareness"],
     "observationTips": "Develop healthy body image",
     "supportStrategies": "Body positivity education",
     "redFlags": "Body image issues",
@@ -1973,12 +1688,8 @@
     "period": "adolescence",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "teen_12_14_cognitive_1"
-    ],
-    "skills": [
-      "Planning skills"
-    ],
+    "prerequisites": ["teen_12_14_cognitive_1"],
+    "skills": ["Planning skills"],
     "observationTips": "Plan for future goals",
     "supportStrategies": "Goal-setting activities",
     "redFlags": "Lack of future planning",
@@ -2000,12 +1711,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "teen_12_14_social_emotional_1"
-    ],
-    "skills": [
-      "Relationship skills"
-    ],
+    "prerequisites": ["teen_12_14_social_emotional_1"],
+    "skills": ["Relationship skills"],
     "observationTips": "Develop mature relationships",
     "supportStrategies": "Relationship guidance",
     "redFlags": "Relationship difficulties",
@@ -2027,12 +1734,8 @@
     "period": "adolescence",
     "importance": "medium",
     "isTypical": true,
-    "prerequisites": [
-      "teen_12_14_language_1"
-    ],
-    "skills": [
-      "Learning commitment"
-    ],
+    "prerequisites": ["teen_12_14_language_1"],
+    "skills": ["Learning commitment"],
     "observationTips": "Commit to ongoing learning",
     "supportStrategies": "Learning opportunities",
     "redFlags": "Resistance to learning",
@@ -2054,12 +1757,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "teen_14_16_physical_1"
-    ],
-    "skills": [
-      "Independence"
-    ],
+    "prerequisites": ["teen_14_16_physical_1"],
+    "skills": ["Independence"],
     "observationTips": "Manage physical needs independently",
     "supportStrategies": "Independence training",
     "redFlags": "Dependence on others",
@@ -2081,12 +1780,8 @@
     "period": "adolescence",
     "importance": "critical",
     "isTypical": true,
-    "prerequisites": [
-      "teen_14_16_cognitive_1"
-    ],
-    "skills": [
-      "Life management"
-    ],
+    "prerequisites": ["teen_14_16_cognitive_1"],
+    "skills": ["Life management"],
     "observationTips": "Apply life skills effectively",
     "supportStrategies": "Life skills training",
     "redFlags": "Poor life skills",
@@ -2108,12 +1803,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "teen_14_16_social_emotional_1"
-    ],
-    "skills": [
-      "Social awareness"
-    ],
+    "prerequisites": ["teen_14_16_social_emotional_1"],
+    "skills": ["Social awareness"],
     "observationTips": "Show social responsibility",
     "supportStrategies": "Community involvement",
     "redFlags": "Lack of social responsibility",
@@ -2135,12 +1826,8 @@
     "period": "adolescence",
     "importance": "high",
     "isTypical": true,
-    "prerequisites": [
-      "teen_14_16_language_1"
-    ],
-    "skills": [
-      "Professional skills"
-    ],
+    "prerequisites": ["teen_14_16_language_1"],
+    "skills": ["Professional skills"],
     "observationTips": "Communicate professionally",
     "supportStrategies": "Professional communication training",
     "redFlags": "Poor professional communication",
@@ -2163,10 +1850,7 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "teen_16_18_social_emotional_1",
-      "teen_16_18_cognitive_1"
-    ],
+    "prerequisites": ["teen_16_18_social_emotional_1", "teen_16_18_cognitive_1"],
     "skills": [
       "Legal responsibility",
       "Independent decision making",
@@ -2196,10 +1880,7 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "months_6_12_language_1",
-      "first_steps"
-    ],
+    "prerequisites": ["months_6_12_language_1", "first_steps"],
     "skills": [
       "Academic readiness",
       "Social interaction",
@@ -2229,9 +1910,7 @@
     "importance": "critical",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "school_starts"
-    ],
+    "prerequisites": ["school_starts"],
     "skills": [
       "Academic achievement",
       "Critical thinking",
@@ -2261,9 +1940,7 @@
     "importance": "high",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "high_school_graduation"
-    ],
+    "prerequisites": ["high_school_graduation"],
     "skills": [
       "Work ethic",
       "Professional communication",
@@ -2293,9 +1970,7 @@
     "importance": "high",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "first_job"
-    ],
+    "prerequisites": ["first_job"],
     "skills": [
       "Household management",
       "Financial management",
@@ -2325,9 +2000,7 @@
     "importance": "medium",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "puberty"
-    ],
+    "prerequisites": ["puberty"],
     "skills": [
       "Emotional intimacy",
       "Communication",
@@ -2357,9 +2030,7 @@
     "importance": "high",
     "isTypical": true,
     "isKeyMilestone": true,
-    "prerequisites": [
-      "first_job"
-    ],
+    "prerequisites": ["first_job"],
     "skills": [
       "Financial planning",
       "Life transition",

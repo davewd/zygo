@@ -41,6 +41,7 @@ export interface TimelineEdge {
   targetHandle?: string;
   type?: string;
   style?: Record<string, any>;
+  className?: string;
   label?: string;
   markerEnd?: {
     type: any;

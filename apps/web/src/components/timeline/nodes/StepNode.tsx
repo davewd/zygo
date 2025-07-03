@@ -27,23 +27,23 @@ export const StepNode = ({ data }: StepNodeProps) => {
   };
 
   const status = getStepStatus();
-  
+
   // Check for new flags
   const isCompleted = data.isCompleted || false;
   const isCurrentGoal = data.isCurrentGoal || false;
-  
+
   // Determine styling classes
   const getContainerClasses = () => {
     let classes = `p-3 rounded-md border shadow-sm min-w-48 max-w-64 bg-gradient-to-r ${getStepColor(
       status
     )} transform-gpu pointer-events-auto relative`;
-    
+
     if (isCurrentGoal) {
       classes += ' zygo-goal-milestone';
     } else if (isCompleted) {
       classes += ' zygo-completed-milestone';
     }
-    
+
     return classes;
   };
 
@@ -57,10 +57,14 @@ export const StepNode = ({ data }: StepNodeProps) => {
     >
       {/* Use standardized vertical handles for Y-axis layout */}
       <VerticalHandles />
-      
+
       {/* Goal Icon */}
       {isCurrentGoal && (
-        <div className={`zygo-goal-icon ${isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'}`}>
+        <div
+          className={`zygo-goal-icon ${
+            isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'
+          }`}
+        >
           <Target className="w-3 h-3" />
         </div>
       )}

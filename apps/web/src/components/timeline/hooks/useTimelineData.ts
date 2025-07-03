@@ -1,22 +1,22 @@
 import { MarkerType } from '@xyflow/react';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  getAllAchievements,
-  getAllAgeRanges,
-  getAllMilestones,
-  getAllSteps,
-  type Achievement,
-  type Step
+    getAllAchievements,
+    getAllAgeRanges,
+    getAllMilestones,
+    getAllSteps,
+    type Achievement,
+    type Step
 } from '../../../lib/api/timeline';
 import { removeTransitiveRedundancy } from '../../../lib/utils/milestonePrerequisiteCleanup';
 import { DEVELOPMENT_CATEGORIES, ZOOM_LEVELS } from '../constants';
 import {
-  AgeRange,
-  DevelopmentCategory,
-  MilestoneData,
-  PedagogyProfile,
-  TimelineEdge,
-  TimelineNode
+    AgeRange,
+    DevelopmentCategory,
+    MilestoneData,
+    PedagogyProfile,
+    TimelineEdge,
+    TimelineNode
 } from '../types';
 
 /**
@@ -118,6 +118,55 @@ export const useTimelineData = ({
 
   // Generate nodes and edges based on current state
   const { nodes, edges } = useMemo(() => {
+    // Helper function to determine edge styling based on connected nodes
+    const getEdgeStyle = (sourceNode: any, targetNode: any, defaultStyle: any) => {
+      const sourceData = sourceNode?.data;
+      const targetData = targetNode?.data;
+      
+      // Check if either node is a current goal
+      const isGoalConnection = sourceData?.milestone?.isCurrentGoal || targetData?.milestone?.isCurrentGoal ||
+                              sourceData?.isCurrentGoal || targetData?.isCurrentGoal;
+      
+      // Check if both nodes are completed
+      const isCompletedConnection = (sourceData?.milestone?.isCompleted || sourceData?.isCompleted) &&
+                                   (targetData?.milestone?.isCompleted || targetData?.isCompleted);
+      
+      // Check if this is a pathway from completed to goal
+      const isPathwayConnection = (sourceData?.milestone?.isCompleted || sourceData?.isCompleted) &&
+                                 (targetData?.milestone?.isCurrentGoal || targetData?.isCurrentGoal);
+      
+      let edgeClasses = '';
+      let style = { ...defaultStyle };
+      
+      if (isGoalConnection) {
+        edgeClasses = 'zygo-goal-edge';
+        style = {
+          ...style,
+          stroke: '#721aff',
+          strokeWidth: 4,
+          opacity: 1,
+        };
+      } else if (isPathwayConnection) {
+        edgeClasses = 'zygo-pathway-edge';
+        style = {
+          ...style,
+          stroke: '#3b82f6',
+          strokeWidth: 3,
+          opacity: 0.9,
+        };
+      } else if (isCompletedConnection) {
+        edgeClasses = 'zygo-completed-edge';
+        style = {
+          ...style,
+          stroke: '#10b981',
+          strokeWidth: 3,
+          opacity: 0.9,
+        };
+      }
+      
+      return { style, className: edgeClasses };
+    };
+    
     // Use milestones from JSON (now stored in csvMilestones for backward compatibility)
     const allMilestones = [...csvMilestones];
     
@@ -252,6 +301,19 @@ export const useTimelineData = ({
           // Only create edge if prerequisite milestone exists in our generated nodes
           const prereqExists = generatedNodes.some(node => node.id === `milestone-${prereqId}`);
           if (prereqId && prereqExists) {
+            const sourceNode = generatedNodes.find(node => node.id === `milestone-${prereqId}`);
+            const targetNode = generatedNodes.find(node => node.id === milestoneId);
+            
+            const defaultStyle = {
+              stroke: '#059669', // Green for prerequisites
+              strokeWidth: 2,
+              strokeDasharray: '8,4',
+              opacity: 0.7,
+              zIndex: 4, // Top layer - milestone edges
+            };
+            
+            const { style: edgeStyle, className } = getEdgeStyle(sourceNode, targetNode, defaultStyle);
+            
             generatedEdges.push({
               id: `prerequisite-${prereqId}-to-${milestone.id}`,
               source: `milestone-${prereqId}`,
@@ -259,16 +321,11 @@ export const useTimelineData = ({
               sourceHandle: 'bottom', // Connect from bottom of prerequisite milestone
               targetHandle: 'top', // Connect to top of dependent milestone
               type: 'smoothstep', // Use smoothstep for better curves
-              style: {
-                stroke: '#059669', // Green for prerequisites
-                strokeWidth: 2,
-                strokeDasharray: '8,4',
-                opacity: 0.7,
-                zIndex: 4, // Top layer - milestone edges
-              },
+              style: edgeStyle,
+              className,
               markerEnd: {
                 type: MarkerType.ArrowClosed,
-                color: '#059669',
+                color: edgeStyle.stroke,
               },
             });
           }
@@ -307,6 +364,17 @@ export const useTimelineData = ({
         const toMilestoneNode = generatedNodes.find(n => n.id === `milestone-${achievement.toMilestone}`);
         
         if (fromMilestoneNode) {
+          const achievementNode = generatedNodes.find(n => n.id === achievementId);
+          
+          const defaultStyle = {
+            stroke: '#f59e0b', // Amber for achievements
+            strokeWidth: 2,
+            opacity: 0.8,
+            zIndex: 3, // Third layer - achievement edges
+          };
+          
+          const { style: edgeStyle, className } = getEdgeStyle(fromMilestoneNode, achievementNode, defaultStyle);
+          
           generatedEdges.push({
             id: `milestone-to-achievement-${achievement.id}`,
             source: fromMilestoneNode.id,
@@ -314,15 +382,11 @@ export const useTimelineData = ({
             sourceHandle: 'bottom',
             targetHandle: 'top',
             type: 'smoothstep',
-            style: {
-              stroke: '#f59e0b', // Amber for achievements
-              strokeWidth: 2,
-              opacity: 0.8,
-              zIndex: 3, // Third layer - achievement edges
-            },
+            style: edgeStyle,
+            className,
             markerEnd: {
               type: MarkerType.ArrowClosed,
-              color: '#f59e0b',
+              color: edgeStyle.stroke,
             },
           });
         }
@@ -358,6 +422,17 @@ export const useTimelineData = ({
         // Connect steps to their achievements
         const achievementNode = generatedNodes.find(n => n.id === `achievement-${step.achievementId}`);
         if (achievementNode) {
+          const stepNode = generatedNodes.find(n => n.id === stepId);
+          
+          const defaultStyle = {
+            stroke: '#10b981', // Emerald for steps
+            strokeWidth: 1.5,
+            opacity: 0.7,
+            zIndex: 2, // Second layer - step edges
+          };
+          
+          const { style: edgeStyle, className } = getEdgeStyle(achievementNode, stepNode, defaultStyle);
+          
           generatedEdges.push({
             id: `achievement-to-step-${step.id}`,
             source: achievementNode.id,
@@ -365,15 +440,11 @@ export const useTimelineData = ({
             sourceHandle: 'bottom',
             targetHandle: 'top',
             type: 'smoothstep',
-            style: {
-              stroke: '#10b981', // Emerald for steps
-              strokeWidth: 1.5,
-              opacity: 0.7,
-              zIndex: 2, // Second layer - step edges
-            },
+            style: edgeStyle,
+            className,
             markerEnd: {
               type: MarkerType.ArrowClosed,
-              color: '#10b981',
+              color: edgeStyle.stroke,
             },
           });
         }

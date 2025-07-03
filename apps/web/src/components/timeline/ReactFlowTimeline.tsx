@@ -155,6 +155,22 @@ export const ReactFlowTimeline = ({
 
   return (
     <div className="w-full h-full">
+      {/* SVG Gradients for Enhanced Edges */}
+      <svg className="zygo-edge-gradients">
+        <defs>
+          <linearGradient id="zygo-goal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#721aff" />
+            <stop offset="50%" stopColor="#e6ab23" />
+            <stop offset="100%" stopColor="#721aff" />
+          </linearGradient>
+          <linearGradient id="zygo-pathway-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="50%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#10b981" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <ReactFlow
         nodes={reactFlowNodes}
         edges={reactFlowEdges}

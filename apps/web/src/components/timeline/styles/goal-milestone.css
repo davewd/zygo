@@ -109,3 +109,64 @@
     background-position: 0% 50%;
   }
 }
+
+/* Edge Styling for Goal and Completed Connections */
+
+/* Goal milestone edges with animated glow */
+.react-flow__edge.zygo-goal-edge path {
+  stroke: url(#zygo-goal-gradient) !important;
+  stroke-width: 4 !important;
+  filter: drop-shadow(0 0 8px var(--zygo-goal-clr-4)) drop-shadow(0 0 16px var(--zygo-goal-clr-3));
+  animation: zygo-edge-pulse 2s ease-in-out infinite;
+}
+
+.react-flow__edge.zygo-goal-edge .react-flow__edge-path {
+  stroke: url(#zygo-goal-gradient) !important;
+  stroke-width: 4 !important;
+}
+
+/* Completed milestone edges */
+.react-flow__edge.zygo-completed-edge path {
+  stroke: #10b981 !important;
+  stroke-width: 3 !important;
+  opacity: 0.9 !important;
+}
+
+.react-flow__edge.zygo-completed-edge .react-flow__edge-path {
+  stroke: #10b981 !important;
+  stroke-width: 3 !important;
+}
+
+/* Edge pulse animation for goals */
+@keyframes zygo-edge-pulse {
+  0% {
+    filter: drop-shadow(0 0 8px var(--zygo-goal-clr-4)) drop-shadow(0 0 16px var(--zygo-goal-clr-3));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px var(--zygo-goal-clr-4))
+      drop-shadow(0 0 24px var(--zygo-goal-clr-3));
+  }
+  100% {
+    filter: drop-shadow(0 0 8px var(--zygo-goal-clr-4)) drop-shadow(0 0 16px var(--zygo-goal-clr-3));
+  }
+}
+
+/* Pathway highlighting between completed and goal milestones */
+.react-flow__edge.zygo-pathway-edge path {
+  stroke: url(#zygo-pathway-gradient) !important;
+  stroke-width: 3 !important;
+  animation: zygo-pathway-flow 3s linear infinite;
+}
+
+.react-flow__edge.zygo-pathway-edge .react-flow__edge-path {
+  stroke: url(#zygo-pathway-gradient) !important;
+  stroke-width: 3 !important;
+}
+
+/* SVG Gradients for edges - these need to be defined in the component */
+.zygo-edge-gradients {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
