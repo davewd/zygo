@@ -1,4 +1,5 @@
 // Timeline-specific types and interfaces
+import React from 'react';
 
 export interface ZoomLevel {
   level: number;
@@ -98,6 +99,7 @@ export interface AgeRange {
 export interface TimelinePedagogyProps {
   pedagogyData?: PedagogyProfile;
   onNodeClick?: (nodeId: string, nodeData: any) => void;
+  profileAvatarSelector?: React.ReactNode;
 }
 
 export interface ReactFlowInnerComponentProps {

@@ -33,6 +33,7 @@ export const ReactFlowTimeline = ({
   setSelectedFamilyMembers,
   pedagogyData,
   onCanvasWidthChange,
+  profileAvatarSelector,
 }) => {
   const reactFlowInstance = useReactFlow();
 
@@ -311,6 +312,7 @@ export const ReactFlowTimeline = ({
           viewport={viewport}
           currentZoomLevel={currentZoomLevel}
           userProfile={getUserProfile()}
+          profileAvatarSelector={profileAvatarSelector}
         />
 
         {/* Timeline Ruler Toggle */}

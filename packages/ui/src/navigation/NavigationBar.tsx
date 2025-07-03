@@ -1,16 +1,10 @@
-import { Bell, Building, Loader2, Network, Search, User, UserCheck, Users } from 'lucide-react';
+import { Bell, Building, Loader2, Network, Search, User, UserCheck } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/avatar';
 import { Button } from '../components/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../components/dropdown-menu';
 import { Input } from '../components/input';
+import { ProfileAvatarSelector } from '../components/profile-avatar-selector';
 
 import { cn } from '@zygo/libs';
 
@@ -107,6 +101,11 @@ interface INavigationBarProps {
   otherUsers?: CurrentUser[];
   notificationCount?: number;
   onNotificationClick?: () => void;
+  getProfileDisplayInfo?: (profileType: string | null, userName?: string) => {
+    title: string;
+    description: string;
+    icon: string;
+  };
 }
 
 const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
@@ -123,6 +122,7 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
       otherUsers = [],
       notificationCount = 0,
       onNotificationClick,
+      getProfileDisplayInfo,
       ...props
     },
     ref
@@ -568,90 +568,20 @@ const NavigationBar = React.forwardRef<HTMLDivElement, INavigationBarProps>(
               )}
             </div>
 
-            {/* Current User Display */}
+            {/* Profile Avatar Selector */}
             {currentUser && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => onAvatarClick?.(currentUser)}
-                  className="hover:opacity-80 transition-opacity duration-200"
-                  title="Go to profile"
-                >
-                  <Avatar className="h-8 w-8 ring-2 ring-white/20">
-                    <AvatarImage
-                      src={currentUser.avatar}
-                      alt={`${currentUser.firstName} ${currentUser.lastName}`}
-                    />
-                    <AvatarFallback className="text-sm text-white bg-gradient-to-r from-purple-500 to-pink-500">
-                      {currentUser.firstName.charAt(0)}
-                      {currentUser.lastName.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
-                </button>
-                <div className="hidden sm:block">
-                  <div className="text-sm font-medium text-gray-800">
-                    {currentUser.firstName} {currentUser.lastName}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* User Switch Dropdown */}
-            {(otherUsers.length > 0 || onUserSwitch) && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-10 w-10 p-0 rounded-full hover:bg-gray-100/50 transition-colors duration-200"
-                    title="Switch user"
-                  >
-                    <Users className="h-5 w-5 text-gray-600" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="w-56 bg-white/25 backdrop-blur-[10px] border border-white/18 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
-                  style={{
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
-                  }}
-                >
-                  {otherUsers.map((user) => (
-                    <DropdownMenuItem
-                      key={user.id}
-                      onClick={() => onUserSelect?.(user)}
-                      className="gap-2 text-gray-800 hover:bg-white/30 focus:bg-white/30 cursor-pointer"
-                    >
-                      <Avatar className="h-6 w-6">
-                        <AvatarImage src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
-                        <AvatarFallback className="text-xs text-white bg-gradient-to-r from-blue-400 to-purple-400">
-                          {user.firstName.charAt(0)}
-                          {user.lastName.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium text-gray-800">
-                          {user.firstName} {user.lastName}
-                        </span>
-                        <span className="text-xs text-gray-600">{user.email}</span>
-                        {user.title && (
-                          <span className="text-xs text-gray-500 italic">{user.title}</span>
-                        )}
-                      </div>
-                    </DropdownMenuItem>
-                  ))}
-                  {otherUsers.length > 0 && <DropdownMenuSeparator className="bg-white/20" />}
-                  {onUserSwitch && (
-                    <DropdownMenuItem
-                      onClick={onUserSwitch}
-                      className="gap-2 text-gray-800 hover:bg-white/30 focus:bg-white/30"
-                    >
-                      <Users className="h-4 w-4" />
-                      <span>Switch Account</span>
-                    </DropdownMenuItem>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ProfileAvatarSelector
+                currentUser={currentUser}
+                otherUsers={otherUsers}
+                onProfileClick={onAvatarClick}
+                onUserSelect={onUserSelect}
+                onUserSwitch={onUserSwitch}
+                size="md"
+                showNameLabel={true}
+                variant="glassmorphism"
+                getProfileDisplayInfo={getProfileDisplayInfo}
+                className="flex items-center gap-2"
+              />
             )}
           </div>
         </div>

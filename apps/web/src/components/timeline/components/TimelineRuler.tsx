@@ -11,6 +11,7 @@ interface TimelineRulerProps {
   viewport?: { x: number; y: number; zoom: number };
   currentZoomLevel?: number;
   userProfile?: 'parent' | 'service_provider' | null;
+  profileAvatarSelector?: React.ReactNode;
 }
 
 export const TimelineRuler: React.FC<TimelineRulerProps> = ({
@@ -19,6 +20,7 @@ export const TimelineRuler: React.FC<TimelineRulerProps> = ({
   viewport = { x: 0, y: 0, zoom: 1 },
   currentZoomLevel = 2,
   userProfile = null,
+  profileAvatarSelector,
 }) => {
   if (!show || ageGroups.length === 0) return null;
 
@@ -94,19 +96,26 @@ export const TimelineRuler: React.FC<TimelineRulerProps> = ({
         // Remove transform so it stays fixed to the viewport
       }}
     >
-      {/* Zoom Level Legend with Avatar */}
+      {/* Zoom Level Legend with Profile Avatar Selector */}
       <div className="absolute top-2 left-2 right-2 z-20">
-        <div
-          className={`bg-gradient-to-r ${profileInfo.bgColor} backdrop-blur-sm border border-gray-200 rounded-md p-2 text-center shadow-sm`}
-        >
-          {/* User Profile Row */}
-          <div className="flex items-center justify-center space-x-2 mb-2">
-            <span className="text-lg">{profileInfo.avatar}</span>
-            <div className="text-xs font-medium text-gray-700">{profileInfo.name}</div>
-          </div>
+        <div className="bg-white/25 backdrop-blur-sm border border-white/18 rounded-md p-2 shadow-sm">
+          {/* Profile Avatar Selector */}
+          {profileAvatarSelector && (
+            <div className="flex items-center justify-center mb-2">
+              {profileAvatarSelector}
+            </div>
+          )}
+          
+          {/* Fallback to simple avatar if no ProfileAvatarSelector provided */}
+          {!profileAvatarSelector && (
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span className="text-lg">{profileInfo.avatar}</span>
+              <div className="text-xs font-medium text-gray-700">{profileInfo.name}</div>
+            </div>
+          )}
 
           {/* Zoom Level Row */}
-          <div className="border-t border-gray-300 pt-1">
+          <div className="border-t border-white/20 pt-1">
             <div className="text-xs font-semibold text-gray-700">{zoomInfo.level}</div>
             <div className="text-xs text-gray-600">{zoomInfo.description}</div>
           </div>
