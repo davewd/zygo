@@ -12,6 +12,7 @@ import credentialsData from '../data/credentials.json';
 import feedItemsData from '../data/feed/feed_items.json';
 import serviceCentersData from '../data/serviceCenters.json';
 import providersData from '../data/serviceProviders.json';
+import usersData from '../data/users.json';
 import { getAllServiceProviders } from '../serviceProviders';
 
 describe('Data Consistency Tests', () => {
@@ -504,6 +505,119 @@ describe('Data Consistency Tests', () => {
         errors.forEach(error => console.log(`   - ${error}`));
         expect(errors.length).toBe(0);
       }
+    });
+    
+  });
+
+  describe('User Data References', () => {
+    
+    test('users.json should have valid structure and required fields', () => {
+      const errors: string[] = [];
+      
+      // Check currentUser structure
+      if (!usersData.currentUser) {
+        errors.push('Missing currentUser in users.json');
+      } else {
+        const user = usersData.currentUser;
+        if (!user.id) errors.push('currentUser missing id');
+        if (!user.firstName) errors.push('currentUser missing firstName');
+        if (!user.lastName) errors.push('currentUser missing lastName');
+        if (!user.email) errors.push('currentUser missing email');
+        if (!user.avatar) errors.push('currentUser missing avatar');
+        if (!user.profileType) errors.push('currentUser missing profileType');
+        if (!user.title) errors.push('currentUser missing title');
+        
+        // Validate email format
+        if (user.email && !user.email.includes('@')) {
+          errors.push('currentUser email is not in valid format');
+        }
+      }
+      
+      // Check otherUsers structure
+      if (!usersData.otherUsers || !Array.isArray(usersData.otherUsers)) {
+        errors.push('Missing or invalid otherUsers array in users.json');
+      } else {
+        usersData.otherUsers.forEach((user, index) => {
+          if (!user.id) errors.push(`otherUsers[${index}] missing id`);
+          if (!user.firstName) errors.push(`otherUsers[${index}] missing firstName`);
+          if (!user.lastName) errors.push(`otherUsers[${index}] missing lastName`);
+          if (!user.email) errors.push(`otherUsers[${index}] missing email`);
+          if (!user.avatar) errors.push(`otherUsers[${index}] missing avatar`);
+          if (!user.profileType) errors.push(`otherUsers[${index}] missing profileType`);
+          if (!user.title) errors.push(`otherUsers[${index}] missing title`);
+          
+          // Validate email format
+          if (user.email && !user.email.includes('@')) {
+            errors.push(`otherUsers[${index}] email is not in valid format`);
+          }
+        });
+      }
+      
+      if (errors.length > 0) {
+        console.log(`\n❌ Found ${errors.length} user data structure errors:`);
+        errors.forEach(error => console.log(`   - ${error}`));
+        expect(errors.length).toBe(0);
+      }
+    });
+    
+    test('All user IDs should be unique across currentUser and otherUsers', () => {
+      const allUsers = [usersData.currentUser, ...usersData.otherUsers];
+      const userIds = allUsers.map(user => user.id);
+      const uniqueIds = new Set(userIds);
+      
+      expect(uniqueIds.size).toBe(userIds.length);
+      
+      // Find and report duplicates if any
+      const duplicates = userIds.filter((id, index) => userIds.indexOf(id) !== index);
+      if (duplicates.length > 0) {
+        console.warn(`Found duplicate user IDs: ${duplicates.join(', ')}`);
+      }
+    });
+    
+    test('Multi-profile users should have consistent structure for profile switching', () => {
+      const allUsers = [usersData.currentUser, ...usersData.otherUsers];
+      
+      // Group users by firstName and lastName to find multi-profile users
+      const userGroups = new Map<string, any[]>();
+      allUsers.forEach(user => {
+        const key = `${user.firstName} ${user.lastName}`;
+        if (!userGroups.has(key)) {
+          userGroups.set(key, []);
+        }
+        userGroups.get(key)!.push(user);
+      });
+      
+      // Find users with multiple profiles
+      const multiProfileUsers = Array.from(userGroups.entries())
+        .filter(([_, profiles]) => profiles.length > 1);
+      
+      // Validate that at least one multi-profile user exists
+      expect(multiProfileUsers.length).toBeGreaterThanOrEqual(1);
+      
+      multiProfileUsers.forEach(([fullName, profiles]) => {
+        const [firstName, lastName] = fullName.split(' ');
+        
+        // Ensure all profiles have the same firstName and lastName
+        profiles.forEach(user => {
+          expect(user.firstName).toBe(firstName);
+          expect(user.lastName).toBe(lastName);
+          expect(user.id).toBeTruthy();
+          expect(user.email).toBeTruthy();
+          expect(user.avatar).toBeTruthy();
+          expect(user.title).toBeTruthy();
+          expect(user.profileType).toBeTruthy();
+        });
+        
+        // Ensure each profile has a unique profileType
+        const profileTypes = profiles.map(user => user.profileType);
+        const uniqueProfileTypes = new Set(profileTypes);
+        expect(uniqueProfileTypes.size).toBe(profileTypes.length);
+        
+        // Ensure IDs follow a consistent pattern for the same user
+        profiles.forEach(user => {
+          expect(user.id).toContain(firstName.toLowerCase());
+        });
+      });
     });
     
   });

@@ -1,14 +1,18 @@
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
 import { NavigationBar } from '@zygo/ui/src/navigation/NavigationBar';
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { searchImmediate } from '../lib/api/search';
-import { getCurrentUserData, switchUser } from '../lib/api/users';
+import { getCurrentUserData, isMultiProfileUser, switchUser } from '../lib/api/users';
+import { ProfileSwitcher } from './ProfileSwitcher';
 
 const Layout = () => {
   const [currentUser, setCurrentUser] = useState<CurrentUser | undefined>();
   const [otherUsers, setOtherUsers] = useState<CurrentUser[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showProfileSwitcher, setShowProfileSwitcher] = useState(false);
+  const [isCurrentUserMultiProfile, setIsCurrentUserMultiProfile] = useState(false);
+  const navigate = useNavigate();
 
   // Load user data on component mount
   useEffect(() => {
@@ -18,6 +22,12 @@ const Layout = () => {
         const userData = await getCurrentUserData();
         setCurrentUser(userData.currentUser);
         setOtherUsers(userData.otherUsers);
+
+        // Check if current user has multiple profiles
+        if (userData.currentUser) {
+          const hasMultipleProfiles = await isMultiProfileUser(userData.currentUser.id);
+          setIsCurrentUserMultiProfile(hasMultipleProfiles);
+        }
       } catch (error) {
         console.error('Failed to load user data:', error);
       } finally {
@@ -45,8 +55,14 @@ const Layout = () => {
 
   const handleUserSwitch = async () => {
     console.log('User switch requested');
-    // Here you would typically open a modal to select user
-    // For demo purposes, let's switch to the first other user
+
+    // If current user has multiple profiles, show profile switcher
+    if (currentUser && isCurrentUserMultiProfile) {
+      setShowProfileSwitcher(!showProfileSwitcher);
+      return;
+    }
+
+    // For single-profile users, use the existing logic to switch to another user
     if (otherUsers.length > 0) {
       try {
         const newUser = await switchUser(otherUsers[0].id);
@@ -56,6 +72,34 @@ const Layout = () => {
         console.error('Failed to switch user:', error);
       }
     }
+  };
+
+  const handleProfileChange = (newUser: CurrentUser) => {
+    setCurrentUser(newUser);
+    setShowProfileSwitcher(false);
+  };
+
+  const handleUserSelect = async (user: CurrentUser) => {
+    try {
+      console.log('Selecting user:', user.firstName, user.lastName);
+      setCurrentUser(user);
+
+      // Update the otherUsers list by moving the current user to others and removing the selected user
+      if (currentUser) {
+        const newOtherUsers = otherUsers.filter((u) => u.id !== user.id).concat(currentUser);
+        setOtherUsers(newOtherUsers);
+      }
+
+      // Close profile switcher if it was open
+      setShowProfileSwitcher(false);
+    } catch (error) {
+      console.error('Failed to select user:', error);
+    }
+  };
+
+  const handleAvatarClick = (user: CurrentUser) => {
+    // Navigate to the user's profile page
+    navigate(`/community/profiles/${user.id}`);
   };
 
   const handleNotificationClick = () => {
@@ -83,10 +127,20 @@ const Layout = () => {
           currentUser={currentUser}
           otherUsers={otherUsers}
           onUserSwitch={handleUserSwitch}
+          onUserSelect={handleUserSelect}
+          onAvatarClick={handleAvatarClick}
           notificationCount={3}
           onNotificationClick={handleNotificationClick}
         />
       </div>
+
+      {/* Profile Switcher for multi-profile users */}
+      {showProfileSwitcher && currentUser && isCurrentUserMultiProfile && (
+        <div className="fixed top-24 right-4 z-50 w-80">
+          <ProfileSwitcher currentUser={currentUser} onUserChange={handleProfileChange} />
+        </div>
+      )}
+
       <div className="pt-24 px-2 md:px-4 h-[calc(100vh-6rem)]">
         <div className="h-full w-full">
           <Outlet />
