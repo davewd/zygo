@@ -19,36 +19,29 @@ export const AgeAlignmentGuides: React.FC<AgeAlignmentGuidesProps> = ({
 
   return (
     <div
-      className="absolute inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none"
       style={{
-        zIndex: 5,
-        transform: `translate(${viewport.x}px, ${viewport.y}px) scale(${viewport.zoom})`,
-        transformOrigin: '0 0',
+        zIndex: 1, // Behind all timeline cards
       }}
     >
       {ageGroups.map((ageGroup, index) => (
         <React.Fragment key={ageGroup.id}>
-          {/* Horizontal line across the age group */}
+          {/* Horizontal line across the entire viewport, aligned with ruler tick marks */}
           <div
-            className="absolute border-t-2 border-dashed border-blue-400 opacity-60"
+            className="absolute border-blue-500 opacity-50"
             style={{
-              left: (192 - viewport.x) / viewport.zoom, // Adjust for wider ruler position (48 * 4px = 192px) and viewport transform
-              right: -viewport.x / viewport.zoom, // Adjust for viewport transform
-              top: ageGroup.position.y + 560, // Center with milestone cards at much wider spacing
+              left: 0,
+              right: 0,
+              // Align with the center of the ruler's age group containers (where the tick marks are)
+              top: (ageGroup.position.y + 160) * viewport.zoom + viewport.y + 320 * viewport.zoom, // Center of the 640px height container
               height: 1,
+              width: '100vw',
+              borderTop: '2px dashed',
+              borderImageSource:
+                'repeating-linear-gradient(to right, #3b82f6 0px, #3b82f6 4px, transparent 4px, transparent 8px)',
+              borderImageSlice: 1,
             }}
           />
-
-          {/* Age label on the right */}
-          <div
-            className="absolute text-xs text-blue-700 font-medium bg-blue-50 border border-blue-200 px-2 py-1 rounded shadow-sm"
-            style={{
-              right: -viewport.x / viewport.zoom + 20, // Adjust for viewport transform
-              top: ageGroup.position.y + 540,
-            }}
-          >
-            {ageGroup.months[0]}m → {ageGroup.months[1]}m
-          </div>
         </React.Fragment>
       ))}
     </div>

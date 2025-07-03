@@ -36,6 +36,23 @@ export const ReactFlowTimeline = ({
 }) => {
   const reactFlowInstance = useReactFlow();
 
+  // Determine user profile type (simplified logic for demo)
+  // In a real app, this would come from user context/authentication
+  const getUserProfile = (): 'parent' | 'service_provider' | null => {
+    // For demo purposes, we'll determine based on a simple check
+    // You can replace this with actual user context logic
+    const userAgent = window.navigator.userAgent.toLowerCase();
+
+    // Simplified logic - in reality this would come from user authentication/context
+    // For now, we'll default to 'parent' for demo purposes
+    // You could also check localStorage, URL params, or global state
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile === 'service_provider') {
+      return 'service_provider';
+    }
+    return 'parent'; // Default to parent profile
+  };
+
   // Track canvas dimensions
   const [canvasDimensions, setCanvasDimensions] = useState<{
     width: number;
@@ -292,6 +309,8 @@ export const ReactFlowTimeline = ({
           })()}
           show={showRuler}
           viewport={viewport}
+          currentZoomLevel={currentZoomLevel}
+          userProfile={getUserProfile()}
         />
 
         {/* Timeline Ruler Toggle */}

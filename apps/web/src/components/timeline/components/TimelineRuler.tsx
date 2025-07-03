@@ -9,14 +9,61 @@ interface TimelineRulerProps {
   }>;
   show?: boolean;
   viewport?: { x: number; y: number; zoom: number };
+  currentZoomLevel?: number;
+  userProfile?: 'parent' | 'service_provider' | null;
 }
 
 export const TimelineRuler: React.FC<TimelineRulerProps> = ({
   ageGroups,
   show = true,
   viewport = { x: 0, y: 0, zoom: 1 },
+  currentZoomLevel = 2,
+  userProfile = null,
 }) => {
   if (!show || ageGroups.length === 0) return null;
+
+  // Zoom level descriptions
+  const getZoomLevelDescription = (level: number) => {
+    switch (level) {
+      case 0:
+        return { level: '1/4', description: 'Age Groups' };
+      case 1:
+        return { level: '2/4', description: 'Key Milestones' };
+      case 2:
+        return { level: '3/4', description: 'All Milestones' };
+      case 3:
+        return { level: '4/4', description: 'Step Level' };
+      default:
+        return { level: '3/4', description: 'All Milestones' };
+    }
+  };
+
+  // User profile information
+  const getUserProfileInfo = () => {
+    switch (userProfile) {
+      case 'parent':
+        return {
+          name: 'Daughter Lily',
+          avatar: '👧',
+          bgColor: 'from-pink-100 to-purple-100',
+        };
+      case 'service_provider':
+        return {
+          name: 'Patient 3',
+          avatar: '🩺',
+          bgColor: 'from-blue-100 to-teal-100',
+        };
+      default:
+        return {
+          name: 'My Timeline',
+          avatar: '📊',
+          bgColor: 'from-gray-100 to-slate-100',
+        };
+    }
+  };
+
+  const zoomInfo = getZoomLevelDescription(currentZoomLevel);
+  const profileInfo = getUserProfileInfo();
 
   const formatAge = (months: number) => {
     if (months < 0) {
@@ -35,19 +82,43 @@ export const TimelineRuler: React.FC<TimelineRulerProps> = ({
 
   return (
     <div
-      className="absolute left-0 w-48 bg-gradient-to-r from-gray-50 via-gray-50/80 to-transparent pointer-events-none border-r border-gray-200 z-10 shadow-lg"
+      className="fixed left-0 w-32 pointer-events-none border-r border-white/20 z-10"
       style={{
         top: 0,
         height: '100vh', // Full viewport height
-        transform: `translateY(${viewport.y}px)`,
+        background:
+          'linear-gradient(to right, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05), transparent)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)', // Safari support
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        // Remove transform so it stays fixed to the viewport
       }}
     >
+      {/* Zoom Level Legend with Avatar */}
+      <div className="absolute top-2 left-2 right-2 z-20">
+        <div
+          className={`bg-gradient-to-r ${profileInfo.bgColor} backdrop-blur-sm border border-gray-200 rounded-md p-2 text-center shadow-sm`}
+        >
+          {/* User Profile Row */}
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            <span className="text-lg">{profileInfo.avatar}</span>
+            <div className="text-xs font-medium text-gray-700">{profileInfo.name}</div>
+          </div>
+
+          {/* Zoom Level Row */}
+          <div className="border-t border-gray-300 pt-1">
+            <div className="text-xs font-semibold text-gray-700">{zoomInfo.level}</div>
+            <div className="text-xs text-gray-600">{zoomInfo.description}</div>
+          </div>
+        </div>
+      </div>
+
       {ageGroups.map((ageGroup, index) => (
         <div
           key={ageGroup.id}
           className="absolute left-0 right-0 flex flex-col items-start justify-center px-4"
           style={{
-            top: (ageGroup.position.y + 160) * viewport.zoom, // Better center alignment with milestone cards
+            top: (ageGroup.position.y + 160) * viewport.zoom + viewport.y, // Adjust for fixed positioning
             height: 640 * viewport.zoom, // Much larger height to accommodate 4x spacing
           }}
         >
