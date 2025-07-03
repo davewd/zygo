@@ -1,0 +1,111 @@
+/* Glowing Border Effect for Goal Milestones */
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --zygo-goal-clr-1: #052b2f;
+  --zygo-goal-clr-2: #073438;
+  --zygo-goal-clr-3: #721aff;
+  --zygo-goal-clr-4: #e6ab23;
+  --zygo-goal-clr-5: #637c54;
+}
+
+.zygo-goal-milestone {
+  position: relative;
+}
+
+.zygo-goal-milestone::before,
+.zygo-goal-milestone::after {
+  content: '';
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--zygo-goal-clr-3),
+    var(--zygo-goal-clr-4),
+    var(--zygo-goal-clr-5),
+    var(--zygo-goal-clr-4),
+    var(--zygo-goal-clr-3)
+  );
+  border-radius: inherit;
+  animation: zygo-goal-rotation 2s linear infinite;
+}
+
+.zygo-goal-milestone::after {
+  filter: blur(3.5rem);
+}
+
+@keyframes zygo-goal-rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+/* Completed milestone styles */
+.zygo-completed-milestone {
+  position: relative;
+}
+
+.zygo-completed-milestone::before {
+  content: '';
+  position: absolute;
+  inset: -0.25rem;
+  z-index: -1;
+  background: linear-gradient(45deg, #10b981, #059669);
+  border-radius: inherit;
+  opacity: 0.8;
+}
+
+/* Goal milestone icon */
+.zygo-goal-icon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  z-index: 10;
+}
+
+.zygo-goal-icon--selected {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.zygo-goal-icon--unselected {
+  background: transparent;
+  color: #9ca3af;
+  border: 2px solid #9ca3af;
+}
+
+/* Pathway highlighting for completed to goal */
+.zygo-pathway-highlight {
+  position: relative;
+  background: linear-gradient(45deg, #10b981, #3b82f6);
+  background-size: 200% 200%;
+  animation: zygo-pathway-flow 3s ease-in-out infinite;
+}
+
+@keyframes zygo-pathway-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

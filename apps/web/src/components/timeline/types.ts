@@ -87,6 +87,8 @@ export interface MilestoneData {
   prerequisites?: string[];
   createdDate: string;
   modifiedDate: string;
+  isCompleted: boolean;
+  isCurrentGoal?: boolean;
 }
 
 export interface AgeRange {

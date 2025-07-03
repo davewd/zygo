@@ -8,7 +8,11 @@
     "toMilestone": "months_0_6_physical_1",
     "ageRangeKey": "0_1_months",
     "stepCount": 3,
-    "prerequisites": ["months_6_12_physical_1"]
+    "prerequisites": [
+      "months_6_12_physical_1"
+    ],
+    "isCompleted": true,
+    "isCurrentGoal": false
   },
   {
     "id": "achievement-2",
@@ -19,7 +23,11 @@
     "toMilestone": "months_0_6_social_emotional_1",
     "ageRangeKey": "0_1_months",
     "stepCount": 4,
-    "prerequisites": ["months_0_6_language_1"]
+    "prerequisites": [
+      "months_0_6_language_1"
+    ],
+    "isCompleted": true,
+    "isCurrentGoal": false
   },
   {
     "id": "achievement-3",
@@ -30,7 +38,11 @@
     "toMilestone": "months_0_6_cognitive_1",
     "ageRangeKey": "1_2_months",
     "stepCount": 2,
-    "prerequisites": ["prenatal_third_cognitive_1"]
+    "prerequisites": [
+      "prenatal_third_cognitive_1"
+    ],
+    "isCompleted": true,
+    "isCurrentGoal": false
   },
   {
     "id": "achievement-4",
@@ -41,6 +53,10 @@
     "toMilestone": "months_0_6_language_1",
     "ageRangeKey": "2_3_months",
     "stepCount": 5,
-    "prerequisites": ["conception"]
+    "prerequisites": [
+      "conception"
+    ],
+    "isCompleted": true,
+    "isCurrentGoal": false
   }
 ]

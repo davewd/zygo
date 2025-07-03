@@ -1,7 +1,8 @@
-import { Crown, Sparkles, Star, Users } from 'lucide-react';
+import { Crown, Sparkles, Star, Users, Target } from 'lucide-react';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLORS } from '../constants';
 import { VerticalHandles } from '../shared/VerticalHandles';
 import { DevelopmentCategory, MilestoneStatus } from '../types';
+import '../styles/goal-milestone.css';
 
 export interface KeyMilestoneNodeProps {
   data: any;
@@ -41,12 +42,29 @@ export const KeyMilestoneNode = ({ data }: KeyMilestoneNodeProps) => {
   const progress = data.progress?.[0]; // Get first family member's progress
   const completion = data.completionPercentage || 0;
   const milestoneType = milestone?.milestoneType || data.milestoneType;
+  
+  // Check for new flags
+  const isCompleted = milestone?.isCompleted || false;
+  const isCurrentGoal = milestone?.isCurrentGoal || false;
+  
+  // Determine styling classes
+  const getContainerClasses = () => {
+    let classes = `p-6 rounded-lg border-4 border-purple-400 shadow-xl min-w-72 max-w-80 ${getCategoryColor(
+      milestone?.category || data.category
+    )} bg-gradient-to-br from-purple-50 to-white relative overflow-hidden transform-gpu`;
+    
+    if (isCurrentGoal) {
+      classes += ' zygo-goal-milestone';
+    } else if (isCompleted) {
+      classes += ' zygo-completed-milestone';
+    }
+    
+    return classes;
+  };
 
   return (
     <div
-      className={`p-6 rounded-lg border-4 border-purple-400 shadow-xl min-w-72 max-w-80 ${getCategoryColor(
-        milestone?.category || data.category
-      )} bg-gradient-to-br from-purple-50 to-white relative overflow-hidden transform-gpu`}
+      className={getContainerClasses()}
       style={{
         zIndex: 20, // Highest priority
         cursor: 'default',
@@ -54,6 +72,13 @@ export const KeyMilestoneNode = ({ data }: KeyMilestoneNodeProps) => {
     >
       {/* Use standardized vertical handles */}
       <VerticalHandles />
+      
+      {/* Goal Icon for Key Milestones */}
+      {isCurrentGoal && (
+        <div className={`zygo-goal-icon ${isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'}`}>
+          <Target className="w-3 h-3" />
+        </div>
+      )}
 
       {/* Key milestone indicator */}
       <div className="absolute top-0 right-0 bg-purple-500 text-white px-3 py-1 text-xs font-bold rounded-bl-lg shadow-md">

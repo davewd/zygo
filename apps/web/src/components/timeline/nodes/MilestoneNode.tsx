@@ -1,7 +1,8 @@
-import { Users } from 'lucide-react';
+import { Users, Target, Crosshair } from 'lucide-react';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLORS } from '../constants';
 import { VerticalHandles } from '../shared/VerticalHandles';
 import { DevelopmentCategory, MilestoneStatus } from '../types';
+import '../styles/goal-milestone.css';
 
 interface MilestoneNodeProps {
   data: any;
@@ -50,15 +51,37 @@ export const MilestoneNode = ({ data }: { data: any }) => {
   const milestone = data.milestone;
   const progress = data.progress?.[0]; // Get first family member's progress
   const completion = data.completionPercentage || 0;
+  
+  // Check for new flags
+  const isCompleted = milestone?.isCompleted || false;
+  const isCurrentGoal = milestone?.isCurrentGoal || false;
+  
+  // Determine styling classes
+  const getContainerClasses = () => {
+    let classes = `p-4 rounded-lg border-2 shadow-md min-w-64 max-w-80 transition-all duration-200 hover:shadow-lg relative ${getCategoryColor(
+      milestone?.category
+    )}`;
+    
+    if (isCurrentGoal) {
+      classes += ' zygo-goal-milestone';
+    } else if (isCompleted) {
+      classes += ' zygo-completed-milestone';
+    }
+    
+    return classes;
+  };
 
   return (
-    <div
-      className={`p-4 rounded-lg border-2 shadow-md min-w-64 max-w-80 transition-all duration-200 hover:shadow-lg ${getCategoryColor(
-        milestone?.category
-      )}`}
-    >
+    <div className={getContainerClasses()}>
       {/* Use standardized vertical handles for Y-axis layout */}
       <VerticalHandles />
+      
+      {/* Goal Icon */}
+      {isCurrentGoal && (
+        <div className={`zygo-goal-icon ${isCurrentGoal ? 'zygo-goal-icon--selected' : 'zygo-goal-icon--unselected'}`}>
+          <Target className="w-3 h-3" />
+        </div>
+      )}
 
       <div className="flex items-start justify-between mb-2">
         <h3 className="font-semibold text-sm leading-tight">{data.title}</h3>

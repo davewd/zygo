@@ -34,6 +34,8 @@ export interface Milestone {
   resources: string;
   createdDate: string;
   modifiedDate: string;
+  isCompleted: boolean;
+  isCurrentGoal?: boolean;
 }
 
 export interface Achievement {
@@ -46,6 +48,8 @@ export interface Achievement {
   ageRangeKey: string;
   stepCount: number;
   prerequisites: string[];
+  isCompleted: boolean;
+  isCurrentGoal?: boolean;
 }
 
 export interface Step {
@@ -57,6 +61,8 @@ export interface Step {
   duration: string;
   completed: boolean;
   inProgress: boolean;
+  isCompleted: boolean;
+  isCurrentGoal?: boolean;
 }
 
 export interface AgeRange {

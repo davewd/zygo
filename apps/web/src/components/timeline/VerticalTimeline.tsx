@@ -6,6 +6,7 @@ import { useTimelineFilters } from './hooks/useTimelineFilters';
 import { useTimelineZoom } from './hooks/useTimelineZoom';
 import { ReactFlowTimeline } from './ReactFlowTimeline';
 import { TimelinePedagogyProps } from './types';
+import './styles/goal-milestone.css';
 
 export const VerticalTimeline = ({
   pedagogyData,

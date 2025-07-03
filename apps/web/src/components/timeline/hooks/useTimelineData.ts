@@ -89,7 +89,9 @@ export const useTimelineData = ({
           importance: milestone.importance,
           prerequisites: milestone.prerequisites,
           createdDate: milestone.createdDate,
-          modifiedDate: milestone.modifiedDate
+          modifiedDate: milestone.modifiedDate,
+          isCompleted: milestone.isCompleted,
+          isCurrentGoal: milestone.isCurrentGoal
         }));
         setCsvMilestones(milestonesData);
         setAllAgeRanges(ageRanges);
@@ -290,6 +292,8 @@ export const useTimelineData = ({
             toMilestone: achievement.toMilestone,
             stepCount: achievement.stepCount,
             ageRangeKey: achievement.ageRangeKey,
+            isCompleted: achievement.isCompleted,
+            isCurrentGoal: achievement.isCurrentGoal,
           },
           position: { x: 0, y: 0 },
           draggable: false,
@@ -341,6 +345,8 @@ export const useTimelineData = ({
             duration: step.duration,
             completed: step.completed,
             inProgress: step.inProgress,
+            isCompleted: step.isCompleted,
+            isCurrentGoal: step.isCurrentGoal,
           },
           position: { x: 0, y: 0 },
           draggable: false,

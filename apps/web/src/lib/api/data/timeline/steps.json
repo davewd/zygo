@@ -7,7 +7,9 @@
     "achievementTitle": "Early Motor Coordination",
     "duration": "First week",
     "completed": false,
-    "inProgress": true
+    "inProgress": true,
+    "isCompleted": false,
+    "isCurrentGoal": false
   },
   {
     "id": "step-2",
@@ -17,7 +19,9 @@
     "achievementTitle": "Early Motor Coordination",
     "duration": "2-3 weeks",
     "completed": false,
-    "inProgress": false
+    "inProgress": false,
+    "isCompleted": false,
+    "isCurrentGoal": false
   },
   {
     "id": "step-3",
@@ -27,7 +31,9 @@
     "achievementTitle": "Early Motor Coordination",
     "duration": "3-4 weeks",
     "completed": false,
-    "inProgress": false
+    "inProgress": false,
+    "isCompleted": false,
+    "isCurrentGoal": false
   },
   {
     "id": "step-4",
@@ -37,7 +43,9 @@
     "achievementTitle": "First Social Responses",
     "duration": "First 2 weeks",
     "completed": true,
-    "inProgress": false
+    "inProgress": false,
+    "isCompleted": true,
+    "isCurrentGoal": false
   },
   {
     "id": "step-5",
@@ -47,7 +55,9 @@
     "achievementTitle": "First Social Responses",
     "duration": "2-3 weeks",
     "completed": false,
-    "inProgress": true
+    "inProgress": true,
+    "isCompleted": false,
+    "isCurrentGoal": false
   },
   {
     "id": "step-6",
@@ -57,7 +67,9 @@
     "achievementTitle": "First Social Responses",
     "duration": "3-4 weeks",
     "completed": false,
-    "inProgress": false
+    "inProgress": false,
+    "isCompleted": false,
+    "isCurrentGoal": false
   },
   {
     "id": "step-7",
@@ -67,6 +79,8 @@
     "achievementTitle": "First Social Responses",
     "duration": "4-6 weeks",
     "completed": false,
-    "inProgress": false
+    "inProgress": false,
+    "isCompleted": false,
+    "isCurrentGoal": false
   }
 ]
