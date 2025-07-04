@@ -42,6 +42,28 @@ export interface ExtendedService extends Service {
   activeFriends?: string[];
 }
 
+// Filter types for the new filtering system
+export interface FilterOption {
+  value: string;
+  label: string;
+  count?: number;
+}
+
+export interface ActiveFilter {
+  id: string;
+  type: 'search' | 'category' | 'duration' | 'friends' | 'location';
+  value: any;
+  label: string;
+}
+
+// Calendar navigation types
+export interface CalendarPeriod {
+  startDate: Date;
+  endDate: Date;
+  type: 'day' | 'week' | 'month';
+  columns: Date[];
+}
+
 export interface HolidayPlannerData {
   currentUser: CurrentUser | null;
   friends: CurrentUser[];
@@ -50,6 +72,12 @@ export interface HolidayPlannerData {
   selectedWeek: HolidayWeek | null;
   appointments: CalendarAppointment[];
   loading: boolean;
+  // New calendar navigation properties
+  currentPeriod: CalendarPeriod;
+  setCurrentPeriod: (period: CalendarPeriod) => void;
+  // New filter properties
+  activeFilters: ActiveFilter[];
+  setActiveFilters: (filters: ActiveFilter[]) => void;
 }
 
 export const useHolidayPlannerData = () => {
@@ -60,6 +88,28 @@ export const useHolidayPlannerData = () => {
   const [selectedWeek, setSelectedWeek] = useState<HolidayWeek | null>(null);
   const [appointments, setAppointments] = useState<CalendarAppointment[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // New state for calendar navigation and filtering
+  const [currentPeriod, setCurrentPeriod] = useState<CalendarPeriod>(() => {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay()); // Sunday start
+    
+    const columns = Array.from({ length: 5 }, (_, i) => {
+      const date = new Date(startOfWeek);
+      date.setDate(startOfWeek.getDate() + i + 1); // Monday start (skip Sunday)
+      return date;
+    });
+    
+    return {
+      startDate: columns[0],
+      endDate: columns[4],
+      type: 'week',
+      columns,
+    };
+  });
+  
+  const [activeFilters, setActiveFilters] = useState<ActiveFilter[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -139,5 +189,9 @@ export const useHolidayPlannerData = () => {
     appointments,
     setAppointments,
     loading,
+    currentPeriod,
+    setCurrentPeriod,
+    activeFilters,
+    setActiveFilters,
   };
 };

@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { AppointmentDialog } from '../../components/calendar/AppointmentDialog';
 import { ConnectionsAvailability } from '../../components/calendar/ConnectionsAvailability';
 import { CalendarSection } from '../../components/holiday-planner/CalendarSection';
-import { ServicesPanel } from '../../components/holiday-planner/ServicesPanel';
+import { AdvancedFilters } from '../../components/holiday-planner/AdvancedFilters';
 import {
   useHolidayPlannerData,
   type CalendarAppointment,
   type ExtendedService,
+  type ActiveFilter,
 } from '../../components/holiday-planner/useHolidayPlannerData';
 
 const HolidayPlanner = () => {
@@ -21,6 +22,10 @@ const HolidayPlanner = () => {
     appointments,
     setAppointments,
     loading,
+    currentPeriod,
+    setCurrentPeriod,
+    activeFilters,
+    setActiveFilters,
   } = useHolidayPlannerData();
 
   const [showAppointmentDialog, setShowAppointmentDialog] = useState(false);
@@ -28,7 +33,7 @@ const HolidayPlanner = () => {
   const [activeTab, setActiveTab] = useState('calendar');
   const [applyFilterToDiary, setApplyFilterToDiary] = useState(false);
 
-  // State for filtering
+  // State for filtering (legacy - to be migrated to activeFilters)
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -147,24 +152,26 @@ const HolidayPlanner = () => {
             <div className="lg:col-span-3 space-y-6">
               <CalendarSection
                 selectedWeek={selectedWeek}
+                currentPeriod={currentPeriod}
+                onPeriodChange={setCurrentPeriod}
                 appointments={filteredAppointments}
                 onCreateAppointment={handleCreateAppointment}
                 onEditAppointment={handleEditAppointment}
                 onDeleteAppointment={handleDeleteAppointment}
+                use5ColumnView={true}
               />
             </div>
 
             <div className="space-y-4">
-              <ServicesPanel
+              <AdvancedFilters
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
-                selectedCategory={selectedCategory}
-                onCategoryChange={setSelectedCategory}
+                activeFilters={activeFilters}
+                onFiltersChange={setActiveFilters}
                 serviceCategories={serviceCategories}
+                friends={friends}
                 applyToDiary={applyFilterToDiary}
                 onApplyToDiaryChange={setApplyFilterToDiary}
-                filteredServices={filteredServices}
-                friends={friends}
               />
             </div>
           </div>
