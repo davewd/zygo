@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '@zygo/ui';
 import { CalendarDays, Plus, Users } from 'lucide-react';
-import {
-  Button,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@zygo/ui';
+import { useState } from 'react';
 import { AppointmentDialog } from '../../components/calendar/AppointmentDialog';
 import { ConnectionsAvailability } from '../../components/calendar/ConnectionsAvailability';
 import { CalendarSection } from '../../components/holiday-planner/CalendarSection';
 import { ServicesPanel } from '../../components/holiday-planner/ServicesPanel';
-import { useHolidayPlannerData, type ExtendedService, type CalendarAppointment } from '../../components/holiday-planner/useHolidayPlannerData';
+import {
+  useHolidayPlannerData,
+  type CalendarAppointment,
+  type ExtendedService,
+} from '../../components/holiday-planner/useHolidayPlannerData';
 
 const HolidayPlanner = () => {
   const {
@@ -35,7 +33,7 @@ const HolidayPlanner = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Create extended services with mock provider/location data for demo
-  const extendedServices: ExtendedService[] = services.map(service => ({
+  const extendedServices: ExtendedService[] = services.map((service) => ({
     ...service,
     provider: 'Local Provider', // In real app, this would come from service provider API
     location: 'Main Street', // In real app, this would come from service center API
@@ -47,12 +45,11 @@ const HolidayPlanner = () => {
     // Search filter
     if (searchQuery.trim()) {
       const searchLower = searchQuery.toLowerCase();
-      const matchesSearch = (
+      const matchesSearch =
         service.name.toLowerCase().includes(searchLower) ||
         service.description.toLowerCase().includes(searchLower) ||
         service.provider?.toLowerCase().includes(searchLower) ||
-        service.location?.toLowerCase().includes(searchLower)
-      );
+        service.location?.toLowerCase().includes(searchLower);
       if (!matchesSearch) return false;
     }
 
@@ -66,14 +63,18 @@ const HolidayPlanner = () => {
   });
 
   // Filter appointments for diary if enabled
-  const filteredAppointments = applyFilterToDiary ? appointments.filter(apt => {
-    if (searchQuery.trim()) {
-      const searchLower = searchQuery.toLowerCase();
-      return apt.title.toLowerCase().includes(searchLower) ||
-             apt.location.toLowerCase().includes(searchLower);
-    }
-    return true;
-  }) : appointments;
+  const filteredAppointments = applyFilterToDiary
+    ? appointments.filter((apt) => {
+        if (searchQuery.trim()) {
+          const searchLower = searchQuery.toLowerCase();
+          return (
+            apt.title.toLowerCase().includes(searchLower) ||
+            apt.location.toLowerCase().includes(searchLower)
+          );
+        }
+        return true;
+      })
+    : appointments;
 
   const handleCreateAppointment = (timeSlot?: { date: Date; hour?: number }) => {
     setSelectedAppointment(null);

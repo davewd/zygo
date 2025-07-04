@@ -1,9 +1,9 @@
-import React from 'react';
-import { Search } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
+import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+import { Search } from 'lucide-react';
+import React from 'react';
 import { ServiceFilters } from './ServiceFilters';
 import { ServiceList } from './ServiceList';
-import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
 
 interface ServiceCategory {
   id: string;
@@ -51,9 +51,7 @@ export const ServicesPanel: React.FC<ServicesPanelProps> = ({
           <Search className="h-5 w-5 mr-2" />
           Find Services & Activities
         </CardTitle>
-        <CardDescription>
-          Discover activities that match your children's interests
-        </CardDescription>
+        <CardDescription>Discover activities that match your children's interests</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <ServiceFilters

@@ -1,8 +1,8 @@
-import React from 'react';
-import { CalendarDays } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@zygo/ui';
+import { CalendarDays } from 'lucide-react';
+import React from 'react';
 import { CalendarGrid } from '../calendar/CalendarGrid';
-import type { HolidayWeek, CalendarAppointment } from './useHolidayPlannerData';
+import type { CalendarAppointment, HolidayWeek } from './useHolidayPlannerData';
 
 interface CalendarSectionProps {
   selectedWeek: HolidayWeek | null;
@@ -32,7 +32,9 @@ export const CalendarSection: React.FC<CalendarSectionProps> = ({
               {selectedWeek.startDate.toLocaleDateString()} -{' '}
               {selectedWeek.endDate.toLocaleDateString()}
             </>
-          ) : 'Select a week to view calendar'}
+          ) : (
+            'Select a week to view calendar'
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -1,6 +1,6 @@
-import React from 'react';
+import { Badge, Checkbox, Input } from '@zygo/ui';
 import { Search } from 'lucide-react';
-import { Input, Badge, Checkbox } from '@zygo/ui';
+import React from 'react';
 
 interface ServiceCategory {
   id: string;
@@ -44,7 +44,7 @@ export const ServiceFilters: React.FC<ServiceFiltersProps> = ({
         <h4 className="text-sm font-medium">Categories</h4>
         <div className="flex flex-wrap gap-2">
           <Badge
-            variant={selectedCategory === 'all' ? "default" : "outline"}
+            variant={selectedCategory === 'all' ? 'default' : 'outline'}
             className="cursor-pointer"
             onClick={() => onCategoryChange('all')}
           >
@@ -53,7 +53,7 @@ export const ServiceFilters: React.FC<ServiceFiltersProps> = ({
           {serviceCategories.map((category) => (
             <Badge
               key={category.id}
-              variant={selectedCategory === category.id ? "default" : "outline"}
+              variant={selectedCategory === category.id ? 'default' : 'outline'}
               className="cursor-pointer"
               onClick={() => onCategoryChange(category.id)}
             >

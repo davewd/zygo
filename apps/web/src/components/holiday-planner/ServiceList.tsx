@@ -1,7 +1,7 @@
-import React from 'react';
-import { Search } from 'lucide-react';
-import { ServiceCard } from './ServiceCard';
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+import { Search } from 'lucide-react';
+import React from 'react';
+import { ServiceCard } from './ServiceCard';
 
 interface ExtendedService {
   id: string;
@@ -24,9 +24,7 @@ export const ServiceList: React.FC<ServiceListProps> = ({ services, friends }) =
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h4 className="text-sm font-medium">Available Services</h4>
-        <span className="text-xs text-gray-500">
-          {services.length} found
-        </span>
+        <span className="text-xs text-gray-500">{services.length} found</span>
       </div>
       <div className="max-h-96 overflow-y-auto space-y-2">
         {services.map((service) => (

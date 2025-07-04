@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { getCurrentUser, getOtherUsers } from '../../lib/api/users';
-import { getAllServices, type Service } from '../../lib/api/services';
-import { getAllServiceCategories, type ServiceCategory } from '../../lib/api/serviceCategories';
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
+import { useEffect, useState } from 'react';
+import { getAllServiceCategories, type ServiceCategory } from '../../lib/api/serviceCategories';
+import { getAllServices, type Service } from '../../lib/api/services';
+import { getCurrentUser, getOtherUsers } from '../../lib/api/users';
 
 // Local type definitions to match the existing implementation
 export interface Child {
