@@ -1,6 +1,6 @@
-import React from 'react';
 import { Clock, MapPin, Users } from 'lucide-react';
-import type { ExtendedService, ActiveFilter } from './useHolidayPlannerData';
+import React from 'react';
+import type { ActiveFilter, ExtendedService } from './useHolidayPlannerData';
 
 interface Friend {
   id: string;
@@ -13,6 +13,11 @@ interface FilteredServicesListProps {
   friends: Friend[];
   activeFilters: ActiveFilter[];
   searchQuery: string;
+  activeTimeSlot?: { date: Date; hour?: number; isAllDay?: boolean } | null;
+  onCreateAppointment?: (
+    timeSlot: { date: Date; hour?: number; isAllDay?: boolean },
+    service?: ExtendedService
+  ) => void;
 }
 
 export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
@@ -20,6 +25,8 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
   friends,
   activeFilters,
   searchQuery,
+  activeTimeSlot,
+  onCreateAppointment,
 }) => {
   // Apply advanced filtering based on active filters
   const filteredServices = services.filter((service) => {
@@ -46,7 +53,7 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
           break;
         case 'friends':
           const friendIds = filter.value as string[];
-          const hasCommonFriends = service.activeFriends?.some(friendId => 
+          const hasCommonFriends = service.activeFriends?.some((friendId) =>
             friendIds.includes(friendId)
           );
           if (!hasCommonFriends) return false;
@@ -64,11 +71,9 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="font-medium">Available Services</h4>
-        <span className="text-sm text-gray-500">
-          {filteredServices.length} found
-        </span>
+        <span className="text-sm text-gray-500">{filteredServices.length} found</span>
       </div>
-      
+
       <div className="max-h-96 overflow-y-auto space-y-3">
         {filteredServices.map((service) => (
           <div
@@ -84,11 +89,9 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
                 </div>
               )}
             </div>
-            
-            <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-              {service.description}
-            </p>
-            
+
+            <p className="text-sm text-gray-600 mb-3 line-clamp-2">{service.description}</p>
+
             <div className="space-y-2">
               {service.provider && (
                 <div className="flex items-center text-xs text-gray-500">
@@ -96,7 +99,7 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
                   {service.provider}
                 </div>
               )}
-              
+
               {service.location && (
                 <div className="flex items-center text-xs text-gray-500">
                   <MapPin className="h-3 w-3 mr-1" />
@@ -104,13 +107,13 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
                 </div>
               )}
             </div>
-            
+
             {service.activeFriends && service.activeFriends.length > 0 && (
               <div className="flex items-center gap-1 flex-wrap mt-3">
                 <span className="text-xs text-gray-500">Friends:</span>
                 <div className="flex gap-1 flex-wrap">
                   {service.activeFriends.slice(0, 3).map((friendId: string) => {
-                    const friend = friends.find(f => f.id === friendId);
+                    const friend = friends.find((f) => f.id === friendId);
                     return friend ? (
                       <span
                         key={friendId}
@@ -130,7 +133,7 @@ export const FilteredServicesList: React.FC<FilteredServicesListProps> = ({
             )}
           </div>
         ))}
-        
+
         {filteredServices.length === 0 && (
           <div className="text-center py-8 text-gray-500">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">

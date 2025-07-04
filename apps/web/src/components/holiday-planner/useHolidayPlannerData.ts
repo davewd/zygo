@@ -1,5 +1,6 @@
 import type { CurrentUser } from '@zygo/ui/src/navigation/NavigationBar';
 import { useEffect, useState } from 'react';
+import { generateAppointmentsFromRecurring } from '../../lib/api/recurringActivities';
 import { getAllServiceCategories, type ServiceCategory } from '../../lib/api/serviceCategories';
 import { getAllServices, type Service } from '../../lib/api/services';
 import { getCurrentUser, getOtherUsers } from '../../lib/api/users';
@@ -15,6 +16,7 @@ export interface Child {
 export interface CalendarAppointment {
   id: string;
   title: string;
+  description?: string;
   date: Date;
   startTime: string;
   endTime: string;
@@ -25,6 +27,7 @@ export interface CalendarAppointment {
   service?: {
     category: string;
   };
+  friends?: string[]; // Add friends support
 }
 
 export interface HolidayWeek {
@@ -143,7 +146,12 @@ export const useHolidayPlannerData = () => {
         };
         setSelectedWeek(mockWeek);
 
-        // Set up mock appointments for demo
+        // Generate recurring activities for the next month
+        const endDate = new Date();
+        endDate.setMonth(endDate.getMonth() + 1);
+        const recurringAppointments = await generateAppointmentsFromRecurring(new Date(), endDate);
+
+        // Set up additional mock appointments for demo
         const mockAppointments: CalendarAppointment[] = [
           {
             id: '1',
@@ -168,7 +176,9 @@ export const useHolidayPlannerData = () => {
             color: 'bg-green-500',
           },
         ];
-        setAppointments(mockAppointments);
+        
+        // Combine mock appointments with recurring ones
+        setAppointments([...mockAppointments, ...recurringAppointments]);
 
       } catch (error) {
         console.error('Error loading data:', error);

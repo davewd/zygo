@@ -1,7 +1,6 @@
+import { RotateCcw, Search, Settings, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { Badge, Checkbox, Input } from '@zygo/ui';
-import { Search, Filter, X, Settings, Save, RotateCcw } from 'lucide-react';
-import type { ActiveFilter, FilterOption } from './useHolidayPlannerData';
+import type { ActiveFilter } from './useHolidayPlannerData';
 
 interface ServiceCategory {
   id: string;
@@ -23,6 +22,15 @@ interface AdvancedFiltersProps {
   friends: Friend[];
   applyToDiary: boolean;
   onApplyToDiaryChange: (apply: boolean) => void;
+  timeContext?: {
+    date?: Date;
+    startHour?: number;
+    startMinute?: number;
+    endHour?: number;
+    endMinute?: number;
+    isAllDay?: boolean;
+  } | null;
+  onClearTimeContext?: () => void;
 }
 
 export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
@@ -34,6 +42,8 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   friends,
   applyToDiary,
   onApplyToDiaryChange,
+  timeContext,
+  onClearTimeContext,
 }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [durationRange, setDurationRange] = useState([30, 180]);
@@ -55,17 +65,18 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
       value,
       label,
     };
-    
+
     // Remove existing filter of same type for single-select filters
-    const updatedFilters = type === 'search' || type === 'duration'
-      ? activeFilters.filter(f => f.type !== type)
-      : activeFilters;
-    
+    const updatedFilters =
+      type === 'search' || type === 'duration'
+        ? activeFilters.filter((f) => f.type !== type)
+        : activeFilters;
+
     onFiltersChange([...updatedFilters, newFilter]);
   };
 
   const removeFilter = (filterId: string) => {
-    onFiltersChange(activeFilters.filter(f => f.id !== filterId));
+    onFiltersChange(activeFilters.filter((f) => f.id !== filterId));
   };
 
   const clearAllFilters = () => {
@@ -76,7 +87,9 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   };
 
   const handleQuickFilterClick = (categoryId: string, label: string) => {
-    const existingFilter = activeFilters.find(f => f.type === 'category' && f.value === categoryId);
+    const existingFilter = activeFilters.find(
+      (f) => f.type === 'category' && f.value === categoryId
+    );
     if (existingFilter) {
       removeFilter(existingFilter.id);
     } else {
@@ -86,20 +99,22 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
 
   const handleFriendsChange = (friendId: string) => {
     const updated = selectedFriends.includes(friendId)
-      ? selectedFriends.filter(id => id !== friendId)
+      ? selectedFriends.filter((id) => id !== friendId)
       : [...selectedFriends, friendId];
-    
+
     setSelectedFriends(updated);
-    
+
     // Update active filters
-    const friendNames = updated.map(id => {
-      const friend = friends.find(f => f.id === id);
-      return friend ? `${friend.firstName} ${friend.lastName.charAt(0)}` : '';
-    }).filter(Boolean);
-    
+    const friendNames = updated
+      .map((id) => {
+        const friend = friends.find((f) => f.id === id);
+        return friend ? `${friend.firstName} ${friend.lastName.charAt(0)}` : '';
+      })
+      .filter(Boolean);
+
     // Remove existing friends filter
-    const otherFilters = activeFilters.filter(f => f.type !== 'friends');
-    
+    const otherFilters = activeFilters.filter((f) => f.type !== 'friends');
+
     if (updated.length > 0) {
       addFilter('friends', updated, `Friends: ${friendNames.join(', ')}`);
     } else {
@@ -138,7 +153,7 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           Discover activities that match your children's interests
         </p>
       </div>
-      
+
       <div className="p-4 space-y-4">
         {/* Search Input */}
         <div className="relative">
@@ -152,22 +167,71 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           />
         </div>
 
+        {/* Time Context Display */}
+        {timeContext && (
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span className="text-sm font-medium text-blue-800">
+                  Filtering for{' '}
+                  {timeContext.isAllDay
+                    ? 'All-Day Activities'
+                    : timeContext.startHour !== undefined
+                    ? `${timeContext.startHour}:${(timeContext.startMinute || 0)
+                        .toString()
+                        .padStart(2, '0')} Time Slot`
+                    : 'Selected Time'}
+                  {timeContext.date && (
+                    <span className="text-blue-600">
+                      {' '}
+                      on{' '}
+                      {timeContext.date.toLocaleDateString('en-US', {
+                        weekday: 'short',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </span>
+                  )}
+                </span>
+              </div>
+              {onClearTimeContext && (
+                <button
+                  onClick={onClearTimeContext}
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            <p className="text-xs text-blue-600 mt-1">
+              Services are filtered to show{' '}
+              {timeContext.isAllDay ? 'full-day suitable' : 'time-appropriate'} activities
+            </p>
+          </div>
+        )}
+
         {/* Quick Filters */}
         <div className="space-y-2">
           <h4 className="text-sm font-medium">Quick Filters</h4>
           <div className="flex flex-wrap gap-2">
             {quickFilters.map((filter) => {
-              const isActive = activeFilters.some(f => f.type === 'category' && f.value === filter.id);
+              const isActive = activeFilters.some(
+                (f) => f.type === 'category' && f.value === filter.id
+              );
               return (
-                <Badge
+                <span
                   key={filter.id}
-                  variant={isActive ? "default" : "outline"}
-                  className="cursor-pointer hover:bg-gray-100"
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm cursor-pointer transition-colors ${
+                    isActive
+                      ? 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                  }`}
                   onClick={() => handleQuickFilterClick(filter.id, filter.label)}
                 >
                   {filter.label}
                   <span className="ml-1 text-xs opacity-70">({filter.count})</span>
-                </Badge>
+                </span>
               );
             })}
           </div>
@@ -179,19 +243,18 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
             <h4 className="text-sm font-medium">Active Filters</h4>
             <div className="flex flex-wrap gap-2">
               {activeFilters.map((filter) => (
-                <Badge
+                <span
                   key={filter.id}
-                  variant="secondary"
-                  className="flex items-center gap-1 pr-1"
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800"
                 >
                   {filter.label}
-                  <div
-                    className="flex items-center justify-center w-4 h-4 ml-1 hover:bg-gray-200 rounded-full cursor-pointer"
+                  <button
+                    className="flex items-center justify-center w-4 h-4 ml-1 hover:bg-gray-300 rounded-full cursor-pointer transition-colors"
                     onClick={() => removeFilter(filter.id)}
                   >
                     <X className="h-3 w-3" />
-                  </div>
-                </Badge>
+                  </button>
+                </span>
               ))}
             </div>
           </div>
@@ -201,22 +264,27 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
         {showAdvanced && (
           <div className="space-y-4 border-t pt-4">
             <h4 className="text-sm font-medium">Advanced Filters</h4>
-            
+
             {/* Category Multi-Select */}
             <div className="space-y-2">
               <label className="text-xs font-medium text-gray-600">Categories</label>
               <div className="flex flex-wrap gap-1">
                 {serviceCategories.map((category) => {
-                  const isSelected = activeFilters.some(f => f.type === 'category' && f.value === category.id);
+                  const isSelected = activeFilters.some(
+                    (f) => f.type === 'category' && f.value === category.id
+                  );
                   return (
-                    <Badge
+                    <span
                       key={category.id}
-                      variant={isSelected ? "default" : "outline"}
-                      className="cursor-pointer text-xs"
+                      className={`inline-flex items-center px-2 py-1 rounded text-xs cursor-pointer transition-colors ${
+                        isSelected
+                          ? 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                          : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                      }`}
                       onClick={() => handleQuickFilterClick(category.id, category.name)}
                     >
                       {category.name}
-                    </Badge>
+                    </span>
                   );
                 })}
               </div>
@@ -231,7 +299,9 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
                 <input
                   type="number"
                   value={durationRange[0]}
-                  onChange={(e) => setDurationRange([parseInt(e.target.value) || 30, durationRange[1]])}
+                  onChange={(e) =>
+                    setDurationRange([parseInt(e.target.value) || 30, durationRange[1]])
+                  }
                   className="w-20 text-xs px-2 py-1 border border-gray-300 rounded"
                   min="15"
                   max="480"
@@ -240,7 +310,9 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
                 <input
                   type="number"
                   value={durationRange[1]}
-                  onChange={(e) => setDurationRange([durationRange[0], parseInt(e.target.value) || 180])}
+                  onChange={(e) =>
+                    setDurationRange([durationRange[0], parseInt(e.target.value) || 180])
+                  }
                   className="w-20 text-xs px-2 py-1 border border-gray-300 rounded"
                   min="15"
                   max="480"
@@ -261,10 +333,7 @@ export const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
                       onChange={() => handleFriendsChange(friend.id)}
                       className="rounded border-gray-300"
                     />
-                    <label 
-                      htmlFor={`friend-${friend.id}`}
-                      className="text-xs cursor-pointer"
-                    >
+                    <label htmlFor={`friend-${friend.id}`} className="text-xs cursor-pointer">
                       {friend.firstName} {friend.lastName}
                     </label>
                   </div>
