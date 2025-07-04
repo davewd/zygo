@@ -1,9 +1,13 @@
 import {
   Background,
+  BezierEdge,
   ConnectionMode,
   Controls,
   MiniMap,
   ReactFlow,
+  SmoothStepEdge,
+  StepEdge,
+  StraightEdge,
   useEdgesState,
   useNodesState,
   useReactFlow,
@@ -153,6 +157,15 @@ export const ReactFlowTimeline = ({
 
   // Auto-centering removed to allow free panning and zooming
 
+  // Edge types configuration for React Flow
+  const edgeTypes = {
+    default: SmoothStepEdge,
+    smoothstep: SmoothStepEdge,
+    step: StepEdge,
+    straight: StraightEdge,
+    bezier: BezierEdge,
+  };
+
   return (
     <div className="w-full h-full">
       {/* SVG Gradients for Enhanced Edges */}
@@ -179,6 +192,7 @@ export const ReactFlowTimeline = ({
         onNodeClick={onNodeClick}
         onMove={(event, newViewport) => setViewport(newViewport)}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         connectionMode={ConnectionMode.Loose}
         fitView={false}
         minZoom={0.2}
